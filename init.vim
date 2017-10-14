@@ -79,6 +79,10 @@ set expandtab
 " for future reference
 " set fillchars=vert:|,fold:-
 
+" This is a sequence of letters which describes how automatic formatting is to
+" be done. See fo-table.
+set formatoptions=croqlj
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
