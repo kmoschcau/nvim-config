@@ -75,6 +75,10 @@ set cpoptions-=_
 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
 
+" Characters to fill the statuslines and vertical separators.
+" for future reference
+" set fillchars=vert:|,fold:-
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
@@ -139,6 +143,8 @@ let g:ctrlp_working_path_mode = ''
 " }}}1
 
 "" appearance settings
+" TODO: put the gui options into ginit.vim ":h gui"
+" TODO: "https://github.com/equalsraf/neovim-qt/blob/master/src/gui/runtime/doc/nvim_gui_shim.txt" for windows nvim-qt
 " color scheme
 colorscheme darcula
 " set the font
