@@ -4,7 +4,11 @@
 
 " Specify a directory for plugins
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/AppData/Local/nvim-data/plugged')
+if has('win32')
+  call plug#begin('~/AppData/Local/nvim-data/plugged')
+else
+  call plug#begin('~/.local/share/nvim/plugged')
+endif
 
 " Make sure you use single quotes
 
@@ -46,6 +50,14 @@ Plug 'blueshirts/darcula'
 
 " Initialize plugin system
 call plug#end()
+" }}}1
+
+" Windows specific settings {{{1
+if has('win32')
+  " set the paths for the python executables (installed with chocolatey)
+  let g:python_host_prog  = 'C:/Python27/python'
+  let g:python3_host_prog = 'C:/Python36/python'
+endif
 " }}}1
 
 " Vim options {{{1
