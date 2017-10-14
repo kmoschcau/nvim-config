@@ -1,5 +1,13 @@
 " Vim: set foldmethod=marker:
 
+" Windows specific settings {{{1
+if has('win32')
+  " set the paths for the python executables (installed with chocolatey)
+  let g:python_host_prog  = 'C:/Python27/python'
+  let g:python3_host_prog = 'C:/Python36/python'
+endif
+" }}}1
+
 " vim-plug | junegunn/vim-plug {{{1
 
 " Specify a directory for plugins
@@ -50,14 +58,6 @@ Plug 'blueshirts/darcula'
 
 " Initialize plugin system
 call plug#end()
-" }}}1
-
-" Windows specific settings {{{1
-if has('win32')
-  " set the paths for the python executables (installed with chocolatey)
-  let g:python_host_prog  = 'C:/Python27/python'
-  let g:python3_host_prog = 'C:/Python36/python'
-endif
 " }}}1
 
 " Vim options {{{1
