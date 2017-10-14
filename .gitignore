@@ -1,0 +1,5 @@
+# ignore the vim-plug file
+/autoload/plug.vim
+
+# ignore the gutentags .notags file
+/.notags
