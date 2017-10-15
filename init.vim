@@ -127,6 +127,9 @@ set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
 
+" Print the line number in front of each line.
+set number
+
 " }}}1
 
 " Number of spaces that a <Tab> in the file counts for.
@@ -142,9 +145,6 @@ set smartindent
 " Write the swap file to disk after this many milliseconds.
 " make vim update faster
 set updatetime=250
-
-" Print the line number in front of each line.
-set number
 
 " Switch on syntax highlighting.
 syntax enable
