@@ -83,6 +83,19 @@ set expandtab
 " be done. See fo-table.
 set formatoptions=croqlj
 
+" Configures the cursor style for each mode. Works in the GUI and some
+" terminals.
+" TODO: check tmux with this.
+" The option is a command separated list of parts. Each part consists of a
+" mode-list and an argument-list:
+"   mode-list:argument-list
+set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
+            \,v-sm:block-blinkwait0
+            \,i-ci:ver75-blinkwait1000-blinkon500-blinkoff500
+            \,ve:ver100-blinkwait0
+            \,r-cr:hor75-blinkwait1000-blinkon500-blinkoff500
+            \,o:hor100-blinkwait0
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
