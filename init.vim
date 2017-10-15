@@ -164,8 +164,6 @@ let g:ctrlp_working_path_mode = ''
 " TODO: "https://github.com/equalsraf/neovim-qt/blob/master/src/gui/runtime/doc/nvim_gui_shim.txt" for windows nvim-qt
 " color scheme
 colorscheme darcula
-" set the font
-set guifont =Ubuntu\ Mono\ derivative\ Powerline\ 12
 " diff highlight settings
 highlight DiffAdd    cterm=bold ctermfg=none ctermbg=22 gui=bold guifg=NONE guibg=DarkGreen
 highlight DiffDelete cterm=bold ctermfg=none ctermbg=52 gui=bold guifg=Red  guibg=DarkRed
