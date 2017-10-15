@@ -218,7 +218,7 @@ if executable('ag')
 endif
 
 " make CtrlP use the current working dir only
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_working_path_mode = 0
 
 " }}}1
 
