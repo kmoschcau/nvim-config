@@ -115,6 +115,15 @@ set nojoinspaces
 " last character that fits on the screen.
 set linebreak
 
+" List mode: Show tabs as CTRL-I is displayed, display $ after end of line.
+" Useful to see the difference between tabs and spaces and for trailing blanks.
+" Further changed by the 'listchars' option.
+set list
+
+" Strings to use in 'list' mode and for the |:list| command.  It is a comma
+" separated list of string settings.
+set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
+
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
 
@@ -147,12 +156,6 @@ set textwidth=80
 
 " Show (partial) command in the last line of the screen.
 set showcmd
-
-" Strings to use in 'list' mode and for the |:list| command.
-set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
-
-" Display characters as defined in 'listchars'.
-set list
 
 " }}}1
 
