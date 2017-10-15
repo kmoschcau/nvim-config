@@ -88,7 +88,7 @@ set expandtab
 
 " Characters to fill the statuslines and vertical separators.
 " for future reference
-" set fillchars=vert:|,fold:-
+set fillchars=vert:│,fold:≍,diff:‡
 
 " This is a sequence of letters which describes how automatic formatting is to
 " be done. See fo-table.
@@ -122,7 +122,7 @@ set list
 
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
-set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
+set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
