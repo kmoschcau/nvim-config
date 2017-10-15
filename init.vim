@@ -127,6 +127,8 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
 
+" }}}1
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
@@ -156,8 +158,6 @@ set textwidth=80
 
 " Show (partial) command in the last line of the screen.
 set showcmd
-
-" }}}1
 
 " The Silver Searcher | ag {{{1
 if executable('ag')
