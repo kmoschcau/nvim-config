@@ -153,6 +153,10 @@ set splitright
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
+" Maximum width of text that is being inserted. A longer line will be broken
+" after white space to get this width.
+set textwidth=80
+
 " }}}1
 
 " Write the swap file to disk after this many milliseconds.
@@ -164,10 +168,6 @@ syntax enable
 
 " Disable wrapping of lines, that are too long for the buffer width.
 set nowrap
-
-" Maximum width of text that is being inserted. A longer line will be broken
-" after white space to get this width.
-set textwidth=80
 
 " The Silver Searcher | ag {{{1
 if executable('ag')
