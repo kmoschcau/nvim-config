@@ -136,10 +136,6 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
 " Display characters as defined in 'listchars'.
 set list
 
-" The value of this option influences when the last window will have a status
-" line. (2: always)
-set laststatus=2
-
 " }}}1
 
 " The Silver Searcher | ag {{{1
