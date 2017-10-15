@@ -211,7 +211,7 @@ let g:csv_no_conceal = 1
 " set up Silver Searcher (ag) use
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching  = 0
@@ -219,6 +219,9 @@ endif
 
 " make CtrlP use the current working dir only
 let g:ctrlp_working_path_mode = 0
+
+" make CtrlP scan for dotfiles and dotdirs
+let g:ctrlp_show_hidden = 1
 
 " }}}1
 
