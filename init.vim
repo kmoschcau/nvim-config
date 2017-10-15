@@ -141,6 +141,12 @@ set showcmd
 " permitting).
 set showfulltag
 
+" When on, splitting a window will put the new window below the current one.
+set splitbelow
+
+" When on, splitting a window will put the new window right of the current one.
+set splitright
+
 " Print the line number in front of each line.
 set number
 
