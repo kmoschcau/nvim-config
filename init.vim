@@ -190,6 +190,13 @@ if executable('ag')
 endif
 " }}}1
 
+" CSV | chrisbra/csv.vim {{{1
+
+" do not conceal delimiters
+let g:csv_no_conceal = 1
+
+" }}}1
+
 " CtrlP | ctrlpvim/ctrlp.vim {{{1
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -206,18 +213,15 @@ let g:ctrlp_working_path_mode = ''
 let g:airline_theme = 'powerlineish'
 " populate dictionary
 let g:airline_powerline_fonts = 1
+" display name if available
+let g:airline#extensions#csv#column_display = 'Name'
+
 
 "" nerdtree configuration
 " nerdtree shortcut
 map <C-n> :NERDTreeToggle<CR>
 " exit Vim when the only open window is nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-"" csv plugin configuration
-" display name if available
-let g:airline#extensions#csv#column_display = 'Name'
-" do not conceal delimiters
-let g:csv_no_conceal = 1
 
 "" syntastic settings
 let g:syntastic_aggregate_errors = 1
