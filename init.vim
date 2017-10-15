@@ -162,9 +162,6 @@ set textwidth=80
 " Switch on syntax highlighting.
 syntax enable
 
-" Disable wrapping of lines, that are too long for the buffer width.
-set nowrap
-
 " The Silver Searcher | ag {{{1
 if executable('ag')
   " Use ag over grep
