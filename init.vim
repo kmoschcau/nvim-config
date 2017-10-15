@@ -124,6 +124,9 @@ set list
 " separated list of string settings.
 set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 
+" Print the line number in front of each line.
+set number
+
 " Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
 " value will be used.
 set shiftwidth=0
@@ -149,9 +152,6 @@ set splitright
 
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
-
-" Print the line number in front of each line.
-set number
 
 " }}}1
 
