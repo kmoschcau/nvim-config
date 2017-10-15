@@ -159,10 +159,6 @@ set textwidth=80
 
 " }}}1
 
-" Write the swap file to disk after this many milliseconds.
-" make vim update faster
-set updatetime=250
-
 " Switch on syntax highlighting.
 syntax enable
 
