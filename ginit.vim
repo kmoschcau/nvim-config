@@ -8,3 +8,8 @@ if has('win32')
 else
   set guifont=Hack
 endif
+
+" This option only has an effect in the GUI version of Vim.  It is a sequence of
+" letters which describes what components and options of the GUI should be used.
+" TODO: test with Ubuntu gui
+set guioptions=cimgT
