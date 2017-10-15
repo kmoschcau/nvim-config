@@ -134,6 +134,13 @@ set showbreak=↪
 " Show (partial) command in the last line of the screen.
 set showcmd
 
+" When completing a word in insert mode (see |ins-completion|) from the tags
+" file, show both the tag name and a tidied-up form of the search pattern (if
+" there is one) as possible matches.  Thus, if you have matched a C function,
+" you can see a template for what arguments are required (coding style
+" permitting).
+set showfulltag
+
 " Print the line number in front of each line.
 set number
 
