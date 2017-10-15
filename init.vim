@@ -124,6 +124,10 @@ set list
 " separated list of string settings.
 set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 
+" Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
+" value will be used.
+set shiftwidth=0
+
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
 
@@ -134,9 +138,6 @@ set number
 
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
-
-" Number of spaces to use for each step of (auto)indent.
-set shiftwidth=2
 
 " Do smart autoindenting when starting a new line.
 " (no effect, when 'indentexpr' is set)
