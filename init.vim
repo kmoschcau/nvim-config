@@ -149,10 +149,6 @@ set number
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
-" Do smart autoindenting when starting a new line.
-" (no effect, when 'indentexpr' is set)
-set smartindent
-
 " Write the swap file to disk after this many milliseconds.
 " make vim update faster
 set updatetime=250
