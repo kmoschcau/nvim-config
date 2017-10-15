@@ -147,13 +147,13 @@ set splitbelow
 " When on, splitting a window will put the new window right of the current one.
 set splitright
 
+" Number of spaces that a <Tab> in the file counts for.
+set tabstop=2
+
 " Print the line number in front of each line.
 set number
 
 " }}}1
-
-" Number of spaces that a <Tab> in the file counts for.
-set tabstop=2
 
 " Write the swap file to disk after this many milliseconds.
 " make vim update faster
