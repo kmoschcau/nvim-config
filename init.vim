@@ -1,11 +1,13 @@
 " Vim: set foldmethod=marker:
 
 " Windows specific settings {{{1
+
 if has('win32')
   " set the paths for the python executables (installed with chocolatey)
   let g:python_host_prog  = 'C:/Python27/python'
   let g:python3_host_prog = 'C:/Python36/python'
 endif
+
 " }}}1
 
 " vim-plug | junegunn/vim-plug {{{1
@@ -21,6 +23,7 @@ endif
 " Make sure you use single quotes
 
 " general plugins {{{2
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
@@ -50,14 +53,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
 Plug 'vim-syntastic/syntastic'
+
 " }}}2
 
 " color schemes {{{2
+
 Plug 'blueshirts/darcula'
+
 " }}}2
 
 " Initialize plugin system
 call plug#end()
+
 " }}}1
 
 " general Vim settings {{{1
@@ -184,10 +191,12 @@ set textwidth=80
 " }}}1
 
 " The Silver Searcher | ag {{{1
+
 if executable('ag')
   " Use ag over grep
   set grepprg =ag\ --nogroup\ --nocolor
 endif
+
 " }}}1
 
 " CSV | chrisbra/csv.vim {{{1
@@ -198,14 +207,19 @@ let g:csv_no_conceal = 1
 " }}}1
 
 " CtrlP | ctrlpvim/ctrlp.vim {{{1
+
+" set up Silver Searcher (ag) use
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching  = 0
 endif
+
 " make CtrlP use the current working dir only
 let g:ctrlp_working_path_mode = ''
+
 " }}}1
 
 "" airline configuration
