@@ -131,6 +131,9 @@ set shiftwidth=0
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
 
+" Show (partial) command in the last line of the screen.
+set showcmd
+
 " Print the line number in front of each line.
 set number
 
@@ -156,9 +159,6 @@ set nowrap
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
 set textwidth=80
-
-" Show (partial) command in the last line of the screen.
-set showcmd
 
 " The Silver Searcher | ag {{{1
 if executable('ag')
