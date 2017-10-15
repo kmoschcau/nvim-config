@@ -132,9 +132,6 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:n
 " Display characters as defined in 'listchars'.
 set list
 
-" When there is a previous search pattern, highlight all its matches.
-set hlsearch
-
 " The value of this option influences when the last window will have a status
 " line. (2: always)
 set laststatus=2
