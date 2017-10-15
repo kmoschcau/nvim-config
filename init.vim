@@ -60,7 +60,29 @@ Plug 'blueshirts/darcula'
 call plug#end()
 " }}}1
 
-" Vim options {{{1
+" general Vim settings {{{1
+
+" non option settings {{{2
+
+" Switch on syntax highlighting.
+syntax enable
+
+" }}}2
+
+" appearance settings {{{2
+
+" Load color scheme {name}.
+colorscheme darcula
+
+" Change the highligh group colors for diff highlight groups.
+highlight DiffAdd    cterm=bold ctermfg=none ctermbg=22 gui=bold guifg=NONE guibg=DarkGreen
+highlight DiffDelete cterm=bold ctermfg=none ctermbg=52 gui=bold guifg=Red  guibg=DarkRed
+highlight DiffChange cterm=none ctermfg=none ctermbg=17 gui=none guifg=NONE guibg=DarkBlue
+highlight DiffText   cterm=bold ctermfg=none ctermbg=19 gui=bold guifg=NONE guibg=SlateBlue
+
+" }}}2
+
+" Vim options {{{2
 
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
@@ -157,10 +179,9 @@ set tabstop=2
 " after white space to get this width.
 set textwidth=80
 
-" }}}1
+" }}}2
 
-" Switch on syntax highlighting.
-syntax enable
+" }}}1
 
 " The Silver Searcher | ag {{{1
 if executable('ag')
@@ -180,17 +201,8 @@ endif
 let g:ctrlp_working_path_mode = ''
 " }}}1
 
-"" appearance settings
 " TODO: put the gui options into ginit.vim ":h gui"
 " TODO: "https://github.com/equalsraf/neovim-qt/blob/master/src/gui/runtime/doc/nvim_gui_shim.txt" for windows nvim-qt
-" color scheme
-colorscheme darcula
-" diff highlight settings
-highlight DiffAdd    cterm=bold ctermfg=none ctermbg=22 gui=bold guifg=NONE guibg=DarkGreen
-highlight DiffDelete cterm=bold ctermfg=none ctermbg=52 gui=bold guifg=Red  guibg=DarkRed
-highlight DiffChange cterm=none ctermfg=none ctermbg=17 gui=none guifg=NONE guibg=DarkBlue
-highlight DiffText   cterm=bold ctermfg=none ctermbg=19 gui=bold guifg=NONE guibg=SlateBlue
-
 
 
 "" airline configuration
