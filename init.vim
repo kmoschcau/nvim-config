@@ -62,6 +62,14 @@ call plug#end()
 
 " Vim options {{{1
 
+" Every wrapped line will continue visually indented (same amount of space as
+" the beginning of that line), thus preserving horizontal blocks of text.
+set breakindent
+
+" Settings for 'breakindent'. It can consist of the following optional items and
+" must be separated by a comma.
+set breakindentopt=shift:2,sbr
+
 " A comma separated list of screen columns that are highlighted with
 " hl-ColorColumn. The screen column can be an absolute number, or a number
 " preceded with '+' or '-', which is added to or subtracted from 'textwidth'.
@@ -71,6 +79,9 @@ set colorcolumn=+1
 " would be to not do this, but it does not work because of
 " 'chaoren/vim-wordmotion' anyway.
 set cpoptions-=_
+
+" Use the column for 'number' and 'relativenumber' for wrapped text as well.
+set cpoptions+=n
 
 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
@@ -99,6 +110,13 @@ set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
 " Insert two spaces after a '.', '?' and '!' with a join command. Otherwise only
 " one space is inserted.
 set nojoinspaces
+
+" If on, Vim will wrap long lines at a character in 'breakat' rather than at the
+" last character that fits on the screen.
+set linebreak
+
+" String to put at the start of lines that have been wrapped.
+set showbreak=↪
 
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
