@@ -201,10 +201,6 @@ endif
 let g:ctrlp_working_path_mode = ''
 " }}}1
 
-" TODO: put the gui options into ginit.vim ":h gui"
-" TODO: "https://github.com/equalsraf/neovim-qt/blob/master/src/gui/runtime/doc/nvim_gui_shim.txt" for windows nvim-qt
-
-
 "" airline configuration
 " airline color scheme
 let g:airline_theme = 'powerlineish'

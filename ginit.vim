@@ -1,4 +1,7 @@
+" Vim: set foldmethod=marker:
 " only read for GUI instances
+
+" GUI options {{{1
 
 " This is a list of fonts which will be used for the GUI version of Vim.
 if has('win32')
@@ -13,3 +16,5 @@ endif
 " letters which describes what components and options of the GUI should be used.
 " TODO: test with Ubuntu gui
 set guioptions=cimgT
+
+" }}}1
