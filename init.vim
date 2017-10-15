@@ -96,6 +96,10 @@ set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
             \,r-cr:hor75-blinkwait1000-blinkon500-blinkoff500
             \,o:hor100-blinkwait0
 
+" Insert two spaces after a '.', '?' and '!' with a join command. Otherwise only
+" one space is inserted.
+set nojoinspaces
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
