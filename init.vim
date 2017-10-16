@@ -350,6 +350,24 @@ let g:airline#extensions#hunks#non_zero_only = 1
 
 " }}}1
 
+" vim-ruby | vim-ruby/vim-ruby {{{2
+
+" Use the "do" indentation style, since it better conforms to the Ruby style
+" guide.
+let g:ruby_indent_block_style = 'do'
+
+" Highlight operators. (Currently has a bug, that causes heredocs to be rendered
+" incorrectly.)
+" let ruby_operators = 1
+
+" Enable syntax based folding for Ruby files.
+let ruby_fold = 1
+
+" Specify what can be folded.
+let ruby_foldable_groups = 'def class module # __END__'
+
+" }}}2
+
 "" syntastic settings
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
