@@ -265,6 +265,20 @@ endif
 
 " }}}1
 
+" Vim Markdown | plasticboy/vim-markdown {{{1
+
+" Fold like in python-mode (meaning, include headers as the first line of a
+" fold.
+let g:vim_markdown_folding_style_pythonic = 1
+
+" Change the indent level of new list items to two spaces.
+let g:vim_markdown_new_list_item_indent = 2
+
+" Disable 'ge' motion override.
+map <Plug> <Plug>Markdown_EditUrlUnderCursor
+
+" }}}1
+
 "" airline configuration
 " airline color scheme
 let g:airline_theme = 'powerlineish'
@@ -297,9 +311,3 @@ let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 "" Eclim configuration
 " make eclim use YouCompleteMe as completion UI
 let g:EclimCompletionMethod = 'omnifunc'
-
-"" vim-markdown configuration
-" list indent spaces
-let g:vim_markdown_new_list_item_indent = 2
-" disable 'ge' motion override
-map <Plug> <Plug>Markdown_EditUrlUnderCursor
