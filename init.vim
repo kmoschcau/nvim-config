@@ -358,7 +358,7 @@ let g:airline#extensions#hunks#non_zero_only = 1
 
 " }}}1
 
-" vim-ruby | vim-ruby/vim-ruby {{{2
+" vim-ruby | vim-ruby/vim-ruby {{{1
 
 " Use the "do" indentation style, since it better conforms to the Ruby style
 " guide.
@@ -374,7 +374,7 @@ let ruby_fold = 1
 " Specify what can be folded.
 let ruby_foldable_groups = 'def class module # __END__'
 
-" }}}2
+" }}}1
 
 "" syntastic settings
 let g:syntastic_aggregate_errors = 1
