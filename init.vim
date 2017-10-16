@@ -77,8 +77,15 @@ syntax enable
 
 " appearance settings {{{2
 
-" Load color scheme {name}.
+" Colorscheme settings {{{3
+
+" darcula | blueshirts/darcula {{{4
+
 colorscheme darcula
+
+" }}}4
+
+" }}}3
 
 " Change the highligh group colors for diff highlight groups.
 highlight DiffAdd    cterm=bold ctermfg=none ctermbg=22 gui=bold guifg=NONE guibg=DarkGreen
