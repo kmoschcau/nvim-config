@@ -1,8 +1,8 @@
-"" java dependent settings
+" Java file type settings
 
-" formatting options
-set formatoptions +=j
-set textwidth =100
+" Maximum width of text that is being inserted. A longer line will be broken
+" after white space to get this width.
+set textwidth=100
 
-" add base java tags to tags watch list
+" Add base java tags to tags watch list.
 set tags +=~/.vim/tags/java
