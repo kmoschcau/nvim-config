@@ -230,29 +230,37 @@ let g:ctrlp_show_hidden = 1
 " toggle Tagbar with typing <F8>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 
-" tagbar autofocus
-let g:tagbar_autofocus = 1
-
-" tagbar autoclose
+" If you set this option the Tagbar window will automatically close when you
+" jump to a tag.
 let g:tagbar_autoclose = 1
 
-" use 'ripper-tags' (if available) to generate ruby ctags with tagbar
+" If you set this option the cursor will move to the Tagbar window when it is
+" opened.
+let g:tagbar_autofocus = 1
+
+" If this option is set the tags are sorted according to their name. If it is
+" unset they are sorted according to their order in the source file.
+let g:tagbar_sort = 0
+
+" By default if the cursor is over a tag in the tagbar window, information
+" about the tag is echoed out. Set this option to disable that behavior.
+let g:tagbar_silent = 1
+
+" Configure Tagbar to user ripper-tags with Ruby
 if executable('ripper-tags')
-  " Configure Tagbar to user ripper-tags with ruby
   let g:tagbar_type_ruby = {
-        \ 'ctagstype' : 'ruby',
-        \ 'kinds' : ['m:modules',
-                   \ 'c:classes',
-                   \ 'C:constants',
-                   \ 'F:singleton methods',
-                   \ 'f:methods',
-                   \ 'a:aliases'],
-        \ 'kind2scope' : {'m' : 'module',
-                        \ 'c' : 'class'},
-        \ 'sro' : '.',
-        \ 'ctagsbin': 'ripper-tags',
-        \ 'ctagsargs': ['-f', '-']
-        \ }
+      \ 'kinds'      : ['m:modules',
+                      \ 'c:classes',
+                      \ 'C:constants',
+                      \ 'F:singleton methods',
+                      \ 'f:methods',
+                      \ 'a:aliases'],
+      \ 'kind2scope' : { 'c' : 'class',
+                       \ 'm' : 'class' },
+      \ 'scope2kind' : { 'class' : 'c' },
+      \ 'ctagsbin'   : 'ripper-tags',
+      \ 'ctagsargs'  : ['-f', '-']
+      \ }
 endif
 
 " }}}1
