@@ -227,8 +227,8 @@ let g:ctrlp_show_hidden = 1
 
 " Tagbar | majutsushi/tagbar {{{1
 
-" Tagbar shortcut
-nmap <F8> :TagbarToggle<CR>
+" toggle Tagbar with typing <F8>
+nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " tagbar autofocus
 let g:tagbar_autofocus = 1
