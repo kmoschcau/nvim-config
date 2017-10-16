@@ -376,16 +376,15 @@ let ruby_foldable_groups = 'def class module # __END__'
 
 " }}}1
 
-"" syntastic settings
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq   = 0
-let g:syntastic_auto_loc_list = 2
+" Syntastic | vim-syntastic/syntastic {{{1
+
 " java checkers
+" TODO: check general settings for this, maybe add guards
 let g:syntastic_java_checkers = ['javac', 'checkstyle']
 let g:syntastic_java_checkstyle_classpath = '/opt/checkstyle/checkstyle-8.1-all.jar'
 let g:syntastic_java_checkstyle_conf_file = 'google_checks.xml'
+
 " ruby checkers
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
+" }}}1
