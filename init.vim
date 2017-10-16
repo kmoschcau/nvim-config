@@ -225,6 +225,38 @@ let g:ctrlp_show_hidden = 1
 
 " }}}1
 
+" Tagbar | majutsushi/tagbar {{{1
+
+" Tagbar shortcut
+nmap <F8> :TagbarToggle<CR>
+
+" tagbar autofocus
+let g:tagbar_autofocus = 1
+
+" tagbar autoclose
+let g:tagbar_autoclose = 1
+
+" use 'ripper-tags' (if available) to generate ruby ctags with tagbar
+if executable('ripper-tags')
+  " Configure Tagbar to user ripper-tags with ruby
+  let g:tagbar_type_ruby = {
+        \ 'ctagstype' : 'ruby',
+        \ 'kinds' : ['m:modules',
+                   \ 'c:classes',
+                   \ 'C:constants',
+                   \ 'F:singleton methods',
+                   \ 'f:methods',
+                   \ 'a:aliases'],
+        \ 'kind2scope' : {'m' : 'module',
+                        \ 'c' : 'class'},
+        \ 'sro' : '.',
+        \ 'ctagsbin': 'ripper-tags',
+        \ 'ctagsargs': ['-f', '-']
+        \ }
+endif
+
+" }}}1
+
 "" airline configuration
 " airline color scheme
 let g:airline_theme = 'powerlineish'
@@ -232,7 +264,8 @@ let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 " display name if available
 let g:airline#extensions#csv#column_display = 'Name'
-
+" disable tagbar in airline
+let g:airline#extensions#tagbar#enabled = 0
 
 "" nerdtree configuration
 " nerdtree shortcut
@@ -252,34 +285,6 @@ let g:syntastic_java_checkstyle_classpath = '/opt/checkstyle/checkstyle-8.1-all.
 let g:syntastic_java_checkstyle_conf_file = 'google_checks.xml'
 " ruby checkers
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-
-"" tagbar config
-" tagbar shortcut
-nmap <F8> :TagbarToggle<CR>
-" tagbar autofocus
-let g:tagbar_autofocus = 1
-" tagbar autoclose
-let g:tagbar_autoclose = 1
-" disable tagbar in airline
-let g:airline#extensions#tagbar#enabled = 0
-" " use 'ripper-tags' (if available) to generate ruby ctags with tagbar
-if executable('ripper-tags')
-  " Configure Tagbar to user ripper-tags with ruby
-  let g:tagbar_type_ruby = {
-        \ 'ctagstype' : 'ruby',
-        \ 'kinds' : ['m:modules',
-                   \ 'c:classes',
-                   \ 'C:constants',
-                   \ 'F:singleton methods',
-                   \ 'f:methods',
-                   \ 'a:aliases'],
-        \ 'kind2scope' : {'m' : 'module',
-                        \ 'c' : 'class'},
-        \ 'sro' : '.',
-        \ 'ctagsbin': 'ripper-tags',
-        \ 'ctagsargs': ['-f', '-']
-        \ }
-endif
 
 "" Eclim configuration
 " make eclim use YouCompleteMe as completion UI
