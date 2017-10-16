@@ -198,6 +198,15 @@ endif
 
 " }}}1
 
+" Eclim {{{1
+
+" TODO: check Eclim options
+
+" Make eclim use YouCompleteMe as completion UI
+let g:EclimCompletionMethod = 'omnifunc'
+
+" }}}1
+
 " CSV | chrisbra/csv.vim {{{1
 
 " do not conceal delimiters
@@ -380,6 +389,3 @@ let g:syntastic_java_checkstyle_conf_file = 'google_checks.xml'
 " ruby checkers
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
-"" Eclim configuration
-" make eclim use YouCompleteMe as completion UI
-let g:EclimCompletionMethod = 'omnifunc'
