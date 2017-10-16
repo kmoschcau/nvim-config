@@ -38,7 +38,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -279,6 +279,26 @@ map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
 " }}}1
 
+" NERD tree | scrooloose/nerdtree {{{1
+
+" NERD tree shortcut
+nnoremap <silent> <C-N> :NERDTreeToggle<CR>
+
+" Exit Vim when the only open window is NERD tree.
+autocmd BufEnter *
+  \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
+  \ |   quit
+  \ | endif
+
+" If set to 1, the NERD tree window will close after opening a file with the
+" |NERDTree-o|, |NERDTree-i|, |NERDTree-t| and |NERDTree-T| mappings.
+let NERDTreeQuitOnOpen = 1
+
+" This option tells Vim whether to display hidden files by default.
+let NERDTreeShowHidden = 1
+
+" }}}1
+
 "" airline configuration
 " airline color scheme
 let g:airline_theme = 'powerlineish'
@@ -288,12 +308,6 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
 " disable tagbar in airline
 let g:airline#extensions#tagbar#enabled = 0
-
-"" nerdtree configuration
-" nerdtree shortcut
-map <C-n> :NERDTreeToggle<CR>
-" exit Vim when the only open window is nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "" syntastic settings
 let g:syntastic_aggregate_errors = 1
