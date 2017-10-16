@@ -299,15 +299,56 @@ let NERDTreeShowHidden = 1
 
 " }}}1
 
-"" airline configuration
-" airline color scheme
-let g:airline_theme = 'powerlineish'
-" populate dictionary
+" vim-airline | vim-airline/vim-airline {{{1
+
+" airline options {{{2
+
+" Themes are automatically selected, based on the matching colorscheme. This can
+" be overridden by defining a value.
+" let g:airline_theme = 'powerlineish'
+
+" By default, airline will use unicode symbols if your encoding matches utf-8.
+" If you want the powerline symbols set this variable.
 let g:airline_powerline_fonts = 1
-" display name if available
-let g:airline#extensions#csv#column_display = 'Name'
-" disable tagbar in airline
+
+" }}}2
+
+" airline extension options {{{2
+
+" airline-default {{{3
+
+" Configure the layout to not use %(%) grouping items in the statusline. Try
+" setting this to zero, if you notice bleeding color artifacts.
+" TODO: test this with color bleeding
+" let airline#extensions#default#section_use_groupitems = 1
+
+" }}}3
+
+" airline-tagbar {{{3
+
+" Disable Tagbar integration.
 let g:airline#extensions#tagbar#enabled = 0
+
+" }}}3
+
+" airline-csv {{{3
+
+" Show the name of columns. (Leads to wrong output, if no headers are
+" available.)
+let g:airline#extensions#csv#column_display = 'Name'
+
+" }}}3
+
+" airline-hunks {{{3
+
+" Enable showing only non-zero hunks.
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" }}}3
+
+" }}}2
+
+" }}}1
 
 "" syntastic settings
 let g:syntastic_aggregate_errors = 1
