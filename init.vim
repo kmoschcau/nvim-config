@@ -51,7 +51,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/L9'
 Plug 'vim-syntastic/syntastic'
 
 " }}}2
