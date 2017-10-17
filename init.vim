@@ -37,7 +37,7 @@ Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'noprompt/vim-yardoc'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'scrooloose/nerdtree'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
