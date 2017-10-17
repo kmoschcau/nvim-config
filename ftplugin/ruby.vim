@@ -3,6 +3,9 @@
 " Add tags generated for gems to the tags watch list
 set tags+=gems.tags
 
+" Set the foldlevel to not fold anything by default.
+setlocal foldlevel=0
+
 " Customize some highlight groups for noprompt/vim-yardoc.
 highlight link yardGenericTag rubyAttribute
 highlight link yardDuckType rubyFunction
