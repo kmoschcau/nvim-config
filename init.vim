@@ -416,7 +416,7 @@ let g:ale_sign_warning = '! '
 " ALE Ruby options {{{2
 
 " This variable can be changed to modify flags given to rubocop.
-let g:ale_ruby_rubocop_options = 'DES'
+let g:ale_ruby_rubocop_options = '-DES'
 
 " }}}2
 
