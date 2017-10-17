@@ -1,7 +1,7 @@
 " Ruby filetype settings
 
 " Add tags generated for gems to the tags watch list
-set tags +=gems.tags
+set tags+=gems.tags
 
 " Customize some highlight groups for noprompt/vim-yardoc.
 highlight link yardGenericTag rubyAttribute

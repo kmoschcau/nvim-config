@@ -1,3 +1,4 @@
+scriptencoding=utf-8
 " Vim: set foldmethod=marker:
 
 " Windows specific settings {{{1
@@ -300,17 +301,19 @@ map <Plug> <Plug>Markdown_EditUrlUnderCursor
 nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 
 " Exit Vim when the only open window is NERD tree.
-autocmd BufEnter *
-  \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
-  \ |   quit
-  \ | endif
+augroup NERDTree
+  autocmd BufEnter *
+    \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
+    \ |   quit
+    \ | endif
+augroup end
 
 " If set to 1, the NERD tree window will close after opening a file with the
 " |NERDTree-o|, |NERDTree-i|, |NERDTree-t| and |NERDTree-T| mappings.
-let NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 1
 
 " This option tells Vim whether to display hidden files by default.
-let NERDTreeShowHidden = 1
+let g:NERDTreeShowHidden = 1
 
 " }}}1
 
@@ -376,10 +379,10 @@ let g:ruby_indent_block_style = 'do'
 " let ruby_operators = 1
 
 " Enable syntax based folding for Ruby files.
-let ruby_fold = 1
+let g:ruby_fold = 1
 
 " Specify what can be folded.
-let ruby_foldable_groups = 'def class module # __END__'
+let g:ruby_foldable_groups = 'def class module # __END__'
 
 " }}}1
 
