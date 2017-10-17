@@ -51,7 +51,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 
 " }}}2
 
@@ -383,15 +383,38 @@ let ruby_foldable_groups = 'def class module # __END__'
 
 " }}}1
 
-" Syntastic | vim-syntastic/syntastic {{{1
+" Asynchronous Lint Engine | w0rp/ale {{{1
 
-" java checkers
-" TODO: check general settings for this, maybe add guards
-let g:syntastic_java_checkers = ['javac', 'checkstyle']
-let g:syntastic_java_checkstyle_classpath = '/opt/checkstyle/checkstyle-8.1-all.jar'
-let g:syntastic_java_checkstyle_conf_file = 'google_checks.xml'
+" ALE general options {{{2
 
-" ruby checkers
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+" This variable defines the format of the echoed message. The `%s` is the error
+" message itself, and it can contain the following handlers:
+" - `%linter%` for linter's name
+" - `%severity%` for the type of severity
+let g:ale_echo_msg_format = '%linter%: %severity% - %s'
+
+" The sign for errors in the sign gutter.
+let g:ale_sign_error = '‼ '
+
+" The sign for "info" markers in the sign gutter.
+let g:ale_sign_info = '¡ '
+
+" The sign for style errors in the sign gutter.
+let g:ale_sign_style_error = '‼S'
+
+" The sign for style warnings in the sign gutter.
+let g:ale_sign_style_warning = '!S'
+
+" The sign for warnings in the sign gutter.
+let g:ale_sign_warning = '! '
+
+" }}}2
+
+" ALE Ruby options {{{2
+
+" This variable can be changed to modify flags given to rubocop.
+let g:ale_ruby_rubocop_options = 'DES'
+
+" }}}2
 
 " }}}1
