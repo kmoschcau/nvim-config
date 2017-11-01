@@ -132,7 +132,6 @@ set formatoptions=croqlj
 
 " Configures the cursor style for each mode. Works in the GUI and some
 " terminals.
-" TODO: check tmux with this.
 " The option is a command separated list of parts. Each part consists of a
 " mode-list and an argument-list:
 "   mode-list:argument-list
@@ -332,15 +331,6 @@ let g:airline_powerline_fonts = 1
 " }}}2
 
 " airline extension options {{{2
-
-" airline-default {{{3
-
-" Configure the layout to not use %(%) grouping items in the statusline. Try
-" setting this to zero, if you notice bleeding color artifacts.
-" TODO: test this with color bleeding
-" let airline#extensions#default#section_use_groupitems = 1
-
-" }}}3
 
 " airline-tagbar {{{3
 
