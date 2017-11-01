@@ -1,7 +1,7 @@
 " Ruby filetype settings
 
 " Add tags generated for gems to the tags watch list
-set tags+=gems.tags
+setlocal tags+=gems.tags
 
 " Set the foldlevel to not fold anything by default.
 setlocal foldlevel=0

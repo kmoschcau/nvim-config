@@ -5,4 +5,4 @@
 setlocal textwidth=100
 
 " Add base java tags to tags watch list.
-set tags+=~/.vim/tags/java
+setlocal tags+=~/.vim/tags/java
