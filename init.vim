@@ -402,10 +402,25 @@ let g:ale_sign_warning = '! '
 
 " }}}2
 
+" ALE fixers {{{2
+
+" A mapping from filetypes to List values for functions for fixing errors.
+let g:ale_fixers = {
+    \ 'sh' : ['shfmt']
+    \ }
+
+" }}}2
+
 " ALE Ruby options {{{2
 
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '-DES'
+
+" }}}2
+
+" ALE sh options {{{2
+
+let g:ale_sh_shfmt_options = '-s -i 2'
 
 " }}}2
 
