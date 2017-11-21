@@ -21,6 +21,18 @@ else
   call plug#begin('~/.local/share/nvim/plugged')
 endif
 
+" build helper functions {{{2
+
+" vim-markdown-composer helper function {{{3
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+  endif
+endfunction
+" }}}3
+
+" }}}2
+
 " general plugins {{{2
 
 " Make sure you use single quotes
@@ -31,6 +43,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'godlygeek/tabular'
 Plug 'infoslack/vim-docker'
 Plug 'ludovicchabant/vim-gutentags'
@@ -236,6 +249,13 @@ let g:ctrlp_working_path_mode = 0
 
 " make CtrlP scan for dotfiles and dotdirs
 let g:ctrlp_show_hidden = 1
+
+" }}}1
+
+" vim-markdown-composer | euclio/vim-markdown-composer {{{1
+
+" Whether the server should automatically start when a markdown file is opened.
+let g:markdown_composer_autostart = 0
 
 " }}}1
 
