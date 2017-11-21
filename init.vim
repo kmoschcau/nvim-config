@@ -21,9 +21,9 @@ else
   call plug#begin('~/.local/share/nvim/plugged')
 endif
 
-" Make sure you use single quotes
-
 " general plugins {{{2
+
+" Make sure you use single quotes
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
