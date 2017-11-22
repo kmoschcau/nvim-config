@@ -97,6 +97,12 @@ syntax enable
 
 " appearance settings {{{2
 
+" When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
+" terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
+"
+" Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
+set termguicolors
+
 " Colorscheme settings {{{3
 
 " darcula | blueshirts/darcula {{{4
