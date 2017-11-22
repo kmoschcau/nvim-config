@@ -69,6 +69,12 @@ Plug 'w0rp/ale'
 
 " }}}2
 
+" NyaoVim plugins {{{2
+
+Plug 'rhysd/nyaovim-popup-tooltip'
+
+" }}}2
+
 " color schemes {{{2
 
 Plug 'blueshirts/darcula'
