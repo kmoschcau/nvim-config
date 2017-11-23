@@ -77,7 +77,9 @@ Plug 'rhysd/nyaovim-popup-tooltip'
 
 " color schemes {{{2
 
-Plug 'blueshirts/darcula'
+Plug 'chriskempson/base16-vim'
+Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 
 " }}}2
 
@@ -105,19 +107,53 @@ set termguicolors
 
 " Colorscheme settings {{{3
 
-" darcula | blueshirts/darcula {{{4
+" When set to "dark", Vim will try to use colors that look good on a dark
+" background.  When set to "light", Vim will try to use colors that look good on
+" a light background.
+set background=dark
 
-colorscheme darcula
+" base16-vim | chriskempson/base16-vim {{{4
+
+" colorscheme base16-default-dark
+
+" }}}4
+
+" oceanic next | mhartington/oceanic-next {{{4
+
+" let g:oceanic_next_terminal_bold   = 1
+" let g:oceanic_next_terminal_italic = 1
+" let g:airline_theme                = 'oceanicnext'
+
+" colorscheme OceanicNext
+
+" }}}4
+
+" gruvbox | morhetz/gruvbox {{{4
+
+" Enables italic text.
+" default: gui 1, term 0
+" Note: Set this to 1, just to be sure.
+let g:gruvbox_italic = 1
+
+" Inverts GitGutter and Syntastic signs. Useful to rapidly focus on.
+" default: 0
+let g:gruvbox_invert_signs = 1
+
+" Inverts tabline highlights, providing distinguishable tabline-fill.
+" default: 0
+let g:gruvbox_invert_tabline = 1
+
+" Adds a nice, subtle background to strings.
+let g:gruvbox_improved_strings = 1
+
+" TODO: Test this.
+let g:gruvbox_improved_warnings = 1
+
+colorscheme gruvbox
 
 " }}}4
 
 " }}}3
-
-" Change the highligh group colors for diff highlight groups.
-highlight DiffAdd    cterm=bold ctermfg=none ctermbg=22 gui=bold guifg=NONE guibg=DarkGreen
-highlight DiffDelete cterm=bold ctermfg=none ctermbg=52 gui=bold guifg=Red  guibg=DarkRed
-highlight DiffChange cterm=none ctermfg=none ctermbg=17 gui=none guifg=NONE guibg=DarkBlue
-highlight DiffText   cterm=bold ctermfg=none ctermbg=19 gui=bold guifg=NONE guibg=SlateBlue
 
 " }}}2
 
@@ -350,10 +386,6 @@ let g:NERDTreeShowHidden = 1
 " vim-airline | vim-airline/vim-airline {{{1
 
 " airline options {{{2
-
-" Themes are automatically selected, based on the matching colorscheme. This can
-" be overridden by defining a value.
-" let g:airline_theme = 'powerlineish'
 
 " By default, airline will use unicode symbols if your encoding matches utf-8.
 " If you want the powerline symbols set this variable.
