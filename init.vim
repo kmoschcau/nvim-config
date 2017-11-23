@@ -37,6 +37,7 @@ endfunction
 
 " Make sure you use single quotes
 
+Plug 'Rykka/colorv.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
