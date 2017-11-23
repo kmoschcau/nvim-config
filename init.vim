@@ -50,6 +50,7 @@ Plug 'infoslack/vim-docker'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'mattn/webapi-vim'
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
@@ -272,6 +273,13 @@ endif
 
 " Make eclim use YouCompleteMe as completion UI
 let g:EclimCompletionMethod = 'omnifunc'
+
+" }}}1
+
+" ColorV | Rykka/colorv.vim {{{1
+
+" Previewing color-text with same fg/bg colors.
+let g:colorv_preview_area = 1
 
 " }}}1
 
