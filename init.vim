@@ -7,6 +7,13 @@ if has('win32')
   " set the paths for the python executables (installed with chocolatey)
   let g:python_host_prog  = 'C:/Python27/python'
   let g:python3_host_prog = 'C:/Python36/python'
+else
+  if executable('/home/kmoschcau/.pyenv/versions/neovim2/bin/python')
+    let g:python_host_prog = '/home/kmoschcau/.pyenv/versions/neovim2/bin/python'
+  endif
+  if executable('/home/kmoschcau/.pyenv/versions/neovim3/bin/python')
+    let g:python3_host_prog = '/home/kmoschcau/.pyenv/versions/neovim3/bin/python'
+  endif
 endif
 
 " }}}1
