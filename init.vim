@@ -1,7 +1,7 @@
 scriptencoding=utf-8
 " Vim: set foldmethod=marker:
 
-" Windows specific settings {{{1
+" path settings {{{1
 
 if has('win32')
   " set the paths for the python executables (installed with chocolatey)
