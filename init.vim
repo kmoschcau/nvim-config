@@ -493,8 +493,20 @@ let g:ale_fixers = {
 
 " ALE Ruby options {{{2
 
+" ALE Ruby reek options {{{3
+
+" Controls whether linter messages contain a link to an explanatory wiki page
+" for the type of code smell. Defaults to off to improve readability.
+let g:ale_ruby_reek_show_wiki_link = 1
+
+" }}}3
+
+" ALE Ruby rubocop options {{{3
+
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '-DES'
+
+" }}}3
 
 " }}}2
 
