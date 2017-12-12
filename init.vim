@@ -193,7 +193,7 @@ set cpoptions+=n
 set expandtab
 
 " Characters to fill the statuslines and vertical separators.
-set fillchars=diff:\ ,fold:-,vert:│
+set fillchars=diff:\ ,fold:-,vert:█
 
 " This is a sequence of letters which describes how automatic formatting is to
 " be done. See fo-table.
