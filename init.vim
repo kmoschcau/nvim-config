@@ -53,6 +53,7 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
 Plug 'godlygeek/tabular'
 Plug 'infoslack/vim-docker'
 Plug 'ludovicchabant/vim-gutentags'
@@ -61,6 +62,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/webapi-vim'
 Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
+Plug 'rbgrouleff/bclose.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
