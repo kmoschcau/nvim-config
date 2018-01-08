@@ -250,6 +250,9 @@ set showcmd
 " permitting).
 set showfulltag
 
+" If in Insert, Replace or Visual mode put a message on the last line.
+set noshowmode
+
 " When on, splitting a window will put the new window below the current one.
 set splitbelow
 
