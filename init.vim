@@ -259,6 +259,90 @@ set splitbelow
 " When on, splitting a window will put the new window right of the current one.
 set splitright
 
+" statusline {{{3
+
+" helper methods {{{4
+
+" current mode {{{5
+
+" Dictionary: take mode() input -> longer notation of current mode
+" mode() is defined by Vim
+let g:currentmode={ 'n'  : 'NORMAL',
+                 \  'no' : 'N-OPERATOR PENDING',
+                 \  'v'  : 'VISUAL',
+                 \  'V'  : 'V-LINE',
+                 \  '' : 'V-BLOCK',
+                 \  's'  : 'SELECT',
+                 \  'S'  : 'S-LINE',
+                 \  '' : 'S-BLOCK',
+                 \  'i'  : 'INSERT',
+                 \  'R'  : 'REPLACE',
+                 \  'Rv' : 'V-REPLACE',
+                 \  'c'  : 'COMMAND',
+                 \  'cv' : 'VIM EX',
+                 \  'ce' : 'EX',
+                 \  'r'  : 'PROMPT',
+                 \  'rm' : 'MORE',
+                 \  'r?' : 'CONFIRM',
+                 \  '!'  : 'SHELL',
+                 \  't'  : 'TERMINAL'
+                 \}
+
+" Function: return current mode
+" abort -> function will abort soon as error detected
+function! ModeCurrent() abort
+  return get(g:currentmode, mode())
+endfunction
+
+" }}}5
+
+" }}}4
+
+" When nonempty, this option determines the content of the status line.
+
+" first, empty the statusline
+set statusline=
+
+" show the current mode
+" left justified, minimum 7
+let &statusline .= ' %-7.{ModeCurrent()}'
+
+" group for buffer flags
+" %h: Help buffer flag, text is "[help]".
+" %w: Preview window flag, text is "[Preview]".
+" %q: "[Quickfix List]", "[Location List]" or empty.
+" left justified
+let &statusline .= ' %-(%h%w%q%)'
+
+" Path to the file in the buffer, as typed or relative to current directory
+" left justified, maximum 100
+let &statusline .= ' %-.100f'
+
+" Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
+let &statusline .= '%m'
+
+" Separation point between alignment sections. Each section will be separated by
+" an equal number of spaces. No width fields allowed.
+let &statusline .= '%='
+
+" Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
+" maximum 20
+let &statusline .= '%.20y '
+
+" Percentage through file in lines as in CTRL-G.
+" minimum 3, followed by a literal percent sign
+let &statusline .= '%3p%% '
+
+" %l: Line number.
+" %L: Number of lines in buffer.
+let &statusline .= '%l/%L '
+
+" Column number.
+" preceded by a literal ': ', minimum 2
+let &statusline .= ': %2c '
+
+" }}}3
+
 " Number of spaces that a <Tab> in the file counts for.
 set tabstop=2
 
