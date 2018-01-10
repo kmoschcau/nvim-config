@@ -154,12 +154,6 @@ let g:gruvbox_invert_signs = 1
 " default: 0
 let g:gruvbox_invert_tabline = 1
 
-" Adds a nice, subtle background to strings.
-let g:gruvbox_improved_strings = 1
-
-" TODO: Test this.
-let g:gruvbox_improved_warnings = 1
-
 colorscheme gruvbox
 
 " }}}4
