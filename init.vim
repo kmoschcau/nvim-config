@@ -64,6 +64,7 @@ Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'sjl/gundo.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -479,6 +480,21 @@ let g:NERDTreeQuitOnOpen = 1
 
 " This option tells Vim whether to display hidden files by default.
 let g:NERDTreeShowHidden = 1
+
+" }}}1
+
+" Gundo | sjl/gundo.vim {{{1
+
+" Gundo view shortcut
+nnoremap <silent> <F5> :GundoToggle<CR>
+
+" Set this to 0 to disable the help text in the Gundo graph window.
+let g:gundo_help = 0
+
+" Set this to 0 to disable automatically rendering preview diffs as you move
+" through the undo tree (you can still render a specific diff with r).  This can
+" be useful on large files and undo trees to speed up Gundo.
+let g:gundo_auto_preview = 0
 
 " }}}1
 
