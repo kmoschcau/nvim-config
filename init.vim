@@ -551,7 +551,7 @@ let g:ruby_indent_block_style = 'do'
 let g:ruby_fold = 1
 
 " Specify what can be folded.
-let g:ruby_foldable_groups = 'def class module # __END__'
+let g:ruby_foldable_groups = 'def class module # __END__ do'
 
 " }}}1
 
