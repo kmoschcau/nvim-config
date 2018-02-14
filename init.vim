@@ -159,6 +159,19 @@ let g:gruvbox_invert_tabline = 1
 
 colorscheme gruvbox
 
+" custom highligh groups {{{5
+
+" Overridden highlight group for the cursor (usually done by gnome-terminal)
+highlight clear Cursor
+highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
+
+" Highlight groups for neovim's terminal cursor
+highlight! link TermCursor Cursor
+highlight clear TermCursorNC
+highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
+
+" }}}5
+
 " }}}4
 
 " }}}3
