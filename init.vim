@@ -8,11 +8,11 @@ if has('win32')
   let g:python_host_prog  = 'C:/Python27/python'
   let g:python3_host_prog = 'C:/Python36/python'
 else
-  if executable('/home/kmoschcau/.pyenv/versions/neovim2/bin/python')
-    let g:python_host_prog = '/home/kmoschcau/.pyenv/versions/neovim2/bin/python'
+  if executable(expand('$HOME/.pyenv/versions/neovim2/bin/python'))
+    let g:python_host_prog  = expand('$HOME/.pyenv/versions/neovim2/bin/python')
   endif
-  if executable('/home/kmoschcau/.pyenv/versions/neovim3/bin/python')
-    let g:python3_host_prog = '/home/kmoschcau/.pyenv/versions/neovim3/bin/python'
+  if executable(expand('$HOME/.pyenv/versions/neovim3/bin/python'))
+    let g:python3_host_prog = expand('$HOME/.pyenv/versions/neovim3/bin/python')
   endif
 endif
 
