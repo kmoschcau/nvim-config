@@ -362,6 +362,13 @@ set textwidth=80
 
 " }}}2
 
+" key bindings {{{2
+
+" Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
+nnoremap Y y$
+
+" }}}2
+
 " }}}1
 
 " The Silver Searcher | ag {{{1
