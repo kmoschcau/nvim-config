@@ -564,15 +564,18 @@ let g:airline#extensions#hunks#non_zero_only = 1
 " guide.
 let g:ruby_indent_block_style = 'do'
 
-" Highlight operators. (Currently has a bug, that causes heredocs to be rendered
-" incorrectly.)
-" let ruby_operators = 1
+" Highlight operators. (Keeping it on, but seems to have no effect.)
+let g:ruby_operators = 1
 
 " Enable syntax based folding for Ruby files.
 let g:ruby_fold = 1
 
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
+
+" Turn off expensive highlighting operations, speeding up ruby files
+" significantly.
+let g:ruby_no_expensive = 1
 
 " }}}1
 
