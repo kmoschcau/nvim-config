@@ -573,10 +573,6 @@ let g:ruby_fold = 1
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
 
-" Turn off expensive highlighting operations, speeding up ruby files
-" significantly.
-let g:ruby_no_expensive = 1
-
 " }}}1
 
 " Asynchronous Lint Engine | w0rp/ale {{{1
