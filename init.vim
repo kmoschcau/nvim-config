@@ -360,6 +360,12 @@ set tabstop=2
 " after white space to get this width.
 set textwidth=80
 
+" Completion mode that is used for the character specified with 'wildchar'. It
+" is a comma separated list of up to four parts. Each part specifies what to do
+" for each consecutive use of 'wildchar'. The first part specifies the behavior
+" for the first use of 'wildchar', The second part for the second use, etc.
+set wildmode=longest:full
+
 " }}}2
 
 " key bindings {{{2
