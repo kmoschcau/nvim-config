@@ -48,13 +48,13 @@ Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-css-color'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
-Plug 'gko/vim-coloresque'
 Plug 'godlygeek/tabular'
 Plug 'infoslack/vim-docker'
 Plug 'ludovicchabant/vim-gutentags'
