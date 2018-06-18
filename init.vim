@@ -381,7 +381,7 @@ nnoremap Y y$
 
 if executable('ag')
   " Use ag over grep
-  set grepprg =ag\ --nogroup\ --nocolor
+  set grepprg =ag\ --nogroup\ --nocolor\ --hidden
 endif
 
 " }}}1
@@ -414,7 +414,7 @@ let g:csv_no_conceal = 1
 " set up Silver Searcher (ag) use
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor --hidden --filename-pattern ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching  = 0
