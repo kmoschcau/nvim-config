@@ -3,3 +3,7 @@
 
 # ignore the gutentags .notags file
 /.notags
+
+# ignore the eclim files and directories
+/eclim/
+/plugin/

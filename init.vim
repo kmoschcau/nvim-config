@@ -393,6 +393,9 @@ endif
 " Make eclim use YouCompleteMe as completion UI
 let g:EclimCompletionMethod = 'omnifunc'
 
+" Disable eclim validation
+let g:EclimFileTypeValidate = 0
+
 " }}}1
 
 " ColorV | Rykka/colorv.vim {{{1

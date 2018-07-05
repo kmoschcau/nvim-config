@@ -6,3 +6,8 @@ setlocal textwidth=100
 
 " Add base java tags to tags watch list.
 setlocal tags+=~/.vim/tags/java
+
+" Set the ALE linters to run for java
+let b:ale_linters = {
+    \ 'java' : ['checkstyle', 'pmd']
+    \ }
