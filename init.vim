@@ -58,6 +58,7 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
 Plug 'godlygeek/tabular'
 Plug 'infoslack/vim-docker'
+Plug 'itmammoth/run-rspec.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
