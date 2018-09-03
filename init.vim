@@ -68,6 +68,7 @@ Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
+Plug 'tmhedberg/SimpylFold'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
@@ -519,6 +520,13 @@ let g:gundo_help = 0
 " through the undo tree (you can still render a specific diff with r).  This can
 " be useful on large files and undo trees to speed up Gundo.
 let g:gundo_auto_preview = 0
+
+" }}}1
+
+" SimpylFold | tmhedberg/SimpylFold {{{1
+
+" Preview docstrings in fold text.
+let g:SimpylFold_docstring_preview = 1
 
 " }}}1
 
