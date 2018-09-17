@@ -391,7 +391,8 @@ endif
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Disable eclim validation
-let g:EclimFileTypeValidate = 0
+let g:EclimJavaValidate = 0
+let g:EclimCssValidate = 0
 
 " }}}1
 
