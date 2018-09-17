@@ -57,6 +57,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
 Plug 'godlygeek/tabular'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
 Plug 'ludovicchabant/vim-gutentags'
