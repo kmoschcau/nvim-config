@@ -36,7 +36,6 @@ function! BuildComposer(info)
     !cargo build --release
   endif
 endfunction
-" }}}3
 
 " }}}2
 
@@ -157,7 +156,7 @@ let g:gruvbox_invert_tabline = 1
 
 colorscheme gruvbox
 
-" custom highligh groups {{{5
+" custom highlight groups {{{5
 
 " Overridden highlight group for the cursor (usually done by gnome-terminal)
 highlight clear Cursor
@@ -167,12 +166,6 @@ highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
 highlight! link TermCursor Cursor
 highlight clear TermCursorNC
 highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
-
-" }}}5
-
-" }}}4
-
-" }}}3
 
 " }}}2
 
@@ -371,8 +364,6 @@ set wildmode=longest:full
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
 
-" }}}2
-
 " }}}1
 
 " The Silver Searcher | ag {{{1
@@ -564,10 +555,6 @@ let g:airline#extensions#csv#column_display = 'Name'
 " Enable showing only non-zero hunks.
 let g:airline#extensions#hunks#non_zero_only = 1
 
-" }}}3
-
-" }}}2
-
 " }}}1
 
 " vim-ruby | vim-ruby/vim-ruby {{{1
@@ -638,14 +625,10 @@ let g:ale_ruby_reek_show_wiki_link = 1
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '-DES'
 
-" }}}3
-
 " }}}2
 
 " ALE sh options {{{2
 
 let g:ale_sh_shfmt_options = '-s -i 2'
-
-" }}}2
 
 " }}}1
