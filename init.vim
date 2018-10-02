@@ -68,6 +68,7 @@ Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
+Plug 'slim-template/vim-slim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
