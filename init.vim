@@ -16,8 +16,6 @@ else
   endif
 endif
 
-" }}}1
-
 " vim-plug | junegunn/vim-plug {{{1
 
 " Specify a directory for plugins
@@ -29,15 +27,12 @@ else
 endif
 
 " build helper functions {{{2
-
 " vim-markdown-composer helper function {{{3
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
     !cargo build --release
   endif
 endfunction
-
-" }}}2
 
 " general plugins {{{2
 
@@ -85,8 +80,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
 
-" }}}2
-
 " color schemes {{{2
 
 Plug 'chriskempson/base16-vim'
@@ -98,16 +91,11 @@ Plug 'morhetz/gruvbox'
 " Initialize plugin system
 call plug#end()
 
-" }}}1
-
 " general Vim settings {{{1
-
 " non option settings {{{2
 
 " Switch on syntax highlighting.
 syntax enable
-
-" }}}2
 
 " appearance settings {{{2
 
@@ -128,8 +116,6 @@ set background=dark
 
 " colorscheme base16-default-dark
 
-" }}}4
-
 " oceanic next | mhartington/oceanic-next {{{4
 
 " let g:oceanic_next_terminal_bold   = 1
@@ -137,8 +123,6 @@ set background=dark
 " let g:airline_theme                = 'oceanicnext'
 
 " colorscheme OceanicNext
-
-" }}}4
 
 " gruvbox | morhetz/gruvbox {{{4
 
@@ -167,8 +151,6 @@ highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
 highlight! link TermCursor Cursor
 highlight clear TermCursorNC
 highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
-
-" }}}2
 
 " Vim options {{{2
 
@@ -262,9 +244,7 @@ set splitbelow
 set splitright
 
 " statusline {{{3
-
 " helper methods {{{4
-
 " current mode {{{5
 
 " Dictionary: take mode() input -> longer notation of current mode
@@ -295,8 +275,6 @@ let g:currentmode={ 'n'  : 'NORMAL',
 function! ModeCurrent() abort
   return get(g:currentmode, mode())
 endfunction
-
-" }}}5
 
 " }}}4
 
@@ -358,14 +336,10 @@ set textwidth=80
 " for the first use of 'wildchar', The second part for the second use, etc.
 set wildmode=longest:full
 
-" }}}2
-
 " key bindings {{{2
 
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
-
-" }}}1
 
 " The Silver Searcher | ag {{{1
 
@@ -373,8 +347,6 @@ if executable('ag')
   " Use ag over grep
   set grepprg =ag\ --nogroup\ --nocolor\ --hidden
 endif
-
-" }}}1
 
 " Eclim {{{1
 
@@ -387,21 +359,15 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimJavaValidate = 0
 let g:EclimCssValidate = 0
 
-" }}}1
-
 " ColorV | Rykka/colorv.vim {{{1
 
 " Previewing color-text with same fg/bg colors.
 let g:colorv_preview_area = 1
 
-" }}}1
-
 " CSV | chrisbra/csv.vim {{{1
 
 " do not conceal delimiters
 let g:csv_no_conceal = 1
-
-" }}}1
 
 " CtrlP | ctrlpvim/ctrlp.vim {{{1
 
@@ -417,14 +383,10 @@ let g:ctrlp_working_path_mode = 0
 " make CtrlP scan for dotfiles and dotdirs
 let g:ctrlp_show_hidden = 1
 
-" }}}1
-
 " vim-markdown-composer | euclio/vim-markdown-composer {{{1
 
 " Whether the server should automatically start when a markdown file is opened.
 let g:markdown_composer_autostart = 0
-
-" }}}1
 
 " Tagbar | majutsushi/tagbar {{{1
 
@@ -464,8 +426,6 @@ if executable('ripper-tags')
       \ }
 endif
 
-" }}}1
-
 " Vim Markdown | plasticboy/vim-markdown {{{1
 
 " Fold like in python-mode (meaning, include headers as the first line of a
@@ -477,8 +437,6 @@ let g:vim_markdown_new_list_item_indent = 2
 
 " Disable 'ge' motion override.
 map <Plug> <Plug>Markdown_EditUrlUnderCursor
-
-" }}}1
 
 " NERD tree | scrooloose/nerdtree {{{1
 
@@ -500,8 +458,6 @@ let g:NERDTreeQuitOnOpen = 1
 " This option tells Vim whether to display hidden files by default.
 let g:NERDTreeShowHidden = 1
 
-" }}}1
-
 " Gundo | sjl/gundo.vim {{{1
 
 " Gundo view shortcut
@@ -515,33 +471,23 @@ let g:gundo_help = 0
 " be useful on large files and undo trees to speed up Gundo.
 let g:gundo_auto_preview = 0
 
-" }}}1
-
 " SimpylFold | tmhedberg/SimpylFold {{{1
 
 " Preview docstrings in fold text.
 let g:SimpylFold_docstring_preview = 1
 
-" }}}1
-
 " vim-airline | vim-airline/vim-airline {{{1
-
 " airline options {{{2
 
 " By default, airline will use unicode symbols if your encoding matches utf-8.
 " If you want the powerline symbols set this variable.
 let g:airline_powerline_fonts = 1
 
-" }}}2
-
 " airline extension options {{{2
-
 " airline-tagbar {{{3
 
 " Disable Tagbar integration.
 let g:airline#extensions#tagbar#enabled = 0
-
-" }}}3
 
 " airline-csv {{{3
 
@@ -549,14 +495,10 @@ let g:airline#extensions#tagbar#enabled = 0
 " available.)
 let g:airline#extensions#csv#column_display = 'Name'
 
-" }}}3
-
 " airline-hunks {{{3
 
 " Enable showing only non-zero hunks.
 let g:airline#extensions#hunks#non_zero_only = 1
-
-" }}}1
 
 " vim-ruby | vim-ruby/vim-ruby {{{1
 
@@ -573,10 +515,7 @@ let g:ruby_fold = 1
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
 
-" }}}1
-
 " Asynchronous Lint Engine | w0rp/ale {{{1
-
 " ALE general options {{{2
 
 " This variable defines the format of the echoed message. The `%s` is the error
@@ -600,8 +539,6 @@ let g:ale_sign_style_warning = '!S'
 " The sign for warnings in the sign gutter.
 let g:ale_sign_warning = '! '
 
-" }}}2
-
 " ALE fixers {{{2
 
 " A mapping from filetypes to List values for functions for fixing errors.
@@ -609,27 +546,18 @@ let g:ale_fixers = {
     \ 'sh' : ['shfmt']
     \ }
 
-" }}}2
-
 " ALE Ruby options {{{2
-
 " ALE Ruby reek options {{{3
 
 " Controls whether linter messages contain a link to an explanatory wiki page
 " for the type of code smell. Defaults to off to improve readability.
 let g:ale_ruby_reek_show_wiki_link = 1
 
-" }}}3
-
 " ALE Ruby rubocop options {{{3
 
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '-DES'
 
-" }}}2
-
 " ALE sh options {{{2
 
 let g:ale_sh_shfmt_options = '-s -i 2'
-
-" }}}1
