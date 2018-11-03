@@ -82,8 +82,7 @@ Plug 'w0rp/ale'
 
 " color schemes {{{2
 
-Plug 'chriskempson/base16-vim'
-Plug 'mhartington/oceanic-next'
+Plug 'hzchirs/vim-material'
 Plug 'morhetz/gruvbox'
 
 " }}}2
@@ -110,36 +109,28 @@ set termguicolors
 " When set to "dark", Vim will try to use colors that look good on a dark
 " background.  When set to "light", Vim will try to use colors that look good on
 " a light background.
-set background=dark
+set background=light
 
-" base16-vim | chriskempson/base16-vim {{{4
+" vim-material | hzchirs/vim-material {{{4
 
-" colorscheme base16-default-dark
-
-" oceanic next | mhartington/oceanic-next {{{4
-
-" let g:oceanic_next_terminal_bold   = 1
-" let g:oceanic_next_terminal_italic = 1
-" let g:airline_theme                = 'oceanicnext'
-
-" colorscheme OceanicNext
+colorscheme vim-material
 
 " gruvbox | morhetz/gruvbox {{{4
 
 " Enables italic text.
 " default: gui 1, term 0
 " Note: Set this to 1, just to be sure.
-let g:gruvbox_italic = 1
+" let g:gruvbox_italic = 1
 
 " Inverts GitGutter and Syntastic signs. Useful to rapidly focus on.
 " default: 0
-let g:gruvbox_invert_signs = 1
+" let g:gruvbox_invert_signs = 1
 
 " Inverts tabline highlights, providing distinguishable tabline-fill.
 " default: 0
-let g:gruvbox_invert_tabline = 1
+" let g:gruvbox_invert_tabline = 1
 
-colorscheme gruvbox
+" colorscheme gruvbox
 
 " custom highlight groups {{{5
 
@@ -482,6 +473,9 @@ let g:SimpylFold_docstring_preview = 1
 " By default, airline will use unicode symbols if your encoding matches utf-8.
 " If you want the powerline symbols set this variable.
 let g:airline_powerline_fonts = 1
+
+" Set the material colorscheme for airline.
+let g:airline_theme = 'material'
 
 " airline extension options {{{2
 " airline-tagbar {{{3
