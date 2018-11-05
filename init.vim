@@ -115,6 +115,28 @@ set background=light
 
 colorscheme vim-material
 
+" custom highlight groups {{{5
+" highlight groups for the terminal cursor {{{6
+
+" Overridden highlight group for the cursor
+highlight clear Cursor
+highlight Cursor cterm=reverse guifg=#666666 guibg=#00BCD4
+
+" Highlight groups for neovim's terminal cursor
+highlight! link TermCursor Cursor
+highlight clear TermCursorNC
+highlight TermCursorNC cterm=reverse guifg=#666666 guibg=#0097A7
+
+" highlight groups for search {{{6
+
+" highlight group for incremental search
+highlight clear IncSearch
+highlight IncSearch ctermbg=208 guibg=#FFA000
+
+" highlight group for last search pattern
+highlight clear Search
+highlight Search ctermbg=220 guibg=#FFC107
+
 " gruvbox | morhetz/gruvbox {{{4
 
 " Enables italic text.
