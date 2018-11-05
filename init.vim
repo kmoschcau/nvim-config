@@ -133,15 +133,16 @@ colorscheme vim-material
 " colorscheme gruvbox
 
 " custom highlight groups {{{5
+" highlight groups for the terminal cursor {{{6
 
-" Overridden highlight group for the cursor (usually done by gnome-terminal)
-highlight clear Cursor
-highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
+" Overridden highlight group for the cursor
+" highlight clear Cursor
+" highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
 
 " Highlight groups for neovim's terminal cursor
-highlight! link TermCursor Cursor
-highlight clear TermCursorNC
-highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
+" highlight! link TermCursor Cursor
+" highlight clear TermCursorNC
+" highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
 
 " Vim options {{{2
 
