@@ -260,7 +260,6 @@ set splitright
 " statusline {{{3
 " helper methods {{{4
 " current mode {{{5
-
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
 let g:currentmode={ 'n'  : 'NORMAL',
@@ -289,7 +288,6 @@ let g:currentmode={ 'n'  : 'NORMAL',
 function! ModeCurrent() abort
   return get(g:currentmode, mode())
 endfunction
-
 " }}}4
 
 " When nonempty, this option determines the content of the status line.
@@ -334,7 +332,6 @@ let &statusline .= '%l/%L '
 " Column number.
 " preceded by a literal ': ', minimum 2
 let &statusline .= ': %2c '
-
 " }}}3
 
 " Number of spaces that a <Tab> in the file counts for.
@@ -372,11 +369,6 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Disable eclim validation
 let g:EclimJavaValidate = 0
 let g:EclimCssValidate = 0
-
-" ColorV | Rykka/colorv.vim {{{1
-
-" Previewing color-text with same fg/bg colors.
-let g:colorv_preview_area = 1
 
 " CSV | chrisbra/csv.vim {{{1
 
