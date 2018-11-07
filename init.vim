@@ -102,7 +102,9 @@ syntax enable
 " terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-set termguicolors
+if trim(system('tput colors')) == '256'
+  set termguicolors
+endif
 
 " Colorscheme settings {{{3
 
@@ -136,6 +138,11 @@ highlight IncSearch ctermbg=208 guibg=#FFA000
 " highlight group for last search pattern
 highlight clear Search
 highlight Search ctermbg=220 guibg=#FFC107
+
+" highlight groups with changed/added cterm values {{{6
+
+highlight NonText ctermbg=white ctermfg=black
+highlight Normal  ctermbg=white ctermfg=black
 
 " gruvbox | morhetz/gruvbox {{{4
 
