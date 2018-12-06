@@ -144,6 +144,17 @@ highlight Search ctermbg=220 guibg=#FFC107
 highlight NonText ctermbg=white ctermfg=black
 highlight Normal  ctermbg=white ctermfg=black
 
+" highlight groups for diffs {{{6
+
+highlight clear DiffAdd
+highlight clear DiffChange
+highlight clear DiffText
+highlight clear DiffDelete
+highlight DiffAdd    ctermbg=193 guibg=#f0f4c3
+highlight DiffChange ctermbg=229 guibg=#fff9c4
+highlight DiffText   ctermbg=222 guibg=#ffe0b2 gui=bold
+highlight DiffDelete ctermbg=216 guibg=#ffccbc
+
 " gruvbox | morhetz/gruvbox {{{4
 
 " Enables italic text.
