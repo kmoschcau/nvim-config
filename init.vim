@@ -61,6 +61,7 @@ Plug 'mattn/webapi-vim'
 Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
 Plug 'slim-template/vim-slim'
