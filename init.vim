@@ -260,13 +260,6 @@ set showbreak=↪
 " Show (partial) command in the last line of the screen.
 set showcmd
 
-" When completing a word in insert mode (see |ins-completion|) from the tags
-" file, show both the tag name and a tidied-up form of the search pattern (if
-" there is one) as possible matches.  Thus, if you have matched a C function,
-" you can see a template for what arguments are required (coding style
-" permitting).
-set showfulltag
-
 " If in Insert, Replace or Visual mode put a message on the last line.
 set noshowmode
 
@@ -388,6 +381,31 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Disable eclim validation
 let g:EclimJavaValidate = 0
 let g:EclimCssValidate = 0
+
+" YouCompleteMe | Valloric/YouCompleteMe {{{1
+
+" This option controls for which Vim filetypes (see ':h filetype') should YCM be
+" turned off. The option value should be a Vim dictionary with keys being
+" filetype strings (like 'python', 'cpp', etc.) and values being unimportant
+" (the dictionary is used like a hash set, meaning that only the keys matter).
+"
+" Ruby: use solargraph gem instead
+" Rust: use rls instead
+" The rest are the defaults, since they are not merged by YCM.
+let g:ycm_filetype_blacklist = {
+    \ 'tagbar': 1,
+    \ 'qf': 1,
+    \ 'notes': 1,
+    \ 'markdown': 1,
+    \ 'unite': 1,
+    \ 'text': 1,
+    \ 'vimwiki': 1,
+    \ 'pandoc': 1,
+    \ 'infolog': 1,
+    \ 'mail': 1,
+    \ 'ruby': 1,
+    \ 'rust': 1
+    \}
 
 " CSV | chrisbra/csv.vim {{{1
 
@@ -546,6 +564,9 @@ let g:ruby_foldable_groups = 'def class module # __END__ do'
 " Asynchronous Lint Engine | w0rp/ale {{{1
 " ALE general options {{{2
 
+" Enable completion from language servers
+let g:ale_completion_enabled = 1
+
 " This variable defines the format of the echoed message. The `%s` is the error
 " message itself, and it can contain the following handlers:
 " - `%linter%` for linter's name
@@ -567,11 +588,19 @@ let g:ale_sign_style_warning = '!S'
 " The sign for warnings in the sign gutter.
 let g:ale_sign_warning = '! '
 
+" ALE Linters {{{2
+
+" A mapping from filetypes to List values for functions for linting files.
+let g:ale_linters = {
+    \ 'rust': ['cargo', 'rls']
+    \ }
+
 " ALE fixers {{{2
 
 " A mapping from filetypes to List values for functions for fixing errors.
 let g:ale_fixers = {
-    \ 'sh' : ['shfmt']
+    \ 'rust': ['rustfmt'],
+    \ 'sh':   ['shfmt']
     \ }
 
 " ALE Ruby options {{{2
@@ -585,6 +614,17 @@ let g:ale_ruby_reek_show_wiki_link = 1
 
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '-DES'
+
+" ALE Rust options {{{2
+" ALE Rust Cargo options {{{3
+
+" Use cargo clippy, when it is installed.
+let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
+
+" ALE Rust rls options {{{3
+
+" Set the rls toolchain to stable.
+let g:ale_rust_rls_toolchain = 'stable'
 
 " ALE sh options {{{2
 
