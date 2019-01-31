@@ -57,6 +57,8 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' } " used for LangClient context menus
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
