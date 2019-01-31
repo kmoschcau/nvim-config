@@ -714,4 +714,5 @@ let g:ale_rust_rls_toolchain = 'stable'
 
 " ALE sh options {{{2
 
+" Set the indent to two spaces.
 let g:ale_sh_shfmt_options = '-s -i 2'
