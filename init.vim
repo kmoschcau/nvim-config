@@ -43,6 +43,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next',
+                                       \ 'do':     'bash install.sh' }
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -54,6 +56,7 @@ Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' } " used for LangClient context menus
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
@@ -205,6 +208,15 @@ highlight link ALEVirtualTextStyleWarning ALEStyleWarningSign
 highlight ALEWarning          cterm=underline ctermfg=208 gui=underline guisp=#ff9800
 highlight ALEWarningSign      ctermfg=231     ctermbg=208 guifg=#fafafa guibg=#ff9800
 highlight link ALEVirtualTextWarning ALEWarningSign
+
+" LanguageClient-neovim | autozimu/LanguageClient-neovim {{{7
+
+highlight clear LanguageClientHint
+highlight clear LanguageClientHintSign
+highlight clear LanguageClientHintVirtualText
+highlight LanguageClientHint             cterm=underline ctermfg=75 gui=underline guisp=#64b5f6
+highlight LanguageClientHintSign         ctermfg=231     ctermbg=75 guifg=#fafafa guibg=#64b5f6
+highlight link LanguageClientHintVirtualText LanguageClientHintSign
 
 " gruvbox | morhetz/gruvbox {{{4
 
@@ -442,6 +454,20 @@ set wildmode=longest:full
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
 
+" LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
+
+" This function will define LanguageClient mappings for buffers, for whose
+" filetype LanguageClient is enabled.
+function! LanguageClient_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<cr>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<cr>
+    nnoremap <buffer> <silent> <F3> :call LanguageClient#textDocument_references()<cr>
+  endif
+endfunction
+autocmd FileType * call LanguageClient_maps()
+
 " Tagbar | majutsushi/tagbar {{{3
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
@@ -500,6 +526,37 @@ let g:ycm_filetype_blacklist = {
     \   'mail': 1,
     \   'ruby': 1,
     \   'rust': 1
+    \ }
+
+" LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
+
+" The LanguageClient server configuration
+let g:LanguageClient_serverCommands = {
+    \   'ruby': ['solargraph', 'stdio'],
+    \   'rust': ['rls'],
+    \ }
+
+let g:LanguageClient_diagnosticsDisplay = {
+    \   1: { 'name':          'Error',
+    \        'texthl':        'ALEError',
+    \        'signText':      '‼ ',
+    \        'signTexthl':    'ALEErrorSign',
+    \        'virtualTexthl': 'ALEVirtualTextError' },
+    \   2: { 'name':          'Warning',
+    \        'texthl':        'ALEWarning',
+    \        'signText':      '! ',
+    \        'signTexthl':    'ALEWarningSign',
+    \        'virtualTexthl': 'ALEVirtualTextWarning' },
+    \   3: { 'name':          'Information',
+    \        'texthl':        'ALEInfo',
+    \        'signText':      '¡ ',
+    \        'signTexthl':    'ALEInfoSign',
+    \        'virtualTexthl': 'ALEVirtualTextInfo' },
+    \   4: { 'name':          'Hint',
+    \        'texthl':        'LanguageClientHint',
+    \        'signText':      '? ',
+    \        'signTexthl':    'LanguageClientHintSign',
+    \        'virtualTexthl': 'LanguageClientHintVirtualText' },
     \ }
 
 " CSV | chrisbra/csv.vim {{{1
@@ -646,9 +703,6 @@ let g:ruby_foldable_groups = 'def class module # __END__ do'
 
 " Asynchronous Lint Engine | w0rp/ale {{{1
 " ALE general options {{{2
-
-" Enable completion from language servers
-let g:ale_completion_enabled = 1
 
 " This variable defines the format of the echoed message. The `%s` is the error
 " message itself, and it can contain the following handlers:
