@@ -317,26 +317,27 @@ set splitright
 " current mode {{{5
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
-let g:currentmode={ 'n'  : 'NORMAL',
-                 \  'no' : 'N-OPERATOR PENDING',
-                 \  'v'  : 'VISUAL',
-                 \  'V'  : 'V-LINE',
-                 \  '' : 'V-BLOCK',
-                 \  's'  : 'SELECT',
-                 \  'S'  : 'S-LINE',
-                 \  '' : 'S-BLOCK',
-                 \  'i'  : 'INSERT',
-                 \  'R'  : 'REPLACE',
-                 \  'Rv' : 'V-REPLACE',
-                 \  'c'  : 'COMMAND',
-                 \  'cv' : 'VIM EX',
-                 \  'ce' : 'EX',
-                 \  'r'  : 'PROMPT',
-                 \  'rm' : 'MORE',
-                 \  'r?' : 'CONFIRM',
-                 \  '!'  : 'SHELL',
-                 \  't'  : 'TERMINAL'
-                 \}
+let g:currentmode = {
+    \   'n'  : 'NORMAL',
+    \   'no' : 'N-OPERATOR PENDING',
+    \   'v'  : 'VISUAL',
+    \   'V'  : 'V-LINE',
+    \   '' : 'V-BLOCK',
+    \   's'  : 'SELECT',
+    \   'S'  : 'S-LINE',
+    \   '' : 'S-BLOCK',
+    \   'i'  : 'INSERT',
+    \   'R'  : 'REPLACE',
+    \   'Rv' : 'V-REPLACE',
+    \   'c'  : 'COMMAND',
+    \   'cv' : 'VIM EX',
+    \   'ce' : 'EX',
+    \   'r'  : 'PROMPT',
+    \   'rm' : 'MORE',
+    \   'r?' : 'CONFIRM',
+    \   '!'  : 'SHELL',
+    \   't'  : 'TERMINAL'
+    \}
 
 " Function: return current mode
 " abort -> function will abort soon as error detected
@@ -436,19 +437,19 @@ let g:EclimCssValidate = 0
 " Rust: use rls instead
 " The rest are the defaults, since they are not merged by YCM.
 let g:ycm_filetype_blacklist = {
-    \ 'tagbar': 1,
-    \ 'qf': 1,
-    \ 'notes': 1,
-    \ 'markdown': 1,
-    \ 'unite': 1,
-    \ 'text': 1,
-    \ 'vimwiki': 1,
-    \ 'pandoc': 1,
-    \ 'infolog': 1,
-    \ 'mail': 1,
-    \ 'ruby': 1,
-    \ 'rust': 1
-    \}
+    \   'tagbar': 1,
+    \   'qf': 1,
+    \   'notes': 1,
+    \   'markdown': 1,
+    \   'unite': 1,
+    \   'text': 1,
+    \   'vimwiki': 1,
+    \   'pandoc': 1,
+    \   'infolog': 1,
+    \   'mail': 1,
+    \   'ruby': 1,
+    \   'rust': 1
+    \ }
 
 " CSV | chrisbra/csv.vim {{{1
 
@@ -498,17 +499,17 @@ let g:tagbar_silent = 1
 " Configure Tagbar to user ripper-tags with Ruby
 if executable('ripper-tags')
   let g:tagbar_type_ruby = {
-      \ 'kinds'      : ['m:modules',
-                      \ 'c:classes',
-                      \ 'C:constants',
-                      \ 'F:singleton methods',
-                      \ 'f:methods',
-                      \ 'a:aliases'],
-      \ 'kind2scope' : { 'c' : 'class',
-                       \ 'm' : 'class' },
-      \ 'scope2kind' : { 'class' : 'c' },
-      \ 'ctagsbin'   : 'ripper-tags',
-      \ 'ctagsargs'  : ['-f', '-']
+      \   'kinds'      : ['m:modules',
+      \                   'c:classes',
+      \                   'C:constants',
+      \                   'F:singleton methods',
+      \                   'f:methods',
+      \                   'a:aliases'],
+      \   'kind2scope' : { 'c' : 'class',
+      \                    'm' : 'class' },
+      \   'scope2kind' : { 'class' : 'c' },
+      \   'ctagsbin'   : 'ripper-tags',
+      \   'ctagsargs'  : ['-f', '-']
       \ }
 endif
 
@@ -635,15 +636,15 @@ let g:ale_sign_warning = '! '
 
 " A mapping from filetypes to List values for functions for linting files.
 let g:ale_linters = {
-    \ 'rust': ['cargo', 'rls']
+    \   'rust': ['cargo', 'rls']
     \ }
 
 " ALE fixers {{{2
 
 " A mapping from filetypes to List values for functions for fixing errors.
 let g:ale_fixers = {
-    \ 'rust': ['rustfmt'],
-    \ 'sh':   ['shfmt']
+    \   'rust': ['rustfmt'],
+    \   'sh':   ['shfmt']
     \ }
 
 " ALE Ruby options {{{2
