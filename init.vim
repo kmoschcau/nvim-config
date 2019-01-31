@@ -408,6 +408,23 @@ set wildmode=longest:full
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
 
+" Tagbar | majutsushi/tagbar {{{3
+
+nnoremap <silent> <F8> :TagbarToggle<CR>
+
+" Vim Markdown | plasticboy/vim-markdown {{{3
+
+" Disable 'ge' motion override.
+map <Plug> <Plug>Markdown_EditUrlUnderCursor
+
+" NERD tree | scrooloose/nerdtree {{{3
+
+nnoremap <silent> <C-N> :NERDTreeToggle<CR>
+
+" Gundo | sjl/gundo.vim {{{3
+
+nnoremap <silent> <F5> :GundoToggle<CR>
+
 " The Silver Searcher | ag {{{1
 
 if executable('ag')
@@ -477,9 +494,6 @@ let g:markdown_composer_autostart = 0
 
 " Tagbar | majutsushi/tagbar {{{1
 
-" toggle Tagbar with typing <F8>
-nnoremap <silent> <F8> :TagbarToggle<CR>
-
 " If you set this option the Tagbar window will automatically close when you
 " jump to a tag.
 let g:tagbar_autoclose = 1
@@ -522,13 +536,7 @@ let g:vim_markdown_folding_style_pythonic = 1
 " Change the indent level of new list items to two spaces.
 let g:vim_markdown_new_list_item_indent = 2
 
-" Disable 'ge' motion override.
-map <Plug> <Plug>Markdown_EditUrlUnderCursor
-
 " NERD tree | scrooloose/nerdtree {{{1
-
-" NERD tree shortcut
-nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 
 " Exit Vim when the only open window is NERD tree.
 augroup NERDTree
@@ -546,9 +554,6 @@ let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeShowHidden = 1
 
 " Gundo | sjl/gundo.vim {{{1
-
-" Gundo view shortcut
-nnoremap <silent> <F5> :GundoToggle<CR>
 
 " Set this to 0 to disable the help text in the Gundo graph window.
 let g:gundo_help = 0
