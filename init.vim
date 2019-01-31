@@ -172,6 +172,40 @@ highlight SpellCap   ctermbg=33  gui=undercurl guisp=#2196f3
 highlight SpellLocal ctermbg=30  gui=undercurl guisp=#00838f
 highlight SpellRare  ctermbg=204 gui=undercurl guisp=#ff4081
 
+" highlight groups for plugins {{{6
+" Asynchronous Lint Engine | w0rp/ale {{{7
+
+highlight clear ALEError
+highlight clear ALEErrorSign
+highlight clear ALEVirtualTextError
+highlight clear ALEInfo
+highlight clear ALEInfoSign
+highlight clear ALEVirtualTextInfo
+highlight clear ALEStyleError
+highlight clear ALEStyleErrorSign
+highlight clear ALEVirtualTextStyleError
+highlight clear ALEStyleWarning
+highlight clear ALEStyleWarningSign
+highlight clear ALEVirtualTextStyleWarning
+highlight clear ALEWarning
+highlight clear ALEWarningSign
+highlight clear ALEVirtualTextWarning
+highlight ALEError            cterm=underline ctermfg=203 gui=underline guisp=#f44336
+highlight ALEErrorSign        ctermfg=231     ctermbg=203 guifg=#fafafa guibg=#f44336
+highlight link ALEVirtualTextError ALEErrorSign
+highlight ALEInfo             cterm=underline ctermfg=39  gui=underline guisp=#03a9f4
+highlight ALEInfoSign         ctermfg=231     ctermbg=39  guifg=#fafafa guibg=#03a9f4
+highlight link ALEVirtualTextInfo ALEInfoSign
+highlight ALEStyleError       cterm=underline ctermfg=174 gui=underline guisp=#e57373
+highlight ALEStyleErrorSign   ctermfg=231     ctermbg=174 guifg=#fafafa guibg=#e57373
+highlight link ALEVirtualTextStyleError ALEStyleErrorSign
+highlight ALEStyleWarning     cterm=underline ctermfg=215 gui=underline guisp=#ffb74d
+highlight ALEStyleWarningSign ctermfg=231     ctermbg=215 guifg=#fafafa guibg=#ffb74d
+highlight link ALEVirtualTextStyleWarning ALEStyleWarningSign
+highlight ALEWarning          cterm=underline ctermfg=208 gui=underline guisp=#ff9800
+highlight ALEWarningSign      ctermfg=231     ctermbg=208 guifg=#fafafa guibg=#ff9800
+highlight link ALEVirtualTextWarning ALEWarningSign
+
 " gruvbox | morhetz/gruvbox {{{4
 
 " Enables italic text.
@@ -636,6 +670,9 @@ let g:ale_sign_style_warning = '!S'
 
 " The sign for warnings in the sign gutter.
 let g:ale_sign_warning = '! '
+
+" Enable the virtualtext error display.
+let g:ale_virtualtext_cursor = 1
 
 " ALE Linters {{{2
 
