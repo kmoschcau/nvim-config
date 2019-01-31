@@ -156,6 +156,22 @@ highlight DiffChange ctermbg=229 guibg=#fff9c4
 highlight DiffText   ctermbg=222 guibg=#ffe0b2 gui=bold
 highlight DiffDelete ctermbg=216 guibg=#ffccbc
 
+" highlight group for TODO {{{6
+
+highlight clear Todo
+highlight Todo cterm=bold gui=bold
+
+" highlight groups for spelling {{{6
+
+highlight clear SpellBad
+highlight clear SpellCap
+highlight clear SpellLocal
+highlight clear SpellRare
+highlight SpellBad   ctermbg=203 gui=undercurl guisp=#f44336
+highlight SpellCap   ctermbg=33  gui=undercurl guisp=#2196f3
+highlight SpellLocal ctermbg=30  gui=undercurl guisp=#00838f
+highlight SpellRare  ctermbg=204 gui=undercurl guisp=#ff4081
+
 " gruvbox | morhetz/gruvbox {{{4
 
 " Enables italic text.
