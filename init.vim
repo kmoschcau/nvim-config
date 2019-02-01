@@ -568,10 +568,12 @@ let g:csv_no_conceal = 1
 
 " CtrlP | ctrlpvim/ctrlp.vim {{{1
 
-" set up Silver Searcher (ag) use
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor --hidden --filename-pattern ""'
+if executable('rg')
+  " set up ripgrep (rg) use
+  let g:ctrlp_user_command = 'rg --color never --hidden --files'
+elseif executable('ag')
+  " set up Silver Searcher (ag) use
+  let g:ctrlp_user_command = 'ag %s --nocolor --hidden --filename-pattern ""'
 endif
 
 " make CtrlP use the current working dir only
