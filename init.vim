@@ -516,18 +516,18 @@ let g:EclimCssValidate = 0
 " Rust: use rls instead
 " The rest are the defaults, since they are not merged by YCM.
 let g:ycm_filetype_blacklist = {
-    \   'tagbar': 1,
-    \   'qf': 1,
-    \   'notes': 1,
+    \   'infolog':  1,
+    \   'mail':     1,
     \   'markdown': 1,
-    \   'unite': 1,
-    \   'text': 1,
-    \   'vimwiki': 1,
-    \   'pandoc': 1,
-    \   'infolog': 1,
-    \   'mail': 1,
-    \   'ruby': 1,
-    \   'rust': 1
+    \   'notes':    1,
+    \   'pandoc':   1,
+    \   'qf':       1,
+    \   'ruby':     1,
+    \   'rust':     1,
+    \   'tagbar':   1,
+    \   'text':     1,
+    \   'unite':    1,
+    \   'vimwiki':  1
     \ }
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
