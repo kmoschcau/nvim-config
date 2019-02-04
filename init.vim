@@ -29,7 +29,7 @@ endif
 " build helper functions {{{2
 " vim-markdown-composer helper function {{{3
 function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
+  if a:info.status !=# 'unchanged' || a:info.force
     !cargo build --release
   endif
 endfunction
@@ -108,7 +108,7 @@ syntax enable
 " terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-if trim(system('tput colors')) == '256'
+if trim(system('tput colors')) ==# '256'
   set termguicolors
 endif
 
@@ -470,7 +470,10 @@ function! LanguageClient_maps()
            \ :call LanguageClient#textDocument_references()<cr>
   endif
 endfunction
-autocmd FileType * call LanguageClient_maps()
+augroup LanguageClient_Keymaps
+  autocmd!
+  autocmd FileType * call LanguageClient_maps()
+augroup end
 
 " Tagbar | majutsushi/tagbar {{{3
 
@@ -630,7 +633,8 @@ let g:vim_markdown_new_list_item_indent = 2
 " NERD tree | scrooloose/nerdtree {{{1
 
 " Exit Vim when the only open window is NERD tree.
-augroup NERDTree
+augroup NERDTree_InitVim
+  autocmd!
   autocmd BufEnter *
       \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
       \ |   quit
