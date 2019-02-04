@@ -39,24 +39,24 @@ endfunction
 " Make sure you use single quotes
 
 Plug 'NLKNguyen/vim-maven-syntax'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next',
-                                       \ 'do':     'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch' : 'next',
+                                       \ 'do'     : 'bash install.sh' }
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'embear/vim-localvimrc'
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
 Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
 Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' } " used for LangClient context menus
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf' } " used for LangClient context menus
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -365,27 +365,25 @@ set splitright
 " current mode {{{5
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
-let g:currentmode = {
-    \   'n'  : 'NORMAL',
-    \   'no' : 'N-OPERATOR PENDING',
-    \   'v'  : 'VISUAL',
-    \   'V'  : 'V-LINE',
-    \   '' : 'V-BLOCK',
-    \   's'  : 'SELECT',
-    \   'S'  : 'S-LINE',
-    \   '' : 'S-BLOCK',
-    \   'i'  : 'INSERT',
-    \   'R'  : 'REPLACE',
-    \   'Rv' : 'V-REPLACE',
-    \   'c'  : 'COMMAND',
-    \   'cv' : 'VIM EX',
-    \   'ce' : 'EX',
-    \   'r'  : 'PROMPT',
-    \   'rm' : 'MORE',
-    \   'r?' : 'CONFIRM',
-    \   '!'  : 'SHELL',
-    \   't'  : 'TERMINAL'
-    \}
+let g:currentmode = { 'n'  : 'NORMAL',
+                    \ 'no' : 'N-OPERATOR PENDING',
+                    \ 'v'  : 'VISUAL',
+                    \ 'V'  : 'V-LINE',
+                    \ '' : 'V-BLOCK',
+                    \ 's'  : 'SELECT',
+                    \ 'S'  : 'S-LINE',
+                    \ '' : 'S-BLOCK',
+                    \ 'i'  : 'INSERT',
+                    \ 'R'  : 'REPLACE',
+                    \ 'Rv' : 'V-REPLACE',
+                    \ 'c'  : 'COMMAND',
+                    \ 'cv' : 'VIM EX',
+                    \ 'ce' : 'EX',
+                    \ 'r'  : 'PROMPT',
+                    \ 'rm' : 'MORE',
+                    \ 'r?' : 'CONFIRM',
+                    \ '!'  : 'SHELL',
+                    \ 't'  : 'TERMINAL' }
 
 " Function: return current mode
 " abort -> function will abort soon as error detected
@@ -515,50 +513,46 @@ let g:EclimCssValidate = 0
 " Ruby: use solargraph gem instead
 " Rust: use rls instead
 " The rest are the defaults, since they are not merged by YCM.
-let g:ycm_filetype_blacklist = {
-    \   'infolog':  1,
-    \   'mail':     1,
-    \   'markdown': 1,
-    \   'notes':    1,
-    \   'pandoc':   1,
-    \   'qf':       1,
-    \   'ruby':     1,
-    \   'rust':     1,
-    \   'tagbar':   1,
-    \   'text':     1,
-    \   'unite':    1,
-    \   'vimwiki':  1
-    \ }
+let g:ycm_filetype_blacklist = { 'infolog'  : 1,
+                               \ 'mail'     : 1,
+                               \ 'markdown' : 1,
+                               \ 'notes'    : 1,
+                               \ 'pandoc'   : 1,
+                               \ 'qf'       : 1,
+                               \ 'ruby'     : 1,
+                               \ 'rust'     : 1,
+                               \ 'tagbar'   : 1,
+                               \ 'text'     : 1,
+                               \ 'unite'    : 1,
+                               \ 'vimwiki'  : 1 }
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
-let g:LanguageClient_serverCommands = {
-    \   'ruby': ['solargraph', 'stdio'],
-    \   'rust': ['rls'],
-    \ }
+let g:LanguageClient_serverCommands = { 'ruby' : ['solargraph', 'stdio'],
+                                      \ 'rust' : ['rls'] }
 
 let g:LanguageClient_diagnosticsDisplay = {
-    \   1: { 'name':          'Error',
-    \        'texthl':        'ALEError',
-    \        'signText':      '‼ ',
-    \        'signTexthl':    'ALEErrorSign',
-    \        'virtualTexthl': 'ALEVirtualTextError' },
-    \   2: { 'name':          'Warning',
-    \        'texthl':        'ALEWarning',
-    \        'signText':      '! ',
-    \        'signTexthl':    'ALEWarningSign',
-    \        'virtualTexthl': 'ALEVirtualTextWarning' },
-    \   3: { 'name':          'Information',
-    \        'texthl':        'ALEInfo',
-    \        'signText':      '¡ ',
-    \        'signTexthl':    'ALEInfoSign',
-    \        'virtualTexthl': 'ALEVirtualTextInfo' },
-    \   4: { 'name':          'Hint',
-    \        'texthl':        'LanguageClientHint',
-    \        'signText':      '? ',
-    \        'signTexthl':    'LanguageClientHintSign',
-    \        'virtualTexthl': 'LanguageClientHintVirtualText' },
+    \   1 : { 'name'          : 'Error',
+    \         'texthl'        : 'ALEError',
+    \         'signText'      : '‼ ',
+    \         'signTexthl'    : 'ALEErrorSign',
+    \         'virtualTexthl' : 'ALEVirtualTextError' },
+    \   2 : { 'name'          : 'Warning',
+    \         'texthl'        : 'ALEWarning',
+    \         'signText'      : '! ',
+    \         'signTexthl'    : 'ALEWarningSign',
+    \         'virtualTexthl' : 'ALEVirtualTextWarning' },
+    \   3 : { 'name'          : 'Information',
+    \         'texthl'        : 'ALEInfo',
+    \         'signText'      : '¡ ',
+    \         'signTexthl'    : 'ALEInfoSign',
+    \         'virtualTexthl' : 'ALEVirtualTextInfo' },
+    \   4 : { 'name'          : 'Hint',
+    \         'texthl'        : 'LanguageClientHint',
+    \         'signText'      : '? ',
+    \         'signTexthl'    : 'LanguageClientHintSign',
+    \         'virtualTexthl' : 'LanguageClientHintVirtualText' }
     \ }
 
 " CSV | chrisbra/csv.vim {{{1
@@ -607,19 +601,17 @@ let g:tagbar_silent = 1
 
 " Configure Tagbar to user ripper-tags with Ruby
 if executable('ripper-tags')
-  let g:tagbar_type_ruby = {
-      \   'kinds'      : ['m:modules',
-      \                   'c:classes',
-      \                   'C:constants',
-      \                   'F:singleton methods',
-      \                   'f:methods',
-      \                   'a:aliases'],
-      \   'kind2scope' : { 'c' : 'class',
-      \                    'm' : 'class' },
-      \   'scope2kind' : { 'class' : 'c' },
-      \   'ctagsbin'   : 'ripper-tags',
-      \   'ctagsargs'  : ['-f', '-']
-      \ }
+  let g:tagbar_type_ruby = { 'kinds'      : ['m:modules',
+                           \                 'c:classes',
+                           \                 'C:constants',
+                           \                 'F:singleton methods',
+                           \                 'f:methods',
+                           \                 'a:aliases'],
+                           \ 'kind2scope' : { 'c' : 'class',
+                           \                  'm' : 'class' },
+                           \ 'scope2kind' : { 'class' : 'c' },
+                           \ 'ctagsbin'   : 'ripper-tags',
+                           \ 'ctagsargs'  : ['-f', '-'] }
 endif
 
 " Vim Markdown | plasticboy/vim-markdown {{{1
@@ -735,17 +727,13 @@ let g:ale_virtualtext_cursor = 1
 " ALE Linters {{{2
 
 " A mapping from filetypes to List values for functions for linting files.
-let g:ale_linters = {
-    \   'rust': ['cargo', 'rls']
-    \ }
+let g:ale_linters = { 'rust' : ['cargo', 'rls'] }
 
 " ALE fixers {{{2
 
 " A mapping from filetypes to List values for functions for fixing errors.
-let g:ale_fixers = {
-    \   'rust': ['rustfmt'],
-    \   'sh':   ['shfmt']
-    \ }
+let g:ale_fixers = { 'rust' : ['rustfmt'],
+                   \ 'sh'   : ['shfmt'] }
 
 " ALE Ruby options {{{2
 " ALE Ruby reek options {{{3
