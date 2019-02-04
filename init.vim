@@ -291,9 +291,8 @@ set colorcolumn=+1
 "            from the menu. Only works in combination with "menu" or "menuone".
 set completeopt=menu,menuone,preview,noinsert,noselect
 
-" Do include whitespace after a word with a 'cw' command. The desired behaviour
-" would be to not do this, but it does not work because of
-" 'chaoren/vim-wordmotion' anyway.
+" Do include whitespace after a word with a 'cw' command to be more in line with
+" 'chaoren/vim-wordmotion'.
 set cpoptions-=_
 
 " Use the column for 'number' and 'relativenumber' for wrapped text as well.
