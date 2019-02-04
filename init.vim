@@ -460,10 +460,14 @@ nnoremap Y y$
 " filetype LanguageClient is enabled.
 function! LanguageClient_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
-    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<cr>
-    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<cr>
-    nnoremap <buffer> <silent> <F3> :call LanguageClient#textDocument_references()<cr>
+    nnoremap <buffer> <silent> K
+           \ :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd
+           \ :call LanguageClient#textDocument_definition()<cr>
+    nnoremap <buffer> <silent> <F2>
+           \ :call LanguageClient#textDocument_rename()<cr>
+    nnoremap <buffer> <silent> <F3>
+           \ :call LanguageClient#textDocument_references()<cr>
   endif
 endfunction
 autocmd FileType * call LanguageClient_maps()
@@ -628,9 +632,9 @@ let g:vim_markdown_new_list_item_indent = 2
 " Exit Vim when the only open window is NERD tree.
 augroup NERDTree
   autocmd BufEnter *
-    \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
-    \ |   quit
-    \ | endif
+      \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
+      \ |   quit
+      \ | endif
 augroup end
 
 " If set to 1, the NERD tree window will close after opening a file with the
