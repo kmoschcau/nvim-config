@@ -41,7 +41,7 @@ function! s:Command(spec_location)
 endfunction
 
 function! s:AndCommand()
-  if system('echo -n $SHELL') =~ 'fish$'
+  if system('echo -n $SHELL') =~# 'fish$'
     return '; and '
   else
     return ' && '
@@ -49,5 +49,5 @@ function! s:AndCommand()
 endfunction
 
 function! s:InSpecFile()
-  return expand('%:t:r') =~ '_spec$'
+  return expand('%:t:r') =~# '_spec$'
 endfunction
