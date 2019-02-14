@@ -108,7 +108,7 @@ syntax enable
 " terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-if trim(system('tput colors')) ==# '256'
+if substitute(system('tput colors'), '\n\+$', '', '') ==# '256'
   set termguicolors
 endif
 
