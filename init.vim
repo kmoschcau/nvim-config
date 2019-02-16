@@ -1,5 +1,5 @@
-scriptencoding=utf-8
 " Vim: set foldmethod=marker:
+scriptencoding=utf-8
 
 " path settings {{{1
 
