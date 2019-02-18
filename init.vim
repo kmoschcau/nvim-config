@@ -120,8 +120,30 @@ endif
 set background=light
 
 " vim-material | hzchirs/vim-material {{{4
+" A material theme for light and dark background. The custom highlight groups
+" work best on a light background.
 
 colorscheme vim-material
+
+" custom variables {{{5
+
+" terminal color variables {{{6
+let g:terminal_color_0  = '#34383a'
+let g:terminal_color_1  = '#e53935'
+let g:terminal_color_2  = '#82a550'
+let g:terminal_color_3  = '#ffad13'
+let g:terminal_color_4  = '#6182b8'
+let g:terminal_color_5  = '#945eb8'
+let g:terminal_color_6  = '#39adb5'
+let g:terminal_color_7  = '#aababc'
+let g:terminal_color_8  = '#869093'
+let g:terminal_color_9  = '#ff5370'
+let g:terminal_color_10 = '#adce7d'
+let g:terminal_color_11 = '#ffc14b'
+let g:terminal_color_12 = '#82aaff'
+let g:terminal_color_13 = '#bb80b3'
+let g:terminal_color_14 = '#89ddff'
+let g:terminal_color_15 = '#cddcde'
 
 " custom highlight groups {{{5
 " highlight groups for the terminal cursor {{{6
@@ -158,7 +180,7 @@ highlight clear DiffText
 highlight clear DiffDelete
 highlight DiffAdd    ctermbg=193 guibg=#f0f4c3
 highlight DiffChange ctermbg=229 guibg=#fff9c4
-highlight DiffText   ctermbg=222 guibg=#ffe0b2 gui=bold
+highlight DiffText   ctermbg=222 guibg=#ffe082 gui=bold
 highlight DiffDelete ctermbg=216 guibg=#ffccbc
 
 " highlight group for TODO {{{6
@@ -176,6 +198,13 @@ highlight SpellBad   ctermbg=203 gui=undercurl guisp=#f44336
 highlight SpellCap   ctermbg=33  gui=undercurl guisp=#2196f3
 highlight SpellLocal ctermbg=30  gui=undercurl guisp=#00838f
 highlight SpellRare  ctermbg=204 gui=undercurl guisp=#ff4081
+
+" highlight groups for columns {{{6
+
+highlight clear FoldColumn
+highlight clear SignColumn
+highlight link FoldColumn LineNr
+highlight link SignColumn LineNr
 
 " highlight groups for plugins {{{6
 " Asynchronous Lint Engine | w0rp/ale {{{7
@@ -219,6 +248,28 @@ highlight clear LanguageClientHintVirtualText
 highlight LanguageClientHint             cterm=underline ctermfg=75 gui=underline guisp=#64b5f6
 highlight LanguageClientHintSign         ctermfg=231     ctermbg=75 guifg=#fafafa guibg=#64b5f6
 highlight link LanguageClientHintVirtualText LanguageClientHintSign
+
+" vim-gitgutter | airline/vim-gitgutter {{{7
+
+" highlights for signs
+highlight clear GitGutterAdd
+highlight clear GitGutterChange
+highlight clear GitGutterDelete
+highlight clear GitGutterChangeDelete
+highlight GitGutterAdd          ctermfg=241 ctermbg=185 guifg=#666666 guibg=#cddc39
+highlight GitGutterChange       ctermfg=241 ctermbg=227 guifg=#666666 guibg=#ffeb3b
+highlight GitGutterChangeDelete ctermfg=241 ctermbg=214 guifg=#666666 guibg=#ffc107
+highlight GitGutterDelete       ctermfg=241 ctermbg=202 guifg=#666666 guibg=#ff5722
+
+" highlights for lines
+highlight clear GitGutterAddLine
+highlight clear GitGutterChangeLine
+highlight clear GitGutterChangeDeleteLine
+highlight clear GitGutterDeleteLine
+highlight GitGutterAddLine          ctermbg=193 guibg=#f0f4c3
+highlight GitGutterChangeLine       ctermbg=229 guibg=#fff9c4
+highlight GitGutterChangeDeleteLine ctermbg=222 guibg=#ffe082
+highlight GitGutterDeleteLine       ctermbg=216 guibg=#ffccbc
 
 " gruvbox | morhetz/gruvbox {{{4
 
@@ -531,6 +582,11 @@ let g:ycm_filetype_blacklist = { 'infolog'  : 1,
                                \ 'text'     : 1,
                                \ 'unite'    : 1,
                                \ 'vimwiki'  : 1 }
+
+" vim-gitgutter | airblade/vim-gitgutter {{{1
+
+" Controls whether to make the sign column look like the line-number column.
+let g:gitgutter_override_sign_column_highlight = 0
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
