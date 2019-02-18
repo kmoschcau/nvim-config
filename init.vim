@@ -41,7 +41,6 @@ endfunction
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'autozimu/LanguageClient-neovim', { 'branch' : 'next',
                                        \ 'do'     : 'bash install.sh' }
@@ -63,6 +62,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/webapi-vim'
+Plug 'mhinz/vim-signify'
 Plug 'noprompt/vim-yardoc'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
@@ -249,27 +249,31 @@ highlight LanguageClientHint             cterm=underline ctermfg=75 gui=underlin
 highlight LanguageClientHintSign         ctermfg=231     ctermbg=75 guifg=#fafafa guibg=#64b5f6
 highlight link LanguageClientHintVirtualText LanguageClientHintSign
 
-" vim-gitgutter | airline/vim-gitgutter {{{7
+" Signify | mhinz/vim-signify {{{7
 
 " highlights for signs
-highlight clear GitGutterAdd
-highlight clear GitGutterChange
-highlight clear GitGutterDelete
-highlight clear GitGutterChangeDelete
-highlight GitGutterAdd          ctermfg=241 ctermbg=185 guifg=#666666 guibg=#cddc39
-highlight GitGutterChange       ctermfg=241 ctermbg=227 guifg=#666666 guibg=#ffeb3b
-highlight GitGutterChangeDelete ctermfg=241 ctermbg=214 guifg=#666666 guibg=#ffc107
-highlight GitGutterDelete       ctermfg=241 ctermbg=202 guifg=#666666 guibg=#ff5722
+highlight clear SignifySignAdd
+highlight clear SignifySignChange
+highlight clear SignifySignChangeDelete
+highlight clear SignifySignDelete
+highlight clear SignifySignDeleteFirstLine
+highlight SignifySignAdd          ctermfg=241 ctermbg=185 guifg=#666666 guibg=#cddc39
+highlight SignifySignChange       ctermfg=241 ctermbg=227 guifg=#666666 guibg=#ffeb3b
+highlight SignifySignChangeDelete ctermfg=241 ctermbg=214 guifg=#666666 guibg=#ffc107
+highlight SignifySignDelete       ctermfg=241 ctermbg=216 guifg=#666666 guibg=#ffab91
+highlight link SignifySignDeleteFirstLine SignifySignDelete
 
 " highlights for lines
-highlight clear GitGutterAddLine
-highlight clear GitGutterChangeLine
-highlight clear GitGutterChangeDeleteLine
-highlight clear GitGutterDeleteLine
-highlight GitGutterAddLine          ctermbg=193 guibg=#f0f4c3
-highlight GitGutterChangeLine       ctermbg=229 guibg=#fff9c4
-highlight GitGutterChangeDeleteLine ctermbg=222 guibg=#ffe082
-highlight GitGutterDeleteLine       ctermbg=216 guibg=#ffccbc
+highlight clear SignifyLineAdd
+highlight clear SignifyLineChange
+highlight clear SignifyLineChangeDelete
+highlight clear SignifyLineDelete
+highlight clear SignifyLineDeleteFirstLine
+highlight SignifyLineAdd          ctermbg=193 guibg=#f0f4c3
+highlight SignifyLineChange       ctermbg=229 guibg=#fff9c4
+highlight SignifyLineChangeDelete ctermbg=222 guibg=#ffe082
+highlight SignifyLineDelete       ctermbg=216 guibg=#ffccbc
+highlight link SignifyLineDeleteFirstLine SignifyLineDelete
 
 " gruvbox | morhetz/gruvbox {{{4
 
@@ -587,11 +591,6 @@ let g:ycm_filetype_blacklist = { 'infolog'  : 1,
                                \ 'unite'    : 1,
                                \ 'vimwiki'  : 1 }
 
-" vim-gitgutter | airblade/vim-gitgutter {{{1
-
-" Controls whether to make the sign column look like the line-number column.
-let g:gitgutter_override_sign_column_highlight = 0
-
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
@@ -679,6 +678,28 @@ if executable('ripper-tags')
                            \ 'ctagsbin'   : 'ripper-tags',
                            \ 'ctagsargs'  : ['-f', '-'] }
 endif
+
+" Signify | mhinz/vim-signify {{{1
+
+" Which VCS to check for
+let g:signify_vcs_list = ['git']
+
+" Enable more aggressive sign update.
+let g:signify_realtime = 1
+
+" Update signs when entering a buffer that was modified.
+let g:signify_update_on_bufenter = 1
+
+" Update the signs on FocusGained.
+let g:signify_update_on_focusgained = 1
+
+" Reconfigure the sign text used.
+let g:signify_sign_change = '~'
+
+" Additionally trigger sign updates in normal or insert mode after 'updatetime'
+" milliseconds without any keypresses.
+let g:signify_cursorhold_normal = 1
+let g:signify_cursorhold_insert = 1
 
 " Vim Markdown | plasticboy/vim-markdown {{{1
 
