@@ -493,6 +493,10 @@ set tabstop=2
 " after white space to get this width.
 set textwidth=80
 
+" If this many milliseconds nothing is typed the swap file will be written to
+" disk.
+set updatetime=100
+
 " Completion mode that is used for the character specified with 'wildchar'. It
 " is a comma separated list of up to four parts. Each part specifies what to do
 " for each consecutive use of 'wildchar'. The first part specifies the behavior
