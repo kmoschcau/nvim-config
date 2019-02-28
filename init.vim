@@ -594,9 +594,10 @@ let g:ycm_filetype_blacklist = { 'infolog'  : 1,
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
-let g:LanguageClient_serverCommands = { 'ruby' : ['bundle', 'exec',
-                                                 \'solargraph', 'stdio'],
-                                      \ 'rust' : ['rls'] }
+let g:LanguageClient_serverCommands = { 'python' : ['pyls'],
+                                      \ 'ruby'   : ['bundle', 'exec',
+                                                   \'solargraph', 'stdio'],
+                                      \ 'rust'   : ['rls'] }
 
 let g:LanguageClient_diagnosticsDisplay = {
     \   1 : { 'name'          : 'Error',
