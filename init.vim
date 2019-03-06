@@ -559,14 +559,33 @@ endif
 
 " Eclim {{{1
 
-" TODO: check Eclim options
+" highlight groups for the log levels
+let g:EclimHighlightError = 'ALEError'
+let g:EclimHighlightWarning = 'ALEWarning'
+let g:EclimHighlightInfo = 'ALEInfo'
+let g:EclimHighlightDebug = 'LanguageClientHint'
+let g:EclimHighlightTrace = 'SpellCap'
+
+" The external web browser to use, to open links
+let g:EclimBrowser = 'firefox'
 
 " Make eclim use YouCompleteMe as completion UI
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Disable eclim validation
-let g:EclimJavaValidate = 0
+let g:EclimCValidate = 0
 let g:EclimCssValidate = 0
+let g:EclimHtmlValidate = 0
+let g:EclimGroovyValidate = 0
+let g:EclimJavaValidate = 0
+let g:EclimJavascriptValidate = 0
+let g:EclimPhpHtmlValidate = 0
+let g:EclimPythonValidate = 0
+let g:EclimRubyValidate = 0
+let g:EclimScalaValidate = 0
+let g:EclimXmlValidate = 0
+let g:EclimDtdValidate = 0
+let g:EclimXsdValidate = 0
 
 " YouCompleteMe | Valloric/YouCompleteMe {{{1
 
