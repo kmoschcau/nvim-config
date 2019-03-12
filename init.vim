@@ -64,6 +64,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/webapi-vim'
 Plug 'mhinz/vim-signify'
 Plug 'noprompt/vim-yardoc'
+Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
 Plug 'rbgrouleff/bclose.vim'
 Plug 'rust-lang/rust.vim'
@@ -569,6 +570,11 @@ let g:signify_sign_change = '~'
 " milliseconds without any keypresses.
 let g:signify_cursorhold_normal = 1
 let g:signify_cursorhold_insert = 1
+
+" vim-javascript | pangloss/vim-javascript {{{1
+
+" Enable JSDoc syntax highlighting.
+let g:javascript_plugin_jsdoc = 1
 
 " Vim Markdown | plasticboy/vim-markdown {{{1
 
