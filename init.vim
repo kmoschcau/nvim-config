@@ -398,6 +398,17 @@ nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 
 nnoremap <silent> <F5> :GundoToggle<CR>
 
+" autocommands {{{2
+
+augroup init_vim
+  autocmd!
+  " Open all folds in the previewwindow by default.
+  autocmd WinNew *
+      \   if &previewwindow
+      \ |   set foldlevel=99
+      \ | endif
+augroup end
+
 " The Silver Searcher | ag {{{1
 
 if executable('ag')
