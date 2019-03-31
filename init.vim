@@ -333,9 +333,9 @@ let &statusline .= '%3p%% '
 " %L: Number of lines in buffer.
 let &statusline .= '%l/%L '
 
-" Column number.
-" preceded by a literal ': ', minimum 2
-let &statusline .= ': %2c '
+" Column number and virtual column number, if diffrent.
+" preceded by a literal ': ', minimum 5
+let &statusline .= ': %5(%c%V%) '
 " }}}3
 
 " Number of spaces that a <Tab> in the file counts for.
