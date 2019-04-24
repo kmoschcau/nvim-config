@@ -39,7 +39,6 @@ endfunction
 " Make sure you use single quotes
 
 Plug 'NLKNguyen/vim-maven-syntax'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ap/vim-css-color'
 Plug 'autozimu/LanguageClient-neovim', { 'branch' : 'next',
@@ -63,6 +62,13 @@ Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/webapi-vim'
 Plug 'mhinz/vim-signify'
+Plug 'neoclide/coc.nvim', { 'do' : { -> coc#util#install() } }
+Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-pyls', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'noprompt/vim-yardoc'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
@@ -428,9 +434,6 @@ let g:EclimHighlightTrace = 'SpellCap'
 " The external web browser to use, to open links
 let g:EclimBrowser = 'firefox'
 
-" Make eclim use YouCompleteMe as completion UI
-let g:EclimCompletionMethod = 'omnifunc'
-
 " Disable eclim validation
 let g:EclimCValidate = 0
 let g:EclimCssValidate = 0
@@ -445,29 +448,6 @@ let g:EclimScalaValidate = 0
 let g:EclimXmlValidate = 0
 let g:EclimDtdValidate = 0
 let g:EclimXsdValidate = 0
-
-" YouCompleteMe | Valloric/YouCompleteMe {{{1
-
-" This option controls for which Vim filetypes (see ':h filetype') should YCM be
-" turned off. The option value should be a Vim dictionary with keys being
-" filetype strings (like 'python', 'cpp', etc.) and values being unimportant
-" (the dictionary is used like a hash set, meaning that only the keys matter).
-"
-" Ruby: use solargraph gem instead
-" Rust: use rls instead
-" The rest are the defaults, since they are not merged by YCM.
-let g:ycm_filetype_blacklist = { 'infolog'  : 1,
-                               \ 'mail'     : 1,
-                               \ 'markdown' : 1,
-                               \ 'notes'    : 1,
-                               \ 'pandoc'   : 1,
-                               \ 'qf'       : 1,
-                               \ 'ruby'     : 1,
-                               \ 'rust'     : 1,
-                               \ 'tagbar'   : 1,
-                               \ 'text'     : 1,
-                               \ 'unite'    : 1,
-                               \ 'vimwiki'  : 1 }
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
