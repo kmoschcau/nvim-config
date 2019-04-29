@@ -67,7 +67,7 @@ Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-pyls', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
+" Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'noprompt/vim-yardoc'
 Plug 'pangloss/vim-javascript'
