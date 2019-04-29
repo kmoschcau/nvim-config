@@ -8,4 +8,9 @@
   "solargraph.rename": true,
   "solargraph.symbols": true,
   "solargraph.useBundler": true,
+  "coc.source.file.trimSameExts": [
+    ".js",
+    ".rb",
+    ".ts"
+  ]
 }
