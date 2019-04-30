@@ -45,7 +45,6 @@ Plug 'autozimu/LanguageClient-neovim', { 'branch' : 'next',
                                        \ 'do'     : 'bash install.sh' }
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'embear/vim-localvimrc'
 Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
@@ -55,6 +54,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf' } " used for LangClient context menus
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -387,6 +387,11 @@ augroup LanguageClient_Keymaps
   autocmd FileType * call LanguageClient_maps()
 augroup end
 
+" fzf.vim | junegunn/fzf.vim {{{3
+
+" Open FZF with the Ctrl-p binding
+nnoremap <C-p> :FZF<cr>
+
 " Tagbar | majutsushi/tagbar {{{3
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
@@ -485,22 +490,6 @@ let g:LanguageClient_diagnosticsDisplay = {
 
 " do not conceal delimiters
 let g:csv_no_conceal = 1
-
-" CtrlP | ctrlpvim/ctrlp.vim {{{1
-
-if executable('rg')
-  " set up ripgrep (rg) use
-  let g:ctrlp_user_command = 'rg --color never --hidden --files'
-elseif executable('ag')
-  " set up Silver Searcher (ag) use
-  let g:ctrlp_user_command = 'ag %s --nocolor --hidden --filename-pattern ""'
-endif
-
-" make CtrlP use the current working dir only
-let g:ctrlp_working_path_mode = 0
-
-" make CtrlP scan for dotfiles and dotdirs
-let g:ctrlp_show_hidden = 1
 
 " vim-markdown-composer | euclio/vim-markdown-composer {{{1
 
