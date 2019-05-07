@@ -392,6 +392,11 @@ augroup end
 " Open FZF with the Ctrl-p binding
 nnoremap <C-p> :FZF<cr>
 
+" Change the default FZF bindings
+let g:fzf_action = { 'ctrl-t' : 'tab split',
+                   \ 'ctrl-s' : 'split',
+                   \ 'ctrl-v' : 'vsplit' }
+
 " Tagbar | majutsushi/tagbar {{{3
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
@@ -495,6 +500,13 @@ let g:csv_no_conceal = 1
 
 " Whether the server should automatically start when a markdown file is opened.
 let g:markdown_composer_autostart = 0
+
+" fzf.vim | junegunn/fzf.vim {{{1
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up.
+let g:fzf_history_dir = '~/.local/share/fzf/history'
 
 " Tagbar | majutsushi/tagbar {{{1
 
