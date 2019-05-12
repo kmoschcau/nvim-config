@@ -723,38 +723,38 @@ let s:h_todo =
 " Non-editor window highlights {{{2
 " Framing {{{3
 call s:highlight('MsgSeparator', s:h_strong_framing)
-call s:highlight('TabLineFill',  s:h_strong_framing)
-call s:highlight('VertSplit',    s:h_strong_framing)
+call s:highlight('TabLineFill', s:h_strong_framing)
+call s:highlight('VertSplit', s:h_strong_framing)
 
 call s:highlight('FoldColumn', s:h_light_framing)
 call s:highlight('SignColumn', s:h_light_framing)
-call s:highlight('LineNr',     s:h_light_framing)
+call s:highlight('LineNr', s:h_light_framing)
 
 call s:highlight('ColorColumn', s:h_lighter_framing)
 
 call s:highlight('CursorLineNr', s:h_cursorlines_num)
 
-call s:highlight('TabLine',    s:h_light_framing)
+call s:highlight('TabLine', s:h_light_framing)
 call s:highlight('TabLineSel', s:h_normal)
-call s:highlight('Title',      s:h_title)
+call s:highlight('Title', s:h_title)
 
-call s:highlight('StatusLine',       s:h_status_line)
-call s:highlight('StatusLineNC',     s:h_status_line_nc)
-call s:highlight('StatusLineTerm',   s:h_status_line)
+call s:highlight('StatusLine', s:h_status_line)
+call s:highlight('StatusLineNC', s:h_status_line_nc)
+call s:highlight('StatusLineTerm', s:h_status_line)
 call s:highlight('StatusLineTermNC', s:h_status_line_nc)
 
 call s:highlight('WildMenu', s:h_wild_menu)
 
 " Popup menu {{{3
-call s:highlight('Pmenu',      s:h_popup)
-call s:highlight('PmenuSel',   s:h_popup_selected)
-call s:highlight('PmenuSbar',  s:h_popup_scrollbar)
+call s:highlight('Pmenu', s:h_popup)
+call s:highlight('PmenuSel', s:h_popup_selected)
+call s:highlight('PmenuSbar', s:h_popup_scrollbar)
 call s:highlight('PmenuThumb', s:h_popup_thumb)
 
 " Editor window highlights {{{2
 " Normal text {{{3
-call s:highlight('NonText',  s:h_normal)
-call s:highlight('Normal',   s:h_normal)
+call s:highlight('NonText', s:h_normal)
+call s:highlight('Normal', s:h_normal)
 call s:highlight('NormalNC', s:h_normal)
 
 " Cursor {{{3
