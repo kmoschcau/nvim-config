@@ -3,7 +3,6 @@
 " File:          material.vim
 " Description:   A configurable material based theme
 " Author:        Kai Moschcau <mail@kmoschcau.de>
-" Source:        https://github.com/kmoschcau/vim-material-theme
 " Last Modified: 2019-03-08
 " -----------------------------------------------------------------------------
 
