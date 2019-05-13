@@ -115,7 +115,8 @@ syntax enable
 " terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-if substitute(system('tput colors'), '\n\+$', '', '') ==# '256'
+let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
+if s:terminfo_colors ==# '256'
   set termguicolors
 endif
 
@@ -126,8 +127,11 @@ endif
 " a light background.
 set background=light
 
-colorscheme vim-material
-colorscheme material
+if s:terminfo_colors ==# '256'
+  colorscheme material
+else
+  colorscheme morning
+endif
 
 " gruvbox | morhetz/gruvbox {{{4
 
