@@ -300,7 +300,7 @@ endif
 if exists('g:material_diff_changed_hue')
   let s:material_diff_changed_hue = g:material_diff_changed_hue
 else
-  let s:material_diff_changed_hue = 'yellow'
+  let s:material_diff_changed_hue = 'amber'
 endif
 
 " Hue used for deleted diff
@@ -520,22 +520,22 @@ let s:h_diff_line_text =
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_add =
       \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
+      \   'fg':   s:color_value(s:material_neutral_hue, 1),
       \   'bg':   s:color_value(s:material_diff_added_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_change =
       \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
+      \   'fg':   s:color_value(s:material_neutral_hue, 1),
       \   'bg':   s:color_value(s:material_diff_changed_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_delete =
       \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
+      \   'fg':   s:color_value(s:material_neutral_hue, 1),
       \   'bg':   s:color_value(s:material_diff_deleted_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_text =
       \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
+      \   'fg':   s:color_value(s:material_neutral_hue, 1),
       \   'bg':   s:color_value(s:material_diff_text_hue, 6),
       \   'sp':   s:material['transparent'] }
 
