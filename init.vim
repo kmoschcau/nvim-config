@@ -370,6 +370,15 @@ set wildmode=longest:full
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
 
+" Add a debugging command for syntax highlighting
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
+nnoremap <F10> :call SynStack()<cr>
+
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
 
 " This function will define LanguageClient mappings for buffers, for whose
