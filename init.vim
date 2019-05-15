@@ -653,8 +653,9 @@ let g:airline#extensions#hunks#non_zero_only = 1
 " guide.
 let g:ruby_indent_block_style = 'do'
 
-" Highlight operators. (Keeping it on, but seems to have no effect.)
+" Highlight operators and pseudo operators.
 let g:ruby_operators = 1
+let g:ruby_pseudo_operators = 1
 
 " Enable syntax based folding for Ruby files.
 let g:ruby_fold = 1
