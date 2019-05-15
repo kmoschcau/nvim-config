@@ -711,40 +711,40 @@ let s:h_float =
 " Identifier and linked groups
 let s:h_identifier =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('amber', 7),
+      \   'fg':   s:color_value('yellow', 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
 " Statement and linked groups
 let s:h_statement =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('cyan', 7),
+      \   'fg':   s:color_value('orange', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_operator =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('cyan', 7),
+      \   'fg':   s:color_value('orange', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
 " PreProc and linked groups
 let s:h_pre_proc =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('purple', 7),
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('teal', 5),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
 " Type and linked groups
 let s:h_type =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('amber', 7),
+      \   'fg':   s:color_value('yellow', 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
 " Special and linked groups
 let s:h_special =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('indigo', 7),
+      \   'fg':   s:color_value('red', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
