@@ -390,7 +390,7 @@ let s:h_normal =
       \   'fg':   s:color_value(s:material_neutral_hue, 8),
       \   'bg':   s:color_value(s:material_neutral_hue, 1),
       \   'sp':   s:material['transparent'] }
-let s:h_base_light =
+let s:h_normal_light =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 6),
       \   'bg':   s:color_value(s:material_neutral_hue, 1),
@@ -399,11 +399,6 @@ let s:h_special_key =
       \ { 'attr': 'italic',
       \   'fg':   s:color_value(s:material_neutral_hue, 8),
       \   'bg':   s:color_value(s:material_neutral_hue, 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_background =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_neutral_hue, 1),
       \   'sp':   s:material['transparent'] }
 let s:h_foreground =
       \ { 'attr': 'NONE',
@@ -555,11 +550,6 @@ let s:h_more_msg =
       \   'fg':   s:color_value('green', 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
-let s:h_error =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('red', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_error_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -570,11 +560,6 @@ let s:h_error_underline =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:material['transparent'],
       \   'sp':   s:color_value('red', 6) }
-let s:h_style_error =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('red', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_style_error_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -585,11 +570,6 @@ let s:h_style_error_underline =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:material['transparent'],
       \   'sp':   s:color_value('red', 3) }
-let s:h_warning =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_warning_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -600,11 +580,6 @@ let s:h_warning_underline =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:material['transparent'],
       \   'sp':   s:color_value('orange', 6) }
-let s:h_style_warning =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_style_warning_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -615,11 +590,6 @@ let s:h_style_warning_underline =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:material['transparent'],
       \   'sp':   s:color_value('orange', 3) }
-let s:h_info =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('light_blue', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_info_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -630,11 +600,6 @@ let s:h_info_underline =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:material['transparent'],
       \   'sp':   s:color_value('light_blue', 6) }
-let s:h_hint =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 let s:h_hint_inverted =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 1),
@@ -704,12 +669,14 @@ let s:h_test =
 
 " Syntax {{{3
 
+" Comment and linked groups
 let s:h_comment =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 5),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Constant and linked groups
 let s:h_constant =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('cyan', 7),
@@ -741,12 +708,14 @@ let s:h_float =
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Identifier and linked groups
 let s:h_identifier =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('amber', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Statement and linked groups
 let s:h_statement =
       \ { 'attr': 'bold',
       \   'fg':   s:color_value('cyan', 7),
@@ -758,30 +727,35 @@ let s:h_operator =
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" PreProc and linked groups
 let s:h_pre_proc =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('purple', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Type and linked groups
 let s:h_type =
       \ { 'attr': 'bold',
       \   'fg':   s:color_value('amber', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Special and linked groups
 let s:h_special =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('indigo', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Underlined and linked groups
 let s:h_underlined =
       \ { 'attr': 'underline',
       \   'fg':   s:color_value('blue', 7),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Todo and linked groups
 let s:h_todo =
       \ { 'attr': 'bold',
       \   'fg':   s:material['transparent'],
@@ -845,7 +819,7 @@ call s:highlight('Visual', s:h_visual)
 call s:highlight('Conceal', s:h_foreground)
 call s:highlight('EndOfBuffer', s:h_light_foreground)
 call s:highlight('SpecialKey', s:h_special_key)
-call s:highlight('Whitespace', s:h_base_light)
+call s:highlight('Whitespace', s:h_normal_light)
 
 " Diff {{{3
 call s:highlight('DiffAdd', s:h_diff_line_add)
@@ -925,9 +899,9 @@ call s:highlight('ALEError', s:h_error_underline)
 call s:highlight('ALEErrorSign', s:h_error_inverted)
 call s:highlight('ALEVirtualTextError', s:h_error_inverted)
 
-call s:highlight('ALEInfo', s:h_error_underline)
-call s:highlight('ALEInfoSign', s:h_error_inverted)
-call s:highlight('ALEVirtualTextInfo', s:h_error_inverted)
+call s:highlight('ALEInfo', s:h_info_underline)
+call s:highlight('ALEInfoSign', s:h_info_inverted)
+call s:highlight('ALEVirtualTextInfo', s:h_info_inverted)
 
 call s:highlight('ALEStyleError', s:h_style_error_underline)
 call s:highlight('ALEStyleErrorSign', s:h_style_error_inverted)
