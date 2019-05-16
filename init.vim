@@ -48,19 +48,16 @@ Plug 'chrisbra/csv.vim'
 Plug 'dag/vim-fish'
 Plug 'embear/vim-localvimrc'
 Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
-Plug 'francoiscabrol/ranger.vim' " depends on rbgrouleff/bclose.vim
 Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
 Plug 'itmammoth/run-rspec.vim'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf' } " used for LangClient context menus
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
 Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'mattn/webapi-vim'
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', { 'do' : { -> coc#util#install() } }
 Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
@@ -72,7 +69,6 @@ Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'noprompt/vim-yardoc'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
-Plug 'rbgrouleff/bclose.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
@@ -92,11 +88,6 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
-
-" color schemes {{{2
-
-Plug 'hzchirs/vim-material'
-Plug 'morhetz/gruvbox'
 
 " }}}2
 
@@ -144,35 +135,6 @@ if s:terminfo_colors ==# '256'
 else
   colorscheme morning
 endif
-
-" gruvbox | morhetz/gruvbox {{{4
-
-" Enables italic text.
-" default: gui 1, term 0
-" Note: Set this to 1, just to be sure.
-" let g:gruvbox_italic = 1
-
-" Inverts GitGutter and Syntastic signs. Useful to rapidly focus on.
-" default: 0
-" let g:gruvbox_invert_signs = 1
-
-" Inverts tabline highlights, providing distinguishable tabline-fill.
-" default: 0
-" let g:gruvbox_invert_tabline = 1
-
-" colorscheme gruvbox
-
-" custom highlight groups {{{5
-" highlight groups for the terminal cursor {{{6
-
-" Overridden highlight group for the cursor
-" highlight clear Cursor
-" highlight Cursor cterm=reverse guifg=#282828 guibg=#fe8019
-
-" Highlight groups for neovim's terminal cursor
-" highlight! link TermCursor Cursor
-" highlight clear TermCursorNC
-" highlight TermCursorNC cterm=reverse guifg=#282828 guibg=#d65d0e
 
 " Vim options {{{2
 
@@ -422,10 +384,6 @@ let g:fzf_action = { 'ctrl-t' : 'tab split',
                    \ 'ctrl-s' : 'split',
                    \ 'ctrl-v' : 'vsplit' }
 
-" Tagbar | majutsushi/tagbar {{{3
-
-nnoremap <silent> <F8> :TagbarToggle<CR>
-
 " Vim Markdown | plasticboy/vim-markdown {{{3
 
 " Disable 'ge' motion override.
@@ -533,39 +491,6 @@ let g:markdown_composer_autostart = 0
 " previous-history instead of down and up.
 let g:fzf_history_dir = '~/.local/share/fzf/history'
 
-" Tagbar | majutsushi/tagbar {{{1
-
-" If you set this option the Tagbar window will automatically close when you
-" jump to a tag.
-let g:tagbar_autoclose = 1
-
-" If you set this option the cursor will move to the Tagbar window when it is
-" opened.
-let g:tagbar_autofocus = 1
-
-" If this option is set the tags are sorted according to their name. If it is
-" unset they are sorted according to their order in the source file.
-let g:tagbar_sort = 0
-
-" By default if the cursor is over a tag in the tagbar window, information
-" about the tag is echoed out. Set this option to disable that behavior.
-let g:tagbar_silent = 1
-
-" Configure Tagbar to user ripper-tags with Ruby
-if executable('ripper-tags')
-  let g:tagbar_type_ruby = { 'kinds'      : ['m:modules',
-                           \                 'c:classes',
-                           \                 'C:constants',
-                           \                 'F:singleton methods',
-                           \                 'f:methods',
-                           \                 'a:aliases'],
-                           \ 'kind2scope' : { 'c' : 'class',
-                           \                  'm' : 'class' },
-                           \ 'scope2kind' : { 'class' : 'c' },
-                           \ 'ctagsbin'   : 'ripper-tags',
-                           \ 'ctagsargs'  : ['-f', '-'] }
-endif
-
 " Signify | mhinz/vim-signify {{{1
 
 " Which VCS to check for
@@ -643,11 +568,6 @@ let g:SimpylFold_docstring_preview = 1
 let g:airline_powerline_fonts = 1
 
 " airline extension options {{{2
-" airline-tagbar {{{3
-
-" Disable Tagbar integration.
-let g:airline#extensions#tagbar#enabled = 0
-
 " airline-csv {{{3
 
 " Show the name of columns. (Leads to wrong output, if no headers are

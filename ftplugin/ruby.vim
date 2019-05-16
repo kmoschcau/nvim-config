@@ -19,9 +19,7 @@ highlight link yardYieldReturn yardGenericTag
 
 " key bindings {{{1
 
-if expand('%:t:r') =~# '_spec$'
-  nnoremap <buffer> <LocalLeader>t :call RSpec_RunCurrentSpecFile()<cr>
-  nnoremap <buffer> <LocalLeader>s :call RSpec_RunNearestSpec()<cr>
-  nnoremap <buffer> <LocalLeader>l :call RSpec_RunLastSpec()<cr>
-  nnoremap <buffer> <LocalLeader>a :call RSpec_RunAllSpecs()<cr>
-endif
+nnoremap <buffer> <LocalLeader>r  :RunSpec<cr>
+nnoremap <buffer> <LocalLeader>l  :RunSpecLine<cr>
+nnoremap <buffer> <LocalLeader>e  :RunSpecLastRun<cr>
+nnoremap <buffer> <LocalLeader>cr :RunSpecCloseResult<cr>
