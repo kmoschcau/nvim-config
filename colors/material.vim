@@ -493,6 +493,16 @@ let s:h_cursor_unfocused =
       \   'sp':   s:material['transparent'] }
 
 " Diff related {{{3
+let s:h_diff_add =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:material_diff_added_hue, 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_diff_delete =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:material_diff_deleted_hue, 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
 let s:h_diff_line_add =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
@@ -920,6 +930,11 @@ call s:highlight('ALEVirtualTextWarning', s:h_warning_inverted)
 call s:highlight('LanguageClientHint', s:h_hint_underline)
 call s:highlight('LanguageClientHintSign', s:h_hint_inverted)
 call s:highlight('LanguageClientHintVirtualText', s:h_hint_inverted)
+
+" vim-git | tpope/vim-git {{{3
+
+call s:highlight('diffAdded', s:h_diff_add)
+call s:highlight('diffRemoved', s:h_diff_delete)
 
 " Signify | mhinz/vim-signify {{{3
 
