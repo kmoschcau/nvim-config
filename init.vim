@@ -120,6 +120,18 @@ if s:terminfo_colors ==# '256'
   set termguicolors
 endif
 
+" Syntax settings {{{3
+" Java {{{4
+
+" Highlight java.lang.* Identifiers
+let g:java_highlight_java_lang_ids = 1
+
+" Highlight functions and some other minor things
+let g:java_highlight_functions = 'style'
+
+" Highlight statements, that should only be used for debugging
+let g:java_highlight_debug = 1
+
 " Colorscheme settings {{{3
 
 " When set to "dark", Vim will try to use colors that look good on a dark
