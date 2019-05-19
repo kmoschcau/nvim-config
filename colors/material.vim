@@ -415,7 +415,7 @@ let s:h_light_foreground =
 let s:h_popup =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:material_neutral_hue, 8),
-      \   'bg':   s:color_value(s:material_neutral_hue, 4),
+      \   'bg':   s:color_value(s:material_neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_popup_selected =
       \ { 'attr': 'NONE',
