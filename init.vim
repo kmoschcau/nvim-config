@@ -353,6 +353,15 @@ function! SynStack()
 endfunction
 nnoremap <F10> :call SynStack()<cr>
 
+" coc.vim | neoclide/coc.vim {{{3
+" This needs to be mapped before the LanguageClient mappings, because those are
+" supposed to overwrite these mappings.
+
+nnoremap <silent> K :call CocAction('doHover')<cr>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <F2> <Plug>(coc-rename)
+nmap <silent> <F3> <Plug>(coc-references)
+
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
 
 " This function will define LanguageClient mappings for buffers, for whose

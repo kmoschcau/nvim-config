@@ -931,6 +931,10 @@ call s:highlight('LanguageClientHint', s:h_hint_underline)
 call s:highlight('LanguageClientHintSign', s:h_hint_inverted)
 call s:highlight('LanguageClientHintVirtualText', s:h_hint_inverted)
 
+" coc.nvim | neoclide/coc.nvim {{{3
+
+call s:highlight('CocCodeLens', s:h_comment)
+
 " vim-git | tpope/vim-git {{{3
 
 call s:highlight('diffAdded', s:h_diff_add)

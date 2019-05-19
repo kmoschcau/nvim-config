@@ -1,18 +1,12 @@
 {
-  "solargraph.completion": true,
-  "solargraph.definitions": true,
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.hover": true,
-  "solargraph.references": true,
-  "solargraph.rename": true,
-  "solargraph.symbols": true,
-  "solargraph.useBundler": true,
+  "coc.preferences.extensionUpdateCheck": "never",
   "coc.source.file.trimSameExts": [
     ".js",
     ".rb",
     ".ts"
   ],
+  "codeLens.enable": true,
+  "diagnostic.displayByAle": true,
   "languageserver": {
     "ccls": {
       "command": "ccls",
@@ -24,5 +18,14 @@
         }
       }
     }
-  }
+  },
+  "solargraph.completion": true,
+  "solargraph.definitions": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true,
+  "solargraph.references": true,
+  "solargraph.rename": true,
+  "solargraph.symbols": true,
+  "solargraph.useBundler": true
 }
