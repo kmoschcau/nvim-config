@@ -1,9 +1,2 @@
-# ignore the vim-plug file
-/autoload/plug.vim
-
 # ignore the gutentags .notags file
 /.notags
-
-# ignore the eclim files and directories
-/eclim/
-/plugin/

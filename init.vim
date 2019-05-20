@@ -424,37 +424,11 @@ if executable('ag')
   set grepprg =ag\ --nogroup\ --nocolor\ --hidden
 endif
 
-" Eclim {{{1
-
-" highlight groups for the log levels
-let g:EclimHighlightError = 'ALEError'
-let g:EclimHighlightWarning = 'ALEWarning'
-let g:EclimHighlightInfo = 'ALEInfo'
-let g:EclimHighlightDebug = 'LanguageClientHint'
-let g:EclimHighlightTrace = 'SpellCap'
-
-" The external web browser to use, to open links
-let g:EclimBrowser = 'firefox'
-
-" Disable eclim validation
-let g:EclimCValidate = 0
-let g:EclimCssValidate = 0
-let g:EclimHtmlValidate = 0
-let g:EclimGroovyValidate = 0
-let g:EclimJavaValidate = 0
-let g:EclimJavascriptValidate = 0
-let g:EclimPhpHtmlValidate = 0
-let g:EclimPythonValidate = 0
-let g:EclimRubyValidate = 0
-let g:EclimScalaValidate = 0
-let g:EclimXmlValidate = 0
-let g:EclimDtdValidate = 0
-let g:EclimXsdValidate = 0
-
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
-let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'],
+let g:LanguageClient_serverCommands = { 'java'       : ['jls'],
+                                      \ 'javascript' : ['jsls'],
                                       \ 'python'     : ['pyls'],
                                       \ 'ruby'       : ['bundle', 'exec',
                                                        \'solargraph', 'stdio'],
