@@ -85,8 +85,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
 
@@ -347,7 +346,7 @@ nnoremap Y y$
 
 " Add a debugging command for syntax highlighting
 function! SynStack()
-  if !exists("*synstack")
+  if !exists('*synstack')
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
@@ -406,24 +405,6 @@ nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 " Gundo | sjl/gundo.vim {{{3
 
 nnoremap <silent> <F5> :GundoToggle<CR>
-
-" autocommands {{{2
-
-augroup init_vim
-  autocmd!
-  " Open all folds in the previewwindow by default.
-  autocmd WinNew *
-      \   if &previewwindow
-      \ |   set foldlevel=99
-      \ | endif
-augroup end
-
-" The Silver Searcher | ag {{{1
-
-if executable('ag')
-  " Use ag over grep
-  set grepprg =ag\ --nogroup\ --nocolor\ --hidden
-endif
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
