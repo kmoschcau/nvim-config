@@ -558,7 +558,6 @@ let g:ruby_fold = 1
 let g:ruby_foldable_groups = 'def class module # __END__ do'
 
 " Asynchronous Lint Engine | w0rp/ale {{{1
-" ALE general options {{{2
 
 " This variable defines the format of the echoed message. The `%s` is the error
 " message itself, and it can contain the following handlers:
@@ -583,42 +582,3 @@ let g:ale_sign_warning = '! '
 
 " Enable the virtualtext error display.
 let g:ale_virtualtext_cursor = 1
-
-" ALE Linters {{{2
-
-" A mapping from filetypes to List values for functions for linting files.
-let g:ale_linters = { 'rust' : ['cargo', 'rls'] }
-
-" ALE fixers {{{2
-
-" A mapping from filetypes to List values for functions for fixing errors.
-let g:ale_fixers = { 'rust' : ['rustfmt'],
-                   \ 'sh'   : ['shfmt'] }
-
-" ALE Ruby options {{{2
-" ALE Ruby reek options {{{3
-
-" Controls whether linter messages contain a link to an explanatory wiki page
-" for the type of code smell. Defaults to off to improve readability.
-let g:ale_ruby_reek_show_wiki_link = 1
-
-" ALE Ruby rubocop options {{{3
-
-" This variable can be changed to modify flags given to rubocop.
-let g:ale_ruby_rubocop_options = '-DES'
-
-" ALE Rust options {{{2
-" ALE Rust Cargo options {{{3
-
-" Use cargo clippy, when it is installed.
-let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
-
-" ALE Rust rls options {{{3
-
-" Set the rls toolchain to stable.
-let g:ale_rust_rls_toolchain = 'stable'
-
-" ALE sh options {{{2
-
-" Set the indent to two spaces.
-let g:ale_sh_shfmt_options = '-s -i 2'
