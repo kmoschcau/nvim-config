@@ -19,6 +19,20 @@
       }
     }
   },
+  "java.home": "/opt/jdk1.8.0_202-x64",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.errors.incompleteClasspath.severity": "error",
+  "java.referencesCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.signatureHelp.enabled": true,
+  "java.completion.importOrder": [
+    "com",
+    "java",
+    "javax",
+    "org"
+  ],
+  "java.codeGeneration.useBlocks": true,
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "solargraph.completion": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,

@@ -61,6 +61,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', { 'do' : { -> coc#util#install() } }
 Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-pyls', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
@@ -357,10 +358,10 @@ nnoremap <F10> :call SynStack()<cr>
 " This needs to be mapped before the LanguageClient mappings, because those are
 " supposed to overwrite these mappings.
 
-nnoremap <silent> K :call CocAction('doHover')<cr>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> <F2> <Plug>(coc-rename)
-nmap <silent> <F3> <Plug>(coc-references)
+nnoremap <silent> K    :call CocAction('doHover')<cr>
+nmap     <silent> gd   <Plug>(coc-definition)
+nmap     <silent> <F2> <Plug>(coc-rename)
+nmap     <silent> <F3> <Plug>(coc-references)
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
 
@@ -427,8 +428,7 @@ endif
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
-let g:LanguageClient_serverCommands = { 'java'       : ['jls'],
-                                      \ 'javascript' : ['jsls'],
+let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'],
                                       \ 'python'     : ['pyls'],
                                       \ 'ruby'       : ['bundle', 'exec',
                                                        \'solargraph', 'stdio'],

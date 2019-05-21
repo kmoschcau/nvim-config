@@ -14,3 +14,6 @@ setlocal tags+=~/.vim/tags/java
 let b:ale_linters = {
     \ 'java' : ['checkstyle', 'pmd']
     \ }
+
+" Map organize imports to F4
+nnoremap <silent> <F4> :CocCommand java.action.organizeImports<cr>
