@@ -59,13 +59,13 @@ Plug 'junegunn/limelight.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mhinz/vim-signify'
-Plug 'neoclide/coc.nvim', { 'do' : { -> coc#util#install() } }
+Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-pyls', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-" Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'noprompt/vim-yardoc'
 Plug 'pangloss/vim-javascript'
@@ -354,7 +354,7 @@ function! SynStack()
 endfunction
 nnoremap <F10> :call SynStack()<cr>
 
-" coc.vim | neoclide/coc.vim {{{3
+" coc.nvim | neoclide/coc.nvim {{{3
 " This needs to be mapped before the LanguageClient mappings, because those are
 " supposed to overwrite these mappings.
 
@@ -430,8 +430,6 @@ endif
 " The LanguageClient server configuration
 let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'],
                                       \ 'python'     : ['pyls'],
-                                      \ 'ruby'       : ['bundle', 'exec',
-                                                       \'solargraph', 'stdio'],
                                       \ 'rust'       : ['rls'] }
 
 let g:LanguageClient_diagnosticsDisplay = {
