@@ -925,12 +925,6 @@ call s:highlight('ALEWarning', s:h_warning_underline)
 call s:highlight('ALEWarningSign', s:h_warning_inverted)
 call s:highlight('ALEVirtualTextWarning', s:h_warning_inverted)
 
-" LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
-
-call s:highlight('LanguageClientHint', s:h_hint_underline)
-call s:highlight('LanguageClientHintSign', s:h_hint_inverted)
-call s:highlight('LanguageClientHintVirtualText', s:h_hint_inverted)
-
 " coc.nvim | neoclide/coc.nvim {{{3
 
 call s:highlight('CocCodeLens', s:h_comment)
