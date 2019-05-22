@@ -417,8 +417,7 @@ nnoremap <silent> <F5> :GundoToggle<CR>
 
 " The LanguageClient server configuration
 let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'],
-                                      \ 'python'     : ['pyls'],
-                                      \ 'rust'       : ['rls'] }
+                                      \ 'python'     : ['pyls'] }
 
 let g:LanguageClient_diagnosticsDisplay = {
     \   1 : { 'name'          : 'Error',
