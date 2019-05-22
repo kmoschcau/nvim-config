@@ -19,20 +19,20 @@
       }
     }
   },
-  "java.home": "/opt/jdk1.8.0_202-x64",
+  "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
-  "java.errors.incompleteClasspath.severity": "error",
-  "java.referencesCodeLens.enabled": true,
-  "java.implementationsCodeLens.enabled": true,
-  "java.signatureHelp.enabled": true,
   "java.completion.importOrder": [
     "com",
     "java",
     "javax",
     "org"
   ],
-  "java.codeGeneration.useBlocks": true,
+  "java.errors.incompleteClasspath.severity": "error",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.home": "/opt/jdk1.8.0_202-x64",
+  "java.implementationsCodeLens.enabled": true,
+  "java.referencesCodeLens.enabled": true,
+  "java.signatureHelp.enabled": true,
   "python.disableInstallationCheck": true,
   "solargraph.completion": true,
   "solargraph.definitions": true,
