@@ -19,6 +19,7 @@
       }
     }
   },
+  "eslint.autoFix": false,
   "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.completion.importOrder": [
@@ -34,6 +35,7 @@
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
   "python.disableInstallationCheck": true,
+  "solargraph.checkGemVersion": false,
   "solargraph.completion": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
