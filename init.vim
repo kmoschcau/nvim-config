@@ -63,7 +63,7 @@ Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-pyls', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
@@ -416,8 +416,7 @@ nnoremap <silent> <F5> :GundoToggle<CR>
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{1
 
 " The LanguageClient server configuration
-let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'],
-                                      \ 'python'     : ['pyls'] }
+let g:LanguageClient_serverCommands = { 'javascript' : ['jsls'] }
 
 let g:LanguageClient_diagnosticsDisplay = {
     \   1 : { 'name'          : 'Error',

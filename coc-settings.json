@@ -33,6 +33,7 @@
   ],
   "java.codeGeneration.useBlocks": true,
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "python.disableInstallationCheck": true,
   "solargraph.completion": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
