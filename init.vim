@@ -357,10 +357,13 @@ nnoremap <F10> :call SynStack()<cr>
 " This needs to be mapped before the LanguageClient mappings, because those are
 " supposed to overwrite these mappings.
 
-nnoremap <silent> K    :call CocAction('doHover')<cr>
-nmap     <silent> gd   <Plug>(coc-definition)
-nmap     <silent> <F2> <Plug>(coc-rename)
-nmap     <silent> <F3> <Plug>(coc-references)
+inoremap <silent><expr> <c-space>  coc#refresh()
+nnoremap <silent>       K          :call CocAction('doHover')<cr>
+nmap     <silent>       lsd        <Plug>(coc-definition)
+nmap     <silent>       lst        <Plug>(coc-type-definition)
+nmap     <silent>       lsi        <Plug>(coc-implementation)
+nmap     <silent>       lsr        <Plug>(coc-references)
+nmap     <silent>       lsn        <Plug>(coc-rename)
 
 " LanguageClient-neovim | autozimu/LanguageClient-neovim {{{3
 
@@ -368,14 +371,18 @@ nmap     <silent> <F3> <Plug>(coc-references)
 " filetype LanguageClient is enabled.
 function! LanguageClient_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
-    nnoremap <buffer> <silent> K
+    nnoremap <buffer><silent> K
            \ :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <buffer> <silent> gd
+    nnoremap <buffer><silent> lsd
            \ :call LanguageClient#textDocument_definition()<cr>
-    nnoremap <buffer> <silent> <F2>
-           \ :call LanguageClient#textDocument_rename()<cr>
-    nnoremap <buffer> <silent> <F3>
+    nnoremap <buffer><silent> lst
+           \ :call LanguageClient#textDocument_typeDefinition()<cr>
+    nnoremap <buffer><silent> lsi
+           \ :call LanguageClient#textDocument_implementation()<cr>
+    nnoremap <buffer><silent> lsr
            \ :call LanguageClient#textDocument_references()<cr>
+    nnoremap <buffer><silent> lsn
+           \ :call LanguageClient#textDocument_rename()<cr>
   endif
 endfunction
 augroup LanguageClient_Keymaps
