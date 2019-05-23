@@ -354,13 +354,13 @@ nnoremap <F10> :call SynStack()<cr>
 
 " coc.nvim | neoclide/coc.nvim {{{3
 
-inoremap <silent><expr> <c-space>  coc#refresh()
+inoremap <silent><expr> <C-space>  coc#refresh()
 nnoremap <silent>       K          :call CocAction('doHover')<cr>
-nmap     <silent>       lsd        <Plug>(coc-definition)
-nmap     <silent>       lst        <Plug>(coc-type-definition)
-nmap     <silent>       lsi        <Plug>(coc-implementation)
-nmap     <silent>       lsr        <Plug>(coc-references)
-nmap     <silent>       lsn        <Plug>(coc-rename)
+nmap     <silent>       <C-s>d     <Plug>(coc-definition)
+nmap     <silent>       <C-s>t     <Plug>(coc-type-definition)
+nmap     <silent>       <C-s>i     <Plug>(coc-implementation)
+nmap     <silent>       <C-s>r     <Plug>(coc-references)
+nmap     <silent>       <C-s>n     <Plug>(coc-rename)
 
 " fzf.vim | junegunn/fzf.vim {{{3
 
