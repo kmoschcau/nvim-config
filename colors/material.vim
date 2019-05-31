@@ -275,47 +275,23 @@ let s:material =
 " Default hue selection {{{2
 
 " Hue used for most of the editor background and framing, should be subtle.
-if exists('g:material_neutral_hue')
-  let s:material_neutral_hue = g:material_neutral_hue
-else
-  let s:material_neutral_hue = 'blue_grey'
-endif
+let s:material_neutral_hue = get(g:, 'material_neutral_hue', 'blue_grey')
 
 " Hue used as the primary accent and normal mode.
-if exists('g:material_primary_hue')
-  let s:material_primary_hue = g:material_primary_hue
-else
-  let s:material_primary_hue = 'teal'
-endif
+let s:material_primary_hue = get(g:, 'material_primary_hue', 'teal')
 
 " Diff hues {{{3
 " Hue used for added diff
-if exists('g:material_diff_added_hue')
-  let s:material_diff_added_hue = g:material_diff_added_hue
-else
-  let s:material_diff_added_hue = 'green'
-endif
+let s:material_diff_added_hue = get(g:, 'material_diff_added_hue', 'green')
 
 " Hue used for changed diff
-if exists('g:material_diff_changed_hue')
-  let s:material_diff_changed_hue = g:material_diff_changed_hue
-else
-  let s:material_diff_changed_hue = 'amber'
-endif
+let s:material_diff_changed_hue = get(g:, 'material_diff_changed_hue', 'amber')
 
 " Hue used for deleted diff
-if exists('g:material_diff_deleted_hue')
-  let s:material_diff_deleted_hue = g:material_diff_deleted_hue
-else
-  let s:material_diff_deleted_hue = 'red'
-endif
+let s:material_diff_deleted_hue = get(g:, 'material_diff_deleted_hue', 'red')
 
 " Hue used for text diff
-if exists('g:material_diff_text_hue')
-  let s:material_diff_text_hue = g:material_diff_text_hue
-else
-  let s:material_diff_text_hue = 'orange'
-endif
+let s:material_diff_text_hue = get(g:, 'material_diff_text_hue', 'orange')
 
 " value list  {{{2
 let s:material_normal_values = [ '50', '100', '200', '300', '400', '500', '600',
