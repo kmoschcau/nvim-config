@@ -363,7 +363,7 @@ endfunction
 " highlight on the right side of the statusline for windows on the bottom when
 " airline is in use.
 function! g:Material_replace_statusline_highlight()
-  call s:highlight('StatusLine', s:h_strong_framing)
+  call s:highlight('StatusLine', s:h_strong_framing_with_fg)
 endfunction
 
 " Shared highlight definitions {{{2
@@ -422,14 +422,24 @@ let s:h_lighter_framing =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:color_value(s:neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
-let s:h_light_framing =
+let s:h_light_framing_subtle_fg =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:neutral_hue, 6),
       \   'bg':   s:color_value(s:neutral_hue, 4),
       \   'sp':   s:material['transparent'] }
-let s:h_strong_framing =
+let s:h_light_framing_strong_fg =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:neutral_hue, 4),
+      \   'sp':   s:material['transparent'] }
+let s:h_strong_framing_without_fg =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
+      \   'bg':   s:color_value(s:neutral_hue, 8),
+      \   'sp':   s:material['transparent'] }
+let s:h_strong_framing_with_fg =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1, 'accent'),
       \   'bg':   s:color_value(s:neutral_hue, 8),
       \   'sp':   s:material['transparent'] }
 let s:h_status_line =
@@ -764,38 +774,23 @@ let s:h_airline_1 =
       \   'fg':   s:color_value(s:neutral_hue, 6),
       \   'bg':   s:color_value(s:neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
-let s:h_airline_2 =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:neutral_hue, 4),
-      \   'sp':   s:material['transparent'] }
 let s:h_airline_3 =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value(s:neutral_hue, 8),
       \   'sp':   s:material['transparent'] }
 
-" The definition for the Normal mode is taken directly from the statusline
-" highlight defintion
-
-" Highlight definition for Insert mode
 let s:h_airline_insert =
       \ { 'attr': 'bold',
       \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('blue', 7),
       \   'sp':   s:material['transparent'] }
-
-" Highlight definition for Replace mode
 let s:h_airline_replace =
       \ { 'attr': 'bold',
       \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('amber', 7),
       \   'sp':   s:material['transparent'] }
 
-" The definition for the Visual mode is taken directly from the cursorlines
-" highlight defintion
-
-" Highlight definition for modified buffers
 let s:h_airline_modified =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:neutral_hue, 1),
@@ -805,19 +800,19 @@ let s:h_airline_modified =
 " Editor colors {{{1
 " Non-editor window highlights {{{2
 " Framing {{{3
-call s:highlight('MsgSeparator', s:h_strong_framing)
-call s:highlight('TabLineFill', s:h_strong_framing)
-call s:highlight('VertSplit', s:h_strong_framing)
+call s:highlight('MsgSeparator', s:h_strong_framing_without_fg)
+call s:highlight('TabLineFill', s:h_strong_framing_without_fg)
+call s:highlight('VertSplit', s:h_strong_framing_without_fg)
 
-call s:highlight('FoldColumn', s:h_light_framing)
-call s:highlight('SignColumn', s:h_light_framing)
-call s:highlight('LineNr', s:h_light_framing)
+call s:highlight('FoldColumn', s:h_light_framing_subtle_fg)
+call s:highlight('SignColumn', s:h_light_framing_subtle_fg)
+call s:highlight('LineNr', s:h_light_framing_subtle_fg)
 
 call s:highlight('ColorColumn', s:h_lighter_framing)
 
 call s:highlight('CursorLineNr', s:h_cursorlines_num)
 
-call s:highlight('TabLine', s:h_light_framing)
+call s:highlight('TabLine', s:h_light_framing_strong_fg)
 call s:highlight('TabLineSel', s:h_normal)
 call s:highlight('Title', s:h_title)
 
@@ -981,7 +976,7 @@ call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
 " vim-airline | vim-airline/vim-airline {{{3
 
 call s:highlight('Airline1', s:h_airline_1)
-call s:highlight('Airline2', s:h_airline_2)
+call s:highlight('Airline2', s:h_light_framing_strong_fg)
 call s:highlight('Airline3', s:h_airline_3)
 
 call s:highlight('AirlineNormal', s:h_status_line)
