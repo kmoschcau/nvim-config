@@ -275,28 +275,28 @@ let s:material =
 " Default hue selection {{{2
 
 " Hue used for most of the editor background and framing, should be subtle.
-let s:material_neutral_hue = get(g:, 'material_neutral_hue', 'blue_grey')
+let s:neutral_hue = get(g:, 'material_neutral_hue', 'blue_grey')
 
 " Hue used as the primary accent and normal mode.
-let s:material_primary_hue = get(g:, 'material_primary_hue', 'teal')
+let s:primary_hue = get(g:, 'material_primary_hue', 'teal')
 
 " Diff hues {{{3
 " Hue used for added diff
-let s:material_diff_added_hue = get(g:, 'material_diff_added_hue', 'green')
+let s:diff_added_hue = get(g:, 'material_diff_added_hue', 'green')
 
 " Hue used for changed diff
-let s:material_diff_changed_hue = get(g:, 'material_diff_changed_hue', 'amber')
+let s:diff_changed_hue = get(g:, 'material_diff_changed_hue', 'amber')
 
 " Hue used for deleted diff
-let s:material_diff_deleted_hue = get(g:, 'material_diff_deleted_hue', 'red')
+let s:diff_deleted_hue = get(g:, 'material_diff_deleted_hue', 'red')
 
 " Hue used for text diff
-let s:material_diff_text_hue = get(g:, 'material_diff_text_hue', 'orange')
+let s:diff_text_hue = get(g:, 'material_diff_text_hue', 'orange')
 
 " value list  {{{2
-let s:material_normal_values = [ '50', '100', '200', '300', '400', '500', '600',
-                             \  '700', '800', '900']
-let s:material_accent_values = ['A100', 'A200', 'A400', 'A700']
+let s:normal_values = [ '50', '100', '200', '300', '400', '500', '600',
+                    \  '700', '800', '900']
+let s:accent_values = ['A100', 'A200', 'A400', 'A700']
 
 " Functions {{{2
 
@@ -330,7 +330,7 @@ function! s:value(index)
   else
     let l:value_index = 0 - l:index
   endif
-  return s:material_normal_values[l:value_index]
+  return s:normal_values[l:value_index]
 endfunction
 
 " Get the accent value number string for the passed index, dependent on the
@@ -342,7 +342,7 @@ function! s:accent_value(index)
   else
     let l:value_index = 0 - l:index
   endif
-  return s:material_accent_values[l:value_index]
+  return s:accent_values[l:value_index]
 endfunction
 
 " Get a color value by the passed color name and the passed index, dependent on
@@ -363,99 +363,99 @@ endfunction
 " Basics {{{3
 let s:h_normal =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 8),
-      \   'bg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 8),
+      \   'bg':   s:color_value(s:neutral_hue, 1),
       \   'sp':   s:material['transparent'] }
 let s:h_normal_light =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 6),
-      \   'bg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:neutral_hue, 1),
       \   'sp':   s:material['transparent'] }
 let s:h_special_key =
       \ { 'attr': 'italic',
-      \   'fg':   s:color_value(s:material_neutral_hue, 8),
-      \   'bg':   s:color_value(s:material_neutral_hue, 3),
+      \   'fg':   s:color_value(s:neutral_hue, 8),
+      \   'bg':   s:color_value(s:neutral_hue, 3),
       \   'sp':   s:material['transparent'] }
 let s:h_foreground =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 8),
+      \   'fg':   s:color_value(s:neutral_hue, 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_light_foreground =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 5),
+      \   'fg':   s:color_value(s:neutral_hue, 5),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
 " Popup menu {{{3
 let s:h_popup =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 8),
-      \   'bg':   s:color_value(s:material_neutral_hue, 2),
+      \   'fg':   s:color_value(s:neutral_hue, 8),
+      \   'bg':   s:color_value(s:neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_popup_selected =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_primary_hue, 2),
+      \   'bg':   s:color_value(s:primary_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_popup_scrollbar =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_neutral_hue, 5),
+      \   'bg':   s:color_value(s:neutral_hue, 5),
       \   'sp':   s:material['transparent'] }
 let s:h_popup_thumb =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_neutral_hue, 10),
+      \   'bg':   s:color_value(s:neutral_hue, 10),
       \   'sp':   s:material['transparent'] }
 
 " Framing {{{3
 let s:h_lighter_framing =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 6),
-      \   'bg':   s:color_value(s:material_neutral_hue, 2),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_light_framing =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 6),
-      \   'bg':   s:color_value(s:material_neutral_hue, 4),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:neutral_hue, 4),
       \   'sp':   s:material['transparent'] }
 let s:h_strong_framing =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_neutral_hue, 8),
+      \   'bg':   s:color_value(s:neutral_hue, 8),
       \   'sp':   s:material['transparent'] }
 let s:h_status_line =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('cyan', 4, 'accent'),
       \   'sp':   s:material['transparent'] }
 let s:h_status_line_nc =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_neutral_hue, 8),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:neutral_hue, 8),
       \   'sp':   s:material['transparent'] }
 
 " Cursor related {{{3
 let s:h_visual =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_primary_hue, 2),
+      \   'bg':   s:color_value(s:primary_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_wild_menu =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_primary_hue, 3),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:primary_hue, 3),
       \   'sp':   s:material['transparent'] }
 let s:h_cursorlines =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_primary_hue, 2),
+      \   'bg':   s:color_value(s:primary_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_cursorlines_num =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:material_neutral_hue, 6),
-      \   'bg':   s:color_value(s:material_primary_hue, 2),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:primary_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_cursor =
       \ { 'attr': 'NONE',
@@ -471,53 +471,53 @@ let s:h_cursor_unfocused =
 " Diff related {{{3
 let s:h_diff_add =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_diff_added_hue, 6),
+      \   'fg':   s:color_value(s:diff_added_hue, 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_diff_delete =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_diff_deleted_hue, 6),
+      \   'fg':   s:color_value(s:diff_deleted_hue, 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_diff_line_add =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_diff_added_hue, 2),
+      \   'bg':   s:color_value(s:diff_added_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_line_change =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_diff_changed_hue, 2),
+      \   'bg':   s:color_value(s:diff_changed_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_line_delete =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_diff_deleted_hue, 2),
+      \   'bg':   s:color_value(s:diff_deleted_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_line_text =
       \ { 'attr': 'bold',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:material_diff_text_hue, 2),
+      \   'bg':   s:color_value(s:diff_text_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_add =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_diff_added_hue, 6),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:diff_added_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_change =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_diff_changed_hue, 6),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:diff_changed_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_delete =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_diff_deleted_hue, 6),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:diff_deleted_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_text =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
-      \   'bg':   s:color_value(s:material_diff_text_hue, 6),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:diff_text_hue, 6),
       \   'sp':   s:material['transparent'] }
 
 " Messages {{{3
@@ -528,7 +528,7 @@ let s:h_title =
       \   'sp':   s:material['transparent'] }
 let s:h_mode_msg =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:material_neutral_hue, 8),
+      \   'fg':   s:color_value(s:neutral_hue, 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_more_msg =
@@ -538,7 +538,7 @@ let s:h_more_msg =
       \   'sp':   s:material['transparent'] }
 let s:h_error_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('red', 6),
       \   'sp':   s:material['transparent'] }
 let s:h_error_underline =
@@ -548,7 +548,7 @@ let s:h_error_underline =
       \   'sp':   s:color_value('red', 6) }
 let s:h_style_error_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('red', 3),
       \   'sp':   s:material['transparent'] }
 let s:h_style_error_underline =
@@ -558,7 +558,7 @@ let s:h_style_error_underline =
       \   'sp':   s:color_value('red', 3) }
 let s:h_warning_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('orange', 6),
       \   'sp':   s:material['transparent'] }
 let s:h_warning_underline =
@@ -568,7 +568,7 @@ let s:h_warning_underline =
       \   'sp':   s:color_value('orange', 6) }
 let s:h_style_warning_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('orange', 3),
       \   'sp':   s:material['transparent'] }
 let s:h_style_warning_underline =
@@ -578,7 +578,7 @@ let s:h_style_warning_underline =
       \   'sp':   s:color_value('orange', 3) }
 let s:h_info_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('light_blue', 6),
       \   'sp':   s:material['transparent'] }
 let s:h_info_underline =
@@ -588,7 +588,7 @@ let s:h_info_underline =
       \   'sp':   s:color_value('light_blue', 6) }
 let s:h_hint_inverted =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value('blue', 3),
       \   'sp':   s:material['transparent'] }
 let s:h_hint_underline =
@@ -627,8 +627,8 @@ let s:h_directory =
       \   'sp':   s:material['transparent'] }
 let s:h_folded =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 6),
-      \   'bg':   s:color_value(s:material_neutral_hue, 3),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:neutral_hue, 3),
       \   'sp':   s:material['transparent'] }
 let s:h_search =
       \ { 'attr': 'NONE',
@@ -658,7 +658,7 @@ let s:h_test =
 " Comment and linked groups
 let s:h_comment =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:material_neutral_hue, 5),
+      \   'fg':   s:color_value(s:neutral_hue, 5),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
