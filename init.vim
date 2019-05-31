@@ -499,6 +499,9 @@ let g:airline_extensions = [
 
 " airline-branch {{{3
 
+" Truncate long branch names to a fixed length.
+let g:airline#extensions#branch#displayed_head_limit = 15
+
 " Truncate all path sections but the last one of branch names.
 let g:airline#extensions#branch#format = 2
 
