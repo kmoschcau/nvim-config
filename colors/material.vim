@@ -3,7 +3,6 @@
 " File:          material.vim
 " Description:   A configurable material based theme
 " Author:        Kai Moschcau <mail@kmoschcau.de>
-" Last Modified: 2019-03-08
 " -----------------------------------------------------------------------------
 
 " General setup {{{1
@@ -359,6 +358,14 @@ function! s:color_value(color_name, color_index, ...)
   endif
 endfunction
 
+" This replaces the default statusline highlight with the strong framing
+" highlight. This is meant to be used to remove the differing, one character
+" highlight on the right side of the statusline for windows on the bottom when
+" airline is in use.
+function! g:Material_replace_statusline_highlight()
+  call s:highlight('StatusLine', s:h_strong_framing)
+endfunction
+
 " Shared highlight definitions {{{2
 " Basics {{{3
 let s:h_normal =
@@ -412,7 +419,7 @@ let s:h_popup_thumb =
 " Framing {{{3
 let s:h_lighter_framing =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'fg':   s:material['transparent'],
       \   'bg':   s:color_value(s:neutral_hue, 2),
       \   'sp':   s:material['transparent'] }
 let s:h_light_framing =
@@ -748,6 +755,53 @@ let s:h_todo =
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+
+" Plugins {{{3
+" vim-airline | vim-airline/vim-airline {{{4
+
+let s:h_airline_1 =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:color_value(s:neutral_hue, 2),
+      \   'sp':   s:material['transparent'] }
+let s:h_airline_2 =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:neutral_hue, 4),
+      \   'sp':   s:material['transparent'] }
+let s:h_airline_3 =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:neutral_hue, 8),
+      \   'sp':   s:material['transparent'] }
+
+" The definition for the Normal mode is taken directly from the statusline
+" highlight defintion
+
+" Highlight definition for Insert mode
+let s:h_airline_insert =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value('blue', 7),
+      \   'sp':   s:material['transparent'] }
+
+" Highlight definition for Replace mode
+let s:h_airline_replace =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value('amber', 7),
+      \   'sp':   s:material['transparent'] }
+
+" The definition for the Visual mode is taken directly from the cursorlines
+" highlight defintion
+
+" Highlight definition for modified buffers
+let s:h_airline_modified =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value('purple', 8),
+      \   'sp':   s:material['transparent'] }
+
 " Editor colors {{{1
 " Non-editor window highlights {{{2
 " Framing {{{3
@@ -923,3 +977,19 @@ call s:highlight('SignifyLineChange', s:h_diff_line_change)
 call s:highlight('SignifyLineChangeDelete', s:h_diff_line_text)
 call s:highlight('SignifyLineDelete', s:h_diff_line_delete)
 call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
+
+" vim-airline | vim-airline/vim-airline {{{3
+
+call s:highlight('Airline1', s:h_airline_1)
+call s:highlight('Airline2', s:h_airline_2)
+call s:highlight('Airline3', s:h_airline_3)
+
+call s:highlight('AirlineNormal', s:h_status_line)
+call s:highlight('AirlineInsert', s:h_airline_insert)
+call s:highlight('AirlineReplace', s:h_airline_replace)
+call s:highlight('AirlineVisual', s:h_cursorlines)
+
+call s:highlight('AirlineWarning', s:h_warning_inverted)
+call s:highlight('AirlineError', s:h_error_inverted)
+
+call s:highlight('AirlineModified', s:h_airline_modified)
