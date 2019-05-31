@@ -325,7 +325,7 @@ endfunction
 " 'background'.
 function! s:value(index)
   let l:index = max([min([a:index, 10]), 1])
-  if &background == 'light'
+  if &background ==? 'light'
     let l:value_index = l:index - 1
   else
     let l:value_index = 0 - l:index
@@ -337,7 +337,7 @@ endfunction
 " 'background'.
 function! s:accent_value(index)
   let l:index = max([min([a:index, 4]), 1])
-  if &background == 'light'
+  if &background ==? 'light'
     let l:value_index = l:index - 1
   else
     let l:value_index = 0 - l:index
