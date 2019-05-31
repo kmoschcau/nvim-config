@@ -483,16 +483,71 @@ let g:SimpylFold_docstring_preview = 1
 let g:airline_powerline_fonts = 1
 
 " airline extension options {{{2
+
+" Rather opt in to extensions instead of loading all at the start.
+let g:airline_extensions = [
+    \   'ale',
+    \   'branch',
+    \   'csv',
+    \   'fugitiveline',
+    \   'hunks',
+    \   'quickfix',
+    \   'whitespace',
+    \   'wordcount',
+    \ ]
+
+
+" airline-branch {{{3
+
+" Truncate all path sections but the last one of branch names.
+let g:airline#extensions#branch#format = 2
+
 " airline-csv {{{3
 
 " Show the name of columns. (Leads to wrong output, if no headers are
 " available.)
 let g:airline#extensions#csv#column_display = 'Name'
 
+" airline-default {{{3
+
+" Set which sections get truncated and at what width.
+" Basic concept here is that there should be 20 characters available for the
+" file name. Anything else appears in order of importance.
+" The min width for this is 27 characters
+" Widths for sections under most common circumstances:
+" a:        9
+" b:       12 + branch name
+"               (starts to disappear at 101, fully gone at 79)
+" x:        2 + filetype name
+" y:       13
+" z:       24
+" warning: 12 when showing errors
+" error:   12 when showing errors
+let g:airline#extensions#default#section_truncate_width = { 'a'       : 88,
+                                                          \ 'b'       : 79,
+                                                          \ 'x'       : 73,
+                                                          \ 'y'       : 66,
+                                                          \ 'z'       : 53,
+                                                          \ 'warning' : 29,
+                                                          \ 'error'   : 28 }
+
+" Set the layout of the sections. Left side being in the first array, right
+" side in the second.
+let g:airline#extensions#default#layout = [['a', 'b', 'c'],
+                                         \ ['x', 'y', 'z', 'warning', 'error']]
+
 " airline-hunks {{{3
 
 " Enable showing only non-zero hunks.
 let g:airline#extensions#hunks#non_zero_only = 1
+
+" airline-whitespace {{{3
+
+" Customize the type of mixed indent checking to perform.
+"   spaces are allowed after tabs, but not in between
+"   this algorithm works well with programming styles that use tabs for
+"   indentation and spaces for alignment
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 " vim-ruby | vim-ruby/vim-ruby {{{1
 
