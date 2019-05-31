@@ -456,6 +456,10 @@ let g:NERDTreeQuitOnOpen = 1
 " This option tells Vim whether to display hidden files by default.
 let g:NERDTreeShowHidden = 1
 
+" This setting disables the 'Bookmarks' label 'Press ? for help' text.
+" This does not seem to work.
+let g:NERDTreeMinimalUI = 0
+
 " Gundo | sjl/gundo.vim {{{1
 
 " Set this to 0 to disable the help text in the Gundo graph window.
