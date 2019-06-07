@@ -54,6 +54,7 @@ Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'lepture/vim-velocity'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mhinz/vim-signify'
