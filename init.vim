@@ -227,6 +227,11 @@ set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 " Print the line number in front of each line.
 set number
 
+" Enables pseudo-transparency for the |popup-menu|. Valid values are in the
+" range of 0 for fully opaque popupmenu (disabled) to 100 for fully transparent
+" background. Values between 0-30 are typically most useful.
+set pumblend=20
+
 " Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
 " value will be used.
 set shiftwidth=0
@@ -239,6 +244,11 @@ set showcmd
 
 " If in Insert, Replace or Visual mode put a message on the last line.
 set noshowmode
+
+" When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
+" 'tabstop' or 'softtabstop' is used in other places.  A <BS> will delete a
+" 'shiftwidth' worth of space at the start of the line.
+set nosmarttab
 
 " When on, splitting a window will put the new window below the current one.
 set splitbelow
@@ -329,8 +339,12 @@ set tabstop=2
 " after white space to get this width.
 set textwidth=80
 
+" When on, the title of the window will be set to the value of 'titlestring' (if
+" it is not empty), or to: filename [+=-] (path) - NVIM
+set title
+
 " If this many milliseconds nothing is typed the swap file will be written to
-" disk.
+" disk. Also used for the CursorHold autocommand event.
 set updatetime=100
 
 " Completion mode that is used for the character specified with 'wildchar'. It
@@ -338,6 +352,16 @@ set updatetime=100
 " for each consecutive use of 'wildchar'. The first part specifies the behavior
 " for the first use of 'wildchar', The second part for the second use, etc.
 set wildmode=longest:full
+
+" A list of words that change how command line completion is done.
+"   tagfile When using CTRL-D to list matching tags, the kind of tag and the
+"           file of the tag is listed.  Only one match is displayed per line.
+"           Often used tag kinds are:
+"             d #define
+"             f function
+"   pum     Display the completion matches using the popupmenu in the same style
+"           as the |ins-completion-menu|.
+set wildoptions=pum
 
 " key bindings {{{2
 
