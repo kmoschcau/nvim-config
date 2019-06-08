@@ -25,6 +25,7 @@
   "java.completion.importOrder": [
     "com",
     "java",
+    "javassist",
     "javax",
     "org"
   ],
