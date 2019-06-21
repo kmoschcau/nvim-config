@@ -385,6 +385,7 @@ nmap     <silent>       <C-s>t     <Plug>(coc-type-definition)
 nmap     <silent>       <C-s>i     <Plug>(coc-implementation)
 nmap     <silent>       <C-s>r     <Plug>(coc-references)
 nmap     <silent>       <C-s>n     <Plug>(coc-rename)
+nmap     <silent>       <C-s>a     <Plug>(coc-codeaction)
 
 " fzf.vim | junegunn/fzf.vim {{{3
 
