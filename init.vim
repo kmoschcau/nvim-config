@@ -385,7 +385,7 @@ nmap     <silent>       <C-s>t     <Plug>(coc-type-definition)
 nmap     <silent>       <C-s>i     <Plug>(coc-implementation)
 nmap     <silent>       <C-s>r     <Plug>(coc-references)
 nmap     <silent>       <C-s>n     <Plug>(coc-rename)
-nmap     <silent>       <C-s>a     <Plug>(coc-codeaction)
+nmap     <silent>       <C-s>l     <Plug>(coc-codelens-action)
 
 " fzf.vim | junegunn/fzf.vim {{{3
 
@@ -409,6 +409,10 @@ nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 " Gundo | sjl/gundo.vim {{{3
 
 nnoremap <silent> <F5> :GundoToggle<CR>
+
+" ALE | w0rp/ale {{{3
+
+nmap <silent> <C-l>d <Plug>(ale_detail)
 
 " CSV | chrisbra/csv.vim {{{1
 
