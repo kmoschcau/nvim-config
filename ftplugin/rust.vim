@@ -1,6 +1,12 @@
 " Vim: set foldmethod=marker:
 " Rust filetype settings
 
+" general Vim settings {{{1
+" Vim options {{{2
+
+" enable syntax folding
+setlocal foldmethod=syntax
+
 " Asynchronous Lint Engine | w0rp/ale {{{1
 
 " Use cargo clippy, when it is installed.
