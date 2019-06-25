@@ -506,6 +506,11 @@ let s:h_diff_line_change =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:color_value(s:diff_changed_hue, 2),
       \   'sp':   s:material['transparent'] }
+let s:h_diff_line_change_delete =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:material['transparent'],
+      \   'bg':   s:color_value(s:diff_changed_hue, 3),
+      \   'sp':   s:material['transparent'] }
 let s:h_diff_line_delete =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
@@ -525,6 +530,11 @@ let s:h_diff_sign_change =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:neutral_hue, 1),
       \   'bg':   s:color_value(s:diff_changed_hue, 6),
+      \   'sp':   s:material['transparent'] }
+let s:h_diff_sign_change_delete =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 1),
+      \   'bg':   s:color_value(s:diff_changed_hue, 7),
       \   'sp':   s:material['transparent'] }
 let s:h_diff_sign_delete =
       \ { 'attr': 'NONE',
@@ -963,13 +973,13 @@ call s:highlight('diffRemoved', s:h_diff_delete)
 
 call s:highlight('SignifySignAdd', s:h_diff_sign_add)
 call s:highlight('SignifySignChange', s:h_diff_sign_change)
-call s:highlight('SignifySignChangeDelete', s:h_diff_sign_text)
+call s:highlight('SignifySignChangeDelete', s:h_diff_sign_change_delete)
 call s:highlight('SignifySignDelete', s:h_diff_sign_delete)
 call s:highlight('SignifySignDeleteFirstLine', s:h_diff_sign_delete)
 
 call s:highlight('SignifyLineAdd', s:h_diff_line_add)
 call s:highlight('SignifyLineChange', s:h_diff_line_change)
-call s:highlight('SignifyLineChangeDelete', s:h_diff_line_text)
+call s:highlight('SignifyLineChangeDelete', s:h_diff_line_change_delete)
 call s:highlight('SignifyLineDelete', s:h_diff_line_delete)
 call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
 
