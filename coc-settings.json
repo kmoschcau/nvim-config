@@ -31,7 +31,7 @@
   ],
   "java.errors.incompleteClasspath.severity": "error",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-  "java.home": "/opt/jdk1.8.0_202-x64",
+  "java.home": "/opt/jdk-12.0.1",
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
