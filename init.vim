@@ -433,15 +433,6 @@ let g:markdown_composer_autostart = 0
 " previous-history instead of down and up.
 let g:fzf_history_dir = '~/.local/share/fzf/history'
 
-" ludovicchabant/vim-gutentags {{{1
-
-" Disable Gutentags by default.
-let g:gutentags_enable = 0
-
-" Define Advanced Commands for Gutentags.
-" (Enable Gutentags on demand with :GutentagsToggleEnabled)
-let g:gutentags_define_advanced_commands = 1
-
 " Signify | mhinz/vim-signify {{{1
 
 " Which VCS to check for
