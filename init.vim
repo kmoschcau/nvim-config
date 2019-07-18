@@ -38,6 +38,7 @@ endfunction
 
 " Make sure you use single quotes
 
+Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ap/vim-css-color'
