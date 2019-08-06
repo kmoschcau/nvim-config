@@ -38,6 +38,23 @@ endfunction
 
 " Make sure you use single quotes
 
+" Plugins which do not work under Windows (yet).
+if !has('win32')
+  Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
+  Plug 'itmammoth/run-rspec.vim'
+  Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
+  Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
+endif
+
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'NLKNguyen/vim-maven-syntax'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -46,27 +63,14 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'dag/vim-fish'
 Plug 'embear/vim-localvimrc'
-Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
 Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'infoslack/vim-docker'
-Plug 'itmammoth/run-rspec.vim'
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'lepture/vim-velocity'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mhinz/vim-signify'
-Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'noprompt/vim-yardoc'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
