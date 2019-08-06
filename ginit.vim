@@ -13,3 +13,5 @@ endif
 " letters which describes what components and options of the GUI should be used.
 " TODO: test with Ubuntu gui
 set guioptions=cimgT
+
+colorscheme material
