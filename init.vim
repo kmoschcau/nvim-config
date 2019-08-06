@@ -234,8 +234,10 @@ set number
 set pumblend=20
 
 " Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
-" value will be used.
-set shiftwidth=0
+" value will be used. Setting this independently from 'tabstop' allows for tabs
+" to be a certain width in characters, but still only indent 'shiftwidth' with
+" spaces.
+set shiftwidth=2
 
 " String to put at the start of lines that have been wrapped.
 set showbreak=↪
