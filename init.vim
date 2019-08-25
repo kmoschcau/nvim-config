@@ -6,7 +6,7 @@ scriptencoding=utf-8
 if has('win32')
   " set the paths for the python executables (installed with chocolatey)
   let g:python_host_prog  = 'C:/Python27/python'
-  let g:python3_host_prog = 'C:/Python36/python'
+  let g:python3_host_prog = 'C:/Python37/python'
 else
   if executable(expand('$HOME/.pyenv/versions/neovim2/bin/python'))
     let g:python_host_prog  = expand('$HOME/.pyenv/versions/neovim2/bin/python')
