@@ -62,6 +62,7 @@ Plug 'ap/vim-css-color'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chrisbra/csv.vim'
 Plug 'dag/vim-fish'
+Plug 'dense-analysis/ale'
 Plug 'embear/vim-localvimrc'
 Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
@@ -92,7 +93,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-ruby/vim-ruby'
-Plug 'w0rp/ale'
 
 " }}}2
 
@@ -428,6 +428,32 @@ nmap <silent> <C-l>d <Plug>(ale_detail)
 " do not conceal delimiters
 let g:csv_no_conceal = 1
 
+" Asynchronous Lint Engine | dense-analysis/ale {{{1
+
+" This variable defines the format of the echoed message. The `%s` is the error
+" message itself, and it can contain the following handlers:
+" - `%linter%` for linter's name
+" - `%severity%` for the type of severity
+let g:ale_echo_msg_format = '%linter%: %severity% - %s'
+
+" The sign for errors in the sign gutter.
+let g:ale_sign_error = '‼ '
+
+" The sign for "info" markers in the sign gutter.
+let g:ale_sign_info = '¡ '
+
+" The sign for style errors in the sign gutter.
+let g:ale_sign_style_error = '‼S'
+
+" The sign for style warnings in the sign gutter.
+let g:ale_sign_style_warning = '!S'
+
+" The sign for warnings in the sign gutter.
+let g:ale_sign_warning = '! '
+
+" Enable the virtualtext error display.
+let g:ale_virtualtext_cursor = 1
+
 " vim-markdown-composer | euclio/vim-markdown-composer {{{1
 
 " Whether the server should automatically start when a markdown file is opened.
@@ -606,28 +632,3 @@ let g:ruby_fold = 1
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
 
-" Asynchronous Lint Engine | w0rp/ale {{{1
-
-" This variable defines the format of the echoed message. The `%s` is the error
-" message itself, and it can contain the following handlers:
-" - `%linter%` for linter's name
-" - `%severity%` for the type of severity
-let g:ale_echo_msg_format = '%linter%: %severity% - %s'
-
-" The sign for errors in the sign gutter.
-let g:ale_sign_error = '‼ '
-
-" The sign for "info" markers in the sign gutter.
-let g:ale_sign_info = '¡ '
-
-" The sign for style errors in the sign gutter.
-let g:ale_sign_style_error = '‼S'
-
-" The sign for style warnings in the sign gutter.
-let g:ale_sign_style_warning = '!S'
-
-" The sign for warnings in the sign gutter.
-let g:ale_sign_warning = '! '
-
-" Enable the virtualtext error display.
-let g:ale_virtualtext_cursor = 1
