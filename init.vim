@@ -229,6 +229,9 @@ set list
 " separated list of string settings.
 set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
 
+" Enables mouse support.
+set mouse=a
+
 " Print the line number in front of each line.
 set number
 
