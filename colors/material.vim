@@ -276,8 +276,8 @@ let s:material =
 " Hue used for most of the editor background and framing, should be subtle.
 let s:neutral_hue = get(g:, 'material_neutral_hue', 'blue_grey')
 
-" Hue used as the primary accent and normal mode.
-let s:primary_hue = get(g:, 'material_primary_hue', 'teal')
+" Hue used as the primary accent for currently interacted with elements.
+let s:primary_hue = get(g:, 'material_primary_hue', 'cyan')
 
 " Diff hues {{{3
 " Hue used for added diff
@@ -445,7 +445,7 @@ let s:h_strong_framing_with_fg =
 let s:h_status_line =
       \ { 'attr': 'bold',
       \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('cyan', 4, 'accent'),
+      \   'bg':   s:color_value(s:primary_hue, 4, 'accent'),
       \   'sp':   s:material['transparent'] }
 let s:h_status_line_nc =
       \ { 'attr': 'NONE',
@@ -477,12 +477,12 @@ let s:h_cursorlines_num =
 let s:h_cursor =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('cyan', 6),
+      \   'bg':   s:color_value(s:primary_hue, 6),
       \   'sp':   s:material['transparent'] }
 let s:h_cursor_unfocused =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('cyan', 3),
+      \   'bg':   s:color_value(s:primary_hue, 3),
       \   'sp':   s:material['transparent'] }
 
 " Diff related {{{3
@@ -670,7 +670,7 @@ let s:h_inc_search =
 let s:h_match_paren =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('cyan', 3),
+      \   'bg':   s:color_value('teal', 3),
       \   'sp':   s:material['transparent'] }
 
 " Testing {{{3
