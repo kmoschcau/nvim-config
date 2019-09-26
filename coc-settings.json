@@ -29,6 +29,7 @@
     "javax",
     "org"
   ],
+  "java.completion.overwrite": false,
   "java.errors.incompleteClasspath.severity": "error",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.home": "/usr/lib/jvm/java-8-openjdk-amd64/",
