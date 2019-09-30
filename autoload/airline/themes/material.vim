@@ -1,7 +1,7 @@
 " Vim: set foldmethod=marker:
 " -----------------------------------------------------------------------------
 " File:          material.vim
-" Description:   The airline implementation of the configurable matieral theme
+" Description:   The airline implementation of the configurable material theme
 " Author:        Kai Moschcau <mail@kmoschcau.de>
 " -----------------------------------------------------------------------------
 
