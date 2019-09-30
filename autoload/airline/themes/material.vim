@@ -15,6 +15,8 @@ function! g:airline#themes#material#refresh()
         \   g:airline#themes#get_highlight('Airline2'),
         \   g:airline#themes#get_highlight('Airline3')
         \ )
+  let g:airline#themes#material#palette.inactive.airline_term =
+        \ g:airline#themes#get_highlight('Airline3')
   let g:airline#themes#material#palette.inactive_modified =
         \ copy(g:airline#themes#material#palette.inactive)
   let g:airline#themes#material#palette.inactive_modified.airline_c =
@@ -28,6 +30,8 @@ function! g:airline#themes#material#refresh()
         \   g:airline#themes#get_highlight('Airline2'),
         \   g:airline#themes#get_highlight('Airline3')
         \ )
+  let g:airline#themes#material#palette.normal.airline_term =
+        \ g:airline#themes#get_highlight('Airline3')
   let g:airline#themes#material#palette.normal.airline_warning =
         \ g:airline#themes#get_highlight('AirlineWarning')
   let g:airline#themes#material#palette.normal.airline_error =
@@ -44,6 +48,8 @@ function! g:airline#themes#material#refresh()
         \ g:airline#themes#get_highlight('AirlineInsert')
   let g:airline#themes#material#palette.insert.airline_z =
         \ g:airline#themes#get_highlight('AirlineInsert')
+  let g:airline#themes#material#palette.insert.airline_term =
+        \ g:airline#themes#get_highlight('Airline3')
   let g:airline#themes#material#palette.insert.airline_warning =
         \ g:airline#themes#get_highlight('AirlineWarning')
   let g:airline#themes#material#palette.insert.airline_error =
@@ -60,6 +66,8 @@ function! g:airline#themes#material#refresh()
         \ g:airline#themes#get_highlight('AirlineReplace')
   let g:airline#themes#material#palette.replace.airline_z =
         \ g:airline#themes#get_highlight('AirlineReplace')
+  let g:airline#themes#material#palette.replace.airline_term =
+        \ g:airline#themes#get_highlight('Airline3')
   let g:airline#themes#material#palette.replace.airline_warning =
         \ g:airline#themes#get_highlight('AirlineWarning')
   let g:airline#themes#material#palette.replace.airline_error =
@@ -76,6 +84,8 @@ function! g:airline#themes#material#refresh()
         \ g:airline#themes#get_highlight('AirlineVisual')
   let g:airline#themes#material#palette.visual.airline_z =
         \ g:airline#themes#get_highlight('AirlineVisual')
+  let g:airline#themes#material#palette.visual.airline_term =
+        \ g:airline#themes#get_highlight('Airline3')
   let g:airline#themes#material#palette.visual.airline_warning =
         \ g:airline#themes#get_highlight('AirlineWarning')
   let g:airline#themes#material#palette.visual.airline_error =
