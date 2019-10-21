@@ -32,7 +32,7 @@
   "java.completion.overwrite": false,
   "java.errors.incompleteClasspath.severity": "error",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-  "java.home": "/usr/lib/jvm/java-8-openjdk-amd64/",
+  "java.home": "/usr/lib/jvm/default/",
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
