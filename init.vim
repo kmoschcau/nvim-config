@@ -1,109 +1,132 @@
 " Vim: set foldmethod=marker:
+" Sets the character encoding used inside Vim.
+set encoding=utf-8
 scriptencoding=utf-8
+
+" tmux specific settings {{{1
+" if in tmux
+if !has('nvim') && &term =~# '^tmux'
+  " set the terminal to an xterm color terminal
+  set term=xterm-256color
+endif
 
 " path settings {{{1
 
-if has('win32')
-  " set the paths for the python executables (installed with chocolatey)
-  let g:python_host_prog  = 'C:/Python27/python'
-  let g:python3_host_prog = 'C:/Python37/python'
-else
-  if executable(expand('$HOME/.pyenv/versions/neovim2/bin/python'))
-    let g:python_host_prog  = expand('$HOME/.pyenv/versions/neovim2/bin/python')
+" set the paths for python executables in neovim
+if has('nvim')
+  if has('win32')
+    let s:python2_path = expand('C:/Python27/python')
+    let s:python3_path = expand('C:/Python37/python')
+  else
+    let s:python2_path = expand('$HOME/.pyenv/versions/neovim2/bin/python')
+    let s:python3_path = expand('$HOME/.pyenv/versions/neovim3/bin/python')
   endif
-  if executable(expand('$HOME/.pyenv/versions/neovim3/bin/python'))
-    let g:python3_host_prog = expand('$HOME/.pyenv/versions/neovim3/bin/python')
+  if executable(s:python2_path)
+    let g:python_host_prog  = s:python2_path
+  endif
+  if executable(s:python3_path)
+    let g:python3_host_prog = s:python3_path
   endif
 endif
 
 " vim-plug | junegunn/vim-plug {{{1
+try
 
-" Specify a directory for plugins
-" - Avoid using standard Vim directory names like 'plugin'
-if has('win32')
-  call plug#begin('~/AppData/Local/nvim-data/plugged')
-else
-  call plug#begin('~/.local/share/nvim/plugged')
-endif
-
-" build helper functions {{{2
-" vim-markdown-composer helper function {{{3
-function! BuildComposer(info)
-  if a:info.status !=# 'unchanged' || a:info.force
-    !cargo build --release
+  " Specify a directory for plugins
+  " - Avoid using standard Vim directory names like 'plugin'
+  if has('nvim')
+    if has('win32')
+      call plug#begin('~/AppData/Local/nvim-data/plugged')
+    else
+      call plug#begin('~/.local/share/nvim/plugged')
+    endif
+  else
+    call plug#begin('~/.vim/plugged')
   endif
-endfunction
 
-" general plugins {{{2
+  " build helper functions {{{2
+  " vim-markdown-composer helper function {{{3
+  function! BuildComposer(info)
+    if a:info.status !=# 'unchanged' || a:info.force
+      !cargo build --release
+    endif
+  endfunction
 
-" Make sure you use single quotes
+  " general plugins {{{2
 
-" Plugins which do not work under Windows (yet).
-if !has('win32')
-  Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
-  Plug 'itmammoth/run-rspec.vim'
-  Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
-  Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
-endif
+  " Make sure you use single quotes
 
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'NLKNguyen/vim-maven-syntax'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ap/vim-css-color'
-Plug 'chaoren/vim-wordmotion'
-Plug 'chrisbra/csv.vim'
-Plug 'dag/vim-fish'
-Plug 'dense-analysis/ale'
-Plug 'embear/vim-localvimrc'
-Plug 'godlygeek/tabular'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'infoslack/vim-docker'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'lepture/vim-velocity'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'mhinz/vim-signify'
-Plug 'noprompt/vim-yardoc'
-Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
-Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'sjl/gundo.vim'
-Plug 'slim-template/vim-slim'
-Plug 'tmhedberg/SimpylFold'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-ruby/vim-ruby'
+  " Plugins which do not work under Windows (yet).
+  if has('unix')
+    Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
+    Plug 'itmammoth/run-rspec.vim'
+    Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
+  endif
 
-" }}}2
+  Plug 'Matt-Deacalion/vim-systemd-syntax'
+  Plug 'NLKNguyen/vim-maven-syntax'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'ap/vim-css-color'
+  Plug 'chaoren/vim-wordmotion'
+  Plug 'chrisbra/csv.vim'
+  Plug 'dag/vim-fish'
+  Plug 'dense-analysis/ale'
+  Plug 'embear/vim-localvimrc'
+  Plug 'godlygeek/tabular'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'infoslack/vim-docker'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+  Plug 'lepture/vim-velocity'
+  Plug 'martinda/Jenkinsfile-vim-syntax'
+  Plug 'mhinz/vim-signify'
+  Plug 'noprompt/vim-yardoc'
+  Plug 'pangloss/vim-javascript'
+  Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
+  Plug 'rust-lang/rust.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'sjl/gundo.vim'
+  Plug 'slim-template/vim-slim'
+  Plug 'tmhedberg/SimpylFold'
+  Plug 'tmux-plugins/vim-tmux'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-ruby/vim-ruby'
 
-" Initialize plugin system
-call plug#end()
+  " }}}2
+
+  " Initialize plugin system
+  call plug#end()
+catch /^Vim(call):E\%(117\|492\)/
+  echom 'vim-plug is not installed.'
+endtry
 
 " general Vim settings {{{1
 " non option settings {{{2
 
 " Switch on syntax highlighting.
-syntax enable
+if has('nvim') || has('syntax')
+  syntax enable
+endif
 
 " appearance settings {{{2
 
@@ -112,7 +135,7 @@ syntax enable
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
 let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
-if s:terminfo_colors ==# '256'
+if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
   set termguicolors
 endif
 
@@ -136,25 +159,60 @@ let g:java_highlight_debug = 1
 set background=light
 
 if s:terminfo_colors ==# '256'
-  colorscheme material
+  try
+    colorscheme material
+  catch /^Vim(colorscheme):E185/
+    echom '"material" colorscheme not found, using "morning" instead.'
+    silent! colorscheme morning
+  endtry
 else
-  colorscheme morning
+  silent! colorscheme morning
+endif
+
+" Vim terminal options {{{2
+
+" When Vim enters Insert mode the 't_SI' escape sequence is sent. When Vim
+" enters Replace mode the 't_SR' escape sequence is sent if it is set, otherwise
+" 't_SI' is sent. When leaving Insert mode or Replace mode 't_EI' is used. This
+" can be used to change the shape or color of the cursor in Insert or Replace
+" mode. These are not standard termcap/terminfo entries, you need to set them
+" yourself.
+" Example for an xterm, this changes the color of the cursor:
+"   if &term =~ "xterm"
+"     let &t_SI = "\<Esc>]12;purple\x7"
+"     let &t_SR = "\<Esc>]12;red\x7"
+"     let &t_EI = "\<Esc>]12;blue\x7"
+"   endif
+" NOTE: When Vim exits the shape for Normal mode will remain.  The shape from
+" before Vim started will not be restored.
+if !has('nvim') && &term =~? 'xterm'
+  let &t_SI = "\<Esc>[5 q"
+  if has('t_SR')
+    let &t_SR = "\<Esc>[3 q"
+  endif
+  let &t_EI = "\<Esc>[1 q"
 endif
 
 " Vim options {{{2
 
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
-set breakindent
+if has('nvim') || has('linebreak')
+  set breakindent
+endif
 
 " Settings for 'breakindent'. It can consist of the following optional items and
 " must be separated by a comma.
-set breakindentopt=shift:2,sbr
+if has('nvim') || has('breakindentopt')
+  set breakindentopt=shift:2,sbr
+endif
 
 " A comma separated list of screen columns that are highlighted with
 " hl-ColorColumn. The screen column can be an absolute number, or a number
 " preceded with '+' or '-', which is added to or subtracted from 'textwidth'.
-set colorcolumn=+1
+if has('nvim') || has('syntax')
+  set colorcolumn=+1
+endif
 
 " A comma separated list of options for Insert mode completion.
 "
@@ -181,7 +239,13 @@ set colorcolumn=+1
 
 "   noselect Do not select a match in the menu, force the user to select one
 "            from the menu. Only works in combination with "menu" or "menuone".
-set completeopt=menu,menuone,preview,noinsert,noselect
+if has('nvim') || has('insert_expand')
+  if has('patch-7.4.775')
+    set completeopt=menu,menuone,preview,noinsert,noselect
+  else
+    set completeopt=menu,menuone,preview
+  endif
+endif
 
 " Do include whitespace after a word with a 'cw' command to be more in line with
 " 'chaoren/vim-wordmotion'.
@@ -194,7 +258,9 @@ set cpoptions+=n
 set expandtab
 
 " Characters to fill the statuslines and vertical separators.
-set fillchars=diff:\ ,vert:\ ,fold:-
+if has('nvim') || has('folding')
+  set fillchars=diff:\ ,vert:\ ,fold:-
+endif
 
 " This is a sequence of letters which describes how automatic formatting is to
 " be done. See fo-table.
@@ -205,20 +271,36 @@ set formatoptions=croqlj
 " The option is a command separated list of parts. Each part consists of a
 " mode-list and an argument-list:
 "   mode-list:argument-list
-set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
-            \,v-sm:block-blinkwait0
-            \,i-ci:ver75-blinkwait1000-blinkon500-blinkoff500
-            \,ve:ver100-blinkwait0
-            \,r-cr:hor75-blinkwait1000-blinkon500-blinkoff500
-            \,o:hor100-blinkwait0
+if has('nvim') || has('gui')
+  set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
+              \,v-sm:block-blinkwait0
+              \,i-ci:ver75-blinkwait1000-blinkon500-blinkoff500
+              \,ve:ver100-blinkwait0
+              \,r-cr:hor75-blinkwait1000-blinkon500-blinkoff500
+              \,o:hor100-blinkwait0
+endif
+
+" When there is a previous search pattern, highlight all its matches.
+if has('nvim') || has('extra_search')
+  set hlsearch
+endif
 
 " Insert two spaces after a '.', '?' and '!' with a join command. Otherwise only
 " one space is inserted.
 set nojoinspaces
 
+" The value of this option influences when the last window will have a status
+" line:
+"   0: never
+"   1: only if there are at least two windows
+"   2: always
+set laststatus=2
+
 " If on, Vim will wrap long lines at a character in 'breakat' rather than at the
 " last character that fits on the screen.
-set linebreak
+if has('nvim') || has('linebreak')
+  set linebreak
+endif
 
 " List mode: Show tabs as CTRL-I is displayed, display $ after end of line.
 " Useful to see the difference between tabs and spaces and for trailing blanks.
@@ -227,10 +309,16 @@ set list
 
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
-set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
+if has('nvim') || has('multi_byte_encoding')
+  set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
+else
+  set listchars=tab:>-,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+endif
 
 " Enables mouse support.
-set mouse=a
+if has('nvim') || has('mouse')
+  set mouse=a
+endif
 
 " Print the line number in front of each line.
 set number
@@ -238,7 +326,12 @@ set number
 " Enables pseudo-transparency for the |popup-menu|. Valid values are in the
 " range of 0 for fully opaque popupmenu (disabled) to 100 for fully transparent
 " background. Values between 0-30 are typically most useful.
-set pumblend=20
+if has('nvim')
+  set pumblend=20
+endif
+
+" Set modeline enabled, no matter what the system config says.
+set modeline
 
 " Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
 " value will be used. Setting this independently from 'tabstop' allows for tabs
@@ -247,10 +340,18 @@ set pumblend=20
 set shiftwidth=2
 
 " String to put at the start of lines that have been wrapped.
-set showbreak=↪
+if has('nvim') || has('linebreak')
+  if has('multi_byte_encoding')
+    set showbreak=↪
+  else
+    set showbreak=>
+  endif
+endif
 
 " Show (partial) command in the last line of the screen.
-set showcmd
+if has('nvim') || has('showcmd') || has('cmdline_info')
+  set showcmd
+endif
 
 " If in Insert, Replace or Visual mode put a message on the last line.
 set noshowmode
@@ -267,83 +368,82 @@ set splitbelow
 set splitright
 
 " statusline {{{3
-" helper methods {{{4
-" current mode {{{5
-" Dictionary: take mode() input -> longer notation of current mode
-" mode() is defined by Vim
-let g:currentmode = { 'n'  : 'NORMAL',
-                    \ 'no' : 'N-OPERATOR PENDING',
-                    \ 'v'  : 'VISUAL',
-                    \ 'V'  : 'V-LINE',
-                    \ '' : 'V-BLOCK',
-                    \ 's'  : 'SELECT',
-                    \ 'S'  : 'S-LINE',
-                    \ '' : 'S-BLOCK',
-                    \ 'i'  : 'INSERT',
-                    \ 'R'  : 'REPLACE',
-                    \ 'Rv' : 'V-REPLACE',
-                    \ 'c'  : 'COMMAND',
-                    \ 'cv' : 'VIM EX',
-                    \ 'ce' : 'EX',
-                    \ 'r'  : 'PROMPT',
-                    \ 'rm' : 'MORE',
-                    \ 'r?' : 'CONFIRM',
-                    \ '!'  : 'SHELL',
-                    \ 't'  : 'TERMINAL' }
+if has('nvim') || has('statusline')
+  " helper methods {{{4
+  " current mode {{{5
+  " Dictionary: take mode() input -> longer notation of current mode
+  " mode() is defined by Vim
+  let g:currentmode = { 'n'  : 'NORMAL',
+                      \ 'no' : 'N-OPERATOR PENDING',
+                      \ 'v'  : 'VISUAL',
+                      \ 'V'  : 'V-LINE',
+                      \ '' : 'V-BLOCK',
+                      \ 's'  : 'SELECT',
+                      \ 'S'  : 'S-LINE',
+                      \ '' : 'S-BLOCK',
+                      \ 'i'  : 'INSERT',
+                      \ 'R'  : 'REPLACE',
+                      \ 'Rv' : 'V-REPLACE',
+                      \ 'c'  : 'COMMAND',
+                      \ 'cv' : 'VIM EX',
+                      \ 'ce' : 'EX',
+                      \ 'r'  : 'PROMPT',
+                      \ 'rm' : 'MORE',
+                      \ 'r?' : 'CONFIRM',
+                      \ '!'  : 'SHELL',
+                      \ 't'  : 'TERMINAL' }
 
-" Function: return current mode
-" abort -> function will abort soon as error detected
-function! ModeCurrent() abort
-  return get(g:currentmode, mode())
-endfunction
-" }}}4
+  " Function: return current mode
+  " abort -> function will abort soon as error detected
+  function! ModeCurrent() abort
+    return get(g:currentmode, mode())
+  endfunction
+  " }}}4
 
-" When nonempty, this option determines the content of the status line.
+  " When nonempty, this option determines the content of the status line.
 
-" first, empty the statusline
-set statusline=
+  " first, empty the statusline
+  set statusline=
 
-" show the current mode
-" left justified, minimum 7
-let &statusline .= ' %-7.{ModeCurrent()}'
+  " show the current mode
+  " left justified, minimum 7
+  let &statusline .= ' %-7.{ModeCurrent()}'
 
-" group for buffer flags
-" %h: Help buffer flag, text is "[help]".
-" %w: Preview window flag, text is "[Preview]".
-" %q: "[Quickfix List]", "[Location List]" or empty.
-" left justified
-let &statusline .= ' %-(%h%w%q%)'
+  " group for buffer flags
+  " %h: Help buffer flag, text is "[help]".
+  " %w: Preview window flag, text is "[Preview]".
+  " %q: "[Quickfix List]", "[Location List]" or empty.
+  " left justified
+  let &statusline .= ' %-(%h%w%q%)'
 
-" Path to the file in the buffer, as typed or relative to current directory
-" left justified, maximum 100
-let &statusline .= ' %-.100f'
+  " Path to the file in the buffer, as typed or relative to current directory
+  " left justified, maximum 100
+  let &statusline .= ' %-.100f'
 
-" Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
-let &statusline .= '%m'
+  " Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
+  let &statusline .= '%m'
 
-" Separation point between alignment sections. Each section will be separated by
-" an equal number of spaces. No width fields allowed.
-let &statusline .= '%='
+  " Separation point between alignment sections. Each section will be separated by
+  " an equal number of spaces. No width fields allowed.
+  let &statusline .= '%='
 
-" Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
-" maximum 20
-let &statusline .= '%.20y '
+  " Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
+  " maximum 20
+  let &statusline .= '%.20y '
 
-" Percentage through file in lines as in CTRL-G.
-" minimum 3, followed by a literal percent sign
-let &statusline .= '%3p%% '
+  " Percentage through file in lines as in CTRL-G.
+  " minimum 3, followed by a literal percent sign
+  let &statusline .= '%3p%% '
 
-" %l: Line number.
-" %L: Number of lines in buffer.
-let &statusline .= '%l/%L '
+  " %l: Line number.
+  " %L: Number of lines in buffer.
+  let &statusline .= '%l/%L '
 
-" Column number and virtual column number, if diffrent.
-" preceded by a literal ': ', minimum 5
-let &statusline .= ': %5(%c%V%) '
+  " Column number and virtual column number, if different.
+  " preceded by a literal ': ', minimum 5
+  let &statusline .= ': %5(%c%V%) '
+endif
 " }}}3
-
-" Number of spaces that a <Tab> in the file counts for.
-set tabstop=2
 
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
@@ -351,7 +451,9 @@ set textwidth=80
 
 " When on, the title of the window will be set to the value of 'titlestring' (if
 " it is not empty), or to: filename [+=-] (path) - NVIM
-set title
+if has('nvim') || has('title')
+  set title
+endif
 
 " If this many milliseconds nothing is typed the swap file will be written to
 " disk. Also used for the CursorHold autocommand event.
@@ -371,7 +473,11 @@ set wildmode=longest:full
 "             f function
 "   pum     Display the completion matches using the popupmenu in the same style
 "           as the |ins-completion-menu|.
-set wildoptions=pum
+if has('nvim') || has('wildignore')
+  if has('nvim')
+    set wildoptions=pum
+  endif
+endif
 
 " key bindings {{{2
 
@@ -634,4 +740,3 @@ let g:ruby_fold = 1
 
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
-
