@@ -251,9 +251,6 @@ endif
 " 'chaoren/vim-wordmotion'.
 set cpoptions-=_
 
-" Use the column for 'number' and 'relativenumber' for wrapped text as well.
-set cpoptions+=n
-
 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
 
