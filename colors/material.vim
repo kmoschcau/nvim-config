@@ -375,7 +375,7 @@ let s:h_normal =
       \   'sp':   s:material['transparent'] }
 let s:h_normal_light =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'fg':   s:color_value(s:neutral_hue, 3),
       \   'bg':   s:color_value(s:neutral_hue, 1),
       \   'sp':   s:material['transparent'] }
 let s:h_special_key =
