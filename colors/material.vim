@@ -992,7 +992,7 @@ call s:highlight('Airline3', s:h_airline_3)
 call s:highlight('AirlineNormal', s:h_status_line)
 call s:highlight('AirlineInsert', s:h_airline_insert)
 call s:highlight('AirlineReplace', s:h_airline_replace)
-call s:highlight('AirlineVisual', s:h_cursorlines)
+call s:highlight('AirlineVisual', s:h_visual)
 
 call s:highlight('AirlineWarning', s:h_warning_inverted)
 call s:highlight('AirlineError', s:h_error_inverted)
