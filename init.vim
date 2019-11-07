@@ -307,9 +307,9 @@ set list
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
 if has('nvim') || has('multi_byte_encoding')
-  set listchars=tab:⊢-,trail:·,extends:›,precedes:‹,conceal:◌,nbsp:⨯
+  set listchars=tab:⊳\ ⊣,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
 else
-  set listchars=tab:>-,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+  set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
 endif
 
 " Enables mouse support.
