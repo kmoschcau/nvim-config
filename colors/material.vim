@@ -841,7 +841,7 @@ call s:highlight('PmenuThumb', s:h_popup_thumb)
 
 " Editor window highlights {{{2
 " Normal text {{{3
-call s:highlight('NonText', s:h_normal)
+call s:highlight('NonText', s:h_normal_light)
 call s:highlight('Normal', s:h_normal)
 call s:highlight('NormalNC', s:h_normal)
 
