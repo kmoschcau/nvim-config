@@ -112,6 +112,9 @@ try
   Plug 'vim-airline/vim-airline'
   Plug 'vim-ruby/vim-ruby'
 
+  Plug 'ryanoasis/vim-devicons' " load after NERDTree, vim-airline and
+                                " nerdtree-git-plugin
+
   " }}}2
 
   " Initialize plugin system
@@ -607,6 +610,20 @@ let g:vim_markdown_folding_style_pythonic = 1
 
 " Change the indent level of new list items to two spaces.
 let g:vim_markdown_new_list_item_indent = 2
+
+" vim-devicons | ryanoasis/vim-devicons {{{1
+
+" whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 1
+
+" turn on/off file node glyph decorations (not particularly useful)
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+
+" enable folder/directory glyph flag (disabled by default with 0)
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+" enable open and close folder/directory glyph flags (disabled by default with 0)
+let g:DevIconsEnableFoldersOpenClose = 1
 
 " NERD tree | scrooloose/nerdtree {{{1
 
