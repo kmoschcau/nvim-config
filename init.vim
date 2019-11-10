@@ -114,6 +114,7 @@ try
 
   Plug 'ryanoasis/vim-devicons' " load after NERDTree, vim-airline and
                                 " nerdtree-git-plugin
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " needs vim-devicons
 
   " }}}2
 
