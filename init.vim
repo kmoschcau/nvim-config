@@ -658,6 +658,11 @@ let g:gundo_help = 0
 " be useful on large files and undo trees to speed up Gundo.
 let g:gundo_auto_preview = 0
 
+" vim-nerdtree-syntax-highlight | tiagofumo/vim-nerdtree-syntax-highlight {{{1
+
+" enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFolders = 1
+
 " SimpylFold | tmhedberg/SimpylFold {{{1
 
 " Preview docstrings in fold text.
