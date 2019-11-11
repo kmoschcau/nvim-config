@@ -14,6 +14,10 @@ setlocal tags+=~/.vim/tags/java
 " after white space to get this width.
 setlocal textwidth=100
 
+" If this many milliseconds nothing is typed the swap file will be written to
+" disk. Also used for the CursorHold autocommand event.
+set updatetime=4000
+
 " key bindings {{{2
 
 nnoremap <silent> <F4> :CocCommand java.action.organizeImports<cr>
