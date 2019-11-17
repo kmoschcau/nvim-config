@@ -77,6 +77,7 @@ try
   Plug 'NLKNguyen/vim-maven-syntax'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ap/vim-css-color'
+  Plug 'cespare/vim-toml'
   Plug 'chaoren/vim-wordmotion'
   Plug 'chrisbra/csv.vim'
   Plug 'dag/vim-fish'
