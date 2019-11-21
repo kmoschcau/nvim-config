@@ -599,6 +599,14 @@ let g:signify_sign_change = '~'
 let g:signify_cursorhold_normal = 1
 let g:signify_cursorhold_insert = 1
 
+" coc.nvim | neoclide/coc.nvim {{{1
+
+augroup CocNvim_InitVim
+  autocmd!
+  " Show method signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
 " vim-javascript | pangloss/vim-javascript {{{1
 
 " Enable JSDoc syntax highlighting.
@@ -629,9 +637,9 @@ let g:DevIconsEnableFoldersOpenClose = 1
 
 " NERD tree | scrooloose/nerdtree {{{1
 
-" Exit Vim when the only open window is NERD tree.
 augroup NERDTree_InitVim
   autocmd!
+  " Exit Vim when the only open window is NERD tree.
   autocmd BufEnter *
       \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
       \ |   quit
