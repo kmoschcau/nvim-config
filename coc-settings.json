@@ -37,6 +37,7 @@
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
   "python.disableInstallationCheck": true,
+  "python.linting.enabled": false,
   "solargraph.checkGemVersion": false,
   "solargraph.completion": true,
   "solargraph.definitions": true,
