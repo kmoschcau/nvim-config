@@ -754,6 +754,11 @@ let g:airline#extensions#hunks#non_zero_only = 1
 "   indentation and spaces for alignment
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
+" configure, which filetypes have special treatment of /* */ comments,
+" matters for mix-indent-file algorithm
+let g:airline#extensions#c_like_langs =
+    \ ['arduino', 'c', 'cpp', 'cuda', 'go', 'java', 'javascript', 'ld', 'php']
+
 " vim-ruby | vim-ruby/vim-ruby {{{1
 
 " Use the "do" indentation style, since it better conforms to the Ruby style
