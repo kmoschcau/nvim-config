@@ -7,9 +7,6 @@
 " Add tags generated for gems to the tags watch list
 setlocal tags+=gems.tags
 
-" Set the foldlevel to not fold anything by default.
-setlocal foldlevel=99
-
 " appearance settings {{{2
 
 " Customize some highlight groups for noprompt/vim-yardoc.

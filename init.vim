@@ -264,6 +264,11 @@ if has('nvim') || has('folding')
   set fillchars=diff:\ ,vert:\ ,fold:-
 endif
 
+" Sets 'foldlevel' when starting to edit another buffer in a window.
+if has('nvim') || has('folding')
+  set foldlevelstart=99
+endif
+
 " This is a sequence of letters which describes how automatic formatting is to
 " be done. See fo-table.
 set formatoptions=croqlj
