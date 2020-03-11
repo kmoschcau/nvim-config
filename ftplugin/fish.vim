@@ -10,4 +10,6 @@ compiler fish
 " Vim options {{{2
 
 " Enable folding of block structures in fish.
-setlocal foldmethod=expr
+if has('nvim') || has('folding')
+  setlocal foldmethod=expr
+endif

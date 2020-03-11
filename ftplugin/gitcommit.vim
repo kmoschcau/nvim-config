@@ -5,7 +5,11 @@
 " Vim options {{{2
 
 " Add an additional color column for the summary line after 50 characters.
-setlocal colorcolumn+=51
+if has('nvim') || has('syntax')
+  setlocal colorcolumn+=51
+endif
 
 " enable syntax folding
-setlocal foldmethod=syntax
+if has('nvim') || has('folding')
+  setlocal foldmethod=syntax
+endif

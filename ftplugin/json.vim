@@ -5,4 +5,6 @@
 " Vim options {{{2
 
 " Enable folding by syntax.
-setlocal foldmethod=syntax
+if has('nvim') || has('folding')
+  setlocal foldmethod=syntax
+endif
