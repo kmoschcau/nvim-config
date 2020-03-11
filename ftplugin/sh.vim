@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " Shell filetype settings
 
 " Asynchronous Lint Engine | w0rp/ale {{{1

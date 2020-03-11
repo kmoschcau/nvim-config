@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " Git commit message file type settings
 
 " general Vim settings {{{1

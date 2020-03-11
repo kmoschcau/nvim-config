@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " Fish filetype settings
 
 " general Vim settings {{{1

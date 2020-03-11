@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " Markdown filetype settings
 
 " general Vim settings {{{1

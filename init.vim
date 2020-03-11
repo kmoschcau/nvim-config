@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker foldlevel=0
 " Sets the character encoding used inside Vim.
 set encoding=utf-8
 scriptencoding=utf-8

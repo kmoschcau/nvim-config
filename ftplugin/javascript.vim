@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " Javascript file type settings
 
 " general Vim settings {{{1
