@@ -7,9 +7,6 @@
 " enable syntax folding
 setlocal foldmethod=syntax
 
-" Add base java tags to tags watch list.
-setlocal tags+=~/.vim/tags/java
-
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
 setlocal textwidth=100
