@@ -504,10 +504,14 @@ nnoremap <F10> :call SynStack()<cr>
 
 inoremap <silent><expr> <C-space>  coc#refresh()
 nnoremap <silent>       K          :call CocAction('doHover')<cr>
-nmap     <silent>       <C-s>d     <Plug>(coc-definition)
-nmap     <silent>       <C-s>t     <Plug>(coc-type-definition)
-nmap     <silent>       <C-s>i     <Plug>(coc-implementation)
-nmap     <silent>       <C-s>r     <Plug>(coc-references)
+nnoremap <silent>       <C-s>d     :call CocAction('jumpDefinition')<cr>
+nnoremap <silent>       <C-s>D     :call CocAction('jumpDefinition', v:false)<cr>
+nnoremap <silent>       <C-s>t     :call CocAction('jumpTypeDefinition')<cr>
+nnoremap <silent>       <C-s>T     :call CocAction('jumpTypeDefinition', v:false)<cr>
+nnoremap <silent>       <C-s>i     :call CocAction('jumpImplementation')<cr>
+nnoremap <silent>       <C-s>I     :call CocAction('jumpImplementation', v:false)<cr>
+nnoremap <silent>       <C-s>r     :call CocAction('jumpReferences')<cr>
+nnoremap <silent>       <C-s>R     :call CocAction('jumpReferences', v:false)<cr>
 nmap     <silent>       <C-s>n     <Plug>(coc-rename)
 nmap     <silent>       <C-s>l     <Plug>(coc-codelens-action)
 nmap     <silent>       <C-s>f     <Plug>(coc-float-jump)
