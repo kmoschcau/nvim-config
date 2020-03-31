@@ -30,7 +30,7 @@
     "org"
   ],
   "java.completion.overwrite": false,
-  "java.errors.incompleteClasspath.severity": "error",
+  "java.errors.incompleteClasspath.severity": "ignore",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.home": "/usr/lib/jvm/default/",
   "java.implementationsCodeLens.enabled": true,
