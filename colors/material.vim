@@ -274,7 +274,7 @@ let s:material =
 " Default hue selection {{{2
 
 " Hue used for most of the editor background and framing, should be subtle.
-let s:neutral_hue = get(g:, 'material_neutral_hue', 'blue_grey')
+let s:neutral_hue = get(g:, 'material_neutral_hue', 'grey')
 
 " Hue used as the primary accent for currently interacted with elements.
 let s:primary_hue = get(g:, 'material_primary_hue', 'cyan')
@@ -424,13 +424,13 @@ let s:h_lighter_framing =
       \   'sp':   s:material['transparent'] }
 let s:h_light_framing_subtle_fg =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:color_value(s:neutral_hue, 4),
+      \   'fg':   s:color_value(s:neutral_hue, 7),
+      \   'bg':   s:color_value(s:neutral_hue, 5),
       \   'sp':   s:material['transparent'] }
 let s:h_light_framing_strong_fg =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:neutral_hue, 4),
+      \   'bg':   s:color_value(s:neutral_hue, 5),
       \   'sp':   s:material['transparent'] }
 let s:h_strong_framing_without_fg =
       \ { 'attr': 'NONE',
