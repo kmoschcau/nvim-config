@@ -375,8 +375,8 @@ let s:h_normal =
       \   'sp':   s:material['transparent'] }
 let s:h_normal_light =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 3),
-      \   'bg':   s:color_value(s:neutral_hue, 1),
+      \   'fg':   s:color_value(s:neutral_hue, 5),
+      \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 let s:h_special_key =
       \ { 'attr': 'italic',
@@ -685,7 +685,7 @@ let s:h_test =
 " Comment and linked groups
 let s:h_comment =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 5),
+      \   'fg':   s:color_value(s:neutral_hue, 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
@@ -833,17 +833,19 @@ call s:highlight('StatusLineTermNC', s:h_status_line_nc)
 
 call s:highlight('WildMenu', s:h_wild_menu)
 
-" Popup menu {{{3
+" Popup menu and floating windows {{{3
 call s:highlight('Pmenu', s:h_popup)
 call s:highlight('PmenuSel', s:h_popup_selected)
 call s:highlight('PmenuSbar', s:h_popup_scrollbar)
 call s:highlight('PmenuThumb', s:h_popup_thumb)
+call s:highlight('NormalFloat', s:h_popup)
 
 " Editor window highlights {{{2
 " Normal text {{{3
 call s:highlight('NonText', s:h_normal_light)
 call s:highlight('Normal', s:h_normal)
 call s:highlight('NormalNC', s:h_normal)
+call s:highlight('MsgArea', s:h_normal)
 
 " Cursor {{{3
 " call s:highlight('Cursor', s:h_test) " no idea what this is
@@ -890,7 +892,6 @@ call s:highlight('Question', s:h_more_msg)
 call s:highlight('WarningMsg', s:h_warning_inverted)
 
 " Syntax groups {{{2
-
 call s:highlight('Comment', s:h_comment)
 
 call s:highlight('Constant', s:h_constant)
