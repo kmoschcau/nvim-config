@@ -486,6 +486,14 @@ if has('nvim') || has('wildignore')
   endif
 endif
 
+" autocommands {{{2
+
+augroup InitVim
+  autocmd!
+  " Do not show line numbers in terminal buffers
+  autocmd TermOpen * setlocal nonumber norelativenumber
+augroup end
+
 " key bindings {{{2
 
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
