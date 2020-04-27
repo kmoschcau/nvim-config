@@ -63,14 +63,14 @@ try
     Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
     Plug 'junegunn/fzf.vim'
     Plug 'ludovicchabant/vim-gutentags'
-    Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
+    Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
+    Plug 'neoclide/coc-eslint', { 'tag' : '*' }
+    Plug 'neoclide/coc-java', { 'tag' : '*' }
+    Plug 'neoclide/coc-json', { 'tag' : '*' }
+    Plug 'neoclide/coc-python', { 'tag' : '*' }
+    Plug 'neoclide/coc-rls', { 'tag' : '*' }
+    Plug 'neoclide/coc-solargraph', { 'tag' : '*' }
+    Plug 'neoclide/coc-yaml', { 'tag' : '*' }
   endif
 
   Plug 'Matt-Deacalion/vim-systemd-syntax'
