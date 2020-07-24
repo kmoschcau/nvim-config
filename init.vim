@@ -41,7 +41,11 @@ try
       call plug#begin('~/.local/share/nvim/plugged')
     endif
   else
-    call plug#begin('~/.vim/plugged')
+    if has('win32')
+      call plug#begin('~/vimfiles/plugged')
+    else
+      call plug#begin('~/.vim/plugged')
+    endif
   endif
 
   " build helper functions {{{2
@@ -139,7 +143,11 @@ endif
 " terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
 "
 " Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
+if has('unix')
+  let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
+else
+  let s:terminfo_colors = ''
+endif
 if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
   set termguicolors
 endif
@@ -491,7 +499,11 @@ endif
 augroup InitVim
   autocmd!
   " Do not show line numbers in terminal buffers
-  autocmd TermOpen * setlocal nonumber norelativenumber
+  if has('nvim')
+    autocmd TermOpen * setlocal nonumber norelativenumber
+  else
+    autocmd TerminalOpen * setlocal nonumber norelativenumber
+  endif
 augroup end
 
 " key bindings {{{2
