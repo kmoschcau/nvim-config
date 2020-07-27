@@ -848,19 +848,19 @@ call s:highlight('NormalNC', s:h_normal)
 call s:highlight('MsgArea', s:h_normal)
 
 " Cursor {{{3
-" call s:highlight('Cursor', s:h_test) " no idea what this is
-" call s:highlight('CursorIM', s:h_test) " no idea what this is
+call s:highlight('Cursor', s:h_cursor)
+call s:highlight('CursorIM', s:h_test) " I don't really use this
 call s:highlight('CursorColumn', s:h_cursorlines)
 call s:highlight('CursorLine', s:h_cursorlines)
 call s:highlight('IncSearch', s:h_inc_search)
 call s:highlight('MatchParen', s:h_match_paren)
 call s:highlight('QuickFixLine', s:h_visual)
 call s:highlight('Search', s:h_search)
-" call s:highlight('Substitute', s:h_test) " no idea what this is
+call s:highlight('Substitute', s:h_test) " doesn't seem to work (neovim only)
 call s:highlight('TermCursor', s:h_cursor)
 call s:highlight('TermCursorNC', s:h_cursor_unfocused)
 call s:highlight('Visual', s:h_visual)
-" call s:highlight('VisualNOS', s:h_test) " no idea what this is
+call s:highlight('VisualNOS', s:h_test) " doesn't seem to work
 
 " Special character visualization {{{3
 call s:highlight('Conceal', s:h_foreground)
