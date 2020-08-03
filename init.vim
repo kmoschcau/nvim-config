@@ -300,6 +300,12 @@ if has('nvim') || has('extra_search')
   set hlsearch
 endif
 
+" "nosplit": Shows the effects of a command incrementally, as you type.
+" "split"  : Also shows partial off-screen results in a preview window.
+if has('nvim')
+  set inccommand=split
+endif
+
 " Insert two spaces after a '.', '?' and '!' with a join command. Otherwise only
 " one space is inserted.
 set nojoinspaces
