@@ -77,6 +77,7 @@ try
 
   Plug 'Matt-Deacalion/vim-systemd-syntax'
   Plug 'NLKNguyen/vim-maven-syntax'
+  Plug 'PProvost/vim-ps1'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ap/vim-css-color'
   Plug 'cespare/vim-toml'
