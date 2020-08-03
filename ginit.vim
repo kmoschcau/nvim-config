@@ -25,4 +25,7 @@ endif
 
 " This option only has an effect in the GUI version of Vim.  It is a sequence of
 " letters which describes what components and options of the GUI should be used.
-set guioptions=!cig
+set guioptions=cig
+if !has('nvim')
+  set guioptions+=!
+endif

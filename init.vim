@@ -208,6 +208,15 @@ endif
 
 " Vim options {{{2
 
+" Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.  This
+" is a list of items, separated by commas.
+set backspace=indent,eol,start
+
+" Specifies for which events the bell will not be rung. It is a comma separated
+" list of items. For each item that is present, the bell will be silenced. This
+" is most useful to specify specific events in insert mode to be silenced.
+set belloff=backspace,cursor,esc
+
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
 if has('nvim') || has('linebreak')
@@ -253,23 +262,29 @@ endif
 "   noselect Do not select a match in the menu, force the user to select one
 "            from the menu. Only works in combination with "menu" or "menuone".
 if has('nvim') || has('insert_expand')
-  if has('patch-7.4.775')
-    set completeopt=menu,menuone,preview,noinsert,noselect
+  set completeopt=menuone,preview
+  if has('textprop')
+    set completeopt+=popup
   else
-    set completeopt=menu,menuone,preview
+    set completeopt+=preview
+  endif
+  if has('patch-7.4.775')
+    set completeopt+=noinsert,noselect
   endif
 endif
 
-" Do include whitespace after a word with a 'cw' command to be more in line with
-" 'chaoren/vim-wordmotion'.
-set cpoptions-=_
+if has('nvim')
+  " Do include whitespace after a word with a 'cw' command to be more in line
+  " with 'chaoren/vim-wordmotion'. (Only in Neovim)
+  set cpoptions-=_
+endif
 
 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
 
 " Characters to fill the statuslines and vertical separators.
 if has('nvim') || has('folding')
-  set fillchars=diff:\ ,vert:\ ,fold:-
+  set fillchars=diff:\ ,vert:\ ,fold:·
 endif
 
 " Sets 'foldlevel' when starting to edit another buffer in a window.
@@ -295,6 +310,11 @@ if has('nvim') || has('gui')
               \,o:hor50
 endif
 
+" A history of ":" commands, and a history of previous search patterns is
+" remembered.  This option decides how many entries may be stored in each of
+" these histories.
+set history=10000
+
 " When there is a previous search pattern, highlight all its matches.
 if has('nvim') || has('extra_search')
   set hlsearch
@@ -304,6 +324,13 @@ endif
 " "split"  : Also shows partial off-screen results in a preview window.
 if has('nvim')
   set inccommand=split
+endif
+
+" While typing a search command, show where the pattern, as it was typed so far,
+" matches.  The matched string is highlighted.  If the pattern is invalid or not
+" found, nothing is shown.
+if has('nvim') || has('extra_search')
+  set incsearch
 endif
 
 " Insert two spaces after a '.', '?' and '!' with a join command. Otherwise only
@@ -330,16 +357,27 @@ set list
 
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
-if has('nvim') || has('multi_byte_encoding')
+if has('nvim')
   set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
 else
+  " Note: Using double width chars in this will make vim and gVim crash when
+  "       trying to display them.
   set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+endif
+
+" The maximum number of combining characters supported for displaying.
+if !has('nvim')
+  set maxcombine=6
 endif
 
 " Enables mouse support.
 if has('nvim') || has('mouse')
   set mouse=a
 endif
+
+" Sets the model to use for the mouse. The name mostly specifies what the right
+" mouse button is used for.
+set mousemodel=extend
 
 " Print the line number in front of each line.
 set number
@@ -354,19 +392,30 @@ endif
 " Set modeline enabled, no matter what the system config says.
 set modeline
 
+" When using the scroll wheel and this option is set, the window under the mouse
+" pointer is scrolled. With this option off the current window is scrolled.
+if !has('nvim')
+  set scrollfocus
+endif
+
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=0
+
 " Number of spaces to use for each step of (auto)indent. When zero the 'tabstop'
 " value will be used. Setting this independently from 'tabstop' allows for tabs
 " to be a certain width in characters, but still only indent 'shiftwidth' with
 " spaces.
 set shiftwidth=2
 
+" This option helps to avoid all the |hit-enter| prompts caused by file
+" messages, for example  with CTRL-G, and to avoid some other messages.
+set shortmess=ilnrxoOTIcF
+
 " String to put at the start of lines that have been wrapped.
-if has('nvim') || has('linebreak')
-  if has('multi_byte_encoding')
-    set showbreak=↪
-  else
-    set showbreak=>
-  endif
+if has('nvim')
+  let &showbreak ='↪ '
+elseif has('linebreak')
+  let &showbreak = '> '
 endif
 
 " Show (partial) command in the last line of the screen.
@@ -376,6 +425,13 @@ endif
 
 " If in Insert, Replace or Visual mode put a message on the last line.
 set noshowmode
+
+" The minimal number of columns to scroll horizontally. Used only when the
+" 'wrap' option is off and the cursor is moved off of the screen. When it is
+" zero the cursor will be put in the middle of the screen. When using a slow
+" terminal set it to a large number or 0. When using a fast terminal use a small
+" number or 1.
+set sidescroll=1
 
 " When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
 " 'tabstop' or 'softtabstop' is used in other places.  A <BS> will delete a
@@ -387,6 +443,16 @@ set splitbelow
 
 " When on, splitting a window will put the new window right of the current one.
 set splitright
+
+" When "on" the commands listed below move the cursor to the first non-blank of
+" the line. When off the cursor is kept in the same column (if possible). This
+" applies to the commands: CTRL-D, CTRL-U, CTRL-B, CTRL-F, "G", "H", "M", "L",
+" gg, and to the commands "d", "<<" and ">>" with a linewise operator, with "%"
+" with a count and to buffer changing commands (CTRL-^, :bnext, :bNext, etc.).
+" Also for an Ex command that only has a line number, e.g., ":25" or ":+".
+" In case of buffer changing commands the cursor is placed at the column where
+" it was the last time the buffer was edited.
+set startofline
 
 " statusline {{{3
 if has('nvim') || has('statusline')
@@ -466,6 +532,10 @@ if has('nvim') || has('statusline')
 endif
 " }}}3
 
+" Maximum number of tab pages to be opened by the |-p| command line argument or
+" the ":tab all" command.
+set tabpagemax=50
+
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
 set textwidth=80
@@ -476,9 +546,17 @@ if has('nvim') || has('title')
   set title
 endif
 
+if has('nvim') || has('title')
+  set titleold=
+endif
+
 " If this many milliseconds nothing is typed the swap file will be written to
 " disk. Also used for the CursorHold autocommand event.
 set updatetime=100
+
+if has('nvim') || has('wildmenu')
+  set wildmenu
+endif
 
 " Completion mode that is used for the character specified with 'wildchar'. It
 " is a comma separated list of up to four parts. Each part specifies what to do
