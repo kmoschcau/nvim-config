@@ -64,8 +64,6 @@ try
   if has('unix')
     Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
     Plug 'itmammoth/run-rspec.vim'
-    Plug 'junegunn/fzf', { 'dir' : '~/.fzf' }
-    Plug 'junegunn/fzf.vim'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
     Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
@@ -90,6 +88,8 @@ try
   Plug 'godlygeek/tabular'
   Plug 'hail2u/vim-css3-syntax'
   Plug 'infoslack/vim-docker'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/limelight.vim'
   Plug 'lepture/vim-velocity'
