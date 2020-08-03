@@ -479,6 +479,16 @@ let s:h_cursor =
       \   'fg':   s:material['transparent'],
       \   'bg':   s:color_value(s:primary_hue, 6),
       \   'sp':   s:material['transparent'] }
+let s:h_cursor_insert =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:material['transparent'],
+      \   'bg':   s:color_value('blue', 7),
+      \   'sp':   s:material['transparent'] }
+let s:h_cursor_replace =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:material['transparent'],
+      \   'bg':   s:color_value('amber', 7),
+      \   'sp':   s:material['transparent'] }
 let s:h_cursor_unfocused =
       \ { 'attr': 'NONE',
       \   'fg':   s:material['transparent'],
@@ -849,6 +859,8 @@ call s:highlight('MsgArea', s:h_normal)
 
 " Cursor {{{3
 call s:highlight('Cursor', s:h_cursor)
+call s:highlight('CursorInsert', s:h_cursor_insert)
+call s:highlight('CursorReplace', s:h_cursor_replace)
 call s:highlight('CursorIM', s:h_test) " I don't really use this
 call s:highlight('CursorColumn', s:h_cursorlines)
 call s:highlight('CursorLine', s:h_cursorlines)

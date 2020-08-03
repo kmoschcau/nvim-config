@@ -287,12 +287,12 @@ set formatoptions=croqlj
 " mode-list and an argument-list:
 "   mode-list:argument-list
 if has('nvim') || has('gui')
-  set guicursor=n-c:block-blinkwait1000-blinkon500-blinkoff500
-              \,v-sm:block-blinkwait0
-              \,i-ci:ver75-blinkwait1000-blinkon500-blinkoff500
-              \,ve:ver100-blinkwait0
-              \,r-cr:hor75-blinkwait1000-blinkon500-blinkoff500
-              \,o:hor100-blinkwait0
+  set guicursor=n:block-blinkwait1000-blinkon500-blinkoff500
+              \,v:block-blinkon0
+              \,c:ver20-blinkwait1000-blinkon500-blinkoff500-Cursor
+              \,i-ci-sm:ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert
+              \,r-cr:hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace
+              \,o:hor50
 endif
 
 " When there is a previous search pattern, highlight all its matches.
