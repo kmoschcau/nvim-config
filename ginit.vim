@@ -18,7 +18,7 @@ endtry
 
 " This is a list of fonts which will be used for the GUI version of Vim.
 if has('win32')
-  set guifont=FiraMono\ NF:h10:W400:qCLEARTYPE
+  set guifont=FiraMono\ NF:h10
 else
   set guifont=FiraMono\ Nerd\ Font\ Mono\ 10
 endif
