@@ -303,12 +303,12 @@ set formatoptions=croqlj
 " mode-list and an argument-list:
 "   mode-list:argument-list
 if has('nvim') || has('gui')
-  set guicursor=n:block-blinkwait1000-blinkon500-blinkoff500
-              \,v:block-blinkon0
+  set guicursor=n:block-blinkwait1000-blinkon500-blinkoff500-Cursor
+              \,v:block-blinkon0-Cursor
               \,c:ver20-blinkwait1000-blinkon500-blinkoff500-Cursor
               \,i-ci-sm:ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert
               \,r-cr:hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace
-              \,o:hor50
+              \,o:hor50-Cursor
 endif
 
 " A history of ":" commands, and a history of previous search patterns is
