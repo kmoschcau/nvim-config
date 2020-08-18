@@ -511,8 +511,8 @@ if has('nvim') || has('statusline')
   " Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
   let &statusline .= '%m'
 
-  " Separation point between alignment sections. Each section will be separated by
-  " an equal number of spaces. No width fields allowed.
+  " Separation point between alignment sections. Each section will be separated
+  " by an equal number of spaces. No width fields allowed.
   let &statusline .= '%='
 
   " Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
@@ -547,6 +547,9 @@ if has('nvim') || has('title')
   set title
 endif
 
+" This option will be used for the window title when exiting Vim if the original
+" title cannot be restored.  Only happens if 'title' is on or 'titlestring' is
+" not empty.
 if has('nvim') || has('title')
   set titleold=
 endif
@@ -555,6 +558,12 @@ endif
 " disk. Also used for the CursorHold autocommand event.
 set updatetime=100
 
+" When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+" On pressing 'wildchar' (usually <Tab>) to invoke completion, the possible
+" matches are shown just above the command line, with the first match
+" highlighted (overwriting the status line, if there is one).  Keys that show
+" the previous/next match, such as <Tab> or CTRL-P/CTRL-N, cause the highlight
+" to move to the appropriate match.
 if has('nvim') || has('wildmenu')
   set wildmenu
 endif
