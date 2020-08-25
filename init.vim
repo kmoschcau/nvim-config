@@ -645,7 +645,7 @@ augroup InitVim
   endif
 augroup end
 
-" key bindings {{{2
+" key maps {{{2
 
 " Make "Y" key in normal mode behave more logical and analoguous to "C" and "D".
 nnoremap Y y$
@@ -677,10 +677,10 @@ nmap     <silent>       <C-s>f     <Plug>(coc-float-jump)
 
 " fzf.vim | junegunn/fzf.vim {{{3
 
-" Open FZF with the Ctrl-p binding
+" Open FZF with the Ctrl-p map
 nnoremap <C-p> :FZF<cr>
 
-" Change the default FZF bindings
+" Change the default FZF maps
 let g:fzf_action = { 'ctrl-t' : 'tab split',
                    \ 'ctrl-s' : 'split',
                    \ 'ctrl-v' : 'vsplit' }
