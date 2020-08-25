@@ -56,71 +56,116 @@ try
     endif
   endfunction
 
-  " general plugins {{{2
+  " plugin list {{{2
 
   " Make sure you use single quotes
 
   " Plugins which do not work under Windows (yet).
   if has('unix')
+    " lighning fast markdown preview in browser
     Plug 'euclio/vim-markdown-composer', { 'do' : function('BuildComposer') }
+
+    " run selected RSpec test case with keymap
     Plug 'itmammoth/run-rspec.vim'
+
+    " auto generate tags files
     Plug 'ludovicchabant/vim-gutentags'
-    Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
-    Plug 'neoclide/coc-eslint', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-python', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-rls', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-solargraph', { 'do' : 'yarn install --frozen-lockfile' }
-    Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
   endif
 
-  Plug 'Matt-Deacalion/vim-systemd-syntax'
-  Plug 'NLKNguyen/vim-maven-syntax'
-  Plug 'PProvost/vim-ps1'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'ap/vim-css-color'
-  Plug 'cespare/vim-toml'
-  Plug 'chaoren/vim-wordmotion'
-  Plug 'chrisbra/csv.vim'
-  Plug 'dag/vim-fish'
-  Plug 'dense-analysis/ale'
-  Plug 'embear/vim-localvimrc'
-  Plug 'godlygeek/tabular'
-  Plug 'hail2u/vim-css3-syntax'
-  Plug 'infoslack/vim-docker'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/limelight.vim'
-  Plug 'lepture/vim-velocity'
-  Plug 'martinda/Jenkinsfile-vim-syntax'
-  Plug 'mhinz/vim-signify'
-  Plug 'noprompt/vim-yardoc'
-  Plug 'pangloss/vim-javascript'
-  Plug 'plasticboy/vim-markdown' " depends on godlygeek/tabular
-  Plug 'rust-lang/rust.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'sjl/gundo.vim'
-  Plug 'slim-template/vim-slim'
-  Plug 'tmhedberg/SimpylFold'
-  Plug 'tmux-plugins/vim-tmux'
-  Plug 'tmux-plugins/vim-tmux-focus-events'
-  Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-endwise'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-git'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-speeddating'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-ruby/vim-ruby'
+  " CoC plugins {{{3
+  " CoC base
+  Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
 
-  Plug 'ryanoasis/vim-devicons' " load after NERDTree, vim-airline and
-                                " nerdtree-git-plugin
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " needs vim-devicons
+  " linter plugins {{{3
+  " Asynchronous Lint Engine brings linting for a lot of file types, when linter
+  " is installed
+  Plug 'dense-analysis/ale'
+
+  " Syntax plugins {{{3
+  " maven syntax
+  Plug 'NLKNguyen/vim-maven-syntax'
+
+  " a lot of helpful things dealing with CSV
+  Plug 'chrisbra/csv.vim'
+
+  " collection of various syntax plugins
+  Plug 'sheerun/vim-polyglot'
+
+  " expanded CSS3 syntax, still to test, no idea whether polyglot brings CSS
+  Plug 'hail2u/vim-css3-syntax'
+
+  " colored highlighting for CSS like hex color values
+  Plug 'ap/vim-css-color'
+
+  " better folding for python
+  Plug 'tmhedberg/SimpylFold'
+
+  " NERDTree plugins {{{3
+  " shows git file status in NERDTree
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+
+  " provides a better file browser than built-in netrw
+  Plug 'scrooloose/nerdtree'
+
+  " colored file type icons in NERDTree
+  " needs vim-devicons
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+  " Airline plugins {{{3
+  " pretty, segmented and configurable status line
+  Plug 'vim-airline/vim-airline'
+
+  " Vim devicons {{{3
+  " use fancy devicons everywhere!
+  " load after NERDTree, vim-airline and nerdtree-git-plugin
+  Plug 'ryanoasis/vim-devicons'
+
+  " git plugins {{{3
+  " show git line status in gutter
+  Plug 'mhinz/vim-signify'
+
+  " provide integrated git handling in the editor
+  Plug 'tpope/vim-fugitive'
+
+  " movement and editing plugins {{{3
+  " makes motion through words more granular
+  Plug 'chaoren/vim-wordmotion'
+
+  " visualize the vim undo tree (seems broken currently)
+  Plug 'sjl/gundo.vim'
+
+  " various handling of variants of words
+  " I mainly use it for the case coercion
+  Plug 'tpope/vim-abolish'
+
+  " toggle line commenting with a key map
+  Plug 'tpope/vim-commentary'
+
+  " automatically add ending pairs of characters or words
+  Plug 'tpope/vim-endwise'
+
+  " makes a lot of Tim Pope's plugins repeatable
+  Plug 'tpope/vim-repeat'
+
+  " add ability to use Ctrl-A/X to manipulate dates
+  Plug 'tpope/vim-speeddating'
+
+  " add maps and commands to surround stuff
+  Plug 'tpope/vim-surround'
+
+  " lots of maps to toggle options and do stuff around current line
+  Plug 'tpope/vim-unimpaired'
+
+  " fzf plugins {{{3
+  " provides fzf fuzzy finder
+  Plug 'junegunn/fzf'
+
+  " provides vim integration with fzf
+  Plug 'junegunn/fzf.vim'
+
+  " misc plugins {{{3
+  " allows better handling for local vimrc files
+  Plug 'embear/vim-localvimrc'
 
   " }}}2
 
@@ -729,6 +774,17 @@ augroup CocNvim_InitVim
   " Show method signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+let g:coc_global_extensions = [
+      \'coc-eslint',
+      \'coc-java',
+      \'coc-json',
+      \'coc-omnisharp',
+      \'coc-python',
+      \'coc-rls',
+      \'coc-solargraph',
+      \'coc-yaml'
+      \]
 
 " vim-javascript | pangloss/vim-javascript {{{1
 
