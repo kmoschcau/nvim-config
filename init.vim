@@ -659,6 +659,17 @@ function! SynStack()
 endfunction
 nnoremap <F10> :call SynStack()<cr>
 
+" wordmotion | chaoren/vim-wordmotion {{{3
+
+let g:wordmotion_mappings = {
+      \ 'w' : '<M-w>',
+      \ 'b' : '<M-b>',
+      \ 'e' : '<M-e>',
+      \ 'ge' : 'g<M-e>',
+      \ 'aw' : 'a<M-w>',
+      \ 'iw' : 'i<M-w>'
+      \ }
+
 " coc.nvim | neoclide/coc.nvim {{{3
 
 inoremap <silent><expr> <C-space>  coc#refresh()
