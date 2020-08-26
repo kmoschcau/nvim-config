@@ -702,39 +702,44 @@ let s:h_comment =
 " Constant and linked groups
 let s:h_constant =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('cyan', 7),
-      \   'bg':   s:material['transparent'],
+      \   'fg':   s:color_value('blue_grey', 7),
+      \   'bg':   s:color_value('blue_grey', 1),
       \   'sp':   s:material['transparent'] }
 let s:h_string =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('green', 7),
-      \   'bg':   s:material['transparent'],
+      \   'bg':   s:color_value('green', 1),
       \   'sp':   s:material['transparent'] }
 let s:h_character =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('light_green', 7),
-      \   'bg':   s:material['transparent'],
+      \   'bg':   s:color_value('light_green', 1),
       \   'sp':   s:material['transparent'] }
 let s:h_number =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('blue', 7),
-      \   'bg':   s:material['transparent'],
+      \   'bg':   s:color_value('blue', 1),
       \   'sp':   s:material['transparent'] }
 let s:h_boolean =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('orange', 7),
-      \   'bg':   s:material['transparent'],
+      \   'bg':   s:color_value('orange', 1),
       \   'sp':   s:material['transparent'] }
 let s:h_float =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('light_blue', 7),
-      \   'bg':   s:material['transparent'],
+      \   'bg':   s:color_value('light_blue', 1),
       \   'sp':   s:material['transparent'] }
 
 " Identifier and linked groups
 let s:h_identifier =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('yellow', 8),
+      \   'fg':   s:color_value('light_green', 7),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_function =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('teal', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
@@ -760,7 +765,17 @@ let s:h_pre_proc =
 " Type and linked groups
 let s:h_type =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('yellow', 8),
+      \   'fg':   s:color_value('green', 8),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_structure =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_typedef =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('purple', 3),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
@@ -914,6 +929,7 @@ call s:highlight('Boolean', s:h_boolean)
 call s:highlight('Float', s:h_float)
 
 call s:highlight('Identifier', s:h_identifier)
+call s:highlight('Function', s:h_function)
 
 call s:highlight('Statement', s:h_statement)
 call s:highlight('Operator', s:h_operator)
@@ -921,6 +937,8 @@ call s:highlight('Operator', s:h_operator)
 call s:highlight('PreProc', s:h_pre_proc)
 
 call s:highlight('Type', s:h_type)
+call s:highlight('Structure', s:h_structure)
+call s:highlight('Typedef', s:h_typedef)
 
 call s:highlight('Special', s:h_special)
 
@@ -950,6 +968,10 @@ let g:terminal_color_14 = s:color_value('cyan', 4)['gui']
 let g:terminal_color_15 = s:color_value('grey', 4)['gui']
 
 " custom highlight groups {{{1
+" debugging highlight groups {{{2
+
+call s:highlight('Test', s:h_test)
+
 " highlight groups for plugins {{{2
 " Asynchronous Lint Engine | w0rp/ale {{{3
 
