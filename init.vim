@@ -882,8 +882,12 @@ let g:airline_extensions = [
     \   'branch',
     \   'csv',
     \   'fugitiveline',
+    \   'fzf',
     \   'hunks',
+    \   'nerdtree',
+    \   'omnisharp',
     \   'quickfix',
+    \   'term',
     \   'whitespace',
     \   'wordcount',
     \ ]
