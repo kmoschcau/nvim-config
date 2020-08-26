@@ -72,9 +72,15 @@ try
     Plug 'ludovicchabant/vim-gutentags'
   endif
 
-  " CoC plugins {{{3
+  " language servers {{{3
   " CoC base
   Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
+
+  " language server specifically for Omnisharp
+  Plug 'OmniSharp/omnisharp-vim'
+
+  " omnisharp default settings and extras
+  Plug 'nickspoons/vim-sharpenup'
 
   " linter plugins {{{3
   " Asynchronous Lint Engine brings linting for a lot of file types, when linter
@@ -656,6 +662,10 @@ function! SynStack()
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+  if exists(':OmniSharpHighlightEcho')
+    echon ' | '
+    OmniSharpHighlightEcho
+  endif
 endfunction
 nnoremap <F10> :call SynStack()<cr>
 

@@ -802,6 +802,122 @@ let s:h_todo =
 
 
 " Plugins {{{3
+" OmniSharp | OmniSharp/omnisharp-vim {{{4
+
+let s:h_omnisharp_verbatim_string_literal =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('green', 7),
+      \   'bg':   s:color_value('green', 2),
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_enum_name =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_interface_name =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('light_green', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_field_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('blue', 5),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_enum_member_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('green', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_constant_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('blue', 8),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_local_name =
+      \ { 'attr': 'italic',
+      \   'fg':   s:color_value('orange', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_parameter_name =
+      \ { 'attr': 'italic',
+      \   'fg':   s:color_value('orange', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_extension_method_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('teal', 5),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_property_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('cyan', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_event_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('yellow', 8),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_namespace_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('brown', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_label_name =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('teal', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_attribute_name =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 3),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_attribute_quotes =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 3),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_attribute_value =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 3),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_delimiter =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('teal', 3),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('orange', 3),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_xml_doc_comment_text =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value(s:neutral_hue, 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
 " vim-airline | vim-airline/vim-airline {{{4
 
 let s:h_airline_1 =
@@ -1017,6 +1133,97 @@ call s:highlight('SignifyLineChange', s:h_diff_line_change)
 call s:highlight('SignifyLineChangeDelete', s:h_diff_line_change_delete)
 call s:highlight('SignifyLineDelete', s:h_diff_line_delete)
 call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
+
+" OmniSharp | OmniSharp/omnisharp-vim {{{3
+
+call s:highlight('OmniSharpVerbatimStringLiteral', s:h_omnisharp_verbatim_string_literal)
+call s:highlight('OmniSharpEnumName', s:h_omnisharp_enum_name)
+call s:highlight('OmniSharpInterfaceName', s:h_omnisharp_interface_name)
+call s:highlight('OmniSharpFieldName', s:h_omnisharp_field_name)
+call s:highlight('OmniSharpEnumMemberName', s:h_omnisharp_enum_member_name)
+call s:highlight('OmniSharpConstantName', s:h_omnisharp_constant_name)
+call s:highlight('OmniSharpLocalName', s:h_omnisharp_local_name)
+call s:highlight('OmniSharpParameterName', s:h_omnisharp_parameter_name)
+call s:highlight('OmniSharpExtensionMethodName', s:h_omnisharp_extension_method_name)
+call s:highlight('OmniSharpPropertyName', s:h_omnisharp_property_name)
+call s:highlight('OmniSharpEventName', s:h_omnisharp_event_name)
+call s:highlight('OmniSharpNamespaceName', s:h_omnisharp_namespace_name)
+call s:highlight('OmniSharpLabelName', s:h_omnisharp_label_name)
+
+call s:highlight('OmniSharpXmlDocCommentAttributeName', s:h_omnisharp_xml_doc_comment_attribute_name)
+call s:highlight('OmniSharpXmlDocCommentAttributeQuotes', s:h_omnisharp_xml_doc_comment_attribute_quotes)
+call s:highlight('OmniSharpXmlDocCommentAttributeValue', s:h_omnisharp_xml_doc_comment_attribute_value)
+call s:highlight('OmniSharpXmlDocCommentDelimiter', s:h_omnisharp_xml_doc_comment_delimiter)
+call s:highlight('OmniSharpXmlDocCommentName', s:h_omnisharp_xml_doc_comment_name)
+call s:highlight('OmniSharpXmlDocCommentText', s:h_omnisharp_xml_doc_comment_text)
+
+let g:OmniSharp_highlight_groups = {
+      \'Comment': 'Comment',
+      \'ExcludedCode': 'Test',
+      \'Identifier': 'Identifier',
+      \'Keyword': 'Keyword',
+      \'ControlKeyword': 'Conditional',
+      \'NumericLiteral': 'Number',
+      \'Operator': 'Operator',
+      \'OperatorOverloaded': 'Test',
+      \'PreprocessorKeyword': 'PreProc',
+      \'StringLiteral': 'String',
+      \'WhiteSpace': 'Test',
+      \'Text': 'Test',
+      \'StaticSymbol': 'Test',
+      \'PreprocessorText': 'Normal',
+      \'Punctuation': 'Delimiter',
+      \'VerbatimStringLiteral': 'OmniSharpVerbatimStringLiteral',
+      \'StringEscapeCharacter': 'SpecialChar',
+      \'ClassName': 'Type',
+      \'DelegateName': 'Test',
+      \'EnumName': 'OmniSharpEnumName',
+      \'InterfaceName': 'OmniSharpInterfaceName',
+      \'ModuleName': 'Test',
+      \'StructName': 'Structure',
+      \'TypeParameterName': 'Typedef',
+      \'FieldName': 'OmniSharpFieldName',
+      \'EnumMemberName': 'OmniSharpEnumMemberName',
+      \'ConstantName': 'OmniSharpConstantName',
+      \'LocalName': 'OmniSharpLocalName',
+      \'ParameterName': 'OmniSharpParameterName',
+      \'MethodName': 'Function',
+      \'ExtensionMethodName': 'OmniSharpExtensionMethodName',
+      \'PropertyName': 'OmniSharpPropertyName',
+      \'EventName': 'OmniSharpEventName',
+      \'NamespaceName': 'OmniSharpNamespaceName',
+      \'LabelName': 'OmniSharpLabelName',
+      \'XmlDocCommentAttributeName': 'OmniSharpXmlDocCommentAttributeName',
+      \'XmlDocCommentAttributeQuotes': 'OmniSharpXmlDocCommentAttributeQuotes',
+      \'XmlDocCommentAttributeValue': 'OmniSharpXmlDocCommentAttributeValue',
+      \'XmlDocCommentCDataSection': 'OmniSharpXmlDocCommentText',
+      \'XmlDocCommentComment': 'Comment',
+      \'XmlDocCommentDelimiter': 'OmniSharpXmlDocCommentDelimiter',
+      \'XmlDocCommentEntityReference': 'Test',
+      \'XmlDocCommentName': 'OmniSharpXmlDocCommentName',
+      \'XmlDocCommentProcessingInstruction': 'Test',
+      \'XmlDocCommentText': 'OmniSharpXmlDocCommentText',
+      \'XmlLiteralAttributeName': 'Test',
+      \'XmlLiteralAttributeQuotes': 'Test',
+      \'XmlLiteralAttributeValue': 'Test',
+      \'XmlLiteralCDataSection': 'Test',
+      \'XmlLiteralComment': 'Test',
+      \'XmlLiteralDelimiter': 'Test',
+      \'XmlLiteralEmbeddedExpression': 'Test',
+      \'XmlLiteralEntityReference': 'Test',
+      \'XmlLiteralName': 'Test',
+      \'XmlLiteralProcessingInstruction': 'Test',
+      \'XmlLiteralText': 'Test',
+      \'RegexComment': 'Test',
+      \'RegexCharacterClass': 'Test',
+      \'RegexAnchor': 'Test',
+      \'RegexQuantifier': 'Test',
+      \'RegexGrouping': 'Test',
+      \'RegexAlternation': 'Test',
+      \'RegexText': 'Test',
+      \'RegexSelfEscapedCharacter': 'Test',
+      \'RegexOtherEscape': 'Test',
+      \}
 
 " vim-airline | vim-airline/vim-airline {{{3
 
