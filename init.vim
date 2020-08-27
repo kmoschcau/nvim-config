@@ -290,31 +290,46 @@ endif
 
 " A comma separated list of options for Insert mode completion.
 "
-"   menu    Use a popup menu to show the possible completions. The menu is only
-"           shown when there is more than one match and sufficient colors are
-"           available.
-
-"   menuone Use the popup menu also when there is only one match. Useful when
-"           there is additional information about the match, e.g., what file it
-"           comes from.
-
-"   longest Only insert the longest common text of the matches. If the menu is
-"           displayed you can use CTRL-L to add more characters. Whether case is
-"           ignored depends on the kind of completion. For buffer text the
-"           'ignorecase' option is used.
-
-"   preview Show extra information about the currently selected completion in
-"           the preview window. Only works in combination with "menu" or
-"           "menuone".
-
+"   menu     Use a popup menu to show the possible completions. The menu is only
+"            shown when there is more than one match and sufficient colors are
+"            available.
+"
+"   menuone  Use the popup menu also when there is only one match. Useful when
+"            there is additional information about the match, e.g., what file it
+"            comes from.
+"
+"   longest  Only insert the longest common text of the matches. If the menu is
+"            displayed you can use CTRL-L to add more characters. Whether case is
+"            ignored depends on the kind of completion. For buffer text the
+"            'ignorecase' option is used.
+"
+"   preview  Show extra information about the currently selected completion in
+"            the preview window. Only works in combination with "menu" or
+"            "menuone".
+"
+"   (Vim only)
+"   popup    Show extra information about the currently selected
+"            completion in a popup window.  Only works in combination
+"            with "menu" or "menuone".  Overrides "preview".
+"            See |'completepopup'| for specifying properties.
+"            {only works when compiled with the |+textprop| feature}
+"
+"   (Vim only)
+"   popuphidden
+"            Just like "popup" but initially hide the popup.  Use a
+"            |CompleteChanged| autocommand to fetch the info and call
+"            |popup_show()| once the popup has been filled.
+"            See the example at |complete-popuphidden|.
+"            {only works when compiled with the |+textprop| feature}
+"
 "   noinsert Do not insert any text for a match until the user selects a match
 "            from the menu. Only works in combination with "menu" or "menuone".
 "            No effect if "longest" is present.
-
+"
 "   noselect Do not select a match in the menu, force the user to select one
 "            from the menu. Only works in combination with "menu" or "menuone".
 if has('nvim') || has('insert_expand')
-  set completeopt=menuone,preview
+  set completeopt=menuone
   if has('textprop')
     set completeopt+=popup
   else
