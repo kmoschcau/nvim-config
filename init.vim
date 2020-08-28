@@ -909,7 +909,6 @@ let g:airline_extensions = [
     \   'fugitiveline',
     \   'fzf',
     \   'hunks',
-    \   'nerdtree',
     \   'omnisharp',
     \   'quickfix',
     \   'term',
