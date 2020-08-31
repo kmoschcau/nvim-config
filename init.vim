@@ -91,17 +91,17 @@ try
   " maven syntax
   Plug 'NLKNguyen/vim-maven-syntax'
 
+  " colored highlighting for CSS like hex color values
+  Plug 'ap/vim-css-color'
+
   " a lot of helpful things dealing with CSV
   Plug 'chrisbra/csv.vim'
-
-  " collection of various syntax plugins
-  Plug 'sheerun/vim-polyglot'
 
   " expanded CSS3 syntax, still to test, no idea whether polyglot brings CSS
   Plug 'hail2u/vim-css3-syntax'
 
-  " colored highlighting for CSS like hex color values
-  Plug 'ap/vim-css-color'
+  " collection of various syntax plugins
+  Plug 'sheerun/vim-polyglot'
 
   " better folding for python
   Plug 'tmhedberg/SimpylFold'
@@ -111,7 +111,7 @@ try
   Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " provides a better file browser than built-in netrw
-  Plug 'scrooloose/nerdtree'
+  Plug 'preservim/nerdtree'
 
   " colored file type icons in NERDTree
   " needs vim-devicons
