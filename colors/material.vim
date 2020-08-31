@@ -358,6 +358,13 @@ function! s:color_value(color_name, color_index, ...)
   endif
 endfunction
 
+" Create a name (non-bold) copy of the provided color dictionary.
+function! s:syn_name_variant(color_dictionary)
+  let l:struct_copy = copy(a:color_dictionary)
+  let l:struct_copy.attr = 'NONE'
+  return l:struct_copy
+endfunction
+
 " This replaces the default statusline highlight with the strong framing
 " highlight. This is meant to be used to remove the differing, one character
 " highlight on the right side of the statusline for windows on the bottom when
@@ -691,6 +698,7 @@ let s:h_test =
       \   'sp':   s:color_value('red', 3) }
 
 " Syntax {{{3
+" Built-in {{{4
 
 " Comment and linked groups
 let s:h_comment =
@@ -731,18 +739,6 @@ let s:h_float =
       \   'bg':   s:color_value('light_blue', 1),
       \   'sp':   s:material['transparent'] }
 
-" Identifier and linked groups
-let s:h_identifier =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('light_green', 7),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_function =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('teal', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-
 " Statement and linked groups
 let s:h_statement =
       \ { 'attr': 'bold',
@@ -763,19 +759,9 @@ let s:h_pre_proc =
       \   'sp':   s:material['transparent'] }
 
 " Type and linked groups
-let s:h_type =
+let s:h_storage_class =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_structure =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_typedef =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_value('purple', 3),
+      \   'fg':   s:color_value('yellow', 8),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
@@ -800,86 +786,117 @@ let s:h_todo =
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
+" Custom {{{4
 
-" Plugins {{{3
-" OmniSharp | OmniSharp/omnisharp-vim {{{4
-
-let s:h_omnisharp_verbatim_string_literal =
+" Member variables
+let s:h_syn_constant_name =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('green', 7),
-      \   'bg':   s:color_value('green', 2),
-      \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_enum_name =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 4),
+      \   'fg':   s:color_value('indigo', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_interface_name =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_value('light_green', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_field_name =
+let s:h_syn_field_name =
       \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue', 5),
+      \   'fg':   s:color_value('blue', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
-let s:h_omnisharp_enum_member_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('green', 4),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_constant_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue', 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_local_name =
+" Other variables
+let s:h_syn_local_name =
       \ { 'attr': 'italic',
       \   'fg':   s:color_value('orange', 4),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_parameter_name =
+let s:h_syn_parameter_name =
       \ { 'attr': 'italic',
       \   'fg':   s:color_value('orange', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
-let s:h_omnisharp_extension_method_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('teal', 5),
+" Functions and methods
+let s:h_syn_function_keyword =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('teal', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
-
-let s:h_omnisharp_property_name =
+let s:h_syn_function_name = s:syn_name_variant(s:h_syn_function_keyword)
+let s:h_syn_accessor_name =
       \ { 'attr': 'NONE',
       \   'fg':   s:color_value('cyan', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
 
-let s:h_omnisharp_event_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('yellow', 8),
+" Types (primitive types and similar)
+let s:h_syn_type_keyword =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('lime', 6),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
+let s:h_syn_type_name = s:syn_name_variant(s:h_syn_type_keyword)
 
-let s:h_omnisharp_namespace_name =
-      \ { 'attr': 'NONE',
+" Structures (smaller than classes, but not quite primitive types)
+let s:h_syn_structure_keyword =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('light_green', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_syn_structure_name = s:syn_name_variant(s:h_syn_structure_keyword)
+
+" Typedefs (Classes and equally large/extensible things)
+let s:h_syn_typedef_keyword =
+      \ { 'attr': 'bold',
+      \   'fg':   s:color_value('green', 6),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_syn_typedef_name = s:syn_name_variant(s:h_syn_typedef_keyword)
+
+" Namespaces (or anything that groups together definitions)
+let s:h_syn_namespace_keyword =
+      \ { 'attr': 'bold',
       \   'fg':   s:color_value('brown', 4),
       \   'bg':   s:material['transparent'],
       \   'sp':   s:material['transparent'] }
+let s:h_syn_namespace_name = s:syn_name_variant(s:h_syn_namespace_keyword)
 
-let s:h_omnisharp_label_name =
+" Generic context background
+let s:h_syn_generic =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:material['transparent'],
+      \   'bg':   s:color_value('purple', 1),
+      \   'sp':   s:material['transparent'] }
+
+" Interfaces (or anything that is just a declaration, but not implementation)
+let s:h_syn_interface_keyword =
       \ { 'attr': 'bold',
+      \   'fg':   s:color_value('purple', 4),
+      \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+let s:h_syn_interface_name = s:syn_name_variant(s:h_syn_interface_keyword)
+
+" Plugins {{{3
+" OmniSharp | OmniSharp/omnisharp-vim {{{4
+
+let s:h_omnisharp_extension_method_name =
+      \ { 'attr': 'NONE',
       \   'fg':   s:color_value('teal', 4),
       \   'bg':   s:material['transparent'],
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_operator_overloaded =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('orange', 7),
+      \   'bg':   s:color_value('orange', 2),
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_type_parameter_name =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:h_syn_structure_name.fg,
+      \   'bg':   s:h_syn_generic.bg,
+      \   'sp':   s:material['transparent'] }
+
+let s:h_omnisharp_verbatim_string_literal =
+      \ { 'attr': 'NONE',
+      \   'fg':   s:color_value('green', 7),
+      \   'bg':   s:color_value('green', 2),
       \   'sp':   s:material['transparent'] }
 
 let s:h_omnisharp_xml_doc_comment_attribute_name =
@@ -1044,17 +1061,18 @@ call s:highlight('Number', s:h_number)
 call s:highlight('Boolean', s:h_boolean)
 call s:highlight('Float', s:h_float)
 
-call s:highlight('Identifier', s:h_identifier)
-call s:highlight('Function', s:h_function)
+call s:highlight('Identifier', s:h_syn_structure_name)
+call s:highlight('Function', s:h_syn_function_name)
 
 call s:highlight('Statement', s:h_statement)
 call s:highlight('Operator', s:h_operator)
 
 call s:highlight('PreProc', s:h_pre_proc)
 
-call s:highlight('Type', s:h_type)
-call s:highlight('Structure', s:h_structure)
-call s:highlight('Typedef', s:h_typedef)
+call s:highlight('Type', s:h_syn_type_keyword)
+call s:highlight('StorageClass', s:h_storage_class)
+call s:highlight('Structure', s:h_syn_structure_keyword)
+call s:highlight('Typedef', s:h_syn_typedef_keyword)
 
 call s:highlight('Special', s:h_special)
 
@@ -1087,6 +1105,19 @@ let g:terminal_color_15 = s:color_value('grey', 4)['gui']
 " debugging highlight groups {{{2
 
 call s:highlight('Test', s:h_test)
+
+" File type highlight groups {{{2
+" C# {{{3
+" Vim Built-in {{{4
+
+call s:highlight('csBraces', s:h_special)
+call s:highlight('csClass', s:h_syn_typedef_keyword)
+call s:highlight('csClassType', s:h_syn_typedef_name)
+call s:highlight('csEndColon', s:h_special)
+call s:highlight('csGeneric', s:h_syn_generic)
+call s:highlight('csNewType', s:h_syn_typedef_name)
+call s:highlight('csParens', s:h_special)
+call s:highlight('csStorage', s:h_syn_namespace_keyword)
 
 " highlight groups for plugins {{{2
 " Asynchronous Lint Engine | w0rp/ale {{{3
@@ -1136,19 +1167,21 @@ call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
 
 " OmniSharp | OmniSharp/omnisharp-vim {{{3
 
-call s:highlight('OmniSharpVerbatimStringLiteral', s:h_omnisharp_verbatim_string_literal)
-call s:highlight('OmniSharpEnumName', s:h_omnisharp_enum_name)
-call s:highlight('OmniSharpInterfaceName', s:h_omnisharp_interface_name)
-call s:highlight('OmniSharpFieldName', s:h_omnisharp_field_name)
-call s:highlight('OmniSharpEnumMemberName', s:h_omnisharp_enum_member_name)
-call s:highlight('OmniSharpConstantName', s:h_omnisharp_constant_name)
-call s:highlight('OmniSharpLocalName', s:h_omnisharp_local_name)
-call s:highlight('OmniSharpParameterName', s:h_omnisharp_parameter_name)
+call s:highlight('OmniSharpClassName', s:h_syn_typedef_name)
+call s:highlight('OmniSharpConstantName', s:h_syn_constant_name)
+call s:highlight('OmniSharpEnumMemberName', s:h_syn_structure_name)
+call s:highlight('OmniSharpEnumName', s:h_syn_structure_keyword)
 call s:highlight('OmniSharpExtensionMethodName', s:h_omnisharp_extension_method_name)
-call s:highlight('OmniSharpPropertyName', s:h_omnisharp_property_name)
-call s:highlight('OmniSharpEventName', s:h_omnisharp_event_name)
-call s:highlight('OmniSharpNamespaceName', s:h_omnisharp_namespace_name)
-call s:highlight('OmniSharpLabelName', s:h_omnisharp_label_name)
+call s:highlight('OmniSharpFieldName', s:h_syn_field_name)
+call s:highlight('OmniSharpInterfaceName', s:h_syn_interface_name)
+call s:highlight('OmniSharpLocalName', s:h_syn_local_name)
+call s:highlight('OmniSharpNamespaceName', s:h_syn_namespace_name)
+call s:highlight('OmniSharpOperatorOverloaded', s:h_omnisharp_operator_overloaded)
+call s:highlight('OmniSharpParameterName', s:h_syn_parameter_name)
+call s:highlight('OmniSharpPropertyName', s:h_syn_accessor_name)
+call s:highlight('OmniSharpStructName', s:h_syn_structure_name)
+call s:highlight('OmniSharpTypeParameterName', s:h_omnisharp_type_parameter_name)
+call s:highlight('OmniSharpVerbatimStringLiteral', s:h_omnisharp_verbatim_string_literal)
 
 call s:highlight('OmniSharpXmlDocCommentAttributeName', s:h_omnisharp_xml_doc_comment_attribute_name)
 call s:highlight('OmniSharpXmlDocCommentAttributeQuotes', s:h_omnisharp_xml_doc_comment_attribute_quotes)
@@ -1165,7 +1198,7 @@ let g:OmniSharp_highlight_groups = {
       \'ControlKeyword': 'Conditional',
       \'NumericLiteral': 'Number',
       \'Operator': 'Operator',
-      \'OperatorOverloaded': 'Test',
+      \'OperatorOverloaded': 'OmniSharpOperatorOverloaded',
       \'PreprocessorKeyword': 'PreProc',
       \'StringLiteral': 'String',
       \'WhiteSpace': 'Test',
@@ -1175,13 +1208,13 @@ let g:OmniSharp_highlight_groups = {
       \'Punctuation': 'Delimiter',
       \'VerbatimStringLiteral': 'OmniSharpVerbatimStringLiteral',
       \'StringEscapeCharacter': 'SpecialChar',
-      \'ClassName': 'Type',
+      \'ClassName': 'OmniSharpClassName',
       \'DelegateName': 'Test',
       \'EnumName': 'OmniSharpEnumName',
       \'InterfaceName': 'OmniSharpInterfaceName',
       \'ModuleName': 'Test',
-      \'StructName': 'Structure',
-      \'TypeParameterName': 'Typedef',
+      \'StructName': 'OmniSharpStructName',
+      \'TypeParameterName': 'OmniSharpTypeParameterName',
       \'FieldName': 'OmniSharpFieldName',
       \'EnumMemberName': 'OmniSharpEnumMemberName',
       \'ConstantName': 'OmniSharpConstantName',
@@ -1190,9 +1223,9 @@ let g:OmniSharp_highlight_groups = {
       \'MethodName': 'Function',
       \'ExtensionMethodName': 'OmniSharpExtensionMethodName',
       \'PropertyName': 'OmniSharpPropertyName',
-      \'EventName': 'OmniSharpEventName',
+      \'EventName': 'Test',
       \'NamespaceName': 'OmniSharpNamespaceName',
-      \'LabelName': 'OmniSharpLabelName',
+      \'LabelName': 'Test',
       \'XmlDocCommentAttributeName': 'OmniSharpXmlDocCommentAttributeName',
       \'XmlDocCommentAttributeQuotes': 'OmniSharpXmlDocCommentAttributeQuotes',
       \'XmlDocCommentAttributeValue': 'OmniSharpXmlDocCommentAttributeValue',
