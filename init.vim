@@ -137,6 +137,9 @@ try
   " makes motion through words more granular
   Plug 'chaoren/vim-wordmotion'
 
+  " Adds table formatting commands
+  Plug 'godlygeek/tabular'
+
   " visualize the vim undo tree (seems broken currently)
   Plug 'sjl/gundo.vim'
 
