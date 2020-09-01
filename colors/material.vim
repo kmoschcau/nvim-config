@@ -496,27 +496,32 @@ let s:h_vim_error_inverted =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
       \   'bg':   s:color_dict('red', 6) }
 let s:h_vim_error_underline =
-      \ { 'sp':   s:color_dict('red', 6) }
+      \ { 'attr': 'underline',
+      \   'sp':   s:color_dict('red', 6) }
 let s:h_vim_style_error_inverted =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
       \   'bg':   s:color_dict('red', 3) }
 let s:h_vim_style_error_underline =
-      \ { 'sp':   s:color_dict('red', 3) }
+      \ { 'attr': 'undercurl',
+      \   'sp':   s:color_dict('red', 3) }
 let s:h_vim_warning_inverted =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
       \   'bg':   s:color_dict('orange', 6) }
 let s:h_vim_warning_underline =
-      \ { 'sp':   s:color_dict('orange', 6) }
+      \ { 'attr': 'underline',
+      \   'sp':   s:color_dict('orange', 6) }
 let s:h_vim_style_warning_inverted =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
       \   'bg':   s:color_dict('orange', 3) }
 let s:h_vim_style_warning_underline =
-      \ { 'sp':   s:color_dict('orange', 3) }
+      \ { 'attr': 'undercurl',
+      \   'sp':   s:color_dict('orange', 3) }
 let s:h_vim_info_inverted =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
       \   'bg':   s:color_dict('light_blue', 6) }
 let s:h_vim_info_underline =
-      \ { 'sp':   s:color_dict('light_blue', 6) }
+      \ { 'attr': 'underline',
+      \   'sp':   s:color_dict('light_blue', 6) }
 
 " Spelling {{{3
 let s:h_vim_spell_bad =
