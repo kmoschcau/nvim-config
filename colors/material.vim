@@ -273,11 +273,21 @@ let s:material =
 
 " Default hue selection {{{2
 
-" Hue used for most of the editor background and framing, should be subtle.
-let s:neutral_hue = get(g:, 'material_neutral_hue', 'grey')
+" A dict of user configured hues
+let s:user_hues = get(g:, 'material_hues', {})
 
-" Hue used as the primary accent for currently interacted with elements.
-let s:primary_hue = get(g:, 'material_primary_hue', 'cyan')
+" Hue used for most of the editor background and framing, should be subtle.
+let s:hue_neutral = get(s:user_hues, 'neutral', 'grey')
+
+" Hue used as the primary accent for currently interacted with elements in
+" normal mode
+let s:hue_primary = get(s:user_hues, 'primary', 'cyan')
+
+" Hue used for insert mode
+let s:hue_insert = get(s:user_hues, 'insert', 'blue')
+
+" Hue used for replace mode
+let s:hue_replace = get(s:user_hues, 'replace', 'amber')
 
 " Diff hues {{{3
 " Hue used for added diff
@@ -297,27 +307,27 @@ let s:normal_values = [ '50', '100', '200', '300', '400', '500', '600',
                     \  '700', '800', '900']
 let s:accent_values = ['A100', 'A200', 'A400', 'A700']
 
+" Shared colors {{{2
+
+let s:c_transparent = s:material['transparent']
+
 " Functions {{{2
 
 " Set the highlight group passed as group_name to the values specified in
 " color_dictionary.
 function! s:highlight(group_name, color_dictionary)
-  exec 'highlight '
-     \ .a:group_name
-     \ .' cterm='
-     \ .a:color_dictionary['attr']
-     \ .' ctermfg='
-     \ .a:color_dictionary['fg']['cterm']
-     \ .' ctermbg='
-     \ .a:color_dictionary['bg']['cterm']
-     \ .' gui='
-     \ .a:color_dictionary['attr']
-     \ .' guifg='
-     \ .a:color_dictionary['fg']['gui']
-     \ .' guibg='
-     \ .a:color_dictionary['bg']['gui']
-     \ .' guisp='
-     \ .a:color_dictionary['sp']['gui']
+  let l:attr = get(a:color_dictionary, 'attr', 'NONE')
+  let l:fg = get(a:color_dictionary, 'fg', {})
+  let l:bg = get(a:color_dictionary, 'bg', {})
+  let l:sp = get(a:color_dictionary, 'sp', {})
+  exec 'highlight ' . a:group_name
+     \ . ' cterm=' . l:attr
+     \ . ' ctermfg=' . get(l:fg, 'cterm', s:c_transparent.cterm)
+     \ . ' ctermbg=' . get(l:bg, 'cterm', s:c_transparent.cterm)
+     \ . ' gui=' . l:attr
+     \ . ' guifg=' . get(l:fg, 'gui', s:c_transparent.gui)
+     \ . ' guibg=' . get(l:bg, 'gui', s:c_transparent.gui)
+     \ . ' guisp=' . get(l:sp, 'gui', s:c_transparent.gui)
 endfunction
 
 " Get the value number string for the passed index, dependent on the
@@ -346,7 +356,7 @@ endfunction
 
 " Get a color value by the passed color name and the passed index, dependent on
 " the 'background'.
-function! s:color_value(color_name, color_index, ...)
+function! s:color_dict(color_name, color_index, ...)
   if a:0 > 0
     let l:value = s:accent_value(a:color_index)
     if 'brown|grey|blue_grey' =~# a:color_name
@@ -358,11 +368,11 @@ function! s:color_value(color_name, color_index, ...)
   endif
 endfunction
 
-" Create a name (non-bold) copy of the provided color dictionary.
-function! s:syn_name_variant(color_dictionary)
-  let l:struct_copy = copy(a:color_dictionary)
-  let l:struct_copy.attr = 'NONE'
-  return l:struct_copy
+" Copy the passed color dictionary without the "attr" key
+function! s:copy_without_attr(color_dictionary)
+  let l:dict_copy = copy(a:color_dictionary)
+  unlet l:dict_copy.attr
+  return l:dict_copy
 endfunction
 
 " This replaces the default statusline highlight with the strong framing
@@ -370,800 +380,555 @@ endfunction
 " highlight on the right side of the statusline for windows on the bottom when
 " airline is in use.
 function! g:Material_replace_statusline_highlight()
-  call s:highlight('StatusLine', s:h_strong_framing_with_fg)
+  call s:highlight('StatusLine', s:h_vim_strong_framing_with_fg)
 endfunction
 
 " Shared highlight definitions {{{2
 " Basics {{{3
-let s:h_normal =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 8),
-      \   'bg':   s:color_value(s:neutral_hue, 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_normal_light =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 5),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_special_key =
-      \ { 'attr': 'italic',
-      \   'fg':   s:color_value(s:neutral_hue, 8),
-      \   'bg':   s:color_value(s:neutral_hue, 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_foreground =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_light_foreground =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 5),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
 
-" Popup menu {{{3
-let s:h_popup =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 8),
-      \   'bg':   s:color_value(s:neutral_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_popup_selected =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:primary_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_popup_scrollbar =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:neutral_hue, 5),
-      \   'sp':   s:material['transparent'] }
-let s:h_popup_thumb =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:neutral_hue, 10),
-      \   'sp':   s:material['transparent'] }
+let s:h_vim_normal =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 8),
+      \   'bg':   s:color_dict(s:hue_neutral, 1) }
+let s:h_vim_normal_light =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 5) }
+let s:h_vim_special_key =
+      \ { 'attr': 'italic',
+      \   'fg':   s:color_dict(s:hue_neutral, 8),
+      \   'bg':   s:color_dict(s:hue_neutral, 3) }
+let s:h_vim_conceal =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 8) }
+
+" Popup menu and floating windows {{{3
+let s:h_vim_popup =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 8),
+      \   'bg':   s:color_dict(s:hue_neutral, 2) }
+let s:h_vim_popup_selected =
+      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
+let s:h_vim_popup_scrollbar =
+      \ { 'bg':   s:color_dict(s:hue_neutral, 5) }
+let s:h_vim_popup_thumb =
+      \ { 'bg':   s:color_dict(s:hue_neutral, 10) }
 
 " Framing {{{3
-let s:h_lighter_framing =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:neutral_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_light_framing_subtle_fg =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 7),
-      \   'bg':   s:color_value(s:neutral_hue, 5),
-      \   'sp':   s:material['transparent'] }
-let s:h_light_framing_strong_fg =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:neutral_hue, 5),
-      \   'sp':   s:material['transparent'] }
-let s:h_strong_framing_without_fg =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:neutral_hue, 8),
-      \   'sp':   s:material['transparent'] }
-let s:h_strong_framing_with_fg =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1, 'accent'),
-      \   'bg':   s:color_value(s:neutral_hue, 8),
-      \   'sp':   s:material['transparent'] }
-let s:h_status_line =
+let s:h_vim_lighter_framing =
+      \ { 'bg':   s:color_dict(s:hue_neutral, 2) }
+let s:h_vim_light_framing_subtle_fg =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 7),
+      \   'bg':   s:color_dict(s:hue_neutral, 5) }
+let s:h_vim_light_framing_strong_fg =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_neutral, 5) }
+let s:h_vim_strong_framing_without_fg =
+      \ { 'bg':   s:color_dict(s:hue_neutral, 8) }
+let s:h_vim_strong_framing_with_fg =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1, 'accent'),
+      \   'bg':   s:color_dict(s:hue_neutral, 8) }
+let s:h_vim_status_line =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:primary_hue, 4, 'accent'),
-      \   'sp':   s:material['transparent'] }
-let s:h_status_line_nc =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:neutral_hue, 8),
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_primary, 4, 'accent') }
+let s:h_vim_status_line_nc =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_neutral, 8) }
 
 " Cursor related {{{3
-let s:h_visual =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:primary_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_wild_menu =
+let s:h_vim_visual =
+      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
+let s:h_vim_wild_menu =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:primary_hue, 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursorlines =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:primary_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursorlines_num =
+      \   'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_primary, 3) }
+let s:h_vim_cursorlines =
+      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
+let s:h_vim_cursorlines_num =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:color_value(s:primary_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursor =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:primary_hue, 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursor_insert =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('blue', 7),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursor_replace =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('amber', 7),
-      \   'sp':   s:material['transparent'] }
-let s:h_cursor_unfocused =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:primary_hue, 3),
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict(s:hue_neutral, 6),
+      \   'bg':   s:color_dict(s:hue_primary, 2) }
+let s:h_vim_cursor =
+      \ { 'bg':   s:color_dict(s:hue_primary, 6) }
+let s:h_vim_cursor_insert =
+      \ { 'bg':   s:color_dict(s:hue_insert, 7) }
+let s:h_vim_cursor_replace =
+      \ { 'bg':   s:color_dict(s:hue_replace, 7) }
+let s:h_vim_cursor_unfocused =
+      \ { 'bg':   s:color_dict(s:hue_primary, 3) }
 
 " Diff related {{{3
-let s:h_diff_add =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:diff_added_hue, 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_delete =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:diff_deleted_hue, 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_line_add =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:diff_added_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_line_change =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:diff_changed_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_line_change_delete =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:diff_changed_hue, 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_line_delete =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:diff_deleted_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_line_text =
+let s:h_vim_diff_add =
+      \ { 'fg':   s:color_dict(s:diff_added_hue, 6) }
+let s:h_vim_diff_delete =
+      \ { 'fg':   s:color_dict(s:diff_deleted_hue, 6) }
+let s:h_vim_diff_line_add =
+      \ { 'bg':   s:color_dict(s:diff_added_hue, 2) }
+let s:h_vim_diff_line_change =
+      \ { 'bg':   s:color_dict(s:diff_changed_hue, 2) }
+let s:h_vim_diff_line_change_delete =
+      \ { 'bg':   s:color_dict(s:diff_changed_hue, 3) }
+let s:h_vim_diff_line_delete =
+      \ { 'bg':   s:color_dict(s:diff_deleted_hue, 2) }
+let s:h_vim_diff_line_text =
       \ { 'attr': 'bold',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value(s:diff_text_hue, 2),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_sign_add =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:diff_added_hue, 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_sign_change =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:diff_changed_hue, 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_sign_change_delete =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:diff_changed_hue, 7),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_sign_delete =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:diff_deleted_hue, 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_diff_sign_text =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:diff_text_hue, 6),
-      \   'sp':   s:material['transparent'] }
+      \   'bg':   s:color_dict(s:diff_text_hue, 2) }
+let s:h_vim_diff_sign_add =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:diff_added_hue, 6) }
+let s:h_vim_diff_sign_change =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:diff_changed_hue, 6) }
+let s:h_vim_diff_sign_change_delete =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:diff_changed_hue, 7) }
+let s:h_vim_diff_sign_delete =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:diff_deleted_hue, 6) }
 
 " Messages {{{3
-let s:h_title =
+let s:h_vim_title =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('pink', 5),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_mode_msg =
+      \   'fg':   s:color_dict('pink', 5) }
+let s:h_vim_mode_msg =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_more_msg =
+      \   'fg':   s:color_dict(s:hue_neutral, 8) }
+let s:h_vim_more_msg =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_error_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('red', 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_error_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('red', 6) }
-let s:h_style_error_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('red', 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_style_error_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('red', 3) }
-let s:h_warning_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('orange', 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_warning_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('orange', 6) }
-let s:h_style_warning_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('orange', 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_style_warning_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('orange', 3) }
-let s:h_info_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('light_blue', 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_info_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('light_blue', 6) }
-let s:h_hint_inverted =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('blue', 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_hint_underline =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('blue', 3) }
+      \   'fg':   s:color_dict('green', 8) }
+let s:h_vim_error_inverted =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('red', 6) }
+let s:h_vim_error_underline =
+      \ { 'sp':   s:color_dict('red', 6) }
+let s:h_vim_style_error_inverted =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('red', 3) }
+let s:h_vim_style_error_underline =
+      \ { 'sp':   s:color_dict('red', 3) }
+let s:h_vim_warning_inverted =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('orange', 6) }
+let s:h_vim_warning_underline =
+      \ { 'sp':   s:color_dict('orange', 6) }
+let s:h_vim_style_warning_inverted =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('orange', 3) }
+let s:h_vim_style_warning_underline =
+      \ { 'sp':   s:color_dict('orange', 3) }
+let s:h_vim_info_inverted =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('light_blue', 6) }
+let s:h_vim_info_underline =
+      \ { 'sp':   s:color_dict('light_blue', 6) }
 
 " Spelling {{{3
-let s:h_spell_bad =
+let s:h_vim_spell_bad =
       \ { 'attr': 'undercurl',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('red', 6) }
-let s:h_spell_cap =
+      \   'sp':   s:color_dict('red', 6) }
+let s:h_vim_spell_cap =
       \ { 'attr': 'undercurl',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('indigo', 6) }
-let s:h_spell_rare =
+      \   'sp':   s:color_dict('indigo', 6) }
+let s:h_vim_spell_rare =
       \ { 'attr': 'undercurl',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('pink', 4) }
-let s:h_spell_local =
+      \   'sp':   s:color_dict('pink', 4) }
+let s:h_vim_spell_local =
       \ { 'attr': 'undercurl',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:color_value('teal', 6) }
+      \   'sp':   s:color_dict('teal', 6) }
 
 " Misc {{{3
-let s:h_directory =
+let s:h_vim_directory =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('blue', 5),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_folded =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:color_value(s:neutral_hue, 3),
-      \   'sp':   s:material['transparent'] }
-let s:h_search =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('yellow', 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_inc_search =
+      \   'fg':   s:color_dict('blue', 5) }
+let s:h_vim_folded =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+      \   'bg':   s:color_dict(s:hue_neutral, 3) }
+let s:h_vim_search =
+      \ { 'bg':   s:color_dict('yellow', 6) }
+let s:h_vim_inc_search =
       \ { 'attr': 'bold',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('orange', 6),
-      \   'sp':   s:material['transparent'] }
-let s:h_match_paren =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('teal', 3),
-      \   'sp':   s:material['transparent'] }
+      \   'bg':   s:color_dict('orange', 6) }
+let s:h_vim_match_paren =
+      \ { 'bg':   s:color_dict('teal', 3) }
 
 " Testing {{{3
-let s:h_test =
+let s:h_debug_test =
       \ { 'attr': 'bold,italic,undercurl',
-      \   'fg':   s:color_value('blue', 4),
-      \   'bg':   s:color_value('green', 9),
-      \   'sp':   s:color_value('red', 3) }
+      \   'fg':   s:color_dict('blue', 4),
+      \   'bg':   s:color_dict('green', 9),
+      \   'sp':   s:color_dict('red', 3) }
 
 " Syntax {{{3
 " Built-in {{{4
 
 " Comment and linked groups
-let s:h_comment =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+let s:h_syn_comment =
+      \ { 'fg':   s:color_dict(s:hue_neutral, 6) }
 
 " Constant and linked groups
-let s:h_constant =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue_grey', 7),
-      \   'bg':   s:color_value('blue_grey', 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_string =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('green', 7),
-      \   'bg':   s:color_value('green', 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_character =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('light_green', 7),
-      \   'bg':   s:color_value('light_green', 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_number =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue', 7),
-      \   'bg':   s:color_value('blue', 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_boolean =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 7),
-      \   'bg':   s:color_value('orange', 1),
-      \   'sp':   s:material['transparent'] }
-let s:h_float =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('light_blue', 7),
-      \   'bg':   s:color_value('light_blue', 1),
-      \   'sp':   s:material['transparent'] }
+let s:h_syn_constant =
+      \ { 'fg':   s:color_dict('blue_grey', 7),
+      \   'bg':   s:color_dict('blue_grey', 1) }
+let s:h_syn_string =
+      \ { 'fg':   s:color_dict('green', 7),
+      \   'bg':   s:color_dict('green', 1) }
+let s:h_syn_character =
+      \ { 'fg':   s:color_dict('light_green', 7),
+      \   'bg':   s:color_dict('light_green', 1) }
+let s:h_syn_number =
+      \ { 'fg':   s:color_dict('blue', 7),
+      \   'bg':   s:color_dict('blue', 1) }
+let s:h_syn_boolean =
+      \ { 'fg':   s:color_dict('orange', 7),
+      \   'bg':   s:color_dict('orange', 1) }
+let s:h_syn_float =
+      \ { 'fg':   s:color_dict('light_blue', 7),
+      \   'bg':   s:color_dict('light_blue', 1) }
 
 " Statement and linked groups
-let s:h_statement =
+let s:h_syn_statement =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('orange', 7),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_operator =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 7),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('orange', 7) }
+let s:h_syn_operator =
+      \ { 'fg':   s:color_dict('orange', 7) }
 
 " PreProc and linked groups
-let s:h_pre_proc =
+let s:h_syn_pre_proc =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('teal', 5),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('teal', 5) }
 
 " Type and linked groups
-let s:h_storage_class =
+let s:h_syn_storage_class =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('yellow', 8),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('yellow', 8) }
 
 " Special and linked groups
-let s:h_special =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('red', 7),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+let s:h_syn_special =
+      \ { 'fg':   s:color_dict('red', 7) }
 
 " Underlined and linked groups
-let s:h_underlined =
+let s:h_syn_underlined =
       \ { 'attr': 'underline',
-      \   'fg':   s:color_value('blue', 7),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('blue', 7) }
 
 " Todo and linked groups
-let s:h_todo =
-      \ { 'attr': 'bold',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+let s:h_syn_todo =
+      \ { 'attr': 'bold' }
 
 " Custom {{{4
 
 " Member variables
 let s:h_syn_constant_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('indigo', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('indigo', 6) }
 let s:h_syn_field_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('blue', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('blue', 6) }
 
 " Other variables
 let s:h_syn_local_name =
       \ { 'attr': 'italic',
-      \   'fg':   s:color_value('orange', 4),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('orange', 4) }
 let s:h_syn_parameter_name =
       \ { 'attr': 'italic',
-      \   'fg':   s:color_value('orange', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('orange', 6) }
 
 " Functions and methods
 let s:h_syn_function_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('teal', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_function_name = s:syn_name_variant(s:h_syn_function_keyword)
+      \   'fg':   s:color_dict('teal', 6) }
+let s:h_syn_function_name = s:copy_without_attr(s:h_syn_function_keyword)
 let s:h_syn_accessor_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('cyan', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('cyan', 6) }
 
 " Types (primitive types and similar)
 let s:h_syn_type_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('lime', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_type_name = s:syn_name_variant(s:h_syn_type_keyword)
+      \   'fg':   s:color_dict('lime', 6) }
+let s:h_syn_type_name = s:copy_without_attr(s:h_syn_type_keyword)
 
 " Structures (smaller than classes, but not quite primitive types)
 let s:h_syn_structure_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('light_green', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_structure_name = s:syn_name_variant(s:h_syn_structure_keyword)
+      \   'fg':   s:color_dict('light_green', 6) }
+let s:h_syn_structure_name = s:copy_without_attr(s:h_syn_structure_keyword)
 
 " Typedefs (Classes and equally large/extensible things)
 let s:h_syn_typedef_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_typedef_name = s:syn_name_variant(s:h_syn_typedef_keyword)
+      \   'fg':   s:color_dict('green', 6) }
+let s:h_syn_typedef_name = s:copy_without_attr(s:h_syn_typedef_keyword)
 
 " Namespaces (or anything that groups together definitions)
 let s:h_syn_namespace_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('brown', 4),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_namespace_name = s:syn_name_variant(s:h_syn_namespace_keyword)
+      \   'fg':   s:color_dict('brown', 4) }
+let s:h_syn_namespace_name = s:copy_without_attr(s:h_syn_namespace_keyword)
 
 " Generic context background
 let s:h_syn_generic =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:material['transparent'],
-      \   'bg':   s:color_value('purple', 1),
-      \   'sp':   s:material['transparent'] }
+      \ { 'bg':   s:color_dict('purple', 1) }
 
 " Interfaces (or anything that is just a declaration, but not implementation)
 let s:h_syn_interface_keyword =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('purple', 4),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
-let s:h_syn_interface_name = s:syn_name_variant(s:h_syn_interface_keyword)
+      \   'fg':   s:color_dict('purple', 4) }
+let s:h_syn_interface_name = s:copy_without_attr(s:h_syn_interface_keyword)
 
 " Plugins {{{3
 " OmniSharp | OmniSharp/omnisharp-vim {{{4
 
 let s:h_omnisharp_extension_method_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('teal', 4),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('teal', 4) }
 
 let s:h_omnisharp_operator_overloaded =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 7),
-      \   'bg':   s:color_value('orange', 2),
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('orange', 7),
+      \   'bg':   s:color_dict('orange', 2) }
 
 let s:h_omnisharp_type_parameter_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:h_syn_structure_name.fg,
-      \   'bg':   s:h_syn_generic.bg,
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:h_syn_structure_name.fg,
+      \   'bg':   s:h_syn_generic.bg }
 
 let s:h_omnisharp_verbatim_string_literal =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('green', 7),
-      \   'bg':   s:color_value('green', 2),
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('green', 7),
+      \   'bg':   s:color_dict('green', 2) }
 
 let s:h_omnisharp_xml_doc_comment_attribute_name =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('green', 3) }
 
 let s:h_omnisharp_xml_doc_comment_attribute_quotes =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('green', 3) }
 
 let s:h_omnisharp_xml_doc_comment_attribute_value =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value('green', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict('green', 3) }
 
 let s:h_omnisharp_xml_doc_comment_delimiter =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('teal', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('teal', 3) }
 
 let s:h_omnisharp_xml_doc_comment_name =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value('orange', 3),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict('orange', 3) }
 
 let s:h_omnisharp_xml_doc_comment_text =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:material['transparent'],
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict(s:hue_neutral, 6) }
 
 " vim-airline | vim-airline/vim-airline {{{4
 
 let s:h_airline_1 =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 6),
-      \   'bg':   s:color_value(s:neutral_hue, 2),
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+      \   'bg':   s:color_dict(s:hue_neutral, 2) }
 let s:h_airline_3 =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value(s:neutral_hue, 8),
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_neutral, 8) }
 
 let s:h_airline_insert =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('blue', 7),
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_insert, 7) }
 let s:h_airline_replace =
       \ { 'attr': 'bold',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('amber', 7),
-      \   'sp':   s:material['transparent'] }
+      \   'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict(s:hue_replace, 7) }
 
 let s:h_airline_modified =
-      \ { 'attr': 'NONE',
-      \   'fg':   s:color_value(s:neutral_hue, 1),
-      \   'bg':   s:color_value('purple', 8),
-      \   'sp':   s:material['transparent'] }
+      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+      \   'bg':   s:color_dict('purple', 8) }
 
 " Editor colors {{{1
 " Non-editor window highlights {{{2
 " Framing {{{3
-call s:highlight('MsgSeparator', s:h_strong_framing_without_fg)
-call s:highlight('TabLineFill', s:h_strong_framing_without_fg)
-call s:highlight('VertSplit', s:h_strong_framing_without_fg)
+call s:highlight('MsgSeparator', s:h_vim_strong_framing_without_fg)
+call s:highlight('TabLineFill', s:h_vim_strong_framing_without_fg)
+call s:highlight('VertSplit', s:h_vim_strong_framing_without_fg)
 
-call s:highlight('FoldColumn', s:h_light_framing_subtle_fg)
-call s:highlight('SignColumn', s:h_light_framing_subtle_fg)
-call s:highlight('LineNr', s:h_light_framing_subtle_fg)
+call s:highlight('FoldColumn', s:h_vim_light_framing_subtle_fg)
+call s:highlight('SignColumn', s:h_vim_light_framing_subtle_fg)
+call s:highlight('LineNr', s:h_vim_light_framing_subtle_fg)
 
-call s:highlight('ColorColumn', s:h_lighter_framing)
+call s:highlight('ColorColumn', s:h_vim_lighter_framing)
 
-call s:highlight('CursorLineNr', s:h_cursorlines_num)
+call s:highlight('CursorLineNr', s:h_vim_cursorlines_num)
 
-call s:highlight('TabLine', s:h_light_framing_strong_fg)
-call s:highlight('TabLineSel', s:h_normal)
-call s:highlight('Title', s:h_title)
+call s:highlight('TabLine', s:h_vim_light_framing_strong_fg)
+call s:highlight('TabLineSel', s:h_vim_normal)
+call s:highlight('Title', s:h_vim_title)
 
-call s:highlight('StatusLine', s:h_status_line)
-call s:highlight('StatusLineNC', s:h_status_line_nc)
-call s:highlight('StatusLineTerm', s:h_status_line)
-call s:highlight('StatusLineTermNC', s:h_status_line_nc)
+call s:highlight('StatusLine', s:h_vim_status_line)
+call s:highlight('StatusLineNC', s:h_vim_status_line_nc)
+call s:highlight('StatusLineTerm', s:h_vim_status_line)
+call s:highlight('StatusLineTermNC', s:h_vim_status_line_nc)
 
-call s:highlight('WildMenu', s:h_wild_menu)
+call s:highlight('WildMenu', s:h_vim_wild_menu)
 
 " Popup menu and floating windows {{{3
-call s:highlight('Pmenu', s:h_popup)
-call s:highlight('PmenuSel', s:h_popup_selected)
-call s:highlight('PmenuSbar', s:h_popup_scrollbar)
-call s:highlight('PmenuThumb', s:h_popup_thumb)
-call s:highlight('NormalFloat', s:h_popup)
+call s:highlight('Pmenu', s:h_vim_popup)
+call s:highlight('PmenuSel', s:h_vim_popup_selected)
+call s:highlight('PmenuSbar', s:h_vim_popup_scrollbar)
+call s:highlight('PmenuThumb', s:h_vim_popup_thumb)
+call s:highlight('NormalFloat', s:h_vim_popup)
 
 " Editor window highlights {{{2
 " Normal text {{{3
-call s:highlight('NonText', s:h_normal_light)
-call s:highlight('Normal', s:h_normal)
-call s:highlight('NormalNC', s:h_normal)
-call s:highlight('MsgArea', s:h_normal)
+call s:highlight('NonText', s:h_vim_normal_light)
+call s:highlight('Normal', s:h_vim_normal)
+call s:highlight('NormalNC', s:h_vim_normal)
+call s:highlight('MsgArea', s:h_vim_normal)
 
 " Cursor {{{3
-call s:highlight('Cursor', s:h_cursor)
-call s:highlight('CursorInsert', s:h_cursor_insert)
-call s:highlight('CursorReplace', s:h_cursor_replace)
-call s:highlight('CursorIM', s:h_test) " I don't really use this
-call s:highlight('CursorColumn', s:h_cursorlines)
-call s:highlight('CursorLine', s:h_cursorlines)
-call s:highlight('IncSearch', s:h_inc_search)
-call s:highlight('MatchParen', s:h_match_paren)
-call s:highlight('QuickFixLine', s:h_visual)
-call s:highlight('Search', s:h_search)
-call s:highlight('Substitute', s:h_search)
-call s:highlight('TermCursor', s:h_cursor)
-call s:highlight('TermCursorNC', s:h_cursor_unfocused)
-call s:highlight('Visual', s:h_visual)
-call s:highlight('VisualNOS', s:h_test) " doesn't seem to work
+call s:highlight('Cursor', s:h_vim_cursor)
+call s:highlight('CursorInsert', s:h_vim_cursor_insert)
+call s:highlight('CursorReplace', s:h_vim_cursor_replace)
+call s:highlight('CursorIM', s:h_debug_test) " I don't really use this
+call s:highlight('CursorColumn', s:h_vim_cursorlines)
+call s:highlight('CursorLine', s:h_vim_cursorlines)
+call s:highlight('IncSearch', s:h_vim_inc_search)
+call s:highlight('MatchParen', s:h_vim_match_paren)
+call s:highlight('QuickFixLine', s:h_vim_visual)
+call s:highlight('Search', s:h_vim_search)
+call s:highlight('Substitute', s:h_vim_search)
+call s:highlight('TermCursor', s:h_vim_cursor)
+call s:highlight('TermCursorNC', s:h_vim_cursor_unfocused)
+call s:highlight('Visual', s:h_vim_visual)
+call s:highlight('VisualNOS', s:h_debug_test) " doesn't seem to work
 
 " Special character visualization {{{3
-call s:highlight('Conceal', s:h_foreground)
-call s:highlight('EndOfBuffer', s:h_light_foreground)
-call s:highlight('SpecialKey', s:h_special_key)
-call s:highlight('Whitespace', s:h_normal_light)
+call s:highlight('Conceal', s:h_vim_conceal)
+call s:highlight('EndOfBuffer', s:h_vim_normal_light)
+call s:highlight('SpecialKey', s:h_vim_special_key)
+call s:highlight('Whitespace', s:h_vim_normal_light)
 
 " Diff {{{3
-call s:highlight('DiffAdd', s:h_diff_line_add)
-call s:highlight('DiffChange', s:h_diff_line_change)
-call s:highlight('DiffDelete', s:h_diff_line_delete)
-call s:highlight('DiffText', s:h_diff_line_text)
+call s:highlight('DiffAdd', s:h_vim_diff_line_add)
+call s:highlight('DiffChange', s:h_vim_diff_line_change)
+call s:highlight('DiffDelete', s:h_vim_diff_line_delete)
+call s:highlight('DiffText', s:h_vim_diff_line_text)
 
 " Spelling {{{3
-call s:highlight('SpellBad', s:h_spell_bad)
-call s:highlight('SpellCap', s:h_spell_cap)
-call s:highlight('SpellLocal', s:h_spell_local)
-call s:highlight('SpellRare', s:h_spell_rare)
+call s:highlight('SpellBad', s:h_vim_spell_bad)
+call s:highlight('SpellCap', s:h_vim_spell_cap)
+call s:highlight('SpellLocal', s:h_vim_spell_local)
+call s:highlight('SpellRare', s:h_vim_spell_rare)
 
 " Special items {{{2
-call s:highlight('Directory', s:h_directory)
-call s:highlight('Folded', s:h_folded)
+call s:highlight('Directory', s:h_vim_directory)
+call s:highlight('Folded', s:h_vim_folded)
 
 " Messages {{{2
-call s:highlight('ErrorMsg', s:h_error_inverted)
-call s:highlight('ModeMsg', s:h_mode_msg)
-call s:highlight('MoreMsg', s:h_more_msg)
-call s:highlight('Question', s:h_more_msg)
-call s:highlight('WarningMsg', s:h_warning_inverted)
+call s:highlight('ErrorMsg', s:h_vim_error_inverted)
+call s:highlight('ModeMsg', s:h_vim_mode_msg)
+call s:highlight('MoreMsg', s:h_vim_more_msg)
+call s:highlight('Question', s:h_vim_more_msg)
+call s:highlight('WarningMsg', s:h_vim_warning_inverted)
 
 " Syntax groups {{{2
-call s:highlight('Comment', s:h_comment)
+call s:highlight('Comment', s:h_syn_comment)
 
-call s:highlight('Constant', s:h_constant)
-call s:highlight('String', s:h_string)
-call s:highlight('Character', s:h_character)
-call s:highlight('Number', s:h_number)
-call s:highlight('Boolean', s:h_boolean)
-call s:highlight('Float', s:h_float)
+call s:highlight('Constant', s:h_syn_constant)
+call s:highlight('String', s:h_syn_string)
+call s:highlight('Character', s:h_syn_character)
+call s:highlight('Number', s:h_syn_number)
+call s:highlight('Boolean', s:h_syn_boolean)
+call s:highlight('Float', s:h_syn_float)
 
 call s:highlight('Identifier', s:h_syn_structure_name)
 call s:highlight('Function', s:h_syn_function_name)
 
-call s:highlight('Statement', s:h_statement)
-call s:highlight('Operator', s:h_operator)
+call s:highlight('Statement', s:h_syn_statement)
+call s:highlight('Operator', s:h_syn_operator)
 
-call s:highlight('PreProc', s:h_pre_proc)
+call s:highlight('PreProc', s:h_syn_pre_proc)
 
 call s:highlight('Type', s:h_syn_type_keyword)
-call s:highlight('StorageClass', s:h_storage_class)
+call s:highlight('StorageClass', s:h_syn_storage_class)
 call s:highlight('Structure', s:h_syn_structure_keyword)
 call s:highlight('Typedef', s:h_syn_typedef_keyword)
 
-call s:highlight('Special', s:h_special)
+call s:highlight('Special', s:h_syn_special)
 
-call s:highlight('Underlined', s:h_underlined)
+call s:highlight('Underlined', s:h_syn_underlined)
 
-call s:highlight('Error', s:h_error_inverted)
+call s:highlight('Error', s:h_vim_error_inverted)
 
-call s:highlight('Todo', s:h_todo)
+call s:highlight('Todo', s:h_syn_todo)
 
 " custom variables {{{1
 " terminal color variables {{{2
-let g:terminal_color_0  = s:color_value('grey', 9)['gui']
-let g:terminal_color_1  = s:color_value('red', 6)['gui']
-let g:terminal_color_2  = s:color_value('light_green', 6)['gui']
-let g:terminal_color_3  = s:color_value('amber', 8)['gui']
-let g:terminal_color_4  = s:color_value('blue', 6)['gui']
-let g:terminal_color_5  = s:color_value('purple', 6)['gui']
-let g:terminal_color_6  = s:color_value('cyan', 6)['gui']
-let g:terminal_color_7  = s:color_value('grey', 6)['gui']
-let g:terminal_color_8  = s:color_value('grey', 5)['gui']
-let g:terminal_color_9  = s:color_value('red', 4)['gui']
-let g:terminal_color_10 = s:color_value('light_green', 4)['gui']
-let g:terminal_color_11 = s:color_value('amber', 6)['gui']
-let g:terminal_color_12 = s:color_value('blue', 4)['gui']
-let g:terminal_color_13 = s:color_value('purple', 4)['gui']
-let g:terminal_color_14 = s:color_value('cyan', 4)['gui']
-let g:terminal_color_15 = s:color_value('grey', 4)['gui']
+let g:terminal_color_0  = s:color_dict('grey', 9).gui
+let g:terminal_color_1  = s:color_dict('red', 6).gui
+let g:terminal_color_2  = s:color_dict('light_green', 6).gui
+let g:terminal_color_3  = s:color_dict('amber', 8).gui
+let g:terminal_color_4  = s:color_dict('blue', 6).gui
+let g:terminal_color_5  = s:color_dict('purple', 6).gui
+let g:terminal_color_6  = s:color_dict('cyan', 6).gui
+let g:terminal_color_7  = s:color_dict('grey', 6).gui
+let g:terminal_color_8  = s:color_dict('grey', 5).gui
+let g:terminal_color_9  = s:color_dict('red', 4).gui
+let g:terminal_color_10 = s:color_dict('light_green', 4).gui
+let g:terminal_color_11 = s:color_dict('amber', 6).gui
+let g:terminal_color_12 = s:color_dict('blue', 4).gui
+let g:terminal_color_13 = s:color_dict('purple', 4).gui
+let g:terminal_color_14 = s:color_dict('cyan', 4).gui
+let g:terminal_color_15 = s:color_dict('grey', 4).gui
 
 " custom highlight groups {{{1
 " debugging highlight groups {{{2
 
-call s:highlight('Test', s:h_test)
+call s:highlight('Test', s:h_debug_test)
 
 " File type highlight groups {{{2
 " C# {{{3
 " Vim Built-in {{{4
 
-call s:highlight('csBraces', s:h_special)
+call s:highlight('csBraces', s:h_syn_special)
 call s:highlight('csClass', s:h_syn_typedef_keyword)
 call s:highlight('csClassType', s:h_syn_typedef_name)
-call s:highlight('csEndColon', s:h_special)
+call s:highlight('csEndColon', s:h_syn_special)
 call s:highlight('csGeneric', s:h_syn_generic)
 call s:highlight('csNewType', s:h_syn_typedef_name)
-call s:highlight('csParens', s:h_special)
+call s:highlight('csParens', s:h_syn_special)
 call s:highlight('csStorage', s:h_syn_namespace_keyword)
 
 " highlight groups for plugins {{{2
 " Asynchronous Lint Engine | w0rp/ale {{{3
 
-call s:highlight('ALEError', s:h_error_underline)
-call s:highlight('ALEErrorSign', s:h_error_inverted)
-call s:highlight('ALEVirtualTextError', s:h_error_inverted)
+call s:highlight('ALEError', s:h_vim_error_underline)
+call s:highlight('ALEErrorSign', s:h_vim_error_inverted)
+call s:highlight('ALEVirtualTextError', s:h_vim_error_inverted)
 
-call s:highlight('ALEInfo', s:h_info_underline)
-call s:highlight('ALEInfoSign', s:h_info_inverted)
-call s:highlight('ALEVirtualTextInfo', s:h_info_inverted)
+call s:highlight('ALEInfo', s:h_vim_info_underline)
+call s:highlight('ALEInfoSign', s:h_vim_info_inverted)
+call s:highlight('ALEVirtualTextInfo', s:h_vim_info_inverted)
 
-call s:highlight('ALEStyleError', s:h_style_error_underline)
-call s:highlight('ALEStyleErrorSign', s:h_style_error_inverted)
-call s:highlight('ALEVirtualTextStyleError', s:h_style_error_inverted)
+call s:highlight('ALEStyleError', s:h_vim_style_error_underline)
+call s:highlight('ALEStyleErrorSign', s:h_vim_style_error_inverted)
+call s:highlight('ALEVirtualTextStyleError', s:h_vim_style_error_inverted)
 
-call s:highlight('ALEStyleWarning', s:h_style_warning_underline)
-call s:highlight('ALEStyleWarningSign', s:h_style_warning_inverted)
-call s:highlight('ALEVirtualTextStyleWarning', s:h_style_warning_inverted)
+call s:highlight('ALEStyleWarning', s:h_vim_style_warning_underline)
+call s:highlight('ALEStyleWarningSign', s:h_vim_style_warning_inverted)
+call s:highlight('ALEVirtualTextStyleWarning', s:h_vim_style_warning_inverted)
 
-call s:highlight('ALEWarning', s:h_warning_underline)
-call s:highlight('ALEWarningSign', s:h_warning_inverted)
-call s:highlight('ALEVirtualTextWarning', s:h_warning_inverted)
+call s:highlight('ALEWarning', s:h_vim_warning_underline)
+call s:highlight('ALEWarningSign', s:h_vim_warning_inverted)
+call s:highlight('ALEVirtualTextWarning', s:h_vim_warning_inverted)
 
 " coc.nvim | neoclide/coc.nvim {{{3
 
-call s:highlight('CocCodeLens', s:h_comment)
+call s:highlight('CocCodeLens', s:h_syn_comment)
 
 " vim-git | tpope/vim-git {{{3
 
-call s:highlight('diffAdded', s:h_diff_add)
-call s:highlight('diffRemoved', s:h_diff_delete)
+call s:highlight('diffAdded', s:h_vim_diff_add)
+call s:highlight('diffRemoved', s:h_vim_diff_delete)
 
 " Signify | mhinz/vim-signify {{{3
 
-call s:highlight('SignifySignAdd', s:h_diff_sign_add)
-call s:highlight('SignifySignChange', s:h_diff_sign_change)
-call s:highlight('SignifySignChangeDelete', s:h_diff_sign_change_delete)
-call s:highlight('SignifySignDelete', s:h_diff_sign_delete)
-call s:highlight('SignifySignDeleteFirstLine', s:h_diff_sign_delete)
+call s:highlight('SignifySignAdd', s:h_vim_diff_sign_add)
+call s:highlight('SignifySignChange', s:h_vim_diff_sign_change)
+call s:highlight('SignifySignChangeDelete', s:h_vim_diff_sign_change_delete)
+call s:highlight('SignifySignDelete', s:h_vim_diff_sign_delete)
+call s:highlight('SignifySignDeleteFirstLine', s:h_vim_diff_sign_delete)
 
-call s:highlight('SignifyLineAdd', s:h_diff_line_add)
-call s:highlight('SignifyLineChange', s:h_diff_line_change)
-call s:highlight('SignifyLineChangeDelete', s:h_diff_line_change_delete)
-call s:highlight('SignifyLineDelete', s:h_diff_line_delete)
-call s:highlight('SignifyLineDeleteFirstLine', s:h_diff_line_delete)
+call s:highlight('SignifyLineAdd', s:h_vim_diff_line_add)
+call s:highlight('SignifyLineChange', s:h_vim_diff_line_change)
+call s:highlight('SignifyLineChangeDelete', s:h_vim_diff_line_change_delete)
+call s:highlight('SignifyLineDelete', s:h_vim_diff_line_delete)
+call s:highlight('SignifyLineDeleteFirstLine', s:h_vim_diff_line_delete)
 
 " OmniSharp | OmniSharp/omnisharp-vim {{{3
 
@@ -1261,15 +1026,15 @@ let g:OmniSharp_highlight_groups = {
 " vim-airline | vim-airline/vim-airline {{{3
 
 call s:highlight('Airline1', s:h_airline_1)
-call s:highlight('Airline2', s:h_light_framing_strong_fg)
+call s:highlight('Airline2', s:h_vim_light_framing_strong_fg)
 call s:highlight('Airline3', s:h_airline_3)
 
-call s:highlight('AirlineNormal', s:h_status_line)
+call s:highlight('AirlineNormal', s:h_vim_status_line)
 call s:highlight('AirlineInsert', s:h_airline_insert)
 call s:highlight('AirlineReplace', s:h_airline_replace)
-call s:highlight('AirlineVisual', s:h_visual)
+call s:highlight('AirlineVisual', s:h_vim_visual)
 
-call s:highlight('AirlineWarning', s:h_warning_inverted)
-call s:highlight('AirlineError', s:h_error_inverted)
+call s:highlight('AirlineWarning', s:h_vim_warning_inverted)
+call s:highlight('AirlineError', s:h_vim_error_inverted)
 
 call s:highlight('AirlineModified', s:h_airline_modified)
