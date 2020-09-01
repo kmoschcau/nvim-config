@@ -617,6 +617,7 @@ let s:h_syn_todo =
       \ { 'attr': 'bold' }
 
 " Custom {{{4
+" General {{{5
 
 " Member variables
 let s:h_syn_constant_name =
@@ -673,6 +674,11 @@ let s:h_syn_interface_keyword =
       \ { 'attr': 'bold',
       \   'fg':   s:color_dict('purple', 4) }
 let s:h_syn_interface_name = s:copy_without_attr(s:h_syn_interface_keyword)
+
+" File type specific {{{5
+
+let s:h_syn_vimscript_comment_string =
+      \ { 'fg':   s:color_dict('green', 5) }
 
 " Plugins {{{3
 " OmniSharp | OmniSharp/omnisharp-vim {{{4
@@ -877,8 +883,7 @@ let g:terminal_color_15 = s:color_dict('grey', 4).gui
 call s:highlight('Test', s:h_debug_test)
 
 " File type highlight groups {{{2
-" C# {{{3
-" Vim Built-in {{{4
+" cs (C#) {{{3
 
 call s:highlight('csBraces', s:h_syn_special)
 call s:highlight('csClass', s:h_syn_typedef_keyword)
@@ -888,6 +893,17 @@ call s:highlight('csGeneric', s:h_syn_generic)
 call s:highlight('csNewType', s:h_syn_typedef_name)
 call s:highlight('csParens', s:h_syn_special)
 call s:highlight('csStorage', s:h_syn_namespace_keyword)
+
+" gitcommit {{{3
+
+call s:highlight('gitCommitBlank', s:h_vim_style_error_underline)
+call s:highlight('gitcommitOverflow', s:h_vim_style_warning_underline)
+
+" vim (VimScript|VimL) {{{3
+
+call s:highlight('vimCommentString', s:h_syn_vimscript_comment_string)
+call s:highlight('vimFunction', s:h_syn_function_name)
+call s:highlight('vimUserFunc', s:h_syn_function_name)
 
 " highlight groups for plugins {{{2
 " Asynchronous Lint Engine | w0rp/ale {{{3
