@@ -6,6 +6,7 @@
 " -----------------------------------------------------------------------------
 
 " General setup {{{1
+
 " Reset all highlight groups to the default.
 highlight clear
 
@@ -13,6 +14,7 @@ highlight clear
 let g:colors_name = expand('<sfile>:t:r')
 
 " Material color palette {{{2
+
 let s:material =
       \ { 'red':         { '50':   { 'gui': '#ffebee', 'cterm': '255' },
                          \ '100':  { 'gui': '#ffcdd2', 'cterm': '224' },
@@ -270,7 +272,6 @@ let s:material =
                          \ '900':  { 'gui': '#263238', 'cterm': '236' } },
         \ 'transparent': { 'gui': 'NONE', 'cterm': 'NONE' } }
 
-
 " Default hue selection {{{2
 
 " A dict of user configured hues
@@ -290,6 +291,7 @@ let s:hue_insert = get(s:user_hues, 'insert', 'blue')
 let s:hue_replace = get(s:user_hues, 'replace', 'amber')
 
 " Diff hues {{{3
+
 " Hue used for added diff
 let s:hue_diff_added = get(s:user_hues, 'diff_added', 'green')
 
@@ -303,6 +305,7 @@ let s:hue_diff_deleted = get(s:user_hues, 'diff_deleted', 'red')
 let s:hue_diff_text = get(s:user_hues, 'diff_text', 'orange')
 
 " value list  {{{2
+
 let s:normal_values = [ '50', '100', '200', '300', '400', '500', '600',
                     \  '700', '800', '900']
 let s:accent_values = ['A100', 'A200', 'A400', 'A700']
@@ -368,498 +371,513 @@ function! s:color_dict(color_name, color_index, ...)
   endif
 endfunction
 
-" Copy the passed color dictionary without the "attr" key
-function! s:copy_without_attr(color_dictionary)
-  let l:dict_copy = copy(a:color_dictionary)
-  unlet l:dict_copy.attr
-  return l:dict_copy
-endfunction
-
 " This replaces the default statusline highlight with the strong framing
 " highlight. This is meant to be used to remove the differing, one character
 " highlight on the right side of the statusline for windows on the bottom when
 " airline is in use.
 function! g:Material_replace_statusline_highlight()
-  call s:highlight('StatusLine', s:h_vim_strong_framing_with_fg)
+  highlight! link StatusLine Material_VimStrongFramingWithFg
 endfunction
 
-" Shared highlight definitions {{{2
+" Highlight definitions {{{2
 " Basics {{{3
 
-let s:h_vim_normal =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 8),
-      \   'bg':   s:color_dict(s:hue_neutral, 1) }
-let s:h_vim_normal_light =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 5) }
-let s:h_vim_special_key =
-      \ { 'attr': 'italic',
-      \   'fg':   s:color_dict(s:hue_neutral, 8),
-      \   'bg':   s:color_dict(s:hue_neutral, 3) }
-let s:h_vim_conceal =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 8) }
+" This is somewhat of a hack and not like I intended it. But just linking the
+" Normal group to anything instead of defining it on its own will cause the
+" current window to have a transparent background for some reason.
+highlight! link Material_VimNormal Normal
+call s:highlight('Normal',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 8),
+                 \   'bg':   s:color_dict(s:hue_neutral, 1) })
+call s:highlight('Material_VimNormalLight',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 5),
+                 \   'bg':   s:color_dict(s:hue_neutral, 1) })
+call s:highlight('Material_VimSpecialKey',
+                 \ { 'attr': 'italic',
+                 \   'fg':   s:color_dict(s:hue_neutral, 8),
+                 \   'bg':   s:color_dict(s:hue_neutral, 3) })
+call s:highlight('Material_VimConceal',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 8) })
 
 " Popup menu and floating windows {{{3
-let s:h_vim_popup =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 8),
-      \   'bg':   s:color_dict(s:hue_neutral, 2) }
-let s:h_vim_popup_selected =
-      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
-let s:h_vim_popup_scrollbar =
-      \ { 'bg':   s:color_dict(s:hue_neutral, 5) }
-let s:h_vim_popup_thumb =
-      \ { 'bg':   s:color_dict(s:hue_neutral, 10) }
+
+call s:highlight('Material_VimPopup',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 8),
+                 \   'bg':   s:color_dict(s:hue_neutral, 2) })
+call s:highlight('Material_VimPopupSelected',
+                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+call s:highlight('Material_VimPopupScrollbar',
+                 \ { 'bg':   s:color_dict(s:hue_neutral, 5) })
+call s:highlight('Material_VimPopupThumb',
+                 \ { 'bg':   s:color_dict(s:hue_neutral, 10) })
 
 " Framing {{{3
-let s:h_vim_lighter_framing =
-      \ { 'bg':   s:color_dict(s:hue_neutral, 2) }
-let s:h_vim_light_framing_subtle_fg =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 7),
-      \   'bg':   s:color_dict(s:hue_neutral, 5) }
-let s:h_vim_light_framing_strong_fg =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_neutral, 5) }
-let s:h_vim_strong_framing_without_fg =
-      \ { 'bg':   s:color_dict(s:hue_neutral, 8) }
-let s:h_vim_strong_framing_with_fg =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1, 'accent'),
-      \   'bg':   s:color_dict(s:hue_neutral, 8) }
-let s:h_vim_status_line =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_primary, 4, 'accent') }
-let s:h_vim_status_line_nc =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_neutral, 8) }
+
+call s:highlight('Material_VimLighterFraming',
+                 \ { 'bg':   s:color_dict(s:hue_neutral, 2) })
+call s:highlight('Material_VimLightFramingSubtleFg',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 7),
+                 \   'bg':   s:color_dict(s:hue_neutral, 5) })
+call s:highlight('Material_VimLightFramingStrongFg',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_neutral, 5) })
+call s:highlight('Material_VimStrongFramingWithoutFg',
+                 \ { 'bg':   s:color_dict(s:hue_neutral, 8) })
+call s:highlight('Material_VimStrongFramingWithFg',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1, 'accent'),
+                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
+call s:highlight('Material_VimStatusLine',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_primary, 4, 'accent') })
+call s:highlight('Material_VimStatusLineNC',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
 
 " Cursor related {{{3
-let s:h_vim_visual =
-      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
-let s:h_vim_wild_menu =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_primary, 3) }
-let s:h_vim_cursorlines =
-      \ { 'bg':   s:color_dict(s:hue_primary, 2) }
-let s:h_vim_cursorlines_num =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 6),
-      \   'bg':   s:color_dict(s:hue_primary, 2) }
-let s:h_vim_cursor =
-      \ { 'bg':   s:color_dict(s:hue_primary, 6) }
-let s:h_vim_cursor_insert =
-      \ { 'bg':   s:color_dict(s:hue_insert, 7) }
-let s:h_vim_cursor_replace =
-      \ { 'bg':   s:color_dict(s:hue_replace, 7) }
-let s:h_vim_cursor_unfocused =
-      \ { 'bg':   s:color_dict(s:hue_primary, 3) }
+
+call s:highlight('Material_VimVisual',
+                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+call s:highlight('Material_VimWildMenu',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_primary, 3) })
+call s:highlight('Material_VimCursorLines',
+                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+call s:highlight('Material_VimCursorLinesNum',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 6),
+                 \   'bg':   s:color_dict(s:hue_primary, 2) })
+call s:highlight('Material_VimCursor',
+                 \ { 'bg':   s:color_dict(s:hue_primary, 6) })
+call s:highlight('Material_VimCursorInsert',
+                 \ { 'bg':   s:color_dict(s:hue_insert, 7) })
+call s:highlight('Material_VimCursorReplace',
+                 \ { 'bg':   s:color_dict(s:hue_replace, 7) })
+call s:highlight('Material_VimCursorUnfocused',
+                 \ { 'bg':   s:color_dict(s:hue_primary, 3) })
 
 " Diff related {{{3
-let s:h_vim_diff_add =
-      \ { 'fg':   s:color_dict(s:hue_diff_added, 6) }
-let s:h_vim_diff_delete =
-      \ { 'fg':   s:color_dict(s:hue_diff_deleted, 6) }
-let s:h_vim_diff_line_add =
-      \ { 'bg':   s:color_dict(s:hue_diff_added, 2) }
-let s:h_vim_diff_line_change =
-      \ { 'bg':   s:color_dict(s:hue_diff_changed, 2) }
-let s:h_vim_diff_line_change_delete =
-      \ { 'bg':   s:color_dict(s:hue_diff_changed, 3) }
-let s:h_vim_diff_line_delete =
-      \ { 'bg':   s:color_dict(s:hue_diff_deleted, 2) }
-let s:h_vim_diff_line_text =
-      \ { 'attr': 'bold',
-      \   'bg':   s:color_dict(s:hue_diff_text, 2) }
-let s:h_vim_diff_sign_add =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_diff_added, 6) }
-let s:h_vim_diff_sign_change =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_diff_changed, 6) }
-let s:h_vim_diff_sign_change_delete =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_diff_changed, 7) }
-let s:h_vim_diff_sign_delete =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_diff_deleted, 6) }
+
+call s:highlight('Material_VimDiffAdd',
+                 \ { 'fg':   s:color_dict(s:hue_diff_added, 6) })
+call s:highlight('Material_VimDiffDelete',
+                 \ { 'fg':   s:color_dict(s:hue_diff_deleted, 6) })
+call s:highlight('Material_VimDiffLineAdd',
+                 \ { 'bg':   s:color_dict(s:hue_diff_added, 2) })
+call s:highlight('Material_VimDiffLineChange',
+                 \ { 'bg':   s:color_dict(s:hue_diff_changed, 2) })
+call s:highlight('Material_VimDiffLineChangeDelete',
+                 \ { 'bg':   s:color_dict(s:hue_diff_changed, 3) })
+call s:highlight('Material_VimDiffLineDelete',
+                 \ { 'bg':   s:color_dict(s:hue_diff_deleted, 2) })
+call s:highlight('Material_VimDiffLineText',
+                 \ { 'attr': 'bold',
+                 \   'bg':   s:color_dict(s:hue_diff_text, 2) })
+call s:highlight('Material_VimDiffSignAdd',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_diff_added, 6) })
+call s:highlight('Material_VimDiffSignChange',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_diff_changed, 6) })
+call s:highlight('Material_VimDiffSignChangeDelete',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_diff_changed, 7) })
+call s:highlight('Material_VimDiffSignDelete',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_diff_deleted, 6) })
 
 " Messages {{{3
-let s:h_vim_title =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('pink', 5) }
-let s:h_vim_mode_msg =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 8) }
-let s:h_vim_more_msg =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('green', 8) }
-let s:h_vim_error_inverted =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('red', 6) }
-let s:h_vim_error_underline =
-      \ { 'attr': 'underline',
-      \   'sp':   s:color_dict('red', 6) }
-let s:h_vim_style_error_inverted =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('red', 3) }
-let s:h_vim_style_error_underline =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('red', 3) }
-let s:h_vim_warning_inverted =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('orange', 6) }
-let s:h_vim_warning_underline =
-      \ { 'attr': 'underline',
-      \   'sp':   s:color_dict('orange', 6) }
-let s:h_vim_style_warning_inverted =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('orange', 3) }
-let s:h_vim_style_warning_underline =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('orange', 3) }
-let s:h_vim_info_inverted =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('light_blue', 6) }
-let s:h_vim_info_underline =
-      \ { 'attr': 'underline',
-      \   'sp':   s:color_dict('light_blue', 6) }
+
+call s:highlight('Material_VimTitle',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('pink', 5) })
+call s:highlight('Material_VimModeMsg',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 8) })
+call s:highlight('Material_VimMoreMsg',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('green', 8) })
+call s:highlight('Material_VimErrorInverted',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('red', 6) })
+call s:highlight('Material_VimErrorUnderline',
+                 \ { 'attr': 'underline',
+                 \   'sp':   s:color_dict('red', 6) })
+call s:highlight('Material_VimStyleErrorInverted',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('red', 3) })
+call s:highlight('Material_VimStyleErrorUnderline',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('red', 3) })
+call s:highlight('Material_VimWarningInverted',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('orange', 6) })
+call s:highlight('Material_VimWarningUnderline',
+                 \ { 'attr': 'underline',
+                 \   'sp':   s:color_dict('orange', 6) })
+call s:highlight('Material_VimStyleWarningInverted',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('orange', 3) })
+call s:highlight('Material_VimStyleWarningUnderline',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('orange', 3) })
+call s:highlight('Material_VimInfoInverted',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('light_blue', 6) })
+call s:highlight('Material_VimInfoUnderline',
+                 \ { 'attr': 'underline',
+                 \   'sp':   s:color_dict('light_blue', 6) })
 
 " Spelling {{{3
-let s:h_vim_spell_bad =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('red', 6) }
-let s:h_vim_spell_cap =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('indigo', 6) }
-let s:h_vim_spell_rare =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('pink', 4) }
-let s:h_vim_spell_local =
-      \ { 'attr': 'undercurl',
-      \   'sp':   s:color_dict('teal', 6) }
+
+call s:highlight('Material_VimSpellBad',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('red', 6) })
+call s:highlight('Material_VimSpellCap',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('indigo', 6) })
+call s:highlight('Material_VimSpellLocal',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('teal', 6) })
+call s:highlight('Material_VimSpellRare',
+                 \ { 'attr': 'undercurl',
+                 \   'sp':   s:color_dict('pink', 4) })
 
 " Misc {{{3
-let s:h_vim_directory =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('blue', 5) }
-let s:h_vim_folded =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 6),
-      \   'bg':   s:color_dict(s:hue_neutral, 3) }
-let s:h_vim_search =
-      \ { 'bg':   s:color_dict('yellow', 6) }
-let s:h_vim_inc_search =
-      \ { 'attr': 'bold',
-      \   'bg':   s:color_dict('orange', 6) }
-let s:h_vim_match_paren =
-      \ { 'bg':   s:color_dict('teal', 3) }
+
+call s:highlight('Material_VimDirectory',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('blue', 5) })
+call s:highlight('Material_VimFolded',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+                 \   'bg':   s:color_dict(s:hue_neutral, 3) })
+call s:highlight('Material_VimSearch',
+                 \ { 'bg':   s:color_dict('yellow', 6) })
+call s:highlight('Material_VimIncSearch',
+                 \ { 'attr': 'bold',
+                 \   'bg':   s:color_dict('orange', 6) })
+call s:highlight('Material_VimMatchParen',
+                 \ { 'bg':   s:color_dict('teal', 3) })
 
 " Testing {{{3
-let s:h_debug_test =
-      \ { 'attr': 'bold,italic,undercurl',
-      \   'fg':   s:color_dict('blue', 4),
-      \   'bg':   s:color_dict('green', 9),
-      \   'sp':   s:color_dict('red', 3) }
+
+call s:highlight('Material_DebugTest',
+                 \ { 'attr': 'bold,italic,undercurl',
+                 \   'fg':   s:color_dict('blue', 4),
+                 \   'bg':   s:color_dict('green', 9),
+                 \   'sp':   s:color_dict('red', 3) })
 
 " Syntax {{{3
 " Built-in {{{4
 
 " Comment and linked groups
-let s:h_syn_comment =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 6) }
+call s:highlight('Material_SynComment',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 6) })
 
 " Constant and linked groups
-let s:h_syn_constant =
-      \ { 'fg':   s:color_dict('blue_grey', 7),
-      \   'bg':   s:color_dict('blue_grey', 1) }
-let s:h_syn_string =
-      \ { 'fg':   s:color_dict('green', 7),
-      \   'bg':   s:color_dict('green', 1) }
-let s:h_syn_character =
-      \ { 'fg':   s:color_dict('light_green', 7),
-      \   'bg':   s:color_dict('light_green', 1) }
-let s:h_syn_number =
-      \ { 'fg':   s:color_dict('blue', 7),
-      \   'bg':   s:color_dict('blue', 1) }
-let s:h_syn_boolean =
-      \ { 'fg':   s:color_dict('orange', 7),
-      \   'bg':   s:color_dict('orange', 1) }
-let s:h_syn_float =
-      \ { 'fg':   s:color_dict('light_blue', 7),
-      \   'bg':   s:color_dict('light_blue', 1) }
+call s:highlight('Material_SynConstant',
+                 \ { 'fg':   s:color_dict('blue_grey', 7),
+                 \   'bg':   s:color_dict('blue_grey', 1) })
+call s:highlight('Material_SynString',
+                 \ { 'fg':   s:color_dict('green', 7),
+                 \   'bg':   s:color_dict('green', 1) })
+call s:highlight('Material_SynCharacter',
+                 \ { 'fg':   s:color_dict('light_green', 7),
+                 \   'bg':   s:color_dict('light_green', 1) })
+call s:highlight('Material_SynNumber',
+                 \ { 'fg':   s:color_dict('blue', 7),
+                 \   'bg':   s:color_dict('blue', 1) })
+call s:highlight('Material_SynBoolean',
+                 \ { 'fg':   s:color_dict('orange', 7),
+                 \   'bg':   s:color_dict('orange', 1) })
+call s:highlight('Material_SynFloat',
+                 \ { 'fg':   s:color_dict('light_blue', 7),
+                 \   'bg':   s:color_dict('light_blue', 1) })
 
 " Statement and linked groups
-let s:h_syn_statement =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('orange', 7) }
-let s:h_syn_operator =
-      \ { 'fg':   s:color_dict('orange', 7) }
+call s:highlight('Material_SynStatement',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('orange', 7) })
+call s:highlight('Material_SynOperator',
+                 \ { 'fg':   s:color_dict('orange', 7) })
 
 " PreProc and linked groups
-let s:h_syn_pre_proc =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('teal', 5) }
+call s:highlight('Material_SynPreProc',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('teal', 5) })
 
 " Type and linked groups
-let s:h_syn_storage_class =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('yellow', 8) }
+call s:highlight('Material_SynStorageClass',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('yellow', 8) })
 
 " Special and linked groups
-let s:h_syn_special =
-      \ { 'fg':   s:color_dict('red', 7) }
+call s:highlight('Material_SynSpecial',
+                 \ { 'fg':   s:color_dict('red', 7) })
 
 " Underlined and linked groups
-let s:h_syn_underlined =
-      \ { 'attr': 'underline',
-      \   'fg':   s:color_dict('blue', 7) }
+call s:highlight('Material_SynUnderlined',
+                 \ { 'attr': 'underline',
+                 \   'fg':   s:color_dict('blue', 7) })
 
 " Todo and linked groups
-let s:h_syn_todo =
-      \ { 'attr': 'bold' }
+call s:highlight('Material_SynTodo',
+                 \ { 'attr': 'bold' })
 
 " Custom {{{4
 " General {{{5
 
 " Member variables
-let s:h_syn_constant_name =
-      \ { 'fg':   s:color_dict('indigo', 6) }
-let s:h_syn_field_name =
-      \ { 'fg':   s:color_dict('blue', 6) }
+call s:highlight('Material_SynConstantName',
+                 \ { 'fg':   s:color_dict('indigo', 6) })
+call s:highlight('Material_SynFieldName',
+                 \ { 'fg':   s:color_dict('blue', 6) })
 
 " Other variables
-let s:h_syn_local_name =
-      \ { 'attr': 'italic',
-      \   'fg':   s:color_dict('orange', 4) }
-let s:h_syn_parameter_name =
-      \ { 'attr': 'italic',
-      \   'fg':   s:color_dict('orange', 6) }
+call s:highlight('Material_SynLocalName',
+                 \ { 'attr': 'italic',
+                 \   'fg':   s:color_dict('orange', 4) })
+call s:highlight('Material_SynParameterName',
+                 \ { 'attr': 'italic',
+                 \   'fg':   s:color_dict('orange', 6) })
 
 " Functions and methods
-let s:h_syn_function_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('teal', 6) }
-let s:h_syn_function_name = s:copy_without_attr(s:h_syn_function_keyword)
-let s:h_syn_accessor_name =
-      \ { 'fg':   s:color_dict('cyan', 6) }
+call s:highlight('Material_SynFunctionKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('teal', 6) })
+call s:highlight('Material_SynFunctionName',
+                 \ { 'fg':   s:color_dict('teal', 6) })
+call s:highlight('Material_SynAccessorName',
+                 \ { 'fg':   s:color_dict('cyan', 6) })
 
 " Types (primitive types and similar)
-let s:h_syn_type_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('lime', 6) }
-let s:h_syn_type_name = s:copy_without_attr(s:h_syn_type_keyword)
+call s:highlight('Material_SynTypeKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('lime', 6) })
+call s:highlight('Material_SynTypeName',
+                 \ { 'fg':   s:color_dict('lime', 6) })
 
 " Structures (smaller than classes, but not quite primitive types)
-let s:h_syn_structure_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('light_green', 6) }
-let s:h_syn_structure_name = s:copy_without_attr(s:h_syn_structure_keyword)
+call s:highlight('Material_SynStructureKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('light_green', 6) })
+call s:highlight('Material_SynStructureName',
+                 \ { 'fg':   s:color_dict('light_green', 6) })
 
 " Typedefs (Classes and equally large/extensible things)
-let s:h_syn_typedef_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('green', 6) }
-let s:h_syn_typedef_name = s:copy_without_attr(s:h_syn_typedef_keyword)
+call s:highlight('Material_SynTypedefKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('green', 6) })
+call s:highlight('Material_SynTypedefName',
+                 \ { 'fg':   s:color_dict('green', 6) })
 
 " Namespaces (or anything that groups together definitions)
-let s:h_syn_namespace_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('brown', 4) }
-let s:h_syn_namespace_name = s:copy_without_attr(s:h_syn_namespace_keyword)
+call s:highlight('Material_SynNamespaceKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('brown', 4) })
+call s:highlight('Material_SynNamespaceName',
+                 \ { 'fg':   s:color_dict('brown', 4) })
 
 " Generic context background
-let s:h_syn_generic =
-      \ { 'bg':   s:color_dict('purple', 1) }
+call s:highlight('Material_SynGeneric',
+                 \ { 'bg':   s:color_dict('purple', 1) })
 
 " Interfaces (or anything that is just a declaration, but not implementation)
-let s:h_syn_interface_keyword =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('purple', 4) }
-let s:h_syn_interface_name = s:copy_without_attr(s:h_syn_interface_keyword)
+call s:highlight('Material_SynInterfaceKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('purple', 4) })
+call s:highlight('Material_SynInterfaceName',
+                 \ { 'fg':   s:color_dict('purple', 4) })
 
 " File type specific {{{5
 
-let s:h_syn_vimscript_comment_string =
-      \ { 'fg':   s:color_dict('green', 5) }
+call s:highlight('Material_SynVimCommentString',
+                 \ { 'fg':   s:color_dict('green', 5) })
 
 " Plugins {{{3
 " OmniSharp | OmniSharp/omnisharp-vim {{{4
 
-let s:h_omnisharp_extension_method_name =
-      \ { 'fg':   s:color_dict('teal', 4) }
+call s:highlight('Material_OmniSharpExtensionMethodName',
+                 \ { 'fg':   s:color_dict('teal', 4) })
+call s:highlight('Material_OmniSharpOperatorOverloaded',
+                 \ { 'fg':   s:color_dict('orange', 7),
+                 \   'bg':   s:color_dict('orange', 2) })
+call s:highlight('Material_OmniSharpTypeParameterName',
+                 \ { 'fg':   s:color_dict('light_green', 6),
+                 \   'bg':   s:color_dict('purple', 1) })
+call s:highlight('Material_OmniSharpVerbatimStringLiteral',
+                 \ { 'fg':   s:color_dict('green', 7),
+                 \   'bg':   s:color_dict('green', 2) })
 
-let s:h_omnisharp_operator_overloaded =
-      \ { 'fg':   s:color_dict('orange', 7),
-      \   'bg':   s:color_dict('orange', 2) }
-
-let s:h_omnisharp_type_parameter_name =
-      \ { 'fg':   s:h_syn_structure_name.fg,
-      \   'bg':   s:h_syn_generic.bg }
-
-let s:h_omnisharp_verbatim_string_literal =
-      \ { 'fg':   s:color_dict('green', 7),
-      \   'bg':   s:color_dict('green', 2) }
-
-let s:h_omnisharp_xml_doc_comment_attribute_name =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('green', 3) }
-
-let s:h_omnisharp_xml_doc_comment_attribute_quotes =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('green', 3) }
-
-let s:h_omnisharp_xml_doc_comment_attribute_value =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict('green', 3) }
-
-let s:h_omnisharp_xml_doc_comment_delimiter =
-      \ { 'fg':   s:color_dict('teal', 3) }
-
-let s:h_omnisharp_xml_doc_comment_name =
-      \ { 'fg':   s:color_dict('orange', 3) }
-
-let s:h_omnisharp_xml_doc_comment_text =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 6) }
+call s:highlight('Material_OmniSharpXmlDocCommentAttributeName',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('green', 3) })
+call s:highlight('Material_OmniSharpXmlDocAttributeQuotes',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('green', 3) })
+call s:highlight('Material_OmniSharpXmlDocCommentAttributeValue',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('green', 3) })
+call s:highlight('Material_OmniSharpXmlDocCommentDelimiter',
+                 \ { 'fg':   s:color_dict('teal', 3) })
+call s:highlight('Material_OmniSharpXmlDocCommentName',
+                 \ { 'fg':   s:color_dict('orange', 3) })
+call s:highlight('Material_OmniSharpXmlDocCommentText',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 6) })
 
 " vim-airline | vim-airline/vim-airline {{{4
 
-let s:h_airline_1 =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 6),
-      \   'bg':   s:color_dict(s:hue_neutral, 2) }
-let s:h_airline_3 =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_neutral, 8) }
+call s:highlight('Material_Airline1',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+                 \   'bg':   s:color_dict(s:hue_neutral, 2) })
+call s:highlight('Material_Airline3',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
 
-let s:h_airline_insert =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_insert, 7) }
-let s:h_airline_replace =
-      \ { 'attr': 'bold',
-      \   'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:hue_replace, 7) }
+call s:highlight('Material_AirlineInsert',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_insert, 7) })
+call s:highlight('Material_AirlineReplace',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict(s:hue_replace, 7) })
 
-let s:h_airline_modified =
-      \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict('purple', 8) }
+call s:highlight('Material_AirlineModified',
+                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'bg':   s:color_dict('purple', 8) })
 
-" Editor colors {{{1
+" Linked highlight groups {{{1
 " Non-editor window highlights {{{2
 " Framing {{{3
-call s:highlight('MsgSeparator', s:h_vim_strong_framing_without_fg)
-call s:highlight('TabLineFill', s:h_vim_strong_framing_without_fg)
-call s:highlight('VertSplit', s:h_vim_strong_framing_without_fg)
 
-call s:highlight('FoldColumn', s:h_vim_light_framing_subtle_fg)
-call s:highlight('SignColumn', s:h_vim_light_framing_subtle_fg)
-call s:highlight('LineNr', s:h_vim_light_framing_subtle_fg)
+highlight! link MsgSeparator     Material_VimStrongFramingWithoutFg
+highlight! link TabLineFill      Material_VimStrongFramingWithoutFg
+highlight! link VertSplit        Material_VimStrongFramingWithoutFg
 
-call s:highlight('ColorColumn', s:h_vim_lighter_framing)
+highlight! link FoldColumn       Material_VimLightFramingSubtleFg
+highlight! link SignColumn       Material_VimLightFramingSubtleFg
+highlight! link LineNr           Material_VimLightFramingSubtleFg
 
-call s:highlight('CursorLineNr', s:h_vim_cursorlines_num)
+highlight! link ColorColumn      Material_VimLighterFraming
 
-call s:highlight('TabLine', s:h_vim_light_framing_strong_fg)
-call s:highlight('TabLineSel', s:h_vim_normal)
-call s:highlight('Title', s:h_vim_title)
+highlight! link CursorLineNr     Material_VimCursorLinesNum
 
-call s:highlight('StatusLine', s:h_vim_status_line)
-call s:highlight('StatusLineNC', s:h_vim_status_line_nc)
-call s:highlight('StatusLineTerm', s:h_vim_status_line)
-call s:highlight('StatusLineTermNC', s:h_vim_status_line_nc)
+highlight! link TabLine          Material_VimLightFramingStrongFg
+highlight! link TabLineSel       Material_VimNormal
+highlight! link Title            Material_VimTitle
 
-call s:highlight('WildMenu', s:h_vim_wild_menu)
+highlight! link StatusLine       Material_VimStatusLine
+highlight! link StatusLineNC     Material_VimStatusLineNC
+highlight! link StatusLineTerm   Material_VimStatusLine
+highlight! link StatusLineTermNC Material_VimStatusLineNC
+
+highlight! link WildMenu         Material_VimWildMenu
 
 " Popup menu and floating windows {{{3
-call s:highlight('Pmenu', s:h_vim_popup)
-call s:highlight('PmenuSel', s:h_vim_popup_selected)
-call s:highlight('PmenuSbar', s:h_vim_popup_scrollbar)
-call s:highlight('PmenuThumb', s:h_vim_popup_thumb)
-call s:highlight('NormalFloat', s:h_vim_popup)
+
+highlight! link Pmenu       Material_VimPopup
+highlight! link PmenuSel    Material_VimPopupSelected
+highlight! link PmenuSbar   Material_VimPopupScrollbar
+highlight! link PmenuThumb  Material_VimPopupThumb
+highlight! link NormalFloat Material_VimPopup
 
 " Editor window highlights {{{2
 " Normal text {{{3
-call s:highlight('NonText', s:h_vim_normal_light)
-call s:highlight('Normal', s:h_vim_normal)
-call s:highlight('NormalNC', s:h_vim_normal)
-call s:highlight('MsgArea', s:h_vim_normal)
+
+" for the Normal group, see the definition of Material_VimNormal
+highlight! link NonText  Material_VimNormalLight
+highlight! link NormalNC Material_VimNormal
+highlight! link MsgArea  Material_VimNormal
 
 " Cursor {{{3
-call s:highlight('Cursor', s:h_vim_cursor)
-call s:highlight('CursorInsert', s:h_vim_cursor_insert)
-call s:highlight('CursorReplace', s:h_vim_cursor_replace)
-call s:highlight('CursorIM', s:h_debug_test) " I don't really use this
-call s:highlight('CursorColumn', s:h_vim_cursorlines)
-call s:highlight('CursorLine', s:h_vim_cursorlines)
-call s:highlight('IncSearch', s:h_vim_inc_search)
-call s:highlight('MatchParen', s:h_vim_match_paren)
-call s:highlight('QuickFixLine', s:h_vim_visual)
-call s:highlight('Search', s:h_vim_search)
-call s:highlight('Substitute', s:h_vim_search)
-call s:highlight('TermCursor', s:h_vim_cursor)
-call s:highlight('TermCursorNC', s:h_vim_cursor_unfocused)
-call s:highlight('Visual', s:h_vim_visual)
-call s:highlight('VisualNOS', s:h_debug_test) " doesn't seem to work
+
+highlight! link Cursor        Material_VimCursor
+highlight! link CursorInsert  Material_VimCursorInsert
+highlight! link CursorReplace Material_VimCursorReplace
+highlight! link CursorIM      Material_DebugTest
+highlight! link CursorColumn  Material_VimCursorLines
+highlight! link CursorLine    Material_VimCursorLines
+highlight! link IncSearch     Material_VimIncSearch
+highlight! link MatchParen    Material_VimMatchParen
+highlight! link QuickFixLine  Material_VimVisual
+highlight! link Search        Material_VimSearch
+highlight! link Substitute    Material_VimSearch
+highlight! link TermCursor    Material_VimCursor
+highlight! link TermCursorNC  Material_VimCursorUnfocused
+highlight! link Visual        Material_VimVisual
+highlight! link VisualNOS     Material_VimDiffLineText
 
 " Special character visualization {{{3
-call s:highlight('Conceal', s:h_vim_conceal)
-call s:highlight('EndOfBuffer', s:h_vim_normal_light)
-call s:highlight('SpecialKey', s:h_vim_special_key)
-call s:highlight('Whitespace', s:h_vim_normal_light)
+
+highlight! link Conceal     Material_VimConceal
+highlight! link EndOfBuffer Material_VimNormalLight
+highlight! link SpecialKey  Material_VimSpecialKey
+highlight! link Whitespace  Material_VimNormalLight
 
 " Diff {{{3
-call s:highlight('DiffAdd', s:h_vim_diff_line_add)
-call s:highlight('DiffChange', s:h_vim_diff_line_change)
-call s:highlight('DiffDelete', s:h_vim_diff_line_delete)
-call s:highlight('DiffText', s:h_vim_diff_line_text)
+
+highlight! link DiffAdd    Material_VimDiffLineAdd
+highlight! link DiffChange Material_VimDiffLineChange
+highlight! link DiffDelete Material_VimDiffLineDelete
+highlight! link DiffText   Material_VimDiffLineText
 
 " Spelling {{{3
-call s:highlight('SpellBad', s:h_vim_spell_bad)
-call s:highlight('SpellCap', s:h_vim_spell_cap)
-call s:highlight('SpellLocal', s:h_vim_spell_local)
-call s:highlight('SpellRare', s:h_vim_spell_rare)
+
+highlight! link SpellBad   Material_VimSpellBad
+highlight! link SpellCap   Material_VimSpellCap
+highlight! link SpellLocal Material_VimSpellLocal
+highlight! link SpellRare  Material_VimSpellRare
 
 " Special items {{{2
-call s:highlight('Directory', s:h_vim_directory)
-call s:highlight('Folded', s:h_vim_folded)
+
+highlight! link Directory Material_VimDirectory
+highlight! link Folded    Material_VimFolded
 
 " Messages {{{2
-call s:highlight('ErrorMsg', s:h_vim_error_inverted)
-call s:highlight('ModeMsg', s:h_vim_mode_msg)
-call s:highlight('MoreMsg', s:h_vim_more_msg)
-call s:highlight('Question', s:h_vim_more_msg)
-call s:highlight('WarningMsg', s:h_vim_warning_inverted)
+
+highlight! link ErrorMsg   Material_VimErrorInverted
+highlight! link ModeMsg    Material_VimModeMsg
+highlight! link MoreMsg    Material_VimMoreMsg
+highlight! link Question   Material_VimMoreMsg
+highlight! link WarningMsg Material_VimWarningInverted
 
 " Syntax groups {{{2
-call s:highlight('Comment', s:h_syn_comment)
 
-call s:highlight('Constant', s:h_syn_constant)
-call s:highlight('String', s:h_syn_string)
-call s:highlight('Character', s:h_syn_character)
-call s:highlight('Number', s:h_syn_number)
-call s:highlight('Boolean', s:h_syn_boolean)
-call s:highlight('Float', s:h_syn_float)
+highlight! link Comment      Material_SynComment
 
-call s:highlight('Identifier', s:h_syn_structure_name)
-call s:highlight('Function', s:h_syn_function_name)
+highlight! link Constant     Material_SynConstant
+highlight! link String       Material_SynString
+highlight! link Character    Material_SynCharacter
+highlight! link Number       Material_SynNumber
+highlight! link Boolean      Material_SynBoolean
+highlight! link Float        Material_SynFloat
 
-call s:highlight('Statement', s:h_syn_statement)
-call s:highlight('Operator', s:h_syn_operator)
+highlight! link Identifier   Material_SynStructureName
+highlight! link Function     Material_SynFunctionName
 
-call s:highlight('PreProc', s:h_syn_pre_proc)
+highlight! link Statement    Material_SynStatement
+highlight! link Operator     Material_SynOperator
 
-call s:highlight('Type', s:h_syn_type_keyword)
-call s:highlight('StorageClass', s:h_syn_storage_class)
-call s:highlight('Structure', s:h_syn_structure_keyword)
-call s:highlight('Typedef', s:h_syn_typedef_keyword)
+highlight! link PreProc      Material_SynPreProc
 
-call s:highlight('Special', s:h_syn_special)
+highlight! link Type         Material_SynTypeKeyword
+highlight! link StorageClass Material_SynStorageClass
+highlight! link Structure    Material_SynStructureKeyword
+highlight! link Typedef      Material_SynTypedefKeyword
 
-call s:highlight('Underlined', s:h_syn_underlined)
+highlight! link Special      Material_SynSpecial
 
-call s:highlight('Error', s:h_vim_error_inverted)
+highlight! link Underlined   Material_SynUnderlined
 
-call s:highlight('Todo', s:h_syn_todo)
+highlight! link Error        Material_VimErrorInverted
+
+highlight! link Todo         Material_SynTodo
 
 " custom variables {{{1
 " terminal color variables {{{2
+
 let g:terminal_color_0  = s:color_dict('grey', 9).gui
 let g:terminal_color_1  = s:color_dict('red', 6).gui
 let g:terminal_color_2  = s:color_dict('light_green', 6).gui
@@ -880,101 +898,84 @@ let g:terminal_color_15 = s:color_dict('grey', 4).gui
 " custom highlight groups {{{1
 " debugging highlight groups {{{2
 
-call s:highlight('Test', s:h_debug_test)
+highlight! link Test Material_DebugTest
 
 " File type highlight groups {{{2
 " cs (C#) {{{3
 
-call s:highlight('csBraces', s:h_syn_special)
-call s:highlight('csClass', s:h_syn_typedef_keyword)
-call s:highlight('csClassType', s:h_syn_typedef_name)
-call s:highlight('csEndColon', s:h_syn_special)
-call s:highlight('csGeneric', s:h_syn_generic)
-call s:highlight('csNewType', s:h_syn_typedef_name)
-call s:highlight('csParens', s:h_syn_special)
-call s:highlight('csStorage', s:h_syn_namespace_keyword)
+highlight! link csBraces    Material_SynSpecial
+highlight! link csClass     Material_SynTypedefKeyword
+highlight! link csClassType Material_SynTypedefName
+highlight! link csEndColon  Material_SynSpecial
+highlight! link csGeneric   Material_SynGeneric
+highlight! link csNewType   Material_SynTypedefName
+highlight! link csParens    Material_SynSpecial
+highlight! link csStorage   Material_SynNamespaceKeyword
 
 " gitcommit {{{3
 
-call s:highlight('gitCommitBlank', s:h_vim_style_error_underline)
-call s:highlight('gitcommitOverflow', s:h_vim_style_warning_underline)
+highlight! link gitCommitBlank    Material_VimStyleErrorUnderline
+highlight! link gitcommitOverflow Material_VimStyleWarningUnderline
+
+" java {{{3
+
+highlight! link javaClassDecl Material_SynTypedefKeyword
+highlight! link javaBraces    Material_SynSpecial
+highlight! link javaParen     Material_SynSpecial
 
 " vim (VimScript|VimL) {{{3
 
-call s:highlight('vimCommentString', s:h_syn_vimscript_comment_string)
-call s:highlight('vimFunction', s:h_syn_function_name)
-call s:highlight('vimUserFunc', s:h_syn_function_name)
+highlight! link vimCommentString Material_SynVimCommentString
+highlight! link vimFunction      Material_SynFunctionName
+highlight! link vimUserFunc      Material_SynFunctionName
 
 " highlight groups for plugins {{{2
 " Asynchronous Lint Engine | w0rp/ale {{{3
 
-call s:highlight('ALEError', s:h_vim_error_underline)
-call s:highlight('ALEErrorSign', s:h_vim_error_inverted)
-call s:highlight('ALEVirtualTextError', s:h_vim_error_inverted)
+highlight! link ALEError                   Material_VimErrorUnderline
+highlight! link ALEErrorSign               Material_VimErrorInverted
+highlight! link ALEVirtualTextError        Material_VimErrorInverted
 
-call s:highlight('ALEInfo', s:h_vim_info_underline)
-call s:highlight('ALEInfoSign', s:h_vim_info_inverted)
-call s:highlight('ALEVirtualTextInfo', s:h_vim_info_inverted)
+highlight! link ALEInfo                    Material_VimInfoUnderline
+highlight! link ALEInfoSign                Material_VimInfoInverted
+highlight! link ALEVirtualTextInfo         Material_VimInfoInverted
 
-call s:highlight('ALEStyleError', s:h_vim_style_error_underline)
-call s:highlight('ALEStyleErrorSign', s:h_vim_style_error_inverted)
-call s:highlight('ALEVirtualTextStyleError', s:h_vim_style_error_inverted)
+highlight! link ALEStyleError              Material_VimStyleErrorUnderline
+highlight! link ALEStyleErrorSign          Material_VimStyleErrorInverted
+highlight! link ALEVirtualTextStyleError   Material_VimStyleErrorInverted
 
-call s:highlight('ALEStyleWarning', s:h_vim_style_warning_underline)
-call s:highlight('ALEStyleWarningSign', s:h_vim_style_warning_inverted)
-call s:highlight('ALEVirtualTextStyleWarning', s:h_vim_style_warning_inverted)
+highlight! link ALEStyleWarning            Material_VimStyleWarningUnderline
+highlight! link ALEStyleWarningSign        Material_VimStyleWarningInverted
+highlight! link ALEVirtualTextStyleWarning Material_VimStyleWarningInverted
 
-call s:highlight('ALEWarning', s:h_vim_warning_underline)
-call s:highlight('ALEWarningSign', s:h_vim_warning_inverted)
-call s:highlight('ALEVirtualTextWarning', s:h_vim_warning_inverted)
+highlight! link ALEWarning                 Material_VimWarningUnderline
+highlight! link ALEWarningSign             Material_VimWarningInverted
+highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
 
 " coc.nvim | neoclide/coc.nvim {{{3
 
-call s:highlight('CocCodeLens', s:h_syn_comment)
+highlight! link CocCodeLens Material_SynComment
 
 " vim-git | tpope/vim-git {{{3
 
-call s:highlight('diffAdded', s:h_vim_diff_add)
-call s:highlight('diffRemoved', s:h_vim_diff_delete)
+highlight! link diffAdded   Material_VimDiffAdd
+highlight! link diffRemoved Material_VimDiffDelete
 
 " Signify | mhinz/vim-signify {{{3
 
-call s:highlight('SignifySignAdd', s:h_vim_diff_sign_add)
-call s:highlight('SignifySignChange', s:h_vim_diff_sign_change)
-call s:highlight('SignifySignChangeDelete', s:h_vim_diff_sign_change_delete)
-call s:highlight('SignifySignDelete', s:h_vim_diff_sign_delete)
-call s:highlight('SignifySignDeleteFirstLine', s:h_vim_diff_sign_delete)
+highlight! link SignifySignAdd             Material_VimDiffSignAdd
+highlight! link SignifySignChange          Material_VimDiffSignChange
+highlight! link SignifySignChangeDelete    Material_VimDiffSignChangeDelete
+highlight! link SignifySignDelete          Material_VimDiffSignDelete
+highlight! link SignifySignDeleteFirstLine Material_VimDiffSignDelete
 
-call s:highlight('SignifyLineAdd', s:h_vim_diff_line_add)
-call s:highlight('SignifyLineChange', s:h_vim_diff_line_change)
-call s:highlight('SignifyLineChangeDelete', s:h_vim_diff_line_change_delete)
-call s:highlight('SignifyLineDelete', s:h_vim_diff_line_delete)
-call s:highlight('SignifyLineDeleteFirstLine', s:h_vim_diff_line_delete)
+highlight! link SignifyLineAdd             Material_VimDiffLineAdd
+highlight! link SignifyLineChange          Material_VimDiffLineChange
+highlight! link SignifyLineChangeDelete    Material_VimDiffLineChangeDelete
+highlight! link SignifyLineDelete          Material_VimDiffLineDelete
+highlight! link SignifyLineDeleteFirstLine Material_VimDiffLineDelete
 
 " OmniSharp | OmniSharp/omnisharp-vim {{{3
-
-call s:highlight('OmniSharpClassName', s:h_syn_typedef_name)
-call s:highlight('OmniSharpConstantName', s:h_syn_constant_name)
-call s:highlight('OmniSharpEnumMemberName', s:h_syn_structure_name)
-call s:highlight('OmniSharpEnumName', s:h_syn_structure_keyword)
-call s:highlight('OmniSharpExtensionMethodName', s:h_omnisharp_extension_method_name)
-call s:highlight('OmniSharpFieldName', s:h_syn_field_name)
-call s:highlight('OmniSharpInterfaceName', s:h_syn_interface_name)
-call s:highlight('OmniSharpLocalName', s:h_syn_local_name)
-call s:highlight('OmniSharpNamespaceName', s:h_syn_namespace_name)
-call s:highlight('OmniSharpOperatorOverloaded', s:h_omnisharp_operator_overloaded)
-call s:highlight('OmniSharpParameterName', s:h_syn_parameter_name)
-call s:highlight('OmniSharpPropertyName', s:h_syn_accessor_name)
-call s:highlight('OmniSharpStructName', s:h_syn_structure_name)
-call s:highlight('OmniSharpTypeParameterName', s:h_omnisharp_type_parameter_name)
-call s:highlight('OmniSharpVerbatimStringLiteral', s:h_omnisharp_verbatim_string_literal)
-
-call s:highlight('OmniSharpXmlDocCommentAttributeName', s:h_omnisharp_xml_doc_comment_attribute_name)
-call s:highlight('OmniSharpXmlDocCommentAttributeQuotes', s:h_omnisharp_xml_doc_comment_attribute_quotes)
-call s:highlight('OmniSharpXmlDocCommentAttributeValue', s:h_omnisharp_xml_doc_comment_attribute_value)
-call s:highlight('OmniSharpXmlDocCommentDelimiter', s:h_omnisharp_xml_doc_comment_delimiter)
-call s:highlight('OmniSharpXmlDocCommentName', s:h_omnisharp_xml_doc_comment_name)
-call s:highlight('OmniSharpXmlDocCommentText', s:h_omnisharp_xml_doc_comment_text)
 
 let g:OmniSharp_highlight_groups = {
       \ 'Comment':                            'Comment',
@@ -984,7 +985,7 @@ let g:OmniSharp_highlight_groups = {
       \ 'ControlKeyword':                     'Conditional',
       \ 'NumericLiteral':                     'Number',
       \ 'Operator':                           'Operator',
-      \ 'OperatorOverloaded':                 'OmniSharpOperatorOverloaded',
+      \ 'OperatorOverloaded':                 'Material_OmniSharpOperatorOverloaded',
       \ 'PreprocessorKeyword':                'PreProc',
       \ 'StringLiteral':                      'String',
       \ 'WhiteSpace':                         'Test',
@@ -992,36 +993,36 @@ let g:OmniSharp_highlight_groups = {
       \ 'StaticSymbol':                       'Test',
       \ 'PreprocessorText':                   'Normal',
       \ 'Punctuation':                        'Delimiter',
-      \ 'VerbatimStringLiteral':              'OmniSharpVerbatimStringLiteral',
+      \ 'VerbatimStringLiteral':              'Material_OmniSharpVerbatimStringLiteral',
       \ 'StringEscapeCharacter':              'SpecialChar',
-      \ 'ClassName':                          'OmniSharpClassName',
+      \ 'ClassName':                          'Material_SynTypedefName',
       \ 'DelegateName':                       'Test',
-      \ 'EnumName':                           'OmniSharpEnumName',
-      \ 'InterfaceName':                      'OmniSharpInterfaceName',
+      \ 'EnumName':                           'Material_SynStructureKeyword',
+      \ 'InterfaceName':                      'Material_SynInterfaceName',
       \ 'ModuleName':                         'Test',
-      \ 'StructName':                         'OmniSharpStructName',
-      \ 'TypeParameterName':                  'OmniSharpTypeParameterName',
-      \ 'FieldName':                          'OmniSharpFieldName',
-      \ 'EnumMemberName':                     'OmniSharpEnumMemberName',
-      \ 'ConstantName':                       'OmniSharpConstantName',
-      \ 'LocalName':                          'OmniSharpLocalName',
-      \ 'ParameterName':                      'OmniSharpParameterName',
+      \ 'StructName':                         'Material_SynStructureName',
+      \ 'TypeParameterName':                  'Material_OmniSharpTypeParameterName',
+      \ 'FieldName':                          'Material_SynFieldName',
+      \ 'EnumMemberName':                     'Material_SynStructureName',
+      \ 'ConstantName':                       'Material_SynConstantName',
+      \ 'LocalName':                          'Material_SynLocalName',
+      \ 'ParameterName':                      'Material_SynParameterName',
       \ 'MethodName':                         'Function',
-      \ 'ExtensionMethodName':                'OmniSharpExtensionMethodName',
-      \ 'PropertyName':                       'OmniSharpPropertyName',
+      \ 'ExtensionMethodName':                'Material_OmniSharpExtensionMethodName',
+      \ 'PropertyName':                       'Material_SynAccessorName',
       \ 'EventName':                          'Test',
-      \ 'NamespaceName':                      'OmniSharpNamespaceName',
+      \ 'NamespaceName':                      'Material_SynNamespaceName',
       \ 'LabelName':                          'Test',
-      \ 'XmlDocCommentAttributeName':         'OmniSharpXmlDocCommentAttributeName',
-      \ 'XmlDocCommentAttributeQuotes':       'OmniSharpXmlDocCommentAttributeQuotes',
-      \ 'XmlDocCommentAttributeValue':        'OmniSharpXmlDocCommentAttributeValue',
-      \ 'XmlDocCommentCDataSection':          'OmniSharpXmlDocCommentText',
+      \ 'XmlDocCommentAttributeName':         'Material_OmniSharpXmlDocCommentAttributeName',
+      \ 'XmlDocCommentAttributeQuotes':       'Material_OmniSharpXmlDocAttributeQuotes',
+      \ 'XmlDocCommentAttributeValue':        'Material_OmniSharpXmlDocCommentAttributeValue',
+      \ 'XmlDocCommentCDataSection':          'Material_OmniSharpXmlDocCommentText',
       \ 'XmlDocCommentComment':               'Comment',
-      \ 'XmlDocCommentDelimiter':             'OmniSharpXmlDocCommentDelimiter',
+      \ 'XmlDocCommentDelimiter':             'Material_OmniSharpXmlDocCommentDelimiter',
       \ 'XmlDocCommentEntityReference':       'Test',
-      \ 'XmlDocCommentName':                  'OmniSharpXmlDocCommentName',
+      \ 'XmlDocCommentName':                  'Material_OmniSharpXmlDocCommentName',
       \ 'XmlDocCommentProcessingInstruction': 'Test',
-      \ 'XmlDocCommentText':                  'OmniSharpXmlDocCommentText',
+      \ 'XmlDocCommentText':                  'Material_OmniSharpXmlDocCommentText',
       \ 'XmlLiteralAttributeName':            'Test',
       \ 'XmlLiteralAttributeQuotes':          'Test',
       \ 'XmlLiteralAttributeValue':           'Test',
@@ -1043,19 +1044,3 @@ let g:OmniSharp_highlight_groups = {
       \ 'RegexSelfEscapedCharacter':          'Test',
       \ 'RegexOtherEscape':                   'Test',
       \}
-
-" vim-airline | vim-airline/vim-airline {{{3
-
-call s:highlight('Airline1', s:h_airline_1)
-call s:highlight('Airline2', s:h_vim_light_framing_strong_fg)
-call s:highlight('Airline3', s:h_airline_3)
-
-call s:highlight('AirlineNormal', s:h_vim_status_line)
-call s:highlight('AirlineInsert', s:h_airline_insert)
-call s:highlight('AirlineReplace', s:h_airline_replace)
-call s:highlight('AirlineVisual', s:h_vim_visual)
-
-call s:highlight('AirlineWarning', s:h_vim_warning_inverted)
-call s:highlight('AirlineError', s:h_vim_error_inverted)
-
-call s:highlight('AirlineModified', s:h_airline_modified)
