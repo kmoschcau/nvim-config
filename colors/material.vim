@@ -291,16 +291,16 @@ let s:hue_replace = get(s:user_hues, 'replace', 'amber')
 
 " Diff hues {{{3
 " Hue used for added diff
-let s:diff_added_hue = get(g:, 'material_diff_added_hue', 'green')
+let s:hue_diff_added = get(s:user_hues, 'diff_added', 'green')
 
 " Hue used for changed diff
-let s:diff_changed_hue = get(g:, 'material_diff_changed_hue', 'amber')
+let s:hue_diff_changed = get(s:user_hues, 'diff_changed', 'amber')
 
 " Hue used for deleted diff
-let s:diff_deleted_hue = get(g:, 'material_diff_deleted_hue', 'red')
+let s:hue_diff_deleted = get(s:user_hues, 'diff_deleted', 'red')
 
 " Hue used for text diff
-let s:diff_text_hue = get(g:, 'material_diff_text_hue', 'orange')
+let s:hue_diff_text = get(s:user_hues, 'diff_text', 'orange')
 
 " value list  {{{2
 let s:normal_values = [ '50', '100', '200', '300', '400', '500', '600',
@@ -455,32 +455,32 @@ let s:h_vim_cursor_unfocused =
 
 " Diff related {{{3
 let s:h_vim_diff_add =
-      \ { 'fg':   s:color_dict(s:diff_added_hue, 6) }
+      \ { 'fg':   s:color_dict(s:hue_diff_added, 6) }
 let s:h_vim_diff_delete =
-      \ { 'fg':   s:color_dict(s:diff_deleted_hue, 6) }
+      \ { 'fg':   s:color_dict(s:hue_diff_deleted, 6) }
 let s:h_vim_diff_line_add =
-      \ { 'bg':   s:color_dict(s:diff_added_hue, 2) }
+      \ { 'bg':   s:color_dict(s:hue_diff_added, 2) }
 let s:h_vim_diff_line_change =
-      \ { 'bg':   s:color_dict(s:diff_changed_hue, 2) }
+      \ { 'bg':   s:color_dict(s:hue_diff_changed, 2) }
 let s:h_vim_diff_line_change_delete =
-      \ { 'bg':   s:color_dict(s:diff_changed_hue, 3) }
+      \ { 'bg':   s:color_dict(s:hue_diff_changed, 3) }
 let s:h_vim_diff_line_delete =
-      \ { 'bg':   s:color_dict(s:diff_deleted_hue, 2) }
+      \ { 'bg':   s:color_dict(s:hue_diff_deleted, 2) }
 let s:h_vim_diff_line_text =
       \ { 'attr': 'bold',
-      \   'bg':   s:color_dict(s:diff_text_hue, 2) }
+      \   'bg':   s:color_dict(s:hue_diff_text, 2) }
 let s:h_vim_diff_sign_add =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:diff_added_hue, 6) }
+      \   'bg':   s:color_dict(s:hue_diff_added, 6) }
 let s:h_vim_diff_sign_change =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:diff_changed_hue, 6) }
+      \   'bg':   s:color_dict(s:hue_diff_changed, 6) }
 let s:h_vim_diff_sign_change_delete =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:diff_changed_hue, 7) }
+      \   'bg':   s:color_dict(s:hue_diff_changed, 7) }
 let s:h_vim_diff_sign_delete =
       \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-      \   'bg':   s:color_dict(s:diff_deleted_hue, 6) }
+      \   'bg':   s:color_dict(s:hue_diff_deleted, 6) }
 
 " Messages {{{3
 let s:h_vim_title =
