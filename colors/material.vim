@@ -312,7 +312,28 @@ let s:accent_values = ['A100', 'A200', 'A400', 'A700']
 
 " Shared colors {{{2
 
-let s:c_transparent = s:material['transparent']
+let s:c_transparent             = s:material['transparent']
+
+let s:c_neutral_lightest        = s:color_dict(s:hue_neutral, 1)
+let s:c_neutral_midpoint        = s:color_dict(s:hue_neutral, 5)
+let s:c_neutral_midpoint_strong = s:color_dict(s:hue_neutral, 6)
+let s:c_neutral_strong          = s:color_dict(s:hue_neutral, 8)
+
+let s:c_interact_light          = s:color_dict(s:hue_primary, 2)
+
+let s:c_error_light             = s:color_dict('red', 3)
+let s:c_error_strong            = s:color_dict('red', 6)
+let s:c_warning_light           = s:color_dict('orange', 3)
+let s:c_warning_strong          = s:color_dict('orange', 6)
+let s:c_info_strong             = s:color_dict('light_blue', 6)
+
+let s:c_syntax_meta_light       = s:color_dict('purple', 1)
+let s:c_syntax_meta_strong      = s:color_dict('purple', 4)
+let s:c_syntax_function         = s:color_dict('teal', 6)
+let s:c_syntax_typedef          = s:color_dict('green', 6)
+let s:c_syntax_structure        = s:color_dict('light_green', 6)
+let s:c_syntax_type             = s:color_dict('lime', 6)
+let s:c_syntax_namespace        = s:color_dict('brown', 4)
 
 " Functions {{{2
 
@@ -387,27 +408,27 @@ endfunction
 " current window to have a transparent background for some reason.
 highlight! link Material_VimNormal Normal
 call s:highlight('Normal',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 8),
-                 \   'bg':   s:color_dict(s:hue_neutral, 1) })
+                 \ { 'fg':   s:c_neutral_strong,
+                 \   'bg':   s:c_neutral_lightest })
 call s:highlight('Material_VimNormalLight',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 5),
-                 \   'bg':   s:color_dict(s:hue_neutral, 1) })
+                 \ { 'fg':   s:c_neutral_midpoint,
+                 \   'bg':   s:c_neutral_lightest })
 call s:highlight('Material_VimSpecialKey',
                  \ { 'attr': 'italic',
-                 \   'fg':   s:color_dict(s:hue_neutral, 8),
+                 \   'fg':   s:c_neutral_strong,
                  \   'bg':   s:color_dict(s:hue_neutral, 3) })
 call s:highlight('Material_VimConceal',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 8) })
+                 \ { 'fg':   s:c_neutral_strong })
 
 " Popup menu and floating windows {{{3
 
 call s:highlight('Material_VimPopup',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 8),
+                 \ { 'fg':   s:c_neutral_strong,
                  \   'bg':   s:color_dict(s:hue_neutral, 2) })
 call s:highlight('Material_VimPopupSelected',
-                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+                 \ { 'bg':   s:c_interact_light })
 call s:highlight('Material_VimPopupScrollbar',
-                 \ { 'bg':   s:color_dict(s:hue_neutral, 5) })
+                 \ { 'bg':   s:c_neutral_midpoint })
 call s:highlight('Material_VimPopupThumb',
                  \ { 'bg':   s:color_dict(s:hue_neutral, 10) })
 
@@ -417,37 +438,37 @@ call s:highlight('Material_VimLighterFraming',
                  \ { 'bg':   s:color_dict(s:hue_neutral, 2) })
 call s:highlight('Material_VimLightFramingSubtleFg',
                  \ { 'fg':   s:color_dict(s:hue_neutral, 7),
-                 \   'bg':   s:color_dict(s:hue_neutral, 5) })
+                 \   'bg':   s:c_neutral_midpoint })
 call s:highlight('Material_VimLightFramingStrongFg',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict(s:hue_neutral, 5) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_neutral_midpoint })
 call s:highlight('Material_VimStrongFramingWithoutFg',
-                 \ { 'bg':   s:color_dict(s:hue_neutral, 8) })
+                 \ { 'bg':   s:c_neutral_strong })
 call s:highlight('Material_VimStrongFramingWithFg',
                  \ { 'fg':   s:color_dict(s:hue_neutral, 1, 'accent'),
-                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
+                 \   'bg':   s:c_neutral_strong })
 call s:highlight('Material_VimStatusLine',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_primary, 4, 'accent') })
 call s:highlight('Material_VimStatusLineNC',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_neutral_strong })
 
 " Cursor related {{{3
 
 call s:highlight('Material_VimVisual',
-                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+                 \ { 'bg':   s:c_interact_light })
 call s:highlight('Material_VimWildMenu',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_primary, 3) })
 call s:highlight('Material_VimCursorLines',
-                 \ { 'bg':   s:color_dict(s:hue_primary, 2) })
+                 \ { 'bg':   s:c_interact_light })
 call s:highlight('Material_VimCursorLinesNum',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 6),
-                 \   'bg':   s:color_dict(s:hue_primary, 2) })
+                 \   'fg':   s:c_neutral_midpoint_strong,
+                 \   'bg':   s:c_interact_light })
 call s:highlight('Material_VimCursor',
                  \ { 'bg':   s:color_dict(s:hue_primary, 6) })
 call s:highlight('Material_VimCursorInsert',
@@ -475,16 +496,16 @@ call s:highlight('Material_VimDiffLineText',
                  \ { 'attr': 'bold',
                  \   'bg':   s:color_dict(s:hue_diff_text, 2) })
 call s:highlight('Material_VimDiffSignAdd',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_diff_added, 6) })
 call s:highlight('Material_VimDiffSignChange',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_diff_changed, 6) })
 call s:highlight('Material_VimDiffSignChangeDelete',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_diff_changed, 7) })
 call s:highlight('Material_VimDiffSignDelete',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_diff_deleted, 6) })
 
 " Messages {{{3
@@ -494,46 +515,46 @@ call s:highlight('Material_VimTitle',
                  \   'fg':   s:color_dict('pink', 5) })
 call s:highlight('Material_VimModeMsg',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 8) })
+                 \   'fg':   s:c_neutral_strong })
 call s:highlight('Material_VimMoreMsg',
                  \ { 'attr': 'bold',
                  \   'fg':   s:color_dict('green', 8) })
 call s:highlight('Material_VimErrorInverted',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict('red', 6) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_error_strong })
 call s:highlight('Material_VimErrorUnderline',
                  \ { 'attr': 'underline',
-                 \   'sp':   s:color_dict('red', 6) })
+                 \   'sp':   s:c_error_strong })
 call s:highlight('Material_VimStyleErrorInverted',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict('red', 3) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_error_light })
 call s:highlight('Material_VimStyleErrorUnderline',
                  \ { 'attr': 'undercurl',
-                 \   'sp':   s:color_dict('red', 3) })
+                 \   'sp':   s:c_error_light })
 call s:highlight('Material_VimWarningInverted',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict('orange', 6) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_warning_strong })
 call s:highlight('Material_VimWarningUnderline',
                  \ { 'attr': 'underline',
-                 \   'sp':   s:color_dict('orange', 6) })
+                 \   'sp':   s:c_warning_strong })
 call s:highlight('Material_VimStyleWarningInverted',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict('orange', 3) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_warning_light })
 call s:highlight('Material_VimStyleWarningUnderline',
                  \ { 'attr': 'undercurl',
-                 \   'sp':   s:color_dict('orange', 3) })
+                 \   'sp':   s:c_warning_light })
 call s:highlight('Material_VimInfoInverted',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict('light_blue', 6) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_info_strong })
 call s:highlight('Material_VimInfoUnderline',
                  \ { 'attr': 'underline',
-                 \   'sp':   s:color_dict('light_blue', 6) })
+                 \   'sp':   s:c_info_strong })
 
 " Spelling {{{3
 
 call s:highlight('Material_VimSpellBad',
                  \ { 'attr': 'undercurl',
-                 \   'sp':   s:color_dict('red', 6) })
+                 \   'sp':   s:c_error_strong })
 call s:highlight('Material_VimSpellCap',
                  \ { 'attr': 'undercurl',
                  \   'sp':   s:color_dict('indigo', 6) })
@@ -550,7 +571,7 @@ call s:highlight('Material_VimDirectory',
                  \ { 'attr': 'bold',
                  \   'fg':   s:color_dict('blue', 5) })
 call s:highlight('Material_VimFolded',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+                 \ { 'fg':   s:c_neutral_midpoint_strong,
                  \   'bg':   s:color_dict(s:hue_neutral, 3) })
 call s:highlight('Material_VimSearch',
                  \ { 'bg':   s:color_dict('yellow', 6) })
@@ -573,7 +594,7 @@ call s:highlight('Material_DebugTest',
 
 " Comment and linked groups
 call s:highlight('Material_SynComment',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 6) })
+                 \ { 'fg':   s:c_neutral_midpoint_strong })
 
 " Constant and linked groups
 call s:highlight('Material_SynConstant',
@@ -645,50 +666,50 @@ call s:highlight('Material_SynParameterName',
 " Functions and methods
 call s:highlight('Material_SynFunctionKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('teal', 6) })
+                 \   'fg':   s:c_syntax_function })
 call s:highlight('Material_SynFunctionName',
-                 \ { 'fg':   s:color_dict('teal', 6) })
+                 \ { 'fg':   s:c_syntax_function })
 call s:highlight('Material_SynAccessorName',
                  \ { 'fg':   s:color_dict('cyan', 6) })
 
 " Types (primitive types and similar)
 call s:highlight('Material_SynTypeKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('lime', 6) })
+                 \   'fg':   s:c_syntax_type })
 call s:highlight('Material_SynTypeName',
-                 \ { 'fg':   s:color_dict('lime', 6) })
+                 \ { 'fg':   s:c_syntax_type })
 
 " Structures (smaller than classes, but not quite primitive types)
 call s:highlight('Material_SynStructureKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('light_green', 6) })
+                 \   'fg':   s:c_syntax_structure })
 call s:highlight('Material_SynStructureName',
-                 \ { 'fg':   s:color_dict('light_green', 6) })
+                 \ { 'fg':   s:c_syntax_structure })
 
 " Typedefs (Classes and equally large/extensible things)
 call s:highlight('Material_SynTypedefKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('green', 6) })
+                 \   'fg':   s:c_syntax_typedef })
 call s:highlight('Material_SynTypedefName',
-                 \ { 'fg':   s:color_dict('green', 6) })
+                 \ { 'fg':   s:c_syntax_typedef })
 
 " Namespaces (or anything that groups together definitions)
 call s:highlight('Material_SynNamespaceKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('brown', 4) })
+                 \   'fg':   s:c_syntax_namespace })
 call s:highlight('Material_SynNamespaceName',
-                 \ { 'fg':   s:color_dict('brown', 4) })
+                 \ { 'fg':   s:c_syntax_namespace })
 
 " Generic context background
 call s:highlight('Material_SynGeneric',
-                 \ { 'bg':   s:color_dict('purple', 1) })
+                 \ { 'bg':   s:c_syntax_meta_light })
 
 " Interfaces (or anything that is just a declaration, but not implementation)
 call s:highlight('Material_SynInterfaceKeyword',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('purple', 4) })
+                 \   'fg':   s:c_syntax_meta_strong })
 call s:highlight('Material_SynInterfaceName',
-                 \ { 'fg':   s:color_dict('purple', 4) })
+                 \ { 'fg':   s:c_syntax_meta_strong })
 
 " File type specific {{{5
 
@@ -704,8 +725,8 @@ call s:highlight('Material_OmniSharpOperatorOverloaded',
                  \ { 'fg':   s:color_dict('orange', 7),
                  \   'bg':   s:color_dict('orange', 2) })
 call s:highlight('Material_OmniSharpTypeParameterName',
-                 \ { 'fg':   s:color_dict('light_green', 6),
-                 \   'bg':   s:color_dict('purple', 1) })
+                 \ { 'fg':   s:c_syntax_typedef,
+                 \   'bg':   s:c_syntax_meta_light })
 call s:highlight('Material_OmniSharpVerbatimStringLiteral',
                  \ { 'fg':   s:color_dict('green', 7),
                  \   'bg':   s:color_dict('green', 2) })
@@ -724,28 +745,28 @@ call s:highlight('Material_OmniSharpXmlDocCommentDelimiter',
 call s:highlight('Material_OmniSharpXmlDocCommentName',
                  \ { 'fg':   s:color_dict('orange', 3) })
 call s:highlight('Material_OmniSharpXmlDocCommentText',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 6) })
+                 \ { 'fg':   s:c_neutral_midpoint_strong })
 
 " vim-airline | vim-airline/vim-airline {{{4
 
 call s:highlight('Material_Airline1',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 6),
+                 \ { 'fg':   s:c_neutral_midpoint_strong,
                  \   'bg':   s:color_dict(s:hue_neutral, 2) })
 call s:highlight('Material_Airline3',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
-                 \   'bg':   s:color_dict(s:hue_neutral, 8) })
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_neutral_strong })
 
 call s:highlight('Material_AirlineInsert',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_insert, 7) })
 call s:highlight('Material_AirlineReplace',
                  \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict(s:hue_neutral, 1),
+                 \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_replace, 7) })
 
 call s:highlight('Material_AirlineModified',
-                 \ { 'fg':   s:color_dict(s:hue_neutral, 1),
+                 \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict('purple', 8) })
 
 " Linked highlight groups {{{1
