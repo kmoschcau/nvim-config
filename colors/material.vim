@@ -310,31 +310,6 @@ let s:normal_values = [ '50', '100', '200', '300', '400', '500', '600',
                     \  '700', '800', '900']
 let s:accent_values = ['A100', 'A200', 'A400', 'A700']
 
-" Shared colors {{{2
-
-let s:c_transparent             = s:material['transparent']
-
-let s:c_neutral_lightest        = s:color_dict(s:hue_neutral, 1)
-let s:c_neutral_midpoint        = s:color_dict(s:hue_neutral, 5)
-let s:c_neutral_midpoint_strong = s:color_dict(s:hue_neutral, 6)
-let s:c_neutral_strong          = s:color_dict(s:hue_neutral, 8)
-
-let s:c_interact_light          = s:color_dict(s:hue_primary, 2)
-
-let s:c_error_light             = s:color_dict('red', 3)
-let s:c_error_strong            = s:color_dict('red', 6)
-let s:c_warning_light           = s:color_dict('orange', 3)
-let s:c_warning_strong          = s:color_dict('orange', 6)
-let s:c_info_strong             = s:color_dict('light_blue', 6)
-
-let s:c_syntax_meta_light       = s:color_dict('purple', 1)
-let s:c_syntax_meta_strong      = s:color_dict('purple', 4)
-let s:c_syntax_function         = s:color_dict('teal', 6)
-let s:c_syntax_typedef          = s:color_dict('green', 6)
-let s:c_syntax_structure        = s:color_dict('light_green', 6)
-let s:c_syntax_type             = s:color_dict('lime', 6)
-let s:c_syntax_namespace        = s:color_dict('brown', 4)
-
 " Functions {{{2
 
 " Set the highlight group passed as group_name to the values specified in
@@ -399,6 +374,31 @@ endfunction
 function! g:Material_replace_statusline_highlight()
   highlight! link StatusLine Material_VimStrongFramingWithFg
 endfunction
+
+" Shared colors {{{2
+
+let s:c_transparent             = s:material['transparent']
+
+let s:c_neutral_lightest        = s:color_dict(s:hue_neutral, 1)
+let s:c_neutral_midpoint        = s:color_dict(s:hue_neutral, 5)
+let s:c_neutral_midpoint_strong = s:color_dict(s:hue_neutral, 6)
+let s:c_neutral_strong          = s:color_dict(s:hue_neutral, 8)
+
+let s:c_interact_light          = s:color_dict(s:hue_primary, 2)
+
+let s:c_error_light             = s:color_dict('red', 3)
+let s:c_error_strong            = s:color_dict('red', 6)
+let s:c_warning_light           = s:color_dict('orange', 3)
+let s:c_warning_strong          = s:color_dict('orange', 6)
+let s:c_info_strong             = s:color_dict('light_blue', 6)
+
+let s:c_syntax_meta_light       = s:color_dict('purple', 1)
+let s:c_syntax_meta_strong      = s:color_dict('purple', 4)
+let s:c_syntax_function         = s:color_dict('teal', 6)
+let s:c_syntax_typedef          = s:color_dict('green', 6)
+let s:c_syntax_structure        = s:color_dict('light_green', 6)
+let s:c_syntax_type             = s:color_dict('lime', 6)
+let s:c_syntax_namespace        = s:color_dict('brown', 4)
 
 " Highlight definitions {{{2
 " Basics {{{3
