@@ -671,6 +671,9 @@ call s:highlight('Material_SynFunctionName',
                  \ { 'fg':   s:c_syntax_function })
 call s:highlight('Material_SynAccessorName',
                  \ { 'fg':   s:color_dict('cyan', 6) })
+call s:highlight('Material_SynAnonymousFunctionName',
+                 \ { 'fg':   s:c_syntax_function,
+                 \   'bg':   s:c_syntax_meta_light })
 
 " Types (primitive types and similar)
 call s:highlight('Material_SynTypeKeyword',
@@ -1017,7 +1020,7 @@ let g:OmniSharp_highlight_groups = {
       \ 'VerbatimStringLiteral':              'Material_OmniSharpVerbatimStringLiteral',
       \ 'StringEscapeCharacter':              'SpecialChar',
       \ 'ClassName':                          'Material_SynTypedefName',
-      \ 'DelegateName':                       'Material_DebugTest',
+      \ 'DelegateName':                       'Material_SynAnonymousFunctionName',
       \ 'EnumName':                           'Material_SynStructureKeyword',
       \ 'InterfaceName':                      'Material_SynInterfaceName',
       \ 'ModuleName':                         'Material_DebugTest',
