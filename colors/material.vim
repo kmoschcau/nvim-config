@@ -947,6 +947,18 @@ highlight! link javaParen      Material_SynSpecial
 highlight! link javaR_         Material_SynTypedefName
 highlight! link javaX_         Material_SynTypedefName
 
+" javascript
+
+highlight! link jsDot          Material_SynOperator
+highlight! link jsFuncArgs     Material_SynParameterName
+highlight! link jsFuncBraces   Material_SynSpecial
+highlight! link jsFuncParens   Material_SynSpecial
+highlight! link jsFunction     Material_SynFunctionKeyword
+highlight! link jsObjectBraces Material_SynStructureKeyword
+highlight! link jsParens       Material_SynSpecial
+highlight! link jsThis         Material_SynStatement
+highlight! link jsVariableDef  Material_SynLocalName
+
 " vim (VimScript|VimL) {{{3
 
 highlight! link vimCommentString Material_SynVimCommentString
