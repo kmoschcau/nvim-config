@@ -966,50 +966,6 @@ highlight! link vimFunction      Material_SynFunctionName
 highlight! link vimUserFunc      Material_SynFunctionName
 
 " highlight groups for plugins {{{2
-" Asynchronous Lint Engine | w0rp/ale {{{3
-
-highlight! link ALEError                   Material_VimErrorUnderline
-highlight! link ALEErrorSign               Material_VimErrorInverted
-highlight! link ALEVirtualTextError        Material_VimErrorInverted
-
-highlight! link ALEInfo                    Material_VimInfoUnderline
-highlight! link ALEInfoSign                Material_VimInfoInverted
-highlight! link ALEVirtualTextInfo         Material_VimInfoInverted
-
-highlight! link ALEStyleError              Material_VimStyleErrorUnderline
-highlight! link ALEStyleErrorSign          Material_VimStyleErrorInverted
-highlight! link ALEVirtualTextStyleError   Material_VimStyleErrorInverted
-
-highlight! link ALEStyleWarning            Material_VimStyleWarningUnderline
-highlight! link ALEStyleWarningSign        Material_VimStyleWarningInverted
-highlight! link ALEVirtualTextStyleWarning Material_VimStyleWarningInverted
-
-highlight! link ALEWarning                 Material_VimWarningUnderline
-highlight! link ALEWarningSign             Material_VimWarningInverted
-highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
-
-" coc.nvim | neoclide/coc.nvim {{{3
-
-highlight! link CocCodeLens Material_SynComment
-
-" vim-git | tpope/vim-git {{{3
-
-highlight! link diffAdded   Material_VimDiffAdd
-highlight! link diffRemoved Material_VimDiffDelete
-
-" Signify | mhinz/vim-signify {{{3
-
-highlight! link SignifySignAdd             Material_VimDiffSignAdd
-highlight! link SignifySignChange          Material_VimDiffSignChange
-highlight! link SignifySignChangeDelete    Material_VimDiffSignChangeDelete
-highlight! link SignifySignDelete          Material_VimDiffSignDelete
-highlight! link SignifySignDeleteFirstLine Material_VimDiffSignDelete
-
-highlight! link SignifyLineAdd             Material_VimDiffLineAdd
-highlight! link SignifyLineChange          Material_VimDiffLineChange
-highlight! link SignifyLineChangeDelete    Material_VimDiffLineChangeDelete
-highlight! link SignifyLineDelete          Material_VimDiffLineDelete
-highlight! link SignifyLineDeleteFirstLine Material_VimDiffLineDelete
 
 " OmniSharp | OmniSharp/omnisharp-vim {{{3
 
@@ -1080,3 +1036,48 @@ let g:OmniSharp_highlight_groups = {
       \ 'RegexSelfEscapedCharacter':          'Material_DebugTest',
       \ 'RegexOtherEscape':                   'Material_DebugTest',
       \}
+
+" Signify | mhinz/vim-signify {{{3
+
+highlight! link SignifySignAdd             Material_VimDiffSignAdd
+highlight! link SignifySignChange          Material_VimDiffSignChange
+highlight! link SignifySignChangeDelete    Material_VimDiffSignChangeDelete
+highlight! link SignifySignDelete          Material_VimDiffSignDelete
+highlight! link SignifySignDeleteFirstLine Material_VimDiffSignDelete
+
+highlight! link SignifyLineAdd             Material_VimDiffLineAdd
+highlight! link SignifyLineChange          Material_VimDiffLineChange
+highlight! link SignifyLineChangeDelete    Material_VimDiffLineChangeDelete
+highlight! link SignifyLineDelete          Material_VimDiffLineDelete
+highlight! link SignifyLineDeleteFirstLine Material_VimDiffLineDelete
+
+" coc.nvim | neoclide/coc.nvim {{{3
+
+highlight! link CocCodeLens Material_SynComment
+
+" vim-git | tpope/vim-git {{{3
+
+highlight! link diffAdded   Material_VimDiffAdd
+highlight! link diffRemoved Material_VimDiffDelete
+
+" Asynchronous Lint Engine | w0rp/ale {{{3
+
+highlight! link ALEError                   Material_VimErrorUnderline
+highlight! link ALEErrorSign               Material_VimErrorInverted
+highlight! link ALEVirtualTextError        Material_VimErrorInverted
+
+highlight! link ALEInfo                    Material_VimInfoUnderline
+highlight! link ALEInfoSign                Material_VimInfoInverted
+highlight! link ALEVirtualTextInfo         Material_VimInfoInverted
+
+highlight! link ALEStyleError              Material_VimStyleErrorUnderline
+highlight! link ALEStyleErrorSign          Material_VimStyleErrorInverted
+highlight! link ALEVirtualTextStyleError   Material_VimStyleErrorInverted
+
+highlight! link ALEStyleWarning            Material_VimStyleWarningUnderline
+highlight! link ALEStyleWarningSign        Material_VimStyleWarningInverted
+highlight! link ALEVirtualTextStyleWarning Material_VimStyleWarningInverted
+
+highlight! link ALEWarning                 Material_VimWarningUnderline
+highlight! link ALEWarningSign             Material_VimWarningInverted
+highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
