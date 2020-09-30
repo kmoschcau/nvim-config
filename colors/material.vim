@@ -693,6 +693,15 @@ call s:highlight('Material_SynStructureKeyword',
 call s:highlight('Material_SynStructureName',
                  \ { 'fg':   s:c_syntax_structure })
 
+" Enums (same as structures, but with enumerated variants)
+call s:highlight('Material_SynEnumKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:c_syntax_structure,
+                 \   'bg':   s:c_syntax_number_light })
+call s:highlight('Material_SynEnumName',
+                 \ { 'fg':   s:c_syntax_structure,
+                 \   'bg':   s:c_syntax_number_light })
+
 " Typedefs (Classes and equally large/extensible things)
 call s:highlight('Material_SynTypedefKeyword',
                  \ { 'attr': 'bold',
@@ -963,6 +972,14 @@ highlight! link jsObjectBraces  Material_SynStructureKeyword
 highlight! link jsParens        Material_SynSpecial
 highlight! link jsThis          Material_SynStatement
 highlight! link jsVariableDef   Material_SynLocalName
+
+" rust {{{3
+
+highlight! link rustEnumVariant Material_SynEnumName
+highlight! link rustEnum        Material_SynEnumKeyword
+highlight! link rustModPath     Material_SynNamespaceName
+highlight! link rustStructure   Material_SynStructureKeyword
+highlight! link rustType        Material_SynTypedefName
 
 " vim (VimScript|VimL) {{{3
 
