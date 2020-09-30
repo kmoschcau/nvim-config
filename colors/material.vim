@@ -392,6 +392,7 @@ let s:c_warning_light           = s:color_dict('orange', 3)
 let s:c_warning_strong          = s:color_dict('orange', 6)
 let s:c_info_strong             = s:color_dict('light_blue', 6)
 
+let s:c_syntax_number_light     = s:color_dict('blue', 1)
 let s:c_syntax_meta_light       = s:color_dict('purple', 1)
 let s:c_syntax_meta_strong      = s:color_dict('purple', 4)
 let s:c_syntax_function         = s:color_dict('teal', 6)
@@ -611,7 +612,7 @@ call s:highlight('Material_SynCharacter',
                  \   'bg':   s:color_dict('light_green', 1) })
 call s:highlight('Material_SynNumber',
                  \ { 'fg':   s:color_dict('blue', 7),
-                 \   'bg':   s:color_dict('blue', 1) })
+                 \   'bg':   s:c_syntax_number_light })
 call s:highlight('Material_SynBoolean',
                  \ { 'fg':   s:color_dict('orange', 7),
                  \   'bg':   s:color_dict('orange', 1) })
@@ -950,7 +951,7 @@ highlight! link javaParen      Material_SynSpecial
 highlight! link javaR_         Material_SynTypedefName
 highlight! link javaX_         Material_SynTypedefName
 
-" javascript
+" javascript {{{3
 
 highlight! link jsArrowFunction Material_SynFunctionKeyword
 highlight! link jsDot           Material_SynOperator
@@ -993,13 +994,13 @@ let g:OmniSharp_highlight_groups = {
       \ 'StringEscapeCharacter':              'SpecialChar',
       \ 'ClassName':                          'Material_SynTypedefName',
       \ 'DelegateName':                       'Material_SynAnonymousFunctionName',
-      \ 'EnumName':                           'Material_SynStructureKeyword',
+      \ 'EnumName':                           'Material_SynEnumKeyword',
       \ 'InterfaceName':                      'Material_SynInterfaceName',
       \ 'ModuleName':                         'Material_DebugTest',
       \ 'StructName':                         'Material_SynStructureName',
       \ 'TypeParameterName':                  'Material_OmniSharpTypeParameterName',
       \ 'FieldName':                          'Material_SynFieldName',
-      \ 'EnumMemberName':                     'Material_SynStructureName',
+      \ 'EnumMemberName':                     'Material_SynEnumName',
       \ 'ConstantName':                       'Material_SynConstantName',
       \ 'LocalName':                          'Material_SynLocalName',
       \ 'ParameterName':                      'Material_SynParameterName',
