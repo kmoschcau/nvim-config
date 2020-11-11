@@ -609,6 +609,11 @@ endif
 " the ":tab all" command.
 set tabpagemax=50
 
+" Number of spaces that a <Tab> in the file counts for. This just sets it to the
+" default value, because polyglot likes to set it to 2 for simple text files for
+" some reason.
+set tabstop=8
+
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
 set textwidth=80
