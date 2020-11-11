@@ -140,6 +140,9 @@ try
   " Adds table formatting commands
   Plug 'godlygeek/tabular'
 
+  " Adds a focus mode to vim
+  Plug 'junegunn/goyo.vim'
+
   " visualize the vim undo tree (seems broken currently)
   Plug 'sjl/gundo.vim'
 
