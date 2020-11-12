@@ -11,6 +11,6 @@ syntax cluster javaTop add=javaExtInt_MethodCall
 syntax match javaExt_AssignedIdent /\k\+\ze\s*=\s*\%([^=]\|$\)/
 
 highlight default link javaExt_AssignedIdent Identifier
-highlight default link javaExtInt_MethodCall Function
+highlight default link javaExt_MethodCall    Function
 highlight default link javaExt_Operator      Operator
 highlight default link javaExt_SemiColon     Special
