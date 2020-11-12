@@ -640,6 +640,9 @@ call s:highlight('Material_SynStorageClass',
 " Special and linked groups
 call s:highlight('Material_SynSpecial',
                  \ { 'fg':   s:color_dict('red', 7) })
+call s:highlight('Material_SynSpecialChar',
+                 \ { 'fg':   s:color_dict('red', 7),
+                 \   'bg':   s:color_dict('green', 1) })
 
 " Underlined and linked groups
 call s:highlight('Material_SynUnderlined',
@@ -905,6 +908,7 @@ highlight! link Structure    Material_SynStructureKeyword
 highlight! link Typedef      Material_SynTypedefKeyword
 
 highlight! link Special      Material_SynSpecial
+highlight! link SpecialChar  Material_SynSpecialChar
 
 highlight! link Underlined   Material_SynUnderlined
 
