@@ -961,6 +961,8 @@ highlight! link javaC_         Material_SynTypedefName
 highlight! link javaClassDecl  Material_SynTypedefKeyword
 highlight! link javaLangObject Material_SynFunctionName
 highlight! link javaParen      Material_SynSpecial
+highlight! link javaParen1     Material_SynSpecial
+highlight! link javaParen2     Material_SynSpecial
 highlight! link javaR_         Material_SynTypedefName
 highlight! link javaX_         Material_SynTypedefName
 
