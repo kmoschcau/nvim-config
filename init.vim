@@ -820,7 +820,13 @@ augroup CocNvim_InitVim
   autocmd!
   " Show method signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  " Show the location list without opening the preview by default.
+  autocmd User CocLocationsChange CocList --normal location
 augroup end
+
+" Disable the default locationlist with preview.
+let g:coc_enable_locationlist = 0
 
 let g:coc_global_extensions = [
       \'coc-eslint',
