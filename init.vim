@@ -430,7 +430,15 @@ set list
 
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
-set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+if has('nvim')
+  " The first version of tab makes neovim 5 crash
+  " set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
+  set listchars=tab:⊳\ \|,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
+else
+  " Note: Using double width chars in this will make vim and gVim crash when
+  "       trying to display them.
+  set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+endif
 
 " The maximum number of combining characters supported for displaying.
 if !has('nvim')
