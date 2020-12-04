@@ -430,13 +430,7 @@ set list
 
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
-if has('nvim')
-  set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
-else
-  " Note: Using double width chars in this will make vim and gVim crash when
-  "       trying to display them.
-  set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
-endif
+set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
 
 " The maximum number of combining characters supported for displaying.
 if !has('nvim')
