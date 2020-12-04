@@ -29,3 +29,13 @@ set guioptions=cig
 if !has('nvim')
   set guioptions+=!
 endif
+
+" nvim-qt specific options {{{3
+
+if exists('g:GuiLoaded')
+  " Use the TUI tabline
+  GuiTabline 0
+
+  " Use the TUI popup menu
+  GuiPopupmenu 0
+endif
