@@ -838,6 +838,7 @@ let g:coc_global_extensions = [
       \'coc-python',
       \'coc-rls',
       \'coc-solargraph',
+      \'coc-tsserver',
       \'coc-yaml'
       \]
 
