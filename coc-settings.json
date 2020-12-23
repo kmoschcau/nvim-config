@@ -36,6 +36,8 @@
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "python.disableInstallationCheck": true,
   "python.linting.enabled": false,
   "solargraph.checkGemVersion": false,
