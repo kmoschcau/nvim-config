@@ -176,6 +176,9 @@ try
   Plug 'junegunn/fzf.vim'
 
   " misc plugins {{{3
+  " adds support for .editorconfig files
+  Plug 'editorconfig/editorconfig-vim'
+
   " allows better handling for local vimrc files
   Plug 'embear/vim-localvimrc'
 
