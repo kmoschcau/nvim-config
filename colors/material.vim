@@ -959,6 +959,7 @@ highlight! link gitcommitOverflow Material_VimStyleWarningUnderline
 highlight! link javaBraces     Material_SynSpecial
 highlight! link javaC_         Material_SynTypedefName
 highlight! link javaClassDecl  Material_SynTypedefKeyword
+highlight! link javaDocParam   Material_SynParameterName
 highlight! link javaLangObject Material_SynFunctionName
 highlight! link javaParen      Material_SynSpecial
 highlight! link javaParen1     Material_SynSpecial
@@ -979,6 +980,25 @@ highlight! link jsParens        Material_SynSpecial
 highlight! link jsThis          Material_SynStatement
 highlight! link jsVariableDef   Material_SynLocalName
 
+" markdown {{{3
+
+highlight! link mkdCodeDelimiter Material_SynSpecialChar
+highlight! link mkdCodeEnd       Material_SynSpecialChar
+highlight! link mkdCodeStart     Material_SynSpecialChar
+highlight! link mkdHeading       Material_SynSpecial
+highlight! link mkdListItem      Material_SynSpecial
+
+" ruby {{{3
+
+highlight! link rubyClass              Material_SynTypedefKeyword
+highlight! link rubyClassName          Material_SynTypedefName
+highlight! link rubyConstant           Material_SynTypedefName
+highlight! link rubyModule             Material_SynNamespaceKeyword
+highlight! link rubyModuleName         Material_SynNamespaceName
+highlight! link rubyPredefinedConstant Material_SynConstantName
+highlight! link rubyPseudoOperator     Material_SynOperator
+highlight! link rubyStringDelimiter    Material_SynSpecialChar
+
 " rust {{{3
 
 highlight! link rustEnumVariant Material_SynEnumName
@@ -992,6 +1012,20 @@ highlight! link rustType        Material_SynTypedefName
 highlight! link vimCommentString Material_SynVimCommentString
 highlight! link vimFunction      Material_SynFunctionName
 highlight! link vimUserFunc      Material_SynFunctionName
+
+" yardoc {{{3
+
+" Fix the wrongly linked groups in noprompt/vim-yardoc.
+highlight! link yardYield       yardGenericTag
+highlight! link yardYieldParam  yardGenericTag
+highlight! link yardYieldReturn yardGenericTag
+
+" Customize some highlight groups for noprompt/vim-yardoc.
+highlight! link yardDuckType   Material_SynFunctionName
+highlight! link yardGenericTag Material_SynSpecial
+highlight! link yardLiteral    Material_SynConstant
+highlight! link yardParamName  Material_SynParameterName
+highlight! link yardType       Material_SynTypedefName
 
 " highlight groups for plugins {{{2
 
