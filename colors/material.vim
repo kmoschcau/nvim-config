@@ -719,9 +719,12 @@ call s:highlight('Material_SynNamespaceKeyword',
 call s:highlight('Material_SynNamespaceName',
                  \ { 'fg':   s:c_syntax_namespace })
 
-" Generic context background
-call s:highlight('Material_SynGeneric',
+" Generics
+call s:highlight('Material_SynGenericBackground',
                  \ { 'bg':   s:c_syntax_meta_light })
+call s:highlight('Material_SynGenericParameterName',
+                 \ { 'fg':   s:c_syntax_typedef,
+                 \   'bg':   s:c_syntax_meta_light })
 
 " Interfaces (or anything that is just a declaration, but not implementation)
 call s:highlight('Material_SynInterfaceKeyword',
@@ -743,9 +746,6 @@ call s:highlight('Material_OmniSharpExtensionMethodName',
 call s:highlight('Material_OmniSharpOperatorOverloaded',
                  \ { 'fg':   s:color_dict('orange', 7),
                  \   'bg':   s:color_dict('orange', 2) })
-call s:highlight('Material_OmniSharpTypeParameterName',
-                 \ { 'fg':   s:c_syntax_typedef,
-                 \   'bg':   s:c_syntax_meta_light })
 call s:highlight('Material_OmniSharpVerbatimStringLiteral',
                  \ { 'fg':   s:color_dict('green', 7),
                  \   'bg':   s:color_dict('green', 2) })
@@ -944,7 +944,7 @@ highlight! link csBraces    Material_SynSpecial
 highlight! link csClass     Material_SynTypedefKeyword
 highlight! link csClassType Material_SynTypedefName
 highlight! link csEndColon  Material_SynSpecial
-highlight! link csGeneric   Material_SynGeneric
+highlight! link csGeneric   Material_SynGenericBackground
 highlight! link csNewType   Material_SynTypedefName
 highlight! link csParens    Material_SynSpecial
 highlight! link csStorage   Material_SynNamespaceKeyword
@@ -1060,7 +1060,7 @@ let g:OmniSharp_highlight_groups = {
       \ 'InterfaceName':                      'Material_SynInterfaceName',
       \ 'ModuleName':                         'Material_DebugTest',
       \ 'StructName':                         'Material_SynStructureName',
-      \ 'TypeParameterName':                  'Material_OmniSharpTypeParameterName',
+      \ 'TypeParameterName':                  'Material_SynGenericParameterName',
       \ 'FieldName':                          'Material_SynFieldName',
       \ 'EnumMemberName':                     'Material_SynEnumName',
       \ 'ConstantName':                       'Material_SynConstantName',
