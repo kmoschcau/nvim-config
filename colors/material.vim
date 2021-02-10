@@ -980,6 +980,11 @@ highlight! link jsParens        Material_SynSpecial
 highlight! link jsThis          Material_SynStatement
 highlight! link jsVariableDef   Material_SynLocalName
 
+" lua {{{3
+
+highlight! link luaFuncCall    Material_SynFunctionName
+highlight! link luaFuncKeyword Material_SynFunctionKeyword
+
 " markdown {{{3
 
 highlight! link mkdCodeDelimiter Material_SynSpecialChar
