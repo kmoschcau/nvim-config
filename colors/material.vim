@@ -1012,6 +1012,23 @@ highlight! link rustModPath     Material_SynNamespaceName
 highlight! link rustStructure   Material_SynStructureKeyword
 highlight! link rustType        Material_SynTypedefName
 
+" Typescript {{{3
+
+highlight! link typescriptAliasDeclaration   Material_SynTypedefName
+highlight! link typescriptArrowFunc          Material_SynFunctionKeyword
+highlight! link typescriptBraces             Material_SynSpecial
+highlight! link typescriptClassName          Material_SynTypedefName
+highlight! link typescriptClassTypeParameter Material_SynGenericBackground
+highlight! link typescriptDotNotation        Material_SynOperator
+highlight! link typescriptEnumKeyword        Material_SynEnumKeyword
+highlight! link typescriptIdentifierName     Material_SynStructureName
+highlight! link typescriptInterfaceName      Material_SynInterfaceName
+highlight! link typescriptMember             Material_SynFieldName
+highlight! link typescriptParens             Material_SynSpecial
+highlight! link typescriptProp               Material_SynFieldName
+highlight! link typescriptTypeBrackets       Material_SynGenericBackground
+highlight! link typescriptTypeParameter      Material_SynGenericParameterName
+
 " vim (VimScript|VimL) {{{3
 
 highlight! link vimCommentString Material_SynVimCommentString
