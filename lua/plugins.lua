@@ -5,6 +5,7 @@ vim.cmd [[packadd packer.nvim]]
 
 -- Specify a list of plugins.
 return require('packer').startup(function()
+  -- packer {{{1
   -- Let packer manage packer itself.
   use { 'wbthomason/packer.nvim', opt = true }
 
@@ -126,4 +127,5 @@ return require('packer').startup(function()
 
   -- lightning fast markdown preview in browser
   use { 'euclio/vim-markdown-composer', run = 'cargo build --release' }
+  -- }}}1
 end)
