@@ -19,7 +19,7 @@ set updatetime=4000
 
 " key bindings {{{2
 
-nnoremap <silent> <F4> :CocCommand java.action.organizeImports<cr>
+nnoremap <silent><buffer> <F4> :CocCommand java.action.organizeImports<cr>
 
 " Asynchronous Line Engine | w0rp/ale {{{1
 
