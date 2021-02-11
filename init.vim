@@ -688,6 +688,11 @@ let g:coc_global_extensions = [
       \'coc-yaml'
       \]
 
+" Omnisharp | Omnisharp/omnisharp-vim {{{1
+
+" Have OmniSharp always highlight
+let g:Omnisharp_highlighting = 3
+
 " vim-javascript | pangloss/vim-javascript {{{1
 
 " Enable JSDoc syntax highlighting.
