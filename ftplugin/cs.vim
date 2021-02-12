@@ -26,3 +26,8 @@ nnoremap <silent><buffer> <F4>   :OmniSharpFixUsings<cr>
 
 nnoremap <silent><buffer> [m     :OmniSharpNavigateUp<cr>
 nnoremap <silent><buffer> ]m     :OmniSharpNavigateDown<cr>
+
+" Asynchronous Line Engine | w0rp/ale {{{1
+
+" Set the ALE linters to run for C#
+let b:ale_linters = { 'cs' : ['OmniSharp'] }
