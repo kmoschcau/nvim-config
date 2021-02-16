@@ -969,16 +969,26 @@ highlight! link javaX_         Material_SynTypedefName
 
 " javascript {{{3
 
-highlight! link jsArrowFunction Material_SynFunctionKeyword
-highlight! link jsDot           Material_SynOperator
-highlight! link jsFuncArgs      Material_SynParameterName
-highlight! link jsFuncBraces    Material_SynSpecial
-highlight! link jsFuncParens    Material_SynSpecial
-highlight! link jsFunction      Material_SynFunctionKeyword
-highlight! link jsObjectBraces  Material_SynStructureKeyword
-highlight! link jsParens        Material_SynSpecial
-highlight! link jsThis          Material_SynStatement
-highlight! link jsVariableDef   Material_SynLocalName
+highlight! link jsArrowFunction   Material_SynFunctionKeyword
+highlight! link jsBrackets        Material_SynSpecial
+highlight! link jsDot             Material_SynOperator
+highlight! link jsFuncArgs        Material_SynParameterName
+highlight! link jsFuncBraces      Material_SynSpecial
+highlight! link jsFuncParens      Material_SynSpecial
+highlight! link jsFunction        Material_SynFunctionKeyword
+highlight! link jsNoise           Material_SynSpecial
+highlight! link jsObjectBraces    Material_SynStructureKeyword
+highlight! link jsObjectColon     Material_SynSpecial
+highlight! link jsObjectKey       Material_SynFieldName
+highlight! link jsObjectProp      Material_SynFieldName
+highlight! link jsObjectSeparator Material_SynSpecial
+highlight! link jsParens          Material_SynSpecial
+highlight! link jsThis            Material_SynStatement
+highlight! link jsVariableDef     Material_SynLocalName
+
+" json {{{3
+
+highlight! link jsonNoise Material_SynSpecial
 
 " lua {{{3
 
@@ -992,6 +1002,11 @@ highlight! link mkdCodeEnd       Material_SynSpecialChar
 highlight! link mkdCodeStart     Material_SynSpecialChar
 highlight! link mkdHeading       Material_SynSpecial
 highlight! link mkdListItem      Material_SynSpecial
+
+" mustache/handlebars {{{3
+
+highlight! link mustacheHelpers      Material_SynOperator
+highlight! link mustacheHbsComponent Material_SynFieldName
 
 " ruby {{{3
 
@@ -1014,20 +1029,38 @@ highlight! link rustType        Material_SynTypedefName
 
 " Typescript {{{3
 
-highlight! link typescriptAliasDeclaration   Material_SynTypedefName
-highlight! link typescriptArrowFunc          Material_SynFunctionKeyword
-highlight! link typescriptBraces             Material_SynSpecial
-highlight! link typescriptClassName          Material_SynTypedefName
-highlight! link typescriptClassTypeParameter Material_SynGenericBackground
-highlight! link typescriptDotNotation        Material_SynOperator
-highlight! link typescriptEnumKeyword        Material_SynEnumKeyword
-highlight! link typescriptIdentifierName     Material_SynStructureName
-highlight! link typescriptInterfaceName      Material_SynInterfaceName
-highlight! link typescriptMember             Material_SynFieldName
-highlight! link typescriptParens             Material_SynSpecial
-highlight! link typescriptProp               Material_SynFieldName
-highlight! link typescriptTypeBrackets       Material_SynGenericBackground
-highlight! link typescriptTypeParameter      Material_SynGenericParameterName
+highlight! link typescriptAliasDeclaration    Material_SynTypedefName
+highlight! link typescriptAliasKeyword        Material_SynTypedefKeyword
+highlight! link typescriptAmbientDeclaration  Material_SynStatement
+highlight! link typescriptArrowFunc           Material_SynFunctionKeyword
+highlight! link typescriptAssign              Material_SynOperator
+highlight! link typescriptBraces              Material_SynSpecial
+highlight! link typescriptCall                Material_SynParameterName
+highlight! link typescriptClassKeyword        Material_SynTypedefKeyword
+highlight! link typescriptClassName           Material_SynTypedefName
+highlight! link typescriptClassTypeParameter  Material_SynGenericBackground
+highlight! link typescriptDotNotation         Material_SynOperator
+highlight! link typescriptEndColons           Material_SynSpecial
+highlight! link typescriptEnumKeyword         Material_SynEnumKeyword
+highlight! link typescriptExport              Material_SynStatement
+highlight! link typescriptFuncComma           Material_SynSpecial
+highlight! link typescriptIdentifierName      Material_SynStructureName
+highlight! link typescriptImport              Material_SynStatement
+highlight! link typescriptInterfaceKeyword    Material_SynInterfaceKeyword
+highlight! link typescriptInterfaceName       Material_SynInterfaceName
+highlight! link typescriptMember              Material_SynFieldName
+highlight! link typescriptMemberOptionality   Material_SynOperator
+highlight! link typescriptModule              Material_SynNamespaceKeyword
+highlight! link typescriptOptionalMark        Material_SynOperator
+highlight! link typescriptParens              Material_SynSpecial
+highlight! link typescriptPredefinedType      Material_SynTypeName
+highlight! link typescriptProp                Material_SynFieldName
+highlight! link typescriptTypeAnnotation      Material_SynSpecial
+highlight! link typescriptTypeBracket         Material_SynSpecial
+highlight! link typescriptTypeBrackets        Material_SynGenericBackground
+highlight! link typescriptTypeParameter       Material_SynGenericParameterName
+highlight! link typescriptVariable            Material_SynStatement
+highlight! link typescriptVariableDeclaration Material_SynLocalName
 
 " vim (VimScript|VimL) {{{3
 
