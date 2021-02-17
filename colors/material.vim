@@ -971,6 +971,7 @@ highlight! link javaX_         Material_SynTypedefName
 
 highlight! link jsArrowFunction   Material_SynFunctionKeyword
 highlight! link jsBrackets        Material_SynSpecial
+highlight! link jsClassDefinition Material_SynTypedefName
 highlight! link jsDot             Material_SynOperator
 highlight! link jsFuncArgs        Material_SynParameterName
 highlight! link jsFuncBraces      Material_SynSpecial
