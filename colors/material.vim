@@ -949,6 +949,10 @@ highlight! link csNewType   Material_SynTypedefName
 highlight! link csParens    Material_SynSpecial
 highlight! link csStorage   Material_SynNamespaceKeyword
 
+" fish {{{3
+
+highlight! link fishStatement Material_SynFunctionName
+
 " gitcommit {{{3
 
 highlight! link gitCommitBlank    Material_VimStyleErrorUnderline
@@ -1030,6 +1034,13 @@ highlight! link rustModPath     Material_SynNamespaceName
 highlight! link rustStructure   Material_SynStructureKeyword
 highlight! link rustType        Material_SynTypedefName
 
+" sh {{{3
+
+highlight! link shDerefVar  Material_SynStructureName
+highlight! link shOption    Material_SynParameterName
+highlight! link shStatement Material_SynFunctionName
+highlight! link shQuote     Material_SynSpecialChar
+
 " Typescript {{{3
 
 highlight! link typescriptAliasDeclaration    Material_SynTypedefName
@@ -1084,6 +1095,10 @@ highlight! link yardGenericTag Material_SynSpecial
 highlight! link yardLiteral    Material_SynConstant
 highlight! link yardParamName  Material_SynParameterName
 highlight! link yardType       Material_SynTypedefName
+
+" zsh {{{3
+
+highlight! link zshFlag Material_SynParameterName
 
 " highlight groups for plugins {{{2
 
