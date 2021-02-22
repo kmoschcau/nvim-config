@@ -956,6 +956,7 @@ highlight! link gitcommitOverflow Material_VimStyleWarningUnderline
 
 " java {{{3
 
+highlight! link javaAnnotation Material_SynGenericParameterName
 highlight! link javaBraces     Material_SynSpecial
 highlight! link javaC_         Material_SynTypedefName
 highlight! link javaClassDecl  Material_SynTypedefKeyword
