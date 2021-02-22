@@ -990,7 +990,8 @@ highlight! link jsVariableDef     Material_SynLocalName
 
 " json {{{3
 
-highlight! link jsonNoise Material_SynSpecial
+highlight! link jsonKeyword Material_SynFieldName
+highlight! link jsonNoise   Material_SynSpecial
 
 " lua {{{3
 
