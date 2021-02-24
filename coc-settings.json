@@ -19,7 +19,6 @@
       }
     }
   },
-  "eslint.autoFix": false,
   "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.completion.importOrder": [
