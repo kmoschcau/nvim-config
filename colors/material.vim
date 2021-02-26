@@ -1069,6 +1069,7 @@ highlight! link typescriptOptionalMark        Material_SynOperator
 highlight! link typescriptParens              Material_SynSpecial
 highlight! link typescriptPredefinedType      Material_SynTypeName
 highlight! link typescriptProp                Material_SynFieldName
+highlight! link typescriptRestOrSpread        Material_SynOperator
 highlight! link typescriptTypeAnnotation      Material_SynSpecial
 highlight! link typescriptTypeBracket         Material_SynSpecial
 highlight! link typescriptTypeBrackets        Material_SynGenericBackground
