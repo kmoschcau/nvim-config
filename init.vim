@@ -585,10 +585,6 @@ let g:fzf_action = { 'ctrl-t' : 'tab split',
 " Disable 'ge' motion override.
 map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
-" NERD tree | scrooloose/nerdtree {{{3
-
-nnoremap <silent> <C-N> :NERDTreeToggle<CR>
-
 " Gundo | sjl/gundo.vim {{{3
 
 nnoremap <silent> <F5> :GundoToggle<CR>
@@ -723,15 +719,6 @@ let g:DevIconsEnableFoldersOpenClose = 1
 
 " NERD tree | scrooloose/nerdtree {{{1
 
-augroup NERDTree_InitVim
-  autocmd!
-  " Exit Vim when the only open window is NERD tree.
-  autocmd BufEnter *
-      \   if (winnr("$") == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree())
-      \ |   quit
-      \ | endif
-augroup end
-
 " If set to 1, the NERD tree window will close after opening a file with the
 " |NERDTree-o|, |NERDTree-i|, |NERDTree-t| and |NERDTree-T| mappings.
 let g:NERDTreeQuitOnOpen = 1
@@ -741,7 +728,7 @@ let g:NERDTreeShowHidden = 1
 
 " This setting disables the 'Bookmarks' label 'Press ? for help' text.
 " This does not seem to work.
-let g:NERDTreeMinimalUI = 0
+let g:NERDTreeMinimalUI = 1
 
 " Gundo | sjl/gundo.vim {{{1
 
