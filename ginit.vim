@@ -20,7 +20,7 @@ endtry
 if has('win32')
   set guifont=FiraMono\ NF:h10
 else
-  set guifont=FiraMono\ Nerd\ Font\ Mono\ 10
+  set guifont=FiraMono\ Nerd\ Font\ Mono:h10
 endif
 
 " This option only has an effect in the GUI version of Vim.  It is a sequence of
