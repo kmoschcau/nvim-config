@@ -583,7 +583,7 @@ call s:highlight('Material_VimIncSearch',
                  \ { 'attr': 'bold',
                  \   'bg':   s:color_dict('orange', 6) })
 call s:highlight('Material_VimMatchParen',
-                 \ { 'bg':   s:color_dict('teal', 3) })
+                 \ { 'bg':   s:color_dict('teal', 2) })
 
 " Testing {{{3
 
