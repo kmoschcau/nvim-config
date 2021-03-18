@@ -1080,6 +1080,7 @@ highlight! link typescriptVariableDeclaration Material_SynLocalName
 " vim (VimScript|VimL) {{{3
 
 highlight! link vimCommentString Material_SynVimCommentString
+highlight! link vimEnvvar        Material_SynStructureName
 highlight! link vimFunction      Material_SynFunctionName
 highlight! link vimUserFunc      Material_SynFunctionName
 
