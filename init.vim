@@ -570,10 +570,10 @@ nmap     <silent>       <C-s>n     <Plug>(coc-rename)
 nmap     <silent>       <C-s>l     <Plug>(coc-codelens-action)
 nmap     <silent>       <C-s>f     <Plug>(coc-float-jump)
 
-" fzf.vim | junegunn/fzf.vim {{{3
+" fzf | fzf.vim | junegunn/fzf junegunn/fzf.vim {{{3
 
 " Open FZF with the Ctrl-p map
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :Files<cr>
 
 " Change the default FZF maps
 let g:fzf_action = { 'ctrl-t' : 'tab split',
@@ -629,7 +629,33 @@ let g:ale_virtualtext_cursor = 1
 " Whether the server should automatically start when a markdown file is opened.
 let g:markdown_composer_autostart = 0
 
-" fzf.vim | junegunn/fzf.vim {{{1
+" fzf | fzf.vim | junegunn/fzf junegunn/fzf.vim {{{1
+
+" Set FZF default command. Usually this is set in the shell, but setting it here
+" helps with FZF integration on Windows.
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+elseif executable('ag')
+  let $FZF_DEFAULT_COMMAND = 'ag --files-with-matches --hidden'
+endif
+
+" Customize the FZF colors
+let g:fzf_colors = {
+    \ 'fg':         ['fg', 'Material_VimNormal'],
+    \ 'bg':         ['bg', 'Material_VimNormal'],
+    \ 'hl':         ['fg', 'Material_SynSpecial'],
+    \ 'fg+':        ['fg', 'Material_VimNormal'],
+    \ 'bg+':        ['bg', 'Material_VimVisual'],
+    \ 'hl+':        ['fg', 'Material_SynSpecial'],
+    \ 'preview-fg': ['fg', 'Material_VimNormal'],
+    \ 'preview-bg': ['bg', 'Material_VimNormal'],
+    \ 'gutter':     ['bg', 'Material_VimLightFramingSubtleFg'],
+    \ 'pointer':    ['fg', 'Material_VimNormal'],
+    \ 'marker':     ['bg', 'Material_VimInfoInverted'],
+    \ 'border':     ['bg', 'Material_VimStrongFramingWithoutFg'],
+    \ 'info':       ['fg', 'Material_VimMoreMsg'],
+    \ 'prompt':     ['bg', 'Material_VimStatusLine']
+    \ }
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
