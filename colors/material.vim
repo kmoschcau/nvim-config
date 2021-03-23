@@ -982,6 +982,7 @@ highlight! link jsFuncArgs        Material_SynParameterName
 highlight! link jsFuncBraces      Material_SynSpecial
 highlight! link jsFuncParens      Material_SynSpecial
 highlight! link jsFunction        Material_SynFunctionKeyword
+highlight! link jsIfElseBraces    Material_SynSpecial
 highlight! link jsNoise           Material_SynSpecial
 highlight! link jsObjectBraces    Material_SynStructureKeyword
 highlight! link jsObjectColon     Material_SynSpecial
@@ -989,6 +990,7 @@ highlight! link jsObjectKey       Material_SynFieldName
 highlight! link jsObjectProp      Material_SynFieldName
 highlight! link jsObjectSeparator Material_SynSpecial
 highlight! link jsParens          Material_SynSpecial
+highlight! link jsRepeatBraces    Material_SynSpecial
 highlight! link jsThis            Material_SynStatement
 highlight! link jsVariableDef     Material_SynLocalName
 
