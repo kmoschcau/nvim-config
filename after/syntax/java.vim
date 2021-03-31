@@ -1,6 +1,7 @@
 syntax clear javaLangObject
 
 syntax match javaExt_SemiColon /;/
+syntax cluster javaTop add=javaExt_SemiColon
 
 syntax match javaExt_Operator />>=\|<<=\|>>>/
 syntax match javaExt_Operator /++\|--\|+=\|-=\|*=\|\/=\|%=\|&=\||=\|^=\|==\|!=\|>=\|<=\|&&\|||\|<<\|>>/
@@ -11,6 +12,7 @@ syntax region javaExtInt_MethodCall matchgroup=javaExt_MethodCall start=/\k\+(/ 
 syntax cluster javaTop add=javaExtInt_MethodCall
 
 syntax match javaExt_AssignedIdent /\k\+\ze\s*=\s*\%([^=]\|$\)/
+syntax cluster javaTop add=javaExt_AssignedIdent
 
 highlight default link javaExt_AssignedIdent Identifier
 highlight default link javaExt_MethodCall    Function
