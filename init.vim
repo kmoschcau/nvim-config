@@ -184,8 +184,6 @@ if has('nvim') || has('insert_expand')
   set completeopt=menuone
   if has('textprop')
     set completeopt+=popup
-  else
-    set completeopt+=preview
   endif
   if has('patch-7.4.775')
     set completeopt+=noinsert,noselect
