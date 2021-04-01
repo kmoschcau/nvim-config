@@ -21,6 +21,16 @@
   },
   "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/usr/lib/jvm/java-8-openjdk"
+    },
+    {
+      "name": "JavaSE-11",
+      "path": "/usr/lib/jvm/java-11-openjdk"
+    }
+  ],
   "java.completion.importOrder": [
     "com",
     "java",
@@ -31,7 +41,6 @@
   "java.completion.overwrite": false,
   "java.errors.incompleteClasspath.severity": "ignore",
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-  "java.home": "/usr/lib/jvm/default/",
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
