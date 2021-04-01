@@ -697,7 +697,6 @@ augroup end
 let g:coc_enable_locationlist = 0
 
 let g:coc_global_extensions = [
-      \'coc-eslint',
       \'coc-java',
       \'coc-json',
       \'coc-omnisharp',
