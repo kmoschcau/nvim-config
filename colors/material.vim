@@ -1001,6 +1001,10 @@ highlight! link jsVariableDef         Material_SynLocalName
 highlight! link jsonKeyword Material_SynFieldName
 highlight! link jsonNoise   Material_SynSpecial
 
+" jsonc {{{3
+
+highlight! link jsoncBraces  Material_SynSpecial
+
 " lua {{{3
 
 highlight! link luaFuncCall    Material_SynFunctionName
