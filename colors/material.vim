@@ -1056,6 +1056,7 @@ highlight! link typescriptAliasKeyword        Material_SynTypedefKeyword
 highlight! link typescriptAmbientDeclaration  Material_SynStatement
 highlight! link typescriptArrowFunc           Material_SynFunctionKeyword
 highlight! link typescriptAssign              Material_SynOperator
+highlight! link typescriptBinaryOp            Material_SynOperator
 highlight! link typescriptBraces              Material_SynSpecial
 highlight! link typescriptCall                Material_SynParameterName
 highlight! link typescriptClassKeyword        Material_SynTypedefKeyword
@@ -1066,6 +1067,7 @@ highlight! link typescriptEndColons           Material_SynSpecial
 highlight! link typescriptEnumKeyword         Material_SynEnumKeyword
 highlight! link typescriptExport              Material_SynStatement
 highlight! link typescriptFuncComma           Material_SynSpecial
+highlight! link typescriptGlobalMathDot       Material_SynOperator
 highlight! link typescriptIdentifierName      Material_SynStructureName
 highlight! link typescriptImport              Material_SynStatement
 highlight! link typescriptInterfaceKeyword    Material_SynInterfaceKeyword
