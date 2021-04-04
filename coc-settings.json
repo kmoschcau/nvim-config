@@ -6,7 +6,7 @@
     ".ts"
   ],
   "codeLens.enable": true,
-  "codeLens.subseparator": "|",
+  "codeLens.subseparator": " | ",
   "diagnostic.displayByAle": true,
   "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
