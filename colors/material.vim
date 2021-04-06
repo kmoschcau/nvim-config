@@ -985,6 +985,7 @@ highlight! link jsFuncParens          Material_SynSpecial
 highlight! link jsFunction            Material_SynFunctionKeyword
 highlight! link jsFunctionKey         Material_SynFunctionName
 highlight! link jsIfElseBraces        Material_SynSpecial
+highlight! link jsModuleBraces        Material_SynSpecial
 highlight! link jsNoise               Material_SynSpecial
 highlight! link jsObjectBraces        Material_SynStructureKeyword
 highlight! link jsObjectColon         Material_SynSpecial
