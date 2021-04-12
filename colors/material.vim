@@ -994,6 +994,8 @@ highlight! link jsObjectProp          Material_SynFieldName
 highlight! link jsObjectSeparator     Material_SynSpecial
 highlight! link jsParens              Material_SynSpecial
 highlight! link jsRepeatBraces        Material_SynSpecial
+highlight! link jsSwitchBraces        Material_SynSpecial
+highlight! link jsSwitchColon         Material_SynSpecial
 highlight! link jsThis                Material_SynStatement
 highlight! link jsTryCatchBraces      Material_SynSpecial
 highlight! link jsVariableDef         Material_SynLocalName
