@@ -979,6 +979,7 @@ highlight! link jsBrackets            Material_SynSpecial
 highlight! link jsClassDefinition     Material_SynTypedefName
 highlight! link jsDestructuringBraces Material_SynSpecial
 highlight! link jsDot                 Material_SynOperator
+highlight! link jsFuncArgCommas       Material_SynSpecial
 highlight! link jsFuncArgs            Material_SynParameterName
 highlight! link jsFuncBraces          Material_SynSpecial
 highlight! link jsFuncParens          Material_SynSpecial
