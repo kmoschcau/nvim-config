@@ -1008,6 +1008,10 @@ highlight! link jsonNoise   Material_SynSpecial
 
 " jsonc {{{3
 
+highlight! link jsoncKeywordMatch Material_SynFieldName
+
+" jsonc {{{3
+
 highlight! link jsoncBraces  Material_SynSpecial
 
 " lua {{{3
