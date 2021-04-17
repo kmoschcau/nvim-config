@@ -52,7 +52,13 @@ endif
 if has('unix')
   let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
 else
-  let s:terminfo_colors = ''
+  " This is a crude check for Windows Terminal, but the only one available right
+  " now.
+  if exists('$WT_SESSION')
+    let s:terminfo_colors = '256'
+  else
+    let s:terminfo_colors = ''
+  endif
 endif
 if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
   set termguicolors
