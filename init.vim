@@ -31,7 +31,9 @@ endif
 
 " plugins and packages {{{1
 " bootstrap packer
-lua require('packer_bootstrap')
+if has('nvim')
+  lua require('packer_bootstrap')
+endif
 
 " general Vim settings {{{1
 " non option settings {{{2
