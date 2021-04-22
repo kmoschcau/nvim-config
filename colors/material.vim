@@ -949,6 +949,17 @@ highlight! link csNewType   Material_SynTypedefName
 highlight! link csParens    Material_SynSpecial
 highlight! link csStorage   Material_SynNamespaceKeyword
 
+" css {{{3
+
+highlight! link cssBraces     Material_SynSpecial
+highlight! link cssClassName  Material_SynTypedefName
+highlight! link cssFunction   NONE
+highlight! link cssIdentifier Material_SynTypedefKeyword
+highlight! link cssImportant  Material_SynStatement
+highlight! link cssNoise      Material_SynSpecial
+highlight! link cssProp       Material_SynFieldName
+highlight! link cssSelectorOp Material_SynOperator
+
 " fish {{{3
 
 highlight! link fishStatement Material_SynFunctionName
