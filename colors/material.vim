@@ -1140,7 +1140,7 @@ highlight! link zshFlag Material_SynParameterName
 
 let g:OmniSharp_highlight_groups = {
       \ 'Comment':                            'Material_SynComment',
-      \ 'ExcludedCode':                       'Material_DebugTest',
+      \ 'ExcludedCode':                       'Material_SynComment',
       \ 'Identifier':                         'Material_SynStructureName',
       \ 'Keyword':                            'Keyword',
       \ 'ControlKeyword':                     'Conditional',
