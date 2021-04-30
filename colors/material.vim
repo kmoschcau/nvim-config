@@ -1116,6 +1116,10 @@ highlight! link vimEnvvar        Material_SynStructureName
 highlight! link vimFunction      Material_SynFunctionName
 highlight! link vimUserFunc      Material_SynFunctionName
 
+" yaml {{{3
+
+highlight! link yamlBlockMappingKey Material_SynFieldName
+
 " yardoc {{{3
 
 " Fix the wrongly linked groups in noprompt/vim-yardoc.
