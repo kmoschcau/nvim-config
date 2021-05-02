@@ -1088,6 +1088,7 @@ highlight! link typescriptEnumKeyword         Material_SynEnumKeyword
 highlight! link typescriptExport              Material_SynStatement
 highlight! link typescriptFuncComma           Material_SynSpecial
 highlight! link typescriptGlobalMathDot       Material_SynOperator
+highlight! link typescriptGlobalPromiseDot    Material_SynOperator
 highlight! link typescriptIdentifierName      Material_SynStructureName
 highlight! link typescriptImport              Material_SynStatement
 highlight! link typescriptInterfaceKeyword    Material_SynInterfaceKeyword
