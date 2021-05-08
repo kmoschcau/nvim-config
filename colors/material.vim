@@ -1016,6 +1016,7 @@ highlight! link jsVariableDef         Material_SynLocalName
 
 highlight! link jsonKeyword Material_SynFieldName
 highlight! link jsonNoise   Material_SynSpecial
+highlight! link jsonNull    Material_SynConstant
 
 " jsonc {{{3
 
