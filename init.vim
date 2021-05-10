@@ -31,7 +31,7 @@ endif
 
 " plugins and packages {{{1
 " bootstrap packer
-if has('nvim')
+if has('nvim-0.5.0')
   lua require('packer_bootstrap')
 endif
 
@@ -283,13 +283,23 @@ set list
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
 if has('nvim')
-  " The first version of tab makes neovim 5 crash
+  " The first version of tab makes neovim 0.5.0 crash
   " set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
-  set listchars=tab:⊳\ \|,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
+  set listchars=trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
+  if has('vim-patch:8.1.0759')
+    set listchars+=tab:⊳\ \|
+  else
+    set listchars+=tab:⊳-
+  endif
 else
   " Note: Using double width chars in this will make vim and gVim crash when
   "       trying to display them.
-  set listchars=tab:>\ \|,trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+  set listchars=trail:·,extends:>,precedes:<,conceal:o,nbsp:x
+  if has('vim-patch:8.1.0759')
+    set listchars+=tab:>\ \|
+  else
+    set listchars+=tab:>-
+  endif
 endif
 
 " The maximum number of combining characters supported for displaying.
@@ -312,7 +322,7 @@ set number
 " Enables pseudo-transparency for the |popup-menu|. Valid values are in the
 " range of 0 for fully opaque popupmenu (disabled) to 100 for fully transparent
 " background. Values between 0-30 are typically most useful.
-if has('nvim')
+if has('nvim-0.4.0')
   set pumblend=20
 endif
 
@@ -506,17 +516,8 @@ endif
 set wildmode=longest:full
 
 " A list of words that change how command line completion is done.
-"   tagfile When using CTRL-D to list matching tags, the kind of tag and the
-"           file of the tag is listed.  Only one match is displayed per line.
-"           Often used tag kinds are:
-"             d #define
-"             f function
-"   pum     Display the completion matches using the popupmenu in the same style
-"           as the |ins-completion-menu|.
-if has('nvim') || has('wildignore')
-  if has('nvim')
-    set wildoptions=pum
-  endif
+if has('nvim-0.4.0')
+  set wildoptions=pum
 endif
 
 " autocommands {{{2
