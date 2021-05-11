@@ -1021,11 +1021,8 @@ highlight! link jsonNull    Material_SynConstant
 
 " jsonc {{{3
 
+highlight! link jsoncBraces       Material_SynSpecial
 highlight! link jsoncKeywordMatch Material_SynFieldName
-
-" jsonc {{{3
-
-highlight! link jsoncBraces  Material_SynSpecial
 
 " lua {{{3
 
