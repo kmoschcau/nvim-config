@@ -969,6 +969,12 @@ highlight! link fishStatement Material_SynFunctionName
 highlight! link gitCommitBlank    Material_VimStyleErrorUnderline
 highlight! link gitcommitOverflow Material_VimStyleWarningUnderline
 
+" html {{{3
+
+highlight! link htmlArg     Material_SynFieldName
+highlight! link htmlEndTag  Material_SynSpecial
+highlight! link htmlTag     Material_SynStructureKeyword
+
 " java {{{3
 
 highlight! link javaAnnotation Material_SynGenericParameterName
@@ -1023,6 +1029,10 @@ highlight! link jsonNull    Material_SynConstant
 
 highlight! link jsoncBraces       Material_SynSpecial
 highlight! link jsoncKeywordMatch Material_SynFieldName
+
+" JSP {{{3
+
+highlight! link jspTag Material_SynPreProc
 
 " lua {{{3
 
