@@ -1114,6 +1114,7 @@ highlight! link typescriptVariableDeclaration Material_SynLocalName
 highlight! link vimCommentString Material_SynVimCommentString
 highlight! link vimEnvvar        Material_SynStructureName
 highlight! link vimFunction      Material_SynFunctionName
+highlight! link vimHiBang        Material_SynSpecial
 highlight! link vimUserFunc      Material_SynFunctionName
 
 " yaml {{{3
