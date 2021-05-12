@@ -286,7 +286,7 @@ if has('nvim')
   " The first version of tab makes neovim 0.5.0 crash
   " set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
   set listchars=trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
-  if has('vim-patch:8.1.0759')
+  if has('nvim-0.4.0')
     set listchars+=tab:⊳\ \|
   else
     set listchars+=tab:⊳-
