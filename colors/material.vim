@@ -971,9 +971,9 @@ highlight! link gitcommitOverflow Material_VimStyleWarningUnderline
 
 " html {{{3
 
-highlight! link htmlArg     Material_SynFieldName
-highlight! link htmlEndTag  Material_SynSpecial
-highlight! link htmlTag     Material_SynStructureKeyword
+highlight! link htmlArg    Material_SynFieldName
+highlight! link htmlEndTag Material_SynSpecial
+highlight! link htmlTag    Material_SynStructureKeyword
 
 " java {{{3
 
