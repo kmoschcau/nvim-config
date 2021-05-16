@@ -1094,6 +1094,7 @@ highlight! link typescriptClassTypeParameter  Material_SynGenericBackground
 highlight! link typescriptDotNotation         Material_SynOperator
 highlight! link typescriptEndColons           Material_SynSpecial
 highlight! link typescriptEnumKeyword         Material_SynEnumKeyword
+highlight! link typescriptExceptions          Material_SynStatement
 highlight! link typescriptExport              Material_SynStatement
 highlight! link typescriptFuncComma           Material_SynSpecial
 highlight! link typescriptGlobalMathDot       Material_SynOperator
@@ -1112,6 +1113,7 @@ highlight! link typescriptParens              Material_SynSpecial
 highlight! link typescriptPredefinedType      Material_SynTypeName
 highlight! link typescriptProp                Material_SynFieldName
 highlight! link typescriptRestOrSpread        Material_SynOperator
+highlight! link typescriptTry                 Material_SynStatement
 highlight! link typescriptTypeAnnotation      Material_SynSpecial
 highlight! link typescriptTypeBracket         Material_SynSpecial
 highlight! link typescriptTypeBrackets        Material_SynGenericBackground
