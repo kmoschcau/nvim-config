@@ -33,6 +33,7 @@
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
+  "javascript.preferences.importModuleSpecifierEnding": "js",
   "list.alignColumns": true,
   "python.disableInstallationCheck": true,
   "python.linting.enabled": false,
