@@ -1039,6 +1039,10 @@ highlight! link jspTag Material_SynPreProc
 highlight! link luaFuncCall    Material_SynFunctionName
 highlight! link luaFuncKeyword Material_SynFunctionKeyword
 
+" make {{{3
+
+highlight! link makeCommands Material_SynConstant
+
 " markdown {{{3
 
 highlight! link mkdCodeDelimiter Material_SynSpecialChar
