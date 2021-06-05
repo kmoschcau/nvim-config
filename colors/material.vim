@@ -1110,6 +1110,7 @@ highlight! link typescriptInterfaceName       Material_SynInterfaceName
 highlight! link typescriptMember              Material_SynFieldName
 highlight! link typescriptMemberOptionality   Material_SynOperator
 highlight! link typescriptModule              Material_SynNamespaceKeyword
+highlight! link typescriptNull                Material_SynConstant
 highlight! link typescriptObjectColon         Material_SynSpecial
 highlight! link typescriptObjectLabel         Material_SynFieldName
 highlight! link typescriptOptionalMark        Material_SynOperator
