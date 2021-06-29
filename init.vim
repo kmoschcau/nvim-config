@@ -641,7 +641,7 @@ let g:markdown_composer_autostart = 0
 " Set FZF default command. Usually this is set in the shell, but setting it here
 " helps with FZF integration on Windows.
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob !/.git/'
 elseif executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --files-with-matches --hidden'
 endif
