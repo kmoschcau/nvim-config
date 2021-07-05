@@ -96,7 +96,7 @@ return require('packer').startup(function()
   -- toggle line commenting with a key map
   use 'tpope/vim-commentary'
 
-  -- automatically add ending paris of characters or words
+  -- automatically add ending pairs of characters or words
   use 'tpope/vim-endwise'
 
   -- makes a lot of Tim Pope's plugins repeatable
