@@ -19,6 +19,9 @@ return require('packer').startup(function()
   -- omnisharp default settings and extras
   use { 'nickspoons/vim-sharpenup', after = 'omnisharp-vim' }
 
+  -- debugging plugins {{{1
+  use 'puremourning/vimspector'
+
   -- linter plugins {{{1
   -- Asynchronous Lint Engine brings linting for a lot of file types, when
   -- linter is installed

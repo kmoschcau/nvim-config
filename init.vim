@@ -707,6 +707,7 @@ let g:coc_enable_locationlist = 0
 
 let g:coc_global_extensions = [
       \'coc-java',
+      \'coc-java-debug',
       \'coc-json',
       \'coc-omnisharp',
       \'coc-python',
