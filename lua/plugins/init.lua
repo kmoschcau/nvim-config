@@ -28,6 +28,15 @@ return require('packer').startup(function()
   use 'dense-analysis/ale'
 
   -- syntax plugins {{{1
+  -- treesitter {{{2
+  -- treesitter itself
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  -- helps with analysing the treesitter tree
+  use 'nvim-treesitter/playground'
+
+  -- }}}2
+
   -- maven syntax
   use 'NLKNguyen/vim-maven-syntax'
 

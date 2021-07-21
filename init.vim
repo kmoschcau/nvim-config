@@ -30,9 +30,12 @@ if has('nvim')
 endif
 
 " plugins and packages {{{1
-" bootstrap packer
 if has('nvim-0.5.0')
-  lua require('packer_bootstrap')
+  " bootstrap packer
+  lua require('packer.bootstrap')
+
+  " load the plugin configuration files
+  lua require('plugins.config')
 endif
 
 " general Vim settings {{{1
@@ -546,6 +549,9 @@ function! SynStack()
   if exists(':OmniSharpHighlightEcho')
     echon ' | '
     OmniSharpHighlightEcho
+  endif
+  if exists(':TSHighlightCapturesUnderCursor')
+    TSHighlightCapturesUnderCursor
   endif
 endfunction
 nnoremap <F10> :call SynStack()<cr>
