@@ -283,10 +283,10 @@ set list
 " Strings to use in 'list' mode and for the |:list| command.  It is a comma
 " separated list of string settings.
 if has('nvim')
-  " The first version of tab makes neovim 0.5.0 crash
-  " set listchars=tab:⊳\ ⎹,trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
   set listchars=trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
-  if has('nvim-0.4.0')
+  if has('nvim-0.6.0')
+    set listchars+=tab:⊳\ ⎹
+  elseif has('nvim-0.4.0')
     set listchars+=tab:⊳\ \|
   else
     set listchars+=tab:⊳-
