@@ -916,6 +916,14 @@ highlight! link Error        Material_VimErrorInverted
 
 highlight! link Todo         Material_SynTodo
 
+" Treesitter {{{3
+
+highlight! link TSClassKeyword Material_SynTypedefKeyword
+highlight! link TSClassName    Material_SynTypedefName
+highlight! link TSConstant     Material_SynConstantName
+highlight! link TSTypeBuiltin  Material_SynTypeName
+highlight! link TSType         Material_SynStructureName
+
 " custom variables {{{1
 " terminal color variables {{{2
 
