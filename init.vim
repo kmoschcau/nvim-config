@@ -889,3 +889,13 @@ let g:ruby_fold = 1
 
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
+
+" packer.nvim | wbthomason/packer.nvim {{{1
+
+augroup PackerNvim_InitVim
+  autocmd!
+
+  if has(':PackerCompile')
+    autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
+  endif
+augroup end

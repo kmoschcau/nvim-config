@@ -7,7 +7,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- packer {{{1
   -- Let packer manage packer itself.
-  use { 'wbthomason/packer.nvim', opt = true }
+  use 'wbthomason/packer.nvim'
 
   -- language servers {{{1
   -- CoC base
