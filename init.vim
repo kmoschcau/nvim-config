@@ -723,6 +723,11 @@ let g:coc_global_extensions = [
       \'coc-yaml'
       \]
 
+" nvim-treesitter | nvim-treesitter/nvim-treesitter {{{1
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " Omnisharp | Omnisharp/omnisharp-vim {{{1
 
 " Have OmniSharp always highlight
