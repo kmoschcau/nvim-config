@@ -35,6 +35,9 @@ return require('packer').startup(function()
   -- helps with analysing the treesitter tree
   use 'nvim-treesitter/playground'
 
+  -- show the context of the current function up top
+  use 'romgrk/nvim-treesitter-context'
+
   -- }}}2
 
   -- maven syntax
