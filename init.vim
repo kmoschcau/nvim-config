@@ -895,7 +895,5 @@ let g:ruby_foldable_groups = 'def class module # __END__ do'
 augroup PackerNvim_InitVim
   autocmd!
 
-  if has(':PackerCompile')
-    autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
-  endif
+  autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
 augroup end
