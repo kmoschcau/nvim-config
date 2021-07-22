@@ -6,7 +6,7 @@ require 'nvim-treesitter.configs'.setup {
       ['class.name'] = 'TSClassName',
       ['class.keyword'] = 'TSClassKeyword'
     },
-    additional_vim_regex_highlighting = true
+    additional_vim_regex_highlighting = false
   },
   playground = {
     enable = true
