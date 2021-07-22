@@ -918,11 +918,62 @@ highlight! link Todo         Material_SynTodo
 
 " Treesitter {{{3
 
-highlight! link TSClassKeyword Material_SynTypedefKeyword
-highlight! link TSClassName    Material_SynTypedefName
-highlight! link TSConstant     Material_SynConstantName
-highlight! link TSTypeBuiltin  Material_SynTypeName
-highlight! link TSType         Material_SynStructureName
+highlight! link TSAnnotation       Material_SynGenericBackground
+highlight! link TSClassKeyword     Material_SynTypedefKeyword
+highlight! link TSClassName        Material_SynTypedefName
+highlight! link TSConstBuiltin     Material_SynConstant
+highlight! link TSConstant         Material_SynConstantName
+highlight! link TSEnumKeyword      Material_SynEnumKeyword
+highlight! link TSEnumName         Material_SynEnumName
+highlight! link TSField            Material_SynFieldName
+highlight! link TSInterfaceKeyword Material_SynInterfaceKeyword
+highlight! link TSInterfaceName    Material_SynInterfaceName
+highlight! link TSKeywordFunction  Material_SynFunctionKeyword
+highlight! link TSNamespace        Material_SynNamespaceName
+highlight! link TSNamespaceKeyword Material_SynNamespaceKeyword
+highlight! link TSNamespaceName    Material_SynNamespaceName
+highlight! link TSParameter        Material_SynParameterName
+highlight! link TSProperty         Material_SynAccessorName
+highlight! link TSType             Material_SynStructureName
+highlight! link TSTypeBuiltin      Material_SynTypeName
+
+" TSNone     ctermfg=241 guifg=foreground
+" TSVariable cleared
+
+" TSAnnotation          links  to  PreProc
+" TSAttribute           links  to  PreProc
+" TSConstMacro          links  to  Define
+" TSConstructor         links  to  Special
+" TSDanger              links  to  WarningMsg
+" TSEnvironment         links  to  Macro
+" TSEnvironmentName     links  to  Type
+" TSException           links  to  Exception
+" TSFuncBuiltin         links  to  Special
+" TSFuncMacro           links  to  Macro
+" TSLabel               links  to  Label
+" TSMath                links  to  Special
+" TSNote                links  to  SpecialComment
+" TSPunctBracket        links  to  Delimiter
+" TSPunctDelimiter      links  to  Delimiter
+" TSPunctSpecial        links  to  Delimiter
+" TSSymbol              links  to  Identifier
+" TSTag                 links  to  Label
+" TSTagAttribute        links  to  TSProperty
+" TSTagDelimiter        links  to  Delimiter
+" TSText                links  to  TSNone
+" TSTextReference       links  to  Constant
+" TSTitle               links  to  Title
+" TSVariableBuiltin     links  to  Special
+" TSWarning             links  to  Todo
+
+" commentTSConstant      links  to  TSConstant
+" queryTSPunctBracket    links  to  TSPunctBracket
+" queryTSVariable        links  to  TSVariable
+" queryTSString          links  to  TSString
+" queryTSPunctSpecial    links  to  TSPunctSpecial
+" queryTSType            links  to  TSType
+" queryTSProperty        links  to  TSProperty
+" queryTSPunctDelimiter  links  to  TSPunctDelimiter
 
 " custom variables {{{1
 " terminal color variables {{{2
