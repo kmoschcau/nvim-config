@@ -95,11 +95,14 @@ return require('packer').startup(function()
   -- makes motion through words more granular
   use 'chaoren/vim-wordmotion'
 
+  -- adds a focus mode to vim
+  use 'folke/zen-mode.nvim'
+
+  -- adds highlighting of only the local scope
+  use { 'folke/twilight.nvim', requires = { 'nvim-treesitter/nvim-treesitter' } }
+
   -- adds table formatting commands
   use 'godlygeek/tabular'
-
-  -- adds a focus mode to vim
-  use 'junegunn/goyo.vim'
 
   -- visualize the vim undo tree (seems broken currently)
   use 'sjl/gundo.vim'
