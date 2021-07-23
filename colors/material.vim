@@ -918,7 +918,6 @@ highlight! link Todo         Material_SynTodo
 
 " Treesitter {{{3
 
-highlight! link TSAnnotation       Material_SynGenericBackground
 highlight! link TSClassKeyword     Material_SynTypedefKeyword
 highlight! link TSClassName        Material_SynTypedefName
 highlight! link TSConstBuiltin     Material_SynConstant
@@ -926,6 +925,7 @@ highlight! link TSConstant         Material_SynConstantName
 highlight! link TSEnumKeyword      Material_SynEnumKeyword
 highlight! link TSEnumName         Material_SynEnumName
 highlight! link TSField            Material_SynFieldName
+highlight! link TSGeneric          Material_SynGenericBackground
 highlight! link TSInterfaceKeyword Material_SynInterfaceKeyword
 highlight! link TSInterfaceName    Material_SynInterfaceName
 highlight! link TSKeywordFunction  Material_SynFunctionKeyword
@@ -1036,7 +1036,6 @@ highlight! link htmlTag    Material_SynStructureKeyword
 
 " java {{{3
 
-highlight! link javaAnnotation Material_SynGenericParameterName
 highlight! link javaBraces     Material_SynSpecial
 highlight! link javaC_         Material_SynTypedefName
 highlight! link javaClassDecl  Material_SynTypedefKeyword

@@ -7,6 +7,7 @@ require 'nvim-treesitter.configs'.setup {
       ['class.name'] = 'TSClassName',
       ['enum.keyword'] = 'TSEnumKeyword',
       ['enum.name'] = 'TSEnumName',
+      ['generic'] = 'TSGeneric',
       ['interface.keyword'] = 'TSInterfaceKeyword',
       ['interface.name'] = 'TSInterfaceName',
       ['namespace.keyword'] = 'TSNamespaceKeyword',

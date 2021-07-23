@@ -24,12 +24,10 @@
   (scoped_identifier
     (identifier) @namespace.name))
 
-; annotations
+; generics
 
-[
-  (marker_annotation)
-  (annotation)
-] @annotation
+(generic_type
+  (type_arguments) @generic)
 
 ; type declarations
 
