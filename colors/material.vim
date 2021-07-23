@@ -937,6 +937,8 @@ highlight! link TSProperty         Material_SynAccessorName
 highlight! link TSType             Material_SynStructureName
 highlight! link TSTypeBuiltin      Material_SynTypeName
 
+highlight! link commentTSConstant Material_SynSpecial
+
 " TSNone     ctermfg=241 guifg=foreground
 " TSVariable cleared
 
