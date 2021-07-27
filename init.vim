@@ -201,12 +201,6 @@ if has('nvim') || has('insert_expand')
   endif
 endif
 
-if has('nvim')
-  " Do include whitespace after a word with a 'cw' command to be more in line
-  " with 'chaoren/vim-wordmotion'. (Only in Neovim)
-  set cpoptions-=_
-endif
-
 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 set expandtab
 
