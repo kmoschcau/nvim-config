@@ -563,19 +563,19 @@ let g:wordmotion_mappings = {
 
 " coc.nvim | neoclide/coc.nvim {{{3
 
-inoremap <silent><expr> <C-space>  coc#refresh()
-nnoremap <silent>       K          :call CocAction('doHover')<cr>
-nnoremap <silent>       <C-s>d     :call CocAction('jumpDefinition')<cr>
-nnoremap <silent>       <C-s>D     :call CocAction('jumpDefinition', v:false)<cr>
-nnoremap <silent>       <C-s>t     :call CocAction('jumpTypeDefinition')<cr>
-nnoremap <silent>       <C-s>T     :call CocAction('jumpTypeDefinition', v:false)<cr>
-nnoremap <silent>       <C-s>i     :call CocAction('jumpImplementation')<cr>
-nnoremap <silent>       <C-s>I     :call CocAction('jumpImplementation', v:false)<cr>
-nnoremap <silent>       <C-s>r     :call CocAction('jumpReferences')<cr>
-nnoremap <silent>       <C-s>R     :call CocAction('jumpReferences', v:false)<cr>
-nmap     <silent>       <C-s>n     <Plug>(coc-rename)
-nmap     <silent>       <C-s>l     <Plug>(coc-codelens-action)
-nmap     <silent>       <C-s>f     <Plug>(coc-float-jump)
+inoremap <silent><expr> <C-space> coc#refresh()
+nnoremap <silent>       K         :call CocAction('doHover')<cr>
+nnoremap <silent>       <C-s>d    :call CocAction('jumpDefinition')<cr>
+nnoremap <silent>       <C-s>D    :call CocAction('jumpDefinition', v:false)<cr>
+nnoremap <silent>       <C-s>t    :call CocAction('jumpTypeDefinition')<cr>
+nnoremap <silent>       <C-s>T    :call CocAction('jumpTypeDefinition', v:false)<cr>
+nnoremap <silent>       <C-s>i    :call CocAction('jumpImplementation')<cr>
+nnoremap <silent>       <C-s>I    :call CocAction('jumpImplementation', v:false)<cr>
+nnoremap <silent>       <C-s>r    :call CocAction('jumpReferences')<cr>
+nnoremap <silent>       <C-s>R    :call CocAction('jumpReferences', v:false)<cr>
+nmap     <silent>       <C-s>n    <Plug>(coc-rename)
+nmap     <silent>       <C-s>l    <Plug>(coc-codelens-action)
+nmap     <silent>       <C-s>f    <Plug>(coc-float-jump)
 
 " fzf | fzf.vim | junegunn/fzf junegunn/fzf.vim {{{3
 
@@ -591,6 +591,21 @@ let g:fzf_action = { 'ctrl-t' : 'tab split',
 
 " Disable 'ge' motion override.
 map <Plug> <Plug>Markdown_EditUrlUnderCursor
+
+" Vimspector | puremourning/vimspector {{{3
+
+nmap <silent> <M-v>c <Plug>VimspectorContinue
+nmap <silent> <M-v>p <Plug>VimspectorPause
+nmap <silent> <M-v>s <Plug>VimspectorStop
+nmap <silent> <M-v>R :VimspectorReset
+nmap <silent> <M-v>b <Plug>VimspectorToggleBreakpoint
+nmap <silent> <M-v>B <Plug>VimspectorToggleConditionalBreakpoint
+nmap <silent> <M-v>r <Plug>VimspectorRunToCursor
+nmap <silent> <M-v>o <Plug>VimspectorStepOver
+nmap <silent> <M-v>i <Plug>VimspectorStepInto
+nmap <silent> <M-v>u <Plug>VimspectorStepOut
+nmap <silent> <M-v>e <Plug>VimspectorBalloonEval
+vmap <silent> <M-v>e <Plug>VimspectorBalloonEval
 
 " Gundo | sjl/gundo.vim {{{3
 

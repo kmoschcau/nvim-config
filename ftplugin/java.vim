@@ -10,7 +10,13 @@ setlocal textwidth=100
 
 " key bindings {{{2
 
-nnoremap <silent><buffer> <F4> :CocCommand java.action.organizeImports<cr>
+" coc.nvim | neoclide/coc.nvim {{{3
+
+nnoremap <silent><buffer> <F4>  :CocCommand java.action.organizeImports<cr>
+
+" Vimspector | puremourning/vimspector {{{3
+
+nnoremap <silent><buffer> <F12> :CocCommand java.debug.vimspector.start<cr>
 
 " Asynchronous Line Engine | w0rp/ale {{{1
 
