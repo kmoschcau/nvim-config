@@ -597,7 +597,7 @@ map <Plug> <Plug>Markdown_EditUrlUnderCursor
 nmap <silent> <M-v>c <Plug>VimspectorContinue
 nmap <silent> <M-v>p <Plug>VimspectorPause
 nmap <silent> <M-v>s <Plug>VimspectorStop
-nmap <silent> <M-v>R :VimspectorReset
+nmap <silent> <M-v>R :VimspectorReset<cr>
 nmap <silent> <M-v>b <Plug>VimspectorToggleBreakpoint
 nmap <silent> <M-v>B <Plug>VimspectorToggleConditionalBreakpoint
 nmap <silent> <M-v>r <Plug>VimspectorRunToCursor
