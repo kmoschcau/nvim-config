@@ -9,16 +9,17 @@
 setlocal textwidth=100
 
 " key bindings {{{2
-
-" coc.nvim | neoclide/coc.nvim {{{3
+" plugin key maps {{{3
+" coc.nvim | neoclide/coc.nvim {{{4
 
 nnoremap <silent><buffer> <F4>  :CocCommand java.action.organizeImports<cr>
 
-" Vimspector | puremourning/vimspector {{{3
+" vimspector | puremourning/vimspector {{{4
 
 nnoremap <silent><buffer> <F12> :CocCommand java.debug.vimspector.start<cr>
 
-" Asynchronous Line Engine | w0rp/ale {{{1
+" plugin configurations {{{1
+" ale | dense-analysis/ale {{{2
 
 " Set the ALE linters to run for java
 let b:ale_linters = { 'java' : ['checkstyle', 'pmd'] }

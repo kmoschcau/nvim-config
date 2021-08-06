@@ -550,18 +550,12 @@ function! SynStack()
 endfunction
 nnoremap <F10> :call SynStack()<cr>
 
-" wordmotion | chaoren/vim-wordmotion {{{3
+" plugin key maps {{{3
+" ale | dense-analysis/ale {{{4
 
-let g:wordmotion_mappings = {
-      \ 'w' : '<M-w>',
-      \ 'b' : '<M-b>',
-      \ 'e' : '<M-e>',
-      \ 'ge' : 'g<M-e>',
-      \ 'aw' : 'a<M-w>',
-      \ 'iw' : 'i<M-w>'
-      \ }
+nmap <silent> <C-l>d <Plug>(ale_detail)
 
-" coc.nvim | neoclide/coc.nvim {{{3
+" coc.nvim | neoclide/coc.nvim {{{4
 
 inoremap <silent><expr> <C-space> coc#refresh()
 nnoremap <silent>       K         :call CocAction('doHover')<cr>
@@ -577,7 +571,7 @@ nmap     <silent>       <C-s>n    <Plug>(coc-rename)
 nmap     <silent>       <C-s>l    <Plug>(coc-codelens-action)
 nmap     <silent>       <C-s>f    <Plug>(coc-float-jump)
 
-" fzf | fzf.vim | junegunn/fzf junegunn/fzf.vim {{{3
+" fzf fzf.vim | junegunn/fzf junegunn/fzf.vim {{{4
 
 " Open FZF with the Ctrl-p map
 nnoremap <C-p> :Files<cr>
@@ -587,12 +581,27 @@ let g:fzf_action = { 'ctrl-t' : 'tab split',
                    \ 'ctrl-s' : 'split',
                    \ 'ctrl-v' : 'vsplit' }
 
-" Vim Markdown | plasticboy/vim-markdown {{{3
+" gundo | sjl/gundo.vim {{{4
+
+nnoremap <silent> <F5> :GundoToggle<CR>
+
+" vim-markdown | plasticboy/vim-markdown {{{4
 
 " Disable 'ge' motion override.
 map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
-" Vimspector | puremourning/vimspector {{{3
+" vim-wordmotion | chaoren/vim-wordmotion {{{4
+
+let g:wordmotion_mappings = {
+      \ 'w' : '<M-w>',
+      \ 'b' : '<M-b>',
+      \ 'e' : '<M-e>',
+      \ 'ge' : 'g<M-e>',
+      \ 'aw' : 'a<M-w>',
+      \ 'iw' : 'i<M-w>'
+      \ }
+
+" vimspector | puremourning/vimspector {{{4
 
 nmap <silent> <M-v>c <Plug>VimspectorContinue
 nmap <silent> <M-v>p <Plug>VimspectorPause
@@ -607,20 +616,13 @@ nmap <silent> <M-v>u <Plug>VimspectorStepOut
 nmap <silent> <M-v>e <Plug>VimspectorBalloonEval
 vmap <silent> <M-v>e <Plug>VimspectorBalloonEval
 
-" Gundo | sjl/gundo.vim {{{3
+" plugin configurations {{{1
+" SimpylFold | tmhedberg/SimpylFold {{{2
 
-nnoremap <silent> <F5> :GundoToggle<CR>
+" Preview docstrings in fold text.
+let g:SimpylFold_docstring_preview = 1
 
-" ALE | w0rp/ale {{{3
-
-nmap <silent> <C-l>d <Plug>(ale_detail)
-
-" CSV | chrisbra/csv.vim {{{1
-
-" do not conceal delimiters
-let g:csv_no_conceal = 1
-
-" Asynchronous Lint Engine | dense-analysis/ale {{{1
+" ale | dense-analysis/ale {{{2
 
 " This variable defines the format of the echoed message. The `%s` is the error
 " message itself, and it can contain the following handlers:
@@ -646,12 +648,38 @@ let g:ale_sign_warning = '! '
 " Enable the virtualtext error display.
 let g:ale_virtualtext_cursor = 1
 
-" vim-markdown-composer | euclio/vim-markdown-composer {{{1
+" coc.nvim | neoclide/coc.nvim {{{2
 
-" Whether the server should automatically start when a markdown file is opened.
-let g:markdown_composer_autostart = 0
+augroup CocNvim_InitVim
+  autocmd!
+  " Show method signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" fzf | fzf.vim | junegunn/fzf junegunn/fzf.vim {{{1
+  " Show the location list without opening the preview by default.
+  autocmd User CocLocationsChange CocList --normal location
+augroup end
+
+" Disable the default locationlist with preview.
+let g:coc_enable_locationlist = 0
+
+let g:coc_global_extensions = [
+      \'coc-java',
+      \'coc-java-debug',
+      \'coc-json',
+      \'coc-omnisharp',
+      \'coc-python',
+      \'coc-rls',
+      \'coc-solargraph',
+      \'coc-tsserver',
+      \'coc-yaml'
+      \]
+
+" csv.vim | chrisbra/csv.vim {{{2
+
+" do not conceal delimiters
+let g:csv_no_conceal = 1
+
+" fzf fzf.vim | junegunn/fzf junegunn/fzf.vim {{{2
 
 " Set FZF default command. Usually this is set in the shell, but setting it here
 " helps with FZF integration on Windows.
@@ -684,93 +712,17 @@ let g:fzf_colors = {
 " previous-history instead of down and up.
 let g:fzf_history_dir = '~/.local/share/fzf/history'
 
-" Signify | mhinz/vim-signify {{{1
+" gundo | sjl/gundo.vim {{{2
 
-" Which VCS to check for
-let g:signify_vcs_list = ['git']
+" Set this to 0 to disable the help text in the Gundo graph window.
+let g:gundo_help = 0
 
-" Enable more aggressive sign update.
-let g:signify_realtime = 1
+" Set this to 0 to disable automatically rendering preview diffs as you move
+" through the undo tree (you can still render a specific diff with r).  This can
+" be useful on large files and undo trees to speed up Gundo.
+let g:gundo_auto_preview = 0
 
-" Update signs when entering a buffer that was modified.
-let g:signify_update_on_bufenter = 1
-
-" Update the signs on FocusGained.
-let g:signify_update_on_focusgained = 1
-
-" Reconfigure the sign text used.
-let g:signify_sign_change = '~'
-
-" Additionally trigger sign updates in normal or insert mode after 'updatetime'
-" milliseconds without any keypresses.
-let g:signify_cursorhold_normal = 1
-let g:signify_cursorhold_insert = 1
-
-" coc.nvim | neoclide/coc.nvim {{{1
-
-augroup CocNvim_InitVim
-  autocmd!
-  " Show method signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-  " Show the location list without opening the preview by default.
-  autocmd User CocLocationsChange CocList --normal location
-augroup end
-
-" Disable the default locationlist with preview.
-let g:coc_enable_locationlist = 0
-
-let g:coc_global_extensions = [
-      \'coc-java',
-      \'coc-java-debug',
-      \'coc-json',
-      \'coc-omnisharp',
-      \'coc-python',
-      \'coc-rls',
-      \'coc-solargraph',
-      \'coc-tsserver',
-      \'coc-yaml'
-      \]
-
-" nvim-treesitter | nvim-treesitter/nvim-treesitter {{{1
-
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
-" Omnisharp | Omnisharp/omnisharp-vim {{{1
-
-" Have OmniSharp always highlight
-let g:Omnisharp_highlighting = 3
-
-" vim-javascript | pangloss/vim-javascript {{{1
-
-" Enable JSDoc syntax highlighting.
-let g:javascript_plugin_jsdoc = 1
-
-" Vim Markdown | plasticboy/vim-markdown {{{1
-
-" Fold like in python-mode (meaning, include headers as the first line of a
-" fold.
-let g:vim_markdown_folding_style_pythonic = 1
-
-" Change the indent level of new list items to two spaces.
-let g:vim_markdown_new_list_item_indent = 2
-
-" vim-devicons | ryanoasis/vim-devicons {{{1
-
-" whether or not to show the nerdtree brackets around flags
-let g:webdevicons_conceal_nerdtree_brackets = 1
-
-" turn on/off file node glyph decorations (not particularly useful)
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-
-" enable folder/directory glyph flag (disabled by default with 0)
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-" enable open and close folder/directory glyph flags (disabled by default with 0)
-let g:DevIconsEnableFoldersOpenClose = 1
-
-" NERD tree | scrooloose/nerdtree {{{1
+" nerdtree | preservim/nerdtree {{{2
 
 " If set to 1, the NERD tree window will close after opening a file with the
 " |NERDTree-o|, |NERDTree-i|, |NERDTree-t| and |NERDTree-T| mappings.
@@ -783,34 +735,31 @@ let g:NERDTreeShowHidden = 1
 " This does not seem to work.
 let g:NERDTreeMinimalUI = 1
 
-" Gundo | sjl/gundo.vim {{{1
+" nvim-treesitter | nvim-treesitter/nvim-treesitter {{{2
 
-" Set this to 0 to disable the help text in the Gundo graph window.
-let g:gundo_help = 0
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
-" Set this to 0 to disable automatically rendering preview diffs as you move
-" through the undo tree (you can still render a specific diff with r).  This can
-" be useful on large files and undo trees to speed up Gundo.
-let g:gundo_auto_preview = 0
+" omnisharp-vim | Omnisharp/omnisharp-vim {{{2
 
-" vim-nerdtree-syntax-highlight | tiagofumo/vim-nerdtree-syntax-highlight {{{1
+" Have OmniSharp always highlight
+let g:Omnisharp_highlighting = 3
 
-" enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFolders = 1
+" packer.nvim | wbthomason/packer.nvim {{{2
 
-" SimpylFold | tmhedberg/SimpylFold {{{1
+augroup PackerNvim_InitVim
+  autocmd!
 
-" Preview docstrings in fold text.
-let g:SimpylFold_docstring_preview = 1
-
-" vim-airline | vim-airline/vim-airline {{{1
-" airline options {{{2
+  autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
+augroup end
+" vim-airline | vim-airline/vim-airline {{{2
+" airline options {{{3
 
 " By default, airline will use unicode symbols if your encoding matches utf-8.
 " If you want the powerline symbols set this variable.
 let g:airline_powerline_fonts = 1
 
-" airline extension options {{{2
+" airline extension options {{{3
 
 " Rather opt in to extensions instead of loading all at the start.
 let g:airline_extensions = [
@@ -828,7 +777,7 @@ let g:airline_extensions = [
     \ ]
 
 
-" airline-branch {{{3
+" airline-branch {{{4
 
 " Truncate long branch names to a fixed length.
 let g:airline#extensions#branch#displayed_head_limit = 15
@@ -836,13 +785,13 @@ let g:airline#extensions#branch#displayed_head_limit = 15
 " Truncate all path sections but the last one of branch names.
 let g:airline#extensions#branch#format = 2
 
-" airline-csv {{{3
+" airline-csv {{{4
 
 " Show the name of columns. (Leads to wrong output, if no headers are
 " available.)
 let g:airline#extensions#csv#column_display = 'Name'
 
-" airline-default {{{3
+" airline-default {{{4
 
 " Set which sections get truncated and at what width.
 " Basic concept here is that there should be 20 characters available for the
@@ -870,12 +819,12 @@ let g:airline#extensions#default#section_truncate_width = { 'a'       : 88,
 let g:airline#extensions#default#layout = [['a', 'b', 'c'],
                                          \ ['x', 'y', 'z', 'warning', 'error']]
 
-" airline-hunks {{{3
+" airline-hunks {{{4
 
 " Enable showing only non-zero hunks.
 let g:airline#extensions#hunks#non_zero_only = 1
 
-" airline-whitespace {{{3
+" airline-whitespace {{{4
 
 " Customize the type of mixed indent checking to perform.
 "   spaces are allowed after tabs, but not in between
@@ -888,7 +837,45 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 2
 let g:airline#extensions#c_like_langs =
     \ ['arduino', 'c', 'cpp', 'cuda', 'go', 'java', 'javascript', 'ld', 'php']
 
-" vim-ruby | vim-ruby/vim-ruby {{{1
+" vim-devicons | ryanoasis/vim-devicons {{{2
+
+" whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 1
+
+" turn on/off file node glyph decorations (not particularly useful)
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+
+" enable folder/directory glyph flag (disabled by default with 0)
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+" enable open and close folder/directory glyph flags (disabled by default with 0)
+let g:DevIconsEnableFoldersOpenClose = 1
+
+" vim-javascript | pangloss/vim-javascript {{{2
+
+" Enable JSDoc syntax highlighting.
+let g:javascript_plugin_jsdoc = 1
+
+" vim-markdown | plasticboy/vim-markdown {{{2
+
+" Fold like in python-mode (meaning, include headers as the first line of a
+" fold.
+let g:vim_markdown_folding_style_pythonic = 1
+
+" Change the indent level of new list items to two spaces.
+let g:vim_markdown_new_list_item_indent = 2
+
+" vim-markdown-composer | euclio/vim-markdown-composer {{{2
+
+" Whether the server should automatically start when a markdown file is opened.
+let g:markdown_composer_autostart = 0
+
+" vim-nerdtree-syntax-highlight | tiagofumo/vim-nerdtree-syntax-highlight {{{2
+
+" enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFolders = 1
+
+" vim-ruby | vim-ruby/vim-ruby {{{2
 
 " Use the "do" indentation style, since it better conforms to the Ruby style
 " guide.
@@ -904,10 +891,25 @@ let g:ruby_fold = 1
 " Specify what can be folded.
 let g:ruby_foldable_groups = 'def class module # __END__ do'
 
-" packer.nvim | wbthomason/packer.nvim {{{1
+" vim-signify | mhinz/vim-signify {{{2
 
-augroup PackerNvim_InitVim
-  autocmd!
+" Which VCS to check for
+let g:signify_vcs_list = ['git']
 
-  autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
-augroup end
+" Enable more aggressive sign update.
+let g:signify_realtime = 1
+
+" Update signs when entering a buffer that was modified.
+let g:signify_update_on_bufenter = 1
+
+" Update the signs on FocusGained.
+let g:signify_update_on_focusgained = 1
+
+" Reconfigure the sign text used.
+let g:signify_sign_change = '~'
+
+" Additionally trigger sign updates in normal or insert mode after 'updatetime'
+" milliseconds without any keypresses.
+let g:signify_cursorhold_normal = 1
+let g:signify_cursorhold_insert = 1
+

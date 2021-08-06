@@ -9,7 +9,8 @@ if has('nvim') || has('folding')
   setlocal foldmethod=syntax
 endif
 
-" Asynchronous Lint Engine | w0rp/ale {{{1
+" plugin configurations {{{1
+" ale | dense-analysis/ale {{{2
 
 " Use cargo clippy, when it is installed.
 let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')

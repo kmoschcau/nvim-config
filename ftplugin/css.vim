@@ -7,7 +7,8 @@
 " Enables plugins to highlight keywords with dashes
 setlocal iskeyword+=-
 
-" coc.nvim | neoclide/coc.nvim {{{1
+" plugin configurations {{{1
+" coc.nvim | neoclide/coc.nvim {{{2
 
 " Enable coc.nvim to properly complete for keywords with dashes
 let b:coc_additional_keywords = ['-']

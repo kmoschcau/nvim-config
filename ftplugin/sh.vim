@@ -1,7 +1,8 @@
 " vim: foldmethod=marker
 " Shell filetype settings
 
-" Asynchronous Lint Engine | w0rp/ale {{{1
+" plugin configurations {{{1
+" ale | dense-analysis/ale {{{2
 
 " Set the ALE fixers to run for shell.
 let b:ale_fixers = { 'sh' : ['shfmt'] }

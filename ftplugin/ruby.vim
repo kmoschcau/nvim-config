@@ -2,11 +2,6 @@
 " Ruby filetype settings
 
 " general Vim settings {{{1
-" Vim options {{{2
-
-" Add tags generated for gems to the tags watch list
-setlocal tags+=gems.tags
-
 " key bindings {{{2
 
 if expand('%:t:r') =~? '_spec$'
@@ -16,7 +11,8 @@ if expand('%:t:r') =~? '_spec$'
   nnoremap <buffer> <LocalLeader>a :call RSpec_RunAllSpecs()<cr>
 endif
 
-" Asynchronous Lint Engine | w0rp/ale {{{1
+" plugin configurations {{{1
+" ale | dense-analysis/ale {{{2
 
 " This variable can be changed to modify flags given to rubocop.
 let g:ale_ruby_rubocop_options = '--display-cop-names
