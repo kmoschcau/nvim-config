@@ -1085,10 +1085,18 @@ highlight! link jsonKeyword Material_SynFieldName
 highlight! link jsonNoise   Material_SynSpecial
 highlight! link jsonNull    Material_SynConstant
 
+" Treesitter {{{4
+
+highlight! link jsonTSLabel Material_SynFieldName
+
 " jsonc {{{3
 
 highlight! link jsoncBraces       Material_SynSpecial
 highlight! link jsoncKeywordMatch Material_SynFieldName
+
+" Treesitter {{{4
+
+highlight! link jsoncTSLabel Material_SynFieldName
 
 " JSP {{{3
 
