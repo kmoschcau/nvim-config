@@ -1,13 +1,13 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.source.file.trimSameExts": [
-    ".js",
     ".rb",
     ".ts"
   ],
   "codeLens.enable": true,
   "codeLens.subseparator": " | ",
   "diagnostic.displayByAle": true,
+  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER_CHAINED",
   "java.codeGeneration.useBlocks": true,
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.configuration.runtimes": [
@@ -29,23 +29,19 @@
   ],
   "java.completion.overwrite": false,
   "java.errors.incompleteClasspath.severity": "ignore",
-  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.enabled": false,
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
+  "java.saveActions.organizeImports": true,
   "java.signatureHelp.enabled": true,
+  "javascript.format.enabled": false,
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "list.alignColumns": true,
   "python.disableInstallationCheck": true,
   "python.linting.enabled": false,
   "solargraph.checkGemVersion": false,
-  "solargraph.completion": true,
-  "solargraph.definitions": true,
   "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "solargraph.hover": true,
-  "solargraph.references": true,
-  "solargraph.rename": true,
-  "solargraph.symbols": true,
+  "solargraph.folding": false,
   "solargraph.useBundler": true,
   "suggest.completionItemKindLabels": {
     "text": "\ue612",
@@ -75,6 +71,8 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   },
+  "suggest.fixInsertedWord": false,
   "suggest.keepCompleteopt": true,
+  "typescript.format.enabled": false,
   "typescript.preferences.importModuleSpecifierEnding": "js"
 }
