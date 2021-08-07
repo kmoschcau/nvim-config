@@ -676,6 +676,9 @@ call s:highlight('Material_SynFunctionKeyword',
                  \   'fg':   s:c_syntax_function })
 call s:highlight('Material_SynFunctionName',
                  \ { 'fg':   s:c_syntax_function })
+call s:highlight('Material_SynAccessorKeyword',
+                 \ { 'attr': 'bold',
+                 \   'fg':   s:color_dict('cyan', 6) })
 call s:highlight('Material_SynAccessorName',
                  \ { 'fg':   s:color_dict('cyan', 6) })
 call s:highlight('Material_SynAnonymousFunctionName',
@@ -720,6 +723,8 @@ call s:highlight('Material_SynNamespaceName',
                  \ { 'fg':   s:c_syntax_namespace })
 
 " Generics
+call s:highlight('Material_SynGenericSpecial',
+                 \ { 'fg':   s:color_dict('purple', 4) })
 call s:highlight('Material_SynGenericBackground',
                  \ { 'bg':   s:c_syntax_meta_light })
 call s:highlight('Material_SynGenericParameterName',
@@ -918,6 +923,8 @@ highlight! link Todo         Material_SynTodo
 
 " Treesitter {{{3
 
+highlight! link TSAccessorKeyword  Material_SynAccessorKeyword
+highlight! link TSAccessorName     Material_SynAccessorName
 highlight! link TSClassKeyword     Material_SynTypedefKeyword
 highlight! link TSClassName        Material_SynTypedefName
 highlight! link TSConstBuiltin     Material_SynConstant
@@ -925,9 +932,13 @@ highlight! link TSConstant         Material_SynConstantName
 highlight! link TSEnumKeyword      Material_SynEnumKeyword
 highlight! link TSEnumName         Material_SynEnumName
 highlight! link TSField            Material_SynFieldName
+highlight! link TSFunctionKeyword  Material_SynFunctionKeyword
+highlight! link TSFunctionName     Material_SynFunctionName
 highlight! link TSGeneric          Material_SynGenericBackground
+highlight! link TSGenericSpecial   Material_SynGenericSpecial
 highlight! link TSInterfaceKeyword Material_SynInterfaceKeyword
 highlight! link TSInterfaceName    Material_SynInterfaceName
+highlight! link TSLocalName        Material_SynLocalName
 highlight! link TSKeywordFunction  Material_SynFunctionKeyword
 highlight! link TSNamespace        Material_SynNamespaceName
 highlight! link TSNamespaceKeyword Material_SynNamespaceKeyword
