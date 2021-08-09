@@ -27,7 +27,8 @@
 ; generics
 
 (generic_type
-  (type_arguments) @generic)
+  (type_arguments
+    ["<" ">"] @generic.special))
 
 ; type declarations
 

@@ -11,7 +11,6 @@ require 'nvim-treesitter.configs'.setup {
       ['enum.name'] = 'TSEnumName',
       ['function.keyword'] = 'TSFunctionKeyword',
       ['function.name'] = 'TSFunctionName',
-      ['generic'] = 'TSGeneric',
       ['generic.special'] = 'TSGenericSpecial',
       ['interface.keyword'] = 'TSInterfaceKeyword',
       ['interface.name'] = 'TSInterfaceName',

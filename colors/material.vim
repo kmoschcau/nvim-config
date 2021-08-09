@@ -934,7 +934,6 @@ highlight! link TSEnumName         Material_SynEnumName
 highlight! link TSField            Material_SynFieldName
 highlight! link TSFunctionKeyword  Material_SynFunctionKeyword
 highlight! link TSFunctionName     Material_SynFunctionName
-highlight! link TSGeneric          Material_SynGenericBackground
 highlight! link TSGenericSpecial   Material_SynGenericSpecial
 highlight! link TSInterfaceKeyword Material_SynInterfaceKeyword
 highlight! link TSInterfaceName    Material_SynInterfaceName
@@ -1200,7 +1199,7 @@ highlight! link typescriptRestOrSpread        Material_SynOperator
 highlight! link typescriptTry                 Material_SynStatement
 highlight! link typescriptTypeAnnotation      Material_SynSpecial
 highlight! link typescriptTypeBracket         Material_SynSpecial
-highlight! link typescriptTypeBrackets        Material_SynGenericBackground
+highlight! link typescriptTypeBrackets        Material_SynGenericSpecial
 highlight! link typescriptTypeParameter       Material_SynGenericParameterName
 highlight! link typescriptVariable            Material_SynStatement
 highlight! link typescriptVariableDeclaration Material_SynLocalName
