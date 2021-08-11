@@ -367,6 +367,10 @@ set noshowmode
 " number or 1.
 set sidescroll=1
 
+" When and how to draw the signcolumn.
+" Note: This has to be quoted, otherwise Vim throws a fit.
+set signcolumn="auto:2"
+
 " When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
 " 'tabstop' or 'softtabstop' is used in other places.  A <BS> will delete a
 " 'shiftwidth' worth of space at the start of the line.
