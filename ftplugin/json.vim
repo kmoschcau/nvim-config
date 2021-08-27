@@ -8,3 +8,9 @@
 if has('nvim') || has('folding')
   setlocal foldmethod=syntax
 endif
+
+" plugin configurations {{{1
+" ale | dense-analysis/ale {{{2
+
+" Set the ignored ALE linters to run for json
+let b:ale_linters_ignore = { 'json' : ['eslint'] }
