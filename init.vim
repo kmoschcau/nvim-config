@@ -1,7 +1,7 @@
 " vim: foldmethod=marker foldlevel=0
 " Sets the character encoding used inside Vim.
 set encoding=utf-8
-scriptencoding=utf-8
+scriptencoding utf-8
 
 " tmux specific settings {{{1
 " if in tmux
@@ -220,16 +220,16 @@ set formatoptions=croqlj
 
 " Configures the cursor style for each mode. Works in the GUI and some
 " terminals.
-" The option is a command separated list of parts. Each part consists of a
+" The option is a comma separated list of parts. Each part consists of a
 " mode-list and an argument-list:
 "   mode-list:argument-list
 if has('nvim') || has('gui')
-  set guicursor=n:block-blinkwait1000-blinkon500-blinkoff500-Cursor
-              \,v:block-blinkon0-Cursor
-              \,c:ver20-blinkwait1000-blinkon500-blinkoff500-Cursor
-              \,i-ci-sm:ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert
-              \,r-cr:hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace
-              \,o:hor50-Cursor
+  set guicursor=n:block-blinkwait1000-blinkon500-blinkoff500-Cursor,
+               \v:block-blinkon0-Cursor,
+               \c:ver20-blinkwait1000-blinkon500-blinkoff500-Cursor,
+               \i-ci-sm:ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert,
+               \r-cr:hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace,
+               \o:hor50-Cursor
 endif
 
 " A history of ":" commands, and a history of previous search patterns is
@@ -920,4 +920,3 @@ let g:signify_sign_change = '~'
 " milliseconds without any keypresses.
 let g:signify_cursorhold_normal = 1
 let g:signify_cursorhold_insert = 1
-
