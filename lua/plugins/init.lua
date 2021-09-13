@@ -131,7 +131,7 @@ return require('packer').startup(function()
 
   -- fzf plugins {{{1
   -- provides fzf fuzzy finder
-  use 'junegunn/fzf'
+  use { 'junegunn/fzf', run = ':call fzf#install()' }
 
   -- provides vim integration with fzf
   use 'junegunn/fzf.vim'
