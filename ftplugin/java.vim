@@ -18,6 +18,19 @@ nnoremap <silent><buffer> <F4>  :CocCommand java.action.organizeImports<cr>
 
 nnoremap <silent><buffer> <F12> :CocCommand java.debug.vimspector.start<cr>
 
+" User commands {{{2
+
+function! s:GoogleJavaFormat(start, end)
+  execute '%!google-java-format -'
+        \ '--skip-reflowing-long-strings'
+        \ '--skip-sorting-imports'
+        \ '--skip-removing-unused-imports'
+        \ '--lines' a:start . ':' . a:end
+        \ '2> /dev/null'
+  execute a:start
+endfunction
+command -range=% GoogleJavaFormat :call s:GoogleJavaFormat(<line1>, <line2>)
+
 " plugin configurations {{{1
 " ale | dense-analysis/ale {{{2
 
