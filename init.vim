@@ -281,7 +281,7 @@ set list
 " separated list of string settings.
 if has('nvim')
   set listchars=trail:·,extends:≻,precedes:≺,conceal:◌,nbsp:⨯
-  if has('nvim-0.6.0')
+  if has('nvim-0.6.0') && !has('win32')
     set listchars+=tab:⊳\ ⎹
   elseif has('nvim-0.4.0')
     set listchars+=tab:⊳\ \|
