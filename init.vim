@@ -3,6 +3,13 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+" vim-polyglot | sheerun/vim-polyglot {{{1
+" this has to be done here, otherwise polyglot doesn't realize
+
+" Disable the typescript lang, because the indenting of comments is atrocious.
+" And it breaks gq.
+let g:polyglot_disabled = ['typescript']
+
 " tmux specific settings {{{1
 " if in tmux
 if !has('nvim') && &term =~# '^tmux'

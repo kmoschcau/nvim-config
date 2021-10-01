@@ -55,6 +55,9 @@ return require('packer').startup(function()
   -- collection of various syntax plugins
   use 'sheerun/vim-polyglot'
 
+  -- add a another typescript syntax plugin, because polyglot's is bad
+  use 'leafgarland/typescript-vim'
+
   -- better folding for python
   use 'tmhedberg/SimpylFold'
 
