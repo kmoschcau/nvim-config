@@ -1236,6 +1236,11 @@ highlight! link zshFlag Material_SynParameterName
 
 " highlight groups for plugins {{{2
 
+" CSV | chrisbra/csv {{{3
+
+highlight! link CSVColumnHeaderOdd  Material_VimTitle
+highlight! link CSVColumnHeaderEven Material_VimTitle
+
 " ale | dense-analysis/ale {{{3
 
 highlight! link ALEError                   Material_VimErrorUnderline
