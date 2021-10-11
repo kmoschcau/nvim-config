@@ -687,6 +687,7 @@ let g:coc_global_extensions = [
       \'coc-sh',
       \'coc-solargraph',
       \'coc-tsserver',
+      \'coc-vimlsp',
       \'coc-yaml'
       \]
 
