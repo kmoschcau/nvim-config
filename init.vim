@@ -682,7 +682,7 @@ let g:coc_global_extensions = [
       \'coc-java-debug',
       \'coc-json',
       \'coc-omnisharp',
-      \'coc-python',
+      \'coc-pyright',
       \'coc-rls',
       \'coc-sh',
       \'coc-solargraph',
