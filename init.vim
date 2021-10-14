@@ -375,7 +375,6 @@ set noshowmode
 set sidescroll=1
 
 " When and how to draw the signcolumn.
-" Note: This has to be quoted, otherwise Vim throws a fit.
 if has('nvim')
   set signcolumn=auto:9
 else
