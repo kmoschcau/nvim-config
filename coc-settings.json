@@ -36,13 +36,19 @@
   "java.signatureHelp.enabled": true,
   "javascript.format.enabled": false,
   "javascript.preferences.importModuleSpecifierEnding": "js",
+  "languageserver": {
+    "puppet": {
+      "args": ["--stdio"],
+      "command": "puppet-languageserver",
+      "filetypes": ["puppet"],
+      "rootPatterns": [".git/"]
+    }
+  },
   "list.alignColumns": true,
-  "python.disableInstallationCheck": true,
   "python.linting.enabled": false,
   "solargraph.checkGemVersion": false,
   "solargraph.diagnostics": true,
   "solargraph.folding": false,
-  "solargraph.useBundler": true,
   "suggest.completionItemKindLabels": {
     "text": "\ue612",
     "method": "\uf09a",
