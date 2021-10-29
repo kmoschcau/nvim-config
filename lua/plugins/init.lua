@@ -17,7 +17,7 @@ return require('packer').startup(function()
   use 'OmniSharp/omnisharp-vim'
 
   -- omnisharp default settings and extras
-  use { 'nickspoons/vim-sharpenup', after = 'omnisharp-vim' }
+  use { 'nickspoons/vim-sharpenup' }
 
   -- debugging plugins {{{1
   use 'puremourning/vimspector'
@@ -62,30 +62,22 @@ return require('packer').startup(function()
   use 'tmhedberg/SimpylFold'
 
   -- NERDTree plugins {{{1
-  -- shows git file status in NERDTree
-  use { 'Xuyuanp/nerdtree-git-plugin', after = 'nerdtree' }
-
   -- provides a better file browser than built-in netrw
   use 'preservim/nerdtree'
 
-  -- colored file type icons in NERDTree
-  use { 'tiagofumo/vim-nerdtree-syntax-highlight', after = 'nerdtree' }
+  -- shows git file status in NERDTree
+  use { 'Xuyuanp/nerdtree-git-plugin' }
 
-  -- devicons plugins {{{1
-  -- use fancy devicons everywhere!
-  use {
-    'ryanoasis/vim-devicons',
-    after = {
-      'nerdtree',
-      'nerdtree-git-plugin',
-      'vim-airline',
-      'vim-nerdtree-syntax-highlight'
-    }
-  }
+  -- colored file type icons in NERDTree
+  use { 'tiagofumo/vim-nerdtree-syntax-highlight' }
 
   -- Airline plugins {{{1
   -- pretty, segmented and configurable status line
   use 'vim-airline/vim-airline'
+
+  -- devicons plugins {{{1
+  -- use fancy devicons everywhere!
+  use { 'ryanoasis/vim-devicons' }
 
   -- git plugins {{{1
   -- show git line status in gutter
