@@ -37,6 +37,12 @@
   "javascript.format.enabled": false,
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "languageserver": {
+    "terraform": {
+      "args": ["serve"],
+      "command": "terraform-ls",
+      "filetypes": ["terraform"],
+      "rootPatterns": [".git/"]
+    },
     "puppet": {
       "args": ["--stdio"],
       "command": "puppet-languageserver",
