@@ -1344,6 +1344,8 @@ highlight! link diffRemoved Material_VimDiffDelete
 
 " vim-nerdtree-syntax-highlight | tiagofumo/vim-nerdtree-syntax-highlight {{{3
 
+highlight! link NERDTreeDirSlash Material_SynSpecial
+
 let g:NERDTreeExactMatchHighlightColor = {
       \ '.bashprofile':   s:c_nerd_tree_neutral_light,
       \ '.bashrc':        s:c_nerd_tree_neutral_light,
