@@ -730,6 +730,8 @@ call s:highlight('Material_SynGenericBackground',
 call s:highlight('Material_SynGenericParameterName',
                  \ { 'fg':   s:c_syntax_typedef,
                  \   'bg':   s:c_syntax_meta_light })
+call s:highlight('Material_SynAnnotation',
+                 \ { 'fg':   s:c_syntax_meta_strong })
 
 " Interfaces (or anything that is just a declaration, but not implementation)
 call s:highlight('Material_SynInterfaceKeyword',
@@ -925,6 +927,7 @@ highlight! link Todo         Material_SynTodo
 
 highlight! link TSAccessorKeyword  Material_SynAccessorKeyword
 highlight! link TSAccessorName     Material_SynAccessorName
+highlight! link TSAttribute        Material_SynAnnotation
 highlight! link TSClassKeyword     Material_SynTypedefKeyword
 highlight! link TSClassName        Material_SynTypedefName
 highlight! link TSConstBuiltin     Material_SynConstant
@@ -953,7 +956,6 @@ highlight! link commentTSConstant Material_SynSpecial
 " TSVariable cleared
 
 " TSAnnotation          links  to  PreProc
-" TSAttribute           links  to  PreProc
 " TSConstMacro          links  to  Define
 " TSConstructor         links  to  Special
 " TSDanger              links  to  WarningMsg
