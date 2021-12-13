@@ -13,22 +13,6 @@ endif
 " after white space to get this width.
 setlocal textwidth=120
 
-" key bindings {{{2
-" plugin key maps {{{3
-" omnisharp-vim | Omnisharp/omnisharp-vim {{{4
-
-nnoremap <silent><buffer> K      :OmniSharpDocumentation<cr>
-nnoremap <silent><buffer> <C-s>s :OmniSharpSignatureHelp<cr>
-nnoremap <silent><buffer> <C-s>d :OmniSharpGotoDefinition<cr>
-nnoremap <silent><buffer> <C-s>i :OmniSharpFindImplementations<cr>
-nnoremap <silent><buffer> <C-s>r :OmniSharpFindUsages<cr>
-nnoremap <silent><buffer> <C-s>n :OmniSharpRename<cr>
-
-nnoremap <silent><buffer> <F4>   :OmniSharpFixUsings<cr>
-
-nnoremap <silent><buffer> [m     :OmniSharpNavigateUp<cr>
-nnoremap <silent><buffer> ]m     :OmniSharpNavigateDown<cr>
-
 " plugin configurations {{{1
 " ale | dense-analysis/ale {{{2
 
