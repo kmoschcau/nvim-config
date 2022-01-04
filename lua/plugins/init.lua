@@ -132,9 +132,6 @@ return require('packer').startup(function()
   use 'junegunn/fzf.vim'
 
   -- misc plugins {{{1
-  -- adds support for .editorconfig files
-  use 'editorconfig/editorconfig-vim'
-
   -- allows better handling for local vimrc files
   use 'embear/vim-localvimrc'
 
