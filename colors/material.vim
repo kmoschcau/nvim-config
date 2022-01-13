@@ -390,6 +390,7 @@ let s:c_error_light             = s:color_dict('red', 3)
 let s:c_error_strong            = s:color_dict('red', 6)
 let s:c_warning_light           = s:color_dict('orange', 3)
 let s:c_warning_strong          = s:color_dict('orange', 6)
+let s:c_info_light              = s:color_dict('light_blue', 3)
 let s:c_info_strong             = s:color_dict('light_blue', 6)
 
 let s:c_syntax_number_light     = s:color_dict('blue', 1)
@@ -553,6 +554,12 @@ call s:highlight('Material_VimInfoInverted',
 call s:highlight('Material_VimInfoUnderline',
                  \ { 'attr': 'underline',
                  \   'sp':   s:c_info_strong })
+call s:highlight('Material_VimHintInverted',
+                 \ { 'fg':   s:c_neutral_lightest,
+                 \   'bg':   s:c_info_light })
+call s:highlight('Material_VimHintUnderline',
+                 \ { 'attr': 'underline',
+                 \   'sp':   s:c_info_light })
 
 " Spelling {{{3
 
@@ -876,6 +883,18 @@ highlight! link SpellBad   Material_VimSpellBad
 highlight! link SpellCap   Material_VimSpellCap
 highlight! link SpellLocal Material_VimSpellLocal
 highlight! link SpellRare  Material_VimSpellRare
+
+" Diagnostics {{{3
+
+highlight! link DiagnosticError Material_VimErrorInverted
+highlight! link DiagnosticWarn  Material_VimWarningInverted
+highlight! link DiagnosticInfo  Material_VimInfoInverted
+highlight! link DiagnosticHint  Material_VimHintInverted
+
+highlight! link DiagnosticUnderLineError Material_VimErrorUnderline
+highlight! link DiagnosticUnderLineWarn  Material_VimWarningUnderline
+highlight! link DiagnosticUnderLineInfo  Material_VimInfoUnderline
+highlight! link DiagnosticUnderLineHint  Material_VimHintUnderline
 
 " Special items {{{2
 
