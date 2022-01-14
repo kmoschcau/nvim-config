@@ -8,7 +8,7 @@
 " value will be used. Setting this independently from 'tabstop' allows for tabs
 " to be a certain width in characters, but still only indent 'shiftwidth' with
 " spaces.
-set shiftwidth=4
+setlocal shiftwidth=4
 
 " plugin configurations {{{1
 " ale | dense-analysis/ale {{{2
