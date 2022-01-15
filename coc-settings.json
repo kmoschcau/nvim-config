@@ -5,7 +5,7 @@
     ".ts"
   ],
   "codeLens.enable": true,
-  "codeLens.separator": "▶",
+  "codeLens.separator": "▸",
   "codeLens.subseparator": " | ",
   "diagnostic.displayByAle": true,
   "hover.floatConfig": {
