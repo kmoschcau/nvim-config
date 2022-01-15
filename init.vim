@@ -376,7 +376,7 @@ set sidescroll=1
 
 " When and how to draw the signcolumn.
 if has('nvim')
-  set signcolumn=auto:9
+  set signcolumn=auto:2
 else
   set signcolumn=auto
 endif
