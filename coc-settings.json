@@ -5,6 +5,7 @@
     ".ts"
   ],
   "codeLens.enable": true,
+  "codeLens.position": "eol",
   "codeLens.separator": "▸",
   "codeLens.subseparator": " | ",
   "diagnostic.displayByAle": true,
