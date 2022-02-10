@@ -320,8 +320,8 @@ endif
 " mouse button is used for.
 set mousemodel=extend
 
-" Print the line number in front of each line.
-set number
+" Do not print the line number in front of each line.
+set nonumber
 
 " Enables pseudo-transparency for the |popup-menu|. Valid values are in the
 " range of 0 for fully opaque popupmenu (disabled) to 100 for fully transparent
@@ -375,11 +375,7 @@ set noshowmode
 set sidescroll=1
 
 " When and how to draw the signcolumn.
-if has('nvim')
-  set signcolumn=auto:2
-else
-  set signcolumn=auto
-endif
+set signcolumn=no
 
 " When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
 " 'tabstop' or 'softtabstop' is used in other places.  A <BS> will delete a
@@ -535,12 +531,18 @@ endif
 
 augroup InitVim
   autocmd!
-  " Do not show line numbers in terminal buffers
+  " Do not show line numbers and sign column in terminal buffers
   if has('nvim')
-    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no
   else
-    autocmd TerminalOpen * setlocal nonumber norelativenumber
+    autocmd TerminalOpen * setlocal nonumber norelativenumber signcolumn=no
   endif
+
+  " Always disable line numbers and sign column in NERDTree
+  autocmd BufEnter *
+        \ if exists('b:NERDTree') |
+        \   setlocal nonumber norelativenumber signcolumn=no |
+        \ endif
 augroup end
 
 " key maps {{{2
