@@ -587,15 +587,10 @@ nmap     <silent>       <C-s>n    <Plug>(coc-rename)
 nmap     <silent>       <C-s>l    <Plug>(coc-codelens-action)
 nmap     <silent>       <C-s>f    <Plug>(coc-float-jump)
 
-" fzf fzf.vim | junegunn/fzf junegunn/fzf.vim {{{4
+" fzf-lua | ibhagwan/fzf-lua {{{4
 
 " Open FZF with the Ctrl-p map
-nnoremap <C-p> :Files<cr>
-
-" Change the default FZF maps
-let g:fzf_action = { 'ctrl-t' : 'tab split',
-                   \ 'ctrl-s' : 'split',
-                   \ 'ctrl-v' : 'vsplit' }
+nnoremap <C-p> :FzfLua files<cr>
 
 " gundo | sjl/gundo.vim {{{4
 
@@ -697,39 +692,6 @@ let g:coc_global_extensions = [
 
 " do not conceal delimiters
 let g:csv_no_conceal = 1
-
-" fzf fzf.vim | junegunn/fzf junegunn/fzf.vim {{{2
-
-" Set FZF default command. Usually this is set in the shell, but setting it here
-" helps with FZF integration on Windows.
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob !/.git/'
-elseif executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --files-with-matches --hidden'
-endif
-
-" Customize the FZF colors
-let g:fzf_colors = {
-    \ 'fg':         ['fg', 'Material_VimNormal'],
-    \ 'bg':         ['bg', 'Material_VimNormal'],
-    \ 'hl':         ['fg', 'Material_SynSpecial'],
-    \ 'fg+':        ['fg', 'Material_VimNormal'],
-    \ 'bg+':        ['bg', 'Material_VimVisual'],
-    \ 'hl+':        ['fg', 'Material_SynSpecial'],
-    \ 'preview-fg': ['fg', 'Material_VimNormal'],
-    \ 'preview-bg': ['bg', 'Material_VimNormal'],
-    \ 'gutter':     ['bg', 'Material_VimLightFramingSubtleFg'],
-    \ 'pointer':    ['fg', 'Material_VimNormal'],
-    \ 'marker':     ['bg', 'Material_VimInfoInverted'],
-    \ 'border':     ['bg', 'Material_VimStrongFramingWithoutFg'],
-    \ 'info':       ['fg', 'Material_VimMoreMsg'],
-    \ 'prompt':     ['bg', 'Material_VimStatusLine']
-    \ }
-
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up.
-let g:fzf_history_dir = '~/.local/share/fzf/history'
 
 " gundo | sjl/gundo.vim {{{2
 

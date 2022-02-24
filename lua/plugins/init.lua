@@ -76,8 +76,11 @@ return require('packer').startup(function()
   use 'vim-airline/vim-airline'
 
   -- devicons plugins {{{1
-  -- use fancy devicons everywhere!
+  -- dev icons for vimscript plugins
   use { 'ryanoasis/vim-devicons' }
+
+  -- dev icons for lua plugins
+  use { 'kyazdani42/nvim-web-devicons' }
 
   -- git plugins {{{1
   -- show git line status in gutter
@@ -125,11 +128,8 @@ return require('packer').startup(function()
   use 'tpope/vim-unimpaired'
 
   -- fzf plugins {{{1
-  -- provides fzf fuzzy finder
-  use { 'junegunn/fzf', run = ':call fzf#install()' }
-
   -- provides vim integration with fzf
-  use 'junegunn/fzf.vim'
+  use 'ibhagwan/fzf-lua'
 
   -- misc plugins {{{1
   -- allows better handling for local vimrc files
