@@ -46,3 +46,12 @@
 (class_declaration
   "class" @class.keyword
   name: (identifier) @class.name)
+
+; type references
+
+(class_declaration
+  interfaces: (super_interfaces
+    (interface_type_list
+      [(type_identifier) @interface.name
+       (generic_type
+        (type_identifier) @interface.name)])))
