@@ -320,8 +320,8 @@ endif
 " mouse button is used for.
 set mousemodel=extend
 
-" Do not print the line number in front of each line.
-set nonumber
+" Print the line number in front of each line.
+set number
 
 " Enables pseudo-transparency for the |popup-menu|. Valid values are in the
 " range of 0 for fully opaque popupmenu (disabled) to 100 for fully transparent
@@ -375,7 +375,11 @@ set noshowmode
 set sidescroll=1
 
 " When and how to draw the signcolumn.
-set signcolumn=no
+if has('nvim')
+  set signcolumn=auto:2
+else
+  set signcolumn=auto
+endif
 
 " When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'.
 " 'tabstop' or 'softtabstop' is used in other places.  A <BS> will delete a
