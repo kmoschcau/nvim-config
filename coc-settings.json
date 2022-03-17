@@ -61,6 +61,12 @@
   },
   "list.alignColumns": true,
   "outline.keepWindow": true,
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+  "powershell.codeFormatting.useConstantStrings": true,
+  "powershell.codeFormatting.useCorrectCasing": true,
+  "powershell.codeFormatting.whitespaceBetweenParameters": true,
+  "powershell.integratedConsole.showOnStartup": false,
   "python.linting.enabled": false,
   "signature.floatConfig": {
     "border": true,
