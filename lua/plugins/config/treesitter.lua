@@ -32,6 +32,6 @@ require 'nvim-treesitter.highlight'.set_custom_captures {
   ['namespace.name'] = 'TSNamespaceName'
 }
 
-require 'treesitter-context.config'.setup {
+require 'treesitter-context'.setup {
   enable = true
 }
