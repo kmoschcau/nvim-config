@@ -68,6 +68,8 @@
   "powershell.codeFormatting.whitespaceBetweenParameters": true,
   "powershell.integratedConsole.showOnStartup": false,
   "python.linting.enabled": false,
+  "rust-analyzer.server.path": "~/.local/bin/rust-analyzer",
+  "rust-analyzer.lens.methodReferences": true,
   "signature.floatConfig": {
     "border": true,
     "winblend": 20

@@ -684,7 +684,7 @@ let g:coc_global_extensions = [
       \'coc-omnisharp',
       \'coc-powershell',
       \'coc-pyright',
-      \'coc-rls',
+      \'coc-rust-analyzer',
       \'coc-sh',
       \'coc-snippets',
       \'coc-solargraph',
