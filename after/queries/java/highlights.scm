@@ -51,7 +51,7 @@
 
 (class_declaration
   interfaces: (super_interfaces
-    (interface_type_list
+    (type_list
       [(type_identifier) @interface.name
        (generic_type
         (type_identifier) @interface.name)])))
