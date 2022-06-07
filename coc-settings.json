@@ -9,6 +9,7 @@
   "codeLens.position": "eol",
   "codeLens.separator": "▸",
   "codeLens.subseparator": " | ",
+  "colors.filetypes": ["css", "sass"],
   "diagnostic.displayByAle": true,
   "hover.floatConfig": {
     "border": true,
@@ -69,7 +70,7 @@
   "powershell.integratedConsole.showOnStartup": false,
   "python.linting.enabled": false,
   "rust-analyzer.server.path": "~/.local/bin/rust-analyzer",
-  "rust-analyzer.lens.methodReferences": true,
+  "semanticTokens.filetypes": ["*"],
   "signature.floatConfig": {
     "border": true,
     "winblend": 20

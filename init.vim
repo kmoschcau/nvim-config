@@ -555,7 +555,7 @@ augroup end
 nnoremap Y y$
 
 " Add a debugging command for syntax highlighting
-function! SynStack()
+function! SynStack(use_coc)
   if !exists('*synstack')
     return
   endif
@@ -564,11 +564,18 @@ function! SynStack()
     echon ' | '
     OmniSharpHighlightEcho
   endif
-  if exists(':TSHighlightCapturesUnderCursor')
-    TSHighlightCapturesUnderCursor
+  if a:use_coc
+    if exists('*CocAction')
+      call CocAction('inspectSemanticToken')
+    endif
+  else
+    if exists(':TSHighlightCapturesUnderCursor')
+      TSHighlightCapturesUnderCursor
+    endif
   endif
 endfunction
-nnoremap <F10> :call SynStack()<cr>
+nnoremap <F10> :call SynStack(0)<cr>
+nnoremap <F22> :call SynStack(1)<cr>
 
 " plugin key maps {{{3
 " ale | dense-analysis/ale {{{4
@@ -587,9 +594,12 @@ nnoremap <silent>       <C-s>i    :call CocAction('jumpImplementation')<cr>
 nnoremap <silent>       <C-s>I    :call CocAction('jumpImplementation', v:false)<cr>
 nnoremap <silent>       <C-s>r    :call CocAction('jumpReferences')<cr>
 nnoremap <silent>       <C-s>R    :call CocAction('jumpReferences', v:false)<cr>
+nmap     <silent>       <C-s>a    <Plug>(coc-codeaction-cursor)
 nmap     <silent>       <C-s>n    <Plug>(coc-rename)
 nmap     <silent>       <C-s>l    <Plug>(coc-codelens-action)
 nmap     <silent>       <C-s>f    <Plug>(coc-float-jump)
+nnoremap <silent>       [s        :CocCommand document.jumpToPrevSymbol<cr>
+nnoremap <silent>       ]s        :CocCommand document.jumpToNextSymbol<cr>
 
 " fzf-lua | ibhagwan/fzf-lua {{{4
 
@@ -667,6 +677,16 @@ let g:ale_virtualtext_cursor = 1
 
 augroup CocNvim_InitVim
   autocmd!
+
+  " Have CoC take over the tagfunc, if available
+  autocmd User CocNvimInit
+        \ if exists('&tagfunc') && exists('*CocTagFunc') |
+        \   set tagfunc=CocTagFunc |
+        \ endif
+
+  " Mark references when holding the cursor over a symbol
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
   " Show method signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
@@ -678,6 +698,7 @@ augroup end
 let g:coc_enable_locationlist = 0
 
 let g:coc_global_extensions = [
+      \'coc-highlight',
       \'coc-java',
       \'coc-java-debug',
       \'coc-json',

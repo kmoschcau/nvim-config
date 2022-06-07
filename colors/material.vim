@@ -672,10 +672,9 @@ call s:highlight('Material_SynFieldName',
 " Other variables
 call s:highlight('Material_SynLocalName',
                  \ { 'attr': 'italic',
-                 \   'fg':   s:color_dict('orange', 4) })
+                 \   'fg':   s:color_dict('orange', 5) })
 call s:highlight('Material_SynParameterName',
-                 \ { 'attr': 'italic',
-                 \   'fg':   s:color_dict('orange', 6) })
+                 \ { 'fg':   s:color_dict('orange', 5) })
 
 " Functions and methods
 call s:highlight('Material_SynFunctionKeyword',
@@ -779,6 +778,15 @@ call s:highlight('Material_OmniSharpXmlDocCommentName',
                  \ { 'fg':   s:color_dict('orange', 3) })
 call s:highlight('Material_OmniSharpXmlDocCommentText',
                  \ { 'fg':   s:c_neutral_midpoint_strong })
+
+" coc.nvim | neoclide/coc.nvim {{{4
+
+call s:highlight('Material_CocHighlightText',
+                 \ { 'bg':   s:color_dict('yellow', 3) })
+call s:highlight('Material_CocHighlightRead',
+                 \ { 'bg':   s:color_dict('green', 2) })
+call s:highlight('Material_CocHighlightWrite',
+                 \ { 'bg':   s:color_dict('blue', 2) })
 
 " vim-airline | vim-airline/vim-airline {{{4
 
@@ -951,6 +959,7 @@ highlight! link TSClassKeyword     Material_SynTypedefKeyword
 highlight! link TSClassName        Material_SynTypedefName
 highlight! link TSConstBuiltin     Material_SynConstant
 highlight! link TSConstant         Material_SynConstantName
+highlight! link TSConstructor      Material_SynFunctionName
 highlight! link TSEnumKeyword      Material_SynEnumKeyword
 highlight! link TSEnumName         Material_SynEnumName
 highlight! link TSField            Material_SynFieldName
@@ -976,7 +985,6 @@ highlight! link commentTSConstant Material_SynSpecial
 
 " TSAnnotation          links  to  PreProc
 " TSConstMacro          links  to  Define
-" TSConstructor         links  to  Special
 " TSDanger              links  to  WarningMsg
 " TSEnvironment         links  to  Macro
 " TSEnvironmentName     links  to  Type
@@ -1287,6 +1295,44 @@ highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
 " coc.nvim | neoclide/coc.nvim {{{3
 
 highlight! link CocCodeLens Material_SynComment
+
+highlight! link CocHighlightText  Material_CocHighlightText
+highlight! link CocHighlightRead  Material_CocHighlightRead
+highlight! link CocHighlightWrite Material_CocHighlightWrite
+
+highlight! link CocSymbolFile          Material_VimNormal
+highlight! link CocSymbolModule        Material_SynNamespaceName
+highlight! link CocSymbolNamespace     Material_SynNamespaceName
+highlight! link CocSymbolPackage       Material_SynNamespaceName
+highlight! link CocSymbolClass         Material_SynTypedefName
+highlight! link CocSymbolMethod        Material_SynFunctionName
+highlight! link CocSymbolProperty      Material_SynAccessorName
+highlight! link CocSymbolField         Material_SynFieldName
+highlight! link CocSymbolConstructor   Material_SynFunctionName
+highlight! link CocSymbolEnum          Material_SynEnumKeyword
+highlight! link CocSymbolInterface     Material_SynInterfaceName
+highlight! link CocSymbolFunction      Material_SynFunctionName
+highlight! link CocSymbolVariable      Material_SynLocalName
+highlight! link CocSymbolConstant      Material_SynConstantName
+highlight! link CocSymbolString        Material_SynString
+highlight! link CocSymbolNumber        Material_SynNumber
+highlight! link CocSymbolBoolean       Material_SynBoolean
+highlight! link CocSymbolArray         Material_SynTypeName
+highlight! link CocSymbolObject        Material_SynStructureName
+highlight! link CocSymbolKey           Material_SynConstant
+highlight! link CocSymbolNull          Material_SynConstant
+highlight! link CocSymbolEnumMember    Material_SynEnumName
+highlight! link CocSymbolStruct        Material_SynStructureName
+highlight! link CocSymbolEvent         Material_DebugTest
+highlight! link CocSymbolOperator      Material_SynOperator
+highlight! link CocSymbolTypeParameter Material_SynGenericParameterName
+highlight! link CocSymbolDefault       Material_VimNormal
+
+highlight! link CocSemClass      Material_SynTypedefName
+highlight! link CocSemEnum       Material_SynEnumKeyword
+highlight! link CocSemEnumMember Material_SynEnumName
+highlight! link CocSemInterface  Material_SynInterfaceName
+highlight! link CocSemVariable   Material_SynLocalName
 
 " omnisharp-vim | OmniSharp/omnisharp-vim {{{3
 

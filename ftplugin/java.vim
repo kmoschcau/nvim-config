@@ -10,9 +10,6 @@ setlocal textwidth=100
 
 " key bindings {{{2
 " plugin key maps {{{3
-" coc.nvim | neoclide/coc.nvim {{{4
-
-nnoremap <silent><buffer> <F4>  :CocCommand java.action.organizeImports<cr>
 
 " vimspector | puremourning/vimspector {{{4
 
