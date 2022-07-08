@@ -44,19 +44,13 @@ return require('packer').startup(function()
   use 'NLKNguyen/vim-maven-syntax'
 
   -- colored highlighting for CSS like hex color values
-  use 'ap/vim-css-color'
+  use 'norcalli/nvim-colorizer.lua'
 
   -- a lot of helpful things dealing with CSV
   use 'chrisbra/csv.vim'
 
-  -- expanded CSS3 syntax, still to test, no idea whether polyglot brings CSS
-  use 'hail2u/vim-css3-syntax'
-
   -- collection of various syntax plugins
   use 'sheerun/vim-polyglot'
-
-  -- add a another typescript syntax plugin, because polyglot's is bad
-  use 'leafgarland/typescript-vim'
 
   -- better folding for python
   use 'tmhedberg/SimpylFold'

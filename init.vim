@@ -3,6 +3,27 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+" colors setup {{{1
+
+" When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
+" terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
+"
+" Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
+if has('unix')
+  let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
+else
+  " This is a crude check for Windows Terminal, but the only one available right
+  " now.
+  if exists('$WT_SESSION')
+    let s:terminfo_colors = '256'
+  else
+    let s:terminfo_colors = ''
+  endif
+endif
+if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
+  set termguicolors
+endif
+
 " vim-polyglot | sheerun/vim-polyglot {{{1
 " this has to be done here, otherwise polyglot doesn't realize
 
@@ -54,26 +75,6 @@ if has('nvim') || has('syntax')
 endif
 
 " appearance settings {{{2
-
-" When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
-" terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible terminal.
-"
-" Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-if has('unix')
-  let s:terminfo_colors = substitute(system('tput colors'), '\n\+$', '', '')
-else
-  " This is a crude check for Windows Terminal, but the only one available right
-  " now.
-  if exists('$WT_SESSION')
-    let s:terminfo_colors = '256'
-  else
-    let s:terminfo_colors = ''
-  endif
-endif
-if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
-  set termguicolors
-endif
-
 " Syntax settings {{{3
 " Java {{{4
 
