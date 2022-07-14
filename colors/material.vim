@@ -734,7 +734,7 @@ call s:highlight('Material_SynGenericSpecial',
 call s:highlight('Material_SynGenericBackground',
                  \ { 'bg':   s:c_syntax_meta_light })
 call s:highlight('Material_SynGenericParameterName',
-                 \ { 'fg':   s:c_syntax_typedef,
+                 \ { 'fg':   s:color_dict('orange', 6),
                  \   'bg':   s:c_syntax_meta_light })
 call s:highlight('Material_SynAnnotation',
                  \ { 'fg':   s:c_syntax_meta_strong })
@@ -1328,11 +1328,12 @@ highlight! link CocSymbolOperator      Material_SynOperator
 highlight! link CocSymbolTypeParameter Material_SynGenericParameterName
 highlight! link CocSymbolDefault       Material_VimNormal
 
-highlight! link CocSemClass      Material_SynTypedefName
-highlight! link CocSemEnum       Material_SynEnumKeyword
-highlight! link CocSemEnumMember Material_SynEnumName
-highlight! link CocSemInterface  Material_SynInterfaceName
-highlight! link CocSemVariable   Material_SynLocalName
+highlight! link CocSemClass         Material_SynTypedefName
+highlight! link CocSemEnum          Material_SynEnumKeyword
+highlight! link CocSemEnumMember    Material_SynEnumName
+highlight! link CocSemInterface     Material_SynInterfaceName
+highlight! link CocSemTypeParameter Material_SynGenericParameterName
+highlight! link CocSemVariable      Material_SynLocalName
 
 " omnisharp-vim | OmniSharp/omnisharp-vim {{{3
 
