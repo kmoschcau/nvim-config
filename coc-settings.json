@@ -112,7 +112,6 @@
     "shadow": true,
     "winblend": 20
   },
-  "suggest.keepCompleteopt": true,
   "typescript.format.enabled": false,
   "typescript.preferences.importModuleSpecifierEnding": "js"
 }

@@ -1296,6 +1296,8 @@ highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
 
 highlight! link CocCodeLens Material_SynComment
 
+highlight! link CocMenuSel Material_VimPopupSelected
+
 highlight! link CocHighlightText  Material_CocHighlightText
 highlight! link CocHighlightRead  Material_CocHighlightRead
 highlight! link CocHighlightWrite Material_CocHighlightWrite
