@@ -952,33 +952,34 @@ highlight! link Todo         Material_SynTodo
 
 " Treesitter {{{3
 
-highlight! link TSAccessorKeyword  Material_SynAccessorKeyword
-highlight! link TSAccessorName     Material_SynAccessorName
+highlight! link @accessor.keyword  Material_SynAccessorKeyword
+highlight! link @accessor.name     Material_SynAccessorName
+highlight! link @class.keyword     Material_SynTypedefKeyword
+highlight! link @class.name        Material_SynTypedefName
+highlight! link @comment.keyword   Material_SynStatement
+highlight! link @enum.keyword      Material_SynEnumKeyword
+highlight! link @enum.name         Material_SynEnumName
+highlight! link @function.keyword  Material_SynFunctionKeyword
+highlight! link @function.name     Material_SynFunctionName
+highlight! link @generic.special   Material_SynGenericSpecial
+highlight! link @interface.keyword Material_SynInterfaceKeyword
+highlight! link @interface.name    Material_SynInterfaceName
+highlight! link @local.name        Material_SynLocalName
+highlight! link @namespace.keyword Material_SynNamespaceKeyword
+highlight! link @namespace.name    Material_SynNamespaceName
+
 highlight! link TSAttribute        Material_SynAnnotation
-highlight! link TSClassKeyword     Material_SynTypedefKeyword
-highlight! link TSClassName        Material_SynTypedefName
 highlight! link TSConstBuiltin     Material_SynConstant
 highlight! link TSConstant         Material_SynConstantName
 highlight! link TSConstructor      Material_SynFunctionName
-highlight! link TSEnumKeyword      Material_SynEnumKeyword
-highlight! link TSEnumName         Material_SynEnumName
 highlight! link TSField            Material_SynFieldName
-highlight! link TSFunctionKeyword  Material_SynFunctionKeyword
-highlight! link TSFunctionName     Material_SynFunctionName
-highlight! link TSGenericSpecial   Material_SynGenericSpecial
-highlight! link TSInterfaceKeyword Material_SynInterfaceKeyword
-highlight! link TSInterfaceName    Material_SynInterfaceName
-highlight! link TSLocalName        Material_SynLocalName
 highlight! link TSKeywordFunction  Material_SynFunctionKeyword
 highlight! link TSNamespace        Material_SynNamespaceName
-highlight! link TSNamespaceKeyword Material_SynNamespaceKeyword
 highlight! link TSNamespaceName    Material_SynNamespaceName
 highlight! link TSParameter        Material_SynParameterName
 highlight! link TSProperty         Material_SynAccessorName
 highlight! link TSType             Material_SynStructureName
 highlight! link TSTypeBuiltin      Material_SynTypeName
-
-highlight! link commentTSConstant Material_SynSpecial
 
 " TSNone     ctermfg=241 guifg=foreground
 " TSVariable cleared

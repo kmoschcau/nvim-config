@@ -113,5 +113,6 @@
     "winblend": 20
   },
   "typescript.format.enabled": false,
-  "typescript.preferences.importModuleSpecifierEnding": "js"
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "java.format.settings.url": "~/.config/nvim/coc/eclipse-formatter.xml"
 }
