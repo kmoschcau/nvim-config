@@ -40,6 +40,7 @@
   "java.completion.overwrite": false,
   "java.errors.incompleteClasspath.severity": "ignore",
   "java.format.enabled": false,
+  "java.format.settings.url": "~/.config/nvim/coc/eclipse-formatter.xml",
   "java.implementationsCodeLens.enabled": true,
   "java.referencesCodeLens.enabled": true,
   "java.signatureHelp.enabled": true,
@@ -113,6 +114,5 @@
     "winblend": 20
   },
   "typescript.format.enabled": false,
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "java.format.settings.url": "~/.config/nvim/coc/eclipse-formatter.xml"
+  "typescript.preferences.importModuleSpecifierEnding": "js"
 }
