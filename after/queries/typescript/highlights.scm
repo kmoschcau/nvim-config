@@ -1,3 +1,5 @@
+;; extends
+
 ; namespaces
 
 (ambient_declaration
