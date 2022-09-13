@@ -49,9 +49,6 @@ return require('packer').startup(function()
   -- a lot of helpful things dealing with CSV
   use 'chrisbra/csv.vim'
 
-  -- collection of various syntax plugins
-  use 'sheerun/vim-polyglot'
-
   -- better folding for python
   use 'tmhedberg/SimpylFold'
 

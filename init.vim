@@ -24,13 +24,6 @@ if s:terminfo_colors ==# '256' && (has('nvim') || has('termguicolors'))
   set termguicolors
 endif
 
-" vim-polyglot | sheerun/vim-polyglot {{{1
-" this has to be done here, otherwise polyglot doesn't realize
-
-" Disable the typescript lang, because the indenting of comments is atrocious.
-" And it breaks gq.
-let g:polyglot_disabled = ['typescript']
-
 " tmux specific settings {{{1
 " if in tmux
 if !has('nvim') && &term =~# '^tmux'
@@ -484,11 +477,6 @@ endif
 " Maximum number of tab pages to be opened by the |-p| command line argument or
 " the ":tab all" command.
 set tabpagemax=50
-
-" Number of spaces that a <Tab> in the file counts for. This just sets it to the
-" default value, because polyglot likes to set it to 2 for simple text files for
-" some reason.
-set tabstop=8
 
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width.
