@@ -3,6 +3,7 @@ vim.g.loaded_netrwPlugin = 1
 
 require "nvim-tree".setup {
   reload_on_bufenter = true,
+  remove_keymaps = { "<C-e>" },
   diagnostics = {
     enable = true,
     show_on_dirs = true
