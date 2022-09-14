@@ -7,6 +7,9 @@ require "nvim-tree".setup {
     enable = true,
     show_on_dirs = true
   },
+  view = {
+    adaptive_size = true
+  },
   renderer = {
     add_trailing = true,
     group_empty = true,
