@@ -52,15 +52,19 @@ return require('packer').startup(function()
   -- better folding for python
   use 'tmhedberg/SimpylFold'
 
+  -- File tree {{{1
+  -- provides a better file browser than built-in netrw
+  use 'kyazdani42/nvim-tree.lua'
+
   -- NERDTree plugins {{{1
   -- provides a better file browser than built-in netrw
-  use 'preservim/nerdtree'
+  -- use 'preservim/nerdtree'
 
   -- shows git file status in NERDTree
-  use { 'Xuyuanp/nerdtree-git-plugin' }
+  -- use { 'Xuyuanp/nerdtree-git-plugin' }
 
   -- colored file type icons in NERDTree
-  use { 'tiagofumo/vim-nerdtree-syntax-highlight' }
+  -- use { 'tiagofumo/vim-nerdtree-syntax-highlight' }
 
   -- Airline plugins {{{1
   -- pretty, segmented and configurable status line

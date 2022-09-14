@@ -645,19 +645,19 @@ let g:SimpylFold_docstring_preview = 1
 let g:ale_echo_msg_format = '%linter%: %severity% - %s'
 
 " The sign for errors in the sign gutter.
-let g:ale_sign_error = '‼ '
+let g:ale_sign_error = ' '
 
 " The sign for "info" markers in the sign gutter.
-let g:ale_sign_info = '¡ '
+let g:ale_sign_info = ' '
 
 " The sign for style errors in the sign gutter.
-let g:ale_sign_style_error = '‼S'
+let g:ale_sign_style_error = 'S'
 
 " The sign for style warnings in the sign gutter.
-let g:ale_sign_style_warning = '!S'
+let g:ale_sign_style_warning = 'S'
 
 " The sign for warnings in the sign gutter.
-let g:ale_sign_warning = '! '
+let g:ale_sign_warning = ' '
 
 " Enable the virtualtext error display.
 let g:ale_virtualtext_cursor = 1
