@@ -10,14 +10,18 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- language servers {{{1
-  -- CoC base
-  use { 'neoclide/coc.nvim', branch = 'release' }
+  -- Built-in LSP {{{2
+  -- LSP server installer
+  use 'williamboman/mason.nvim'
 
-  -- language server specifically for Omnisharp
-  use 'OmniSharp/omnisharp-vim'
+  -- Bridging the gap between mason.nvim and lspconfig
+  use 'williamboman/mason-lspconfig.nvim'
 
-  -- omnisharp default settings and extras
-  use { 'nickspoons/vim-sharpenup' }
+  -- Configurations for built-in LSP
+  use 'neovim/nvim-lspconfig'
+
+  -- Experimental semantic highlighting
+  use 'theHamsta/nvim-semantic-tokens'
 
   -- debugging plugins {{{1
   use 'puremourning/vimspector'

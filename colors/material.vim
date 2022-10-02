@@ -592,6 +592,15 @@ call s:highlight('Material_VimIncSearch',
 call s:highlight('Material_VimMatchParen',
                  \ { 'bg':   s:color_dict('teal', 2) })
 
+" LSP {{{3
+
+call s:highlight('Material_LspReferenceText',
+                 \ { 'bg':   s:color_dict('yellow', 3) })
+call s:highlight('Material_LspReferenceRead',
+                 \ { 'bg':   s:color_dict('green', 2) })
+call s:highlight('Material_LspReferenceWrite',
+                 \ { 'bg':   s:color_dict('blue', 2) })
+
 " Testing {{{3
 
 call s:highlight('Material_DebugTest',
@@ -746,48 +755,21 @@ call s:highlight('Material_SynInterfaceKeyword',
 call s:highlight('Material_SynInterfaceName',
                  \ { 'fg':   s:c_syntax_meta_strong })
 
+" Modifiers {{{5
+
+call s:highlight('Material_SynModAsync',
+                 \ { 'bg':   s:color_dict('yellow', 2) })
+call s:highlight('Material_SynModStatic',
+                 \ { 'attr': 'bold' })
+call s:highlight('Material_SynModDeprecated',
+                 \ { 'attr': 'strikethrough' })
+
 " File type specific {{{5
 
 call s:highlight('Material_SynVimCommentString',
                  \ { 'fg':   s:color_dict('green', 5) })
 
 " Plugins {{{3
-" OmniSharp | OmniSharp/omnisharp-vim {{{4
-
-call s:highlight('Material_OmniSharpExtensionMethodName',
-                 \ { 'fg':   s:color_dict('teal', 4) })
-call s:highlight('Material_OmniSharpOperatorOverloaded',
-                 \ { 'fg':   s:color_dict('orange', 7),
-                 \   'bg':   s:color_dict('orange', 2) })
-call s:highlight('Material_OmniSharpVerbatimStringLiteral',
-                 \ { 'fg':   s:color_dict('green', 7),
-                 \   'bg':   s:color_dict('green', 2) })
-
-call s:highlight('Material_OmniSharpXmlDocCommentAttributeName',
-                 \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('green', 3) })
-call s:highlight('Material_OmniSharpXmlDocAttributeQuotes',
-                 \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('green', 3) })
-call s:highlight('Material_OmniSharpXmlDocCommentAttributeValue',
-                 \ { 'attr': 'bold',
-                 \   'fg':   s:color_dict('green', 3) })
-call s:highlight('Material_OmniSharpXmlDocCommentDelimiter',
-                 \ { 'fg':   s:color_dict('teal', 3) })
-call s:highlight('Material_OmniSharpXmlDocCommentName',
-                 \ { 'fg':   s:color_dict('orange', 3) })
-call s:highlight('Material_OmniSharpXmlDocCommentText',
-                 \ { 'fg':   s:c_neutral_midpoint_strong })
-
-" coc.nvim | neoclide/coc.nvim {{{4
-
-call s:highlight('Material_CocHighlightText',
-                 \ { 'bg':   s:color_dict('yellow', 3) })
-call s:highlight('Material_CocHighlightRead',
-                 \ { 'bg':   s:color_dict('green', 2) })
-call s:highlight('Material_CocHighlightWrite',
-                 \ { 'bg':   s:color_dict('blue', 2) })
-
 " vim-airline | vim-airline/vim-airline {{{4
 
 call s:highlight('Material_Airline1',
@@ -1016,6 +998,55 @@ highlight! link TSTypeBuiltin      Material_SynTypeName
 " queryTSType            links  to  TSType
 " queryTSProperty        links  to  TSProperty
 " queryTSPunctDelimiter  links  to  TSPunctDelimiter
+
+" LSP {{{3
+
+" References {{{4
+
+highlight! link LspReferenceText  Material_LspReferenceText
+highlight! link LspReferenceRead  Material_LspReferenceRead
+highlight! link LspReferenceWrite Material_LspReferenceWrite
+
+" Code Lens {{{4
+
+highlight! link LspCodeLens          Material_SynComment
+highlight! link LspCodeLensSeparator Material_SynComment
+
+" Signature Help {{{4
+
+highlight! link LspSignatureActiveParameter Material_VimSearch
+
+" Semantic Highlighting {{{4
+
+highlight! link LspClass         Material_SynTypedefName
+highlight! link LspComment       Material_SynComment
+highlight! link LspDecorator     Material_SynAnnotation
+highlight! link LspEnum          Material_SynEnumKeyword
+highlight! link LspEnumMember    Material_SynEnumName
+highlight! link LspEvent         Material_DebugTest
+highlight! link LspFunction      Material_SynFunctionName
+highlight! link LspInterface     Material_SynInterfaceName
+highlight! link LspKeyword       Material_DebugTest
+highlight! link LspMacro         Material_DebugTest
+highlight! link LspMethod        Material_SynFunctionName
+highlight! link LspModifier      Material_DebugTest
+highlight! link LspNamespace     Material_SynNamespaceName
+highlight! link LspNumber        Material_SynNumber
+highlight! link LspOperator      Material_SynOperator
+highlight! link LspParameter     Material_SynParameterName
+highlight! link LspProperty      Material_SynAccessorName
+highlight! link LspRegexp        Material_DebugTest
+highlight! link LspString        Material_SynString
+highlight! link LspStruct        Material_SynStructureName
+highlight! link LspType          Material_SynStructureName
+highlight! link LspTypeParameter Material_SynGenericParameterName
+highlight! link LspVariable      Material_SynLocalName
+
+highlight! link LspAbstract   Material_DebugTest
+highlight! link LspAsync      Material_SynModAsync
+highlight! link LspDeprecated Material_SynModDeprecated
+highlight! link LspReadonly   Material_SynConstantName
+highlight! link LspStatic     Material_SynModStatic
 
 " custom variables {{{1
 " terminal color variables {{{2
@@ -1292,121 +1323,6 @@ highlight! link ALEVirtualTextStyleWarning Material_VimStyleWarningInverted
 highlight! link ALEWarning                 Material_VimWarningUnderline
 highlight! link ALEWarningSign             Material_VimWarningInverted
 highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
-
-" coc.nvim | neoclide/coc.nvim {{{3
-
-highlight! link CocCodeLens Material_SynComment
-
-highlight! link CocMenuSel Material_VimPopupSelected
-
-highlight! link CocHighlightText  Material_CocHighlightText
-highlight! link CocHighlightRead  Material_CocHighlightRead
-highlight! link CocHighlightWrite Material_CocHighlightWrite
-
-highlight! link CocSymbolFile          Material_VimNormal
-highlight! link CocSymbolModule        Material_SynNamespaceName
-highlight! link CocSymbolNamespace     Material_SynNamespaceName
-highlight! link CocSymbolPackage       Material_SynNamespaceName
-highlight! link CocSymbolClass         Material_SynTypedefName
-highlight! link CocSymbolMethod        Material_SynFunctionName
-highlight! link CocSymbolProperty      Material_SynAccessorName
-highlight! link CocSymbolField         Material_SynFieldName
-highlight! link CocSymbolConstructor   Material_SynFunctionName
-highlight! link CocSymbolEnum          Material_SynEnumKeyword
-highlight! link CocSymbolInterface     Material_SynInterfaceName
-highlight! link CocSymbolFunction      Material_SynFunctionName
-highlight! link CocSymbolVariable      Material_SynLocalName
-highlight! link CocSymbolConstant      Material_SynConstantName
-highlight! link CocSymbolString        Material_SynString
-highlight! link CocSymbolNumber        Material_SynNumber
-highlight! link CocSymbolBoolean       Material_SynBoolean
-highlight! link CocSymbolArray         Material_SynTypeName
-highlight! link CocSymbolObject        Material_SynStructureName
-highlight! link CocSymbolKey           Material_SynConstant
-highlight! link CocSymbolNull          Material_SynConstant
-highlight! link CocSymbolEnumMember    Material_SynEnumName
-highlight! link CocSymbolStruct        Material_SynStructureName
-highlight! link CocSymbolEvent         Material_DebugTest
-highlight! link CocSymbolOperator      Material_SynOperator
-highlight! link CocSymbolTypeParameter Material_SynGenericParameterName
-highlight! link CocSymbolDefault       Material_VimNormal
-
-highlight! link CocSemClass         Material_SynTypedefName
-highlight! link CocSemEnum          Material_SynEnumKeyword
-highlight! link CocSemEnumMember    Material_SynEnumName
-highlight! link CocSemInterface     Material_SynInterfaceName
-highlight! link CocSemTypeParameter Material_SynGenericParameterName
-highlight! link CocSemVariable      Material_SynLocalName
-
-" omnisharp-vim | OmniSharp/omnisharp-vim {{{3
-
-let g:OmniSharp_highlight_groups = {
-      \ 'Comment':                            'Material_SynComment',
-      \ 'ExcludedCode':                       'Material_SynComment',
-      \ 'Identifier':                         'Material_SynStructureName',
-      \ 'Keyword':                            'Keyword',
-      \ 'ControlKeyword':                     'Conditional',
-      \ 'NumericLiteral':                     'Material_SynNumber',
-      \ 'Operator':                           'Material_SynOperator',
-      \ 'OperatorOverloaded':                 'Material_OmniSharpOperatorOverloaded',
-      \ 'PreprocessorKeyword':                'Material_SynPreProc',
-      \ 'StringLiteral':                      'Material_SynString',
-      \ 'WhiteSpace':                         'Material_DebugTest',
-      \ 'Text':                               'Material_DebugTest',
-      \ 'StaticSymbol':                       'Material_DebugTest',
-      \ 'PreprocessorText':                   'Material_VimNormal',
-      \ 'Punctuation':                        'Delimiter',
-      \ 'VerbatimStringLiteral':              'Material_OmniSharpVerbatimStringLiteral',
-      \ 'StringEscapeCharacter':              'SpecialChar',
-      \ 'ClassName':                          'Material_SynTypedefName',
-      \ 'DelegateName':                       'Material_SynAnonymousFunctionName',
-      \ 'EnumName':                           'Material_SynEnumKeyword',
-      \ 'InterfaceName':                      'Material_SynInterfaceName',
-      \ 'ModuleName':                         'Material_DebugTest',
-      \ 'StructName':                         'Material_SynStructureName',
-      \ 'TypeParameterName':                  'Material_SynGenericParameterName',
-      \ 'FieldName':                          'Material_SynFieldName',
-      \ 'EnumMemberName':                     'Material_SynEnumName',
-      \ 'ConstantName':                       'Material_SynConstantName',
-      \ 'LocalName':                          'Material_SynLocalName',
-      \ 'ParameterName':                      'Material_SynParameterName',
-      \ 'MethodName':                         'Material_SynFunctionName',
-      \ 'ExtensionMethodName':                'Material_OmniSharpExtensionMethodName',
-      \ 'PropertyName':                       'Material_SynAccessorName',
-      \ 'EventName':                          'Material_DebugTest',
-      \ 'NamespaceName':                      'Material_SynNamespaceName',
-      \ 'LabelName':                          'Material_DebugTest',
-      \ 'XmlDocCommentAttributeName':         'Material_OmniSharpXmlDocCommentAttributeName',
-      \ 'XmlDocCommentAttributeQuotes':       'Material_OmniSharpXmlDocAttributeQuotes',
-      \ 'XmlDocCommentAttributeValue':        'Material_OmniSharpXmlDocCommentAttributeValue',
-      \ 'XmlDocCommentCDataSection':          'Material_OmniSharpXmlDocCommentText',
-      \ 'XmlDocCommentComment':               'Material_SynComment',
-      \ 'XmlDocCommentDelimiter':             'Material_OmniSharpXmlDocCommentDelimiter',
-      \ 'XmlDocCommentEntityReference':       'Material_DebugTest',
-      \ 'XmlDocCommentName':                  'Material_OmniSharpXmlDocCommentName',
-      \ 'XmlDocCommentProcessingInstruction': 'Material_DebugTest',
-      \ 'XmlDocCommentText':                  'Material_OmniSharpXmlDocCommentText',
-      \ 'XmlLiteralAttributeName':            'Material_DebugTest',
-      \ 'XmlLiteralAttributeQuotes':          'Material_DebugTest',
-      \ 'XmlLiteralAttributeValue':           'Material_DebugTest',
-      \ 'XmlLiteralCDataSection':             'Material_DebugTest',
-      \ 'XmlLiteralComment':                  'Material_DebugTest',
-      \ 'XmlLiteralDelimiter':                'Material_DebugTest',
-      \ 'XmlLiteralEmbeddedExpression':       'Material_DebugTest',
-      \ 'XmlLiteralEntityReference':          'Material_DebugTest',
-      \ 'XmlLiteralName':                     'Material_DebugTest',
-      \ 'XmlLiteralProcessingInstruction':    'Material_DebugTest',
-      \ 'XmlLiteralText':                     'Material_DebugTest',
-      \ 'RegexComment':                       'Material_DebugTest',
-      \ 'RegexCharacterClass':                'Material_DebugTest',
-      \ 'RegexAnchor':                        'Material_DebugTest',
-      \ 'RegexQuantifier':                    'Material_DebugTest',
-      \ 'RegexGrouping':                      'Material_DebugTest',
-      \ 'RegexAlternation':                   'Material_DebugTest',
-      \ 'RegexText':                          'Material_DebugTest',
-      \ 'RegexSelfEscapedCharacter':          'Material_DebugTest',
-      \ 'RegexOtherEscape':                   'Material_DebugTest',
-      \}
 
 " vim-git | tpope/vim-git {{{3
 

@@ -8,13 +8,6 @@
 " after white space to get this width.
 setlocal textwidth=100
 
-" key bindings {{{2
-" plugin key maps {{{3
-
-" vimspector | puremourning/vimspector {{{4
-
-nnoremap <silent><buffer> <F12> :CocCommand java.debug.vimspector.start<cr>
-
 " User commands {{{2
 
 function! s:GoogleJavaFormat(start, end)

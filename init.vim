@@ -544,51 +544,21 @@ augroup end
 nnoremap Y y$
 
 " Add a debugging command for syntax highlighting
-function! SynStack(use_coc)
+function! SynStack()
   if !exists('*synstack')
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-  if exists(':OmniSharpHighlightEcho')
-    echon ' | '
-    OmniSharpHighlightEcho
-  endif
-  if a:use_coc
-    if exists('*CocAction')
-      call CocAction('inspectSemanticToken')
-    endif
-  else
-    if exists(':TSHighlightCapturesUnderCursor')
-      TSHighlightCapturesUnderCursor
-    endif
+  if exists(':TSHighlightCapturesUnderCursor')
+    TSHighlightCapturesUnderCursor
   endif
 endfunction
-nnoremap <F10> :call SynStack(0)<cr>
-nnoremap <F22> :call SynStack(1)<cr>
+nnoremap <F10> :call SynStack()<cr>
 
 " plugin key maps {{{3
 " ale | dense-analysis/ale {{{4
 
 nmap <silent> <C-l>d <Plug>(ale_detail)
-
-" coc.nvim | neoclide/coc.nvim {{{4
-
-inoremap <silent><expr> <C-space> coc#refresh()
-nnoremap <silent>       K         :call CocAction('doHover')<cr>
-nnoremap <silent>       <C-s>d    :call CocAction('jumpDefinition')<cr>
-nnoremap <silent>       <C-s>D    :call CocAction('jumpDefinition', v:false)<cr>
-nnoremap <silent>       <C-s>t    :call CocAction('jumpTypeDefinition')<cr>
-nnoremap <silent>       <C-s>T    :call CocAction('jumpTypeDefinition', v:false)<cr>
-nnoremap <silent>       <C-s>i    :call CocAction('jumpImplementation')<cr>
-nnoremap <silent>       <C-s>I    :call CocAction('jumpImplementation', v:false)<cr>
-nnoremap <silent>       <C-s>r    :call CocAction('jumpReferences')<cr>
-nnoremap <silent>       <C-s>R    :call CocAction('jumpReferences', v:false)<cr>
-nmap     <silent>       <C-s>a    <Plug>(coc-codeaction-cursor)
-nmap     <silent>       <C-s>n    <Plug>(coc-rename)
-nmap     <silent>       <C-s>l    <Plug>(coc-codelens-action)
-nmap     <silent>       <C-s>f    <Plug>(coc-float-jump)
-nnoremap <silent>       [s        :CocCommand document.jumpToPrevSymbol<cr>
-nnoremap <silent>       ]s        :CocCommand document.jumpToNextSymbol<cr>
 
 " fzf-lua | ibhagwan/fzf-lua {{{4
 
@@ -662,48 +632,6 @@ let g:ale_sign_warning = ' '
 " Enable the virtualtext error display.
 let g:ale_virtualtext_cursor = 1
 
-" coc.nvim | neoclide/coc.nvim {{{2
-
-augroup CocNvim_InitVim
-  autocmd!
-
-  " Have CoC take over the tagfunc, if available
-  autocmd User CocNvimInit
-        \ if exists('&tagfunc') && exists('*CocTagFunc') |
-        \   set tagfunc=CocTagFunc |
-        \ endif
-
-  " Mark references when holding the cursor over a symbol
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " Show method signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-  " Show the location list without opening the preview by default.
-  autocmd User CocLocationsChange CocList --normal location
-augroup end
-
-" Disable the default locationlist with preview.
-let g:coc_enable_locationlist = 0
-
-let g:coc_global_extensions = [
-      \'coc-highlight',
-      \'coc-java',
-      \'coc-java-debug',
-      \'coc-json',
-      \'coc-omnisharp',
-      \'coc-powershell',
-      \'coc-pyright',
-      \'coc-rust-analyzer',
-      \'coc-sh',
-      \'coc-snippets',
-      \'coc-solargraph',
-      \'coc-tsserver',
-      \'coc-vimlsp',
-      \'coc-xml',
-      \'coc-yaml'
-      \]
-
 " csv.vim | chrisbra/csv.vim {{{2
 
 " do not conceal delimiters
@@ -737,11 +665,6 @@ let g:NERDTreeMinimalUI = 1
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-" omnisharp-vim | Omnisharp/omnisharp-vim {{{2
-
-" Have OmniSharp always highlight
-let g:Omnisharp_highlighting = 3
-
 " packer.nvim | wbthomason/packer.nvim {{{2
 
 augroup PackerNvim_InitVim
@@ -766,7 +689,6 @@ let g:airline_extensions = [
     \   'fugitiveline',
     \   'fzf',
     \   'hunks',
-    \   'omnisharp',
     \   'quickfix',
     \   'term',
     \   'whitespace',
