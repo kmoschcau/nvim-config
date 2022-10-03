@@ -1,7 +1,8 @@
-require 'plugins.config.colorizer'
-require 'plugins.config.editing'
-require 'plugins.config.fzf'
-require 'plugins.config.lsp'
-require 'plugins.config.mason'
-require 'plugins.config.treesitter'
-require 'plugins.config.tree'
+require "plugins.config.cmp"
+require "plugins.config.colorizer"
+require "plugins.config.editing"
+require "plugins.config.fzf"
+require "plugins.config.lsp"
+require "plugins.config.mason"
+require "plugins.config.treesitter"
+require "plugins.config.tree"

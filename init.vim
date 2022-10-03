@@ -193,7 +193,7 @@ endif
 "   noselect Do not select a match in the menu, force the user to select one
 "            from the menu. Only works in combination with "menu" or "menuone".
 if has('nvim') || has('insert_expand')
-  set completeopt=menuone
+  set completeopt=menuone,menuone
   if has('textprop')
     set completeopt+=popup
   endif

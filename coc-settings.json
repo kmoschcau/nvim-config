@@ -1,35 +1,5 @@
 {
   "diagnostic.displayByAle": true,
-  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER_CHAINED",
-  "java.codeGeneration.useBlocks": true,
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.configuration.runtimes": [
-    {
-      "name": "JavaSE-1.8",
-      "path": "/usr/lib/jvm/java-8-openjdk-amd64"
-    },
-    {
-      "name": "JavaSE-11",
-      "path": "/usr/lib/jvm/java-11-openjdk-amd64"
-    }
-  ],
-  "java.completion.guessMethodArguments": true,
-  "java.completion.importOrder": [
-    "com",
-    "java",
-    "javassist",
-    "javax",
-    "org"
-  ],
-  "java.completion.overwrite": false,
-  "java.errors.incompleteClasspath.severity": "ignore",
-  "java.format.enabled": false,
-  "java.format.settings.url": "~/.config/nvim/coc/eclipse-formatter.xml",
-  "java.implementationsCodeLens.enabled": true,
-  "java.referencesCodeLens.enabled": true,
-  "java.signatureHelp.enabled": true,
-  "javascript.preferences.importModuleSpecifierEnding": "js",
-  "javascript.preferences.useAliasesForRenames": false,
   "languageserver": {
     "terraform": {
       "args": ["serve"],
@@ -49,35 +19,5 @@
   "powershell.codeFormatting.useConstantStrings": true,
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.whitespaceBetweenParameters": true,
-  "powershell.integratedConsole.showOnStartup": false,
-  "suggest.completionItemKindLabels": {
-    "class": "",
-    "color": "",
-    "constant": "",
-    "constructor": "ƒ",
-    "default": "",
-    "enum": "",
-    "enumMember": "",
-    "event": "鬒",
-    "field": "料",
-    "file": "",
-    "folder": "",
-    "function": "ƒ",
-    "interface": "",
-    "keyword": "",
-    "method": "",
-    "module": "",
-    "operator": "Ψ",
-    "property": "",
-    "reference": "渚",
-    "snippet": "",
-    "struct": "פּ",
-    "text": "",
-    "typeParameter": "",
-    "unit": "",
-    "value": "",
-    "variable": ""
-  },
-  "suggest.fixInsertedWord": false,
-  "typescript.preferences.importModuleSpecifierEnding": "js"
+  "powershell.integratedConsole.showOnStartup": false
 }
