@@ -98,6 +98,13 @@ else
   silent! colorscheme morning
 endif
 
+" Sign settings {{{3
+
+sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text=ﯽ texthl=DiagnosticSignHint linehl= numhl=
+
 " Vim terminal options {{{2
 
 " When Vim enters Insert mode the 't_SI' escape sequence is sent. When Vim
