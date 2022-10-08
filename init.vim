@@ -562,8 +562,11 @@ nmap <silent> <C-l>d <Plug>(ale_detail)
 
 " fzf-lua | ibhagwan/fzf-lua {{{4
 
-" Open FZF with the Ctrl-p map
+" Open FZF file search with the Ctrl-p map
 nnoremap <C-p> :FzfLua files<cr>
+
+" Open FZF fuzzy search with the Ctrl-/ map
+nnoremap  :FzfLua live_grep<cr>
 
 " gundo | sjl/gundo.vim {{{4
 
