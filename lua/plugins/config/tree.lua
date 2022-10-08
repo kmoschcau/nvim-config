@@ -2,6 +2,7 @@ vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
 require "nvim-tree".setup {
+  disable_netrw = true,
   reload_on_bufenter = true,
   remove_keymaps = { "<C-e>" },
   diagnostics = {
