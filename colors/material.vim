@@ -680,8 +680,7 @@ call s:highlight('Material_SynFieldName',
 
 " Other variables
 call s:highlight('Material_SynLocalName',
-                 \ { 'attr': 'italic',
-                 \   'fg':   s:color_dict('orange', 5) })
+                 \ { 'fg':   s:color_dict('orange', 6) })
 call s:highlight('Material_SynParameterName',
                  \ { 'fg':   s:color_dict('orange', 5) })
 
@@ -757,6 +756,8 @@ call s:highlight('Material_SynInterfaceName',
 
 " Modifiers {{{5
 
+call s:highlight('Material_SynModAbstract',
+                 \ { 'bg':   s:color_dict('purple', 1) })
 call s:highlight('Material_SynModAsync',
                  \ { 'bg':   s:color_dict('yellow', 2) })
 call s:highlight('Material_SynModStatic',
@@ -1026,10 +1027,10 @@ highlight! link LspEnumMember    Material_SynEnumName
 highlight! link LspEvent         Material_DebugTest
 highlight! link LspFunction      Material_SynFunctionName
 highlight! link LspInterface     Material_SynInterfaceName
-highlight! link LspKeyword       Material_DebugTest
+highlight! link LspKeyword       Material_SynStatement
 highlight! link LspMacro         Material_DebugTest
 highlight! link LspMethod        Material_SynFunctionName
-highlight! link LspModifier      Material_DebugTest
+highlight! link LspModifier      Material_SynStatement
 highlight! link LspNamespace     Material_SynNamespaceName
 highlight! link LspNumber        Material_SynNumber
 highlight! link LspOperator      Material_SynOperator
@@ -1042,7 +1043,7 @@ highlight! link LspType          Material_SynStructureName
 highlight! link LspTypeParameter Material_SynGenericParameterName
 highlight! link LspVariable      Material_SynLocalName
 
-highlight! link LspAbstract   Material_DebugTest
+highlight! link LspAbstract   Material_SynModAbstract
 highlight! link LspAsync      Material_SynModAsync
 highlight! link LspDeprecated Material_SynModDeprecated
 highlight! link LspReadonly   Material_SynConstantName

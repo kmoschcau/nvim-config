@@ -82,7 +82,7 @@ end
 -- Neovim options {{{2
 
 vim.o.breakindent = true
-vim.opt.breakindentopt = { min = 80, shift = 2, "sbr" }
+vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 vim.o.equalalways = false
@@ -209,6 +209,7 @@ vim.o.statusline =
 
 vim.o.textwidth = 80
 vim.o.title = true
+vim.o.updatetime = 100
 vim.o.winblend = window_blend
 
 -- autocommands {{{2
@@ -235,6 +236,11 @@ vim.keymap.set(
       return
     end
 
+    if vim.fn.exists(":TSHighlightCapturesUnderCursor") > 0 then
+      vim.cmd("TSHighlightCapturesUnderCursor")
+      return
+    end
+
     local line = vim.fn.line(".")
     local col = vim.fn.col(".")
     local names = {}
@@ -242,10 +248,6 @@ vim.keymap.set(
       table.insert(names, vim.fn.synIDattr(id, "name"))
     end
     print(vim.inspect(names))
-
-    if vim.fn.exists(":TSHighlightCapturesUnderCursor") > 0 then
-      vim.cmd("TSHighlightCapturesUnderCursor")
-    end
   end,
   {
     desc = "Show syntax highlight group information at cursor position.",

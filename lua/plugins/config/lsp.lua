@@ -5,7 +5,9 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
-local function on_attach(client, bufnr)
+local M = {}
+
+M.on_attach = function (client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
@@ -25,6 +27,7 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "<space>f", function()
     vim.lsp.buf.format { async = true }
   end, bufopts)
+  vim.keymap.set("n", "<F9>", vim.lsp.buf.semantic_tokens_full, bufopts)
 
   local caps = client.server_capabilities
 
@@ -40,12 +43,12 @@ local function on_attach(client, bufnr)
   end
 
   if caps.documentHighlightProvider then
-    vim.api.nvim_create_autocmd({ "CursorHold" }, {
+    vim.api.nvim_create_autocmd("CursorHold", {
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight
     })
-    vim.api.nvim_create_autocmd("CursorMoved", {
+    vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references
@@ -71,19 +74,21 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+M.capabilities = capabilities
+
 local lspconfig = require("lspconfig")
 
 local simple_servers = { "jsonls", "vimls" }
 for _, lsp in ipairs(simple_servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = M.on_attach
   }
 end
 
 lspconfig.sumneko_lua.setup {
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = M.on_attach,
   settings = {
     Lua = {
       completion = {
@@ -108,7 +113,7 @@ lspconfig.sumneko_lua.setup {
 require("typescript").setup {
   server = {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = M.on_attach,
     settings = {
       javascript = {
         format = {
@@ -155,3 +160,5 @@ require("typescript").setup {
     }
   }
 }
+
+return M

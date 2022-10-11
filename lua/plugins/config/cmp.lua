@@ -7,7 +7,6 @@ local buffer_source = {
 
 local luasnip = require "luasnip"
 local cmp = require "cmp"
-local cmp_buffer = require "cmp_buffer"
 cmp.setup {
   formatting = {
     format = function(entry, vim_item)
@@ -53,9 +52,6 @@ cmp.setup {
     end, { "i", "s" }),
   },
   snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
-  sorting = {
-    comparators = { function(...) return cmp_buffer:compare_locality(...) end }
-  },
   sources = cmp.config.sources({ { name = "nvim_lsp" } }, { buffer_source })
 }
 
