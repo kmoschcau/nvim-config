@@ -139,9 +139,6 @@ return require("packer").startup(function()
   -- adds table formatting commands
   use "godlygeek/tabular"
 
-  -- visualize the vim undo tree (seems broken currently)
-  use "sjl/gundo.vim"
-
   -- various handling of variants of words
   -- I mainly use it for the case coercion
   use "tpope/vim-abolish"
@@ -174,5 +171,8 @@ return require("packer").startup(function()
 
   -- lightning fast markdown preview in browser
   use { "euclio/vim-markdown-composer", run = "cargo build --release" }
+
+  -- a scratchpad for lua
+  use "rafcamlet/nvim-luapad"
   -- }}}1
 end)
