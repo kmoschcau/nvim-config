@@ -55,14 +55,14 @@ vim.o.background = "light"
 
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
-  if not pcall(function() vim.cmd("colorscheme material") end) then
+  if not pcall(function() vim.cmd [[colorscheme material]] end) then
     vim.notify(
       [[Could not load the "material" colorscheme, using "morning" instead.]],
       3)
-    vim.cmd("silent! colorscheme morning")
+    vim.cmd [[silent! colorscheme morning]]
   end
 else
-  vim.cmd("silent! colorscheme morning")
+  vim.cmd [[silent! colorscheme morning]]
 end
 
 -- Sign settings {{{3
@@ -228,6 +228,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- key maps {{{2
 
+-- diagnostics API bindings
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { silent = true })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true })
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { silent = true })
+
+-- highlight group inspection
 vim.keymap.set(
   "n",
   "<F10>",
@@ -237,7 +244,7 @@ vim.keymap.set(
     end
 
     if vim.fn.exists(":TSHighlightCapturesUnderCursor") > 0 then
-      vim.cmd("TSHighlightCapturesUnderCursor")
+      vim.cmd [[TSHighlightCapturesUnderCursor]]
       return
     end
 
@@ -342,13 +349,13 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- packer.nvim | wbthomason/packer.nvim {{{2
 
-vim.cmd([[
+vim.cmd [[
 augroup PackerNvim_InitVim
   autocmd!
 
   autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
 augroup end
-]])
+]]
 
 -- vim-airline | vim-airline/vim-airline {{{2
 -- airline options {{{3

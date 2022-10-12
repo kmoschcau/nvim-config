@@ -680,9 +680,9 @@ call s:highlight('Material_SynFieldName',
 
 " Other variables
 call s:highlight('Material_SynLocalName',
-                 \ { 'fg':   s:color_dict('orange', 6) })
-call s:highlight('Material_SynParameterName',
                  \ { 'fg':   s:color_dict('orange', 5) })
+call s:highlight('Material_SynParameterName',
+                 \ { 'fg':   s:color_dict('orange', 9) })
 
 " Functions and methods
 call s:highlight('Material_SynFunctionKeyword',
@@ -760,6 +760,8 @@ call s:highlight('Material_SynModAbstract',
                  \ { 'bg':   s:color_dict('purple', 1) })
 call s:highlight('Material_SynModAsync',
                  \ { 'bg':   s:color_dict('yellow', 2) })
+call s:highlight('Material_SynModReadonly',
+                 \ { 'attr': 'italic' })
 call s:highlight('Material_SynModStatic',
                  \ { 'attr': 'bold' })
 call s:highlight('Material_SynModDeprecated',
@@ -1046,7 +1048,7 @@ highlight! link LspVariable      Material_SynLocalName
 highlight! link LspAbstract   Material_SynModAbstract
 highlight! link LspAsync      Material_SynModAsync
 highlight! link LspDeprecated Material_SynModDeprecated
-highlight! link LspReadonly   Material_SynConstantName
+highlight! link LspReadonly   Material_SynModReadonly
 highlight! link LspStatic     Material_SynModStatic
 
 " custom variables {{{1

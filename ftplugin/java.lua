@@ -4,17 +4,12 @@
 -- general Vim settings {{{1
 -- Vim options {{{2
 
--- Maximum width of text that is being inserted. A longer line will be broken
--- after white space to get this width.
-vim.api.nvim_buf_set_option(0, "textwidth", 100)
+vim.opt_local.textwidth = 100
 
 -- plugin configurations {{{1
 -- ale | dense-analysis/ale {{{2
 
--- Set the ALE linters to run for java
-vim.api.nvim_buf_set_var(0, "ale_linters", {
-  java = { "checkstyle", "pmd" }
-})
+vim.b.ale_linters = { java = { "checkstyle", "pmd" } }
 
 -- jdtls | mfussenegger/nvim-jdtls {{{2
 
