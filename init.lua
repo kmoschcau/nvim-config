@@ -69,10 +69,10 @@ end
 
 -- Customize the built-in signs used by the diagnostics API.
 local signs = {
-  Error = " ",
-  Warn  = " ",
-  Info  = " ",
-  Hint  = " "
+  Error = require("icons").error,
+  Warn  = require("icons").warn,
+  Info  = require("icons").info,
+  Hint  = require("icons").hint
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -200,11 +200,11 @@ vim.o.statusline =
 
     -- %l: Line number.
     -- %L: Number of lines in buffer.
-    "%l/%L " ..
+    ":%l/%L☰ " ..
 
     -- Column number and virtual column number, if different.
     -- preceded by a literal ': ', minimum 5
-    ": %5(%c%V%) "
+    "℅:%5(%c%V%) "
 -- }}}3
 
 vim.o.textwidth = 80
@@ -356,44 +356,6 @@ augroup PackerNvim_InitVim
   autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
 augroup end
 ]]
-
--- vim-airline | vim-airline/vim-airline {{{2
--- airline options {{{3
-
--- By default, airline will use unicode symbols if your encoding matches utf-8.
--- If you want the powerline symbols set this variable.
-vim.g.airline_powerline_fonts = 1
-
--- airline extension options {{{3
-
--- Rather opt in to extensions instead of loading all at the start.
-vim.g.airline_extensions = {
-  "ale",
-  "branch",
-  "csv",
-  "fugitiveline",
-  "fzf",
-  "hunks",
-  "quickfix",
-  "term",
-  "whitespace",
-  "wordcount"
-}
-
--- vim-devicons | ryanoasis/vim-devicons {{{2
-
--- whether or not to show the nerdtree brackets around flags
-vim.g.webdevicons_conceal_nerdtree_brackets = 1
-
--- turn on/off file node glyph decorations (not particularly useful)
-vim.g.WebDevIconsUnicodeDecorateFileNodes = 1
-
--- enable folder/directory glyph flag (disabled by default with 0)
-vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
-
--- enable open and close folder/directory glyph flags
--- (disabled by default with 0)
-vim.g.DevIconsEnableFoldersOpenClose = 1
 
 -- vim-markdown-composer | euclio/vim-markdown-composer {{{2
 

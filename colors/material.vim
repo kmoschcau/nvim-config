@@ -367,14 +367,6 @@ function! s:color_dict(color_name, color_index, ...)
   endif
 endfunction
 
-" This replaces the default statusline highlight with the strong framing
-" highlight. This is meant to be used to remove the differing, one character
-" highlight on the right side of the statusline for windows on the bottom when
-" airline is in use.
-function! g:Material_replace_statusline_highlight()
-  highlight! link StatusLine Material_VimStrongFramingWithFg
-endfunction
-
 " Shared colors {{{2
 
 let s:c_transparent             = s:material['transparent']
@@ -773,25 +765,25 @@ call s:highlight('Material_SynVimCommentString',
                  \ { 'fg':   s:color_dict('green', 5) })
 
 " Plugins {{{3
-" vim-airline | vim-airline/vim-airline {{{4
+" lualine | nvim-lualine/lualine.nvim {{{4
 
-call s:highlight('Material_Airline1',
+call s:highlight('Material_Lualine1',
                  \ { 'fg':   s:c_neutral_midpoint_strong,
                  \   'bg':   s:color_dict(s:hue_neutral, 2) })
-call s:highlight('Material_Airline3',
+call s:highlight('Material_Lualine3',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_neutral_strong })
 
-call s:highlight('Material_AirlineInsert',
+call s:highlight('Material_LualineInsert',
                  \ { 'attr': 'bold',
                  \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_insert, 7) })
-call s:highlight('Material_AirlineReplace',
+call s:highlight('Material_LualineReplace',
                  \ { 'attr': 'bold',
                  \   'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict(s:hue_replace, 7) })
 
-call s:highlight('Material_AirlineModified',
+call s:highlight('Material_LualineModified',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:color_dict('purple', 8) })
 

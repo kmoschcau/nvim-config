@@ -1,8 +1,5 @@
 -- vim: foldmethod=marker foldlevel=0
 
--- Load the packer plugin, since it is installed as optional.
-vim.cmd [[packadd packer.nvim]]
-
 -- Specify a list of plugins.
 local use = require("packer").use
 return require("packer").startup(function()
@@ -91,28 +88,18 @@ return require("packer").startup(function()
   -- better folding for python
   use "tmhedberg/SimpylFold"
 
-  -- File tree {{{1
+  -- file tree {{{1
   -- provides a better file browser than built-in netrw
   use "kyazdani42/nvim-tree.lua"
 
-  -- NERDTree plugins {{{1
-  -- provides a better file browser than built-in netrw
-  -- use 'preservim/nerdtree'
-
-  -- shows git file status in NERDTree
-  -- use { 'Xuyuanp/nerdtree-git-plugin' }
-
-  -- colored file type icons in NERDTree
-  -- use { 'tiagofumo/vim-nerdtree-syntax-highlight' }
-
-  -- Airline plugins {{{1
-  -- pretty, segmented and configurable status line
-  use "vim-airline/vim-airline"
+  -- status line plugins {{{1
+  -- pretty, segmented and configurable status line in lua
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+  }
 
   -- devicons plugins {{{1
-  -- dev icons for vimscript plugins
-  use "ryanoasis/vim-devicons"
-
   -- dev icons for lua plugins
   use "kyazdani42/nvim-web-devicons"
 
@@ -134,7 +121,10 @@ return require("packer").startup(function()
   use "folke/zen-mode.nvim"
 
   -- adds highlighting of only the local scope
-  use { "folke/twilight.nvim", requires = { "nvim-treesitter/nvim-treesitter" } }
+  use {
+    "folke/twilight.nvim",
+    requires = { "nvim-treesitter/nvim-treesitter" }
+  }
 
   -- adds table formatting commands
   use "godlygeek/tabular"
