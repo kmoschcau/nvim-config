@@ -165,6 +165,8 @@ require("lualine").setup {
           if vim.fn.winwidth(0) > vcs_shorten_width then return str end
 
           local parts = vim.split(str, "/", { plain = true, trimempty = true })
+          if #parts == 0 then return "" end
+
           return parts[#parts]:sub(1, 15) .. "…"
         end
       }
