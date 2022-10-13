@@ -666,7 +666,8 @@ call s:highlight('Material_SynTodo',
 
 " Member variables
 call s:highlight('Material_SynConstantName',
-                 \ { 'fg':   s:color_dict('indigo', 6) })
+                 \ { 'attr': 'italic',
+                 \   'fg':   s:color_dict('blue', 6) })
 call s:highlight('Material_SynFieldName',
                  \ { 'fg':   s:color_dict('blue', 6) })
 
