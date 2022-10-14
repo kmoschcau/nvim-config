@@ -17,18 +17,17 @@ M.on_attach = function (client, bufnr)
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<space>f", function()
+  vim.keymap.set("n", "<space>f", function ()
     vim.lsp.buf.format { async = true }
   end, bufopts)
-  vim.keymap.set("n", "<F9>", vim.lsp.buf.semantic_tokens_full, bufopts)
 
   local caps = client.server_capabilities
 
-  local augroup = vim.api.nvim_create_augroup("LanguageServer", {
-    clear = true
-  })
+  local augroup = vim.api.nvim_create_augroup("LanguageServer", {})
+
   if caps.codeLensProvider then
     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      desc = "Update the code lenses of the buffer.",
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.codelens.refresh
@@ -37,23 +36,52 @@ M.on_attach = function (client, bufnr)
 
   if caps.documentHighlightProvider then
     vim.api.nvim_create_autocmd("CursorHold", {
+      desc = "Document highlight references of the token under the cursor.",
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
+      desc = "Clear document highlight references.",
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references
     })
   end
 
+  if caps.semanticTokensProvider and caps.semanticTokensProvider.range then
+    vim.keymap.set("v", "<F10>", function ()
+      vim.lsp.buf_request(
+        0,
+        "textDocument/semanticTokens/range",
+        vim.lsp.util.make_given_range_params(),
+        vim.lsp.with(require("nvim-semantic-tokens.semantic_tokens").on_full, {
+          on_token = function (ctx, token)
+            vim.notify(token.type .. "." .. table.concat(token.modifiers, "."))
+          end
+        })
+      )
+    end, {
+      buffer = bufnr,
+      desc = "Show LSP semantic tokens in selection.",
+      silent = true
+    })
+  end
+
   if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
+    vim.keymap.set("n", "<F9>", vim.lsp.buf.semantic_tokens_full, {
+      buffer = bufnr,
+      desc = "Do a full semantic tokens refresh.",
+      silent = true
+    })
+
     vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+      desc = "Do a full semantic tokens refresh.",
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.buf.semantic_tokens_full
     })
+
     vim.lsp.buf.semantic_tokens_full()
   end
 end
