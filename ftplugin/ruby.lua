@@ -17,7 +17,7 @@ end
 
 local function create_command(spec_location)
   return "!echo " .. rspec_executable .. " " .. spec_location ..
-    and_command() .. rspec_executable .. " " .. spec_location
+      and_command() .. rspec_executable .. " " .. spec_location
 end
 
 local function run_specs(spec_location)
@@ -29,26 +29,26 @@ local function is_in_spec_file()
 end
 
 if is_in_spec_file() then
-  vim.keymap.set("n", "<space>sf", function ()
+  vim.keymap.set("n", "<space>sf", function()
     last_spec = vim.fn.expand("%")
     run_specs(last_spec)
   end, {
     buffer = true, silent = true, desc = "Run all specs."
   })
-  vim.keymap.set("n", "<space>sl", function ()
+  vim.keymap.set("n", "<space>sl", function()
     last_spec = vim.fn.expand("%") .. ":" .. vim.fn.line(".")
     run_specs(last_spec)
   end, {
     buffer = true, silent = true, desc = "Run all specs."
   })
-  vim.keymap.set("n", "<space>s.", function ()
+  vim.keymap.set("n", "<space>s.", function()
     if last_spec then
       run_specs(last_spec)
     end
   end, {
     buffer = true, silent = true, desc = "Repeat the last spec run."
   })
-  vim.keymap.set("n", "<space>sa", function ()
+  vim.keymap.set("n", "<space>sa", function()
     last_spec = ""
     run_specs(last_spec)
   end, {
@@ -61,4 +61,4 @@ end
 
 -- This variable can be changed to modify flags given to rubocop.
 vim.g.ale_ruby_rubocop_options =
-  "--display-cop-names --extra-details --display-style-guide"
+"--display-cop-names --extra-details --display-style-guide"

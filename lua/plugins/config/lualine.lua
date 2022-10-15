@@ -38,8 +38,8 @@ local function format_count_search(count_search_info, label)
   if count_search_info.total < 1 then return "" end
 
   local count = count_search_info.total > max_count
-    and string.format("(%d+)", max_count)
-    or tostring(count_search_info.total)
+      and string.format("(%d+)", max_count)
+      or tostring(count_search_info.total)
 
   return string.format("%s*%s[%d]", count, label, count_search_info.first)
 end
@@ -58,8 +58,8 @@ local function format_mixed_indent_file(info)
   return format_count_search(
     info,
     vim.fn.winwidth(0) > ws_shorten_width
-      and string.format("mixed-indent-file(%s)", info.label)
-      or string.format("MF(%s)", info.label:sub(1, 1)))
+    and string.format("mixed-indent-file(%s)", info.label)
+    or string.format("MF(%s)", info.label:sub(1, 1)))
 end
 
 local function whitespace_checks()
@@ -68,20 +68,20 @@ local function whitespace_checks()
   local mixed_indent_file_info = mixed_indent_file()
 
   if not trailing_info and
-    not mixed_indent_line_info and
-    not mixed_indent_file_info then return "" end
+      not mixed_indent_line_info and
+      not mixed_indent_file_info then return "" end
 
   local result = "☲"
   result = result ..
-    (trailing_info and " " .. format_trailing(trailing_info) or "")
+      (trailing_info and " " .. format_trailing(trailing_info) or "")
   result = result ..
-    (mixed_indent_line_info
-      and " " .. format_mixed_indent_line(mixed_indent_line_info)
-      or "")
+      (mixed_indent_line_info
+          and " " .. format_mixed_indent_line(mixed_indent_line_info)
+          or "")
   result = result ..
-    (mixed_indent_file_info
-      and " " .. format_mixed_indent_file(mixed_indent_file_info)
-      or "")
+      (mixed_indent_file_info
+          and " " .. format_mixed_indent_file(mixed_indent_file_info)
+          or "")
   return result
 end
 
@@ -90,7 +90,7 @@ local function create_diagnostics_section(severity)
     "diagnostics",
     sources = { "nvim_lsp", "nvim_diagnostic", "ale" },
     sections = { severity },
-    separator = { left = '', right = '' },
+    separator = { left = "", right = "" },
     diagnostics_color = {
       error = "DiagnosticError",
       warn = "DiagnosticWarn",
@@ -104,10 +104,10 @@ end
 local lualine_c = {
   {
     "filename",
-    color = function ()
+    color = function()
       return vim.bo.modified
-        and "Material_LualineModified"
-        or "Material_Lualine3"
+          and "Material_LualineModified"
+          or "Material_Lualine3"
     end,
     path = 1 -- relative path
   }
@@ -118,7 +118,7 @@ local lualine_x = {
   {
     whitespace_checks,
     color = "Material_VimWarningInverted",
-    separator = { left = '', right = '' },
+    separator = { left = "", right = "" },
   },
   create_diagnostics_section("hint"),
   create_diagnostics_section("info"),
@@ -140,7 +140,7 @@ local lualine_y = {
 
 local lualine_z = {
   "%3p%% :%l/%L☰ ℅:%c",
-  function () return vim.api.nvim_win_get_number(0) end
+  function() return vim.api.nvim_win_get_number(0) end
 }
 
 require("lualine").setup {
@@ -155,13 +155,13 @@ require("lualine").setup {
         colored = false,
         padding = { left = 1, right = 0 },
         separator = "",
-        cond = function () return vim.fn.winwidth(0) > vcs_display_width end
+        cond = function() return vim.fn.winwidth(0) > vcs_display_width end
       },
       {
         "branch",
         separator = "",
-        cond = function () return vim.fn.winwidth(0) > vcs_display_width end,
-        fmt = function (str)
+        cond = function() return vim.fn.winwidth(0) > vcs_display_width end,
+        fmt = function(str)
           if vim.fn.winwidth(0) > vcs_shorten_width then return str end
 
           local parts = vim.split(str, "/", { plain = true, trimempty = true })

@@ -1,7 +1,7 @@
 require "fzf-lua".setup {
   fzf_opts = {
-    ["--layout"]  = false,
-    ["--prompt"]  = false
+    ["--layout"] = false,
+    ["--prompt"] = false
   },
   fzf_colors = {
     ["fg"]         = { "fg", "Material_VimNormal" },
