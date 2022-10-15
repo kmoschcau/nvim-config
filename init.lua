@@ -324,32 +324,6 @@ vim.keymap.set("n", "<M-v>e", "<Plug>VimspectorBalloonEval", { remap = true })
 -- Preview docstrings in fold text.
 vim.g.SimpylFold_docstring_preview = 1
 
--- ale | dense-analysis/ale {{{2
-
--- This variable defines the format of the echoed message. The `%s` is the error
--- message itself, and it can contain the following handlers:
--- - `%linter%` for linter's name
--- - `%severity%` for the type of severity
-vim.g.ale_echo_msg_format = "%linter%: %severity% - %s"
-
--- The sign for errors in the sign gutter.
-vim.g.ale_sign_error = signs.Error
-
--- The sign for "info" markers in the sign gutter.
-vim.g.ale_sign_info = signs.Info
-
--- The sign for style errors in the sign gutter.
-vim.g.ale_sign_style_error = signs.Error
-
--- The sign for style warnings in the sign gutter.
-vim.g.ale_sign_style_warning = signs.Warn
-
--- The sign for warnings in the sign gutter.
-vim.g.ale_sign_warning = signs.Warn
-
--- Enable the virtualtext error display.
-vim.g.ale_virtualtext_cursor = 1
-
 -- csv.vim | chrisbra/csv.vim {{{2
 
 vim.g.csv_no_conceal = 1

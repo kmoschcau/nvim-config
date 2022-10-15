@@ -1298,28 +1298,6 @@ highlight! link zshFlag Material_SynParameterName
 highlight! link CSVColumnHeaderOdd  Material_VimTitle
 highlight! link CSVColumnHeaderEven Material_VimTitle
 
-" ale | dense-analysis/ale {{{3
-
-highlight! link ALEError                   Material_VimErrorUnderline
-highlight! link ALEErrorSign               Material_VimErrorInverted
-highlight! link ALEVirtualTextError        Material_VimErrorInverted
-
-highlight! link ALEInfo                    Material_VimInfoUnderline
-highlight! link ALEInfoSign                Material_VimInfoInverted
-highlight! link ALEVirtualTextInfo         Material_VimInfoInverted
-
-highlight! link ALEStyleError              Material_VimStyleErrorUnderline
-highlight! link ALEStyleErrorSign          Material_VimStyleErrorInverted
-highlight! link ALEVirtualTextStyleError   Material_VimStyleErrorInverted
-
-highlight! link ALEStyleWarning            Material_VimStyleWarningUnderline
-highlight! link ALEStyleWarningSign        Material_VimStyleWarningInverted
-highlight! link ALEVirtualTextStyleWarning Material_VimStyleWarningInverted
-
-highlight! link ALEWarning                 Material_VimWarningUnderline
-highlight! link ALEWarningSign             Material_VimWarningInverted
-highlight! link ALEVirtualTextWarning      Material_VimWarningInverted
-
 " vim-git | tpope/vim-git {{{3
 
 highlight! link diffAdded   Material_VimDiffAdd

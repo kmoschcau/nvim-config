@@ -21,6 +21,12 @@ return require("packer").startup(function()
   -- Experimental semantic highlighting
   use "theHamsta/nvim-semantic-tokens"
 
+  -- Tool to allow non-LSP sources to use LSP functions
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim" }
+  }
+
   -- language specific extensions {{{3
   -- java
   use "mfussenegger/nvim-jdtls"
@@ -65,10 +71,6 @@ return require("packer").startup(function()
     "folke/trouble.nvim",
     requires = { "kyazdani42/nvim-web-devicons", opt = true }
   }
-
-  -- Asynchronous Lint Engine brings linting for a lot of file types, when
-  -- linter is installed
-  use "dense-analysis/ale"
 
   -- syntax plugins {{{1
   -- treesitter {{{2

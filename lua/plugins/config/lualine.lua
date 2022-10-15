@@ -88,7 +88,7 @@ end
 local function create_diagnostics_section(severity)
   return {
     "diagnostics",
-    sources = { "nvim_lsp", "nvim_diagnostic", "ale" },
+    sources = { "nvim_lsp", "nvim_diagnostic" },
     sections = { severity },
     separator = { left = "", right = "" },
     diagnostics_color = {

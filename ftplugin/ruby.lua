@@ -55,10 +55,3 @@ if is_in_spec_file() then
     buffer = true, silent = true, desc = "Run all specs."
   })
 end
-
--- plugin configurations {{{1
--- ale | dense-analysis/ale {{{2
-
--- This variable can be changed to modify flags given to rubocop.
-vim.g.ale_ruby_rubocop_options =
-"--display-cop-names --extra-details --display-style-guide"

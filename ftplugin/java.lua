@@ -9,6 +9,7 @@ vim.opt_local.textwidth = 100
 -- plugin configurations {{{1
 -- ale | dense-analysis/ale {{{2
 
+-- FIXME: Need to reimplement these myself with null-ls
 vim.b.ale_linters = { java = { "checkstyle", "pmd" } }
 
 -- jdtls | mfussenegger/nvim-jdtls {{{2
