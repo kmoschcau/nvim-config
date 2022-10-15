@@ -141,24 +141,20 @@ require("nvim-semantic-tokens").setup {
   highlighters = { require "nvim-semantic-tokens.table-highlighter" }
 }
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-
-M.capabilities = capabilities
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require("lspconfig")
 
 local simple_servers = { "jsonls", "vimls" }
 for _, lsp in ipairs(simple_servers) do
   lspconfig[lsp].setup {
-    capabilities = capabilities,
+    capabilities = M.capabilities,
     on_attach = M.on_attach
   }
 end
 
 lspconfig.sumneko_lua.setup {
-  capabilities = capabilities,
+  capabilities = M.capabilities,
   on_attach = M.on_attach,
   settings = {
     Lua = {
@@ -183,7 +179,7 @@ lspconfig.sumneko_lua.setup {
 
 require("typescript").setup {
   server = {
-    capabilities = capabilities,
+    capabilities = M.capabilities,
     on_attach = M.on_attach,
     settings = {
       javascript = {
