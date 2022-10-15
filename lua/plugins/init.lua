@@ -59,6 +59,13 @@ return require("packer").startup(function()
   use "puremourning/vimspector"
 
   -- linter plugins {{{1
+  -- unified display of diagnostics (project and file), location, quickfix, LSP
+  -- stuff…
+  use {
+    "folke/trouble.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+  }
+
   -- Asynchronous Lint Engine brings linting for a lot of file types, when
   -- linter is installed
   use "dense-analysis/ale"
