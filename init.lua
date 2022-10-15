@@ -229,10 +229,22 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- key maps {{{2
 
 -- diagnostics API bindings
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { silent = true })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true })
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { silent = true })
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, {
+  desc = "Open the floating window for the diagnostic closes to the cursor.",
+  silent = true
+})
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {
+  desc = "Go to the previous diagnostic from the cursor.",
+  silent = true
+})
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {
+  desc = "Go to the next diagnostic from the cursor.",
+  silent = true
+})
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
+  desc = "Put all buffer diagnostics in the location list.",
+  silent = true
+})
 
 -- highlight group inspection
 vim.keymap.set(

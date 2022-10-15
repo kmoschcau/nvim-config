@@ -31,8 +31,9 @@ require "nvim-tree".setup {
   }
 }
 
-local api = require "nvim-tree.api"
-
 vim.keymap.set("n", "<C-n>", function()
-  api.tree.toggle()
-end)
+  require("nvim-tree.api").tree.toggle()
+end, {
+  desc = "Toggle the nvim-tree window.",
+  silent = true
+})
