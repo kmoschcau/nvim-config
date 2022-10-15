@@ -20,7 +20,7 @@ require("null-ls").setup {
     diagnostics.tidy,
     diagnostics.todo_comments,
     diagnostics.trail_space.with {
-      disabled_filetypes = { "NvimTree" }
+      disabled_filetypes = { "NvimTree", "markdown" }
     },
     diagnostics.yamllint,
 

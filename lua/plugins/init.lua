@@ -94,6 +94,9 @@ return require("packer").startup(function()
   -- a lot of helpful things dealing with CSV
   use "chrisbra/csv.vim"
 
+  -- some niceties for markdown
+  use { "preservim/vim-markdown", requires = { "godlygeek/tabular" } }
+
   -- better folding for python
   use "tmhedberg/SimpylFold"
 
