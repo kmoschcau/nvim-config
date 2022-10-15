@@ -7,8 +7,12 @@
 local rspec_executable = "rspec --format progress"
 local last_spec = nil
 
-local function run_specs(spec_location)
-  vim.cmd(create_command(spec_location))
+local function and_command()
+  if vim.regex("fish$"):match_str(vim.fn.system("echo -n $SHELL")) then
+    return "; and "
+  else
+    return " && "
+  end
 end
 
 local function create_command(spec_location)
@@ -16,12 +20,8 @@ local function create_command(spec_location)
     and_command() .. rspec_executable .. " " .. spec_location
 end
 
-local function and_command()
-  if vim.regex("fish$"):match_str(vim.fn.system("echo -n $SHELL") then
-    return "; and "
-  else
-    return " && "
-  end
+local function run_specs(spec_location)
+  vim.cmd(create_command(spec_location))
 end
 
 local function is_in_spec_file()
