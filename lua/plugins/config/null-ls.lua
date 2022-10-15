@@ -19,7 +19,9 @@ require("null-ls").setup {
     diagnostics.stylelint,
     diagnostics.tidy,
     diagnostics.todo_comments,
-    diagnostics.trail_space,
+    diagnostics.trail_space.with {
+      disabled_filetypes = { "NvimTree" }
+    },
     diagnostics.yamllint,
 
     formatting.eslint_d,
