@@ -12,9 +12,11 @@ require("null-ls").setup {
     code_actions.eslint_d,
     code_actions.shellcheck,
 
+    require("plugins.config.null-ls-checkstyle").diagnostics,
     diagnostics.eslint_d,
     diagnostics.fish,
     diagnostics.markdownlint,
+    require("plugins.config.null-ls-pmd").diagnostics,
     diagnostics.shellcheck,
     diagnostics.stylelint,
     diagnostics.tidy,
