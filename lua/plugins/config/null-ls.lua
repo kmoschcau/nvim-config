@@ -5,7 +5,6 @@ local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 
 require("null-ls").setup {
-  debug = true,
   diagnostics_format = "#{s}: #{c} - #{m}",
   on_attach = require("plugins.config.lsp").on_attach,
   sources = {
