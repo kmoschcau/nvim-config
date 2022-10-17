@@ -163,6 +163,7 @@ require("lualine").setup {
         cond = function() return vim.fn.winwidth(0) > vcs_display_width end,
         fmt = function(str)
           if vim.fn.winwidth(0) > vcs_shorten_width then return str end
+          if #str <= 15 then return str end
 
           local parts = vim.split(str, "/", { plain = true, trimempty = true })
           if #parts == 0 then return "" end
