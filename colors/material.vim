@@ -665,13 +665,13 @@ call s:highlight('Material_SynTodo',
 " General {{{5
 
 " Member variables
-call s:highlight('Material_SynConstantName',
-                 \ { 'attr': 'italic',
-                 \   'fg':   s:color_dict('blue', 6) })
 call s:highlight('Material_SynFieldName',
                  \ { 'fg':   s:color_dict('blue', 6) })
 
-" Other variables
+" Other value holders
+call s:highlight('Material_SynConstantName',
+                 \ { 'attr': 'italic',
+                 \   'fg':   s:color_dict('orange', 5) })
 call s:highlight('Material_SynLocalName',
                  \ { 'fg':   s:color_dict('orange', 5) })
 call s:highlight('Material_SynParameterName',
@@ -932,32 +932,35 @@ highlight! link Todo         Material_SynTodo
 
 highlight! link @accessor.keyword  Material_SynAccessorKeyword
 highlight! link @accessor.name     Material_SynAccessorName
+highlight! link @attribute         Material_SynAnnotation
 highlight! link @class.keyword     Material_SynTypedefKeyword
 highlight! link @class.name        Material_SynTypedefName
 highlight! link @comment.keyword   Material_SynStatement
+highlight! link @constant          Material_SynConstantName
+highlight! link @constant.builtin  Material_SynConstant
+highlight! link @constructor       Material_SynFunctionName
 highlight! link @enum.keyword      Material_SynEnumKeyword
 highlight! link @enum.name         Material_SynEnumName
+highlight! link @field             Material_SynFieldName
 highlight! link @function.keyword  Material_SynFunctionKeyword
 highlight! link @function.name     Material_SynFunctionName
 highlight! link @generic.special   Material_SynGenericSpecial
 highlight! link @interface.keyword Material_SynInterfaceKeyword
 highlight! link @interface.name    Material_SynInterfaceName
 highlight! link @local.name        Material_SynLocalName
+highlight! link @namespace         Material_SynNamespaceName
 highlight! link @namespace.keyword Material_SynNamespaceKeyword
 highlight! link @namespace.name    Material_SynNamespaceName
-
-highlight! link TSAttribute        Material_SynAnnotation
-highlight! link TSConstBuiltin     Material_SynConstant
-highlight! link TSConstant         Material_SynConstantName
-highlight! link TSConstructor      Material_SynFunctionName
-highlight! link TSField            Material_SynFieldName
-highlight! link TSKeywordFunction  Material_SynFunctionKeyword
-highlight! link TSNamespace        Material_SynNamespaceName
-highlight! link TSNamespaceName    Material_SynNamespaceName
-highlight! link TSParameter        Material_SynParameterName
-highlight! link TSProperty         Material_SynAccessorName
-highlight! link TSType             Material_SynStructureName
-highlight! link TSTypeBuiltin      Material_SynTypeName
+highlight! link @parameter         Material_SynParameterName
+highlight! link @property          Material_SynAccessorName
+highlight! link @text.literal      Material_SynString
+highlight! link @text.reference    Material_SynUnderlined
+highlight! link @text.title        Material_VimTitle
+highlight! link @text.uri          Material_SynUnderlined
+highlight! link @type              Material_SynStructureName
+highlight! link @type.builtin      Material_SynTypeName
+highlight! link @variable          Material_SynLocalName
+highlight! link @variable.builtin  Material_SynSpecial
 
 " TSNone     ctermfg=241 guifg=foreground
 " TSVariable cleared
@@ -983,7 +986,6 @@ highlight! link TSTypeBuiltin      Material_SynTypeName
 " TSText                links  to  TSNone
 " TSTextReference       links  to  Constant
 " TSTitle               links  to  Title
-" TSVariableBuiltin     links  to  Special
 " TSWarning             links  to  Todo
 
 " commentTSConstant      links  to  TSConstant
