@@ -1,5 +1,5 @@
 -- vim: foldmethod=marker
--- Javascript file type settings
+-- Typescript file type settings
 
 -- general Neovim settings {{{1
 -- non-option settings {{{2
