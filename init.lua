@@ -48,9 +48,6 @@ require "plugins.config"
 -- appearance settings {{{2
 -- colorscheme settings {{{3
 
--- When set to "dark", Vim will try to use colors that look good on a dark
--- background.  When set to "light", Vim will try to use colors that look good
--- on a light background.
 vim.o.background = "light"
 
 -- Try to set the "material" colorscheme, fall back to "morning".

@@ -1,7 +1,7 @@
 -- vim: foldmethod=marker
 -- Ruby file type settings
 
--- general Vim settings {{{1
+-- general Neovim settings {{{1
 -- key maps {{{2
 
 local rspec_executable = "rspec --format progress"

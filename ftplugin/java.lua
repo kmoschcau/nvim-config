@@ -1,8 +1,8 @@
 -- vim: foldmethod=marker
 -- Java file type settings
 
--- general Vim settings {{{1
--- Vim options {{{2
+-- general Neovim settings {{{1
+-- Neovim options {{{2
 
 vim.opt_local.textwidth = 100
 

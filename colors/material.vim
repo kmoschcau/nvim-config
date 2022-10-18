@@ -1,4 +1,4 @@
-" Vim: set foldmethod=marker:
+" vim: foldmethod=marker
 " -----------------------------------------------------------------------------
 " File:          material.vim
 " Description:   A configurable material based theme
