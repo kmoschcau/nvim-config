@@ -63,15 +63,23 @@ M.on_attach = function(client, bufnr)
     desc = "Go to the reference(s) of the symbol under the cursor.",
     silent = true
   })
-  vim.keymap.set("n", "<space>f", function()
-    vim.lsp.buf.format { async = true }
-  end, {
-    buffer = bufnr,
-    desc = "Format the current buffer.",
-    silent = true
-  })
 
   local caps = client.server_capabilities
+
+  if caps.documentFormattingProvider and client.name ~= "tsserver" then
+    vim.keymap.set("n", "<space>f", function()
+      vim.lsp.buf.format {
+        async = true,
+        filter = function(formatting_client)
+          return formatting_client.name ~= "tsserver"
+        end
+      }
+    end, {
+      buffer = bufnr,
+      desc = "Format the current buffer.",
+      silent = true
+    })
+  end
 
   local augroup = vim.api.nvim_create_augroup("LanguageServer", {})
 
@@ -183,9 +191,6 @@ require("typescript").setup {
     on_attach = M.on_attach,
     settings = {
       javascript = {
-        format = {
-          semicolons = "insert"
-        },
         preferences = {
           importModuleSpecifier = "relative",
           importModuleSpecifierEnding = "js",
@@ -201,9 +206,6 @@ require("typescript").setup {
         }
       },
       typescript = {
-        format = {
-          semicolons = "insert"
-        },
         implementationsCodeLens = {
           enabled = true
         },

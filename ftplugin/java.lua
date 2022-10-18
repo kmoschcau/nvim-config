@@ -82,6 +82,7 @@ if package:is_installed() then
           downloadSources = true
         },
         format = {
+          enabled = false,
           settings = {
             url = "~/.config/nvim/coc/eclipse-formatter.xml"
           }
