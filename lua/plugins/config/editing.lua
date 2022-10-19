@@ -1,2 +1,2 @@
-require "twilight".setup {}
-require "zen-mode".setup {}
+require("twilight").setup {}
+require("zen-mode").setup {}

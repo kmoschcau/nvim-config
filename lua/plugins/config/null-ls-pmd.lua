@@ -1,5 +1,5 @@
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
+local h = require "null-ls.helpers"
+local methods = require "null-ls.methods"
 
 local M = {}
 
@@ -31,9 +31,8 @@ local function handle_pmd_output(params)
         end_col = violation.endcolumn + 1,
         code = violation.ruleset .. "/" .. violation.rule,
         message = violation.description,
-        severity = violation.priority == 1
-            and violation.priority
-            or violation.priority - 1
+        severity = violation.priority == 1 and violation.priority
+          or violation.priority - 1,
       })
     end
   end
@@ -45,7 +44,7 @@ M.diagnostics = h.make_builtin {
   name = "pmd",
   meta = {
     url = "https://pmd.github.io",
-    description = "An extensible cross-language static code analyzer."
+    description = "An extensible cross-language static code analyzer.",
   },
   method = methods.internal.DIAGNOSTICS,
   filetypes = { "java" },
@@ -54,9 +53,9 @@ M.diagnostics = h.make_builtin {
     args = build_pmd_args,
     format = "json_raw",
     ignore_stderr = true,
-    on_output = handle_pmd_output
+    on_output = handle_pmd_output,
   },
-  factory = h.generator_factory
+  factory = h.generator_factory,
 }
 
 return M

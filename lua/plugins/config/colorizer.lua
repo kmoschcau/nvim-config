@@ -1,13 +1,13 @@
-require "colorizer".setup({
-  "*";
+require("colorizer").setup({
+  "*",
   css = {
-    css = true;
-  };
+    css = true,
+  },
   sass = {
-    css = true;
-  }
+    css = true,
+  },
 }, {
-  RGB = true;
-  RRGGBB = true;
-  RRGGBBAA = true;
+  RGB = true,
+  RRGGBB = true,
+  RRGGBBAA = true,
 })

@@ -8,18 +8,18 @@ return {
   normal = {
     a = "Material_VimStatusLine",
     b = "Material_VimLightFramingStrongFg",
-    c = "Material_Lualine3"
+    c = "Material_Lualine3",
   },
   insert = {
-    a = "Material_LualineInsert"
+    a = "Material_LualineInsert",
   },
   replace = {
-    a = "Material_LualineReplace"
+    a = "Material_LualineReplace",
   },
   visual = {
-    a = "Material_VimVisual"
+    a = "Material_VimVisual",
   },
   inactive = {
     a = "Material_Lualine1",
-  }
+  },
 }

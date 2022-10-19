@@ -1,5 +1,5 @@
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
+local h = require "null-ls.helpers"
+local methods = require "null-ls.methods"
 
 local M = {}
 
@@ -26,7 +26,7 @@ local function handle_checkstyle_output(params)
       and params.output.runs
       and params.output.runs[1]
       and params.output.runs[1].results
-      or {}
+    or {}
 
   if params.err then
     table.insert(output, { message = vim.trim(params.err) })
@@ -39,10 +39,10 @@ local function handle_checkstyle_output(params)
         col = location.physicalLocation.region.startColumn,
         end_row = location.physicalLocation.region.endLine,
         end_col = location.physicalLocation.region.endColumn
-            and location.physicalLocation.region.endColumn - 1,
+          and location.physicalLocation.region.endColumn - 1,
         code = result.ruleId,
         message = result.message.text,
-        severity = h.diagnostics.severities[result.level]
+        severity = h.diagnostics.severities[result.level],
       })
     end
   end
@@ -54,9 +54,9 @@ M.diagnostics = h.make_builtin {
   name = "checkstyle",
   meta = {
     url = "https://checkstyle.org",
-    description = "Checkstyle is a tool for checking Java source code for" ..
-        " adherence to a Code Standard or set of validation rules (best" ..
-        " practices)."
+    description = "Checkstyle is a tool for checking Java source code for"
+      .. " adherence to a Code Standard or set of validation rules (best"
+      .. " practices).",
   },
   method = methods.internal.DIAGNOSTICS,
   filetypes = { "java" },
@@ -64,9 +64,9 @@ M.diagnostics = h.make_builtin {
     command = "checkstyle",
     args = build_checkstyle_args,
     format = "json_raw",
-    on_output = handle_checkstyle_output
+    on_output = handle_checkstyle_output,
   },
-  factory = h.generator_factory
+  factory = h.generator_factory,
 }
 
 return M

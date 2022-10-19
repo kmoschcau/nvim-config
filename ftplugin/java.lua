@@ -9,13 +9,14 @@ vim.opt_local.textwidth = 100
 -- plugin configurations {{{1
 -- jdtls | mfussenegger/nvim-jdtls {{{2
 
-local package = require("mason-registry").get_package("jdtls")
+local package = require("mason-registry").get_package "jdtls"
 if package:is_installed() then
-  local jar = vim.fn.glob(package:get_install_path() ..
-    "/plugins/org.eclipse.equinox.launcher_*.jar")
+  local jar = vim.fn.glob(
+    package:get_install_path() .. "/plugins/org.eclipse.equinox.launcher_*.jar"
+  )
 
   local os
-  if vim.fn.has("win32") == 1 then
+  if vim.fn.has "win32" == 1 then
     os = "win"
   else
     os = "linux"
@@ -36,11 +37,16 @@ if package:is_installed() then
       "-Dlog.level=ALL",
       "-Xms1g",
       "--add-modules=ALL-SYSTEM",
-      "--add-opens", "java.base/java.util=ALL-UNNAMED",
-      "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-      "-jar", jar,
-      "-configuration", config,
-      "-data", workspace
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
+      "-jar",
+      jar,
+      "-configuration",
+      config,
+      "-data",
+      workspace,
     },
     on_attach = require("plugins.config.lsp").on_attach,
     settings = {
@@ -48,12 +54,12 @@ if package:is_installed() then
         codeGeneration = {
           hashCodeEquals = {
             useInstanceof = true,
-            useJava7Objects = true
+            useJava7Objects = true,
           },
           toString = {
-            codeStyle = "STRING_BUILDER_CHAINED"
+            codeStyle = "STRING_BUILDER_CHAINED",
           },
-          useBlocks = true
+          useBlocks = true,
         },
         completion = {
           importOrder = {
@@ -61,52 +67,52 @@ if package:is_installed() then
             "java",
             "javassist",
             "javax",
-            "org"
+            "org",
           },
-          overwrite = false
+          overwrite = false,
         },
         configuration = {
           runtimes = {
             {
               name = "JavaSE-1.8",
-              path = "/usr/lib/jvm/java-8-openjdk-amd64"
+              path = "/usr/lib/jvm/java-8-openjdk-amd64",
             },
             {
               name = "JavaSE-11",
-              path = "/usr/lib/jvm/java-11-openjdk-amd64"
-            }
+              path = "/usr/lib/jvm/java-11-openjdk-amd64",
+            },
           },
-          updateBuildConfiguration = "automatic"
+          updateBuildConfiguration = "automatic",
         },
         eclipse = {
-          downloadSources = true
+          downloadSources = true,
         },
         format = {
           enabled = false,
           settings = {
-            url = "~/.config/nvim/coc/eclipse-formatter.xml"
-          }
+            url = "~/.config/nvim/coc/eclipse-formatter.xml",
+          },
         },
         implementationsCodeLens = {
-          enabled = true
+          enabled = true,
         },
         inlayHints = {
           parameterNames = {
-            enabled = false
-          }
+            enabled = false,
+          },
         },
         maven = {
-          downloadSources = true
+          downloadSources = true,
         },
         referencesCodeLens = {
-          enabled = true
+          enabled = true,
         },
         signatureHelp = {
           description = {
-            enabled = true
-          }
-        }
-      }
-    }
+            enabled = true,
+          },
+        },
+      },
+    },
   }
 end

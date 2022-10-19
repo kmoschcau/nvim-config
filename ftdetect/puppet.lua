@@ -3,5 +3,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   desc = "Detect the puppet file type.",
   group = augroup,
   pattern = "*.pp",
-  callback = function() vim.cmd [[setfiletype puppet]] end
+  callback = function()
+    vim.cmd [[setfiletype puppet]]
+  end,
 })

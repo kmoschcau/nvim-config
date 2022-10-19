@@ -1,16 +1,16 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
-require "nvim-tree".setup {
+require("nvim-tree").setup {
   disable_netrw = true,
   reload_on_bufenter = true,
   remove_keymaps = { "<C-e>" },
   diagnostics = {
     enable = true,
-    show_on_dirs = true
+    show_on_dirs = true,
   },
   view = {
-    adaptive_size = true
+    adaptive_size = true,
   },
   renderer = {
     add_trailing = true,
@@ -18,22 +18,22 @@ require "nvim-tree".setup {
     full_name = true,
     highlight_git = true,
     icons = {
-      git_placement = "after"
-    }
+      git_placement = "after",
+    },
   },
   actions = {
     change_dir = {
-      enable = false
+      enable = false,
     },
     open_file = {
-      quit_on_open = true
-    }
-  }
+      quit_on_open = true,
+    },
+  },
 }
 
 vim.keymap.set("n", "<C-n>", function()
   require("nvim-tree.api").tree.toggle()
 end, {
   desc = "Toggle the nvim-tree window.",
-  silent = true
+  silent = true,
 })

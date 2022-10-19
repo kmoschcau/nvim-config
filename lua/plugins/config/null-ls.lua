@@ -1,4 +1,4 @@
-local null_ls = require("null-ls")
+local null_ls = require "null-ls"
 
 local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
@@ -17,11 +17,12 @@ require("null-ls").setup {
     diagnostics.markdownlint,
     require("plugins.config.null-ls-pmd").diagnostics,
     diagnostics.shellcheck,
+    diagnostics.selene,
     diagnostics.stylelint,
     diagnostics.tidy,
     diagnostics.todo_comments,
     diagnostics.trail_space.with {
-      disabled_filetypes = { "NvimTree", "markdown" }
+      disabled_filetypes = { "NvimTree", "markdown" },
     },
     diagnostics.yamllint,
 
@@ -33,7 +34,8 @@ require("null-ls").setup {
     formatting.packer,
     formatting.shfmt,
     formatting.stylelint,
+    formatting.stylua,
     formatting.trim_newlines,
-    formatting.trim_whitespace
-  }
+    formatting.trim_whitespace,
+  },
 }

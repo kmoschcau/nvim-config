@@ -11,16 +11,16 @@ local window_blend = 20
 --
 -- Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
 local terminfo_colors
-if vim.fn.has("unix") > 0 then
-  terminfo_colors = vim.trim(vim.fn.system("tput colors"))
+if vim.fn.has "unix" > 0 then
+  terminfo_colors = vim.trim(vim.fn.system "tput colors")
 else
-  if vim.fn.exists("$WT_SESSION") > 0 then
+  if vim.fn.exists "$WT_SESSION" > 0 then
     terminfo_colors = "256"
   else
     terminfo_colors = ""
   end
 end
-if terminfo_colors:match("256") then
+if terminfo_colors:match "256" then
   vim.o.termguicolors = true
 end
 
@@ -28,10 +28,10 @@ end
 
 -- set the paths for python executables
 local python_path
-if vim.fn.has("win32") > 0 then
-  python_path = vim.fn.expand("C:/Python37/python")
+if vim.fn.has "win32" > 0 then
+  python_path = vim.fn.expand "C:/Python37/python"
 else
-  python_path = vim.fn.expand("$HOME/.pyenv/versions/neovim3/bin/python")
+  python_path = vim.fn.expand "$HOME/.pyenv/versions/neovim3/bin/python"
 end
 if vim.fn.executable(python_path) > 0 then
   vim.g.python3_host_prog = python_path
@@ -52,10 +52,13 @@ vim.o.background = "light"
 
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
-  if not pcall(function() vim.cmd [[colorscheme material]] end) then
+  if not pcall(function()
+    vim.cmd [[colorscheme material]]
+  end) then
     vim.notify(
       [[Could not load the "material" colorscheme, using "morning" instead.]],
-      3)
+      3
+    )
     vim.cmd [[silent! colorscheme morning]]
   end
 else
@@ -67,9 +70,9 @@ end
 -- Customize the built-in signs used by the diagnostics API.
 local signs = {
   Error = require("icons").error,
-  Warn  = require("icons").warn,
-  Info  = require("icons").info,
-  Hint  = require("icons").hint
+  Warn = require("icons").warn,
+  Info = require("icons").info,
+  Hint = require("icons").hint,
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -89,28 +92,28 @@ vim.o.formatoptions = "cro/qlj"
 vim.o.guicursor = table.concat({
   table.concat({
     "n",
-    "block-blinkwait1000-blinkon500-blinkoff500-Cursor"
+    "block-blinkwait1000-blinkon500-blinkoff500-Cursor",
   }, ":"),
   table.concat({
     "v",
-    "block-blinkon0-Cursor"
+    "block-blinkon0-Cursor",
   }, ":"),
   table.concat({
     "c",
-    "ver20-blinkwait1000-blinkon500-blinkoff500-Cursor"
+    "ver20-blinkwait1000-blinkon500-blinkoff500-Cursor",
   }, ":"),
   table.concat({
     "i-ci-sm",
-    "ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert"
+    "ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert",
   }, ":"),
   table.concat({
     "r-cr",
-    "hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace"
+    "hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace",
   }, ":"),
   table.concat({
     "o",
-    "hor50-Cursor"
-  }, ":")
+    "hor50-Cursor",
+  }, ":"),
 }, ",")
 vim.o.guioptions = "cig"
 vim.o.inccommand = "split"
@@ -122,7 +125,7 @@ vim.opt.listchars = {
   extends = "≻",
   precedes = "≺",
   conceal = "◌",
-  nbsp = "⨯"
+  nbsp = "⨯",
 }
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
@@ -138,69 +141,62 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 
 -- statusline {{{3
+-- selene: allow(unused_variable)
 function StatuslineModeName()
   return ({
-    n      = "NORMAL",
-    no     = "N-OPERATOR PENDING",
-    v      = "VISUAL",
-    V      = "V-LINE",
-    [""]  = "V-BLOCK",
-    s      = "SELECT",
-    S      = "S-LINE",
-    [""]  = "S-BLOCK",
-    i      = "INSERT",
-    R      = "REPLACE",
-    Rv     = "V-REPLACE",
-    c      = "COMMAND",
-    cv     = "VIM EX",
-    ce     = "EX",
-    r      = "PROMPT",
-    rm     = "MORE",
+    n = "NORMAL",
+    no = "N-OPERATOR PENDING",
+    v = "VISUAL",
+    V = "V-LINE",
+    [""] = "V-BLOCK",
+    s = "SELECT",
+    S = "S-LINE",
+    [""] = "S-BLOCK",
+    i = "INSERT",
+    R = "REPLACE",
+    Rv = "V-REPLACE",
+    c = "COMMAND",
+    cv = "VIM EX",
+    ce = "EX",
+    r = "PROMPT",
+    rm = "MORE",
     ["r?"] = "CONFIRM",
-    ["!"]  = "SHELL",
-    t      = "TERMINAL"
+    ["!"] = "SHELL",
+    t = "TERMINAL",
   })[vim.fn.mode()]
 end
 
 vim.o.statusline =
--- show the current mode
--- left justified, minimum 7
-" %-7.{v:lua.StatuslineModeName()}" ..
-
-    -- group for buffer flags
-    -- %h: Help buffer flag, text is "[help]".
-    -- %w: Preview window flag, text is "[Preview]".
-    -- %q: "[Quickfix List]", "[Location List]" or empty.
-    -- left justified
-    " %h%w%q" ..
-
-    -- Path to the file in the buffer, as typed or relative to current directory
-    -- left justified, maximum 100
-    " %.100f" ..
-
-    -- group for modification flags
-    -- Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
-    " %m%r" ..
-
-    -- Separation point between alignment sections. Each section will be separated
-    -- by an equal number of spaces. No width fields allowed.
-    "%=" ..
-
-    -- Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
-    -- maximum 20
-    "%.20y " ..
-
-    -- Percentage through file in lines as in CTRL-G.
-    -- minimum 3, followed by a literal percent sign
-    "%3p%% " ..
-
-    -- %l: Line number.
-    -- %L: Number of lines in buffer.
-    ":%l/%L☰ " ..
-
-    -- Column number and virtual column number, if different.
-    -- preceded by a literal ': ', minimum 5
-    "℅:%5(%c%V%) "
+  -- show the current mode
+  -- left justified, minimum 7
+  " %-7.{v:lua.StatuslineModeName()}"
+  -- group for buffer flags
+  -- %h: Help buffer flag, text is "[help]".
+  -- %w: Preview window flag, text is "[Preview]".
+  -- %q: "[Quickfix List]", "[Location List]" or empty.
+  -- left justified
+  .. " %h%w%q"
+  -- Path to the file in the buffer, as typed or relative to current directory
+  -- left justified, maximum 100
+  .. " %.100f"
+  -- group for modification flags
+  -- Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
+  .. " %m%r"
+  -- Separation point between alignment sections. Each section will be separated
+  -- by an equal number of spaces. No width fields allowed.
+  .. "%="
+  -- Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
+  -- maximum 20
+  .. "%.20y "
+  -- Percentage through file in lines as in CTRL-G.
+  -- minimum 3, followed by a literal percent sign
+  .. "%3p%% "
+  -- %l: Line number.
+  -- %L: Number of lines in buffer.
+  .. ":%l/%L☰ "
+  -- Column number and virtual column number, if different.
+  -- preceded by a literal ': ', minimum 5
+  .. "℅:%5(%c%V%) "
 -- }}}3
 
 vim.o.textwidth = 80
@@ -219,7 +215,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.api.nvim_set_option_value("number", false, { scope = "local" })
     vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
     vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
-  end
+  end,
 })
 
 -- key maps {{{2
@@ -227,72 +223,67 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- diagnostics API bindings
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, {
   desc = "Open the floating window for the diagnostic closes to the cursor.",
-  silent = true
+  silent = true,
 })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {
   desc = "Go to the previous diagnostic from the cursor.",
-  silent = true
+  silent = true,
 })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {
   desc = "Go to the next diagnostic from the cursor.",
-  silent = true
+  silent = true,
 })
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
   desc = "Put all buffer diagnostics in the location list.",
-  silent = true
+  silent = true,
 })
 
 -- highlight group inspection
-vim.keymap.set(
-  "n",
-  "<F10>",
-  function()
-    if not (vim.fn.exists("*synstack") > 0) then
-      return
-    end
+vim.keymap.set("n", "<F10>", function()
+  if not (vim.fn.exists "*synstack" > 0) then
+    return
+  end
 
-    if vim.fn.exists(":TSHighlightCapturesUnderCursor") > 0 then
-      vim.cmd [[TSHighlightCapturesUnderCursor]]
-      return
-    end
+  if vim.fn.exists ":TSHighlightCapturesUnderCursor" > 0 then
+    vim.cmd [[TSHighlightCapturesUnderCursor]]
+    return
+  end
 
-    local line = vim.fn.line(".")
-    local col = vim.fn.col(".")
-    local names = {}
-    for _, id in ipairs(vim.fn.synstack(line, col)) do
-      table.insert(names, vim.fn.synIDattr(id, "name"))
-    end
-    print(vim.inspect(names))
-  end,
-  {
-    desc = "Show syntax highlight group information at cursor position.",
-    silent = true
-  }
-)
+  local line = vim.fn.line "."
+  local col = vim.fn.col "."
+  local names = {}
+  for _, id in ipairs(vim.fn.synstack(line, col)) do
+    table.insert(names, vim.fn.synIDattr(id, "name"))
+  end
+  print(vim.inspect(names))
+end, {
+  desc = "Show syntax highlight group information at cursor position.",
+  silent = true,
+})
 
 -- plugin key maps {{{3
 -- fzf-lua | ibhagwan/fzf-lua {{{4
 
 vim.keymap.set("n", "<C-p>", ":FzfLua files<cr>", {
   desc = "Open FZF file search.",
-  silent = true
+  silent = true,
 })
 
 vim.keymap.set("n", "<C-_>", ":FzfLua live_grep<cr>", {
   desc = "Open FZF fuzzy search.",
-  silent = true
+  silent = true,
 })
 
 -- vim-wordmotion | chaoren/vim-wordmotion {{{4
 
 -- Change the wordmotion keys to work with Alt.
 vim.g.wordmotion_mappings = {
-  w  = "<M-w>",
-  b  = "<M-b>",
-  e  = "<M-e>",
+  w = "<M-w>",
+  b = "<M-b>",
+  e = "<M-e>",
   ge = "g<M-e>",
   aw = "g<M-w>",
-  iw = "g<M-w>"
+  iw = "g<M-w>",
 }
 
 -- vimspector | puremourning/vimspector {{{4
@@ -302,10 +293,10 @@ vim.keymap.set("n", "<M-v>p", "<Plug>VimspectorPause", { remap = true })
 vim.keymap.set("n", "<M-v>s", "<Plug>VimspectorStop", { remap = true })
 vim.keymap.set("n", "<M-v>R", ":VimspectorReset<cr>", {})
 vim.keymap.set("n", "<M-v>b", "<Plug>VimspectorToggleBreakpoint", {
-  remap = true
+  remap = true,
 })
 vim.keymap.set("n", "<M-v>B", "<Plug>VimspectorToggleConditionalBreakpoint", {
-  remap = true
+  remap = true,
 })
 vim.keymap.set("n", "<M-v>r", "<Plug>VimspectorRunToCursor", { remap = true })
 vim.keymap.set("n", "<M-v>o", "<Plug>VimspectorStepOver", { remap = true })

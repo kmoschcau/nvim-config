@@ -24,7 +24,7 @@ return require("packer").startup(function()
   -- Tool to allow non-LSP sources to use LSP functions
   use {
     "jose-elias-alvarez/null-ls.nvim",
-    requires = { "nvim-lua/plenary.nvim" }
+    requires = { "nvim-lua/plenary.nvim" },
   }
 
   -- language specific extensions {{{3
@@ -69,7 +69,7 @@ return require("packer").startup(function()
   -- stuff…
   use {
     "folke/trouble.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
   }
 
   -- syntax plugins {{{1
@@ -108,7 +108,7 @@ return require("packer").startup(function()
   -- pretty, segmented and configurable status line in lua
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
   }
 
   -- devicons plugins {{{1
@@ -135,7 +135,7 @@ return require("packer").startup(function()
   -- adds highlighting of only the local scope
   use {
     "folke/twilight.nvim",
-    requires = { "nvim-treesitter/nvim-treesitter" }
+    requires = { "nvim-treesitter/nvim-treesitter" },
   }
 
   -- adds table formatting commands
