@@ -4,13 +4,18 @@ vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup {
   disable_netrw = true,
   reload_on_bufenter = true,
-  remove_keymaps = { "<C-e>" },
+  remove_keymaps = { "<C-e>", "<C-x>" },
   diagnostics = {
     enable = true,
     show_on_dirs = true,
   },
   view = {
     adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "<C-s>", action = "split" }
+      },
+    },
   },
   renderer = {
     add_trailing = true,
