@@ -64,14 +64,6 @@ return require("packer").startup(function()
   -- debugging plugins {{{1
   use "puremourning/vimspector"
 
-  -- linter plugins {{{1
-  -- unified display of diagnostics (project and file), location, quickfix, LSP
-  -- stuff…
-  use {
-    "folke/trouble.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
-  }
-
   -- syntax plugins {{{1
   -- treesitter {{{2
   -- treesitter itself
@@ -163,9 +155,16 @@ return require("packer").startup(function()
   -- lots of maps to toggle options and do stuff around current line
   use "tpope/vim-unimpaired"
 
-  -- fzf plugins {{{1
-  -- provides vim integration with fzf
-  use "ibhagwan/fzf-lua"
+  -- fuzzy finder plugins {{{1
+  -- generic fuzzy finder framework
+  use {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    requires = { "nvim-lua/plenary.nvim" },
+  }
+
+  -- fzf integration for telescope
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- misc plugins {{{1
   -- allows better handling for local vimrc files

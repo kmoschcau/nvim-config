@@ -1,14 +1,16 @@
 local M = {}
 
 M.on_attach = function(client, bufnr)
+  local tel_builtin = require "telescope.builtin"
+
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
     buffer = bufnr,
-    desc = "Go to the declaration(s) of the symbol under the cursor.",
+    desc = "Go to the declaration of the symbol under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+  vim.keymap.set("n", "gd", tel_builtin.lsp_definitions, {
     buffer = bufnr,
-    desc = "Go to the definition(s) of the symbol under the cursor.",
+    desc = "Fuzzy find definitions of the symbol under the cursor.",
     silent = true,
   })
   vim.keymap.set("n", "K", vim.lsp.buf.hover, {
@@ -16,9 +18,9 @@ M.on_attach = function(client, bufnr)
     desc = "Trigger hover for the symbol under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {
+  vim.keymap.set("n", "gi", tel_builtin.lsp_implementations, {
     buffer = bufnr,
-    desc = "Go to the implementation(s) of the symbol under the cursor.",
+    desc = "Fuzzy find implementations of the symbol under the cursor.",
     silent = true,
   })
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, {
@@ -43,9 +45,9 @@ M.on_attach = function(client, bufnr)
     desc = "Print the current workspace folders.",
     silent = true,
   })
-  vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, {
+  vim.keymap.set("n", "<space>D", tel_builtin.lsp_type_definitions, {
     buffer = bufnr,
-    desc = "Go to the type definition(s) of the symbol under the cursor.",
+    desc = "Fuzzy find type definitions of the symbol under the cursor.",
     silent = true,
   })
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {
@@ -58,9 +60,29 @@ M.on_attach = function(client, bufnr)
     desc = "Trigger the code actions menu for the position under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, {
+  vim.keymap.set("n", "gr", tel_builtin.lsp_references, {
     buffer = bufnr,
-    desc = "Go to the reference(s) of the symbol under the cursor.",
+    desc = "Fuzzy find references of the symbol under the cursor.",
+    silent = true,
+  })
+  vim.keymap.set("n", "gci", tel_builtin.lsp_incoming_calls, {
+    buffer = bufnr,
+    desc = "Fuzzy find incoming calls of the symbol under the cursor.",
+    silent = true,
+  })
+  vim.keymap.set("n", "gco", tel_builtin.lsp_outgoing_calls, {
+    buffer = bufnr,
+    desc = "Fuzzy find outgoing calls of the symbol under the cursor.",
+    silent = true,
+  })
+  vim.keymap.set("n", "<space>sd", tel_builtin.lsp_document_symbols, {
+    buffer = bufnr,
+    desc = "Fuzzy find document symbols.",
+    silent = true,
+  })
+  vim.keymap.set("n", "<space>sw", tel_builtin.lsp_workspace_symbols, {
+    buffer = bufnr,
+    desc = "Fuzzy find workspace symbols.",
     silent = true,
   })
 

@@ -262,18 +262,6 @@ end, {
 })
 
 -- plugin key maps {{{3
--- fzf-lua | ibhagwan/fzf-lua {{{4
-
-vim.keymap.set("n", "<C-p>", ":FzfLua files<cr>", {
-  desc = "Open FZF file search.",
-  silent = true,
-})
-
-vim.keymap.set("n", "<C-_>", ":FzfLua live_grep<cr>", {
-  desc = "Open FZF fuzzy search.",
-  silent = true,
-})
-
 -- vim-wordmotion | chaoren/vim-wordmotion {{{4
 
 -- Change the wordmotion keys to work with Alt.
