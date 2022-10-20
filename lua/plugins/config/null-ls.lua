@@ -35,6 +35,7 @@ require("null-ls").setup {
     formatting.shfmt,
     formatting.stylelint,
     formatting.stylua,
+    formatting.tidy,
     formatting.trim_newlines,
     formatting.trim_whitespace,
   },
