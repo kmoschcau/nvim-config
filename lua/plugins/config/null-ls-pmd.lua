@@ -4,7 +4,8 @@ local methods = require "null-ls.methods"
 local M = {}
 
 local function build_pmd_args()
-  local args = { "--format", "json", "--dir", "$FILENAME", "--rulesets" }
+  local args =
+    { "--no-cache", "--format", "json", "--dir", "$FILENAME", "--rulesets" }
   if vim.b.null_ls_java_pmd_rulesets then
     table.insert(args, vim.b.null_ls_java_pmd_rulesets)
   else
@@ -47,13 +48,14 @@ M.diagnostics = h.make_builtin {
     description = "An extensible cross-language static code analyzer.",
   },
   method = methods.internal.DIAGNOSTICS,
-  filetypes = { "java" },
+  filetypes = { "java", "jsp" },
   generator_opts = {
-    command = "pmd",
     args = build_pmd_args,
-    format = "json_raw",
-    ignore_stderr = true,
+    check_exit_code = { 0, 4 },
+    command = "pmd",
+    format = "json",
     on_output = handle_pmd_output,
+    to_stdin = false,
   },
   factory = h.generator_factory,
 }
