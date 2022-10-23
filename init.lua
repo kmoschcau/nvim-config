@@ -324,24 +324,3 @@ augroup end
 -- Whether the server should automatically start when a markdown file is opened.
 vim.g.markdown_composer_autostart = 0
 
--- vim-signify | mhinz/vim-signify {{{2
-
--- Which VCS to check for
-vim.g.signify_vcs_list = { "git" }
-
--- Enable more aggressive sign update.
-vim.g.signify_realtime = 1
-
--- Update signs when entering a buffer that was modified.
-vim.g.signify_update_on_bufenter = 1
-
--- Update the signs on FocusGained.
-vim.g.signify_update_on_focusgained = 1
-
--- Reconfigure the sign text used.
-vim.g.signify_sign_change = "~"
-
--- Additionally trigger sign updates in normal or insert mode after 'updatetime'
--- milliseconds without any keypresses.
-vim.g.signify_cursorhold_normal = 1
-vim.g.signify_cursorhold_insert = 1

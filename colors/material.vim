@@ -394,9 +394,6 @@ let s:c_syntax_structure        = s:color_dict('light_green', 6)
 let s:c_syntax_type             = s:color_dict('lime', 6)
 let s:c_syntax_namespace        = s:color_dict('brown', 4)
 
-let s:c_nerd_tree_neutral_light =
-      \ substitute(s:c_neutral_strong.gui, '^#', '', '')
-
 " Highlight definitions {{{2
 " Basics {{{3
 
@@ -1304,41 +1301,3 @@ highlight! link CSVColumnHeaderEven Material_VimTitle
 
 highlight! link diffAdded   Material_VimDiffAdd
 highlight! link diffRemoved Material_VimDiffDelete
-
-" vim-nerdtree-syntax-highlight | tiagofumo/vim-nerdtree-syntax-highlight {{{3
-
-highlight! link NERDTreeDirSlash Material_SynSpecial
-
-let g:NERDTreeExactMatchHighlightColor = {
-      \ '.bashprofile':   s:c_nerd_tree_neutral_light,
-      \ '.bashrc':        s:c_nerd_tree_neutral_light,
-      \ '.ds_store':      s:c_nerd_tree_neutral_light,
-      \ '.gitconfig':     s:c_nerd_tree_neutral_light,
-      \ '.gitignore':     s:c_nerd_tree_neutral_light,
-      \ '.zshrc':         s:c_nerd_tree_neutral_light,
-      \ 'cmakelists.txt': s:c_nerd_tree_neutral_light,
-      \ 'license':        s:c_nerd_tree_neutral_light,
-      \ 'makefile':       s:c_nerd_tree_neutral_light,
-      \ 'mix.lock':       s:c_nerd_tree_neutral_light,
-      \}
-
-let g:NERDTreeExtensionHighlightColor = {
-      \ 'awk':  s:c_nerd_tree_neutral_light,
-      \ 'bat':  s:c_nerd_tree_neutral_light,
-      \ 'conf': s:c_nerd_tree_neutral_light,
-      \ 'csh':  s:c_nerd_tree_neutral_light,
-      \ 'diff': s:c_nerd_tree_neutral_light,
-      \ 'elm':  '1293d8',
-      \ 'ini':  s:c_nerd_tree_neutral_light,
-      \ 'ksh':  s:c_nerd_tree_neutral_light,
-      \ 'leex': s:c_nerd_tree_neutral_light,
-      \ 'pp':   s:c_nerd_tree_neutral_light,
-      \ 'toml': s:c_nerd_tree_neutral_light,
-      \ 'yaml': s:c_nerd_tree_neutral_light,
-      \ 'yml':  s:c_nerd_tree_neutral_light,
-      \ 'zsh':  s:c_nerd_tree_neutral_light,
-      \}
-
-let g:NERDTreePatternMatchHighlightColor = {
-      \ '.*mootools.*\.js$': s:c_nerd_tree_neutral_light,
-      \}
