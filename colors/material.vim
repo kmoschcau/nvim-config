@@ -384,6 +384,10 @@ let s:c_warning_light           = s:color_dict('orange', 3)
 let s:c_warning_strong          = s:color_dict('orange', 6)
 let s:c_info_light              = s:color_dict('light_blue', 3)
 let s:c_info_strong             = s:color_dict('light_blue', 6)
+let s:c_debug_light             = s:color_dict('grey', 3)
+let s:c_debug_strong            = s:color_dict('grey', 6)
+let s:c_trace_light             = s:color_dict('purple', 3)
+let s:c_trace_strong            = s:color_dict('purple', 6)
 
 let s:c_syntax_number_light     = s:color_dict('blue', 1)
 let s:c_syntax_meta_light       = s:color_dict('purple', 1)
@@ -513,36 +517,64 @@ call s:highlight('Material_VimModeMsg',
 call s:highlight('Material_VimMoreMsg',
                  \ { 'attr': 'bold',
                  \   'fg':   s:color_dict('green', 8) })
+
+call s:highlight('Material_VimError',
+                 \ { 'fg':   s:c_error_strong })
+call s:highlight('Material_VimErrorBorder',
+                 \ { 'fg':   s:c_error_light })
 call s:highlight('Material_VimErrorInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_error_strong })
 call s:highlight('Material_VimErrorUnderline',
                  \ { 'attr': 'underline',
                  \   'sp':   s:c_error_strong })
+
 call s:highlight('Material_VimStyleErrorInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_error_light })
 call s:highlight('Material_VimStyleErrorUnderline',
                  \ { 'attr': 'undercurl',
                  \   'sp':   s:c_error_light })
+
+call s:highlight('Material_VimWarning',
+                 \ { 'fg':   s:c_warning_strong })
+call s:highlight('Material_VimWarningBorder',
+                 \ { 'fg':   s:c_warning_light })
 call s:highlight('Material_VimWarningInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_warning_strong })
 call s:highlight('Material_VimWarningUnderline',
                  \ { 'attr': 'underline',
                  \   'sp':   s:c_warning_strong })
+
 call s:highlight('Material_VimStyleWarningInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_warning_light })
 call s:highlight('Material_VimStyleWarningUnderline',
                  \ { 'attr': 'undercurl',
                  \   'sp':   s:c_warning_light })
+
+call s:highlight('Material_VimInfo',
+                 \ { 'fg':   s:c_info_strong })
+call s:highlight('Material_VimInfoBorder',
+                 \ { 'fg':   s:c_info_light })
 call s:highlight('Material_VimInfoInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_info_strong })
 call s:highlight('Material_VimInfoUnderline',
                  \ { 'attr': 'underline',
                  \   'sp':   s:c_info_strong })
+
+call s:highlight('Material_VimDebug',
+                 \ { 'fg':   s:c_debug_strong })
+call s:highlight('Material_VimDebugBorder',
+                 \ { 'fg':   s:c_debug_light })
+
+call s:highlight('Material_VimTrace',
+                 \ { 'fg':   s:c_trace_strong })
+call s:highlight('Material_VimTraceBorder',
+                 \ { 'fg':   s:c_trace_light })
+
 call s:highlight('Material_VimHintInverted',
                  \ { 'fg':   s:c_neutral_lightest,
                  \   'bg':   s:c_info_light })
@@ -1301,3 +1333,21 @@ highlight! link CSVColumnHeaderEven Material_VimTitle
 
 highlight! link diffAdded   Material_VimDiffAdd
 highlight! link diffRemoved Material_VimDiffDelete
+
+" nvim-notify | rcarriga/nvim-notify {{{3
+
+highlight!   link   NotifyDEBUGBorder   Material_VimDebugBorder
+highlight!   link   NotifyDEBUGIcon     Material_VimDebug
+highlight!   link   NotifyDEBUGTitle    Material_VimDebug
+highlight!   link   NotifyERRORBorder   Material_VimErrorBorder
+highlight!   link   NotifyERRORIcon     Material_VimError
+highlight!   link   NotifyERRORTitle    Material_VimError
+highlight!   link   NotifyINFOBorder    Material_VimInfoBorder
+highlight!   link   NotifyINFOIcon      Material_VimInfo
+highlight!   link   NotifyINFOTitle     Material_VimInfo
+highlight!   link   NotifyTRACEBorder   Material_VimTraceBorder
+highlight!   link   NotifyTRACEIcon     Material_VimTrace
+highlight!   link   NotifyTRACETitle    Material_VimTrace
+highlight!   link   NotifyWARNBorder    Material_VimWarningBorder
+highlight!   link   NotifyWARNIcon      Material_VimWarning
+highlight!   link   NotifyWARNTitle     Material_VimWarning

@@ -167,6 +167,9 @@ return require("packer").startup(function()
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- misc plugins {{{1
+  -- better notifications
+  use "rcarriga/nvim-notify"
+
   -- allows better handling for local vimrc files
   use "embear/vim-localvimrc"
 
