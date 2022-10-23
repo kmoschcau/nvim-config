@@ -112,7 +112,7 @@ return require("packer").startup(function()
 
   -- git plugins {{{1
   -- show git line status in gutter
-  use "mhinz/vim-signify"
+  use "lewis6991/gitsigns.nvim"
 
   -- provide integrated git handling in the editor
   use "tpope/vim-fugitive"

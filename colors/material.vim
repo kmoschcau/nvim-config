@@ -1342,17 +1342,3 @@ let g:NERDTreeExtensionHighlightColor = {
 let g:NERDTreePatternMatchHighlightColor = {
       \ '.*mootools.*\.js$': s:c_nerd_tree_neutral_light,
       \}
-
-" vim-signify | mhinz/vim-signify {{{3
-
-highlight! link SignifySignAdd             Material_VimDiffSignAdd
-highlight! link SignifySignChange          Material_VimDiffSignChange
-highlight! link SignifySignChangeDelete    Material_VimDiffSignChangeDelete
-highlight! link SignifySignDelete          Material_VimDiffSignDelete
-highlight! link SignifySignDeleteFirstLine Material_VimDiffSignDelete
-
-highlight! link SignifyLineAdd             Material_VimDiffLineAdd
-highlight! link SignifyLineChange          Material_VimDiffLineChange
-highlight! link SignifyLineChangeDelete    Material_VimDiffLineChangeDelete
-highlight! link SignifyLineDelete          Material_VimDiffLineDelete
-highlight! link SignifyLineDeleteFirstLine Material_VimDiffLineDelete

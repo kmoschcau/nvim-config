@@ -1,6 +1,7 @@
 require "plugins.config.cmp"
 require "plugins.config.colorizer"
 require "plugins.config.editing"
+require "plugins.config.gitsigns"
 require "plugins.config.lsp"
 require "plugins.config.lsp.omnisharp"
 require "plugins.config.lualine"

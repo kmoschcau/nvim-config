@@ -9,6 +9,7 @@ require("null-ls").setup {
   on_attach = require("plugins.config.lsp").on_attach,
   sources = {
     code_actions.eslint_d,
+    code_actions.gitsigns,
     code_actions.shellcheck,
 
     require("plugins.config.null-ls-checkstyle").diagnostics,
