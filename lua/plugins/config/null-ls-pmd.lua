@@ -47,7 +47,7 @@ M.diagnostics = h.make_builtin {
     url = "https://pmd.github.io",
     description = "An extensible cross-language static code analyzer.",
   },
-  method = methods.internal.DIAGNOSTICS,
+  method = methods.internal.DIAGNOSTICS_ON_SAVE,
   filetypes = { "java", "jsp" },
   generator_opts = {
     args = build_pmd_args,
