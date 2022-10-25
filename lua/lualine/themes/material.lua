@@ -2,7 +2,9 @@
 -- highlight. This is meant to be used to remove the differing, one character
 -- highlight on the right side of the statusline for windows on the bottom when
 -- lualine is in use.
-vim.cmd [[highlight! link StatusLine Material_VimStrongFramingWithFg]]
+vim.api.nvim_set_hl(0, "StatusLine", {
+  link = "Material_VimStrongFramingWithFg",
+})
 
 return {
   normal = {
