@@ -4,6 +4,24 @@ local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 
+local function build_checkstyle_extra_args()
+  local args = { "-c" }
+
+  if vim.b.null_ls_java_checkstyle_config then
+    table.insert(args, vim.b.null_ls_java_checkstyle_config)
+  else
+    table.insert(args, "/google_checks.xml")
+  end
+
+  if vim.b.null_ls_java_checkstyle_options then
+    for _, arg in ipairs(vim.fn.split(vim.b.null_ls_java_checkstyle_options)) do
+      table.insert(args, arg)
+    end
+  end
+
+  return args
+end
+
 require("null-ls").setup {
   diagnostics_format = "#{s}: #{c} - #{m}",
   on_attach = require("plugins.config.lsp").on_attach,
@@ -12,7 +30,10 @@ require("null-ls").setup {
     code_actions.gitsigns,
     code_actions.shellcheck,
 
-    require("plugins.config.null-ls-checkstyle").diagnostics,
+    diagnostics.checkstyle.with {
+      args = { "-f", "sarif", "$FILENAME" },
+      extra_args = build_checkstyle_extra_args,
+    },
     diagnostics.eslint_d,
     diagnostics.fish,
     diagnostics.markdownlint,
