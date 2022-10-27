@@ -5,8 +5,9 @@ local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 
 local function build_checkstyle_extra_args()
-  local args = { "-c" }
+  local args = {}
 
+  table.insert(args, "-c")
   if vim.b.null_ls_java_checkstyle_config then
     table.insert(args, vim.b.null_ls_java_checkstyle_config)
   else
@@ -22,6 +23,33 @@ local function build_checkstyle_extra_args()
   return args
 end
 
+local function build_pmd_extra_args()
+  local args = {}
+
+  table.insert(args, "--dir")
+  if vim.b.null_ls_java_pmd_dir then
+    table.insert(args, vim.b.null_ls_java_pmd_dir)
+  else
+    table.insert(args, "$ROOT")
+  end
+
+  table.insert(args, "--rulesets")
+  if vim.b.null_ls_java_pmd_rulesets then
+    table.insert(args, vim.b.null_ls_java_pmd_rulesets)
+  else
+    table.insert(args, "category/java/bestpractices.xml")
+  end
+
+  if vim.b.null_ls_java_pmd_cache then
+    table.insert(args, "--cache")
+    table.insert(args, vim.b.null_ls_java_pmd_cache)
+  else
+    table.insert(args, "--no-cache")
+  end
+
+  return args
+end
+
 require("null-ls").setup {
   diagnostics_format = "#{s}: #{c} - #{m}",
   on_attach = require("plugins.config.lsp").on_attach,
@@ -31,13 +59,17 @@ require("null-ls").setup {
     code_actions.shellcheck,
 
     diagnostics.checkstyle.with {
-      args = { "-f", "sarif", "$FILENAME" },
       extra_args = build_checkstyle_extra_args,
+      timeout = -1,
     },
     diagnostics.eslint_d,
     diagnostics.fish,
     diagnostics.markdownlint,
-    require("plugins.config.null-ls-pmd").diagnostics,
+    diagnostics.pmd.with {
+      args = { "--format", "json" },
+      extra_args = build_pmd_extra_args,
+      timeout = -1,
+    },
     diagnostics.shellcheck,
     diagnostics.selene,
     diagnostics.stylelint,
