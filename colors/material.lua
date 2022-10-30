@@ -367,6 +367,22 @@ local function highlight(group_name, config)
     def.sp = config.sp.gui
   end
 
+  if vim.o.background == "dark" then
+    if config.fg_dark then
+      def.fg = config.fg_dark.gui
+      def.ctermfg = config.fg_dark.cterm
+    end
+
+    if config.bg_dark then
+      def.bg = config.bg_dark.gui
+      def.ctermbg = config.bg_dark.cterm
+    end
+
+    if config.sp_dark then
+      def.sp = config.sp_dark.gui
+    end
+  end
+
   for _, prop in ipairs {
     "blend",
     "bold",
@@ -390,35 +406,52 @@ local function highlight(group_name, config)
 end
 
 -- Get the value number for the passed index, dependent on the 'background'.
-local function value(index)
+local function value(index, invert_dark)
   local clamped = math.max(math.min(index, 10), 1)
 
-  local value_index = vim.o.background == "light" and clamped
-    or #normal_values - clamped + 1
+  local value_index
+  if invert_dark and vim.o.background == "dark" then
+    value_index = #normal_values - clamped + 1
+  else
+    value_index = clamped
+  end
+
   return normal_values[value_index]
 end
 
 -- Get the accent value string for the passed index, dependent on the
 -- 'background'.
-local function accent_value(index)
+local function accent_value(index, invert_dark)
   local clamped = math.max(math.min(index, 4), 1)
 
-  local value_index = vim.o.background == "light" and clamped
-    or #accent_values - clamped + 1
+  local value_index
+  if invert_dark and vim.o.background == "dark" then
+    value_index = #accent_values - clamped + 1
+  else
+    value_index = clamped
+  end
+
   return accent_values[value_index]
 end
 
 -- Get a color table by the passed color name and the passed index, dependent on
 -- the 'background'.
-local function color_table(color_name, color_index, accent)
+local function color_table(color_name, color_index, options)
+  local accent = false
+  local invert_dark = true
+  if options then
+    accent = options.accent or false
+    invert_dark = options.invert_dark and true
+  end
+
   if accent then
-    local raw_accent_value = accent_value(color_index)
+    local raw_accent_value = accent_value(color_index, invert_dark)
     local clamped_accent_value = vim
       .regex("brown|grey|blue_grey")
       :match_str(color_name) and raw_accent_value:sub(2) or raw_accent_value
     return material[color_name][clamped_accent_value]
   else
-    return material[color_name][value(color_index)]
+    return material[color_name][value(color_index, invert_dark)]
   end
 end
 
@@ -510,12 +543,12 @@ highlight("Material_VimLightFramingStrongFg", {
 })
 highlight("Material_VimStrongFramingWithoutFg", { bg = c.neutral.strong })
 highlight("Material_VimStrongFramingWithFg", {
-  fg = color_table(hue_neutral, 1, "accent"),
+  fg = color_table(hue_neutral, 1, { accent = true }),
   bg = c.neutral.strong,
 })
 highlight("Material_VimStatusLine", {
   fg = c.neutral.lightest,
-  bg = color_table(hue_primary, 4, "accent"),
+  bg = color_table(hue_primary, 4, { accent = true }),
   bold = true,
 })
 highlight("Material_VimStatusLineNC", {
@@ -546,18 +579,25 @@ highlight("Material_VimCursorUnfocused", { bg = color_table(hue_primary, 3) })
 
 highlight("Material_VimDiffAdd", { fg = color_table(hue_diff_added, 6) })
 highlight("Material_VimDiffDelete", { fg = color_table(hue_diff_deleted, 6) })
-highlight("Material_VimDiffLineAdd", { bg = color_table(hue_diff_added, 2) })
+highlight("Material_VimDiffLineAdd", {
+  bg = color_table(hue_diff_added, 2),
+  bg_dark = color_table(hue_diff_added, 10, { invert_dark = false }),
+})
 highlight("Material_VimDiffLineChange", {
   bg = color_table(hue_diff_changed, 2),
+  bg_dark = color_table(hue_diff_changed, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineChangeDelete", {
   bg = color_table(hue_diff_changed, 3),
+  bg_dark = color_table(hue_diff_changed, 9, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineDelete", {
   bg = color_table(hue_diff_deleted, 2),
+  bg_dark = color_table(hue_diff_deleted, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineText", {
   bg = color_table(hue_diff_text, 2),
+  bg_dark = color_table(hue_diff_text, 10, { invert_dark = false }),
   bold = true,
 })
 highlight("Material_VimDiffSignAdd", {
@@ -669,16 +709,23 @@ highlight("Material_VimFolded", {
   fg = c.neutral.midpoint_strong,
   bg = color_table(hue_neutral, 3),
 })
-highlight("Material_VimSearch", { bg = color_table("yellow", 6) })
+highlight("Material_VimSearch", {
+  bg = color_table("yellow", 6),
+  bg_dark = color_table("yellow", 10, { invert_dark = false }),
+})
 highlight("Material_VimIncSearch", {
   bg = color_table("orange", 6),
+  bg_dark = color_table("orange", 9, { invert_dark = false }),
   bold = true,
 })
 highlight("Material_VimMatchParen", { bg = color_table("teal", 2) })
 
 -- LSP {{{3
 
-highlight("Material_LspReferenceText", { bg = color_table("yellow", 3) })
+highlight("Material_LspReferenceText", {
+  bg = color_table("yellow", 3),
+  bg_dark = color_table("yellow", 10, { invert_dark = false }),
+})
 highlight("Material_LspReferenceRead", { bg = color_table("green", 2) })
 highlight("Material_LspReferenceWrite", { bg = color_table("blue", 2) })
 
@@ -1041,6 +1088,8 @@ highlight("@namespace.keyword", { link = "Material_SynNamespaceKeyword" })
 highlight("@namespace.name", { link = "Material_SynNamespaceName" })
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@property", { link = "Material_SynAccessorName" })
+highlight("@tag", { link = "Material_SynStatement" })
+highlight("@tag.delimiter", { link = "Material_Synspecial" })
 highlight("@text.literal", { link = "Material_SynString" })
 highlight("@text.reference", { link = "Material_SynUnderlined" })
 highlight("@text.title", { link = "Material_VimTitle" })
