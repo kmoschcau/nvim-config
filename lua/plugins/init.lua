@@ -75,16 +75,20 @@ return require("packer").startup(function()
   -- show the context of the current function up top
   use "romgrk/nvim-treesitter-context"
 
-  -- }}}2
+  -- specific file syntaxes {{{2
+  -- logfile syntax
+  use "MTDL9/vim-log-highlighting"
 
   -- maven syntax
   use "NLKNguyen/vim-maven-syntax"
 
-  -- colored highlighting for CSS like hex color values
-  use "norcalli/nvim-colorizer.lua"
-
   -- a lot of helpful things dealing with CSV
   use "chrisbra/csv.vim"
+
+  -- }}}2
+
+  -- colored highlighting for CSS like hex color values
+  use "norcalli/nvim-colorizer.lua"
 
   -- some niceties for markdown
   use { "preservim/vim-markdown", requires = { "godlygeek/tabular" } }
