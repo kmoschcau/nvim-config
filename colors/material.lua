@@ -675,9 +675,17 @@ highlight("Material_VimInfoUnderline", {
 })
 
 highlight("Material_VimDebug", { fg = c.debug.strong })
+highlight("Material_VimDebugInverted", {
+  fg = c.neutral.lightest,
+  bg = c.debug.strong,
+})
 highlight("Material_VimDebugBorder", { fg = c.debug.light })
 
 highlight("Material_VimTrace", { fg = c.trace.strong })
+highlight("Material_VimTraceInverted", {
+  fg = c.neutral.lightest,
+  bg = c.trace.strong,
+})
 highlight("Material_VimTraceBorder", { fg = c.trace.light })
 
 highlight("Material_VimHintInverted", {
@@ -1089,7 +1097,7 @@ highlight("@namespace.name", { link = "Material_SynNamespaceName" })
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@property", { link = "Material_SynAccessorName" })
 highlight("@tag", { link = "Material_SynStatement" })
-highlight("@tag.delimiter", { link = "Material_Synspecial" })
+highlight("@tag.delimiter", { link = "Material_SynSpecial" })
 highlight("@text.literal", { link = "Material_SynString" })
 highlight("@text.reference", { link = "Material_SynUnderlined" })
 highlight("@text.title", { link = "Material_VimTitle" })
@@ -1445,6 +1453,17 @@ highlight("zshFlag", { link = "Material_SynParameterName" })
 
 highlight("CSVColumnHeaderOdd", { link = "Material_VimTitle" })
 highlight("CSVColumnHeaderEven", { link = "Material_VimTitle" })
+
+-- Log | MTDL9/vim-log-Highlighting {{{3
+
+highlight("logLevelTrace", { link = "Material_VimTraceInverted" })
+highlight("logLevelDebug", { link = "Material_VimDebugInverted" })
+highlight("logLevelNotice", { link = "Material_VimHintInverted" })
+highlight("logLevelInfo", { link = "Material_VimInfoInverted" })
+highlight("logLevelWarning", { link = "Material_VimWarningInverted" })
+highlight("logLevelError", { link = "Material_VimErrorInverted" })
+
+highlight("logBrackets", { link = "Material_SynSpecial" })
 
 -- vim-git | tpope/vim-git {{{3
 
