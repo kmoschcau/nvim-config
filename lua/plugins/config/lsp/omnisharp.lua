@@ -31,6 +31,6 @@ require("lspconfig").omnisharp.setup {
       organizeImportsOnFormat = organize_imports,
       sdkIncludePrereleases = incluse_prereleases,
       useModernNet = use_modern,
-    }
-  }
+    },
+  },
 }

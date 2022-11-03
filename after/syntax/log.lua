@@ -27,13 +27,43 @@ syntax match logReferenceJavaFile /\h\w\+\.java/ contained containedin=logRefere
 syntax match logReferenceJavaLineNumber /\d+/ contained containedin=logReferenceJavaFileRef
 ]]
 
-vim.api.nvim_set_hl(0, "logReferenceType", { default = true, link = "Material_SynTypedefName" })
-vim.api.nvim_set_hl(0, "logReferenceNamespace", { default = true, link = "Material_SynNamespaceName" })
-vim.api.nvim_set_hl(0, "logReferenceException", { default = true, link = "Material_VimError" })
-vim.api.nvim_set_hl(0, "logReferenceDot", { default = true, link = "logOperator" })
-vim.api.nvim_set_hl(0, "logReferenceParens", { default = true, link = "Material_SynSpecial" })
-vim.api.nvim_set_hl(0, "logReferenceCallComma", { default = true, link = "Material_SynSpecial" })
-vim.api.nvim_set_hl(0, "logReferenceParamType", { default = true, link = "Material_SynTypedefName" })
-vim.api.nvim_set_hl(0, "logReferenceParamName", { default = true, link = "Material_SynParameterName" })
-vim.api.nvim_set_hl(0, "logReferenceJavaFile", { default = true, link = "logFilePath" })
-vim.api.nvim_set_hl(0, "logReferenceJavaLineNumber", { default = true, link = "logNumber" })
+vim.api.nvim_set_hl(0, "logReferenceType", {
+  default = true,
+  link = "Material_SynTypedefName",
+})
+vim.api.nvim_set_hl(0, "logReferenceNamespace", {
+  default = true,
+  link = "Material_SynNamespaceName",
+})
+vim.api.nvim_set_hl(0, "logReferenceException", {
+  default = true,
+  link = "Material_VimError",
+})
+vim.api.nvim_set_hl(0, "logReferenceDot", {
+  default = true,
+  link = "logOperator",
+})
+vim.api.nvim_set_hl(0, "logReferenceParens", {
+  default = true,
+  link = "Material_SynSpecial",
+})
+vim.api.nvim_set_hl(0, "logReferenceCallComma", {
+  default = true,
+  link = "Material_SynSpecial",
+})
+vim.api.nvim_set_hl(0, "logReferenceParamType", {
+  default = true,
+  link = "Material_SynTypedefName",
+})
+vim.api.nvim_set_hl(0, "logReferenceParamName", {
+  default = true,
+  link = "Material_SynParameterName",
+})
+vim.api.nvim_set_hl(0, "logReferenceJavaFile", {
+  default = true,
+  link = "logFilePath",
+})
+vim.api.nvim_set_hl(0, "logReferenceJavaLineNumber", {
+  default = true,
+  link = "logNumber",
+})
