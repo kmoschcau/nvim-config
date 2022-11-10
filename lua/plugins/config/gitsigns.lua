@@ -1,30 +1,26 @@
 require("gitsigns").setup {
   signs = {
-    add = {
-      hl = "Material_VimDiffSignAdd",
-      numhl = "Material_VimDiffSignAdd",
-      linehl = "Material_VimDiffLineAdd",
-    },
-    change = {
-      hl = "Material_VimDiffSignChange",
-      numhl = "Material_VimDiffSignChange",
-      linehl = "Material_VimDiffLineChange",
-    },
-    delete = {
-      hl = "Material_VimDiffSignDelete",
-      numhl = "Material_VimDiffSignDelete",
-      linehl = "Material_VimDiffLineDelete",
-    },
-    topdelete = {
-      hl = "Material_VimDiffSignDelete",
-      numhl = "Material_VimDiffSignDelete",
-      linehl = "Material_VimDiffLineDelete",
-    },
+    delete = { show_count = true },
+    topdelete = { show_count = true },
     changedelete = {
+      show_count = true,
       hl = "Material_VimDiffSignChangeDelete",
       numhl = "Material_VimDiffSignChangeDelete",
       linehl = "Material_VimDiffLineChangeDelete",
     },
+    untracked = { text = "┇" },
+  },
+  count_chars = {
+    [1] = "₁",
+    [2] = "₂",
+    [3] = "₃",
+    [4] = "₄",
+    [5] = "₅",
+    [6] = "₆",
+    [7] = "₇",
+    [8] = "₈",
+    [9] = "₉",
+    ["+"] = "₊",
   },
   numhl = true,
   on_attach = function(bufnr)
