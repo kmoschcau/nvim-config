@@ -1,21 +1,30 @@
 local null_ls = require "null-ls"
-
 local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 
+local local_config = require "local-config"
+
 local function build_checkstyle_extra_args()
+  local config = local_config.get_config()
+
   local args = {}
 
+  if config.null_ls.java.checkstyle.file then
+    table.insert(args, "$FILENAME")
+  else
+    table.insert(args, "$ROOT")
+  end
+
   table.insert(args, "-c")
-  if vim.b.null_ls_java_checkstyle_config then
-    table.insert(args, vim.b.null_ls_java_checkstyle_config)
+  if config.null_ls.java.checkstyle.config then
+    table.insert(args, config.null_ls.java.checkstyle.config)
   else
     table.insert(args, "/google_checks.xml")
   end
 
-  if vim.b.null_ls_java_checkstyle_options then
-    for _, arg in ipairs(vim.fn.split(vim.b.null_ls_java_checkstyle_options)) do
+  if config.null_ls.java.checkstyle.options then
+    for _, arg in ipairs(vim.fn.split(config.null_ls.java.checkstyle.options)) do
       table.insert(args, arg)
     end
   end
@@ -24,25 +33,27 @@ local function build_checkstyle_extra_args()
 end
 
 local function build_pmd_extra_args()
+  local config = local_config.get_config()
+
   local args = {}
 
   table.insert(args, "--dir")
-  if vim.b.null_ls_java_pmd_dir then
-    table.insert(args, vim.b.null_ls_java_pmd_dir)
+  if config.null_ls.java.pmd.dir then
+    table.insert(args, config.null_ls.java.pmd.dir)
   else
     table.insert(args, "$ROOT")
   end
 
   table.insert(args, "--rulesets")
-  if vim.b.null_ls_java_pmd_rulesets then
-    table.insert(args, vim.b.null_ls_java_pmd_rulesets)
+  if config.null_ls.java.pmd.rulesets then
+    table.insert(args, config.null_ls.java.pmd.rulesets)
   else
     table.insert(args, "category/java/bestpractices.xml")
   end
 
-  if vim.b.null_ls_java_pmd_cache then
+  if config.null_ls.java.pmd.cache then
     table.insert(args, "--cache")
-    table.insert(args, vim.b.null_ls_java_pmd_cache)
+    table.insert(args, config.null_ls.java.pmd.cache)
   else
     table.insert(args, "--no-cache")
   end
@@ -59,6 +70,7 @@ require("null-ls").setup {
     code_actions.shellcheck,
 
     diagnostics.checkstyle.with {
+      args = { "-f", "sarif" },
       extra_args = build_checkstyle_extra_args,
       timeout = -1,
     },
