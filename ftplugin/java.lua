@@ -35,7 +35,6 @@ if package:is_installed() then
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
       "-Dlog.protocol=true",
       "-Dlog.level=ALL",
-      "-noverify",
       "-Xmx1G",
       "--add-modules=ALL-SYSTEM",
       "--add-opens",
