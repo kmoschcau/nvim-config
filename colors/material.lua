@@ -1482,6 +1482,31 @@ highlight("GitSignsDelete", { link = "Material_VimDiffSignDelete" })
 highlight("GitSignsDeleteLn", { link = "Material_VimDiffLineDelete" })
 highlight("GitSignsDeleteInline", { link = "Material_VimDiffLineText" })
 
+-- nvim-cmp | hrsh7th/nvim-cmp {{{3
+
+highlight("CmpItemAbbrDeprecated", { link = "Material_SynModDeprecated" })
+highlight("CmpItemAbbrMatch", { bold = true })
+
+highlight("CmpItemKindClass", { link = "Material_SynTypedefName" })
+highlight("CmpItemKindConstant", { link = "Material_SynConstantName" })
+highlight("CmpItemKindConstructor", { link = "Material_SynFunctionName" })
+highlight("CmpItemKindEnum", { link = "Material_SynEnumKeyword" })
+highlight("CmpItemKindEnumMember", { link = "Material_SynEnumName" })
+highlight("CmpItemKindField", { link = "Material_SynFieldName" })
+highlight("CmpItemKindFolder", { link = "Material_VimDirectory" })
+highlight("CmpItemKindFunction", { link = "Material_SynFunctionName" })
+highlight("CmpItemKindInterface", { link = "Material_SynInterfaceName" })
+highlight("CmpItemKindKeyword", { link = "Material_SynStatement" })
+highlight("CmpItemKindMethod", { link = "Material_SynFunctionName" })
+highlight("CmpItemKindModule", { link = "Material_SynNamespaceName" })
+highlight("CmpItemKindOperator", { link = "Material_SynOperator" })
+highlight("CmpItemKindProperty", { link = "Material_SynAccessorName" })
+highlight("CmpItemKindStruct", { link = "Material_SynStructureName" })
+highlight("CmpItemKindTypeParameter", {
+  link = "Material_SynGenericParameterName",
+})
+highlight("CmpItemKindVariable", { link = "Material_SynLocalName" })
+
 -- nvim-notify | rcarriga/nvim-notify {{{3
 
 highlight("NotifyDEBUGBorder", { link = "Material_VimDebugBorder" })
