@@ -7,6 +7,7 @@ local buffer_source = {
 
 local luasnip = require "luasnip"
 local cmp = require "cmp"
+local types = require "cmp.types"
 cmp.setup {
   completion = {
     autocomplete = false,
@@ -77,6 +78,11 @@ cmp.setup.filetype("gitcommit", {
 require("cmp_git").setup()
 
 cmp.setup.cmdline({ "/", "?" }, {
+  completion = {
+    autocomplete = {
+      types.cmp.TriggerEvent.TextChanged,
+    },
+  },
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     buffer_source,
@@ -84,6 +90,11 @@ cmp.setup.cmdline({ "/", "?" }, {
 })
 
 cmp.setup.cmdline(":", {
+  completion = {
+    autocomplete = {
+      types.cmp.TriggerEvent.TextChanged,
+    },
+  },
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
