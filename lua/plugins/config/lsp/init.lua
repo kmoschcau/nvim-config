@@ -55,7 +55,9 @@ M.on_attach = function(client, bufnr)
     desc = "Rename the symbol under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, {
+  vim.keymap.set("n", "<space>ca", function()
+    vim.cmd [[CodeActionMenu]]
+  end, {
     buffer = bufnr,
     desc = "Trigger the code actions menu for the position under the cursor.",
     silent = true,

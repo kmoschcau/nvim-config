@@ -171,6 +171,9 @@ return require("packer").startup(function()
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- misc plugins {{{1
+  -- better code actions menu
+  use "weilbith/nvim-code-action-menu"
+
   -- better notifications
   use "rcarriga/nvim-notify"
 

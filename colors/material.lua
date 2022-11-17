@@ -965,6 +965,7 @@ highlight("PmenuSel", { link = "Material_VimPopupSelected" })
 highlight("PmenuSbar", { link = "Material_VimPopupScrollbar" })
 highlight("PmenuThumb", { link = "Material_VimPopupThumb" })
 highlight("NormalFloat", { link = "Material_VimPopup" })
+highlight("FloatBorder", { link = "Material_VimPopup" })
 
 -- Editor window highlights {{{2
 -- Normal text {{{3

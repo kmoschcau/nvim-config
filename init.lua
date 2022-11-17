@@ -1,8 +1,5 @@
 -- vim: foldmethod=marker foldlevel=0
 
--- value used for pumblend and winblend
-local window_blend = 20
-
 -- colors setup {{{1
 
 -- When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
@@ -131,7 +128,6 @@ vim.opt.listchars = {
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
 vim.o.number = true
-vim.o.pumblend = window_blend
 vim.o.shiftwidth = 2
 vim.opt.shortmess:append "I"
 vim.o.showbreak = "↪ "
@@ -203,7 +199,6 @@ vim.o.statusline =
 vim.o.textwidth = 80
 vim.o.title = true
 vim.o.updatetime = 100
-vim.o.winblend = window_blend
 
 -- autocommands {{{2
 
