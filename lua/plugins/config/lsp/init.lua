@@ -129,6 +129,21 @@ M.on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
+
+    vim.keymap.set("n", "<space>dh", function()
+      vim.lsp.buf.clear_references()
+      vim.lsp.buf.document_highlight()
+    end, {
+      buffer = bufnr,
+      desc = "Trigger document highlight for the symbol under the cursor.",
+      silent = true,
+    })
+
+    vim.keymap.set("n", "<space>cr", vim.lsp.buf.clear_references, {
+      buffer = bufnr,
+      desc = "Clear references (document highlight) in the document.",
+      silent = true,
+    })
   end
 
   if caps.semanticTokensProvider and caps.semanticTokensProvider.range then
