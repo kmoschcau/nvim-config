@@ -114,6 +114,12 @@ M.on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = vim.lsp.codelens.refresh,
     })
+
+    vim.keymap.set("n", "<F8>", vim.lsp.codelens.refresh, {
+      buffer = bufnr,
+      desc = "Do a codelens refresh.",
+      silent = true,
+    })
   end
 
   if caps.documentHighlightProvider then
