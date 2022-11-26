@@ -1085,6 +1085,7 @@ highlight("@constant.builtin", { link = "Material_SynConstant" })
 highlight("@constructor", { link = "Material_SynFunctionName" })
 highlight("@enum.keyword", { link = "Material_SynEnumKeyword" })
 highlight("@enum.name", { link = "Material_SynEnumName" })
+highlight("@error", { link = "Material_VimErrorUnderline" })
 highlight("@field", { link = "Material_SynFieldName" })
 highlight("@function.keyword", { link = "Material_SynFunctionKeyword" })
 highlight("@function.name", { link = "Material_SynFunctionName" })
@@ -1099,49 +1100,20 @@ highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@property", { link = "Material_SynAccessorName" })
 highlight("@tag", { link = "Material_SynStatement" })
 highlight("@tag.delimiter", { link = "Material_SynSpecial" })
+highlight("@text", { link = "Material_VimNormal" })
+highlight("@text.todo", { link = "Material_SynTodo" })
+highlight("@text.danger", { link = "Material_VimErrorInverted" })
+highlight("@text.diff.add", { link = "Material_VimDiffAdd" })
+highlight("@text.diff.delete", { link = "Material_VimDiffDelete" })
 highlight("@text.literal", { link = "Material_SynString" })
 highlight("@text.reference", { link = "Material_SynUnderlined" })
 highlight("@text.title", { link = "Material_VimTitle" })
 highlight("@text.uri", { link = "Material_SynUnderlined" })
 highlight("@type", { link = "Material_SynStructureName" })
 highlight("@type.builtin", { link = "Material_SynTypeName" })
+highlight("@type.qualifier", { link = "Material_SynStatement" })
 highlight("@variable", { link = "Material_SynLocalName" })
 highlight("@variable.builtin", { link = "Material_SynSpecial" })
-
--- TSNone     ctermfg=241 guifg=foreground
--- TSVariable cleared
-
--- TSAnnotation          links  to  PreProc
--- TSConstMacro          links  to  Define
--- TSDanger              links  to  WarningMsg
--- TSEnvironment         links  to  Macro
--- TSEnvironmentName     links  to  Type
--- TSException           links  to  Exception
--- TSFuncBuiltin         links  to  Special
--- TSFuncMacro           links  to  Macro
--- TSLabel               links  to  Label
--- TSMath                links  to  Special
--- TSNote                links  to  SpecialComment
--- TSPunctBracket        links  to  Delimiter
--- TSPunctDelimiter      links  to  Delimiter
--- TSPunctSpecial        links  to  Delimiter
--- TSSymbol              links  to  Identifier
--- TSTag                 links  to  Label
--- TSTagAttribute        links  to  TSProperty
--- TSTagDelimiter        links  to  Delimiter
--- TSText                links  to  TSNone
--- TSTextReference       links  to  Constant
--- TSTitle               links  to  Title
--- TSWarning             links  to  Todo
-
--- commentTSConstant      links  to  TSConstant
--- queryTSPunctBracket    links  to  TSPunctBracket
--- queryTSVariable        links  to  TSVariable
--- queryTSString          links  to  TSString
--- queryTSPunctSpecial    links  to  TSPunctSpecial
--- queryTSType            links  to  TSType
--- queryTSProperty        links  to  TSProperty
--- queryTSPunctDelimiter  links  to  TSPunctDelimiter
 
 -- LSP {{{3
 
