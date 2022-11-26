@@ -177,6 +177,9 @@ return require("packer").startup(function()
   -- better notifications
   use "rcarriga/nvim-notify"
 
+  -- allows better handling for local vimrc files
+  use "embear/vim-localvimrc"
+
   -- lightning fast markdown preview in browser
   use { "euclio/vim-markdown-composer", run = "cargo build --release" }
 
