@@ -9,6 +9,8 @@ vim.opt_local.textwidth = 100
 -- plugin configurations {{{1
 -- jdtls | mfussenegger/nvim-jdtls {{{2
 
+local lsp = require "plugins.config.lsp"
+
 local package = require("mason-registry").get_package "jdtls"
 if package:is_installed() then
   local jar = vim.fn.glob(
@@ -48,7 +50,8 @@ if package:is_installed() then
       "-data",
       workspace,
     },
-    on_attach = require("plugins.config.lsp").on_attach,
+    handlers = lsp.handlers,
+    on_attach = lsp.on_attach,
     settings = {
       java = {
         codeGeneration = {

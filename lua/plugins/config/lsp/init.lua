@@ -1,5 +1,16 @@
 local M = {}
 
+M.handlers = {
+  ["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = "rounded" }
+  ),
+  ["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    { border = "rounded" }
+  ),
+}
+
 M.on_attach = function(client, bufnr)
   local tel_builtin = require "telescope.builtin"
 
@@ -202,12 +213,14 @@ local simple_servers = { "jsonls", "vimls" }
 for _, lsp in ipairs(simple_servers) do
   lspconfig[lsp].setup {
     capabilities = M.capabilities,
+    handlers = M.handlers,
     on_attach = M.on_attach,
   }
 end
 
 lspconfig.sumneko_lua.setup {
   capabilities = M.capabilities,
+  handlers = M.handlers,
   on_attach = M.on_attach,
   settings = {
     Lua = {
@@ -231,6 +244,7 @@ lspconfig.sumneko_lua.setup {
 require("typescript").setup {
   server = {
     capabilities = M.capabilities,
+    handlers = M.handlers,
     on_attach = M.on_attach,
     settings = {
       javascript = {

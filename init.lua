@@ -217,15 +217,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- key maps {{{2
 
 -- diagnostics API bindings
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, {
-  desc = "Open the floating window for the diagnostic closes to the cursor.",
+vim.keymap.set("n", "<space>e", function()
+  vim.diagnostic.open_float { border = "rounded" }
+end, {
+  desc = "Open the floating window for the diagnostic closest to the cursor.",
   silent = true,
 })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.goto_prev { float = { border = "rounded" } }
+end, {
   desc = "Go to the previous diagnostic from the cursor.",
   silent = true,
 })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.goto_next { float = { border = "rounded" } }
+end, {
   desc = "Go to the next diagnostic from the cursor.",
   silent = true,
 })
@@ -318,4 +324,3 @@ augroup end
 
 -- Whether the server should automatically start when a markdown file is opened.
 vim.g.markdown_composer_autostart = 0
-

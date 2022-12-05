@@ -14,6 +14,7 @@ require("lspconfig").omnisharp.setup {
     return "C:/Synxis/ProjectX/SHS/EnterpriseServices/"
   end,
   capabilities = lsp.capabilities,
+  handlers = lsp.handlers,
   on_attach = lsp.on_attach,
   enable_ms_build_load_projects_on_demand = load_on_demand,
   enable_roslyn_analyzers = roslyn_analyzers,

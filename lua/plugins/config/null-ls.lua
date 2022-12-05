@@ -62,7 +62,8 @@ local function build_pmd_extra_args()
 end
 
 require("null-ls").setup {
-  diagnostics_format = "#{s}: #{c} - #{m}",
+  border = "rounded",
+  diagnostics_format = "#{s}: #{m}",
   on_attach = require("plugins.config.lsp").on_attach,
   sources = {
     code_actions.eslint_d,
