@@ -314,3 +314,10 @@ augroup end
 
 -- Whether the server should automatically start when a markdown file is opened.
 vim.g.markdown_composer_autostart = 0
+
+-- Add additional logic for WSL
+if vim.fn.executable("xdg-open") > 0 then
+  vim.g.markdown_composer_browser = "xdg-open"
+elseif vim.fn.executable("wslview") > 0 then
+  vim.g.markdown_composer_browser = "wslview"
+end
