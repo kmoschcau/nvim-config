@@ -1,13 +1,15 @@
-require "plugins.config.cmp"
-require "plugins.config.colorizer"
-require "plugins.config.editing"
-require "plugins.config.gitsigns"
-require "plugins.config.lsp"
-require "plugins.config.lsp.omnisharp"
-require "plugins.config.lualine"
-require "plugins.config.mason"
-require "plugins.config.notify"
-require "plugins.config.null-ls"
-require "plugins.config.telescope"
-require "plugins.config.treesitter"
-require "plugins.config.tree"
+local ehandler = require("error-handler").handler
+
+xpcall(require, ehandler, "plugins.config.cmp")
+xpcall(require, ehandler, "plugins.config.colorizer")
+xpcall(require, ehandler, "plugins.config.editing")
+xpcall(require, ehandler, "plugins.config.gitsigns")
+xpcall(require, ehandler, "plugins.config.lsp")
+xpcall(require, ehandler, "plugins.config.lsp.omnisharp")
+xpcall(require, ehandler, "plugins.config.lualine")
+xpcall(require, ehandler, "plugins.config.mason")
+xpcall(require, ehandler, "plugins.config.notify")
+xpcall(require, ehandler, "plugins.config.null-ls")
+xpcall(require, ehandler, "plugins.config.telescope")
+xpcall(require, ehandler, "plugins.config.treesitter")
+xpcall(require, ehandler, "plugins.config.tree")

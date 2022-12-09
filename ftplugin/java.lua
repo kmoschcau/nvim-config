@@ -93,7 +93,7 @@ if package:is_installed() then
         format = {
           enabled = false,
           settings = {
-            url = "~/.config/nvim/coc/eclipse-formatter.xml",
+            url = "~/.config/nvim/eclipse-formatter.xml",
           },
         },
         implementationsCodeLens = {

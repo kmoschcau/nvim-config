@@ -1,5 +1,6 @@
 local M = {}
 
+--- Overridden handlers for the LSP client.
 M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover,
@@ -11,6 +12,10 @@ M.handlers = {
   ),
 }
 
+--- On attach callback for the LSP client.
+--- @param client table the LSP client
+--- @param bufnr number the number of the buffer
+--- @return nil
 M.on_attach = function(client, bufnr)
   local tel_builtin = require "telescope.builtin"
 
@@ -163,47 +168,34 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if caps.semanticTokensProvider and caps.semanticTokensProvider.range then
-    vim.keymap.set("v", "<F10>", function()
-      vim.lsp.buf_request(
-        0,
-        "textDocument/semanticTokens/range",
-        vim.lsp.util.make_given_range_params(),
-        vim.lsp.with(require("nvim-semantic-tokens.semantic_tokens").on_full, {
-          on_token = function(_, token)
-            vim.notify(token.type .. "." .. table.concat(token.modifiers, "."))
-          end,
-        })
-      )
+  if caps.semanticTokensProvider and caps.semanticTokensProvider then
+    vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
+      buffer = bufnr,
+      desc = "Do a full semantic tokens refresh.",
+      silent = true,
+    })
+
+    vim.keymap.set("n", "<F10>", function()
+      xpcall(function()
+        local dbg = require "highlights-debug"
+        local highlight = dbg.get_semantic_highlight(bufnr)
+        if highlight then
+          vim.lsp.util.open_floating_preview(
+            vim.split(vim.inspect(highlight), "\n"),
+            "lua",
+            { border = "rounded" }
+          )
+        else
+          dbg.show_regex_or_ts_highlight()
+        end
+      end, require("error-handler").handler)
     end, {
       buffer = bufnr,
       desc = "Show LSP semantic tokens in selection.",
       silent = true,
     })
   end
-
-  if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-    vim.keymap.set("n", "<F9>", vim.lsp.buf.semantic_tokens_full, {
-      buffer = bufnr,
-      desc = "Do a full semantic tokens refresh.",
-      silent = true,
-    })
-
-    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-      desc = "Do a full semantic tokens refresh.",
-      group = augroup,
-      buffer = bufnr,
-      callback = vim.lsp.buf.semantic_tokens_full,
-    })
-
-    vim.lsp.buf.semantic_tokens_full()
-  end
 end
-
-require("nvim-semantic-tokens").setup {
-  preset = "default",
-  highlighters = { require "nvim-semantic-tokens.table-highlighter" },
-}
 
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 

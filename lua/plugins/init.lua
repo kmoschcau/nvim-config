@@ -18,9 +18,6 @@ return require("packer").startup(function()
   -- Configurations for built-in LSP
   use "neovim/nvim-lspconfig"
 
-  -- Experimental semantic highlighting
-  use "theHamsta/nvim-semantic-tokens"
-
   -- Tool to allow non-LSP sources to use LSP functions
   use {
     "jose-elias-alvarez/null-ls.nvim",

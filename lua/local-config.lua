@@ -1,5 +1,26 @@
 local config_name = ".lvimrc.json"
 
+--- @class LocalConfigNullLsJavaCheckstyle
+--- @field file boolean Whether to use file or project wide linting
+--- @field config string|nil The file name for the config file XML
+--- @field options string|nil Additional options for checkstyle
+
+--- @class LocalConfigNullLsJavaPmd
+--- @field dir string | nil The run directory for PMD
+--- @field rulesets string | nil The rulesets for PMD
+--- @field cache string | nil The cache file path, if used
+
+--- @class LocalConfigNullLsJava
+--- @field checkstyle LocalConfigNullLsJavaCheckstyle Checkstyle options
+--- @field pmd LocalConfigNullLsJavaPmd PMD options
+
+--- @class LocalConfigNullLs
+--- @field java LocalConfigNullLsJava Java specific options
+
+--- @class LocalConfig
+--- @field null_ls LocalConfigNullLs Options for null-ls
+
+--- @type LocalConfig
 local default_config = {
   null_ls = {
     java = {
@@ -17,6 +38,9 @@ local default_config = {
   },
 }
 
+--- Check if a file with the given file name exists.
+--- @param file_name string The file name to check
+--- @return boolean result Whether the file exists
 local function file_exists(file_name)
   local file = io.open(file_name, "rb")
   if file then
@@ -25,6 +49,8 @@ local function file_exists(file_name)
   return file ~= nil
 end
 
+--- Get a table of file names for existing config files.
+--- @return string[] paths The paths with existing config files
 local function get_config_paths()
   local dirs = {}
   for dir in vim.fs.parents(vim.api.nvim_buf_get_name(0)) do
@@ -41,6 +67,9 @@ local function get_config_paths()
   return config_paths
 end
 
+--- Get the content of the file with the given file name.
+--- @param file_name string The name of the file
+--- @return string[] content The file contents
 local function get_lines(file_name)
   if not file_exists(file_name) then
     return {}
@@ -53,6 +82,8 @@ local function get_lines(file_name)
 end
 
 return {
+  --- Get the local config.
+  --- @return LocalConfig config The effective config
   get_config = function()
     local effective_conf = default_config
     for _, config_path in ipairs(get_config_paths()) do

@@ -35,11 +35,13 @@ if vim.fn.executable(python_path) > 0 then
 end
 
 -- plugins and packages {{{1
+local ehandler = require("error-handler").handler
+
 -- bootstrap packer
-require "packer.bootstrap"
+xpcall(require, ehandler, "packer.bootstrap")
 
 -- load the plugin configuration files
-require "plugins.config"
+xpcall(require, ehandler, "plugins.config")
 
 -- general Neovim settings {{{1
 -- appearance settings {{{2
@@ -139,6 +141,9 @@ vim.o.splitright = true
 
 -- statusline {{{3
 -- selene: allow(unused_variable)
+
+--- Convert the current mode from `vim.fn.mode()` into a readable string.
+--- @return string
 function StatuslineModeName()
   return ({
     n = "NORMAL",
@@ -242,22 +247,7 @@ vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
 
 -- highlight group inspection
 vim.keymap.set("n", "<F10>", function()
-  if not (vim.fn.exists "*synstack" > 0) then
-    return
-  end
-
-  if vim.fn.exists ":TSHighlightCapturesUnderCursor" > 0 then
-    vim.cmd [[TSHighlightCapturesUnderCursor]]
-    return
-  end
-
-  local line = vim.fn.line "."
-  local col = vim.fn.col "."
-  local names = {}
-  for _, id in ipairs(vim.fn.synstack(line, col)) do
-    table.insert(names, vim.fn.synIDattr(id, "name"))
-  end
-  print(vim.inspect(names))
+  require("highlights-debug").show_regex_or_ts_highlight()
 end, {
   desc = "Show syntax highlight group information at cursor position.",
   silent = true,

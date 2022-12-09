@@ -5,6 +5,8 @@ local formatting = null_ls.builtins.formatting
 
 local local_config = require "local-config"
 
+--- Build the extra arguments for checkstyle
+--- @return string[]
 local function build_checkstyle_extra_args()
   local config = local_config.get_config()
 
@@ -32,6 +34,8 @@ local function build_checkstyle_extra_args()
   return args
 end
 
+--- Build the extra arguments for PMD
+--- @return string[]
 local function build_pmd_extra_args()
   local config = local_config.get_config()
 

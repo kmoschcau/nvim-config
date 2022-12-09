@@ -15,6 +15,15 @@ vim.g.colors_name = vim.fn.expand "<sfile>:t:r"
 
 -- Material color palette {{{2
 
+--- @class ColorDefinition
+--- @field gui string The GUI and termguicolors hex value of the color
+--- @field cterm number|"NONE" The cterm color index of the color
+
+--- @alias ColorGradient { [string]: ColorDefinition }
+
+--- @alias ColorTable { [string]: ColorGradient, transparent: ColorDefinition }
+
+--- @type ColorTable
 local material = {
   red = {
     [50] = { gui = "#ffebee", cterm = 255 },
@@ -348,38 +357,91 @@ local accent_values = { "A100", "A200", "A400", "A700" }
 
 -- Functions {{{2
 
--- Set the highlight group passed as group_name to the values specified in
--- config.
+--- @class HighlightConfig
+--- @field fg? ColorDefinition|"NONE" The foreground color
+--- @field bg? ColorDefinition|"NONE" The background color
+--- @field sp? ColorDefinition|"NONE" The special color
+--- @field fg_dark? ColorDefinition|"NONE" The dark background override for the foreground color
+--- @field bg_dark? ColorDefinition|"NONE" The dark background override for the background color
+--- @field sp_dark? ColorDefinition|"NONE" The dark background override for the special color
+--- @field blend? number The blend value for pumblend
+--- @field bold? boolean
+--- @field standout? boolean
+--- @field underline? boolean
+--- @field undercurl? boolean
+--- @field underdouble? boolean
+--- @field underdotted? boolean
+--- @field underdashed? boolean
+--- @field strikethrough? boolean
+--- @field italic? boolean
+--- @field reverse? boolean
+--- @field nocombine? boolean
+--- @field link? string
+--- @field default? boolean
+
+--- Set the highlight group passed as group_name to the values specified in
+--- config.
+--- @param group_name string the name of the group
+--- @param config HighlightConfig the highlight config
+--- @return nil
 local function highlight(group_name, config)
   local def = {}
 
   if config.fg then
-    def.fg = config.fg.gui
-    def.ctermfg = config.fg.cterm
+    if config.fg == "NONE" then
+      def.fg = "NONE"
+      def.ctermfg = "NONE"
+    else
+      def.fg = config.fg.gui
+      def.ctermfg = config.fg.cterm
+    end
   end
 
   if config.bg then
-    def.bg = config.bg.gui
-    def.ctermbg = config.bg.cterm
+    if config.bg == "NONE" then
+      def.bg = "NONE"
+      def.ctermbg = "NONE"
+    else
+      def.bg = config.bg.gui
+      def.ctermbg = config.bg.cterm
+    end
   end
 
   if config.sp then
-    def.sp = config.sp.gui
+    if config.sp == "NONE" then
+      def.sp = "NONE"
+    else
+      def.sp = config.sp.gui
+    end
   end
 
   if vim.o.background == "dark" then
     if config.fg_dark then
-      def.fg = config.fg_dark.gui
-      def.ctermfg = config.fg_dark.cterm
+      if config.fg_dark == "NONE" then
+        def.fg = "NONE"
+        def.ctermfg = "NONE"
+      else
+        def.fg = config.fg_dark.gui
+        def.ctermfg = config.fg_dark.cterm
+      end
     end
 
     if config.bg_dark then
-      def.bg = config.bg_dark.gui
-      def.ctermbg = config.bg_dark.cterm
+      if config.bg_dark == "NONE" then
+        def.bg = "NONE"
+        def.ctermbg = "NONE"
+      else
+        def.bg = config.bg_dark.gui
+        def.ctermbg = config.bg_dark.cterm
+      end
     end
 
     if config.sp_dark then
-      def.sp = config.sp_dark.gui
+      if config.sp_dark == "NONE" then
+        def.sp = "NONE"
+      else
+        def.sp = config.sp_dark.gui
+      end
     end
   end
 
@@ -405,7 +467,9 @@ local function highlight(group_name, config)
   vim.api.nvim_set_hl(0, group_name, def)
 end
 
--- Get the value number for the passed index, dependent on the 'background'.
+--- Get the value number for the passed index, dependent on the 'background'.
+--- @param index number
+--- @param invert_dark boolean
 local function value(index, invert_dark)
   local clamped = math.max(math.min(index, 10), 1)
 
@@ -419,8 +483,10 @@ local function value(index, invert_dark)
   return normal_values[value_index]
 end
 
--- Get the accent value string for the passed index, dependent on the
--- 'background'.
+--- Get the accent value string for the passed index, dependent on the
+--- 'background'.
+--- @param index number
+--- @param invert_dark boolean
 local function accent_value(index, invert_dark)
   local clamped = math.max(math.min(index, 4), 1)
 
@@ -434,14 +500,17 @@ local function accent_value(index, invert_dark)
   return accent_values[value_index]
 end
 
--- Get a color table by the passed color name and the passed index, dependent on
--- the 'background'.
+--- Get a color table by the passed color name and the passed index, dependent
+--- on the 'background'.
+--- @param color_name string
+--- @param color_index number
+--- @param options? { accent?: boolean, invert_dark?: boolean }
 local function color_table(color_name, color_index, options)
   local accent = false
   local invert_dark = true
   if options then
     accent = options.accent or false
-    invert_dark = options.invert_dark and true
+    invert_dark = options.invert_dark and true or false
   end
 
   if accent then
@@ -510,7 +579,7 @@ local c = {
 -- This is somewhat of a hack and not like I intended it. But just linking the
 -- Normal group to anything instead of defining it on its own will cause the
 -- current window to have a transparent background for some reason.
-vim.api.nvim_set_hl(0, "Material_VimNormal", { link = "Normal" })
+highlight("Material_VimNormal", { link = "Normal" })
 highlight("Normal", { fg = c.neutral.strong, bg = c.neutral.lightest })
 highlight("Material_VimNormalLight", { fg = c.neutral.midpoint })
 highlight("Material_VimSpecialKey", {
@@ -1092,6 +1161,7 @@ highlight("@function.name", { link = "Material_SynFunctionName" })
 highlight("@generic.special", { link = "Material_SynGenericSpecial" })
 highlight("@interface.keyword", { link = "Material_SynInterfaceKeyword" })
 highlight("@interface.name", { link = "Material_SynInterfaceName" })
+highlight("@keyword.function", { link = "Material_SynFunctionKeyword" })
 highlight("@local.name", { link = "Material_SynLocalName" })
 highlight("@namespace", { link = "Material_SynNamespaceName" })
 highlight("@namespace.keyword", { link = "Material_SynNamespaceKeyword" })
