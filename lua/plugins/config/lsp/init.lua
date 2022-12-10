@@ -174,26 +174,6 @@ M.on_attach = function(client, bufnr)
       desc = "Do a full semantic tokens refresh.",
       silent = true,
     })
-
-    vim.keymap.set("n", "<F10>", function()
-      xpcall(function()
-        local dbg = require "highlights-debug"
-        local highlight = dbg.get_semantic_highlight(bufnr)
-        if highlight then
-          vim.lsp.util.open_floating_preview(
-            vim.split(vim.inspect(highlight), "\n"),
-            "lua",
-            { border = "rounded" }
-          )
-        else
-          dbg.show_regex_or_ts_highlight()
-        end
-      end, require("error-handler").handler)
-    end, {
-      buffer = bufnr,
-      desc = "Show LSP semantic tokens in selection.",
-      silent = true,
-    })
   end
 end
 

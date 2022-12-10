@@ -14,9 +14,9 @@
 ; namespaces
 
 (package_declaration
-  "package" @namespace.keyword
+  "package" @keyword.namespace
   (scoped_identifier
-    name: (identifier) @namespace.name))
+    name: (identifier) @namespace))
 
 (import_declaration
   (scoped_identifier
@@ -24,7 +24,7 @@
 
 (scoped_identifier
   (scoped_identifier
-    (identifier) @namespace.name))
+    (identifier) @namespace))
 
 ; generics
 
@@ -35,25 +35,25 @@
 ; type declarations
 
 (enum_declaration
-  "enum" @enum.keyword
-  name: (identifier) @enum.name)
+  "enum" @keyword.enum
+  name: (identifier) @enum)
 
 (enum_constant
-  name: (identifier) @enum.name)
+  name: (identifier) @enum)
 
 (interface_declaration
-  "interface" @interface.keyword
-  name: (identifier) @interface.name)
+  "interface" @keyword.interface
+  name: (identifier) @interface)
 
 (class_declaration
-  "class" @class.keyword
-  name: (identifier) @class.name)
+  "class" @keyword.class
+  name: (identifier) @class)
 
 ; type references
 
 (class_declaration
   interfaces: (super_interfaces
     (type_list
-      [(type_identifier) @interface.name
+      [(type_identifier) @interface
        (generic_type
-        (type_identifier) @interface.name)])))
+        (type_identifier) @interface)])))

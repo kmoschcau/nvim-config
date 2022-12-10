@@ -3,17 +3,19 @@
 ; namespaces
 
 (ambient_declaration
-  "global" @namespace.name)
+  "global" @namespace)
 
 (internal_module
-  "namespace" @namespace.keyword
-  name: (identifier) @namespace.name)
+  "namespace" @keyword.namespace
+  name: (identifier) @namespace)
 
 ; generics
 
-(generic_type
-  (type_arguments
-    ["<" ">"] @generic.special))
+(type_arguments
+  ["<" ">"] @generic.special)
+
+(type_parameters
+  ["<" ">"] @generic.special)
 
 ; type declarations
 
@@ -36,20 +38,20 @@
   left: (identifier) @local.name)
 
 (method_signature
-  name: (property_identifier) @function.name)
+  name: (property_identifier) @function)
 
 (method_definition
-  ["get" "set"] @accessor.keyword
-  name: (property_identifier) @accessor.name)
+  ["get" "set"] @keyword.property
+  name: (property_identifier) @property)
 
 (interface_declaration
-  "interface" @interface.keyword
-  name: (type_identifier) @interface.name)
+  "interface" @keyword.interface
+  name: (type_identifier) @interface)
 
 (abstract_class_declaration
-  "class" @class.keyword
-  name: (type_identifier) @class.name)
+  "class" @keyword.class
+  name: (type_identifier) @class)
 
 (class_declaration
-  "class" @class.keyword
-  name: (type_identifier) @class.name)
+  "class" @keyword.class
+  name: (type_identifier) @class)

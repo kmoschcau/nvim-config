@@ -19,7 +19,7 @@ vim.g.colors_name = vim.fn.expand "<sfile>:t:r"
 --- @field gui string The GUI and termguicolors hex value of the color
 --- @field cterm number|"NONE" The cterm color index of the color
 
---- @alias ColorGradient { [string]: ColorDefinition }
+--- @alias ColorGradient { [number|string]: ColorDefinition }
 
 --- @alias ColorTable { [string]: ColorGradient, transparent: ColorDefinition }
 
@@ -558,18 +558,22 @@ local c = {
     strong = color_table("purple", 6),
   },
   syntax = {
-    number = {
-      light = color_table("blue", 1),
+    enum = {
+      name = color_table("indigo", 6),
+      member = color_table("light_blue", 6),
     },
+    ["function"] = color_table("teal", 6),
     meta = {
       light = color_table("purple", 1),
       strong = color_table("purple", 4),
     },
-    ["function"] = color_table("teal", 6),
-    typedef = color_table("green", 6),
+    namespace = color_table("brown", 4),
+    number = {
+      light = color_table("blue", 1),
+    },
     structure = color_table("light_green", 6),
     type = color_table("lime", 6),
-    namespace = color_table("brown", 4),
+    typedef = color_table("green", 6),
   },
 }
 
@@ -924,14 +928,11 @@ highlight("Material_SynStructureName", { fg = c.syntax.structure })
 
 -- Enums (same as structures, but with enumerated variants)
 highlight("Material_SynEnumKeyword", {
-  fg = c.syntax.structure,
-  bg = c.syntax.number.light,
+  fg = c.syntax.enum.name,
   bold = true,
 })
-highlight("Material_SynEnumName", {
-  fg = c.syntax.structure,
-  bg = c.syntax.number.light,
-})
+highlight("Material_SynEnumName", { fg = c.syntax.enum.name })
+highlight("Material_SynEnumMember", { fg = c.syntax.enum.member })
 
 -- Typedefs (Classes and equally large/extensible things)
 highlight("Material_SynTypedefKeyword", { fg = c.syntax.typedef, bold = true })
@@ -1141,49 +1142,60 @@ highlight("Error", { link = "Material_VimErrorInverted" })
 
 highlight("Todo", { link = "Material_SynTodo" })
 
--- Treesitter {{{3
+-- Treesitter and LSP {{{3
 
-highlight("@accessor.keyword", { link = "Material_SynAccessorKeyword" })
-highlight("@accessor.name", { link = "Material_SynAccessorName" })
 highlight("@attribute", { link = "Material_SynAnnotation" })
-highlight("@class.keyword", { link = "Material_SynTypedefKeyword" })
-highlight("@class.name", { link = "Material_SynTypedefName" })
+highlight("@class", { link = "Material_SynTypedefName" })
 highlight("@comment.keyword", { link = "Material_SynStatement" })
 highlight("@constant", { link = "Material_SynConstantName" })
 highlight("@constant.builtin", { link = "Material_SynConstant" })
 highlight("@constructor", { link = "Material_SynFunctionName" })
-highlight("@enum.keyword", { link = "Material_SynEnumKeyword" })
-highlight("@enum.name", { link = "Material_SynEnumName" })
+highlight("@decorator", { link = "Material_SynAnnotation" })
+highlight("@enum", { link = "Material_SynEnumName" })
+highlight("@enumMember", { link = "Material_SynEnumMember" })
 highlight("@error", { link = "Material_VimErrorUnderline" })
+highlight("@event", { link = "Material_DebugTest" })
 highlight("@field", { link = "Material_SynFieldName" })
-highlight("@function.keyword", { link = "Material_SynFunctionKeyword" })
-highlight("@function.name", { link = "Material_SynFunctionName" })
 highlight("@generic.special", { link = "Material_SynGenericSpecial" })
-highlight("@interface.keyword", { link = "Material_SynInterfaceKeyword" })
-highlight("@interface.name", { link = "Material_SynInterfaceName" })
+highlight("@interface", { link = "Material_SynInterfaceName" })
+highlight("@keyword.class", { link = "Material_SynTypedefKeyword" })
+highlight("@keyword.enum", { link = "Material_SynEnumKeyword" })
 highlight("@keyword.function", { link = "Material_SynFunctionKeyword" })
+highlight("@keyword.interface", { link = "Material_SynInterfaceKeyword" })
+highlight("@keyword.namespace", { link = "Material_SynNamespaceKeyword" })
+highlight("@keyword.property", { link = "Material_SynAccessorKeyword" })
 highlight("@local.name", { link = "Material_SynLocalName" })
+highlight("@modifier", { link = "Material_SynStatement" })
 highlight("@namespace", { link = "Material_SynNamespaceName" })
-highlight("@namespace.keyword", { link = "Material_SynNamespaceKeyword" })
-highlight("@namespace.name", { link = "Material_SynNamespaceName" })
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@property", { link = "Material_SynAccessorName" })
+highlight("@regexp", { link = "Material_DebugTest" })
+highlight("@struct", { link = "Material_SynStructureName" })
 highlight("@tag", { link = "Material_SynStatement" })
 highlight("@tag.delimiter", { link = "Material_SynSpecial" })
 highlight("@text", { link = "Material_VimNormal" })
-highlight("@text.todo", { link = "Material_SynTodo" })
 highlight("@text.danger", { link = "Material_VimErrorInverted" })
 highlight("@text.diff.add", { link = "Material_VimDiffAdd" })
 highlight("@text.diff.delete", { link = "Material_VimDiffDelete" })
 highlight("@text.literal", { link = "Material_SynString" })
 highlight("@text.reference", { link = "Material_SynUnderlined" })
 highlight("@text.title", { link = "Material_VimTitle" })
+highlight("@text.todo", { link = "Material_SynTodo" })
+highlight("@text.underline", { link = "Material_SynUnderlined" })
 highlight("@text.uri", { link = "Material_SynUnderlined" })
 highlight("@type", { link = "Material_SynStructureName" })
 highlight("@type.builtin", { link = "Material_SynTypeName" })
 highlight("@type.qualifier", { link = "Material_SynStatement" })
+highlight("@typeParameter", { link = "Material_SynGenericParameterName" })
 highlight("@variable", { link = "Material_SynLocalName" })
 highlight("@variable.builtin", { link = "Material_SynSpecial" })
+
+-- Modifiers are not yet implemented in the built-in solution of semantic tokens
+-- highlight("LspAbstract", { link = "Material_SynModAbstract" })
+-- highlight("LspAsync", { link = "Material_SynModAsync" })
+-- highlight("LspDeprecated", { link = "Material_SynModDeprecated" })
+-- highlight("LspReadonly", { link = "Material_SynModReadonly" })
+-- highlight("LspStatic", { link = "Material_SynModStatic" })
 
 -- LSP {{{3
 
@@ -1201,38 +1213,6 @@ highlight("LspCodeLensSeparator", { link = "Material_SynComment" })
 -- Signature Help {{{4
 
 highlight("LspSignatureActiveParameter", { link = "Material_VimSearch" })
-
--- Semantic Highlighting {{{4
-
-highlight("LspClass", { link = "Material_SynTypedefName" })
-highlight("LspComment", { link = "Material_SynComment" })
-highlight("LspDecorator", { link = "Material_SynAnnotation" })
-highlight("LspEnum", { link = "Material_SynEnumKeyword" })
-highlight("LspEnumMember", { link = "Material_SynEnumName" })
-highlight("LspEvent", { link = "Material_DebugTest" })
-highlight("LspFunction", { link = "Material_SynFunctionName" })
-highlight("LspInterface", { link = "Material_SynInterfaceName" })
-highlight("LspKeyword", { link = "Material_SynStatement" })
-highlight("LspMacro", { link = "Material_DebugTest" })
-highlight("LspMethod", { link = "Material_SynFunctionName" })
-highlight("LspModifier", { link = "Material_SynStatement" })
-highlight("LspNamespace", { link = "Material_SynNamespaceName" })
-highlight("LspNumber", { link = "Material_SynNumber" })
-highlight("LspOperator", { link = "Material_SynOperator" })
-highlight("LspParameter", { link = "Material_SynParameterName" })
-highlight("LspProperty", { link = "Material_SynAccessorName" })
-highlight("LspRegexp", { link = "Material_DebugTest" })
-highlight("LspString", { link = "Material_SynString" })
-highlight("LspStruct", { link = "Material_SynStructureName" })
-highlight("LspType", { link = "Material_SynStructureName" })
-highlight("LspTypeParameter", { link = "Material_SynGenericParameterName" })
-highlight("LspVariable", { link = "Material_SynLocalName" })
-
-highlight("LspAbstract", { link = "Material_SynModAbstract" })
-highlight("LspAsync", { link = "Material_SynModAsync" })
-highlight("LspDeprecated", { link = "Material_SynModDeprecated" })
-highlight("LspReadonly", { link = "Material_SynModReadonly" })
-highlight("LspStatic", { link = "Material_SynModStatic" })
 
 -- custom variables {{{1
 -- terminal color variables {{{2
@@ -1394,8 +1374,8 @@ highlight("rubyStringDelimiter", { link = "Material_SynSpecialChar" })
 
 -- rust {{{3
 
-highlight("rustEnumVariant", { link = "Material_SynEnumName" })
-highlight("rustEnum", { link = "Material_SynEnumKeyword" })
+highlight("rustEnumVariant", { link = "Material_SynEnumMember" })
+highlight("rustEnum", { link = "Material_SynEnumName" })
 highlight("rustModPath", { link = "Material_SynNamespaceName" })
 highlight("rustStructure", { link = "Material_SynStructureKeyword" })
 highlight("rustType", { link = "Material_SynTypedefName" })
@@ -1533,8 +1513,8 @@ highlight("CmpItemAbbrMatch", { bold = true })
 highlight("CmpItemKindClass", { link = "Material_SynTypedefName" })
 highlight("CmpItemKindConstant", { link = "Material_SynConstantName" })
 highlight("CmpItemKindConstructor", { link = "Material_SynFunctionName" })
-highlight("CmpItemKindEnum", { link = "Material_SynEnumKeyword" })
-highlight("CmpItemKindEnumMember", { link = "Material_SynEnumName" })
+highlight("CmpItemKindEnum", { link = "Material_SynEnumName" })
+highlight("CmpItemKindEnumMember", { link = "Material_SynEnumMember" })
 highlight("CmpItemKindField", { link = "Material_SynFieldName" })
 highlight("CmpItemKindFolder", { link = "Material_VimDirectory" })
 highlight("CmpItemKindFunction", { link = "Material_SynFunctionName" })
