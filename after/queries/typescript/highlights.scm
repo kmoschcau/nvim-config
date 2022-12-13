@@ -38,6 +38,7 @@
   left: (identifier) @local.name)
 
 (method_signature
+  ["get" "set"] @keyword.property
   name: (property_identifier) @function)
 
 (method_definition
