@@ -6,7 +6,10 @@ local function transform_extmark(extmarks, extmark)
   local details = extmark[4]
   local extmark_end = details.end_col
 
-  if extmark_start > col or extmark_end < col then
+  if
+    (extmark_start and extmark_start > col)
+    or (extmark_end and extmark_end < col)
+  then
     return
   end
 
