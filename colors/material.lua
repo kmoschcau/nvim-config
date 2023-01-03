@@ -1144,13 +1144,16 @@ highlight("Todo", { link = "Material_SynTodo" })
 
 -- Treesitter and LSP {{{3
 
+highlight("@abstract", { link = "Material_SynModAbstract" })
 highlight("@attribute", { link = "Material_SynAnnotation" })
+highlight("@async", { link = "Material_SynModAsync" })
 highlight("@class", { link = "Material_SynTypedefName" })
 highlight("@comment.keyword", { link = "Material_SynStatement" })
 highlight("@constant", { link = "Material_SynConstantName" })
 highlight("@constant.builtin", { link = "Material_SynConstant" })
 highlight("@constructor", { link = "Material_SynFunctionName" })
 highlight("@decorator", { link = "Material_SynAnnotation" })
+highlight("@deprecated", { link = "Material_SynModDeprecated" })
 highlight("@enum", { link = "Material_SynEnumName" })
 highlight("@enumMember", { link = "Material_SynEnumMember" })
 highlight("@error", { link = "Material_VimErrorUnderline" })
@@ -1169,7 +1172,9 @@ highlight("@modifier", { link = "Material_SynStatement" })
 highlight("@namespace", { link = "Material_SynNamespaceName" })
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@property", { link = "Material_SynAccessorName" })
+highlight("@readonly", { link = "Material_SynModReadonly" })
 highlight("@regexp", { link = "Material_DebugTest" })
+highlight("@static", { link = "Material_SynModStatic" })
 highlight("@struct", { link = "Material_SynStructureName" })
 highlight("@tag", { link = "Material_SynStatement" })
 highlight("@tag.delimiter", { link = "Material_SynSpecial" })
@@ -1189,13 +1194,6 @@ highlight("@type.qualifier", { link = "Material_SynStatement" })
 highlight("@typeParameter", { link = "Material_SynGenericParameterName" })
 highlight("@variable", { link = "Material_SynLocalName" })
 highlight("@variable.builtin", { link = "Material_SynSpecial" })
-
--- Modifiers are not yet implemented in the built-in solution of semantic tokens
--- highlight("LspAbstract", { link = "Material_SynModAbstract" })
--- highlight("LspAsync", { link = "Material_SynModAsync" })
--- highlight("LspDeprecated", { link = "Material_SynModDeprecated" })
--- highlight("LspReadonly", { link = "Material_SynModReadonly" })
--- highlight("LspStatic", { link = "Material_SynModStatic" })
 
 -- LSP {{{3
 
