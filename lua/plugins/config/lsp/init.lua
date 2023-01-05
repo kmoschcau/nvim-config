@@ -181,7 +181,7 @@ M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require "lspconfig"
 
-local simple_servers = { "jsonls", "vimls" }
+local simple_servers = { "jsonls", "jedi_language_server", "ruff_lsp", "vimls" }
 for _, lsp in ipairs(simple_servers) do
   lspconfig[lsp].setup {
     capabilities = M.capabilities,

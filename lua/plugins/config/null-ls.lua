@@ -97,6 +97,7 @@ require("null-ls").setup {
     },
     diagnostics.yamllint,
 
+    formatting.black,
     formatting.eslint_d,
     formatting.fish_indent,
     formatting.google_java_format,
