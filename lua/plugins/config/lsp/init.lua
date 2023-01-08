@@ -29,11 +29,6 @@ M.on_attach = function(client, bufnr)
     desc = "Fuzzy find definitions of the symbol under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-    buffer = bufnr,
-    desc = "Trigger hover for the symbol under the cursor.",
-    silent = true,
-  })
   vim.keymap.set("n", "gi", tel_builtin.lsp_implementations, {
     buffer = bufnr,
     desc = "Fuzzy find implementations of the symbol under the cursor.",
@@ -105,6 +100,14 @@ M.on_attach = function(client, bufnr)
   })
 
   local caps = client.server_capabilities
+
+  if caps.hoverProvider then
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+      buffer = bufnr,
+      desc = "Trigger hover for the symbol under the cursor.",
+      silent = true,
+    })
+  end
 
   if caps.documentFormattingProvider and client.name ~= "tsserver" then
     vim.keymap.set("n", "<space>f", function()
