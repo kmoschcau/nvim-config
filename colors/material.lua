@@ -1494,13 +1494,14 @@ highlight("diffRemoved", { link = "Material_VimDiffDelete" })
 -- gitsigns | lewis6991/gitsigns.nvim {{{3
 
 highlight("GitSignsAdd", { link = "Material_VimDiffSignAdd" })
-highlight("GitSignsAddLn", { link = "Material_VimDiffLineAdd" })
 highlight("GitSignsAddInline", { link = "Material_VimDiffLineText" })
 highlight("GitSignsChange", { link = "Material_VimDiffSignChange" })
-highlight("GitSignsChangeLn", { link = "Material_VimDiffLineChange" })
 highlight("GitSignsChangeInline", { link = "Material_VimDiffLineText" })
+highlight("GitSignsChangeDelete", { link = "Material_VimDiffSignChangeDelete" })
+highlight("GitSignsChangeDeleteLn", {
+  link = "Material_VimDiffLineChangeDelete",
+})
 highlight("GitSignsDelete", { link = "Material_VimDiffSignDelete" })
-highlight("GitSignsDeleteLn", { link = "Material_VimDiffLineDelete" })
 highlight("GitSignsDeleteInline", { link = "Material_VimDiffLineText" })
 
 -- nvim-cmp | hrsh7th/nvim-cmp {{{3

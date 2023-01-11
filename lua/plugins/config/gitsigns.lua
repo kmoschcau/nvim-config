@@ -2,12 +2,7 @@ require("gitsigns").setup {
   signs = {
     delete = { show_count = true },
     topdelete = { show_count = true },
-    changedelete = {
-      show_count = true,
-      hl = "Material_VimDiffSignChangeDelete",
-      numhl = "Material_VimDiffSignChangeDelete",
-      linehl = "Material_VimDiffLineChangeDelete",
-    },
+    changedelete = { show_count = true },
     untracked = { text = "┇" },
   },
   count_chars = {
