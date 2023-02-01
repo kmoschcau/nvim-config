@@ -207,6 +207,15 @@ lspconfig.html.setup {
   filetypes = { "html", "jsp" },
   handlers = M.handlers,
   on_attach = M.on_attach,
+  settings = {
+    html = {
+      format = {
+        indentInnerHtml = true,
+        wrapAttributes = "preserve",
+        templating = true,
+      },
+    },
+  },
 }
 
 lspconfig.sumneko_lua.setup {
