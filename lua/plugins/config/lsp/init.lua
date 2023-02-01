@@ -188,7 +188,6 @@ local simple_servers = {
   "cssls",
   "ember",
   "glint",
-  "html",
   "jedi_language_server",
   "jsonls",
   "ruff_lsp",
@@ -201,6 +200,13 @@ for _, lsp in ipairs(simple_servers) do
     on_attach = M.on_attach,
   }
 end
+
+lspconfig.html.setup {
+  capabilities = M.capabilities,
+  filetypes = { "html", "jsp" },
+  handlers = M.handlers,
+  on_attach = M.on_attach,
+}
 
 lspconfig.sumneko_lua.setup {
   capabilities = M.capabilities,
