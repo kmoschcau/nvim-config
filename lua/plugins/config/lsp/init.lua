@@ -186,8 +186,6 @@ local lspconfig = require "lspconfig"
 
 local simple_servers = {
   "cssls",
-  "ember",
-  "glint",
   "jedi_language_server",
   "jsonls",
   "lemminx",
@@ -201,6 +199,28 @@ for _, lsp in ipairs(simple_servers) do
     on_attach = M.on_attach,
   }
 end
+
+lspconfig.ember.setup {
+  capabilities = M.capabilities,
+  filetypes = {
+    "html.handlebars",
+    "handlebars",
+  },
+  handlers = M.handlers,
+  on_attach = M.on_attach,
+}
+
+lspconfig.glint.setup {
+  capabilities = M.capabilities,
+  filetypes = {
+    "html.handlebars",
+    "handlebars",
+    "typescript.glimmer",
+    "javascript.glimmer",
+  },
+  handlers = M.handlers,
+  on_attach = M.on_attach,
+}
 
 lspconfig.html.setup {
   capabilities = M.capabilities,
