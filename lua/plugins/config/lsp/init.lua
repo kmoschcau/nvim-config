@@ -190,6 +190,7 @@ local simple_servers = {
   "glint",
   "jedi_language_server",
   "jsonls",
+  "lemminx",
   "ruff_lsp",
   "vimls",
 }
