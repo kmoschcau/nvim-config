@@ -93,7 +93,7 @@ M.on_attach = function(client, bufnr)
     desc = "Fuzzy find document symbols.",
     silent = true,
   })
-  vim.keymap.set("n", "<space>sw", tel_builtin.lsp_workspace_symbols, {
+  vim.keymap.set("n", "<space>sw", tel_builtin.lsp_dynamic_workspace_symbols, {
     buffer = bufnr,
     desc = "Fuzzy find workspace symbols.",
     silent = true,
