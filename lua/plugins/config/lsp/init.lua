@@ -171,7 +171,7 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if caps.semanticTokensProvider and caps.semanticTokensProvider then
+  if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
     vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
       buffer = bufnr,
       desc = "Do a full semantic tokens refresh.",
