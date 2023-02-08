@@ -168,6 +168,9 @@ return require("packer").startup(function()
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- misc plugins {{{1
+  -- out of the box setup for neovim lua development
+  use "folke/neodev.nvim"
+
   -- better code actions menu
   use "weilbith/nvim-code-action-menu"
 

@@ -253,10 +253,6 @@ lspconfig.sumneko_lua.setup {
       telemetry = {
         enable = false,
       },
-      workspace = {
-        -- TODO: This should be only in vim config projects
-        library = vim.api.nvim_get_runtime_file("*.lua", true),
-      },
     },
   },
 }
