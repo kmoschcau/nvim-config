@@ -1486,6 +1486,8 @@ highlight("logLevelError", { link = "Material_VimErrorInverted" })
 
 highlight("logBrackets", { link = "Material_SynSpecial" })
 
+highlight("logXmlNamespace", { link = "Material_SynNamespaceName" })
+
 -- vim-git | tpope/vim-git {{{3
 
 highlight("diffAdded", { link = "Material_VimDiffAdd" })
