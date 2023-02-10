@@ -59,7 +59,12 @@ return require("packer").startup(function()
   use "hrsh7th/cmp-cmdline"
 
   -- debugging plugins {{{1
-  use "puremourning/vimspector"
+
+  -- DAP (Debug Adapter Protocol) implementation
+  use "mfussenegger/nvim-dap"
+
+  -- ui for nvim-dap
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
   -- syntax plugins {{{1
   -- treesitter {{{2
@@ -110,6 +115,9 @@ return require("packer").startup(function()
 
   -- dev icons for LSP completion
   use "onsails/lspkind.nvim"
+
+  -- microsoft codeicons
+  use "mortepau/codicons.nvim"
 
   -- git plugins {{{1
   -- show git line status in gutter
@@ -171,11 +179,11 @@ return require("packer").startup(function()
   -- out of the box setup for neovim lua development
   use "folke/neodev.nvim"
 
-  -- better code actions menu
-  use "weilbith/nvim-code-action-menu"
-
   -- better notifications
   use "rcarriga/nvim-notify"
+
+  -- better input and select ui
+  use "stevearc/dressing.nvim"
 
   -- allows better handling for local vimrc files
   use "embear/vim-localvimrc"

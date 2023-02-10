@@ -66,9 +66,7 @@ M.on_attach = function(client, bufnr)
     desc = "Rename the symbol under the cursor.",
     silent = true,
   })
-  vim.keymap.set("n", "<space>ca", function()
-    vim.cmd [[CodeActionMenu]]
-  end, {
+  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, {
     buffer = bufnr,
     desc = "Trigger the code actions menu for the position under the cursor.",
     silent = true,
@@ -132,12 +130,6 @@ M.on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = vim.lsp.codelens.refresh,
-    })
-
-    vim.keymap.set("n", "<F8>", vim.lsp.codelens.refresh, {
-      buffer = bufnr,
-      desc = "Do a codelens refresh.",
-      silent = true,
     })
   end
 

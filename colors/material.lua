@@ -629,6 +629,29 @@ highlight("Material_VimStatusLineNC", {
   bg = c.neutral.strong,
 })
 
+-- Signs {{{3
+
+highlight("Material_SignBreakpoint", {
+  fg = color_table("red", 6),
+  bg = c.neutral.midpoint,
+})
+highlight("Material_SignBreakpointConditional", {
+  fg = color_table("red", 6),
+  bg = c.neutral.midpoint,
+})
+highlight("Material_SignLogpoint", {
+  fg = color_table("yellow", 6),
+  bg = c.neutral.midpoint,
+})
+highlight("Material_SignCurrentFrame", {
+  fg = color_table("green", 6),
+  bg = c.neutral.midpoint,
+})
+highlight("Material_SignBreakpointRejected", {
+  fg = c.neutral.midpoint_strong,
+  bg = c.neutral.midpoint,
+})
+
 -- Cursor related {{{3
 
 highlight("Material_VimVisual", { bg = c.interact.light })
