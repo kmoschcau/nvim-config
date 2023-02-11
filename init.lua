@@ -114,7 +114,7 @@ vim.o.guicursor = table.concat({
     "hor50-Cursor",
   }, ":"),
 }, ",")
-vim.o.guifont = "FiraMono Nerd Font:h10"
+vim.o.guifont = "FuraMonoNerdFontComplete:h10"
 vim.o.guioptions = "cig"
 vim.o.inccommand = "split"
 vim.o.linebreak = true
