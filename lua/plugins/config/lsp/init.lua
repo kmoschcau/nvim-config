@@ -230,7 +230,7 @@ lspconfig.html.setup {
   },
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   capabilities = M.capabilities,
   handlers = M.handlers,
   on_attach = M.on_attach,
