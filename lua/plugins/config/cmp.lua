@@ -35,7 +35,7 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
     ["<C-d>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-Space>"] = cmp.mapping.complete {},
     ["<C-e>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -65,7 +65,12 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
-  sources = cmp.config.sources({ { name = "nvim_lsp" } }, { buffer_source }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" }
+  }, {
+    buffer_source,
+  }),
 }
 
 cmp.setup.filetype("gitcommit", {

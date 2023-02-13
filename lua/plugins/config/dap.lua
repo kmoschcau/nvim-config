@@ -1,6 +1,5 @@
 local dap = require "dap"
 local dapui = require "dapui"
-local dap_widgets = require "dap.ui.widgets"
 
 dap.configurations.java = {
   {
