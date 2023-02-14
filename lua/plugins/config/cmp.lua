@@ -9,6 +9,10 @@ local luasnip = require "luasnip"
 local cmp = require "cmp"
 local types = require "cmp.types"
 cmp.setup {
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+      or require("cmp_dap").is_dap_buffer()
+  end,
   completion = {
     autocomplete = false,
   },
@@ -67,7 +71,7 @@ cmp.setup {
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "nvim_lsp_signature_help" }
+    { name = "nvim_lsp_signature_help" },
   }, {
     buffer_source,
   }),
@@ -81,6 +85,12 @@ cmp.setup.filetype("gitcommit", {
   }),
 })
 require("cmp_git").setup()
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+  sources = {
+    { name = "dap" },
+  },
+})
 
 cmp.setup.cmdline({ "/", "?" }, {
   completion = {

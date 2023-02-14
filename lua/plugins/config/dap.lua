@@ -120,11 +120,3 @@ vim.fn.sign_define("DapBreakpointRejected", {
   text = "",
   texthl = "Material_SignBreakpointRejected",
 })
-
-local augroup = vim.api.nvim_create_augroup("InitDap", {})
-vim.api.nvim_create_autocmd("FileType", {
-  desc = "Automatically trigger completions in the repl on completion chars.",
-  group = augroup,
-  pattern = "dap-repl",
-  callback = require("dap.ext.autocompl").attach,
-})

@@ -4,6 +4,8 @@ require("neodev").setup {
       "LuaSnip",
       "cmp-buffer",
       "cmp-cmdline",
+      "cmp-dap",
+      "cmp-fish",
       "cmp-git",
       "cmp-nvim-lsp",
       "cmp-path",

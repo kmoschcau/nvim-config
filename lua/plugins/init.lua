@@ -52,11 +52,14 @@ return require("packer").startup(function()
   -- cmp path source
   use "hrsh7th/cmp-path"
 
-  -- git sources
+  -- cmp git source
   use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
 
   -- cmp path source
   use "hrsh7th/cmp-cmdline"
+
+  -- cmp DAP source
+  use "rcarriga/cmp-dap"
 
   -- debugging plugins {{{1
 
