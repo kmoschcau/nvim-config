@@ -1,4 +1,4 @@
--- vim: foldmethod=marker foldlevel=0
+-- vim: foldmethod=marker foldlevelstart=0
 
 -- colors setup {{{1
 
@@ -86,7 +86,7 @@ vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 vim.o.expandtab = true
 vim.opt.fillchars = { diff = " " }
-vim.o.foldlevelstart = 99
+vim.o.foldenable = false
 vim.o.formatoptions = "cro/qlj"
 vim.o.guicursor = table.concat({
   table.concat({
@@ -301,11 +301,6 @@ vim.g.SimpylFold_docstring_preview = 1
 -- csv.vim | chrisbra/csv.vim {{{2
 
 vim.g.csv_no_conceal = 1
-
--- nvim-treesitter | nvim-treesitter/nvim-treesitter {{{2
-
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- packer.nvim | wbthomason/packer.nvim {{{2
 

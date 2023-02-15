@@ -1,4 +1,4 @@
--- vim: foldmethod=marker foldlevel=0
+-- vim: foldmethod=marker foldlevelstart=0
 
 -- Specify a list of plugins.
 local use = require("packer").use
