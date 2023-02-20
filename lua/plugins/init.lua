@@ -103,18 +103,18 @@ return require("packer").startup(function()
 
   -- file tree {{{1
   -- provides a better file browser than built-in netrw
-  use "kyazdani42/nvim-tree.lua"
+  use "nvim-tree/nvim-tree.lua"
 
   -- status line plugins {{{1
   -- pretty, segmented and configurable status line in lua
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = { "nvim-tree/nvim-web-devicons", opt = true },
   }
 
   -- devicons plugins {{{1
   -- dev icons for lua plugins
-  use "kyazdani42/nvim-web-devicons"
+  use "nvim-tree/nvim-web-devicons"
 
   -- dev icons for LSP completion
   use "onsails/lspkind.nvim"
