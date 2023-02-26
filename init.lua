@@ -219,6 +219,15 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- file type detection {{{2
+
+vim.filetype.add {
+  extension = {
+    pp = "puppet",
+    rasi = "rasi",
+  }
+}
+
 -- key maps {{{2
 
 -- diagnostics API bindings
