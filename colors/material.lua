@@ -1168,6 +1168,7 @@ highlight("Todo", { link = "Material_SynTodo" })
 -- Treesitter and LSP {{{3
 
 highlight("@abstract", { link = "Material_SynModAbstract" })
+highlight("@annotation", { link = "Material_SynAnnotation" })
 highlight("@attribute", { link = "Material_SynAnnotation" })
 highlight("@async", { link = "Material_SynModAsync" })
 highlight("@class", { link = "Material_SynTypedefName" })
