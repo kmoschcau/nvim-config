@@ -545,6 +545,16 @@ local c = {
     light = color_table("orange", 3),
     strong = color_table("orange", 6),
   },
+  success = {
+    light = color_table("light_green", 3, {
+      accent = true,
+      invert_dark = false,
+    }),
+    strong = color_table("light_green", 3, {
+      accent = true,
+      invert_dark = false,
+    }),
+  },
   info = {
     light = color_table("light_blue", 3),
     strong = color_table("light_blue", 6),
@@ -757,6 +767,11 @@ highlight("Material_VimStyleWarningInverted", {
 highlight("Material_VimStyleWarningUnderline", {
   sp = c.warning.light,
   undercurl = true,
+})
+
+highlight("Material_VimSuccessInverted", {
+  fg = color_table(hue_neutral, 8, { invert_dark = false }),
+  bg = c.success.strong,
 })
 
 highlight("Material_VimInfo", { fg = c.info.strong })
@@ -1290,6 +1305,12 @@ highlight("fishStatement", { link = "Material_SynFunctionName" })
 
 highlight("gitCommitBlank", { link = "Material_VimStyleErrorUnderline" })
 highlight("gitcommitOverflow", { link = "Material_VimStyleWarningUnderline" })
+
+-- checkhealth {{{3
+
+highlight("healthError", { link = "Material_VimErrorInverted" })
+highlight("healthWarning", { link = "Material_VimWarningInverted" })
+highlight("healthSuccess", { link = "Material_VimSuccessInverted" })
 
 -- html {{{3
 
