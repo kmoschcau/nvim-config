@@ -1427,10 +1427,14 @@ highlight("rustType", { link = "Material_SynTypedefName" })
 
 -- sh {{{3
 
-highlight("shDerefVar", { link = "Material_SynStructureName" })
+highlight("shCmdSubRegion", { link = "Material_SynSpecial" })
+highlight("shDeref", { link = "Material_SynSpecial" })
+highlight("shDerefSimple", { link = "Material_SynLocalName" })
+highlight("shDerefVar", { link = "Material_SynLocalName" })
 highlight("shOption", { link = "Material_SynParameterName" })
 highlight("shStatement", { link = "Material_SynFunctionName" })
 highlight("shQuote", { link = "Material_SynSpecialChar" })
+highlight("shVariable", { link = "Material_SynLocalName" })
 
 -- Typescript {{{3
 

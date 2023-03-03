@@ -225,7 +225,7 @@ vim.filetype.add {
   extension = {
     pp = "puppet",
     rasi = "rasi",
-  }
+  },
 }
 
 -- key maps {{{2
@@ -327,8 +327,8 @@ augroup end
 vim.g.markdown_composer_autostart = 0
 
 -- Add additional logic for WSL
-if vim.fn.executable("xdg-open") > 0 then
+if vim.fn.executable "xdg-open" > 0 then
   vim.g.markdown_composer_browser = "xdg-open"
-elseif vim.fn.executable("wslview") > 0 then
+elseif vim.fn.executable "wslview" > 0 then
   vim.g.markdown_composer_browser = "wslview"
 end
