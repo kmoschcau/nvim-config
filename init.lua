@@ -332,3 +332,11 @@ if vim.fn.executable "xdg-open" > 0 then
 elseif vim.fn.executable "wslview" > 0 then
   vim.g.markdown_composer_browser = "wslview"
 end
+
+-- ft_sql | really old vimscript plugin, that's shipped by default {{{2
+
+-- set the default completion type to be syntax based
+vim.g.omni_sql_default_compl_type = "syntax"
+
+-- disable the plugin creating keymaps by default
+vim.g.omni_sql_no_default_maps = 1
