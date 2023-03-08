@@ -178,11 +178,13 @@ local lspconfig = require "lspconfig"
 
 local simple_servers = {
   "cssls",
+  "gradle_ls",
   "jedi_language_server",
   "jsonls",
   "lemminx",
   "ruff_lsp",
   "vimls",
+  "yamlls",
 }
 for _, lsp in ipairs(simple_servers) do
   lspconfig[lsp].setup {
