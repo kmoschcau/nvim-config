@@ -24,7 +24,6 @@ local lualine_c = {
       return vim.bo.modified and "Material_LualineModified"
         or "Material_Lualine3"
     end,
-    path = 1, -- relative path
   },
 }
 
