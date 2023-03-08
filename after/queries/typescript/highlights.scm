@@ -42,8 +42,7 @@
   name: (property_identifier) @function)
 
 (method_definition
-  ["get" "set"] @keyword.property
-  name: (property_identifier) @property)
+  ["get" "set"] @keyword.property)
 
 (interface_declaration
   "interface" @keyword.interface

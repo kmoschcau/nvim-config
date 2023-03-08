@@ -26,7 +26,7 @@
 ; indices
 
 (drop_index
-  name: (identifier) @attribute)
+  name: (identifier) @decorator)
 
 ; types
 
