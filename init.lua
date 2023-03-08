@@ -255,16 +255,7 @@ vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
 })
 
 -- highlight group inspection
-vim.keymap.set("n", "<F10>", function()
-  require("highlights-debug").show_extmarks_at_cursor()
-end, {
-  desc = "Show syntax highlight group information at cursor position.",
-  silent = true,
-})
-
-vim.keymap.set("n", "<F22>", function()
-  require("highlights-debug").show_synstack_highlight()
-end, {
+vim.keymap.set("n", "<F10>", vim.show_pos, {
   desc = "Show syntax highlight group information at cursor position.",
   silent = true,
 })
