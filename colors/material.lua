@@ -595,7 +595,10 @@ local c = {
 -- current window to have a transparent background for some reason.
 highlight("Material_VimNormal", { link = "Normal" })
 highlight("Normal", { fg = c.neutral.strong, bg = c.neutral.lightest })
-highlight("Material_VimNormalLight", { fg = c.neutral.midpoint })
+highlight("Material_VimNormalLight", {
+  fg = color_table(hue_neutral, 4),
+  fg_dark = color_table(hue_neutral, 2)
+})
 highlight("Material_VimSpecialKey", {
   fg = c.neutral.strong,
   bg = color_table(hue_neutral, 3),

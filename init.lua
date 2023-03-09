@@ -84,7 +84,6 @@ vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
-vim.o.expandtab = true
 vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
 vim.o.formatoptions = "cro/qlj"
