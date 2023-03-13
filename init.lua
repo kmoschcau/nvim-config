@@ -84,8 +84,12 @@ vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+vim.opt.diffopt:append("hiddenoff")
+vim.opt.diffopt:append("linematch:60")
 vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldmethod = "expr"
 vim.o.formatoptions = "cro/qlj"
 vim.o.guicursor = table.concat({
   table.concat({

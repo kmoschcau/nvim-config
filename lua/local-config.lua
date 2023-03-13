@@ -1,9 +1,11 @@
 local config_name = ".lvimrc.json"
 
+-- TODO: improve this with vim.secure module
+
 --- @class LocalConfigNullLsJavaCheckstyle
 --- @field file boolean Whether to use file or project wide linting
---- @field config string|nil The file name for the config file XML
---- @field options string|nil Additional options for checkstyle
+--- @field config string | nil The file name for the config file XML
+--- @field options string | nil Additional options for checkstyle
 
 --- @class LocalConfigNullLsJavaPmd
 --- @field dir string | nil The run directory for PMD
