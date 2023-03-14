@@ -12,8 +12,14 @@ return require("packer").startup(function()
   -- LSP server installer
   use "williamboman/mason.nvim"
 
-  -- Bridging the gap between mason.nvim and lspconfig
+  -- Bridging the gap between mason and lspconfig
   use "williamboman/mason-lspconfig.nvim"
+
+  -- Automatically install configured null-ls sources with mason
+  use "jay-babu/mason-null-ls.nvim"
+
+  -- Automatically install configured nvim-dap sources with mason
+  use "jay-babu/mason-nvim-dap.nvim"
 
   -- Configurations for built-in LSP
   use "neovim/nvim-lspconfig"

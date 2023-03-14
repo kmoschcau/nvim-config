@@ -19,3 +19,10 @@ xpcall(require, ehandler, "plugins.config.null-ls")
 xpcall(require, ehandler, "plugins.config.telescope")
 xpcall(require, ehandler, "plugins.config.treesitter")
 xpcall(require, ehandler, "plugins.config.tree")
+
+-- mason-lspconfig has to be set up after lspconfig
+xpcall(require, ehandler, "plugins.config.mason-lspconfig")
+-- mason-null-ls has to be set up after null-ls
+xpcall(require, ehandler, "plugins.config.mason-null-ls")
+-- mason-nvim-dap has to be set up after nvim-dap
+xpcall(require, ehandler, "plugins.config.mason-nvim-dap")
