@@ -1675,6 +1675,7 @@ highlight("CmpItemKindVariable", { link = "Material_SynLocalName" })
 
 -- nvim-notify | rcarriga/nvim-notify {{{3
 
+highlight("NotifyBackground", { link = "Material_VimPopup" })
 highlight("NotifyDEBUGBorder", { link = "Material_VimDebugBorder" })
 highlight("NotifyDEBUGIcon", { link = "Material_VimDebug" })
 highlight("NotifyDEBUGTitle", { link = "Material_VimDebug" })
