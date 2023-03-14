@@ -96,7 +96,7 @@ return require("packer").startup(function()
   use "norcalli/nvim-colorizer.lua"
 
   -- some niceties for markdown
-  use { "preservim/vim-markdown", requires = { "godlygeek/tabular" } }
+  use "ixru/nvim-markdown"
 
   -- better folding for python
   use "tmhedberg/SimpylFold"
