@@ -84,8 +84,9 @@ vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
-vim.opt.diffopt:append("hiddenoff")
-vim.opt.diffopt:append("linematch:60")
+vim.opt.diffopt:append "hiddenoff"
+vim.opt.diffopt:append "linematch:60"
+vim.o.expandtab = true
 vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -226,8 +227,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.filetype.add {
   extension = {
-    pp = "puppet",
     rasi = "rasi",
+  },
+  filename = {
+    crypttab = "fstab",
   },
 }
 
