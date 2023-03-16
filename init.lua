@@ -40,6 +40,9 @@ local ehandler = require("error-handler").handler
 -- bootstrap packer
 xpcall(require, ehandler, "packer.bootstrap")
 
+-- load plugin list
+xpcall(require, ehandler, "plugins")
+
 -- load the plugin configuration files
 xpcall(require, ehandler, "plugins.config")
 
