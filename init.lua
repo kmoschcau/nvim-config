@@ -90,6 +90,7 @@ vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
+vim.o.exrc = true
 vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
