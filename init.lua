@@ -283,30 +283,7 @@ vim.g.wordmotion_mappings = {
   iw = "g<M-w>",
 }
 
--- vimspector | puremourning/vimspector {{{4
-
-vim.keymap.set("n", "<M-v>c", "<Plug>VimspectorContinue", { remap = true })
-vim.keymap.set("n", "<M-v>p", "<Plug>VimspectorPause", { remap = true })
-vim.keymap.set("n", "<M-v>s", "<Plug>VimspectorStop", { remap = true })
-vim.keymap.set("n", "<M-v>R", ":VimspectorReset<cr>", {})
-vim.keymap.set("n", "<M-v>b", "<Plug>VimspectorToggleBreakpoint", {
-  remap = true,
-})
-vim.keymap.set("n", "<M-v>B", "<Plug>VimspectorToggleConditionalBreakpoint", {
-  remap = true,
-})
-vim.keymap.set("n", "<M-v>r", "<Plug>VimspectorRunToCursor", { remap = true })
-vim.keymap.set("n", "<M-v>o", "<Plug>VimspectorStepOver", { remap = true })
-vim.keymap.set("n", "<M-v>i", "<Plug>VimspectorStepInto", { remap = true })
-vim.keymap.set("n", "<M-v>u", "<Plug>VimspectorStepOut", { remap = true })
-vim.keymap.set("n", "<M-v>e", "<Plug>VimspectorBalloonEval", { remap = true })
-vim.keymap.set("n", "<M-v>e", "<Plug>VimspectorBalloonEval", { remap = true })
-
 -- plugin configurations {{{1
--- SimpylFold | tmhedberg/SimpylFold {{{2
-
--- Preview docstrings in fold text.
-vim.g.SimpylFold_docstring_preview = 1
 
 -- csv.vim | chrisbra/csv.vim {{{2
 

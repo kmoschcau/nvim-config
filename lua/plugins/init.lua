@@ -104,9 +104,6 @@ return require("packer").startup(function()
   -- some niceties for markdown
   use "ixru/nvim-markdown"
 
-  -- better folding for python
-  use "tmhedberg/SimpylFold"
-
   -- file tree {{{1
   -- provides a better file browser than built-in netrw
   use "nvim-tree/nvim-tree.lua"
