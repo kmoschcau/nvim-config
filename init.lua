@@ -55,11 +55,11 @@ vim.o.background = "light"
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
   if not pcall(function()
-    vim.cmd [[colorscheme material]]
+    vim.cmd.colorscheme "material"
   end) then
     vim.notify(
       [[Could not load the "material" colorscheme, using "morning" instead.]],
-      3
+      vim.log.levels.WARN
     )
     vim.cmd [[silent! colorscheme morning]]
   end
@@ -291,13 +291,16 @@ vim.g.csv_no_conceal = 1
 
 -- packer.nvim | wbthomason/packer.nvim {{{2
 
-vim.cmd [[
-augroup PackerNvim_InitVim
-  autocmd!
-
-  autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
-augroup end
-]]
+local packer_augroup = vim.api.nvim_create_augroup("PackerNvim_InitVim", {})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  desc = "Automatically source the plugin configuration on write.",
+  group = packer_augroup,
+  pattern = vim.fn.expand "~" .. "/.config/nvim/lua/plugins/init.lua",
+  callback = function()
+    package.loaded["plugins"] = nil
+    xpcall(require, ehandler, "plugins")
+  end,
+})
 
 -- vim-markdown-composer | euclio/vim-markdown-composer {{{2
 

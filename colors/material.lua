@@ -8,7 +8,7 @@
 -- General setup {{{1
 
 -- Reset all highlight groups to the default.
-vim.cmd [[highlight clear]]
+vim.cmd.highlight "clear"
 
 -- Set the name of the colortheme.
 vim.g.colors_name = vim.fn.expand "<sfile>:t:r"
