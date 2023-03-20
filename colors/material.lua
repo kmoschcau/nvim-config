@@ -1453,22 +1453,22 @@ highlight("jsVariableDef", { link = "Material_SynLocalName" })
 
 -- json {{{3
 
-highlight("jsonKeyword", { link = "Material_SynFieldName" })
+highlight("jsonKeyword", { link = "Material_SynFieldNameNonItalic" })
 highlight("jsonNoise", { link = "Material_SynSpecial" })
 highlight("jsonNull", { link = "Material_SynConstant" })
 
 -- Treesitter {{{4
 
-highlight("jsonTSLabel", { link = "Material_SynFieldName" })
+highlight("@label.json", { link = "Material_SynFieldNameNonItalic" })
 
 -- jsonc {{{3
 
 highlight("jsoncBraces", { link = "Material_SynSpecial" })
-highlight("jsoncKeywordMatch", { link = "Material_SynFieldName" })
+highlight("jsoncKeywordMatch", { link = "Material_SynFieldNameNonItalic" })
 
 -- Treesitter {{{4
 
-highlight("jsoncTSLabel", { link = "Material_SynFieldName" })
+highlight("@label.json", { link = "Material_SynFieldNameNonItalic" })
 
 -- JSP {{{3
 
@@ -1478,6 +1478,10 @@ highlight("jspTag", { link = "Material_SynPreProc" })
 
 highlight("luaFuncCall", { link = "Material_SynFunctionName" })
 highlight("luaFuncKeyword", { link = "Material_SynFunctionKeyword" })
+
+-- Treesitter {{{4
+
+highlight("@comment.luadoc", { link = "Material_SynDocComment" })
 
 -- make {{{3
 
