@@ -1,8 +1,9 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
 -- Specify a list of plugins.
-local use = require("packer").use
 return require("packer").startup(function()
+  local use = require("packer").use
+
   -- packer {{{1
   -- Let packer manage packer itself.
   use "wbthomason/packer.nvim"
@@ -42,8 +43,8 @@ return require("packer").startup(function()
   -- snippet engine
   use "L3MON4D3/LuaSnip"
 
-  -- bridge the gap between LuaSnip and nvim-cmp
-  use "saadparwaiz1/cmp_luasnip"
+  -- community maintained snippet collection for all sorts of langs
+  use "rafamadriz/friendly-snippets"
 
   -- nvim-cmp {{{2
   -- autocompletion framework
@@ -66,6 +67,9 @@ return require("packer").startup(function()
 
   -- cmp DAP source
   use "rcarriga/cmp-dap"
+
+  -- cmp LuaSnip source
+  use "saadparwaiz1/cmp_luasnip"
 
   -- debugging plugins {{{1
 

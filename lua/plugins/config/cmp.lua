@@ -72,6 +72,7 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
+    { name = "luasnip" },
   }, {
     buffer_source,
   }),
@@ -80,6 +81,7 @@ cmp.setup {
 cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
     { name = "git" },
+    { name = "luasnip" },
   }, {
     buffer_source,
   }),
