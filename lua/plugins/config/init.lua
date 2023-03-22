@@ -5,6 +5,7 @@ xpcall(require, ehandler, "plugins.config.neodev")
 
 xpcall(require, ehandler, "plugins.config.cmp")
 xpcall(require, ehandler, "plugins.config.colorizer")
+xpcall(require, ehandler, "plugins.config.comment")
 xpcall(require, ehandler, "plugins.config.dap")
 xpcall(require, ehandler, "plugins.config.dapui")
 xpcall(require, ehandler, "plugins.config.dressing")

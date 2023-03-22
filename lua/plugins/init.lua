@@ -160,7 +160,7 @@ return require("packer").startup(function()
   use "tpope/vim-abolish"
 
   -- toggle line commenting with a key map
-  use "tpope/vim-commentary"
+  use "numToStr/Comment.nvim"
 
   -- automatically add ending pairs of characters or words
   use "tpope/vim-endwise"
