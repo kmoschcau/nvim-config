@@ -172,7 +172,7 @@ return require("packer").startup(function()
   use "tpope/vim-speeddating"
 
   -- add maps and commands to surround stuff
-  use "tpope/vim-surround"
+  use "windwp/nvim-autopairs"
 
   -- lots of maps to toggle options and do stuff around current line
   use "tpope/vim-unimpaired"

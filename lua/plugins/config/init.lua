@@ -3,6 +3,7 @@ local ehandler = require("error-handler").handler
 -- neodev has to be set up before lspconfig
 xpcall(require, ehandler, "plugins.config.neodev")
 
+xpcall(require, ehandler, "plugins.config.autopairs")
 xpcall(require, ehandler, "plugins.config.cmp")
 xpcall(require, ehandler, "plugins.config.colorizer")
 xpcall(require, ehandler, "plugins.config.comment")
