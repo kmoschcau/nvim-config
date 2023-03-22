@@ -143,6 +143,9 @@ return require("packer").startup(function()
   -- adds a focus mode to vim
   use "folke/zen-mode.nvim"
 
+  -- better document highlight provider than manual
+  use "RRethy/vim-illuminate"
+
   -- adds highlighting of only the local scope
   use {
     "folke/twilight.nvim",

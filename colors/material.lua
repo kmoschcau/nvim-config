@@ -1696,3 +1696,9 @@ highlight("NotifyTRACETitle", { link = "Material_VimTrace" })
 highlight("NotifyWARNBorder", { link = "Material_VimWarningBorder" })
 highlight("NotifyWARNIcon", { link = "Material_VimWarning" })
 highlight("NotifyWARNTitle", { link = "Material_VimWarning" })
+
+-- vim-illuminate | RRethy/vim-illuminate {{{3
+
+highlight("IlluminatedWordText", { link = "Material_LspReferenceText" })
+highlight("IlluminatedWordRead", { link = "Material_LspReferenceRead" })
+highlight("IlluminatedWordWrite", { link = "Material_LspReferenceWrite" })
