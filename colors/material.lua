@@ -597,7 +597,7 @@ highlight("Material_VimNormal", { link = "Normal" })
 highlight("Normal", { fg = c.neutral.strong, bg = c.neutral.lightest })
 highlight("Material_VimNormalLight", {
   fg = color_table(hue_neutral, 4),
-  fg_dark = color_table(hue_neutral, 2)
+  fg_dark = color_table(hue_neutral, 2),
 })
 highlight("Material_VimSpecialKey", {
   fg = c.neutral.strong,
@@ -1403,7 +1403,7 @@ highlight("healthSuccess", { link = "Material_VimSuccessInverted" })
 
 highlight("htmlArg", { link = "Material_SynFieldNameNonItalic" })
 highlight("htmlEndTag", { link = "Material_SynSpecial" })
-highlight("htmlTag", { link = "Material_SynStructureKeyword" })
+highlight("htmlTag", { link = "Material_SynSpecial" })
 
 highlight("@tag.attribute.html", { link = "Material_SynFieldNameNonItalic" })
 
@@ -1590,6 +1590,14 @@ highlight("vimEnvvar", { link = "Material_SynStructureName" })
 highlight("vimFunction", { link = "Material_SynFunctionName" })
 highlight("vimHiBang", { link = "Material_SynSpecial" })
 highlight("vimUserFunc", { link = "Material_SynFunctionName" })
+
+-- xml {{{3
+
+highlight("xmlAttrib", { link = "Material_SynFieldNameNonItalic" })
+highlight("xmlAttribPunct", { link = "Material_SynSpecial" })
+highlight("xmlNamespace", { link = "Material_SynNamespaceName" })
+highlight("xmlTag", { link = "Material_SynSpecial" })
+highlight("xmlTagName", { link = "Material_SynStatement" })
 
 -- yaml {{{3
 
