@@ -116,18 +116,6 @@ local function get_plugin_bundle_paths()
   return bundles
 end
 
---- An on_attach function specific for jdtls.
---- @param client table the LSP client
---- @param bufnr number the number of the buffer
---- @return nil
-local function on_attach(client, bufnr)
-  lsp.on_attach(client, bufnr)
-
-  jdtls.setup_dap { hotcodereplace = "auto" }
-
-  jdtls.setup.add_commands()
-end
-
 --- Start the language server (if not started), and attach the current buffer.
 M.start_or_attach = function()
   local jdtls_package = mason_reg.get_package "jdtls"
@@ -141,7 +129,11 @@ M.start_or_attach = function()
     cmd = get_cmd(jdtls_package),
     handlers = lsp.handlers,
     init_options = { bundles = get_plugin_bundle_paths() },
-    on_attach = on_attach,
+    on_attach = function()
+      jdtls.setup_dap { hotcodereplace = "auto" }
+
+      jdtls.setup.add_commands()
+    end,
     settings = {
       java = {
         codeGeneration = {
