@@ -867,7 +867,6 @@ highlight("Material_DebugTest", {
 
 -- Comment and linked groups
 highlight("Material_SynComment", { fg = c.neutral.midpoint_strong })
-highlight("Material_SynDocComment", { fg = color_table("blue_grey", 6) })
 
 -- Constant and linked groups
 highlight("Material_SynConstant", {
@@ -929,6 +928,20 @@ highlight("Material_SynTodo", { bold = true })
 
 -- Custom {{{4
 -- General {{{5
+
+-- Non-Value symbols
+highlight("Material_SynDocComment", { fg = color_table("blue_grey", 6) })
+highlight("Material_SynExtensionMethod", { fg = color_table("teal", 4) })
+highlight("Material_SynOperatorOverloaded", {
+  fg = color_table("orange", 7),
+  bg = color_table("orange", 2),
+})
+highlight("Material_SynStringVerbatim", {
+  fg = color_table("green", 7),
+  bg = color_table("green", 2),
+})
+
+-- Literals
 
 -- Member variables
 highlight("Material_SynFieldName", {
@@ -1043,6 +1056,27 @@ highlight("Material_SynModStatic", { bold = true })
 highlight("Material_SynModDeprecated", { strikethrough = true })
 
 -- File type specific {{{5
+
+-- cs (C#) {{{6
+
+highlight("Material_SynCsharpDocCommentTagAttr", {
+  fg = color_table("blue", 4),
+  fg_dark = color_table("blue", 9, { invert_dark = false }),
+})
+highlight("Material_SynCsharpDocCommentTagAttrQuotes", {
+  fg = color_table("red", 3),
+  fg_dark = color_table("red", 9, { invert_dark = false }),
+})
+highlight("Material_SynCsharpDocCommentDelimiter", {
+  fg = color_table("red", 3),
+  fg_dark = color_table("red", 9, { invert_dark = false }),
+})
+highlight("Material_SynCsharpDocCommentTagName", {
+  fg = color_table("orange", 4),
+  fg_dark = color_table("orange", 9, { invert_dark = false }),
+})
+
+-- vim (VimScript|VimL) {{{6
 
 highlight("Material_SynVimCommentString", { fg = color_table("green", 5) })
 
@@ -1277,7 +1311,10 @@ highlight("@lsp.type.decorator", { link = "Material_SynDecorator" })
 highlight("@lsp.type.enum", { link = "Material_SynEnumName" })
 highlight("@lsp.type.enumMember", { link = "Material_SynEnumMember" })
 highlight("@lsp.type.interface", { link = "Material_SynInterfaceName" })
-highlight("@lsp.type.keyword", { link = "Material_SynStatement" })
+if vim.bo.ft ~= "cs" then
+  -- FIXME: omnisharp hack
+  highlight("@lsp.type.keyword", { link = "Material_SynStatement" })
+end
 highlight("@lsp.type.member", { link = "Material_SynMemberName" })
 highlight("@lsp.type.namespace", { link = "Material_SynNamespaceName" })
 highlight("@lsp.type.parameter", { link = "Material_SynParameterName" })
@@ -1369,6 +1406,53 @@ highlight("csGeneric", { link = "Material_SynGenericBackground" })
 highlight("csNewType", { link = "Material_SynTypedefName" })
 highlight("csParens", { link = "Material_SynSpecial" })
 highlight("csStorage", { link = "Material_SynNamespaceKeyword" })
+
+-- LSP {{{4
+
+-- FIXME: This can be cleaned up when choco Neovim is updated
+highlight("@lsp.type.comment.cs", { link = "@comment" })
+highlight("@lsp.type.conditional.cs", { link = "@conditional" })
+highlight("@lsp.type.constant.cs", { link = "Material_SynConstantName" })
+highlight("@lsp.type.field.cs", { link = "@field" })
+highlight("@lsp.type.identifier.cs", { link = "@type" })
+highlight("@lsp.type.method.cs", { link = "@method" })
+highlight("@lsp.type.number.cs", { link = "@number" })
+highlight("@lsp.type.operator.cs", { link = "@operator" })
+highlight("@lsp.type.preproc.cs", { link = "@preproc" })
+highlight("@lsp.type.punctuation.cs", { link = "@punctuation" })
+highlight("@lsp.type.string.escape.cs", { link = "@string.escape" })
+
+-- the following are actual highlights that should stay
+highlight("@lsp.type.comment.documentation.attribute.name", {
+  link = "Material_SynCsharpDocCommentTagAttr",
+})
+highlight("@lsp.type.comment.documentation.attribute.quotes", {
+  link = "Material_SynCsharpDocCommentTagAttrQuotes",
+})
+highlight("@lsp.type.comment.documentation.comment", { link = "@comment" })
+highlight("@lsp.type.comment.documentation.delimiter", {
+  link = "Material_SynCsharpDocCommentDelimiter",
+})
+highlight("@lsp.type.comment.documentation.name", {
+  link = "Material_SynCsharpDocCommentTagName",
+})
+highlight("@lsp.type.comment.documentation.text", {
+  link = "Material_SynDocComment",
+})
+highlight("@lsp.type.comment.excludedCode.cs", { link = "@comment" })
+highlight("@lsp.type.delegate.cs", {
+  link = "Material_SynAnonymousFunctionName",
+})
+highlight("@lsp.type.label.cs", { link = "Material_SynLocalName" })
+highlight("@lsp.type.method.extension.cs", {
+  link = "Material_SynExtensionMethod",
+})
+highlight("@lsp.type.operator.overloaded.cs", {
+  link = "Material_SynOperatorOverloaded",
+})
+highlight("@lsp.type.preproc.text.cs", { link = "Normal" })
+highlight("@lsp.type.property.cs", { link = "Material_SynAccessorName" })
+highlight("@lsp.type.string.verbatim", { link = "Material_SynStringVerbatim" })
 
 -- css {{{3
 
@@ -1595,6 +1679,7 @@ highlight("vimUserFunc", { link = "Material_SynFunctionName" })
 
 highlight("xmlAttrib", { link = "Material_SynFieldNameNonItalic" })
 highlight("xmlAttribPunct", { link = "Material_SynSpecial" })
+highlight("xmlEqual", { link = "Material_SynOperator" })
 highlight("xmlNamespace", { link = "Material_SynNamespaceName" })
 highlight("xmlTag", { link = "Material_SynSpecial" })
 highlight("xmlTagName", { link = "Material_SynStatement" })
@@ -1625,28 +1710,14 @@ highlight("zshFlag", { link = "Material_SynParameterName" })
 
 -- highlight groups for plugins {{{2
 
--- CSV | chrisbra/csv {{{3
+-- csv | chrisbra/csv {{{3
 
 highlight("CSVColumnHeaderOdd", { link = "Material_VimTitle" })
 highlight("CSVColumnHeaderEven", { link = "Material_VimTitle" })
 
--- Log | MTDL9/vim-log-Highlighting {{{3
+-- fidget | j-hui/fidget.nvim {{{3
 
-highlight("logLevelTrace", { link = "Material_VimTraceInverted" })
-highlight("logLevelDebug", { link = "Material_VimDebugInverted" })
-highlight("logLevelNotice", { link = "Material_VimHintInverted" })
-highlight("logLevelInfo", { link = "Material_VimInfoInverted" })
-highlight("logLevelWarning", { link = "Material_VimWarningInverted" })
-highlight("logLevelError", { link = "Material_VimErrorInverted" })
-
-highlight("logBrackets", { link = "Material_SynSpecial" })
-
-highlight("logXmlNamespace", { link = "Material_SynNamespaceName" })
-
--- vim-git | tpope/vim-git {{{3
-
-highlight("diffAdded", { link = "Material_VimDiffAdd" })
-highlight("diffRemoved", { link = "Material_VimDiffDelete" })
+highlight("FidgetTask", { link = "Material_SynComment" })
 
 -- gitsigns | lewis6991/gitsigns.nvim {{{3
 
@@ -1660,6 +1731,19 @@ highlight("GitSignsChangeDeleteLn", {
 })
 highlight("GitSignsDelete", { link = "Material_VimDiffSignDelete" })
 highlight("GitSignsDeleteInline", { link = "Material_VimDiffLineText" })
+
+-- log | MTDL9/vim-log-Highlighting {{{3
+
+highlight("logLevelTrace", { link = "Material_VimTraceInverted" })
+highlight("logLevelDebug", { link = "Material_VimDebugInverted" })
+highlight("logLevelNotice", { link = "Material_VimHintInverted" })
+highlight("logLevelInfo", { link = "Material_VimInfoInverted" })
+highlight("logLevelWarning", { link = "Material_VimWarningInverted" })
+highlight("logLevelError", { link = "Material_VimErrorInverted" })
+
+highlight("logBrackets", { link = "Material_SynSpecial" })
+
+highlight("logXmlNamespace", { link = "Material_SynNamespaceName" })
 
 -- nvim-cmp | hrsh7th/nvim-cmp {{{3
 
@@ -1704,6 +1788,11 @@ highlight("NotifyTRACETitle", { link = "Material_VimTrace" })
 highlight("NotifyWARNBorder", { link = "Material_VimWarningBorder" })
 highlight("NotifyWARNIcon", { link = "Material_VimWarning" })
 highlight("NotifyWARNTitle", { link = "Material_VimWarning" })
+
+-- vim-git | tpope/vim-git {{{3
+
+highlight("diffAdded", { link = "Material_VimDiffAdd" })
+highlight("diffRemoved", { link = "Material_VimDiffDelete" })
 
 -- vim-illuminate | RRethy/vim-illuminate {{{3
 
