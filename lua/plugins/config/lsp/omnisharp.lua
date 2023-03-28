@@ -115,6 +115,7 @@ require("lspconfig").omnisharp.setup {
   capabilities = lsp.capabilities,
   handlers = lsp.handlers,
   root_dir = function(fname)
+    -- TODO: Add selection when multiple found
     vim.notify("Omnisharp fname: " .. fname, vim.log.levels.DEBUG)
     local root_dir = util.root_pattern "*.sln"(fname)
       or util.root_pattern "*.csproj"(fname)
