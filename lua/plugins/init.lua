@@ -38,6 +38,11 @@ return require("packer").startup(function()
   -- typescript
   use "jose-elias-alvarez/typescript.nvim"
 
+  -- LSP related plugins {{{2
+
+  -- show LSP progress
+  use "j-hui/fidget.nvim"
+
   -- (auto)completion {{{1
   -- snippets {{{2
   -- snippet engine
