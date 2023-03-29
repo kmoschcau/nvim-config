@@ -28,7 +28,7 @@ return require("packer").startup(function()
   -- Tool to allow non-LSP sources to use LSP functions
   use {
     "jose-elias-alvarez/null-ls.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    requires = "nvim-lua/plenary.nvim",
   }
 
   -- language specific extensions {{{3
@@ -116,6 +116,12 @@ return require("packer").startup(function()
   -- file tree {{{1
   -- provides a better file browser than built-in netrw
   use "nvim-tree/nvim-tree.lua"
+
+  -- integrate nvim-tree actions with LSP events
+  use {
+    "antosha417/nvim-lsp-file-operations",
+    requires = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-tree.lua" },
+  }
 
   -- status line plugins {{{1
   -- pretty, segmented and configurable status line in lua

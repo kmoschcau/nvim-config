@@ -31,3 +31,6 @@ xpcall(require, ehandler, "plugins.config.mason-lspconfig")
 xpcall(require, ehandler, "plugins.config.mason-null-ls")
 -- mason-nvim-dap has to be set up after nvim-dap
 xpcall(require, ehandler, "plugins.config.mason-nvim-dap")
+
+-- nvim-lsp-file-operations has to be set up after nvim-tree
+xpcall(require, ehandler, "plugins.config.lsp-file-ops")
