@@ -1,5 +1,16 @@
 local M = {}
 
+local formatting_ignore_list = {
+  "omnisharp",
+  "tsserver",
+}
+
+--- @param name string
+--- @return boolean
+local function is_ignored_formatter(name)
+  return vim.tbl_contains(formatting_ignore_list, name)
+end
+
 --- Overridden handlers for the LSP client.
 M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(
@@ -116,12 +127,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
-    if caps.documentFormattingProvider and client.name ~= "tsserver" then
+    if
+      caps.documentFormattingProvider and not is_ignored_formatter(client.name)
+    then
       vim.keymap.set("n", "<space>f", function()
         vim.lsp.buf.format {
           async = true,
           filter = function(formatting_client)
-            return formatting_client.name ~= "tsserver"
+            return not is_ignored_formatter(formatting_client.name)
           end,
         }
       end, {
