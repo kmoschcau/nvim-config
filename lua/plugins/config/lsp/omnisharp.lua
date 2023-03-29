@@ -11,6 +11,79 @@ local function create_base_cmd()
   }
 end
 
+--- @param message string
+local function notify_root(message)
+  vim.notify("[OmniSharp get_root_dir] " .. message, vim.log.levels.DEBUG)
+end
+
+local function get_root_dir(fname)
+  notify_root("fname: " .. fname)
+
+  local root_dir = util.root_pattern "*.sln"(fname)
+    or util.root_pattern "*.csproj"(fname)
+
+  notify_root("root_dir: " .. tostring(root_dir))
+
+  return root_dir
+end
+
+--- @param message string
+local function notify_select(message)
+  vim.notify("[OmniSharp select_source] " .. message, vim.log.levels.DEBUG)
+end
+
+local function select_source(root_dir)
+  if root_dir == nil then
+    return nil
+  end
+
+  local sln_matches = vim.fn.glob(root_dir .. "/*.sln", false, true)
+  local csproj_matches = vim.fn.glob(root_dir .. "/*.csproj", false, true)
+
+  notify_select("sln_matches: " .. vim.inspect(sln_matches))
+  notify_select("csproj_matches: " .. vim.inspect(csproj_matches))
+
+  local matches = {}
+  if not vim.tbl_isempty(sln_matches) then
+    matches = sln_matches
+  elseif not vim.tbl_isempty(csproj_matches) then
+    matches = csproj_matches
+  end
+
+  notify_select("matches: " .. vim.inspect(matches))
+
+  if #matches < 2 then
+    notify_select "single result"
+    return root_dir
+  end
+
+  local selection_counter = 0
+  local selection_options = vim.list_extend(
+    { "Select a source:", "0: " .. root_dir },
+    vim.tbl_map(function(match)
+      selection_counter = selection_counter + 1
+      return tostring(selection_counter) .. ": " .. match
+    end, matches)
+  )
+
+  notify_select("selection_list: " .. vim.inspect(selection_options))
+
+  local selection = vim.fn.inputlist(selection_options)
+
+  notify_select("user selection: " .. selection)
+
+  if selection < 2 then
+    notify_select("using root_dir: " .. root_dir)
+    return root_dir
+  end
+
+  local selected = matches[selection]
+
+  notify_select("selected: " .. selected)
+
+  return selected
+end
+
 local function create_token_modifiers()
   return { "static" }
 end
@@ -102,8 +175,8 @@ local function create_decorated_token_modifiers()
 end
 
 local function create_decorated_token_types()
-  return vim.tbl_map(function(mod)
-    local prefixed = "lsp.type." .. mod
+  return vim.tbl_map(function(type)
+    local prefixed = "lsp.type." .. type
     local full = prefixed .. ".cs"
     link_fallback_highlight(full, prefixed)
     return full
@@ -114,23 +187,13 @@ require("lspconfig").omnisharp.setup {
   cmd = create_base_cmd(),
   capabilities = lsp.capabilities,
   handlers = lsp.handlers,
-  root_dir = function(fname)
-    -- TODO: Add selection when multiple found
-    vim.notify("Omnisharp fname: " .. fname, vim.log.levels.DEBUG)
-    local root_dir = util.root_pattern "*.sln"(fname)
-      or util.root_pattern "*.csproj"(fname)
-    vim.notify(
-      "Omnisharp root_dir: " .. tostring(root_dir),
-      vim.log.levels.DEBUG
-    )
-    return root_dir
-  end,
+  root_dir = get_root_dir,
   on_new_config = function(new_config, new_root_dir)
     if new_root_dir == nil then
       return
     end
     new_config.cmd = create_base_cmd()
-    vim.list_extend(new_config.cmd, { "--source", new_root_dir })
+    vim.list_extend(new_config.cmd, { "--source", select_source(new_root_dir) })
   end,
   on_attach = function(client)
     -- This is needed because OmniSharp's semantic tokens don't comply with LSP
