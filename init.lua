@@ -26,9 +26,9 @@ end
 -- set the paths for python executables
 local python_path
 if vim.fn.has "win32" > 0 then
-  python_path = vim.fn.expand "C:/Python37/python"
+  python_path = vim.fs.normalize "C:/Python37/python"
 else
-  python_path = vim.fn.expand "$HOME/.pyenv/versions/neovim3/bin/python"
+  python_path = vim.fs.normalize "~/.pyenv/versions/neovim3/bin/python"
 end
 if vim.fn.executable(python_path) > 0 then
   vim.g.python3_host_prog = python_path
@@ -295,8 +295,9 @@ local packer_augroup = vim.api.nvim_create_augroup("PackerNvim_InitVim", {})
 vim.api.nvim_create_autocmd("BufWritePost", {
   desc = "Automatically source the plugin configuration on write.",
   group = packer_augroup,
-  pattern = vim.fn.expand "~" .. "/.config/nvim/lua/plugins/init.lua",
+  pattern = vim.fs.normalize "~/.config/nvim/lua/plugins/init.lua",
   callback = function()
+    vim.notify("Reloaded plugins init", vim.log.levels.DEBUG)
     package.loaded["plugins"] = nil
     xpcall(require, ehandler, "plugins")
   end,
