@@ -1505,6 +1505,10 @@ highlight("javaParen2", { link = "Material_SynSpecial" })
 highlight("javaR_", { link = "Material_SynTypedefName" })
 highlight("javaX_", { link = "Material_SynTypedefName" })
 
+-- LSP {{{4
+
+highlight("@lsp.type.annotationMember", { link = "Material_SynMemberName" })
+
 -- javascript {{{3
 
 highlight("jsArrowFunction", { link = "Material_SynFunctionKeyword" })
