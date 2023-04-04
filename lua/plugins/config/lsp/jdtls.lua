@@ -48,7 +48,6 @@ local function get_cmd(jdtls_package)
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
     "-Xmx1G",
-    "-Xms1G",
     "--add-modules=ALL-SYSTEM",
     "--add-opens",
     "java.base/java.util=ALL-UNNAMED",
