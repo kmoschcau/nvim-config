@@ -1,22 +1,31 @@
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
+local api = require "nvim-tree.api"
+local ehandler = require("error-handler").handler
+
 require("nvim-tree").setup {
+  on_attach = function(bufnr)
+    api.config.mappings.default_on_attach(bufnr)
+
+    xpcall(vim.keymap.del, ehandler, "n", "<C-e>", { buffer = bufnr })
+    xpcall(vim.keymap.del, ehandler, "n", "<C-x>", { buffer = bufnr })
+
+    vim.keymap.set("n", "<C-s>", api.node.open.horizontal, {
+      desc = "Open: Horizontal Split",
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true,
+    })
+  end,
   disable_netrw = true,
   reload_on_bufenter = true,
-  remove_keymaps = { "<C-e>", "<C-x>" },
   diagnostics = {
     enable = true,
     show_on_dirs = true,
   },
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "<C-s>", action = "split" }
-      },
-    },
-  },
+  view = { adaptive_size = true },
   renderer = {
     add_trailing = true,
     group_empty = true,
