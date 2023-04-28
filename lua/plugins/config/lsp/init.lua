@@ -211,10 +211,17 @@ lspconfig.html.setup {
   filetypes = { "html", "jsp" },
   handlers = M.handlers,
   settings = {
+    -- https://code.visualstudio.com/docs/languages/html
     html = {
+      suggest = {
+        html5 = true,
+      },
       format = {
+        wrapLineLength = 0,
+        preserveNewLines = true,
+        maxPreserveNewLines = 1,
         indentInnerHtml = true,
-        wrapAttributes = "preserve",
+        wrapAttributes = "preserve-aligned",
         templating = true,
       },
     },

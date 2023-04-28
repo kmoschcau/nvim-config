@@ -110,7 +110,6 @@ require("null-ls").setup {
     },
     formatting.stylelint,
     formatting.stylua,
-    formatting.tidy,
     formatting.trim_newlines,
     formatting.trim_whitespace,
   },
