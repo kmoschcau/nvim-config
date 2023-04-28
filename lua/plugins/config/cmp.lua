@@ -21,7 +21,7 @@ cmp.setup {
   },
   formatting = {
     format = function(entry, vim_item)
-      if vim.tbl_contains({ "path" }, entry.source.name) then
+      if vim.list_contains({ "path" }, entry.source.name) then
         local icon, hl_group = require("nvim-web-devicons").get_icon(
           entry:get_completion_item().label
         )
