@@ -20,6 +20,7 @@ end
 local lualine_c = {
   {
     "filename",
+    path = 1, -- relative path
     color = function()
       return vim.bo.modified and "Material_LualineModified"
         or "Material_Lualine3"
