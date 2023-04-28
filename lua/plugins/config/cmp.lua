@@ -1,3 +1,5 @@
+local list_contains = vim.list_contains or vim.tbl_contains
+
 local buffer_source = {
   name = "buffer",
   option = {
@@ -21,7 +23,7 @@ cmp.setup {
   },
   formatting = {
     format = function(entry, vim_item)
-      if vim.list_contains({ "path" }, entry.source.name) then
+      if list_contains({ "path" }, entry.source.name) then
         local icon, hl_group = require("nvim-web-devicons").get_icon(
           entry:get_completion_item().label
         )

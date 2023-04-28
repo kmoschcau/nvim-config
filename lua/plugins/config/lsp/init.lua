@@ -1,5 +1,7 @@
 local M = {}
 
+local list_contains = vim.list_contains or vim.tbl_contains
+
 local formatting_ignore_list = {
   "omnisharp",
   "tsserver",
@@ -8,7 +10,7 @@ local formatting_ignore_list = {
 --- @param name string
 --- @return boolean
 local function is_ignored_formatter(name)
-  return vim.list_contains(formatting_ignore_list, name)
+  return list_contains(formatting_ignore_list, name)
 end
 
 --- Overridden handlers for the LSP client.
