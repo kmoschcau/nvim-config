@@ -104,7 +104,10 @@ require("null-ls").setup {
     formatting.jq,
     formatting.markdownlint,
     formatting.packer,
-    formatting.shfmt,
+    formatting.shellharden,
+    formatting.shfmt.with {
+      extra_args = { "--indent", "4" }
+    },
     formatting.stylelint,
     formatting.stylua,
     formatting.tidy,
