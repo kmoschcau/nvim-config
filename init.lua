@@ -95,7 +95,7 @@ vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
-vim.o.formatoptions = "cro/qlj"
+vim.o.formatoptions = "cro/qanlj"
 vim.o.guicursor = table.concat({
   table.concat({
     "n",
