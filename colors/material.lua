@@ -1311,10 +1311,6 @@ highlight("@lsp.type.decorator", { link = "Material_SynDecorator" })
 highlight("@lsp.type.enum", { link = "Material_SynEnumName" })
 highlight("@lsp.type.enumMember", { link = "Material_SynEnumMember" })
 highlight("@lsp.type.interface", { link = "Material_SynInterfaceName" })
-if vim.bo.ft ~= "cs" then
-  -- FIXME: omnisharp hack
-  highlight("@lsp.type.keyword", { link = "Material_SynStatement" })
-end
 highlight("@lsp.type.member", { link = "Material_SynMemberName" })
 highlight("@lsp.type.namespace", { link = "Material_SynNamespaceName" })
 highlight("@lsp.type.parameter", { link = "Material_SynParameterName" })
@@ -1409,20 +1405,6 @@ highlight("csStorage", { link = "Material_SynNamespaceKeyword" })
 
 -- LSP {{{4
 
--- FIXME: This can be cleaned up when choco Neovim is updated
-highlight("@lsp.type.comment.cs", { link = "@comment" })
-highlight("@lsp.type.conditional.cs", { link = "@conditional" })
-highlight("@lsp.type.constant.cs", { link = "Material_SynConstantName" })
-highlight("@lsp.type.field.cs", { link = "@field" })
-highlight("@lsp.type.identifier.cs", { link = "@type" })
-highlight("@lsp.type.method.cs", { link = "@method" })
-highlight("@lsp.type.number.cs", { link = "@number" })
-highlight("@lsp.type.operator.cs", { link = "@operator" })
-highlight("@lsp.type.preproc.cs", { link = "@preproc" })
-highlight("@lsp.type.punctuation.cs", { link = "@punctuation" })
-highlight("@lsp.type.string.escape.cs", { link = "@string.escape" })
-
--- the following are actual highlights that should stay
 highlight("@lsp.type.comment.documentation.attribute.name", {
   link = "Material_SynCsharpDocCommentTagAttr",
 })
