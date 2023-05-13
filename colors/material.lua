@@ -929,6 +929,9 @@ highlight("Material_SynTodo", { bold = true })
 -- Custom {{{4
 -- General {{{5
 
+highlight("Material_SynBold", { bold = true })
+highlight("Material_SynItalic", { italic = true })
+
 -- Non-Value symbols
 highlight("Material_SynDocComment", { fg = color_table("blue_grey", 6) })
 highlight("Material_SynExtensionMethod", { fg = color_table("teal", 4) })
@@ -1253,8 +1256,10 @@ highlight("Todo", { link = "Material_SynTodo" })
 
 -- Built-in {{{4
 
+highlight("@text.emphasis", { link = "Material_SynItalic" })
 highlight("@text.literal", { link = "Material_SynString" })
 highlight("@text.reference", { link = "Material_SynUnderlined" })
+highlight("@text.strong", { link = "Material_SynBold" })
 
 highlight("@comment.documentation", { link = "Material_SynDocComment" })
 
