@@ -73,6 +73,7 @@ require("null-ls").setup {
     code_actions.gitsigns,
     code_actions.shellcheck,
 
+    diagnostics.cfn_lint,
     diagnostics.checkstyle.with {
       args = { "-f", "sarif" },
       extra_args = build_checkstyle_extra_args,
