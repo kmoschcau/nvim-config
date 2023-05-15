@@ -46,4 +46,4 @@ vim.keymap.set("n", "<space>t", builtin.diagnostics, {
   silent = true,
 })
 
--- LSP keymaps are in lua/plugins/config/lsp.lua
+-- LSP keymaps are in lua/plugins/config/lsp/common.lua

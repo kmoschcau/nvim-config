@@ -1,4 +1,4 @@
-local lsp = require "plugins.config.lsp"
+local common = require "plugins.config.lsp.common"
 local util = require("lspconfig").util
 
 local function create_base_cmd()
@@ -86,8 +86,8 @@ end
 
 require("lspconfig").omnisharp.setup {
   cmd = create_base_cmd(),
-  capabilities = lsp.capabilities,
-  handlers = lsp.handlers,
+  capabilities = common.capabilities,
+  handlers = common.handlers,
   root_dir = get_root_dir,
   on_new_config = function(new_config, new_root_dir)
     if new_root_dir == nil then

@@ -1,7 +1,7 @@
 local M = {}
 
 local jdtls = require "jdtls"
-local lsp = require "plugins.config.lsp"
+local common = require "plugins.config.lsp.common"
 local mason_reg = require "mason-registry"
 
 --- Get the config file path for jdtls.
@@ -124,9 +124,9 @@ M.start_or_attach = function()
   end
 
   jdtls.start_or_attach {
-    capabilities = require("plugins.config.lsp").capabilities,
+    capabilities = common.capabilities,
     cmd = get_cmd(jdtls_package),
-    handlers = lsp.handlers,
+    handlers = common.handlers,
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }
