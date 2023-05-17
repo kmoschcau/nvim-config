@@ -82,6 +82,7 @@ require("null-ls").setup {
     diagnostics.eslint_d,
     diagnostics.fish,
     diagnostics.markdownlint,
+    diagnostics.markuplint,
     diagnostics.pmd.with {
       args = { "--format", "json" },
       extra_args = build_pmd_extra_args,
@@ -90,7 +91,6 @@ require("null-ls").setup {
     diagnostics.shellcheck,
     diagnostics.selene,
     diagnostics.stylelint,
-    diagnostics.tidy,
     diagnostics.todo_comments,
     diagnostics.trail_space.with {
       disabled_filetypes = { "NvimTree", "markdown" },
@@ -105,9 +105,12 @@ require("null-ls").setup {
     formatting.jq,
     formatting.markdownlint,
     formatting.packer,
+    formatting.prettier.with {
+      filetypes = { "json", "jsonc" },
+    },
     formatting.shellharden,
     formatting.shfmt.with {
-      extra_args = { "--indent", "4" }
+      extra_args = { "--indent", "4" },
     },
     formatting.stylelint,
     formatting.stylua,
