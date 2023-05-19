@@ -105,7 +105,7 @@ require("null-ls").setup {
     formatting.jq,
     formatting.markdownlint,
     formatting.packer,
-    formatting.prettier.with {
+    formatting.prettierd.with {
       filetypes = { "json", "jsonc" },
     },
     formatting.shellharden,
