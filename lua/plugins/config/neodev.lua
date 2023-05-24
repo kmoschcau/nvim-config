@@ -1,6 +1,7 @@
 require("neodev").setup {
   library = {
     plugins = {
+      "Comment.nvim",
       "LuaSnip",
       "cmp-buffer",
       "cmp-cmdline",
@@ -10,6 +11,8 @@ require("neodev").setup {
       "cmp-path",
       "cmp_luasnip",
       "dressing.nvim",
+      "fidget.nvim",
+      "friendly-snippets",
       "gitsigns.nvim",
       "lspkind.nvim",
       "lualine.nvim",
@@ -19,11 +22,13 @@ require("neodev").setup {
       "mason.nvim",
       "neodev.nvim",
       "null-ls.nvim",
+      "nvim-autopairs",
       "nvim-cmp",
       "nvim-colorizer",
       "nvim-dap",
       "nvim-dap-ui",
       "nvim-jdtls",
+      "nvim-lsp-file-operations",
       "nvim-lspconfig",
       "nvim-luapad",
       "nvim-markdown",
@@ -38,6 +43,7 @@ require("neodev").setup {
       "telescope.nvim",
       "twilight.nvim",
       "typescript.nvim",
+      "vim-illuminate",
       "zen-mode.nvim",
     },
     types = true,

@@ -12,12 +12,8 @@ local cmp = require "cmp"
 local types = require "cmp.types"
 cmp.setup {
   enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-      or require("cmp_dap").is_dap_buffer()
+    return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
   end,
-  completion = {
-    autocomplete = false,
-  },
   view = {
     entries = { name = "custom", selection_order = "near_cursor" },
   },
