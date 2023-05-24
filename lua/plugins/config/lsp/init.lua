@@ -2,7 +2,6 @@ local common = require "plugins.config.lsp.common"
 local lspconfig = require "lspconfig"
 
 local simple_servers = {
-  "cssls",
   "gradle_ls",
   "jedi_language_server",
   "jsonls",
@@ -18,6 +17,7 @@ for _, lsp in ipairs(simple_servers) do
 end
 
 local server_config_modules = {
+  "cssls",
   "ember",
   "glint",
   "html",
