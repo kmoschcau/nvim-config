@@ -105,6 +105,9 @@ return require("packer").startup(function()
   -- a lot of helpful things dealing with CSV
   use "chrisbra/csv.vim"
 
+  -- better groovy highlighting
+  use "thecodesmith/vim-groovy"
+
   -- }}}2
 
   -- colored highlighting for CSS like hex color values

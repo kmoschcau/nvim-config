@@ -1464,6 +1464,12 @@ highlight("fishStatement", { link = "Material_SynFunctionName" })
 highlight("gitCommitBlank", { link = "Material_VimStyleErrorUnderline" })
 highlight("gitcommitOverflow", { link = "Material_VimStyleWarningUnderline" })
 
+-- groovy {{{3
+
+highlight("groovyParen", { link = "Material_SynSpecial" })
+highlight("groovyInterpolatedString", { link = "Material_VimNormal" })
+highlight("groovyInterpolatedWrapper", { link = "Material_SynSpecialChar" })
+
 -- checkhealth {{{3
 
 highlight("healthError", { link = "Material_VimErrorInverted" })
