@@ -2,7 +2,9 @@ local M = {}
 
 local list_contains = vim.list_contains or vim.tbl_contains
 
+-- This is a list of servers that do not have an option to disable formatting.
 local formatting_ignore_list = {
+  "jsonls",
   "omnisharp",
   "tsserver",
 }

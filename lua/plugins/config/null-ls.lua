@@ -99,15 +99,11 @@ require("null-ls").setup {
 
     formatting.black,
     formatting.csharpier,
-    formatting.eslint_d,
     formatting.fish_indent,
     formatting.google_java_format,
-    formatting.jq,
     formatting.markdownlint,
     formatting.packer,
-    formatting.prettierd.with {
-      filetypes = { "json", "jsonc" },
-    },
+    formatting.prettierd,
     formatting.shellharden,
     formatting.shfmt.with {
       extra_args = { "--indent", "4" },
