@@ -1467,6 +1467,8 @@ highlight("gitcommitOverflow", { link = "Material_VimStyleWarningUnderline" })
 -- groovy {{{3
 
 highlight("groovyParen", { link = "Material_SynSpecial" })
+highlight("groovyParen1", { link = "Material_SynSpecial" })
+highlight("groovyParen2", { link = "Material_SynSpecial" })
 highlight("groovyInterpolatedString", { link = "Material_VimNormal" })
 highlight("groovyInterpolatedWrapper", { link = "Material_SynSpecialChar" })
 
