@@ -21,6 +21,8 @@ if terminfo_colors:match "256" then
   vim.o.termguicolors = true
 end
 
+vim.o.background = "light"
+
 -- path settings {{{1
 
 -- set the paths for python executables
@@ -49,8 +51,6 @@ xpcall(require, ehandler, "plugins.config")
 -- general Neovim settings {{{1
 -- appearance settings {{{2
 -- colorscheme settings {{{3
-
-vim.o.background = "light"
 
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
