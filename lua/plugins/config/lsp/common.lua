@@ -1,19 +1,7 @@
 local M = {}
 
-local list_contains = vim.list_contains or vim.tbl_contains
-
--- This is a list of servers that do not have an option to disable formatting.
-local formatting_ignore_list = {
-  "jsonls",
-  "omnisharp",
-  "tsserver",
-}
-
---- @param name string
---- @return boolean
-local function is_ignored_formatter(name)
-  return list_contains(formatting_ignore_list, name)
-end
+--- Generated capabilities for the LSP client
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 --- Overridden handlers for the LSP client.
 M.handlers = {
@@ -27,146 +15,67 @@ M.handlers = {
   ),
 }
 
---- @class LspAttachData
---- @field client_id number the number of the LSP client
+--- Log the given client's server's capabilities
+--- @param client unknown the LSP client to log capabilities for
+--- @param buf_id? integer the buffer number, defaults to 0
+M.log_capabilities = function(client, buf_id)
+  local buffer_name = vim.api.nvim_buf_get_name(buf_id or 0)
+  local title = "Capabilities for " .. client.name .. " at " .. buffer_name
 
---- @class LspAttachArgs
---- @field buf number the buffer number
---- @field data LspAttachData the LspAttach specific data
+  local longest_cap = 0
+  local longest_meth = 0
+  local entries = {}
+  for meth_name, capability in pairs(vim.lsp._request_name_to_capability) do
+    local cap_name = table.concat(capability, ".")
+    longest_cap = math.max(longest_cap, #cap_name)
+    longest_meth = math.max(longest_meth, #meth_name)
 
-local augroup = vim.api.nvim_create_augroup("LanguageServer_InitVim", {})
-vim.api.nvim_create_autocmd("LspAttach", {
-  desc = "Set up things when attaching with a language client to a server.",
-  group = augroup,
-  --- @param args LspAttachArgs the autocmd args
-  callback = function(args)
-    local tel_builtin = require "telescope.builtin"
+    local entry = {
+      cap_marker = vim.tbl_get(
+        client.server_capabilities or {},
+        unpack(capability)
+      ) and "[X]" or "[ ]",
+      cap_name = cap_name,
+      meth_marker = M.supports_method(client, meth_name) and "[X]" or "[ ]",
+      meth_name = meth_name,
+    }
 
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local caps = client.server_capabilities
+    table.insert(entries, entry)
+  end
+  table.sort(entries, function(a, b)
+    return a.meth_name < b.meth_name
+  end)
 
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
-      buffer = args.buf,
-      desc = "Go to the declaration of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "gd", tel_builtin.lsp_definitions, {
-      buffer = args.buf,
-      desc = "Fuzzy find definitions of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "gi", tel_builtin.lsp_implementations, {
-      buffer = args.buf,
-      desc = "Fuzzy find implementations of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, {
-      buffer = args.buf,
-      desc = "Show signature help for parameter under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, {
-      buffer = args.buf,
-      desc = "Add a workspace folder.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, {
-      buffer = args.buf,
-      desc = "Remove a workspace folder.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, {
-      buffer = args.buf,
-      desc = "Print the current workspace folders.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>D", tel_builtin.lsp_type_definitions, {
-      buffer = args.buf,
-      desc = "Fuzzy find type definitions of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {
-      buffer = args.buf,
-      desc = "Rename the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, {
-      buffer = args.buf,
-      desc = "Trigger the code actions menu for the position under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "gr", tel_builtin.lsp_references, {
-      buffer = args.buf,
-      desc = "Fuzzy find references of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "gci", tel_builtin.lsp_incoming_calls, {
-      buffer = args.buf,
-      desc = "Fuzzy find incoming calls of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "gco", tel_builtin.lsp_outgoing_calls, {
-      buffer = args.buf,
-      desc = "Fuzzy find outgoing calls of the symbol under the cursor.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>sd", tel_builtin.lsp_document_symbols, {
-      buffer = args.buf,
-      desc = "Fuzzy find document symbols.",
-      silent = true,
-    })
-    vim.keymap.set("n", "<space>sw", tel_builtin.lsp_dynamic_workspace_symbols, {
-      buffer = args.buf,
-      desc = "Fuzzy find workspace symbols.",
-      silent = true,
-    })
+  local lines = {}
+  for _, entry in ipairs(entries) do
+    table.insert(
+      lines,
+      string.format(
+        "%s %-" .. longest_meth .. "s %s %-" .. longest_cap .. "s",
+        entry.meth_marker,
+        entry.meth_name,
+        entry.cap_marker,
+        entry.cap_name
+      )
+    )
+  end
 
-    if caps.hoverProvider then
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-        buffer = args.buf,
-        desc = "Trigger hover for the symbol under the cursor.",
-        silent = true,
-      })
-    end
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.DEBUG, { title = title })
+end
 
-    if
-      caps.documentFormattingProvider and not is_ignored_formatter(client.name)
-    then
-      vim.keymap.set("n", "<space>f", function()
-        vim.lsp.buf.format {
-          async = true,
-          filter = function(formatting_client)
-            return not is_ignored_formatter(formatting_client.name)
-          end,
-        }
-      end, {
-        buffer = args.buf,
-        desc = "Format the current buffer.",
-        silent = true,
-      })
-    end
+--- Check whether the given client's server supports the given LSP method.
+--- @param client unknown the LSP client whose server to check
+--- @param method string the method name of the method to check
+--- @return boolean
+M.supports_method = function(client, method)
+  if client.supports_method then
+    return client.supports_method(method)
+  end
 
-    if caps.codeLensProvider then
-      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-        desc = "Update the code lenses of the buffer.",
-        group = augroup,
-        buffer = args.buf,
-        callback = vim.lsp.codelens.refresh,
-      })
-    end
-
-    if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-      vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
-        buffer = args.buf,
-        desc = "Do a full semantic tokens refresh.",
-        silent = true,
-      })
-    end
-  end,
-})
-
-M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+  return vim.tbl_get(
+    client.server_capabilities or {},
+    unpack(vim.lsp._request_name_to_capability[method])
+  ) and true or false
+end
 
 return M

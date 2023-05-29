@@ -13,7 +13,11 @@ end
 
 --- @param message string
 local function notify_root(message)
-  vim.notify("[OmniSharp get_root_dir] " .. message, vim.log.levels.DEBUG)
+  vim.notify(
+    message,
+    vim.log.levels.DEBUG,
+    { title = "OmniSharp get_root_dir" }
+  )
 end
 
 local function get_root_dir(fname)
@@ -29,7 +33,11 @@ end
 
 --- @param message string
 local function notify_select(message)
-  vim.notify("[OmniSharp select_source] " .. message, vim.log.levels.DEBUG)
+  vim.notify(
+    message,
+    vim.log.levels.DEBUG,
+    { title = "OmniSharp select_source" }
+  )
 end
 
 local function select_source(root_dir)
