@@ -12,12 +12,7 @@ lspconfig.html.setup {
         html5 = true,
       },
       format = {
-        wrapLineLength = 0,
-        preserveNewLines = true,
-        maxPreserveNewLines = 1,
-        indentInnerHtml = true,
-        wrapAttributes = "preserve-aligned",
-        templating = true,
+        enable = false,
       },
     },
   },
