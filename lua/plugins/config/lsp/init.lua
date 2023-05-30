@@ -22,8 +22,9 @@ local server_config_modules = {
   "glint",
   "html",
   "lua_ls",
-  "yamlls",
+  "omnisharp",
   "typescript",
+  "yamlls",
 }
 for _, module_name in ipairs(server_config_modules) do
   require("plugins.config.lsp." .. module_name)

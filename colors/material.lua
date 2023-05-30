@@ -1017,7 +1017,11 @@ highlight("Material_SynEnumMember", { fg = c.syntax.enum.member })
 
 -- Typedefs (Classes and equally large/extensible things)
 highlight("Material_SynTypedefKeyword", { fg = c.syntax.typedef, bold = true })
-highlight("Material_SynTypedefName", { fg = c.syntax.typedef })
+highlight("Material_SynTypedefName", {
+  fg = c.syntax.typedef,
+  italic = false,
+  nocombine = true,
+})
 
 -- Namespaces (or anything that groups together definitions)
 highlight("Material_SynNamespaceKeyword", {
@@ -1048,7 +1052,11 @@ highlight("Material_SynInterfaceKeyword", {
   fg = c.syntax.meta.strong,
   bold = true,
 })
-highlight("Material_SynInterfaceName", { fg = c.syntax.meta.strong })
+highlight("Material_SynInterfaceName", {
+  fg = c.syntax.meta.strong,
+  italic = false,
+  nocombine = true,
+})
 
 -- Modifiers {{{5
 
@@ -1410,6 +1418,7 @@ highlight("csStorage", { link = "Material_SynNamespaceKeyword" })
 
 -- LSP {{{4
 
+highlight("@lsp.type.constant.cs", { link = "Material_SynModReadonly" })
 highlight("@lsp.type.comment.documentation.attribute.name", {
   link = "Material_SynCsharpDocCommentTagAttr",
 })
@@ -1452,6 +1461,8 @@ highlight("cssNoise", { link = "Material_SynSpecial" })
 highlight("cssProp", { link = "Material_SynFieldName" })
 highlight("cssSelectorOp", { link = "Material_SynOperator" })
 
+-- Treesitter {{{4
+
 highlight("@property.css", { link = "Material_SynFieldNameNonItalic" })
 highlight("@type.css", { link = "Material_SynStatement" })
 
@@ -1483,6 +1494,8 @@ highlight("healthSuccess", { link = "Material_VimSuccessInverted" })
 highlight("htmlArg", { link = "Material_SynFieldNameNonItalic" })
 highlight("htmlEndTag", { link = "Material_SynSpecial" })
 highlight("htmlTag", { link = "Material_SynSpecial" })
+
+-- Treesitter {{{4
 
 highlight("@tag.attribute.html", { link = "Material_SynFieldNameNonItalic" })
 
@@ -1686,6 +1699,8 @@ highlight("xmlTagName", { link = "Material_SynStatement" })
 -- yaml {{{3
 
 highlight("yamlBlockMappingKey", { link = "Material_SynFieldName" })
+
+-- Treesitter {{{4
 
 highlight("@field.yaml", { link = "Material_SynFieldNameNonItalic" })
 
