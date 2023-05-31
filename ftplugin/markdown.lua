@@ -1,5 +1,3 @@
-local ehandler = require("error-handler").handler
-
 -- vim: foldmethod=marker
 -- Markdown file type settings
 
@@ -13,4 +11,4 @@ vim.opt_local.formatoptions:append "t"
 -- nvim-markdown | ixru/nvim-markdown {{{2
 
 -- Remove the default `insert link` mapping, so that we can use digraphs.
-xpcall(vim.keymap.del, ehandler, "i", "<C-k>", { buffer = true })
+pcall(vim.keymap.del, "i", "<C-k>", { buffer = true })
