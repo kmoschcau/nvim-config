@@ -1564,7 +1564,7 @@ highlight("jsoncKeywordMatch", { link = "Material_SynFieldNameNonItalic" })
 
 -- Treesitter {{{4
 
-highlight("@label.json", { link = "Material_SynFieldNameNonItalic" })
+highlight("@label.jsonc", { link = "Material_SynFieldNameNonItalic" })
 
 -- JSP {{{3
 
