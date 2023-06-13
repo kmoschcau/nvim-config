@@ -41,7 +41,7 @@ return require("packer").startup(function()
   -- LSP related plugins {{{2
 
   -- show LSP progress
-  use "j-hui/fidget.nvim"
+  use { "j-hui/fidget.nvim", tag = "legacy" }
 
   -- (auto)completion {{{1
   -- snippets {{{2
