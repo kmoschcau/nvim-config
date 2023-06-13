@@ -110,8 +110,8 @@ return require("packer").startup(function()
 
   -- }}}2
 
-  -- colored highlighting for CSS like hex color values
-  use "norcalli/nvim-colorizer.lua"
+  -- colored highlighting for CSS like color literals
+  use "brenoprata10/nvim-highlight-colors"
 
   -- some niceties for markdown
   use "ixru/nvim-markdown"
