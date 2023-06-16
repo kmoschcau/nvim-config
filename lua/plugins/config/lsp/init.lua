@@ -72,18 +72,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/definition
-    vim.keymap.set("n", "gd", tel_builtin.lsp_definitions, {
-      buffer = args.buf,
-      desc = "Fuzzy find definitions of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "gd",
+      common.supports_method(client, "textDocument/definition")
+          and tel_builtin.lsp_definitions
+        or vim.lsp.buf.definition,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find definitions of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- textDocument/implementation
-    vim.keymap.set("n", "gi", tel_builtin.lsp_implementations, {
-      buffer = args.buf,
-      desc = "Fuzzy find implementations of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "gi",
+      common.supports_method(client, "textDocument/implementation")
+          and tel_builtin.lsp_implementations
+        or vim.lsp.buf.implementation,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find implementations of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- textDocument/signatureHelp
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, {
@@ -162,19 +176,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- workspace/symbol
-    vim.keymap.set("n", "<space>sw", tel_builtin.lsp_dynamic_workspace_symbols, {
+    vim.keymap.set(
+      "n",
+      "<space>sw",
+      tel_builtin.lsp_dynamic_workspace_symbols,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find workspace symbols.",
+        silent = true,
+      }
+    )
+
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
       buffer = args.buf,
-      desc = "Fuzzy find workspace symbols.",
+      desc = "Trigger hover for the symbol under the cursor.",
       silent = true,
     })
-
-    if common.supports_method(client, "textDocument/hover") then
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-        buffer = args.buf,
-        desc = "Trigger hover for the symbol under the cursor.",
-        silent = true,
-      })
-    end
 
     if common.supports_method(client, "textDocument/formatting") then
       if is_ignored_formatter(client.name) then
