@@ -21,7 +21,7 @@ if terminfo_colors:match "256" then
   vim.o.termguicolors = true
 end
 
-if vim.fn.executable "darkman" then
+if vim.fn.executable "darkman" > 0 then
   local result = vim.system({ "darkman", "get" }, { text = true }):wait()
   if result.code > 0 then
     vim.o.background = "light"
