@@ -959,7 +959,7 @@ highlight("Material_SynConstantName", {
   italic = false,
   nocombine = true,
 })
-highlight("Material_SynLocalName", {
+highlight("Material_SynVariableName", {
   fg = color_table("orange", 5),
   italic = true,
 })
@@ -1277,10 +1277,10 @@ highlight("@constant.comment", { link = "Material_SynStatement" })
 
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@field", { link = "Material_SynFieldName" })
-highlight("@property", { link = "Material_SynFieldName" })
+highlight("@property", { link = "Material_SynAccessorName" })
 highlight("@constructor", { link = "Material_SynFunctionName" })
 
-highlight("@variable", { link = "Material_SynLocalName" })
+highlight("@variable", { link = "Material_SynVariableName" })
 highlight("@type", { link = "Material_SynStructureName" })
 highlight("@namespace", { link = "Material_SynNamespaceName" })
 highlight("@tag", { link = "Material_SynStatement" })
@@ -1291,6 +1291,7 @@ highlight("@error", { link = "Material_VimErrorUnderline" })
 
 -- Custom Query highlights {{{4
 
+highlight("@accessor", { link = "Material_SynAccessorName" })
 highlight("@attribute", { link = "Material_SynDecorator" })
 highlight("@class", { link = "Material_SynTypedefName" })
 highlight("@comment.keyword", { link = "Material_SynStatement" })
@@ -1305,7 +1306,6 @@ highlight("@keyword.interface", { link = "Material_SynInterfaceKeyword" })
 highlight("@keyword.namespace", { link = "Material_SynNamespaceKeyword" })
 highlight("@keyword.operator", { link = "Material_SynOperator" })
 highlight("@keyword.property", { link = "Material_SynAccessorKeyword" })
-highlight("@local.name", { link = "Material_SynLocalName" })
 highlight("@text.danger", { link = "Material_VimErrorInverted" })
 highlight("@text.diff.add", { link = "Material_VimDiffAdd" })
 highlight("@text.diff.delete", { link = "Material_VimDiffDelete" })
@@ -1334,7 +1334,7 @@ highlight("@lsp.type.type", { link = "Material_SynStructureName" })
 highlight("@lsp.type.typeParameter", {
   link = "Material_SynGenericParameterName",
 })
-highlight("@lsp.type.variable", { link = "Material_SynLocalName" })
+highlight("@lsp.type.variable", { link = "Material_SynVariableName" })
 
 -- Semantic Modifiers {{{4
 
@@ -1439,7 +1439,7 @@ highlight("@lsp.type.comment.excludedCode.cs", { link = "@comment" })
 highlight("@lsp.type.delegate.cs", {
   link = "Material_SynAnonymousFunctionName",
 })
-highlight("@lsp.type.label.cs", { link = "Material_SynLocalName" })
+highlight("@lsp.type.label.cs", { link = "Material_SynVariableName" })
 highlight("@lsp.type.method.extension.cs", {
   link = "Material_SynExtensionMethod",
 })
@@ -1545,7 +1545,7 @@ highlight("jsSwitchBraces", { link = "Material_SynSpecial" })
 highlight("jsSwitchColon", { link = "Material_SynSpecial" })
 highlight("jsThis", { link = "Material_SynStatement" })
 highlight("jsTryCatchBraces", { link = "Material_SynSpecial" })
-highlight("jsVariableDef", { link = "Material_SynLocalName" })
+highlight("jsVariableDef", { link = "Material_SynVariableName" })
 
 -- json {{{3
 
@@ -1619,12 +1619,12 @@ highlight("rustType", { link = "Material_SynTypedefName" })
 
 highlight("shCmdSubRegion", { link = "Material_SynSpecial" })
 highlight("shDeref", { link = "Material_SynSpecial" })
-highlight("shDerefSimple", { link = "Material_SynLocalName" })
-highlight("shDerefVar", { link = "Material_SynLocalName" })
+highlight("shDerefSimple", { link = "Material_SynVariableName" })
+highlight("shDerefVar", { link = "Material_SynVariableName" })
 highlight("shOption", { link = "Material_SynParameterName" })
 highlight("shStatement", { link = "Material_SynFunctionName" })
 highlight("shQuote", { link = "Material_SynSpecialChar" })
-highlight("shVariable", { link = "Material_SynLocalName" })
+highlight("shVariable", { link = "Material_SynVariableName" })
 
 -- Typescript {{{3
 
@@ -1677,7 +1677,11 @@ highlight(
   { link = "Material_SynGenericParameterName" }
 )
 highlight("typescriptVariable", { link = "Material_SynStatement" })
-highlight("typescriptVariableDeclaration", { link = "Material_SynLocalName" })
+highlight("typescriptVariableDeclaration", { link = "Material_SynVariableName" })
+
+-- Treesitter {{{4
+
+highlight("@property.typescript", { link = "Material_SynFieldName" })
 
 -- vim (VimScript|VimL) {{{3
 
@@ -1782,7 +1786,7 @@ highlight("CmpItemKindStruct", { link = "Material_SynStructureName" })
 highlight("CmpItemKindTypeParameter", {
   link = "Material_SynGenericParameterName",
 })
-highlight("CmpItemKindVariable", { link = "Material_SynLocalName" })
+highlight("CmpItemKindVariable", { link = "Material_SynVariableName" })
 
 -- nvim-notify | rcarriga/nvim-notify {{{3
 

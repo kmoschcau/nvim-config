@@ -2,9 +2,6 @@
 
 ; operators
 
-(unary_expression
-  operator: "!" @operator)
-
 (method_invocation
   "." @operator)
 

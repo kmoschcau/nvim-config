@@ -28,21 +28,13 @@
   "const"
   left: (identifier) @constant)
 
-(lexical_declaration
-  "let"
-  (variable_declarator
-    name: (identifier) @local.name))
-
-(for_in_statement
-  "let"
-  left: (identifier) @local.name)
-
 (method_signature
   ["get" "set"] @keyword.property
-  name: (property_identifier) @function)
+  name: (property_identifier) @accessor)
 
 (method_definition
-  ["get" "set"] @keyword.property)
+  ["get" "set"] @keyword.property
+  name: (property_identifier) @accessor)
 
 (interface_declaration
   "interface" @keyword.interface

@@ -2,14 +2,13 @@
 
 ; table refs
 
-(table_reference
-  schema: (identifier) @namespace
-  name: (identifier) @type)
+(object_reference
+  schema: (identifier) @namespace)
 
 ; column refs
 
 (column
-  name: (identifier) @field)
+  (identifier) @field)
 
 (column_definition
   name: (identifier) @field)
@@ -28,17 +27,19 @@
 (drop_index
   name: (identifier) @decorator)
 
-; types
-
-(tinyint) @type.builtin
-
 ; keywords
 
 (column_definition
-  (keyword_null) @keyword)
+  (keyword_null) @constant.builtin)
 
-(keyword_after) @keyword
+(literal
+  (keyword_null) @constant.builtin)
 
-(keyword_comment) @keyword
+; operators
 
-(keyword_modify) @keyword
+(keyword_like) @keyword.operator
+
+; special characters
+
+(identifier
+  "`" @punctuation.delimiter)
