@@ -147,6 +147,9 @@ return require("packer").startup(function()
   -- show git line status in gutter
   use "lewis6991/gitsigns.nvim"
 
+  -- enhanced diff view
+  use "sindrets/diffview.nvim"
+
   -- provide integrated git handling in the editor
   use "tpope/vim-fugitive"
 
