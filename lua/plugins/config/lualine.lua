@@ -29,7 +29,6 @@ local lualine_c = {
 }
 
 local lualine_x = {
-  "filetype",
   create_diagnostics_section "hint",
   create_diagnostics_section "info",
   create_diagnostics_section "warn",
@@ -37,6 +36,7 @@ local lualine_x = {
 }
 
 local lualine_y = {
+  "filetype",
   {
     "encoding",
     padding = { left = 1, right = 0 },
