@@ -1013,7 +1013,11 @@ highlight("Material_SynEnumKeyword", {
   bold = true,
 })
 highlight("Material_SynEnumName", { fg = c.syntax.enum.name })
-highlight("Material_SynEnumMember", { fg = c.syntax.enum.member })
+highlight("Material_SynEnumMember", {
+  fg = c.syntax.enum.member,
+  italic = false,
+  nocombine = true,
+})
 
 -- Typedefs (Classes and equally large/extensible things)
 highlight("Material_SynTypedefKeyword", { fg = c.syntax.typedef, bold = true })
@@ -1677,7 +1681,9 @@ highlight(
   { link = "Material_SynGenericParameterName" }
 )
 highlight("typescriptVariable", { link = "Material_SynStatement" })
-highlight("typescriptVariableDeclaration", { link = "Material_SynVariableName" })
+highlight("typescriptVariableDeclaration", {
+  link = "Material_SynVariableName",
+})
 
 -- Treesitter {{{4
 
