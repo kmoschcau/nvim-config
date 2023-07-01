@@ -52,10 +52,9 @@ end
 --- @field buf number the buffer number
 --- @field data LspAttachData the LspAttach specific data
 
-local augroup = vim.api.nvim_create_augroup("LanguageServer_InitVim", {})
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Set up things when attaching with a language client to a server.",
-  group = augroup,
+  group = common.augroup,
   --- @param args LspAttachArgs the autocmd args
   callback = function(args)
     local tel_builtin = require "telescope.builtin"
@@ -221,7 +220,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     then
       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
         desc = "Update the code lenses of the buffer.",
-        group = augroup,
+        group = common.augroup,
         buffer = args.buf,
         callback = vim.lsp.codelens.refresh,
       })

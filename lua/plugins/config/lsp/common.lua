@@ -1,5 +1,8 @@
 local M = {}
 
+--- The autocommand group for LSP init autocommands.
+M.augroup = vim.api.nvim_create_augroup("LanguageServer_InitVim", {})
+
 --- Generated capabilities for the LSP client
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
