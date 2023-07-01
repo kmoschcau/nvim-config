@@ -1,5 +1,8 @@
 ;; extends
 
+(binary_expression
+  operator: _ @operator)
+
 ; namespaces
 
 (extern_alias_directive
@@ -32,3 +35,6 @@
 
 (enum_declaration
   "enum" @keyword.enum)
+
+(accessor_declaration
+  name: ["get" "set"] @keyword.property)

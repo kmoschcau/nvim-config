@@ -30,11 +30,11 @@
 
 (method_signature
   ["get" "set"] @keyword.property
-  name: (property_identifier) @accessor)
+  name: (property_identifier) @property)
 
 (method_definition
   ["get" "set"] @keyword.property
-  name: (property_identifier) @accessor)
+  name: (property_identifier) @property)
 
 (interface_declaration
   "interface" @keyword.interface

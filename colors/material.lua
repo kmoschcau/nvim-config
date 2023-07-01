@@ -951,7 +951,11 @@ highlight("Material_SynFieldName", {
   fg = color_table("blue", 6),
   italic = true,
 })
-highlight("Material_SynFieldNameNonItalic", { fg = color_table("blue", 6) })
+highlight("Material_SynFieldNameNonItalic", {
+  fg = color_table("blue", 6),
+  italic = false,
+  nocombine = true,
+})
 
 -- Other value holders
 highlight("Material_SynConstantName", {
@@ -979,11 +983,11 @@ highlight("Material_SynFunctionName", {
   nocombine = true,
 })
 highlight("Material_SynMemberName", { fg = c.syntax["function"] })
-highlight("Material_SynAccessorKeyword", {
+highlight("Material_SynPropertyKeyword", {
   fg = color_table("cyan", 6),
   bold = true,
 })
-highlight("Material_SynAccessorName", {
+highlight("Material_SynPropertyName", {
   fg = color_table("cyan", 6),
   italic = true,
 })
@@ -1281,21 +1285,19 @@ highlight("@constant.comment", { link = "Material_SynStatement" })
 
 highlight("@parameter", { link = "Material_SynParameterName" })
 highlight("@field", { link = "Material_SynFieldName" })
-highlight("@property", { link = "Material_SynAccessorName" })
+highlight("@property", { link = "Material_SynPropertyName" })
 highlight("@constructor", { link = "Material_SynFunctionName" })
 
 highlight("@variable", { link = "Material_SynVariableName" })
 highlight("@type", { link = "Material_SynStructureName" })
 highlight("@namespace", { link = "Material_SynNamespaceName" })
 highlight("@tag", { link = "Material_SynStatement" })
-highlight("@tag.attribute", { link = "Material_SynFieldName" })
 highlight("@tag.delimiter", { link = "Material_SynSpecial" })
 
 highlight("@error", { link = "Material_VimErrorUnderline" })
 
 -- Custom Query highlights {{{4
 
-highlight("@accessor", { link = "Material_SynAccessorName" })
 highlight("@attribute", { link = "Material_SynDecorator" })
 highlight("@class", { link = "Material_SynTypedefName" })
 highlight("@comment.keyword", { link = "Material_SynStatement" })
@@ -1309,7 +1311,7 @@ highlight("@keyword.function", { link = "Material_SynFunctionKeyword" })
 highlight("@keyword.interface", { link = "Material_SynInterfaceKeyword" })
 highlight("@keyword.namespace", { link = "Material_SynNamespaceKeyword" })
 highlight("@keyword.operator", { link = "Material_SynOperator" })
-highlight("@keyword.property", { link = "Material_SynAccessorKeyword" })
+highlight("@keyword.property", { link = "Material_SynPropertyKeyword" })
 highlight("@text.danger", { link = "Material_VimErrorInverted" })
 highlight("@text.diff.add", { link = "Material_VimDiffAdd" })
 highlight("@text.diff.delete", { link = "Material_VimDiffDelete" })
@@ -1331,7 +1333,7 @@ highlight("@lsp.type.interface", { link = "Material_SynInterfaceName" })
 highlight("@lsp.type.member", { link = "Material_SynMemberName" })
 highlight("@lsp.type.namespace", { link = "Material_SynNamespaceName" })
 highlight("@lsp.type.parameter", { link = "Material_SynParameterName" })
-highlight("@lsp.type.property", { link = "Material_SynFieldName" })
+highlight("@lsp.type.property", { link = "Material_SynPropertyName" })
 highlight("@lsp.type.string", { link = "Material_SynString" })
 highlight("@lsp.type.struct", { link = "Material_SynStructureName" })
 highlight("@lsp.type.type", { link = "Material_SynStructureName" })
@@ -1422,7 +1424,7 @@ highlight("csStorage", { link = "Material_SynNamespaceKeyword" })
 
 -- LSP {{{4
 
-highlight("@lsp.type.constant.cs", { link = "Material_SynModReadonly" })
+highlight("@lsp.type.constant.cs", { link = "Material_SynFieldNameNonItalic" })
 highlight("@lsp.type.comment.documentation.attribute.name", {
   link = "Material_SynCsharpDocCommentTagAttr",
 })
@@ -1443,6 +1445,7 @@ highlight("@lsp.type.comment.excludedCode.cs", { link = "@comment" })
 highlight("@lsp.type.delegate.cs", {
   link = "Material_SynAnonymousFunctionName",
 })
+highlight("@lsp.type.field.cs", { link = "Material_SynFieldName" })
 highlight("@lsp.type.label.cs", { link = "Material_SynVariableName" })
 highlight("@lsp.type.method.extension.cs", {
   link = "Material_SynExtensionMethod",
@@ -1451,7 +1454,7 @@ highlight("@lsp.type.operator.overloaded.cs", {
   link = "Material_SynOperatorOverloaded",
 })
 highlight("@lsp.type.preproc.text.cs", { link = "Normal" })
-highlight("@lsp.type.property.cs", { link = "Material_SynAccessorName" })
+highlight("@lsp.type.property.cs", { link = "Material_SynPropertyName" })
 highlight("@lsp.type.string.verbatim", { link = "Material_SynStringVerbatim" })
 
 -- css {{{3
@@ -1462,7 +1465,6 @@ highlight("cssFunction", { link = "NONE" })
 highlight("cssIdentifier", { link = "Material_SynTypedefKeyword" })
 highlight("cssImportant", { link = "Material_SynStatement" })
 highlight("cssNoise", { link = "Material_SynSpecial" })
-highlight("cssProp", { link = "Material_SynFieldName" })
 highlight("cssSelectorOp", { link = "Material_SynOperator" })
 
 -- Treesitter {{{4
@@ -1670,7 +1672,7 @@ highlight("typescriptObjectLabel", { link = "Material_SynFieldName" })
 highlight("typescriptOptionalMark", { link = "Material_SynOperator" })
 highlight("typescriptParens", { link = "Material_SynSpecial" })
 highlight("typescriptPredefinedType", { link = "Material_SynTypeName" })
-highlight("typescriptProp", { link = "Material_SynFieldName" })
+highlight("typescriptProp", { link = "Material_SynPropertyName" })
 highlight("typescriptRestOrSpread", { link = "Material_SynOperator" })
 highlight("typescriptTry", { link = "Material_SynStatement" })
 highlight("typescriptTypeAnnotation", { link = "Material_SynSpecial" })
@@ -1684,10 +1686,6 @@ highlight("typescriptVariable", { link = "Material_SynStatement" })
 highlight("typescriptVariableDeclaration", {
   link = "Material_SynVariableName",
 })
-
--- Treesitter {{{4
-
-highlight("@property.typescript", { link = "Material_SynFieldName" })
 
 -- vim (VimScript|VimL) {{{3
 
@@ -1787,7 +1785,7 @@ highlight("CmpItemKindKeyword", { link = "Material_SynStatement" })
 highlight("CmpItemKindMethod", { link = "Material_SynFunctionName" })
 highlight("CmpItemKindModule", { link = "Material_SynNamespaceName" })
 highlight("CmpItemKindOperator", { link = "Material_SynOperator" })
-highlight("CmpItemKindProperty", { link = "Material_SynAccessorName" })
+highlight("CmpItemKindProperty", { link = "Material_SynPropertyName" })
 highlight("CmpItemKindStruct", { link = "Material_SynStructureName" })
 highlight("CmpItemKindTypeParameter", {
   link = "Material_SynGenericParameterName",
