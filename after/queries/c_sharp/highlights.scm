@@ -1,5 +1,7 @@
 ;; extends
 
+; operators
+
 (binary_expression
   operator: _ @operator)
 
