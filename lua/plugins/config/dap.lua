@@ -73,15 +73,6 @@ local function set_dynamic_keymaps()
   })
 end
 
-local function delete_dynamic_keymaps()
-  vim.keymap.del("n", "<F5>")
-  vim.keymap.del("n", "<F6>")
-  vim.keymap.del("n", "<F7>")
-  vim.keymap.del("n", "<F19>")
-  vim.keymap.del("n", "<F8>")
-  vim.keymap.del({ "n", "v" }, "<M-k>")
-end
-
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 
@@ -90,14 +81,10 @@ end
 
 dap.listeners.after.event_terminated["dapui_config"] = function()
   dapui.close()
-
-  delete_dynamic_keymaps()
 end
 
 dap.listeners.after.event_exited["dapui_config"] = function()
   dapui.close()
-
-  delete_dynamic_keymaps()
 end
 
 vim.fn.sign_define("DapBreakpoint", {
