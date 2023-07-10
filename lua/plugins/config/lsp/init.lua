@@ -218,7 +218,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       common.supports_method(client, "textDocument/codeLens")
       or common.supports_method(client, "codeLens/resolve")
     then
-      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
         desc = "Update the code lenses of the buffer.",
         group = common.augroup,
         buffer = args.buf,
