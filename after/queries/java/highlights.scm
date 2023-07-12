@@ -8,6 +8,9 @@
 (scoped_identifier
   "." @operator)
 
+(wildcard
+  "?" @punctuation)
+
 ; namespaces
 
 (package_declaration
