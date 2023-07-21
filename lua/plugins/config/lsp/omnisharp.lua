@@ -1,7 +1,7 @@
 local common = require "plugins.config.lsp.common"
 
 require("lspconfig").omnisharp.setup {
-  cmd = { "OmniSharp" },
+  cmd = { "omnisharp" },
   capabilities = common.capabilities,
   handlers = common.handlers,
 }
