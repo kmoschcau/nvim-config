@@ -1455,6 +1455,7 @@ highlight("@lsp.type.operator.overloaded.cs", {
 })
 highlight("@lsp.type.preproc.text.cs", { link = "Normal" })
 highlight("@lsp.type.property.cs", { link = "Material_SynPropertyName" })
+highlight("@lsp.type.string.escape", { link = "Material_SynSpecialChar" })
 highlight("@lsp.type.string.verbatim", { link = "Material_SynStringVerbatim" })
 
 -- css {{{3
