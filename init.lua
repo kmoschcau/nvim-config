@@ -133,7 +133,6 @@ vim.o.guicursor = table.concat({
   }, ":"),
 }, ",")
 vim.o.guifont = "FuraMonoNerdFontComplete:h10"
-vim.o.guioptions = "cig"
 vim.o.inccommand = "split"
 vim.o.linebreak = true
 vim.o.list = true
