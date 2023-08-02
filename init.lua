@@ -46,21 +46,7 @@ if vim.fn.executable(python_path) > 0 then
   vim.g.python3_host_prog = python_path
 end
 
--- plugins and packages {{{1
-local ehandler = require("error-handler").handler
-
--- bootstrap packer
-xpcall(require, ehandler, "packer.bootstrap")
-
--- load plugin list
-xpcall(require, ehandler, "plugins")
-
--- load the plugin configuration files
-xpcall(require, ehandler, "plugins.config")
-
--- general Neovim settings {{{1
--- appearance settings {{{2
--- colorscheme settings {{{3
+-- theme settings {{{1
 
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
@@ -77,7 +63,20 @@ else
   vim.cmd [[silent! colorscheme morning]]
 end
 
--- Sign settings {{{3
+-- plugins and packages {{{1
+local ehandler = require("error-handler").handler
+
+-- bootstrap packer
+xpcall(require, ehandler, "packer.bootstrap")
+
+-- load plugin list
+xpcall(require, ehandler, "plugins")
+
+-- load the plugin configuration files
+xpcall(require, ehandler, "plugins.config")
+
+-- general Neovim settings {{{1
+-- appearance settings {{{2
 
 -- Customize the built-in signs used by the diagnostics API.
 local signs = {
