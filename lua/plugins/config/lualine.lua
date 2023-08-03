@@ -64,11 +64,26 @@ require("lualine").setup {
     lualine_b = {
       {
         "diff",
-        colored = false,
-        padding = { left = 1, right = 0 },
-        separator = "",
+        colored = true,
+        diff_color = {
+          added = "Material_VimDiffSignAdd",
+          modified = "Material_VimDiffSignChange",
+          removed = "Material_VimDiffSignDelete",
+        },
+        separator = { left = "", right = "" },
         cond = function()
           return vim.fn.winwidth(0) > vcs_display_width
+        end,
+        source = function()
+          --- @diagnostic disable-next-line: undefined-field
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
         end,
       },
       {
