@@ -1,10 +1,15 @@
 local common = require "plugins.config.lsp.common"
 local compat = require "system-compat"
+local omni_ext = require "omnisharp_extended"
 
 require("lspconfig").omnisharp.setup {
   cmd = { compat.append_win_ext "omnisharp" },
   capabilities = common.capabilities,
-  handlers = common.handlers,
+  handlers = vim.tbl_extend(
+    "error",
+    common.handlers,
+    { ["textDocument/definition"] = omni_ext.handler }
+  ),
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -17,6 +22,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.name ~= "omnisharp" then
       return
     end
+
+    -- textDocument/definition
+    vim.keymap.set("n", "gd", omni_ext.telescope_lsp_definitions, {
+      buffer = args.buf,
+      desc = "Fuzzy find definitions of the symbol under the cursor.",
+      silent = true,
+    })
 
     -- This is needed because OmniSharp's semantic tokens are off-spec
     client.server_capabilities.semanticTokensProvider.legend = {

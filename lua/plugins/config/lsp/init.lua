@@ -71,18 +71,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/definition
-    vim.keymap.set(
-      "n",
-      "gd",
-      common.supports_method(client, "textDocument/definition")
-          and tel_builtin.lsp_definitions
-        or vim.lsp.buf.definition,
-      {
-        buffer = args.buf,
-        desc = "Fuzzy find definitions of the symbol under the cursor.",
-        silent = true,
-      }
-    )
+    if client.name ~= "omnisharp" then
+      vim.keymap.set(
+        "n",
+        "gd",
+        common.supports_method(client, "textDocument/definition")
+            and tel_builtin.lsp_definitions
+          or vim.lsp.buf.definition,
+        {
+          buffer = args.buf,
+          desc = "Fuzzy find definitions of the symbol under the cursor.",
+          silent = true,
+        }
+      )
+    end
 
     -- textDocument/implementation
     vim.keymap.set(

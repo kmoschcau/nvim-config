@@ -36,6 +36,7 @@ require("neodev").setup {
       "nvim-tree.lua",
       "nvim-treesitter",
       "nvim-treesitter-context",
+      "omnisharp-extended-lsp.nvim",
       "packer.nvim",
       "playground",
       "plenary.nvim",

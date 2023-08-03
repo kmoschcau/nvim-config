@@ -25,6 +25,9 @@ return require("packer").startup(function()
   -- Configurations for built-in LSP
   use "neovim/nvim-lspconfig"
 
+  -- Additional things needed for OmniSharp (since it's not quite an LSP)
+  use "Hoffs/omnisharp-extended-lsp.nvim"
+
   -- Tool to allow non-LSP sources to use LSP functions
   use {
     "jose-elias-alvarez/null-ls.nvim",
