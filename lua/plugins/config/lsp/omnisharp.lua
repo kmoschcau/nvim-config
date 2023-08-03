@@ -1,7 +1,8 @@
 local common = require "plugins.config.lsp.common"
+local compat = require "system-compat"
 
 require("lspconfig").omnisharp.setup {
-  cmd = { "omnisharp" },
+  cmd = { compat.append_win_ext "omnisharp" },
   capabilities = common.capabilities,
   handlers = common.handlers,
 }

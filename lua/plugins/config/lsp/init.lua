@@ -4,7 +4,6 @@ local lspconfig = require "lspconfig"
 local simple_servers = {
   "gradle_ls",
   "jedi_language_server",
-  "jsonls",
   "lemminx",
   "ruff_lsp",
   "vimls",
@@ -21,6 +20,7 @@ local server_config_modules = {
   "ember",
   "glint",
   "html",
+  "jsonls",
   "lua_ls",
   "omnisharp",
   "typescript",
