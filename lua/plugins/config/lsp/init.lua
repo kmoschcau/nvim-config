@@ -38,7 +38,7 @@ local formatting_ignore_list = {
   "tsserver",
 }
 
---- @param name string
+--- @param name string|nil
 --- @return boolean
 local function is_ignored_formatter(name)
   local contains = vim.list_contains or vim.tbl_contains
@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/definition
-    if client.name ~= "omnisharp" then
+    if client and client.name ~= "omnisharp" then
       vim.keymap.set(
         "n",
         "gd",
@@ -195,9 +195,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     if common.supports_method(client, "textDocument/formatting") then
-      if is_ignored_formatter(client.name) then
+      if is_ignored_formatter(client and client.name) then
+        local c = client or { name = "NilClient" }
         vim.notify_once(
-          "Ignoring " .. client.name .. " as formatting provider.",
+          "Ignoring " .. c.name .. " as formatting provider.",
           vim.log.levels.DEBUG
         )
       else

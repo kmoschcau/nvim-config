@@ -19,9 +19,13 @@ M.handlers = {
 }
 
 --- Log the given client's server's capabilities
---- @param client unknown the LSP client to log capabilities for
+--- @param client lsp.Client|nil the LSP client to log capabilities for
 --- @param buf_id? integer the buffer number, defaults to 0
 M.log_capabilities = function(client, buf_id)
+  if client == nil then
+    return
+  end
+
   local buffer_name = vim.api.nvim_buf_get_name(buf_id or 0)
   local title = "Capabilities for " .. client.name .. " at " .. buffer_name
 
@@ -66,11 +70,16 @@ M.log_capabilities = function(client, buf_id)
   vim.notify(table.concat(lines, "\n"), vim.log.levels.DEBUG, { title = title })
 end
 
---- Check whether the given client's server supports the given LSP method.
---- @param client unknown the LSP client whose server to check
+--- Check whether the given client's server supports the given LSP method. If
+--- the given client is `nil`, this always returns false.
+--- @param client lsp.Client|nil the LSP client whose server to check
 --- @param method string the method name of the method to check
 --- @return boolean
 M.supports_method = function(client, method)
+  if client == nil then
+    return false
+  end
+
   if client.supports_method then
     return client.supports_method(method)
   end
