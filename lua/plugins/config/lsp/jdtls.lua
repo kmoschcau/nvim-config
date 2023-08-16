@@ -130,8 +130,6 @@ M.start_or_attach = function()
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }
-
-      jdtls.setup.add_commands()
     end,
     settings = {
       java = {
