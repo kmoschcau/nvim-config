@@ -6,6 +6,7 @@ local simple_servers = {
   "jedi_language_server",
   "lemminx",
   "ruff_lsp",
+  "svelte",
   "vimls",
 }
 for _, lsp in ipairs(simple_servers) do
