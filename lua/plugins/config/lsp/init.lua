@@ -5,6 +5,7 @@ local simple_servers = {
   "gradle_ls",
   "jedi_language_server",
   "lemminx",
+  "phpactor",
   "ruff_lsp",
   "svelte",
   "vimls",
