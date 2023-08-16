@@ -8,6 +8,7 @@ require("neodev").setup {
       "cmp-dap",
       "cmp-git",
       "cmp-nvim-lsp",
+      "cmp-nvim-lsp-signature-help",
       "cmp-path",
       "cmp_luasnip",
       "dressing.nvim",
