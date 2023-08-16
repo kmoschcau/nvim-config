@@ -61,6 +61,9 @@ return require("packer").startup(function()
   -- cmp LSP source
   use "hrsh7th/cmp-nvim-lsp"
 
+  -- cmp LSP source for function signatures
+  use "hrsh7th/cmp-nvim-lsp-signature-help"
+
   -- cmp buffer source
   use "hrsh7th/cmp-buffer"
 
