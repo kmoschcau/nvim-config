@@ -1,22 +1,29 @@
 local lsp_common_opts = {
   fname_width = 0.5,
-  trim_text = true,
 }
 
+local actions = require "telescope.actions"
 require("telescope").setup {
   defaults = {
     mappings = {
       i = {
         ["<C-x>"] = false,
-        ["<C-s>"] = "select_horizontal",
+        ["<C-s>"] = actions.select_horizontal,
       },
       n = {
         ["<C-x>"] = false,
-        ["<C-s>"] = "select_horizontal",
+        ["<C-s>"] = actions.select_horizontal,
       },
     },
   },
   pickers = {
+    live_grep = vim.tbl_extend("force", lsp_common_opts, {
+      mappings = {
+        i = {
+          ["<C-f>"] = actions.to_fuzzy_refine,
+        },
+      },
+    }),
     lsp_references = lsp_common_opts,
     lsp_incoming_calls = lsp_common_opts,
     lsp_outgoing_calls = lsp_common_opts,
