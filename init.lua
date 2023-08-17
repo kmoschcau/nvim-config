@@ -66,14 +66,11 @@ end
 -- plugins and packages {{{1
 local ehandler = require("error-handler").handler
 
--- bootstrap packer
-xpcall(require, ehandler, "packer.bootstrap")
+-- load plugin infrastructure
+xpcall(require, ehandler, "plugin-management")
 
--- load plugin list
-xpcall(require, ehandler, "plugins")
-
--- load the plugin configuration files
-xpcall(require, ehandler, "plugins.config")
+-- load LSP keymaps
+xpcall(require, ehandler, "lsp.keymaps")
 
 -- general Neovim settings {{{1
 -- appearance settings {{{2
@@ -278,50 +275,7 @@ vim.keymap.set("n", "<F10>", vim.show_pos, {
   silent = true,
 })
 
--- plugin key maps {{{3
--- vim-wordmotion | chaoren/vim-wordmotion {{{4
-
--- Change the wordmotion keys to work with Alt.
-vim.g.wordmotion_mappings = {
-  w = "<M-w>",
-  b = "<M-b>",
-  e = "<M-e>",
-  ge = "g<M-e>",
-  aw = "g<M-w>",
-  iw = "g<M-w>",
-}
-
 -- plugin configurations {{{1
-
--- csv.vim | chrisbra/csv.vim {{{2
-
-vim.g.csv_no_conceal = 1
-
--- packer.nvim | wbthomason/packer.nvim {{{2
-
-local packer_augroup = vim.api.nvim_create_augroup("PackerNvim_InitVim", {})
-vim.api.nvim_create_autocmd("BufWritePost", {
-  desc = "Automatically source the plugin configuration on write.",
-  group = packer_augroup,
-  pattern = vim.fs.normalize "~/.config/nvim/lua/plugins/init.lua",
-  callback = function()
-    vim.notify("Reloaded plugins init", vim.log.levels.DEBUG)
-    package.loaded["plugins"] = nil
-    xpcall(require, ehandler, "plugins")
-  end,
-})
-
--- vim-markdown-composer | euclio/vim-markdown-composer {{{2
-
--- Whether the server should automatically start when a markdown file is opened.
-vim.g.markdown_composer_autostart = 0
-
--- Add additional logic for WSL
-if vim.fn.executable "xdg-open" > 0 then
-  vim.g.markdown_composer_browser = "xdg-open"
-elseif vim.fn.executable "wslview" > 0 then
-  vim.g.markdown_composer_browser = "wslview"
-end
 
 -- ft_sql | really old vimscript plugin, that's shipped by default {{{2
 

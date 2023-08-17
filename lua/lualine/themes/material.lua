@@ -1,3 +1,5 @@
+-- This file has to be here instead of the plugin dir, to be loaded by lualine.
+
 -- This replaces the default statusline highlight with the strong framing
 -- highlight. This is meant to be used to remove the differing, one character
 -- highlight on the right side of the statusline for windows on the bottom when

@@ -13,4 +13,19 @@ M.append_win_ext = function(baseName, ext)
   return baseName .. "." .. (ext or "cmd")
 end
 
+--- Try and get the appropriate browser command for the environment neovim is
+--- running in.
+--- @return string?
+M.get_browser_command = function()
+  if vim.fn.executable "xdg-open" > 0 then
+    return "xdg-open"
+  end
+
+  if vim.fn.executable "wslview" > 0 then
+    return "wslview"
+  end
+
+  return nil
+end
+
 return M
