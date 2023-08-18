@@ -231,10 +231,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- plugin hooks {{{1
 
     if common.supports_method(client, "textDocument/documentSymbol") then
-      require("nvim-navic").attach(client, args.buf)
-
       local c = client or { name = "NilClient" }
-      vim.notify("Attached navic to: " .. c.name, vim.log.levels.DEBUG)
+
+      local has_navic, navic = pcall(require, "nvim-navic")
+      if has_navic then
+        navic.attach(client, args.buf)
+
+        vim.notify("Attached navic to: " .. c.name, vim.log.levels.DEBUG)
+      end
+
+      local has_navbuddy, navbuddy = pcall(require, "nvim-navbuddy")
+      if has_navbuddy then
+        navbuddy.attach(client, args.buf)
+
+        vim.notify("Attached navbuddy to: " .. c.name, vim.log.levels.DEBUG)
+      end
     end
 
     -- }}}1
