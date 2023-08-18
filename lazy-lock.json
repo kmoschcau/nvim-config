@@ -40,6 +40,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "4613314b1f21b37694cf390ab3dc5262ba670798" },
   "nvim-treesitter-context": { "branch": "master", "commit": "a17c31268b56d53624fdc9cb03a225d4a17cabdb" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "9298b3ac8fd6d0d8f9e321194c6d3fd37e417cf9" },
+  "nvim-ts-autotag": { "branch": "main", "commit": "6be1192965df35f94b8ea6d323354f7dc7a557e4" },
   "nvim-web-devicons": { "branch": "master", "commit": "cfc8824cc1db316a276b36517f093baccb8e799a" },
   "omnisharp-extended-lsp.nvim": { "branch": "main", "commit": "53edfb413a54c9e55dcddc9e9fa4977a897e4425" },
   "playground": { "branch": "master", "commit": "2b81a018a49f8e476341dfcb228b7b808baba68b" },

@@ -37,6 +37,9 @@ return {
     },
 
     -- modules below
+    autotag = {
+      enable = true,
+    },
     endwise = {
       enable = true,
     },
