@@ -36,6 +36,10 @@ return {
       "comment", -- see above
     },
 
+    -- modules below
+    endwise = {
+      enable = true,
+    },
     highlight = {
       enable = true,
     },
