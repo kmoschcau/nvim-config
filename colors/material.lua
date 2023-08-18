@@ -1619,6 +1619,12 @@ highlight("mkdListItem", { link = "Material_SynSpecial" })
 highlight("mustacheHelpers", { link = "Material_SynOperator" })
 highlight("mustacheHbsComponent", { link = "Material_SynFieldName" })
 
+-- razor {{{3
+
+highlight("razorcsIdentifier", { link = "Material_SynStructureName" })
+highlight("razorHtmlAttribute", { link = "@tag.attribute.html" })
+highlight("razorHtmlTag", { link = "@tag.html" })
+
 -- ruby {{{3
 
 highlight("rubyClass", { link = "Material_SynTypedefKeyword" })
