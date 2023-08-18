@@ -132,6 +132,16 @@ return {
         lualine_y = lualine_y,
         lualine_z = lualine_z,
       },
+      winbar = {
+        lualine_c = {
+          { "navic" },
+        },
+      },
+      inactive_winbar = {
+        lualine_c = {
+          { "navic" },
+        },
+      },
       extensions = {
         "fugitive",
         "nvim-dap-ui",

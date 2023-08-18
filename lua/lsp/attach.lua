@@ -1,3 +1,5 @@
+-- vim: set foldmethod=marker
+
 local common = require "lsp.common"
 
 --- @class LspAttachData
@@ -18,6 +20,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     common.log_capabilities(client)
 
+    -- keymaps {{{1
     -- textDocument/declaration
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
       buffer = args.buf,
@@ -175,6 +178,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       }
     )
 
+    -- textDocument/hover
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {
       buffer = args.buf,
       desc = "Trigger hover for the symbol under the cursor.",
@@ -223,5 +227,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         silent = true,
       })
     end
+
+    -- plugin hooks {{{1
+
+    if common.supports_method(client, "textDocument/documentSymbol") then
+      require("nvim-navic").attach(client, args.buf)
+
+      local c = client or { name = "NilClient" }
+      vim.notify("Attached navic to: " .. c.name, vim.log.levels.DEBUG)
+    end
+
+    -- }}}1
   end,
 })

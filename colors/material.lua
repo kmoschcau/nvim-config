@@ -869,37 +869,43 @@ highlight("Material_DebugTest", {
 highlight("Material_SynComment", { fg = c.neutral.midpoint_strong })
 
 -- Constant and linked groups
-highlight("Material_SynConstant", {
+local h_syn_constant = {
   fg = color_table("blue_grey", 7),
   bg = color_table("blue_grey", 1),
-})
-highlight("Material_SynString", {
+}
+highlight("Material_SynConstant", h_syn_constant)
+local h_syn_string = {
   fg = color_table("green", 7),
   bg = color_table("green", 1),
-})
+}
+highlight("Material_SynString", h_syn_string)
 highlight("Material_SynCharacter", {
   fg = color_table("light_green", 7),
   bg = color_table("light_green", 1),
 })
-highlight("Material_SynNumber", {
+local h_syn_number = {
   fg = color_table("blue", 7),
   bg = c.syntax.number.light,
-})
-highlight("Material_SynBoolean", {
+}
+highlight("Material_SynNumber", h_syn_number)
+local h_syn_boolean = {
   fg = color_table("orange", 7),
   bg = color_table("orange", 1),
-})
+}
+highlight("Material_SynBoolean", h_syn_boolean)
 highlight("Material_SynFloat", {
   fg = color_table("light_blue", 7),
   bg = color_table("light_blue", 1),
 })
 
 -- Statement and linked groups
-highlight("Material_SynStatement", {
+local h_syn_statement = {
   fg = color_table("orange", 7),
   bold = true,
-})
-highlight("Material_SynOperator", { fg = color_table("orange", 7) })
+}
+highlight("Material_SynStatement", h_syn_statement)
+local h_syn_operator = { fg = color_table("orange", 7) }
+highlight("Material_SynOperator", h_syn_operator)
 
 -- PreProc and linked groups
 highlight("Material_SynPreProc", { fg = color_table("teal", 5), bold = true })
@@ -947,10 +953,11 @@ highlight("Material_SynStringVerbatim", {
 -- Literals
 
 -- Member variables
-highlight("Material_SynFieldName", {
+local h_syn_field_name = {
   fg = color_table("blue", 6),
   italic = true,
-})
+}
+highlight("Material_SynFieldName", h_syn_field_name)
 highlight("Material_SynFieldNameNonItalic", {
   fg = color_table("blue", 6),
   italic = false,
@@ -958,15 +965,17 @@ highlight("Material_SynFieldNameNonItalic", {
 })
 
 -- Other value holders
-highlight("Material_SynConstantName", {
+local h_syn_constant_name = {
   fg = color_table("orange", 5),
   italic = false,
   nocombine = true,
-})
-highlight("Material_SynVariableName", {
+}
+highlight("Material_SynConstantName", h_syn_constant_name)
+local h_syn_variable_name = {
   fg = color_table("orange", 5),
   italic = true,
-})
+}
+highlight("Material_SynVariableName", h_syn_variable_name)
 highlight("Material_SynParameterName", {
   fg = color_table("orange", 9),
   italic = true,
@@ -977,20 +986,22 @@ highlight("Material_SynFunctionKeyword", {
   fg = c.syntax["function"],
   bold = true,
 })
-highlight("Material_SynFunctionName", {
+local h_syn_function_name = {
   fg = c.syntax["function"],
   italic = false,
   nocombine = true,
-})
+}
+highlight("Material_SynFunctionName", h_syn_function_name)
 highlight("Material_SynMemberName", { fg = c.syntax["function"] })
 highlight("Material_SynPropertyKeyword", {
   fg = color_table("cyan", 6),
   bold = true,
 })
-highlight("Material_SynPropertyName", {
+local h_syn_property_name = {
   fg = color_table("cyan", 6),
   italic = true,
-})
+}
+highlight("Material_SynPropertyName", h_syn_property_name)
 highlight("Material_SynAnonymousFunctionName", {
   fg = c.syntax["function"],
   bg = c.syntax.meta.light,
@@ -1005,11 +1016,12 @@ highlight("Material_SynStructureKeyword", {
   fg = c.syntax.structure,
   bold = true,
 })
-highlight("Material_SynStructureName", {
+local h_syn_structure_name = {
   fg = c.syntax.structure,
   italic = false,
   nocombine = true,
-})
+}
+highlight("Material_SynStructureName", h_syn_structure_name)
 
 -- Enums (same as structures, but with enumerated variants)
 highlight("Material_SynEnumKeyword", {
@@ -1025,30 +1037,33 @@ highlight("Material_SynEnumMember", {
 
 -- Typedefs (Classes and equally large/extensible things)
 highlight("Material_SynTypedefKeyword", { fg = c.syntax.typedef, bold = true })
-highlight("Material_SynTypedefName", {
+local h_syn_typedef_name = {
   fg = c.syntax.typedef,
   italic = false,
   nocombine = true,
-})
+}
+highlight("Material_SynTypedefName", h_syn_typedef_name)
 
 -- Namespaces (or anything that groups together definitions)
 highlight("Material_SynNamespaceKeyword", {
   fg = c.syntax.namespace,
   bold = true,
 })
-highlight("Material_SynNamespaceName", {
+local h_syn_namespace_name = {
   fg = c.syntax.namespace,
   italic = false,
   nocombine = true,
-})
+}
+highlight("Material_SynNamespaceName", h_syn_namespace_name)
 
 -- Generics
 highlight("Material_SynGenericSpecial", { fg = color_table("purple", 4) })
 highlight("Material_SynGenericBackground", { bg = c.syntax.meta.light })
-highlight("Material_SynGenericParameterName", {
+local h_syn_generic_parameter_name = {
   fg = color_table("orange", 6),
   bg = c.syntax.meta.light,
-})
+}
+highlight("Material_SynGenericParameterName", h_syn_generic_parameter_name)
 highlight("Material_SynDecorator", {
   fg = c.syntax.meta.strong,
   italic = false,
@@ -1060,11 +1075,12 @@ highlight("Material_SynInterfaceKeyword", {
   fg = c.syntax.meta.strong,
   bold = true,
 })
-highlight("Material_SynInterfaceName", {
+local h_syn_interface_name = {
   fg = c.syntax.meta.strong,
   italic = false,
   nocombine = true,
-})
+}
+highlight("Material_SynInterfaceName", h_syn_interface_name)
 
 -- Modifiers {{{5
 
@@ -1792,6 +1808,109 @@ highlight("CmpItemKindTypeParameter", {
   link = "Material_SynGenericParameterName",
 })
 highlight("CmpItemKindVariable", { link = "Material_SynVariableName" })
+
+-- nvim-navic | SmiteshP/nvim-navic {{{3
+
+highlight("NavicIconsArray", {
+  fg = h_syn_structure_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsBoolean", {
+  fg = h_syn_boolean.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsClass", {
+  fg = h_syn_typedef_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsConstant", {
+  fg = h_syn_constant_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsConstructor", {
+  fg = h_syn_function_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsEnum", {
+  fg = c.syntax.enum.name,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsEnumMember", {
+  fg = c.syntax.enum.member,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsEvent", { link = "Material_DebugTest" })
+highlight("NavicIconsField", {
+  fg = h_syn_field_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsFile", { link = "Material_Lualine3" })
+highlight("NavicIconsFunction", {
+  fg = h_syn_function_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsInterface", {
+  fg = h_syn_interface_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsKey", {
+  fg = h_syn_statement.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsMethod", {
+  fg = h_syn_function_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsModule", {
+  fg = h_syn_namespace_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsNamespace", {
+  fg = h_syn_namespace_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsNull", {
+  fg = h_syn_constant.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsNumber", {
+  fg = h_syn_number.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsObject", {
+  fg = h_syn_structure_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsOperator", {
+  fg = h_syn_operator.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsPackage", {
+  fg = h_syn_namespace_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsProperty", {
+  fg = h_syn_property_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsString", {
+  fg = h_syn_string.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsStruct", {
+  fg = h_syn_structure_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsTypeParameter", {
+  fg = h_syn_generic_parameter_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicIconsVariable", {
+  fg = h_syn_variable_name.fg,
+  bg = c.neutral.strong,
+})
+highlight("NavicSeparator", { link = "Material_Lualine3" })
+highlight("NavicText", { link = "Material_Lualine3" })
 
 -- nvim-notify | rcarriga/nvim-notify {{{3
 

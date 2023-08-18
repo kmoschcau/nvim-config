@@ -70,17 +70,17 @@ local ehandler = require("error-handler").handler
 xpcall(require, ehandler, "plugin-management")
 
 -- load LSP keymaps
-xpcall(require, ehandler, "lsp.keymaps")
+xpcall(require, ehandler, "lsp.attach")
 
 -- general Neovim settings {{{1
 -- appearance settings {{{2
 
 -- Customize the built-in signs used by the diagnostics API.
 local signs = {
-  Error = require("icons").error,
-  Warn = require("icons").warn,
-  Info = require("icons").info,
-  Hint = require("icons").hint,
+  Error = require("icons").diagnostics.error,
+  Warn = require("icons").diagnostics.warn,
+  Info = require("icons").diagnostics.info,
+  Hint = require("icons").diagnostics.hint,
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
