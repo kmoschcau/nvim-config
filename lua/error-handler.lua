@@ -3,5 +3,5 @@ return {
   --- @param error string An error message
   handler = function(error)
     print("An error occurred:", error:gsub("\t", "    "))
-  end
+  end,
 }

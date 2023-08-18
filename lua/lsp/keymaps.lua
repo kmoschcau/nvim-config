@@ -85,11 +85,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/typeDefinition
-    vim.keymap.set("n", "<space>D", has_telescope and tel_builtin.lsp_type_definitions or vim.lsp.buf.type_definition, {
-      buffer = args.buf,
-      desc = "Fuzzy find type definitions of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "<space>D",
+      has_telescope and tel_builtin.lsp_type_definitions
+        or vim.lsp.buf.type_definition,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find type definitions of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- textDocument/rename
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {
@@ -106,38 +112,62 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/references
-    vim.keymap.set("n", "gr", has_telescope and tel_builtin.lsp_references or vim.lsp.buf.references, {
-      buffer = args.buf,
-      desc = "Fuzzy find references of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "gr",
+      has_telescope and tel_builtin.lsp_references or vim.lsp.buf.references,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find references of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- callHierarchy/incomingCalls
-    vim.keymap.set("n", "gci", has_telescope and tel_builtin.lsp_incoming_calls or vim.lsp.buf.incoming_calls, {
-      buffer = args.buf,
-      desc = "Fuzzy find incoming calls of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "gci",
+      has_telescope and tel_builtin.lsp_incoming_calls
+        or vim.lsp.buf.incoming_calls,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find incoming calls of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- callHierarchy/outgoingCalls
-    vim.keymap.set("n", "gco", has_telescope and tel_builtin.lsp_outgoing_calls or vim.lsp.buf.outgoing_calls, {
-      buffer = args.buf,
-      desc = "Fuzzy find outgoing calls of the symbol under the cursor.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "gco",
+      has_telescope and tel_builtin.lsp_outgoing_calls
+        or vim.lsp.buf.outgoing_calls,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find outgoing calls of the symbol under the cursor.",
+        silent = true,
+      }
+    )
 
     -- textDocument/documentSymbol
-    vim.keymap.set("n", "<space>sd", has_telescope and tel_builtin.lsp_document_symbols or vim.lsp.buf.document_symbol, {
-      buffer = args.buf,
-      desc = "Fuzzy find document symbols.",
-      silent = true,
-    })
+    vim.keymap.set(
+      "n",
+      "<space>sd",
+      has_telescope and tel_builtin.lsp_document_symbols
+        or vim.lsp.buf.document_symbol,
+      {
+        buffer = args.buf,
+        desc = "Fuzzy find document symbols.",
+        silent = true,
+      }
+    )
 
     -- workspace/symbol
     vim.keymap.set(
       "n",
       "<space>sw",
-      has_telescope and tel_builtin.lsp_dynamic_workspace_symbols or vim.lsp.buf.workspace_symbol,
+      has_telescope and tel_builtin.lsp_dynamic_workspace_symbols
+        or vim.lsp.buf.workspace_symbol,
       {
         buffer = args.buf,
         desc = "Fuzzy find workspace symbols.",
