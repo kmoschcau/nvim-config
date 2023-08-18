@@ -6,6 +6,7 @@ return {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    "lukas-reineke/cmp-under-comparator",
     "onsails/lspkind.nvim",
     { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
     "rcarriga/cmp-dap",
@@ -91,6 +92,18 @@ return {
       }, {
         buffer_source,
       }),
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require("cmp-under-comparator").under,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
     }
 
     cmp.setup.filetype("gitcommit", {
