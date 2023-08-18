@@ -15,11 +15,15 @@ return {
       "gradle_ls",
       "jedi_language_server",
       "lemminx",
-      "phpactor",
       "ruff_lsp",
       "svelte",
       "vimls",
     }
+
+    if vim.fn.has "win32" ~= 1 then
+      -- phpactor is simply not supported on Windows.
+      table.insert(simple_servers, "phpactor")
+    end
 
     for _, lsp in ipairs(simple_servers) do
       lspconfig[lsp].setup {
