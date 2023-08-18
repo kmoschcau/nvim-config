@@ -6,13 +6,45 @@ return {
   end,
   main = "nvim-treesitter.configs",
   opts = {
-    ensure_installed = "all",
+    ensure_installed = {
+      -- This should only include what should be there on first setup, not what
+      -- I end up using over time.
+      "bash",
+      -- "comment", -- commets are slowing down TS a lot currently
+      "diff",
+      "fish",
+      "git_config",
+      "git_rebase",
+      "gitattributes",
+      "gitcommit",
+      "gitignore",
+      "gpg",
+      "json",
+      "jsonc",
+      "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "regex",
+      "toml",
+      "vim",
+      "vimdoc",
+      "yaml",
+    },
+    auto_install = true,
+    ignore_install = {
+      "comment", -- see above
+    },
     highlight = {
       enable = true,
     },
     indent = {
       enable = true,
-      disable = { "javascript", "typescript" },
+      disable = {
+        "javascript",
+        "typescript",
+      },
     },
     playground = {
       enable = true,
