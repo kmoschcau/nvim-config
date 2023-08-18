@@ -1,1 +1,4 @@
-return { "NLKNguyen/vim-maven-syntax" }
+return {
+  "NLKNguyen/vim-maven-syntax",
+  ft = "maven",
+}

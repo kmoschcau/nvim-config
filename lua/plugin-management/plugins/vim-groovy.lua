@@ -1,1 +1,4 @@
-return { "thecodesmith/vim-groovy" }
+return {
+  "thecodesmith/vim-groovy",
+  ft = "groovy",
+}

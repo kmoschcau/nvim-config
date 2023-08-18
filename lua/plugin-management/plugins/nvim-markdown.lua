@@ -1,1 +1,4 @@
-return { "ixru/nvim-markdown" }
+return {
+  "ixru/nvim-markdown",
+  ft = "markdown",
+}
