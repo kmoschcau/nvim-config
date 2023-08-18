@@ -35,6 +35,7 @@ return {
     ignore_install = {
       "comment", -- see above
     },
+
     highlight = {
       enable = true,
     },
@@ -44,6 +45,9 @@ return {
         "javascript",
         "typescript",
       },
+    },
+    matchup = {
+      enable = true,
     },
     playground = {
       enable = true,
