@@ -172,7 +172,7 @@ M.start_or_attach = function()
         format = {
           enabled = false,
           settings = {
-            url = "~/.config/nvim/eclipse-formatter.xml",
+            url = "~/.config/nvim/external-config/eclipse-formatter.xml",
           },
         },
         implementationsCodeLens = {

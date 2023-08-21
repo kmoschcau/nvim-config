@@ -17,7 +17,6 @@ return {
       "jqls",
       "lemminx",
       "ruff_lsp",
-      "svelte",
       "vimls",
     }
 
@@ -41,6 +40,7 @@ return {
       "jsonls",
       "lua_ls",
       "omnisharp",
+      "svelte",
       "typescript",
       "yamlls",
     }

@@ -5,42 +5,8 @@ require("typescript").setup {
     capabilities = common.capabilities,
     handlers = common.handlers,
     settings = {
-      javascript = {
-        preferences = {
-          importModuleSpecifier = "relative",
-          importModuleSpecifierEnding = "js",
-          quoteStyle = "double",
-          useAliasesForRenames = false,
-        },
-        referencesCodeLens = {
-          enabled = true,
-          showOnAllFunctions = true,
-        },
-        suggest = {
-          completeFunctionCalls = true,
-        },
-      },
-      typescript = {
-        implementationsCodeLens = {
-          enabled = true,
-        },
-        preferences = {
-          importModuleSpecifier = "relative",
-          importModuleSpecifierEnding = "js",
-          quoteStyle = "double",
-          useAliasesForRenames = false,
-        },
-        referencesCodeLens = {
-          enabled = true,
-          showOnAllFunctions = true,
-        },
-        suggest = {
-          completeFunctionCalls = true,
-        },
-        surveys = {
-          enabled = false,
-        },
-      },
+      javascript = common.settings.javascript,
+      typescript = common.settings.typescript,
     },
   },
 }

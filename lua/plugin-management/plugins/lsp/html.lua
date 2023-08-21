@@ -8,14 +8,6 @@ lspconfig.html.setup {
   filetypes = { "html", "jsp" },
   handlers = common.handlers,
   settings = {
-    -- https://code.visualstudio.com/docs/languages/html
-    html = {
-      suggest = {
-        html5 = true,
-      },
-      format = {
-        enable = false,
-      },
-    },
+    html = common.settings.html
   },
 }

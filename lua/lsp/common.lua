@@ -20,6 +20,85 @@ M.handlers = {
   ),
 }
 
+--- Common configuration settings shared between multiple servers
+M.settings = {
+  -- https://code.visualstudio.com/docs/languages/css
+  css = {
+    customData = {
+      "~/.config/nvim/external-config/container.css-data.json",
+    },
+    format = {
+      enable = false,
+    },
+  },
+  less = {
+    format = {
+      enable = false,
+    },
+  },
+  scss = {
+    format = {
+      enable = false,
+    },
+  },
+
+  -- https://code.visualstudio.com/docs/languages/html
+  html = {
+    suggest = {
+      html5 = true,
+    },
+    format = {
+      enable = false,
+    },
+  },
+
+  javascript = {
+    format = {
+      enable = false,
+    },
+    preferences = {
+      importModuleSpecifier = "relative",
+      importModuleSpecifierEnding = "js",
+      quoteStyle = "double",
+      useAliasesForRenames = false,
+    },
+    referencesCodeLens = {
+      enabled = true,
+      showOnAllFunctions = true,
+    },
+    suggest = {
+      completeFunctionCalls = true,
+    },
+    updateImportsOnFileMove = {
+      enabled = true,
+    },
+  },
+  typescript = {
+    format = {
+      enable = false,
+    },
+    implementationsCodeLens = {
+      enabled = true,
+    },
+    preferences = {
+      importModuleSpecifier = "relative",
+      importModuleSpecifierEnding = "js",
+      quoteStyle = "double",
+      useAliasesForRenames = false,
+    },
+    referencesCodeLens = {
+      enabled = true,
+      showOnAllFunctions = true,
+    },
+    suggest = {
+      completeFunctionCalls = true,
+    },
+    surveys = {
+      enabled = false,
+    },
+  },
+}
+
 -- This is a list of servers that do not have an option to disable formatting.
 local formatting_ignore_list = {
   "html",
