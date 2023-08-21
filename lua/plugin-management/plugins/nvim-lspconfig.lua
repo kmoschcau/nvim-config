@@ -12,6 +12,7 @@ return {
     local lspconfig = require "lspconfig"
 
     local simple_servers = {
+      "emmet_language_server",
       "gradle_ls",
       "jedi_language_server",
       "jqls",
