@@ -14,6 +14,7 @@ return {
     local simple_servers = {
       "gradle_ls",
       "jedi_language_server",
+      "jqls",
       "lemminx",
       "ruff_lsp",
       "svelte",
