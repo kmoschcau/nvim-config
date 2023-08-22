@@ -96,7 +96,9 @@ return {
         },
         diagnostics.shellcheck,
         diagnostics.selene,
-        diagnostics.stylelint,
+        diagnostics.stylelint.with {
+          filetypes = { "css", "less", "sass", "scss", "svelte" },
+        },
         diagnostics.todo_comments,
         diagnostics.trail_space.with {
           disabled_filetypes = { "NvimTree", "markdown" },
