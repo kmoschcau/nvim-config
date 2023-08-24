@@ -1,5 +1,7 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
+local ehandler = require("error-handler").handler
+
 -- colors setup {{{1
 
 -- When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
@@ -53,9 +55,7 @@ end
 
 -- Try to set the "material" colorscheme, fall back to "morning".
 if vim.o.termguicolors then
-  if not pcall(function()
-    vim.cmd.colorscheme "material"
-  end) then
+  if not xpcall(vim.cmd.colorscheme, ehandler, "material") then
     vim.notify(
       [[Could not load the "material" colorscheme, using "morning" instead.]],
       vim.log.levels.WARN
@@ -67,7 +67,6 @@ else
 end
 
 -- plugins and packages {{{1
-local ehandler = require("error-handler").handler
 
 -- load plugin infrastructure
 xpcall(require, ehandler, "plugin-management")
