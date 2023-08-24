@@ -8,8 +8,11 @@
 --
 -- Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
 local terminfo_colors
-if vim.fn.has "unix" > 0 then
-  terminfo_colors = vim.trim(vim.fn.system "tput colors")
+if vim.fn.executable "tput" > 0 then
+  local result = vim.system({ "tput", "colors" }, { text = true }):wait()
+  if result.code == 0 then
+    terminfo_colors = vim.trim(result.stdout)
+  end
 else
   if vim.fn.exists "$WT_SESSION" > 0 then
     terminfo_colors = "256"

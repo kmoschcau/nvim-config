@@ -8,7 +8,8 @@ local rspec_executable = "rspec --format progress"
 local last_spec = nil
 
 local function and_command()
-  if vim.regex("fish$"):match_str(vim.fn.system "echo -n $SHELL") then
+  local result = vim.system({ "echo", "-n", "$SHELL" }, { text = true }):wait()
+  if result.code == 0 and vim.regex("fish$"):match_str(result.stdout) then
     return "; and "
   else
     return " && "
