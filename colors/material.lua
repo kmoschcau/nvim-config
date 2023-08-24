@@ -5,6 +5,13 @@
 -- Author:        Kai Moschcau <mail@kmoschcau.de>
 -- -----------------------------------------------------------------------------
 
+local utils = require "colors.material.utils"
+local color_table = utils.color_table
+local highlight = utils.highlight
+local constants = require "colors.material.constants"
+local hues = constants.hues
+local colors = constants.colors()
+
 -- General setup {{{1
 
 -- Reset all highlight groups to the default.
@@ -13,580 +20,6 @@ vim.cmd.highlight "clear"
 -- Set the name of the colortheme.
 vim.g.colors_name = vim.fn.expand "<sfile>:t:r"
 
--- Material color palette {{{2
-
---- @class ColorDefinition
---- @field gui string The GUI and termguicolors hex value of the color
---- @field cterm number|"NONE" The cterm color index of the color
-
---- @alias ColorGradient { [number|string]: ColorDefinition }
-
---- @alias ColorTable { [string]: ColorGradient, transparent: ColorDefinition }
-
---- @type ColorTable
-local material = {
-  red = {
-    [50] = { gui = "#ffebee", cterm = 255 },
-    [100] = { gui = "#ffcdd2", cterm = 224 },
-    [200] = { gui = "#ef9a9a", cterm = 210 },
-    [300] = { gui = "#e57373", cterm = 174 },
-    [400] = { gui = "#ef5350", cterm = 203 },
-    [500] = { gui = "#f44336", cterm = 203 },
-    [600] = { gui = "#e53935", cterm = 167 },
-    [700] = { gui = "#d32f2f", cterm = 160 },
-    [800] = { gui = "#c62828", cterm = 160 },
-    [900] = { gui = "#b71c1c", cterm = 124 },
-    A100 = { gui = "#ff8a80", cterm = 210 },
-    A200 = { gui = "#ff5252", cterm = 203 },
-    A400 = { gui = "#ff1744", cterm = 197 },
-    A700 = { gui = "#d50000", cterm = 160 },
-  },
-  pink = {
-    [50] = { gui = "#fce4ec", cterm = 255 },
-    [100] = { gui = "#f8bbd0", cterm = 218 },
-    [200] = { gui = "#f48fb1", cterm = 211 },
-    [300] = { gui = "#f06292", cterm = 204 },
-    [400] = { gui = "#ec407a", cterm = 204 },
-    [500] = { gui = "#e91e63", cterm = 161 },
-    [600] = { gui = "#d81b60", cterm = 161 },
-    [700] = { gui = "#c2185b", cterm = 125 },
-    [800] = { gui = "#ad1457", cterm = 125 },
-    [900] = { gui = "#880e4f", cterm = 89 },
-    A100 = { gui = "#ff80ab", cterm = 211 },
-    A200 = { gui = "#ff4081", cterm = 204 },
-    A400 = { gui = "#f50057", cterm = 197 },
-    A700 = { gui = "#c51162", cterm = 161 },
-  },
-  purple = {
-    [50] = { gui = "#f3e5f5", cterm = 255 },
-    [100] = { gui = "#e1bee7", cterm = 182 },
-    [200] = { gui = "#ce93d8", cterm = 176 },
-    [300] = { gui = "#ba68c8", cterm = 134 },
-    [400] = { gui = "#ab47bc", cterm = 133 },
-    [500] = { gui = "#9c27b0", cterm = 127 },
-    [600] = { gui = "#8e24aa", cterm = 91 },
-    [700] = { gui = "#7b1fa2", cterm = 91 },
-    [800] = { gui = "#6a1b9a", cterm = 54 },
-    [900] = { gui = "#4a148c", cterm = 54 },
-    A100 = { gui = "#ea80fc", cterm = 177 },
-    A200 = { gui = "#e040fb", cterm = 171 },
-    A400 = { gui = "#d500f9", cterm = 165 },
-    A700 = { gui = "#aa00ff", cterm = 129 },
-  },
-  deep_purple = {
-    [50] = { gui = "#ede7f6", cterm = 255 },
-    [100] = { gui = "#d1c4e9", cterm = 188 },
-    [200] = { gui = "#b39ddb", cterm = 146 },
-    [300] = { gui = "#9575cd", cterm = 104 },
-    [400] = { gui = "#7e57c2", cterm = 97 },
-    [500] = { gui = "#673ab7", cterm = 61 },
-    [600] = { gui = "#5e35b1", cterm = 61 },
-    [700] = { gui = "#512da8", cterm = 55 },
-    [800] = { gui = "#4527a0", cterm = 55 },
-    [900] = { gui = "#311b92", cterm = 54 },
-    A100 = { gui = "#b388ff", cterm = 141 },
-    A200 = { gui = "#7c4dff", cterm = 99 },
-    A400 = { gui = "#651fff", cterm = 57 },
-    A700 = { gui = "#6200ea", cterm = 56 },
-  },
-  indigo = {
-    [50] = { gui = "#e8eaf6", cterm = 255 },
-    [100] = { gui = "#c5cae9", cterm = 252 },
-    [200] = { gui = "#9fa8da", cterm = 146 },
-    [300] = { gui = "#7986cb", cterm = 104 },
-    [400] = { gui = "#5c6bc0", cterm = 61 },
-    [500] = { gui = "#3f51b5", cterm = 61 },
-    [600] = { gui = "#3949ab", cterm = 61 },
-    [700] = { gui = "#303f9f", cterm = 61 },
-    [800] = { gui = "#283593", cterm = 24 },
-    [900] = { gui = "#1a237e", cterm = 18 },
-    A100 = { gui = "#8c9eff", cterm = 111 },
-    A200 = { gui = "#536dfe", cterm = 63 },
-    A400 = { gui = "#3d5afe", cterm = 63 },
-    A700 = { gui = "#304ffe", cterm = 63 },
-  },
-  blue = {
-    [50] = { gui = "#e3f2fd", cterm = 195 },
-    [100] = { gui = "#bbdefb", cterm = 153 },
-    [200] = { gui = "#90caf9", cterm = 117 },
-    [300] = { gui = "#64b5f6", cterm = 75 },
-    [400] = { gui = "#42a5f5", cterm = 75 },
-    [500] = { gui = "#2196f3", cterm = 33 },
-    [600] = { gui = "#1e88e5", cterm = 32 },
-    [700] = { gui = "#1976d2", cterm = 32 },
-    [800] = { gui = "#1565c0", cterm = 25 },
-    [900] = { gui = "#0d47a1", cterm = 25 },
-    A100 = { gui = "#82b1ff", cterm = 111 },
-    A200 = { gui = "#448aff", cterm = 69 },
-    A400 = { gui = "#2979ff", cterm = 33 },
-    A700 = { gui = "#2962ff", cterm = 27 },
-  },
-  light_blue = {
-    [50] = { gui = "#e1f5fe", cterm = 195 },
-    [100] = { gui = "#b3e5fc", cterm = 153 },
-    [200] = { gui = "#81d4fa", cterm = 117 },
-    [300] = { gui = "#4fc3f7", cterm = 81 },
-    [400] = { gui = "#29b6f6", cterm = 39 },
-    [500] = { gui = "#03a9f4", cterm = 39 },
-    [600] = { gui = "#039be5", cterm = 38 },
-    [700] = { gui = "#0288d1", cterm = 32 },
-    [800] = { gui = "#0277bd", cterm = 31 },
-    [900] = { gui = "#01579b", cterm = 25 },
-    A100 = { gui = "#80d8ff", cterm = 117 },
-    A200 = { gui = "#40c4ff", cterm = 81 },
-    A400 = { gui = "#00b0ff", cterm = 39 },
-    A700 = { gui = "#0091ea", cterm = 32 },
-  },
-  cyan = {
-    [50] = { gui = "#e0f7fa", cterm = 195 },
-    [100] = { gui = "#b2ebf2", cterm = 159 },
-    [200] = { gui = "#80deea", cterm = 116 },
-    [300] = { gui = "#4dd0e1", cterm = 80 },
-    [400] = { gui = "#26c6da", cterm = 44 },
-    [500] = { gui = "#00bcd4", cterm = 38 },
-    [600] = { gui = "#00acc1", cterm = 37 },
-    [700] = { gui = "#0097a7", cterm = 31 },
-    [800] = { gui = "#00838f", cterm = 30 },
-    [900] = { gui = "#006064", cterm = 23 },
-    A100 = { gui = "#84ffff", cterm = 123 },
-    A200 = { gui = "#18ffff", cterm = 51 },
-    A400 = { gui = "#00e5ff", cterm = 45 },
-    A700 = { gui = "#00b8d4", cterm = 38 },
-  },
-  teal = {
-    [50] = { gui = "#e0f2f1", cterm = 255 },
-    [100] = { gui = "#b2dfdb", cterm = 152 },
-    [200] = { gui = "#80cbc4", cterm = 116 },
-    [300] = { gui = "#4db6ac", cterm = 73 },
-    [400] = { gui = "#26a69a", cterm = 36 },
-    [500] = { gui = "#009688", cterm = 30 },
-    [600] = { gui = "#00897b", cterm = 30 },
-    [700] = { gui = "#00796b", cterm = 29 },
-    [800] = { gui = "#00695c", cterm = 23 },
-    [900] = { gui = "#004d40", cterm = 23 },
-    A100 = { gui = "#a7ffeb", cterm = 159 },
-    A200 = { gui = "#64ffda", cterm = 86 },
-    A400 = { gui = "#1de9b6", cterm = 43 },
-    A700 = { gui = "#00bfa5", cterm = 37 },
-  },
-  green = {
-    [50] = { gui = "#e8f5e9", cterm = 255 },
-    [100] = { gui = "#c8e6c9", cterm = 252 },
-    [200] = { gui = "#a5d6a7", cterm = 151 },
-    [300] = { gui = "#81c784", cterm = 114 },
-    [400] = { gui = "#66bb6a", cterm = 71 },
-    [500] = { gui = "#4caf50", cterm = 71 },
-    [600] = { gui = "#43a047", cterm = 71 },
-    [700] = { gui = "#388e3c", cterm = 65 },
-    [800] = { gui = "#2e7d32", cterm = 239 },
-    [900] = { gui = "#1b5e20", cterm = 22 },
-    A100 = { gui = "#b9f6ca", cterm = 158 },
-    A200 = { gui = "#69f0ae", cterm = 85 },
-    A400 = { gui = "#00e676", cterm = 42 },
-    A700 = { gui = "#00c853", cterm = 41 },
-  },
-  light_green = {
-    [50] = { gui = "#f1f8e9", cterm = 255 },
-    [100] = { gui = "#dcedc8", cterm = 194 },
-    [200] = { gui = "#c5e1a5", cterm = 187 },
-    [300] = { gui = "#aed581", cterm = 150 },
-    [400] = { gui = "#9ccc65", cterm = 149 },
-    [500] = { gui = "#8bc34a", cterm = 113 },
-    [600] = { gui = "#7cb342", cterm = 107 },
-    [700] = { gui = "#689f38", cterm = 71 },
-    [800] = { gui = "#558b2f", cterm = 64 },
-    [900] = { gui = "#33691e", cterm = 58 },
-    A100 = { gui = "#ccff90", cterm = 192 },
-    A200 = { gui = "#b2ff59", cterm = 155 },
-    A400 = { gui = "#76ff03", cterm = 118 },
-    A700 = { gui = "#64dd17", cterm = 76 },
-  },
-  lime = {
-    [50] = { gui = "#f9fbe7", cterm = 230 },
-    [100] = { gui = "#f0f4c3", cterm = 230 },
-    [200] = { gui = "#e6ee9c", cterm = 193 },
-    [300] = { gui = "#dce775", cterm = 186 },
-    [400] = { gui = "#d4e157", cterm = 185 },
-    [500] = { gui = "#cddc39", cterm = 185 },
-    [600] = { gui = "#c0ca33", cterm = 149 },
-    [700] = { gui = "#afb42b", cterm = 142 },
-    [800] = { gui = "#9e9d24", cterm = 142 },
-    [900] = { gui = "#827717", cterm = 100 },
-    A100 = { gui = "#f4ff81", cterm = 228 },
-    A200 = { gui = "#eeff41", cterm = 227 },
-    A400 = { gui = "#c6ff00", cterm = 190 },
-    A700 = { gui = "#aeea00", cterm = 148 },
-  },
-  yellow = {
-    [50] = { gui = "#fffde7", cterm = 230 },
-    [100] = { gui = "#fff9c4", cterm = 230 },
-    [200] = { gui = "#fff59d", cterm = 229 },
-    [300] = { gui = "#fff176", cterm = 228 },
-    [400] = { gui = "#ffee58", cterm = 227 },
-    [500] = { gui = "#ffeb3b", cterm = 227 },
-    [600] = { gui = "#fdd835", cterm = 221 },
-    [700] = { gui = "#fbc02d", cterm = 214 },
-    [800] = { gui = "#f9a825", cterm = 214 },
-    [900] = { gui = "#f57f17", cterm = 208 },
-    A100 = { gui = "#ffff8d", cterm = 228 },
-    A200 = { gui = "#ffff00", cterm = 226 },
-    A400 = { gui = "#ffea00", cterm = 220 },
-    A700 = { gui = "#ffd600", cterm = 220 },
-  },
-  amber = {
-    [50] = { gui = "#fff8e1", cterm = 230 },
-    [100] = { gui = "#ffecb3", cterm = 229 },
-    [200] = { gui = "#ffe082", cterm = 222 },
-    [300] = { gui = "#ffd54f", cterm = 221 },
-    [400] = { gui = "#ffca28", cterm = 220 },
-    [500] = { gui = "#ffc107", cterm = 214 },
-    [600] = { gui = "#ffb300", cterm = 214 },
-    [700] = { gui = "#ffa000", cterm = 214 },
-    [800] = { gui = "#ff8f00", cterm = 208 },
-    [900] = { gui = "#ff6f00", cterm = 202 },
-    A100 = { gui = "#ffe57f", cterm = 222 },
-    A200 = { gui = "#ffd740", cterm = 221 },
-    A400 = { gui = "#ffc400", cterm = 220 },
-    A700 = { gui = "#ffab00", cterm = 214 },
-  },
-  orange = {
-    [50] = { gui = "#fff3e0", cterm = 230 },
-    [100] = { gui = "#ffe0b2", cterm = 223 },
-    [200] = { gui = "#ffcc80", cterm = 222 },
-    [300] = { gui = "#ffb74d", cterm = 215 },
-    [400] = { gui = "#ffa726", cterm = 214 },
-    [500] = { gui = "#ff9800", cterm = 208 },
-    [600] = { gui = "#fb8c00", cterm = 208 },
-    [700] = { gui = "#f57c00", cterm = 208 },
-    [800] = { gui = "#ef6c00", cterm = 202 },
-    [900] = { gui = "#e65100", cterm = 166 },
-    A100 = { gui = "#ffd180", cterm = 222 },
-    A200 = { gui = "#ffab40", cterm = 215 },
-    A400 = { gui = "#ff9100", cterm = 208 },
-    A700 = { gui = "#ff6d00", cterm = 202 },
-  },
-  deep_orange = {
-    [50] = { gui = "#fbe9e7", cterm = 255 },
-    [100] = { gui = "#ffccbc", cterm = 223 },
-    [200] = { gui = "#ffab91", cterm = 216 },
-    [300] = { gui = "#ff8a65", cterm = 209 },
-    [400] = { gui = "#ff7043", cterm = 203 },
-    [500] = { gui = "#ff5722", cterm = 202 },
-    [600] = { gui = "#f4511e", cterm = 202 },
-    [700] = { gui = "#e64a19", cterm = 166 },
-    [800] = { gui = "#d84315", cterm = 166 },
-    [900] = { gui = "#bf360c", cterm = 130 },
-    A100 = { gui = "#ff9e80", cterm = 216 },
-    A200 = { gui = "#ff6e40", cterm = 203 },
-    A400 = { gui = "#ff3d00", cterm = 202 },
-    A700 = { gui = "#dd2c00", cterm = 160 },
-  },
-  brown = {
-    [50] = { gui = "#efebe9", cterm = 255 },
-    [100] = { gui = "#d7ccc8", cterm = 252 },
-    [200] = { gui = "#bcaaa4", cterm = 145 },
-    [300] = { gui = "#a1887f", cterm = 138 },
-    [400] = { gui = "#8d6e63", cterm = 95 },
-    [500] = { gui = "#795548", cterm = 95 },
-    [600] = { gui = "#6d4c41", cterm = 240 },
-    [700] = { gui = "#5d4037", cterm = 238 },
-    [800] = { gui = "#4e342e", cterm = 237 },
-    [900] = { gui = "#3e2723", cterm = 236 },
-  },
-  grey = {
-    [50] = { gui = "#fafafa", cterm = 231 },
-    [100] = { gui = "#f5f5f5", cterm = 255 },
-    [200] = { gui = "#eeeeee", cterm = 255 },
-    [300] = { gui = "#e0e0e0", cterm = 254 },
-    [400] = { gui = "#bdbdbd", cterm = 250 },
-    [500] = { gui = "#9e9e9e", cterm = 247 },
-    [600] = { gui = "#757575", cterm = 243 },
-    [700] = { gui = "#616161", cterm = 241 },
-    [800] = { gui = "#424242", cterm = 238 },
-    [900] = { gui = "#212121", cterm = 235 },
-  },
-  blue_grey = {
-    [50] = { gui = "#eceff1", cterm = 255 },
-    [100] = { gui = "#cfd8dc", cterm = 188 },
-    [200] = { gui = "#b0bec5", cterm = 250 },
-    [300] = { gui = "#90a4ae", cterm = 109 },
-    [400] = { gui = "#78909c", cterm = 103 },
-    [500] = { gui = "#607d8b", cterm = 66 },
-    [600] = { gui = "#546e7a", cterm = 60 },
-    [700] = { gui = "#455a64", cterm = 240 },
-    [800] = { gui = "#37474f", cterm = 238 },
-    [900] = { gui = "#263238", cterm = 236 },
-  },
-  transparent = { gui = "NONE", cterm = "NONE" },
-}
-
--- Default hue selection {{{2
-
--- Hue used for most of the editor background and framing, should be subtle.
-local hue_neutral = "grey"
-
--- Hue used as the primary accent for currently interacted with elements in
--- normal mode
-local hue_primary = "cyan"
-
--- Hue used for insert mode
-local hue_insert = "blue"
-
--- Hue used for replace mode
-local hue_replace = "amber"
-
--- Diff hues {{{3
-
--- Hue used for added diff
-local hue_diff_added = "green"
-
--- Hue used for changed diff
-local hue_diff_changed = "amber"
-
--- Hue used for deleted diff
-local hue_diff_deleted = "red"
-
--- Hue used for text diff
-local hue_diff_text = "orange"
-
--- Value list {{{2
-
-local normal_values = { 50, 100, 200, 300, 400, 500, 600, 700, 800, 900 }
-
-local accent_values = { "A100", "A200", "A400", "A700" }
-
--- Functions {{{2
-
---- @class HighlightConfig
---- @field fg? ColorDefinition|"NONE" The foreground color
---- @field bg? ColorDefinition|"NONE" The background color
---- @field sp? ColorDefinition|"NONE" The special color
---- @field fg_dark? ColorDefinition|"NONE" The dark background override for the foreground color
---- @field bg_dark? ColorDefinition|"NONE" The dark background override for the background color
---- @field sp_dark? ColorDefinition|"NONE" The dark background override for the special color
---- @field blend? number The blend value for pumblend
---- @field bold? boolean
---- @field standout? boolean
---- @field underline? boolean
---- @field undercurl? boolean
---- @field underdouble? boolean
---- @field underdotted? boolean
---- @field underdashed? boolean
---- @field strikethrough? boolean
---- @field italic? boolean
---- @field reverse? boolean
---- @field nocombine? boolean
---- @field link? string
---- @field default? boolean
-
---- Set the highlight group passed as group_name to the values specified in
---- config.
---- @param group_name string the name of the group
---- @param config HighlightConfig the highlight config
---- @return nil
-local function highlight(group_name, config)
-  local def = {}
-
-  if config.fg then
-    if config.fg == "NONE" then
-      def.fg = "NONE"
-      def.ctermfg = "NONE"
-    else
-      def.fg = config.fg.gui
-      def.ctermfg = config.fg.cterm
-    end
-  end
-
-  if config.bg then
-    if config.bg == "NONE" then
-      def.bg = "NONE"
-      def.ctermbg = "NONE"
-    else
-      def.bg = config.bg.gui
-      def.ctermbg = config.bg.cterm
-    end
-  end
-
-  if config.sp then
-    if config.sp == "NONE" then
-      def.sp = "NONE"
-    else
-      def.sp = config.sp.gui
-    end
-  end
-
-  if vim.o.background == "dark" then
-    if config.fg_dark then
-      if config.fg_dark == "NONE" then
-        def.fg = "NONE"
-        def.ctermfg = "NONE"
-      else
-        def.fg = config.fg_dark.gui
-        def.ctermfg = config.fg_dark.cterm
-      end
-    end
-
-    if config.bg_dark then
-      if config.bg_dark == "NONE" then
-        def.bg = "NONE"
-        def.ctermbg = "NONE"
-      else
-        def.bg = config.bg_dark.gui
-        def.ctermbg = config.bg_dark.cterm
-      end
-    end
-
-    if config.sp_dark then
-      if config.sp_dark == "NONE" then
-        def.sp = "NONE"
-      else
-        def.sp = config.sp_dark.gui
-      end
-    end
-  end
-
-  for _, prop in ipairs {
-    "blend",
-    "bold",
-    "standout",
-    "underline",
-    "undercurl",
-    "underdouble",
-    "underdotted",
-    "underdashed",
-    "strikethrough",
-    "italic",
-    "reverse",
-    "nocombine",
-    "link",
-    "default",
-  } do
-    def[prop] = config[prop]
-  end
-
-  vim.api.nvim_set_hl(0, group_name, def)
-end
-
---- Get the value number for the passed index, dependent on the 'background'.
---- @param index number
---- @param invert_dark boolean
-local function value(index, invert_dark)
-  local clamped = math.max(math.min(index, 10), 1)
-
-  local value_index
-  if invert_dark and vim.o.background == "dark" then
-    value_index = #normal_values - clamped + 1
-  else
-    value_index = clamped
-  end
-
-  return normal_values[value_index]
-end
-
---- Get the accent value string for the passed index, dependent on the
---- 'background'.
---- @param index number
---- @param invert_dark boolean
-local function accent_value(index, invert_dark)
-  local clamped = math.max(math.min(index, 4), 1)
-
-  local value_index
-  if invert_dark and vim.o.background == "dark" then
-    value_index = #accent_values - clamped + 1
-  else
-    value_index = clamped
-  end
-
-  return accent_values[value_index]
-end
-
---- Get a color table by the passed color name and the passed index, dependent
---- on the 'background'.
---- @param color_name string
---- @param color_index number
---- @param options? { accent?: boolean, invert_dark?: boolean }
-local function color_table(color_name, color_index, options)
-  local accent = false
-  local invert_dark = true
-  if options then
-    accent = options.accent or false
-    invert_dark = options.invert_dark and true or false
-  end
-
-  if accent then
-    local raw_accent_value = accent_value(color_index, invert_dark)
-    local clamped_accent_value = vim
-      .regex("brown|grey|blue_grey")
-      :match_str(color_name) and raw_accent_value:sub(2) or raw_accent_value
-    return material[color_name][clamped_accent_value]
-  else
-    return material[color_name][value(color_index, invert_dark)]
-  end
-end
-
--- Shared colors {{{2
-
--- Shared colors
-local c = {
-  neutral = {
-    lightest = color_table(hue_neutral, 1),
-    midpoint = color_table(hue_neutral, 5),
-    midpoint_strong = color_table(hue_neutral, 6),
-    strong = color_table(hue_neutral, 8),
-  },
-  interact = {
-    light = color_table(hue_primary, 2),
-  },
-  error = {
-    light = color_table("red", 3),
-    strong = color_table("red", 6),
-  },
-  warning = {
-    light = color_table("orange", 3),
-    strong = color_table("orange", 6),
-  },
-  success = {
-    light = color_table("light_green", 3, {
-      accent = true,
-      invert_dark = false,
-    }),
-    strong = color_table("light_green", 3, {
-      accent = true,
-      invert_dark = false,
-    }),
-  },
-  info = {
-    light = color_table("light_blue", 3),
-    strong = color_table("light_blue", 6),
-  },
-  debug = {
-    light = color_table("grey", 3),
-    strong = color_table("grey", 6),
-  },
-  trace = {
-    light = color_table("purple", 3),
-    strong = color_table("purple", 6),
-  },
-  syntax = {
-    enum = {
-      name = color_table("indigo", 6),
-      member = color_table("light_blue", 6),
-    },
-    ["function"] = color_table("teal", 6),
-    meta = {
-      light = color_table("purple", 1),
-      strong = color_table("purple", 4),
-    },
-    namespace = color_table("brown", 4),
-    number = {
-      light = color_table("blue", 1),
-    },
-    structure = color_table("light_green", 6),
-    type = color_table("lime", 6),
-    typedef = color_table("green", 6),
-  },
-}
-
 -- Highlight definitions {{{2
 -- Basics {{{3
 
@@ -594,223 +27,232 @@ local c = {
 -- Normal group to anything instead of defining it on its own will cause the
 -- current window to have a transparent background for some reason.
 highlight("Material_VimNormal", { link = "Normal" })
-highlight("Normal", { fg = c.neutral.strong, bg = c.neutral.lightest })
+highlight("Normal", {
+  fg = colors.neutral.strong,
+  bg = colors.neutral.lightest,
+})
 highlight("Material_VimNormalLight", {
-  fg = color_table(hue_neutral, 4),
-  fg_dark = color_table(hue_neutral, 2),
+  fg = color_table(hues.neutral, 4),
+  fg_dark = color_table(hues.neutral, 2),
 })
 highlight("Material_VimSpecialKey", {
-  fg = c.neutral.strong,
-  bg = color_table(hue_neutral, 3),
+  fg = colors.neutral.strong,
+  bg = color_table(hues.neutral, 3),
   italic = true,
 })
-highlight("Material_VimConceal", { fg = c.neutral.strong })
+highlight("Material_VimConceal", { fg = colors.neutral.strong })
 
 -- Popup menu and floating windows {{{3
 
 highlight("Material_VimPopup", {
-  fg = c.neutral.strong,
-  bg = color_table(hue_neutral, 2),
+  fg = colors.neutral.strong,
+  bg = color_table(hues.neutral, 2),
 })
-highlight("Material_VimPopupSelected", { bg = c.interact.light })
-highlight("Material_VimPopupScrollbar", { bg = c.neutral.midpoint })
-highlight("Material_VimPopupThumb", { bg = color_table(hue_neutral, 10) })
+highlight("Material_VimPopupSelected", { bg = colors.interact.light })
+highlight("Material_VimPopupScrollbar", { bg = colors.neutral.midpoint })
+highlight("Material_VimPopupThumb", { bg = color_table(hues.neutral, 10) })
 
 -- Framing {{{3
 
-highlight("Material_VimLighterFraming", { bg = color_table(hue_neutral, 2) })
+highlight("Material_VimLighterFraming", { bg = color_table(hues.neutral, 2) })
 highlight("Material_VimLightFramingSubtleFg", {
-  fg = color_table(hue_neutral, 7),
-  bg = c.neutral.midpoint,
+  fg = color_table(hues.neutral, 7),
+  bg = colors.neutral.midpoint,
 })
 highlight("Material_VimLightFramingStrongFg", {
-  fg = c.neutral.lightest,
-  bg = c.neutral.midpoint,
+  fg = colors.neutral.lightest,
+  bg = colors.neutral.midpoint,
 })
-highlight("Material_VimStrongFramingWithoutFg", { bg = c.neutral.strong })
+highlight("Material_VimStrongFramingWithoutFg", { bg = colors.neutral.strong })
 highlight("Material_VimStrongFramingWithFg", {
-  fg = color_table(hue_neutral, 1, { accent = true }),
-  bg = c.neutral.strong,
+  fg = color_table(hues.neutral, 1, { accent = true }),
+  bg = colors.neutral.strong,
 })
 highlight("Material_VimStatusLine", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_primary, 4, { accent = true }),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.primary, 4, { accent = true }),
   bold = true,
 })
 highlight("Material_VimStatusLineNC", {
-  fg = c.neutral.lightest,
-  bg = c.neutral.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.neutral.strong,
 })
 
 -- Signs {{{3
 
 highlight("Material_SignBreakpoint", {
   fg = color_table("red", 6),
-  bg = c.neutral.midpoint,
+  bg = colors.neutral.midpoint,
 })
 highlight("Material_SignBreakpointConditional", {
   fg = color_table("red", 6),
-  bg = c.neutral.midpoint,
+  bg = colors.neutral.midpoint,
 })
 highlight("Material_SignLogpoint", {
   fg = color_table("yellow", 6),
-  bg = c.neutral.midpoint,
+  bg = colors.neutral.midpoint,
 })
 highlight("Material_SignCurrentFrame", {
   fg = color_table("green", 6),
-  bg = c.neutral.midpoint,
+  bg = colors.neutral.midpoint,
 })
 highlight("Material_SignBreakpointRejected", {
-  fg = c.neutral.midpoint_strong,
-  bg = c.neutral.midpoint,
+  fg = colors.neutral.midpoint_strong,
+  bg = colors.neutral.midpoint,
 })
 
 -- Cursor related {{{3
 
-highlight("Material_VimVisual", { bg = c.interact.light })
+highlight("Material_VimVisual", { bg = colors.interact.light })
 highlight("Material_VimWildMenu", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_primary, 3),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.primary, 3),
   bold = true,
 })
-highlight("Material_VimCursorLines", { bg = c.interact.light })
+highlight("Material_VimCursorLines", { bg = colors.interact.light })
 highlight("Material_VimCursorLinesNum", {
-  fg = c.neutral.midpoint_strong,
-  bg = c.interact.light,
+  fg = colors.neutral.midpoint_strong,
+  bg = colors.interact.light,
   bold = true,
 })
-highlight("Material_VimCursor", { bg = color_table(hue_primary, 6) })
-highlight("Material_VimCursorInsert", { bg = color_table(hue_insert, 7) })
-highlight("Material_VimCursorReplace", { bg = color_table(hue_replace, 7) })
-highlight("Material_VimCursorUnfocused", { bg = color_table(hue_primary, 3) })
+highlight("Material_VimCursor", { bg = color_table(hues.primary, 6) })
+highlight("Material_VimCursorInsert", { bg = color_table(hues.insert, 7) })
+highlight("Material_VimCursorReplace", { bg = color_table(hues.replace, 7) })
+highlight("Material_VimCursorUnfocused", { bg = color_table(hues.primary, 3) })
 
 -- Diff related {{{3
 
-highlight("Material_VimDiffAdd", { fg = color_table(hue_diff_added, 6) })
-highlight("Material_VimDiffDelete", { fg = color_table(hue_diff_deleted, 6) })
+highlight("Material_VimDiffAdd", { fg = color_table(hues.diff.added, 6) })
+highlight("Material_VimDiffDelete", { fg = color_table(hues.diff.deleted, 6) })
 highlight("Material_VimDiffLineAdd", {
-  bg = color_table(hue_diff_added, 2),
-  bg_dark = color_table(hue_diff_added, 10, { invert_dark = false }),
+  bg = color_table(hues.diff.added, 2),
+  bg_dark = color_table(hues.diff.added, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineChange", {
-  bg = color_table(hue_diff_changed, 2),
-  bg_dark = color_table(hue_diff_changed, 10, { invert_dark = false }),
+  bg = color_table(hues.diff.changed, 2),
+  bg_dark = color_table(hues.diff.changed, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineChangeDelete", {
-  bg = color_table(hue_diff_changed, 3),
-  bg_dark = color_table(hue_diff_changed, 9, { invert_dark = false }),
+  bg = color_table(hues.diff.changed, 3),
+  bg_dark = color_table(hues.diff.changed, 9, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineDelete", {
-  bg = color_table(hue_diff_deleted, 2),
-  bg_dark = color_table(hue_diff_deleted, 10, { invert_dark = false }),
+  bg = color_table(hues.diff.deleted, 2),
+  bg_dark = color_table(hues.diff.deleted, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineText", {
-  bg = color_table(hue_diff_text, 2),
-  bg_dark = color_table(hue_diff_text, 10, { invert_dark = false }),
+  bg = color_table(hues.diff.text, 2),
+  bg_dark = color_table(hues.diff.text, 10, { invert_dark = false }),
   bold = true,
 })
 highlight("Material_VimDiffSignAdd", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_diff_added, 6),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.diff.added, 6),
 })
 highlight("Material_VimDiffSignChange", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_diff_changed, 6),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.diff.changed, 6),
 })
 highlight("Material_VimDiffSignChangeDelete", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_diff_changed, 7),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.diff.changed, 7),
 })
 highlight("Material_VimDiffSignDelete", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_diff_deleted, 6),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.diff.deleted, 6),
 })
 
 -- Messages {{{3
 
 highlight("Material_VimTitle", { fg = color_table("pink", 5), bold = true })
-highlight("Material_VimModeMsg", { fg = c.neutral.strong, bold = true })
+highlight("Material_VimModeMsg", { fg = colors.neutral.strong, bold = true })
 highlight("Material_VimMoreMsg", { fg = color_table("green", 8), bold = true })
 
-highlight("Material_VimError", { fg = c.error.strong })
-highlight("Material_VimErrorBorder", { fg = c.error.light })
+highlight("Material_VimError", { fg = colors.error.strong })
+highlight("Material_VimErrorBorder", { fg = colors.error.light })
 highlight("Material_VimErrorInverted", {
-  fg = c.neutral.lightest,
-  bg = c.error.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.error.strong,
 })
 highlight("Material_VimErrorUnderline", {
-  sp = c.error.strong,
+  sp = colors.error.strong,
   underline = true,
 })
 
 highlight("Material_VimStyleErrorInverted", {
-  fg = c.neutral.lightest,
-  bg = c.error.light,
+  fg = colors.neutral.lightest,
+  bg = colors.error.light,
 })
 highlight("Material_VimStyleErrorUnderline", {
-  sp = c.error.light,
+  sp = colors.error.light,
   undercurl = true,
 })
 
-highlight("Material_VimWarning", { fg = c.warning.strong })
-highlight("Material_VimWarningBorder", { fg = c.warning.light })
+highlight("Material_VimWarning", { fg = colors.warning.strong })
+highlight("Material_VimWarningBorder", { fg = colors.warning.light })
 highlight("Material_VimWarningInverted", {
-  fg = c.neutral.lightest,
-  bg = c.warning.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.warning.strong,
 })
 highlight("Material_VimWarningUnderline", {
-  sp = c.warning.strong,
+  sp = colors.warning.strong,
   underline = true,
 })
 
 highlight("Material_VimStyleWarningInverted", {
-  fg = c.neutral.lightest,
-  bg = c.warning.light,
+  fg = colors.neutral.lightest,
+  bg = colors.warning.light,
 })
 highlight("Material_VimStyleWarningUnderline", {
-  sp = c.warning.light,
+  sp = colors.warning.light,
   undercurl = true,
 })
 
 highlight("Material_VimSuccessInverted", {
-  fg = color_table(hue_neutral, 8, { invert_dark = false }),
-  bg = c.success.strong,
+  fg = color_table(hues.neutral, 8, { invert_dark = false }),
+  bg = colors.success.strong,
 })
 
-highlight("Material_VimInfo", { fg = c.info.strong })
-highlight("Material_VimInfoBorder", { fg = c.info.light })
+highlight("Material_VimInfo", { fg = colors.info.strong })
+highlight("Material_VimInfoBorder", { fg = colors.info.light })
 highlight("Material_VimInfoInverted", {
-  fg = c.neutral.lightest,
-  bg = c.info.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.info.strong,
 })
 highlight("Material_VimInfoUnderline", {
-  sp = c.info.strong,
+  sp = colors.info.strong,
   underline = true,
 })
 
-highlight("Material_VimDebug", { fg = c.debug.strong })
+highlight("Material_VimDebug", { fg = colors.debug.strong })
 highlight("Material_VimDebugInverted", {
-  fg = c.neutral.lightest,
-  bg = c.debug.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.debug.strong,
 })
-highlight("Material_VimDebugBorder", { fg = c.debug.light })
+highlight("Material_VimDebugBorder", { fg = colors.debug.light })
 
-highlight("Material_VimTrace", { fg = c.trace.strong })
+highlight("Material_VimTrace", { fg = colors.trace.strong })
 highlight("Material_VimTraceInverted", {
-  fg = c.neutral.lightest,
-  bg = c.trace.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.trace.strong,
 })
-highlight("Material_VimTraceBorder", { fg = c.trace.light })
+highlight("Material_VimTraceBorder", { fg = colors.trace.light })
 
 highlight("Material_VimHintInverted", {
-  fg = c.neutral.lightest,
-  bg = c.info.light,
+  fg = colors.neutral.lightest,
+  bg = colors.info.light,
 })
-highlight("Material_VimHintUnderline", { sp = c.info.light, underline = true })
+highlight("Material_VimHintUnderline", {
+  sp = colors.info.light,
+  underline = true,
+})
 
 -- Spelling {{{3
 
-highlight("Material_VimSpellBad", { sp = c.error.strong, undercurl = true })
+highlight("Material_VimSpellBad", {
+  sp = colors.error.strong,
+  undercurl = true,
+})
 highlight("Material_VimSpellCap", {
   sp = color_table("indigo", 6),
   undercurl = true,
@@ -828,8 +270,8 @@ highlight("Material_VimSpellRare", {
 
 highlight("Material_VimDirectory", { fg = color_table("blue", 5), bold = true })
 highlight("Material_VimFolded", {
-  fg = c.neutral.midpoint_strong,
-  bg = color_table(hue_neutral, 3),
+  fg = colors.neutral.midpoint_strong,
+  bg = color_table(hues.neutral, 3),
 })
 highlight("Material_VimSearch", {
   bg = color_table("yellow", 6),
@@ -866,7 +308,7 @@ highlight("Material_DebugTest", {
 -- Built-in {{{4
 
 -- Comment and linked groups
-highlight("Material_SynComment", { fg = c.neutral.midpoint_strong })
+highlight("Material_SynComment", { fg = colors.neutral.midpoint_strong })
 
 -- Constant and linked groups
 local h_syn_constant = {
@@ -885,7 +327,7 @@ highlight("Material_SynCharacter", {
 })
 local h_syn_number = {
   fg = color_table("blue", 7),
-  bg = c.syntax.number.light,
+  bg = colors.syntax.number.light,
 }
 highlight("Material_SynNumber", h_syn_number)
 local h_syn_boolean = {
@@ -983,16 +425,16 @@ highlight("Material_SynParameterName", {
 
 -- Functions and methods
 highlight("Material_SynFunctionKeyword", {
-  fg = c.syntax["function"],
+  fg = colors.syntax["function"],
   bold = true,
 })
 local h_syn_function_name = {
-  fg = c.syntax["function"],
+  fg = colors.syntax["function"],
   italic = false,
   nocombine = true,
 }
 highlight("Material_SynFunctionName", h_syn_function_name)
-highlight("Material_SynMemberName", { fg = c.syntax["function"] })
+highlight("Material_SynMemberName", { fg = colors.syntax["function"] })
 highlight("Material_SynPropertyKeyword", {
   fg = color_table("cyan", 6),
   bold = true,
@@ -1003,21 +445,21 @@ local h_syn_property_name = {
 }
 highlight("Material_SynPropertyName", h_syn_property_name)
 highlight("Material_SynAnonymousFunctionName", {
-  fg = c.syntax["function"],
-  bg = c.syntax.meta.light,
+  fg = colors.syntax["function"],
+  bg = colors.syntax.meta.light,
 })
 
 -- Types (primitive types and similar)
-highlight("Material_SynTypeKeyword", { fg = c.syntax.type, bold = true })
-highlight("Material_SynTypeName", { fg = c.syntax.type })
+highlight("Material_SynTypeKeyword", { fg = colors.syntax.type, bold = true })
+highlight("Material_SynTypeName", { fg = colors.syntax.type })
 
 -- Structures (smaller than classes, but not quite primitive types)
 highlight("Material_SynStructureKeyword", {
-  fg = c.syntax.structure,
+  fg = colors.syntax.structure,
   bold = true,
 })
 local h_syn_structure_name = {
-  fg = c.syntax.structure,
+  fg = colors.syntax.structure,
   italic = false,
   nocombine = true,
 }
@@ -1025,20 +467,23 @@ highlight("Material_SynStructureName", h_syn_structure_name)
 
 -- Enums (same as structures, but with enumerated variants)
 highlight("Material_SynEnumKeyword", {
-  fg = c.syntax.enum.name,
+  fg = colors.syntax.enum.name,
   bold = true,
 })
-highlight("Material_SynEnumName", { fg = c.syntax.enum.name })
+highlight("Material_SynEnumName", { fg = colors.syntax.enum.name })
 highlight("Material_SynEnumMember", {
-  fg = c.syntax.enum.member,
+  fg = colors.syntax.enum.member,
   italic = false,
   nocombine = true,
 })
 
 -- Typedefs (Classes and equally large/extensible things)
-highlight("Material_SynTypedefKeyword", { fg = c.syntax.typedef, bold = true })
+highlight("Material_SynTypedefKeyword", {
+  fg = colors.syntax.typedef,
+  bold = true,
+})
 local h_syn_typedef_name = {
-  fg = c.syntax.typedef,
+  fg = colors.syntax.typedef,
   italic = false,
   nocombine = true,
 }
@@ -1046,11 +491,11 @@ highlight("Material_SynTypedefName", h_syn_typedef_name)
 
 -- Namespaces (or anything that groups together definitions)
 highlight("Material_SynNamespaceKeyword", {
-  fg = c.syntax.namespace,
+  fg = colors.syntax.namespace,
   bold = true,
 })
 local h_syn_namespace_name = {
-  fg = c.syntax.namespace,
+  fg = colors.syntax.namespace,
   italic = false,
   nocombine = true,
 }
@@ -1058,25 +503,25 @@ highlight("Material_SynNamespaceName", h_syn_namespace_name)
 
 -- Generics
 highlight("Material_SynGenericSpecial", { fg = color_table("purple", 4) })
-highlight("Material_SynGenericBackground", { bg = c.syntax.meta.light })
+highlight("Material_SynGenericBackground", { bg = colors.syntax.meta.light })
 local h_syn_generic_parameter_name = {
   fg = color_table("orange", 6),
-  bg = c.syntax.meta.light,
+  bg = colors.syntax.meta.light,
 }
 highlight("Material_SynGenericParameterName", h_syn_generic_parameter_name)
 highlight("Material_SynDecorator", {
-  fg = c.syntax.meta.strong,
+  fg = colors.syntax.meta.strong,
   italic = false,
   nocombine = true,
 })
 
 -- Interfaces (or anything that is just a declaration, but not implementation)
 highlight("Material_SynInterfaceKeyword", {
-  fg = c.syntax.meta.strong,
+  fg = colors.syntax.meta.strong,
   bold = true,
 })
 local h_syn_interface_name = {
-  fg = c.syntax.meta.strong,
+  fg = colors.syntax.meta.strong,
   italic = false,
   nocombine = true,
 }
@@ -1119,28 +564,32 @@ highlight("Material_SynVimCommentString", { fg = color_table("green", 5) })
 -- lualine | nvim-lualine/lualine.nvim {{{4
 
 highlight("Material_Lualine1", {
-  fg = c.neutral.midpoint_strong,
-  bg = color_table(hue_neutral, 2),
+  fg = colors.neutral.midpoint_strong,
+  bg = color_table(hues.neutral, 2),
 })
 highlight("Material_Lualine3", {
-  fg = c.neutral.lightest,
-  bg = c.neutral.strong,
+  fg = colors.neutral.lightest,
+  bg = colors.neutral.strong,
 })
 
 highlight("Material_LualineInsert", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_insert, 7),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.insert, 7),
   bold = true,
 })
 highlight("Material_LualineReplace", {
-  fg = c.neutral.lightest,
-  bg = color_table(hue_replace, 7),
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.replace, 7),
   bold = true,
 })
 
 highlight("Material_LualineModified", {
-  fg = c.neutral.lightest,
+  fg = colors.neutral.lightest,
   bg = color_table("purple", 8),
+})
+highlight("Material_LualineLazyPackages", {
+  fg = colors.syntax.namespace,
+  bg = colors.neutral.strong,
 })
 
 -- Linked highlight groups {{{1
@@ -1319,7 +768,7 @@ highlight("@class", { link = "Material_SynTypedefName" })
 highlight("@comment.keyword", { link = "Material_SynStatement" })
 highlight("@decorator", { link = "Material_SynDecorator" })
 highlight("@enum", { link = "Material_SynEnumName" })
-highlight("@generic.special", { link = "Material_SynGenericSpecial" })
+highlight("@genericolors.special", { link = "Material_SynGenericSpecial" })
 highlight("@interface", { link = "Material_SynInterfaceName" })
 highlight("@keyword.class", { link = "Material_SynTypedefKeyword" })
 highlight("@keyword.enum", { link = "Material_SynEnumKeyword" })
@@ -1469,7 +918,7 @@ highlight("@lsp.type.method.extension.cs", {
 highlight("@lsp.type.operator.overloaded.cs", {
   link = "Material_SynOperatorOverloaded",
 })
-highlight("@lsp.type.preproc.text.cs", { link = "Normal" })
+highlight("@lsp.type.preprocolors.text.cs", { link = "Normal" })
 highlight("@lsp.type.property.cs", { link = "Material_SynPropertyName" })
 highlight("@lsp.type.string.escape", { link = "Material_SynSpecialChar" })
 highlight("@lsp.type.string.verbatim", { link = "Material_SynStringVerbatim" })
@@ -1667,10 +1116,9 @@ highlight("typescriptBraces", { link = "Material_SynSpecial" })
 highlight("typescriptCall", { link = "Material_SynParameterName" })
 highlight("typescriptClassKeyword", { link = "Material_SynTypedefKeyword" })
 highlight("typescriptClassName", { link = "Material_SynTypedefName" })
-highlight(
-  "typescriptClassTypeParameter",
-  { link = "Material_SynGenericBackground" }
-)
+highlight("typescriptClassTypeParameter", {
+  link = "Material_SynGenericBackground",
+})
 highlight("typescriptDotNotation", { link = "Material_SynOperator" })
 highlight("typescriptEndColons", { link = "Material_SynSpecial" })
 highlight("typescriptEnumKeyword", { link = "Material_SynEnumKeyword" })
@@ -1681,10 +1129,9 @@ highlight("typescriptGlobalMathDot", { link = "Material_SynOperator" })
 highlight("typescriptGlobalPromiseDot", { link = "Material_SynOperator" })
 highlight("typescriptIdentifierName", { link = "Material_SynStructureName" })
 highlight("typescriptImport", { link = "Material_SynStatement" })
-highlight(
-  "typescriptInterfaceKeyword",
-  { link = "Material_SynInterfaceKeyword" }
-)
+highlight("typescriptInterfaceKeyword", {
+  link = "Material_SynInterfaceKeyword",
+})
 highlight("typescriptInterfaceName", { link = "Material_SynInterfaceName" })
 highlight("typescriptMember", { link = "Material_SynFieldName" })
 highlight("typescriptMemberOptionality", { link = "Material_SynOperator" })
@@ -1701,10 +1148,9 @@ highlight("typescriptTry", { link = "Material_SynStatement" })
 highlight("typescriptTypeAnnotation", { link = "Material_SynSpecial" })
 highlight("typescriptTypeBracket", { link = "Material_SynSpecial" })
 highlight("typescriptTypeBrackets", { link = "Material_SynGenericSpecial" })
-highlight(
-  "typescriptTypeParameter",
-  { link = "Material_SynGenericParameterName" }
-)
+highlight("typescriptTypeParameter", {
+  link = "Material_SynGenericParameterName",
+})
 highlight("typescriptVariable", { link = "Material_SynStatement" })
 highlight("typescriptVariableDeclaration", {
   link = "Material_SynVariableName",
@@ -1737,12 +1183,12 @@ highlight("@field.yaml", { link = "Material_SynFieldNameNonItalic" })
 
 -- yardoc {{{3
 
--- Fix the wrongly linked groups in noprompt/vim-yardoc.
+-- Fix the wrongly linked groups in noprompt/vim-yardocolors.
 highlight("yardYield", { link = "yardGenericTag" })
 highlight("yardYieldParam", { link = "yardGenericTag" })
 highlight("yardYieldReturn", { link = "yardGenericTag" })
 
--- Customize some highlight groups for noprompt/vim-yardoc.
+-- Customize some highlight groups for noprompt/vim-yardocolors.
 highlight("yardDuckType", { link = "Material_SynFunctionName" })
 highlight("yardGenericTag", { link = "Material_SynSpecial" })
 highlight("yardLiteral", { link = "Material_SynConstant" })
@@ -1819,101 +1265,101 @@ highlight("CmpItemKindVariable", { link = "Material_SynVariableName" })
 
 highlight("NavicIconsArray", {
   fg = h_syn_structure_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsBoolean", {
   fg = h_syn_boolean.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsClass", {
   fg = h_syn_typedef_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsConstant", {
   fg = h_syn_constant_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsConstructor", {
   fg = h_syn_function_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsEnum", {
-  fg = c.syntax.enum.name,
-  bg = c.neutral.strong,
+  fg = colors.syntax.enum.name,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsEnumMember", {
-  fg = c.syntax.enum.member,
-  bg = c.neutral.strong,
+  fg = colors.syntax.enum.member,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsEvent", { link = "Material_DebugTest" })
 highlight("NavicIconsField", {
   fg = h_syn_field_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsFile", { link = "Material_Lualine3" })
 highlight("NavicIconsFunction", {
   fg = h_syn_function_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsInterface", {
   fg = h_syn_interface_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsKey", {
   fg = h_syn_statement.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsMethod", {
   fg = h_syn_function_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsModule", {
   fg = h_syn_namespace_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsNamespace", {
   fg = h_syn_namespace_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsNull", {
   fg = h_syn_constant.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsNumber", {
   fg = h_syn_number.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsObject", {
   fg = h_syn_structure_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsOperator", {
   fg = h_syn_operator.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsPackage", {
   fg = h_syn_namespace_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsProperty", {
   fg = h_syn_property_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsString", {
   fg = h_syn_string.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsStruct", {
   fg = h_syn_structure_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsTypeParameter", {
   fg = h_syn_generic_parameter_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicIconsVariable", {
   fg = h_syn_variable_name.fg,
-  bg = c.neutral.strong,
+  bg = colors.neutral.strong,
 })
 highlight("NavicSeparator", { link = "Material_Lualine3" })
 highlight("NavicText", { link = "Material_Lualine3" })
