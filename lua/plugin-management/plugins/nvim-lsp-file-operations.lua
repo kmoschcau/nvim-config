@@ -1,5 +1,12 @@
 return {
   "antosha417/nvim-lsp-file-operations",
+  cmd = {
+    "NvimTreeOpen",
+    "NvimTreeToggle",
+    "NvimTreeFocus",
+    "NvimTreeFindFile",
+    "NvimTreeFindFileToggle",
+  },
   keys = {
     {
       "<C-n>",
