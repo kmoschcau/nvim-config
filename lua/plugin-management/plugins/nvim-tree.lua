@@ -27,7 +27,7 @@ return {
     disable_netrw = true,
     reload_on_bufenter = true,
     git = {
-      timeout = vim.fn.has "win32" == 1 and 1000 or nil,
+      timeout = vim.fn.has "win32" == 1 and 4000 or nil,
     },
     diagnostics = {
       enable = true,
