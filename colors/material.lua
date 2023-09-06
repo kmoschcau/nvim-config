@@ -1207,6 +1207,12 @@ highlight("zshFlag", { link = "Material_SynParameterName" })
 highlight("CSVColumnHeaderOdd", { link = "Material_VimTitle" })
 highlight("CSVColumnHeaderEven", { link = "Material_VimTitle" })
 
+-- diffview | sindrets/diffview.nvim {{{3
+
+highlight("DiffviewStatusAdded", { link = "Material_VimDiffSignAdd" })
+highlight("DiffviewStatusModified", { link = "Material_VimDiffSignChange" })
+highlight("DiffviewStatusDeleted", { link = "Material_VimDiffSignDelete" })
+
 -- fidget | j-hui/fidget.nvim {{{3
 
 highlight("FidgetTask", { link = "Material_SynComment" })
