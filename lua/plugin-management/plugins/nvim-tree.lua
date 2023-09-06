@@ -26,6 +26,9 @@ return {
     end,
     disable_netrw = true,
     reload_on_bufenter = true,
+    git = {
+      timeout = vim.fn.has "win32" == 1 and 1000 or nil,
+    },
     diagnostics = {
       enable = true,
       show_on_dirs = true,
