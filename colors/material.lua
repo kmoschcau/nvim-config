@@ -1119,6 +1119,7 @@ highlight("typescriptClassName", { link = "Material_SynTypedefName" })
 highlight("typescriptClassTypeParameter", {
   link = "Material_SynGenericBackground",
 })
+highlight("typescriptDecorator", { link = "Material_SynDecorator" })
 highlight("typescriptDotNotation", { link = "Material_SynOperator" })
 highlight("typescriptEndColons", { link = "Material_SynSpecial" })
 highlight("typescriptEnumKeyword", { link = "Material_SynEnumKeyword" })
