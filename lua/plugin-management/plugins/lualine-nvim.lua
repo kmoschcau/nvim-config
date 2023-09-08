@@ -17,7 +17,7 @@ return {
           info = "DiagnosticInfo",
           hint = "DiagnosticHint",
         },
-        symbols = require "icons",
+        symbols = require("icons").diagnostics,
       }
     end
 
