@@ -8,14 +8,21 @@ lspconfig.lua_ls.setup {
   handlers = common.handlers,
   settings = {
     Lua = {
+      codelens = {
+        enable = true,
+      },
       completion = {
         callSnippet = "Both",
       },
       format = {
         enable = false,
       },
-      telemetry = {
-        enable = false,
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true),
       },
     },
   },

@@ -132,19 +132,28 @@ M.start_or_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }
     end,
     settings = {
+      -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
       java = {
         codeGeneration = {
           hashCodeEquals = {
             useInstanceof = true,
             useJava7Objects = true,
           },
+          insertionLocation = "lastMember",
           toString = {
             codeStyle = "STRING_BUILDER_CHAINED",
           },
           useBlocks = true,
         },
+        compile = {
+          nullAnalysis = {
+            mode = "automatic",
+          },
+        },
         completion = {
+          guessMethodArguments = "insertBestGuessedArguments",
           importOrder = {
+            "#",
             "com",
             "java",
             "javassist",
@@ -169,6 +178,9 @@ M.start_or_attach = function()
         eclipse = {
           downloadSources = true,
         },
+        edit = {
+          validateAllOpenBuffersOnChanges = true,
+        },
         format = {
           enabled = false,
           settings = {
@@ -180,11 +192,14 @@ M.start_or_attach = function()
         },
         inlayHints = {
           parameterNames = {
-            enabled = false,
+            enabled = "none",
           },
         },
         maven = {
           downloadSources = true,
+        },
+        quickfix = {
+          showAt = "problem",
         },
         referencesCodeLens = {
           enabled = true,
@@ -192,6 +207,11 @@ M.start_or_attach = function()
         signatureHelp = {
           description = {
             enabled = true,
+          },
+        },
+        redhat = {
+          telemetry = {
+            enabled = false,
           },
         },
       },

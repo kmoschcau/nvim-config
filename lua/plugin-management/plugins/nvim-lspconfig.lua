@@ -5,6 +5,12 @@ return {
     "folke/neodev.nvim",
     "jose-elias-alvarez/typescript.nvim",
     "mfussenegger/nvim-jdtls",
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+    },
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
@@ -12,7 +18,6 @@ return {
     local lspconfig = require "lspconfig"
 
     local simple_servers = {
-      "emmet_language_server",
       "gradle_ls",
       "jedi_language_server",
       "jqls",
@@ -36,13 +41,14 @@ return {
     local server_config_modules = {
       "cssls",
       "ember",
+      "emmet",
       "glint",
       "html",
       "jsonls",
       "lua_ls",
       "omnisharp",
       "svelte",
-      "typescript",
+      "typescript-tools",
       "yamlls",
     }
     for _, module_name in ipairs(server_config_modules) do

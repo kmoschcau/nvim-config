@@ -20,27 +20,93 @@ M.handlers = {
   ),
 }
 
+-- https://code.visualstudio.com/docs/languages/css
+local style = {
+  format = {
+    enable = false,
+  },
+  validate = {
+    duplicateProperties = "warning",
+    idSelector = "warning",
+    ieHack = "warning",
+    important = "warning",
+    zeroUnits = "warning",
+  },
+}
+
+local js_inlay_vs_code = {
+  enumMemberValues = { enabled = true },
+  functionLikeReturnTypes = { enabled = true },
+  parameterNames = {
+    enabled = "all",
+    suppressWhenArgumentMatchesName = false,
+  },
+  parameterTypes = { enabled = true },
+  propertyDeclarationTypes = { enabled = true },
+  variableTypes = {
+    enabled = true,
+    suppressWhenTypeMatchesName = false,
+  },
+}
+
+local js_inlay_tsserver = {
+  includeInlayEnumMemberValueHints = js_inlay_vs_code.enumMemberValues.enabled,
+  includeInlayFunctionLikeReturnTypeHints = js_inlay_vs_code.functionLikeReturnTypes.enabled,
+  includeInlayFunctionParameterTypeHints = js_inlay_vs_code.parameterTypes.enabled,
+  includeInlayParameterNameHints = js_inlay_vs_code.parameterNames.enabled,
+  includeInlayParameterNameHintsWhenArgumentMatchesName = not js_inlay_vs_code.parameterNames.suppressWhenArgumentMatchesName,
+  includeInlayPropertyDeclarationTypeHints = js_inlay_vs_code.propertyDeclarationTypes.enabled,
+  includeInlayVariableTypeHints = js_inlay_vs_code.variableTypes.enabled,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = not js_inlay_vs_code.variableTypes.suppressWhenTypeMatchesName,
+}
+
+M.js_inlay = {
+  vs_code = js_inlay_vs_code,
+  tsserver = js_inlay_tsserver,
+}
+
+local js_like = {
+  format = {
+    enable = false,
+  },
+  implementationsCodeLens = {
+    enabled = true,
+  },
+  inlayHints = vim.tbl_deep_extend(
+    "error",
+    js_inlay_vs_code,
+    js_inlay_tsserver
+  ),
+  preferences = {
+    importModuleSpecifier = "relative",
+    importModuleSpecifierEnding = "js",
+    quoteStyle = "double",
+    useAliasesForRenames = false,
+  },
+  referencesCodeLens = {
+    enabled = true,
+    showOnAllFunctions = true,
+  },
+  suggest = {
+    completeFunctionCalls = true,
+  },
+  surveys = {
+    enabled = false,
+  },
+  updateImportsOnFileMove = {
+    enabled = "always",
+  },
+}
+
 --- Common configuration settings shared between multiple servers
 M.settings = {
-  -- https://code.visualstudio.com/docs/languages/css
-  css = {
+  css = vim.tbl_deep_extend("force", style, {
     customData = {
       "~/.config/nvim/external-config/container.css-data.json",
     },
-    format = {
-      enable = false,
-    },
-  },
-  less = {
-    format = {
-      enable = false,
-    },
-  },
-  scss = {
-    format = {
-      enable = false,
-    },
-  },
+  }),
+  less = style,
+  scss = style,
 
   -- https://code.visualstudio.com/docs/languages/html
   html = {
@@ -52,56 +118,12 @@ M.settings = {
     },
   },
 
-  javascript = {
-    format = {
-      enable = false,
-    },
-    preferences = {
-      importModuleSpecifier = "relative",
-      importModuleSpecifierEnding = "js",
-      quoteStyle = "double",
-      useAliasesForRenames = false,
-    },
-    referencesCodeLens = {
-      enabled = true,
-      showOnAllFunctions = true,
-    },
-    suggest = {
-      completeFunctionCalls = true,
-    },
-    updateImportsOnFileMove = {
-      enabled = true,
-    },
-  },
-  typescript = {
-    format = {
-      enable = false,
-    },
-    implementationsCodeLens = {
-      enabled = true,
-    },
-    preferences = {
-      importModuleSpecifier = "relative",
-      importModuleSpecifierEnding = "js",
-      quoteStyle = "double",
-      useAliasesForRenames = false,
-    },
-    referencesCodeLens = {
-      enabled = true,
-      showOnAllFunctions = true,
-    },
-    suggest = {
-      completeFunctionCalls = true,
-    },
-    surveys = {
-      enabled = false,
-    },
-  },
+  javascript = js_like,
+  typescript = js_like,
 }
 
 -- This is a list of servers that do not have an option to disable formatting.
 local formatting_ignore_list = {
-  "html",
   "jsonls",
   "omnisharp",
   "tsserver",
