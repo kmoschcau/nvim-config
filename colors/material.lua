@@ -292,6 +292,10 @@ highlight("Material_LspReferenceText", {
 })
 highlight("Material_LspReferenceRead", { bg = color_table("green", 2) })
 highlight("Material_LspReferenceWrite", { bg = color_table("blue", 2) })
+highlight("Material_LspInlayHint", {
+  fg = colors.neutral.midpoint_strong,
+  bg = color_table(hues.neutral, 3),
+})
 
 -- Testing {{{3
 
@@ -844,6 +848,7 @@ highlight("@lsp.typemod.variable.static", { link = "Material_SynModStatic" })
 highlight("LspReferenceText", { link = "Material_LspReferenceText" })
 highlight("LspReferenceRead", { link = "Material_LspReferenceRead" })
 highlight("LspReferenceWrite", { link = "Material_LspReferenceWrite" })
+highlight("LspInlayHint", { link = "Material_LspInlayHint" })
 
 -- Code Lens {{{4
 
