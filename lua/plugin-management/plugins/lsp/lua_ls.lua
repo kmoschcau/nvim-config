@@ -17,6 +17,10 @@ lspconfig.lua_ls.setup {
       format = {
         enable = false,
       },
+      hint = {
+        enable = true,
+        setTypes = true,
+      },
       runtime = {
         version = "LuaJIT",
       },

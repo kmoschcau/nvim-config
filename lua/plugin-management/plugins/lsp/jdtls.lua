@@ -192,7 +192,7 @@ M.start_or_attach = function()
         },
         inlayHints = {
           parameterNames = {
-            enabled = "none",
+            enabled = true,
           },
         },
         maven = {
