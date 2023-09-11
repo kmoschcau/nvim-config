@@ -14,8 +14,6 @@ return {
     "windwp/nvim-autopairs",
   },
   config = function()
-    local list_contains = vim.list_contains or vim.tbl_contains
-
     local buffer_source = {
       name = "buffer",
       option = {
@@ -35,7 +33,7 @@ return {
       },
       formatting = {
         format = function(entry, vim_item)
-          if list_contains({ "path" }, entry.source.name) then
+          if vim.list_contains({ "path" }, entry.source.name) then
             local icon, hl_group = require("nvim-web-devicons").get_icon(
               entry:get_completion_item().label
             )

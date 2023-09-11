@@ -134,8 +134,7 @@ local formatting_ignore_list = {
 --- @param name string|nil
 --- @return boolean
 M.is_ignored_formatter = function(name)
-  local contains = vim.list_contains or vim.tbl_contains
-  return contains(formatting_ignore_list, name)
+  return vim.list_contains(formatting_ignore_list, name)
 end
 
 --- Log the given client's server's capabilities
