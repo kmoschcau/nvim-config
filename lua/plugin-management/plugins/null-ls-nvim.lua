@@ -1,3 +1,7 @@
+local disabled_filetypes = {
+  "NvimTree",
+}
+
 return {
   "jose-elias-alvarez/null-ls.nvim",
   dependencies = "nvim-lua/plenary.nvim",
@@ -74,6 +78,12 @@ return {
     require("null-ls").setup {
       border = "rounded",
       diagnostics_format = "#{s}: #{m}",
+      should_attach = function(bufnr)
+        return not vim.list_contains(
+          disabled_filetypes,
+          vim.api.nvim_buf_get_option(bufnr, "filetype")
+        )
+      end,
       sources = {
         code_actions.eslint_d,
         code_actions.gitsigns,
@@ -101,7 +111,7 @@ return {
         },
         diagnostics.todo_comments,
         diagnostics.trail_space.with {
-          disabled_filetypes = { "NvimTree", "markdown" },
+          disabled_filetypes = { "markdown" },
         },
         diagnostics.yamllint,
 
