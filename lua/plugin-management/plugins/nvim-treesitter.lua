@@ -9,7 +9,7 @@ return {
       -- This should only include what should be there on first setup, not what
       -- I end up using over time.
       "bash",
-      -- "comment", -- commets are slowing down TS a lot currently
+      "comment",
       "diff",
       "fish",
       "git_config",
@@ -32,9 +32,6 @@ return {
       "yaml",
     },
     auto_install = true,
-    ignore_install = {
-      "comment", -- see above
-    },
 
     -- modules below
     autotag = {
