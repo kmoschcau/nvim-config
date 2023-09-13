@@ -34,6 +34,15 @@ M.get_browser_command = function()
   return nil
 end
 
+--- Set the options common for a dos formatted file for the current buffer.
+M.set_dos_file_options = function()
+  vim.opt_local.endofline = false
+  vim.opt_local.fixendofline = false
+  if vim.opt_local.modifiable:get() then
+    vim.opt_local.fileformat = "dos"
+  end
+end
+
 --- Try to determine whether the editor is running in a WSL environment.
 --- @return boolean
 M.is_running_in_wsl = function()
