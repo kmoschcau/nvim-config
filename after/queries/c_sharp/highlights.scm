@@ -1,5 +1,10 @@
 ;; extends
 
+; keywords
+
+(lambda_expression
+  (modifier) @keyword.coroutine)
+
 ; operators
 
 (binary_expression
