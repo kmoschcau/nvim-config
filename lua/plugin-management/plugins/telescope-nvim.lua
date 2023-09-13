@@ -25,9 +25,17 @@ return {
     {
       "<space>t",
       function()
+        require("telescope.builtin").diagnostics({ bufnr = 0 })
+      end,
+      desc = "Fuzzy search diagnostics in current buffer.",
+      silent = true,
+    },
+    {
+      "<space>T",
+      function()
         require("telescope.builtin").diagnostics()
       end,
-      desc = "Fuzzy search diagnostics.",
+      desc = "Fuzzy search diagnostics in workspace.",
       silent = true,
     },
   },
