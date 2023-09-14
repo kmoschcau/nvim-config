@@ -25,7 +25,7 @@ return {
     {
       "<space>t",
       function()
-        require("telescope.builtin").diagnostics({ bufnr = 0 })
+        require("telescope.builtin").diagnostics { bufnr = 0 }
       end,
       desc = "Fuzzy search diagnostics in current buffer.",
       silent = true,
@@ -67,7 +67,9 @@ return {
             },
           },
         }),
-        lsp_references = lsp_common_opts,
+        lsp_references = vim.tbl_extend("force", lsp_common_opts, {
+          include_declaration = false,
+        }),
         lsp_incoming_calls = lsp_common_opts,
         lsp_outgoing_calls = lsp_common_opts,
         lsp_definitions = lsp_common_opts,
