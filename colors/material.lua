@@ -685,6 +685,7 @@ highlight("DiagnosticError", { link = "Material_VimErrorInverted" })
 highlight("DiagnosticWarn", { link = "Material_VimWarningInverted" })
 highlight("DiagnosticInfo", { link = "Material_VimInfoInverted" })
 highlight("DiagnosticHint", { link = "Material_VimHintInverted" })
+highlight("DiagnosticOk", { link = "Material_VimSuccessInverted" })
 
 highlight("DiagnosticUnderLineError", { link = "Material_VimErrorUnderline" })
 highlight("DiagnosticUnderLineWarn", { link = "Material_VimWarningUnderline" })
@@ -959,12 +960,6 @@ highlight("groovyParen1", { link = "Material_SynSpecial" })
 highlight("groovyParen2", { link = "Material_SynSpecial" })
 highlight("groovyInterpolatedString", { link = "Material_VimNormal" })
 highlight("groovyInterpolatedWrapper", { link = "Material_SynSpecialChar" })
-
--- checkhealth {{{3
-
-highlight("healthError", { link = "Material_VimErrorInverted" })
-highlight("healthWarning", { link = "Material_VimWarningInverted" })
-highlight("healthSuccess", { link = "Material_VimSuccessInverted" })
 
 -- html {{{3
 
