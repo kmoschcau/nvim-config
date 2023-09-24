@@ -1,3 +1,5 @@
+local icons = require "icons"
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = "nvim-tree/nvim-web-devicons",
@@ -17,7 +19,7 @@ return {
           info = "DiagnosticInfo",
           hint = "DiagnosticHint",
         },
-        symbols = require("icons").diagnostics,
+        symbols = icons.diagnostics,
       }
     end
 
@@ -79,6 +81,7 @@ return {
               modified = "Material_VimDiffSignChange",
               removed = "Material_VimDiffSignDelete",
             },
+            symbols = icons.git.lines,
             separator = { left = "", right = "" },
             cond = function()
               return vim.fn.winwidth(0) > vcs_display_width
@@ -144,8 +147,8 @@ return {
       },
       extensions = {
         "fugitive",
+        "neo-tree",
         "nvim-dap-ui",
-        "nvim-tree",
         "quickfix",
       },
     }

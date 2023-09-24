@@ -263,13 +263,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         vim.notify("Attached navic to: " .. c.name, vim.log.levels.DEBUG)
       end
-
-      local has_navbuddy, navbuddy = pcall(require, "nvim-navbuddy")
-      if has_navbuddy then
-        navbuddy.attach(client, args.buf)
-
-        vim.notify("Attached navbuddy to: " .. c.name, vim.log.levels.DEBUG)
-      end
     end
 
     -- }}}1

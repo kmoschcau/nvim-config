@@ -52,35 +52,64 @@ M.colors = function()
     interact = {
       light = color_table(M.hues.primary, 2),
     },
-    error = {
-      light = color_table("red", 3),
-      strong = color_table("red", 6),
+    modified = {
+      strong = color_table("purple", 8),
     },
-    warning = {
-      light = color_table("orange", 3),
-      strong = color_table("orange", 6),
+    diff = {
+      added = {
+        lightest = color_table(M.hues.diff.added, 2),
+        midpoint_strong = color_table(M.hues.diff.added, 6),
+      },
+      changed = {
+        lightest = color_table(M.hues.diff.changed, 2),
+        lighter = color_table(M.hues.diff.changed, 3),
+        midpoint_strong = color_table(M.hues.diff.changed, 6),
+        midpoint_stronger = color_table(M.hues.diff.changed, 7),
+      },
+      deleted = {
+        lightest = color_table(M.hues.diff.deleted, 2),
+        midpoint_strong = color_table(M.hues.diff.deleted, 6),
+      },
+      text = {
+        lightest = color_table(M.hues.diff.text, 2),
+      },
     },
-    success = {
-      light = color_table("light_green", 3, {
-        accent = true,
-        invert_dark = false,
-      }),
-      strong = color_table("light_green", 3, {
-        accent = true,
-        invert_dark = false,
-      }),
+    git = {
+      staged = color_table("green", 4, { accent = true }),
+      unstaged = color_table("red", 2, { accent = true }),
+      untracked = color_table("red", 1, { accent = true }),
     },
-    info = {
-      light = color_table("light_blue", 3),
-      strong = color_table("light_blue", 6),
-    },
-    debug = {
-      light = color_table("grey", 3),
-      strong = color_table("grey", 6),
-    },
-    trace = {
-      light = color_table("purple", 3),
-      strong = color_table("purple", 6),
+    levels = {
+      error = {
+        light = color_table("red", 3),
+        strong = color_table("red", 6),
+      },
+      warning = {
+        light = color_table("orange", 3),
+        strong = color_table("orange", 6),
+      },
+      success = {
+        light = color_table("light_green", 3, {
+          accent = true,
+          invert_dark = false,
+        }),
+        strong = color_table("light_green", 3, {
+          accent = true,
+          invert_dark = false,
+        }),
+      },
+      info = {
+        light = color_table("light_blue", 3),
+        strong = color_table("light_blue", 6),
+      },
+      debug = {
+        light = color_table("grey", 3),
+        strong = color_table("grey", 6),
+      },
+      trace = {
+        light = color_table("purple", 3),
+        strong = color_table("purple", 6),
+      },
     },
     syntax = {
       enum = {

@@ -122,40 +122,43 @@ highlight("Material_VimCursorUnfocused", { bg = color_table(hues.primary, 3) })
 
 -- Diff related {{{3
 
-highlight("Material_VimDiffAdd", { fg = color_table(hues.diff.added, 6) })
-highlight("Material_VimDiffDelete", { fg = color_table(hues.diff.deleted, 6) })
+highlight("Material_VimDiffAdd", { fg = colors.diff.added.midpoint_strong })
+highlight(
+  "Material_VimDiffDelete",
+  { fg = colors.diff.deleted.midpoint_strong }
+)
 highlight("Material_VimDiffLineAdd", {
-  bg = color_table(hues.diff.added, 2),
+  bg = colors.diff.added.lightest,
   bg_dark = color_table(hues.diff.added, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineChange", {
-  bg = color_table(hues.diff.changed, 2),
+  bg = colors.diff.changed.lightest,
   bg_dark = color_table(hues.diff.changed, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineChangeDelete", {
-  bg = color_table(hues.diff.changed, 3),
+  bg = colors.diff.changed.lighter,
   bg_dark = color_table(hues.diff.changed, 9, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineDelete", {
-  bg = color_table(hues.diff.deleted, 2),
+  bg = colors.diff.deleted.lightest,
   bg_dark = color_table(hues.diff.deleted, 10, { invert_dark = false }),
 })
 highlight("Material_VimDiffLineText", {
-  bg = color_table(hues.diff.text, 2),
+  bg = colors.diff.text.lightest,
   bg_dark = color_table(hues.diff.text, 10, { invert_dark = false }),
   bold = true,
 })
 highlight("Material_VimDiffSignAdd", {
   fg = colors.neutral.lightest,
-  bg = color_table(hues.diff.added, 6),
+  bg = colors.diff.added.midpoint_strong,
 })
 highlight("Material_VimDiffSignChange", {
   fg = colors.neutral.lightest,
-  bg = color_table(hues.diff.changed, 6),
+  bg = colors.diff.changed.midpoint_strong,
 })
 highlight("Material_VimDiffSignChangeDelete", {
   fg = colors.neutral.lightest,
-  bg = color_table(hues.diff.changed, 7),
+  bg = colors.diff.changed.midpoint_stronger,
 })
 highlight("Material_VimDiffSignDelete", {
   fg = colors.neutral.lightest,
@@ -168,89 +171,89 @@ highlight("Material_VimTitle", { fg = color_table("pink", 5), bold = true })
 highlight("Material_VimModeMsg", { fg = colors.neutral.strong, bold = true })
 highlight("Material_VimMoreMsg", { fg = color_table("green", 8), bold = true })
 
-highlight("Material_VimError", { fg = colors.error.strong })
-highlight("Material_VimErrorBorder", { fg = colors.error.light })
+highlight("Material_VimError", { fg = colors.levels.error.strong })
+highlight("Material_VimErrorBorder", { fg = colors.levels.error.light })
 highlight("Material_VimErrorInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.error.strong,
+  bg = colors.levels.error.strong,
 })
 highlight("Material_VimErrorUnderline", {
-  sp = colors.error.strong,
+  sp = colors.levels.error.strong,
   underline = true,
 })
 
 highlight("Material_VimStyleErrorInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.error.light,
+  bg = colors.levels.error.light,
 })
 highlight("Material_VimStyleErrorUnderline", {
-  sp = colors.error.light,
+  sp = colors.levels.error.light,
   undercurl = true,
 })
 
-highlight("Material_VimWarning", { fg = colors.warning.strong })
-highlight("Material_VimWarningBorder", { fg = colors.warning.light })
+highlight("Material_VimWarning", { fg = colors.levels.warning.strong })
+highlight("Material_VimWarningBorder", { fg = colors.levels.warning.light })
 highlight("Material_VimWarningInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.warning.strong,
+  bg = colors.levels.warning.strong,
 })
 highlight("Material_VimWarningUnderline", {
-  sp = colors.warning.strong,
+  sp = colors.levels.warning.strong,
   underline = true,
 })
 
 highlight("Material_VimStyleWarningInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.warning.light,
+  bg = colors.levels.warning.light,
 })
 highlight("Material_VimStyleWarningUnderline", {
-  sp = colors.warning.light,
+  sp = colors.levels.warning.light,
   undercurl = true,
 })
 
 highlight("Material_VimSuccessInverted", {
   fg = color_table(hues.neutral, 8, { invert_dark = false }),
-  bg = colors.success.strong,
+  bg = colors.levels.success.strong,
 })
 
-highlight("Material_VimInfo", { fg = colors.info.strong })
-highlight("Material_VimInfoBorder", { fg = colors.info.light })
+highlight("Material_VimInfo", { fg = colors.levels.info.strong })
+highlight("Material_VimInfoBorder", { fg = colors.levels.info.light })
 highlight("Material_VimInfoInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.info.strong,
+  bg = colors.levels.info.strong,
 })
 highlight("Material_VimInfoUnderline", {
-  sp = colors.info.strong,
+  sp = colors.levels.info.strong,
   underline = true,
 })
 
-highlight("Material_VimDebug", { fg = colors.debug.strong })
+highlight("Material_VimDebug", { fg = colors.levels.debug.strong })
 highlight("Material_VimDebugInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.debug.strong,
+  bg = colors.levels.debug.strong,
 })
-highlight("Material_VimDebugBorder", { fg = colors.debug.light })
+highlight("Material_VimDebugBorder", { fg = colors.levels.debug.light })
 
-highlight("Material_VimTrace", { fg = colors.trace.strong })
+highlight("Material_VimTrace", { fg = colors.levels.trace.strong })
 highlight("Material_VimTraceInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.trace.strong,
+  bg = colors.levels.trace.strong,
 })
-highlight("Material_VimTraceBorder", { fg = colors.trace.light })
+highlight("Material_VimTraceBorder", { fg = colors.levels.trace.light })
 
 highlight("Material_VimHintInverted", {
   fg = colors.neutral.lightest,
-  bg = colors.info.light,
+  bg = colors.levels.info.light,
 })
 highlight("Material_VimHintUnderline", {
-  sp = colors.info.light,
+  sp = colors.levels.info.light,
   underline = true,
 })
 
 -- Spelling {{{3
 
 highlight("Material_VimSpellBad", {
-  sp = colors.error.strong,
+  sp = colors.levels.error.strong,
   undercurl = true,
 })
 highlight("Material_VimSpellCap", {
@@ -538,63 +541,6 @@ highlight("Material_SynModAsync", { bg = color_table("yellow", 2) })
 highlight("Material_SynModReadonly", { italic = false, nocombine = true })
 highlight("Material_SynModStatic", { bold = true })
 highlight("Material_SynModDeprecated", { strikethrough = true })
-
--- File type specific {{{5
-
--- cs (C#) {{{6
-
-highlight("Material_SynCsharpDocCommentTagAttr", {
-  fg = color_table("blue", 4),
-  fg_dark = color_table("blue", 9, { invert_dark = false }),
-})
-highlight("Material_SynCsharpDocCommentTagAttrQuotes", {
-  fg = color_table("red", 3),
-  fg_dark = color_table("red", 9, { invert_dark = false }),
-})
-highlight("Material_SynCsharpDocCommentDelimiter", {
-  fg = color_table("red", 3),
-  fg_dark = color_table("red", 9, { invert_dark = false }),
-})
-highlight("Material_SynCsharpDocCommentTagName", {
-  fg = color_table("orange", 4),
-  fg_dark = color_table("orange", 9, { invert_dark = false }),
-})
-
--- vim (VimScript|VimL) {{{6
-
-highlight("Material_SynVimCommentString", { fg = color_table("green", 5) })
-
--- Plugins {{{3
--- lualine | nvim-lualine/lualine.nvim {{{4
-
-highlight("Material_Lualine1", {
-  fg = colors.neutral.midpoint_strong,
-  bg = color_table(hues.neutral, 2),
-})
-highlight("Material_Lualine3", {
-  fg = colors.neutral.lightest,
-  bg = colors.neutral.strong,
-})
-
-highlight("Material_LualineInsert", {
-  fg = colors.neutral.lightest,
-  bg = color_table(hues.insert, 7),
-  bold = true,
-})
-highlight("Material_LualineReplace", {
-  fg = colors.neutral.lightest,
-  bg = color_table(hues.replace, 7),
-  bold = true,
-})
-
-highlight("Material_LualineModified", {
-  fg = colors.neutral.lightest,
-  bg = color_table("purple", 8),
-})
-highlight("Material_LualineLazyPackages", {
-  fg = colors.syntax.namespace,
-  bg = colors.neutral.strong,
-})
 
 -- Linked highlight groups {{{1
 -- Non-editor window highlights {{{2
@@ -897,17 +843,21 @@ highlight("csStorage", { link = "Material_SynNamespaceKeyword" })
 
 highlight("@lsp.type.constant.cs", { link = "Material_SynFieldNameNonItalic" })
 highlight("@lsp.type.comment.documentation.attribute.name", {
-  link = "Material_SynCsharpDocCommentTagAttr",
+  fg = color_table("blue", 4),
+  fg_dark = color_table("blue", 9, { invert_dark = false }),
 })
 highlight("@lsp.type.comment.documentation.attribute.quotes", {
-  link = "Material_SynCsharpDocCommentTagAttrQuotes",
+  fg = color_table("red", 3),
+  fg_dark = color_table("red", 9, { invert_dark = false }),
 })
 highlight("@lsp.type.comment.documentation.comment", { link = "@comment" })
 highlight("@lsp.type.comment.documentation.delimiter", {
-  link = "Material_SynCsharpDocCommentDelimiter",
+  fg = color_table("red", 3),
+  fg_dark = color_table("red", 9, { invert_dark = false }),
 })
 highlight("@lsp.type.comment.documentation.name", {
-  link = "Material_SynCsharpDocCommentTagName",
+  fg = color_table("orange", 4),
+  fg_dark = color_table("orange", 9, { invert_dark = false }),
 })
 highlight("@lsp.type.comment.documentation.text", {
   link = "Material_SynDocComment",
@@ -1159,7 +1109,7 @@ highlight("typescriptVariableDeclaration", {
 
 -- vim (VimScript|VimL) {{{3
 
-highlight("vimCommentString", { link = "Material_SynVimCommentString" })
+highlight("vimCommentString", { fg = color_table("green", 5) })
 highlight("vimEnvvar", { link = "Material_SynStructureName" })
 highlight("vimFunction", { link = "Material_SynFunctionName" })
 highlight("vimHiBang", { link = "Material_SynSpecial" })
@@ -1242,6 +1192,54 @@ highlight("logLevelError", { link = "Material_VimErrorInverted" })
 highlight("logBrackets", { link = "Material_SynSpecial" })
 
 highlight("logXmlNamespace", { link = "Material_SynNamespaceName" })
+
+-- lualine | nvim-lualine/lualine.nvim {{{3
+
+highlight("Material_Lualine1", {
+  fg = colors.neutral.midpoint_strong,
+  bg = color_table(hues.neutral, 2),
+})
+highlight("Material_Lualine3", {
+  fg = colors.neutral.lightest,
+  bg = colors.neutral.strong,
+})
+
+highlight("Material_LualineInsert", {
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.insert, 7),
+  bold = true,
+})
+highlight("Material_LualineReplace", {
+  fg = colors.neutral.lightest,
+  bg = color_table(hues.replace, 7),
+  bold = true,
+})
+
+highlight("Material_LualineModified", {
+  fg = colors.neutral.lightest,
+  bg = colors.modified.strong,
+})
+highlight("Material_LualineLazyPackages", {
+  fg = colors.syntax.namespace,
+  bg = colors.neutral.strong,
+})
+
+-- neo-tree | nvim-neo-tree/neo-tree.nvim {{{3
+
+highlight("NeoTreeModified", { fg = colors.modified.strong })
+highlight("NeoTreeGitStaged", {
+  fg = colors.neutral.lightest,
+  bg = colors.git.staged,
+})
+highlight("NeoTreeGitIgnored", { link = "Material_SynComment" })
+highlight("NeoTreeGitUnstaged", {
+  fg = colors.neutral.lightest,
+  bg = colors.git.unstaged,
+})
+highlight("NeoTreeGitUntracked", {
+  fg = colors.neutral.lightest,
+  bg = colors.git.untracked,
+})
 
 -- nvim-cmp | hrsh7th/nvim-cmp {{{3
 
