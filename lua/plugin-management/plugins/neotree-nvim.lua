@@ -78,6 +78,20 @@ return {
     filesystem = {
       group_empty_dirs = true,
       hijack_netrw_behavior = "open_current",
+      commands = {
+        toggle_hidden = function(state)
+          -- might break in the future, as we are using internals
+          -- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/main/lua/neo-tree/sources/filesystem/commands.lua#L230C8
+          state.filtered_items.visible = not state.filtered_items.visible
+          require("neo-tree.sources.filesystem")._navigate_internal(
+            state,
+            nil,
+            nil,
+            nil,
+            false
+          )
+        end,
+      },
       window = {
         mappings = {
           ["[c"] = "prev_git_modified",
@@ -90,6 +104,3 @@ return {
     },
   },
 }
-
--- TODO:
--- - remove toggle notification for hidden files
