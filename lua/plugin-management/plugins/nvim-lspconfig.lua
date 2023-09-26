@@ -24,6 +24,7 @@ return {
       "jqls",
       "lemminx",
       "ruff_lsp",
+      "texlab",
       "vimls",
     }
 
