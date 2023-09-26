@@ -58,6 +58,7 @@ return {
       },
     },
     nesting_rules = {
+      cshtml = { "cshtml.cs" },
       razor = { "razor.cs", "razor.css" },
     },
     window = {
