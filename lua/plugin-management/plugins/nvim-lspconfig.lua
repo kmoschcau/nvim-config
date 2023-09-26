@@ -18,6 +18,7 @@ return {
     local lspconfig = require "lspconfig"
 
     local simple_servers = {
+      "bashls",
       "gradle_ls",
       "jedi_language_server",
       "jqls",
