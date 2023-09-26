@@ -81,7 +81,7 @@ return {
       should_attach = function(bufnr)
         return not vim.list_contains(
           disabled_filetypes,
-          vim.api.nvim_buf_get_option(bufnr, "filetype")
+          vim.api.nvim_get_option_value("filetype", { buf = bufnr })
         )
       end,
       sources = {
