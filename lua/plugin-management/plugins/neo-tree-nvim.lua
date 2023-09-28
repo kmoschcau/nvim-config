@@ -60,6 +60,7 @@ return {
     nesting_rules = {
       cshtml = { "cshtml.cs" },
       razor = { "razor.cs", "razor.css" },
+      xaml = { "xaml.cs" },
     },
     window = {
       mappings = {
