@@ -10,6 +10,21 @@ local function map_kinds()
   return ret_val
 end
 
+local function index_of(array, value)
+  for i, v in ipairs(array) do
+    if v == value then
+      return i
+    end
+  end
+  return nil
+end
+
+local function get_siblings(state, node)
+  local parent = state.tree:get_node(node:get_parent_id())
+  local siblings = parent:get_child_ids()
+  return siblings
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -64,6 +79,24 @@ return {
     },
     window = {
       mappings = {
+        ["<C-j>"] = function(state)
+          local node = state.tree:get_node()
+          local siblings = get_siblings(state, node)
+          if not node.is_last_child then
+            local current_index = index_of(siblings, node.id)
+            local next_index = siblings[current_index + 1]
+            require("neo-tree.ui.renderer").focus_node(state, next_index)
+          end
+        end,
+        ["<C-k>"] = function(state)
+          local node = state.tree:get_node()
+          local siblings = get_siblings(state, node)
+          local current_index = index_of(siblings, node.id)
+          if current_index > 1 then
+            local previous_index = siblings[current_index - 1]
+            require("neo-tree.ui.renderer").focus_node(state, previous_index)
+          end
+        end,
         ["<C-s>"] = "split_with_window_picker",
         ["<C-t>"] = "open_tabnew",
         ["<C-v>"] = "vsplit_with_window_picker",
@@ -71,6 +104,16 @@ return {
         ["<space>"] = { "toggle_node", nowait = true },
         ["[g"] = "none",
         ["]g"] = "none",
+        J = function(state)
+          local node = state.tree:get_node()
+          local siblings = get_siblings(state, node)
+          require("neo-tree.ui.renderer").focus_node(state, siblings[#siblings])
+        end,
+        K = function(state)
+          local node = state.tree:get_node()
+          local siblings = get_siblings(state, node)
+          require("neo-tree.ui.renderer").focus_node(state, siblings[1])
+        end,
         S = "none",
         o = "open_with_window_picker",
         oc = "none",
