@@ -68,6 +68,9 @@ return {
         trailing_slash = true,
         highlight_opened_files = true,
       },
+      modified = {
+        symbol = icons.files.modified,
+      },
       git_status = {
         symbols = vim.tbl_extend("error", icons.git.lines, icons.git.files),
       },
