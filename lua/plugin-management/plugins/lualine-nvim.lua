@@ -27,6 +27,8 @@ return {
       {
         "filename",
         path = 1, -- relative path
+        newfile_status = true,
+        symbols = icons.files,
         color = function()
           return vim.bo.modified and "Material_LualineModified"
             or "Material_Lualine3"

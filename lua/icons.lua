@@ -5,6 +5,12 @@ return {
     info = " ",
     hint = "󰌵 ",
   },
+  files = {
+    modified = " ",
+    readonly = "",
+    unnamed = "",
+    newfile = " ",
+  },
   git = {
     lines = {
       added = "󰐕",
