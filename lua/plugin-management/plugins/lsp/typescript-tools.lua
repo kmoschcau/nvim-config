@@ -8,6 +8,8 @@ require("typescript-tools").setup {
   settings = {
     expose_as_code_action = "all",
     complete_function_calls = ts.suggest.completeFunctionCalls,
+    code_lens = "all",
+    disable_member_code_lens = false,
 
     tsserver_file_preferences = vim.tbl_deep_extend(
       "error",
