@@ -1,12 +1,6 @@
 return {
   "euclio/vim-markdown-composer",
   build = "cargo build --release",
-  cmd = {
-    "ComposerStart",
-    "ComposerUpdate",
-    "ComposerOpen",
-    "ComposerJob",
-  },
   config = function()
     -- Whether the server should automatically start when a markdown file is opened.
     vim.g.markdown_composer_autostart = 0
