@@ -63,15 +63,5 @@ return {
     matchup = {
       enable = true,
     },
-
-    -- nvim-treesitter/nvim-treesitter
-    playground = {
-      enable = true,
-    },
-
-    -- nvim-treesitter/nvim-treesitter
-    query_linter = {
-      enable = true,
-    },
   },
 }
