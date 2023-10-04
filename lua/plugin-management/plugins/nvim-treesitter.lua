@@ -34,15 +34,23 @@ return {
     auto_install = true,
 
     -- modules below
+
+    -- windwp/nvim-ts-autotag
     autotag = {
       enable = true,
     },
+
+    -- RRethy/nvim-treesitter-endwise
     endwise = {
       enable = true,
     },
+
+    -- nvim-treesitter/nvim-treesitter
     highlight = {
       enable = true,
     },
+
+    -- nvim-treesitter/nvim-treesitter
     indent = {
       enable = true,
       disable = {
@@ -50,12 +58,18 @@ return {
         "typescript",
       },
     },
+
+    -- andymass/vim-matchup
     matchup = {
       enable = true,
     },
+
+    -- nvim-treesitter/nvim-treesitter
     playground = {
       enable = true,
     },
+
+    -- nvim-treesitter/nvim-treesitter
     query_linter = {
       enable = true,
     },
