@@ -1,1 +1,3 @@
-return { "tpope/vim-unimpaired" }
+return {
+  "tpope/vim-unimpaired",
+}

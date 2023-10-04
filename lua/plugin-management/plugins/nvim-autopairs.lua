@@ -1,1 +1,4 @@
-return { "windwp/nvim-autopairs", opts = {} }
+return {
+  "windwp/nvim-autopairs",
+  opts = {},
+}

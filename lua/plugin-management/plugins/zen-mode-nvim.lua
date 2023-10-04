@@ -1,1 +1,4 @@
-return { "folke/zen-mode.nvim", opts = {} }
+return {
+  "folke/zen-mode.nvim",
+  opts = {},
+}

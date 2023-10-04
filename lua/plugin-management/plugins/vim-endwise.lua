@@ -1,1 +1,3 @@
-return { "tpope/vim-endwise" }
+return {
+  "tpope/vim-endwise",
+}

@@ -1,1 +1,3 @@
-return { "embear/vim-localvimrc" }
+return {
+  "embear/vim-localvimrc",
+}

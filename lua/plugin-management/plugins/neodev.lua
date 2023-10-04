@@ -1,1 +1,4 @@
-return { "folke/neodev.nvim", opts = {} }
+return {
+  "folke/neodev.nvim",
+  opts = {},
+}
