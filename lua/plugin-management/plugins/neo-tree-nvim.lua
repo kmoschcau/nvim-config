@@ -76,9 +76,59 @@ return {
       },
     },
     nesting_rules = {
-      cshtml = { "cshtml.cs" },
-      razor = { "razor.cs", "razor.css" },
-      xaml = { "xaml.cs" },
+      ["component.ts"] = {
+        "component.css",
+        "component.html",
+        "component.less",
+        "component.sass",
+        "component.scss",
+        "component.spec.ts",
+      },
+      ["config"] = {
+        "Debug.config",
+        "Release.config",
+        "debug.config",
+        "release.config",
+      },
+      ["cs"] = {
+        "Designer.cs",
+      },
+      ["cshtml"] = {
+        "cshtml.cs",
+      },
+      ["css"] = {
+        "min.css",
+        "css.map",
+      },
+      ["js"] = {
+        "min.js",
+        "js.map",
+      },
+      ["json"] = {
+        "Development.json",
+        "Production.json",
+        "Staging.json",
+        "development.json",
+        "production.json",
+        "staging.json",
+      },
+      ["min.css"] = {
+        "min.css.map",
+      },
+      ["min.js"] = {
+        "min.map",
+        "min.js.map",
+      },
+      ["svg"] = {
+        "min.svg",
+      },
+      ["razor"] = {
+        "razor.cs",
+        "razor.css",
+      },
+      ["xaml"] = {
+        "xaml.cs",
+      },
     },
     window = {
       mappings = {
