@@ -238,6 +238,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.filetype.add {
   extension = {
+    azcli = "ps1",
+    nswag = "json",
     rasi = "rasi",
   },
   filename = {
