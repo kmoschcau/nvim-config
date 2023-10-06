@@ -95,6 +95,7 @@ return {
       },
       ["cshtml"] = {
         "cshtml.cs",
+        "cshtml.js",
       },
       ["css"] = {
         "min.css",
@@ -125,6 +126,7 @@ return {
       ["razor"] = {
         "razor.cs",
         "razor.css",
+        "razor.js",
       },
       ["xaml"] = {
         "xaml.cs",
