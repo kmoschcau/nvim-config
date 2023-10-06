@@ -15,7 +15,7 @@ return {
       silent = true,
     },
     {
-      "<C-_>",
+      vim.fn.has("mac") > 0 and "<C-/>" or "<C-_>",
       function()
         require("telescope.builtin").live_grep()
       end,
