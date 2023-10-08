@@ -126,7 +126,7 @@ M.settings = {
 local formatting_ignore_list = {
   "jsonls",
   "omnisharp",
-  "tsserver",
+  "typescript-tools",
 }
 
 --- Check whether the given name designates an LSP that should be ignored for
