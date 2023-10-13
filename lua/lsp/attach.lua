@@ -179,11 +179,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
 
     -- textDocument/hover
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-      buffer = args.buf,
-      desc = "Trigger hover for the symbol under the cursor.",
-      silent = true,
-    })
+    if common.supports_method(client, "textDocument/hover") then
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+        buffer = args.buf,
+        desc = "Trigger LSP hover for the symbol under the cursor.",
+        silent = true,
+      })
+    end
 
     if common.supports_method(client, "textDocument/formatting") then
       if common.is_ignored_formatter(client and client.name) then
