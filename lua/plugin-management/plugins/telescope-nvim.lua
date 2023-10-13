@@ -4,6 +4,8 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-fzf-native.nvim",
+    "piersolenski/telescope-import.nvim",
+    "rcarriga/nvim-notify",
   },
   keys = {
     {
@@ -80,6 +82,7 @@ return {
     }
 
     require("telescope").load_extension "fzf"
+    require("telescope").load_extension "import"
     require("telescope").load_extension "notify"
   end,
 }
