@@ -3,7 +3,6 @@ return {
   dependencies = {
     "Hoffs/omnisharp-extended-lsp.nvim",
     "folke/neodev.nvim",
-    "jose-elias-alvarez/typescript.nvim",
     "mfussenegger/nvim-jdtls",
     {
       "pmizio/typescript-tools.nvim",
