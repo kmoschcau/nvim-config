@@ -124,6 +124,7 @@ M.settings = {
 
 -- This is a list of servers that do not have an option to disable formatting.
 local formatting_ignore_list = {
+  "html",
   "jsonls",
   "omnisharp",
   "typescript-tools",
