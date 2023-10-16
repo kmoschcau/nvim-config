@@ -3,13 +3,13 @@ local disabled_filetypes = {
 }
 
 return {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()
-    local null_ls = require "null-ls"
-    local code_actions = null_ls.builtins.code_actions
-    local diagnostics = null_ls.builtins.diagnostics
-    local formatting = null_ls.builtins.formatting
+    local none_ls = require "null-ls"
+    local code_actions = none_ls.builtins.code_actions
+    local diagnostics = none_ls.builtins.diagnostics
+    local formatting = none_ls.builtins.formatting
 
     local local_config = require "local-config"
 
@@ -20,22 +20,22 @@ return {
 
       local args = {}
 
-      if config.null_ls.java.checkstyle.file then
+      if config.none_ls.java.checkstyle.file then
         table.insert(args, "$FILENAME")
       else
         table.insert(args, "$ROOT")
       end
 
       table.insert(args, "-c")
-      if config.null_ls.java.checkstyle.config then
-        table.insert(args, config.null_ls.java.checkstyle.config)
+      if config.none_ls.java.checkstyle.config then
+        table.insert(args, config.none_ls.java.checkstyle.config)
       else
         table.insert(args, "/google_checks.xml")
       end
 
-      if config.null_ls.java.checkstyle.options then
+      if config.none_ls.java.checkstyle.options then
         for _, arg in
-          ipairs(vim.fn.split(config.null_ls.java.checkstyle.options))
+          ipairs(vim.fn.split(config.none_ls.java.checkstyle.options))
         do
           table.insert(args, arg)
         end
@@ -52,22 +52,22 @@ return {
       local args = {}
 
       table.insert(args, "--dir")
-      if config.null_ls.java.pmd.dir then
-        table.insert(args, config.null_ls.java.pmd.dir)
+      if config.none_ls.java.pmd.dir then
+        table.insert(args, config.none_ls.java.pmd.dir)
       else
         table.insert(args, "$ROOT")
       end
 
       table.insert(args, "--rulesets")
-      if config.null_ls.java.pmd.rulesets then
-        table.insert(args, config.null_ls.java.pmd.rulesets)
+      if config.none_ls.java.pmd.rulesets then
+        table.insert(args, config.none_ls.java.pmd.rulesets)
       else
         table.insert(args, "category/java/bestpractices.xml")
       end
 
-      if config.null_ls.java.pmd.cache then
+      if config.none_ls.java.pmd.cache then
         table.insert(args, "--cache")
-        table.insert(args, config.null_ls.java.pmd.cache)
+        table.insert(args, config.none_ls.java.pmd.cache)
       else
         table.insert(args, "--no-cache")
       end
@@ -75,7 +75,7 @@ return {
       return args
     end
 
-    require("null-ls").setup {
+    none_ls.setup {
       border = "rounded",
       diagnostics_format = "#{s}: #{m}",
       should_attach = function(bufnr)
@@ -95,7 +95,9 @@ return {
           extra_args = build_checkstyle_extra_args,
           timeout = -1,
         },
-        diagnostics.eslint_d,
+        diagnostics.eslint_d.with {
+          extra_filetypes = { "svelte" },
+        },
         diagnostics.fish,
         diagnostics.markdownlint,
         diagnostics.markuplint,
@@ -107,7 +109,7 @@ return {
         diagnostics.shellcheck,
         diagnostics.selene,
         diagnostics.stylelint.with {
-          filetypes = { "css", "less", "sass", "scss", "svelte" },
+          extra_filetypes = { "svelte" },
         },
         -- This breaks joining lines with the newer treesitter APIs
         -- diagnostics.todo_comments,
@@ -122,7 +124,9 @@ return {
         formatting.google_java_format,
         formatting.markdownlint,
         formatting.packer,
-        formatting.prettierd,
+        formatting.prettierd.with {
+          extra_filetypes = { "svelte" },
+        },
         formatting.shellharden,
         formatting.shfmt.with {
           extra_args = { "--indent", "4" },
