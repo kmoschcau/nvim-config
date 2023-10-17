@@ -1,5 +1,6 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
+local compat = require("system-compat")
 local ehandler = require("error-handler").handler
 
 -- colors setup {{{1
@@ -9,34 +10,9 @@ local ehandler = require("error-handler").handler
 -- terminal.
 --
 -- Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-local terminfo_colors
-if vim.fn.executable "tput" > 0 then
-  local result = vim.system({ "tput", "colors" }, { text = true }):wait()
-  if result.code == 0 then
-    terminfo_colors = vim.trim(result.stdout)
-  end
-else
-  if vim.fn.exists "$WT_SESSION" > 0 then
-    terminfo_colors = "256"
-  else
-    terminfo_colors = ""
-  end
-end
-if terminfo_colors:match "256" then
-  vim.o.termguicolors = true
-end
+vim.o.termguicolors = compat.should_enable_termguicolors()
 
-if vim.fn.executable "darkman" > 0 then
-  local result = vim.system({ "darkman", "get" }, { text = true }):wait()
-  if result.code > 0 then
-    vim.o.background = "light"
-  else
-    vim.o.background = (result.stdout:gsub("%s+", "") == "dark") and "dark"
-      or "light"
-  end
-else
-  vim.o.background = "light"
-end
+vim.o.background = compat.get_system_background()
 
 -- path settings {{{1
 
