@@ -1182,7 +1182,18 @@ highlight("GitSignsDeleteInline", { link = "Material_VimDiffLineText" })
 
 -- indent-blankline | lukas-reineke/indent-blankline.nvim {{{3
 
-highlight("IblScope", { fg = color_table(hues.neutral, 5) })
+highlight("IblIndent", {
+  fg = color_table(hues.neutral, 3),
+  italic = false,
+  bold = false,
+  nocombine = true,
+})
+highlight("IblScope", {
+  fg = color_table(hues.neutral, 4),
+  italic = false,
+  bold = false,
+  nocombine = true,
+})
 
 -- log | MTDL9/vim-log-Highlighting {{{3
 
