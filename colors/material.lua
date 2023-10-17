@@ -1180,6 +1180,10 @@ highlight("GitSignsChangeDeleteLn", {
 highlight("GitSignsDelete", { link = "Material_VimDiffSignDelete" })
 highlight("GitSignsDeleteInline", { link = "Material_VimDiffLineText" })
 
+-- indent-blankline | lukas-reineke/indent-blankline.nvim {{{3
+
+highlight("IblScope", { fg = color_table(hues.neutral, 5) })
+
 -- log | MTDL9/vim-log-Highlighting {{{3
 
 highlight("logLevelTrace", { link = "Material_VimTraceInverted" })
