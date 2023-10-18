@@ -102,8 +102,10 @@ return {
         "css.map",
       },
       ["js"] = {
-        "min.js",
         "js.map",
+        "min.js",
+        "spec.js",
+        "test.js",
       },
       ["json"] = {
         "Development.json",
@@ -127,6 +129,10 @@ return {
         "razor.cs",
         "razor.css",
         "razor.js",
+      },
+      ["ts"] = {
+        "spec.ts",
+        "test.ts",
       },
       ["xaml"] = {
         "xaml.cs",
