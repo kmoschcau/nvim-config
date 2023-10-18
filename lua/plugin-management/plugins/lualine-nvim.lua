@@ -23,6 +23,10 @@ return {
       }
     end
 
+    local win_number_section = function()
+      return vim.api.nvim_win_get_number(0)
+    end
+
     local lualine_c = {
       {
         "filename",
@@ -63,9 +67,6 @@ return {
 
     local lualine_z = {
       "%3p%% :%l/%L :%c",
-      function()
-        return vim.api.nvim_win_get_number(0)
-      end,
     }
 
     require("lualine").setup {
@@ -141,10 +142,16 @@ return {
         lualine_c = {
           { "navic" },
         },
+        lualine_z = {
+          win_number_section,
+        },
       },
       inactive_winbar = {
         lualine_c = {
           { "navic" },
+        },
+        lualine_z = {
+          win_number_section,
         },
       },
       extensions = {
