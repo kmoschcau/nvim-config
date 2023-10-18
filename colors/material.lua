@@ -278,11 +278,11 @@ highlight("Material_VimFolded", {
 })
 highlight("Material_VimSearch", {
   bg = color_table("yellow", 6),
-  bg_dark = color_table("yellow", 10, { invert_dark = false }),
+  bg_dark = color_table("lime", 10, { invert_dark = false }),
 })
 highlight("Material_VimIncSearch", {
   bg = color_table("orange", 6),
-  bg_dark = color_table("orange", 9, { invert_dark = false }),
+  bg_dark = color_table("orange", 10, { invert_dark = false }),
   bold = true,
 })
 highlight("Material_VimMatchParen", { bg = color_table("teal", 2) })
@@ -291,7 +291,7 @@ highlight("Material_VimMatchParen", { bg = color_table("teal", 2) })
 
 highlight("Material_LspReferenceText", {
   bg = color_table("yellow", 3),
-  bg_dark = color_table("yellow", 10, { invert_dark = false }),
+  bg_dark = color_table("lime", 10, { invert_dark = false }),
 })
 highlight("Material_LspReferenceRead", { bg = color_table("green", 2) })
 highlight("Material_LspReferenceWrite", { bg = color_table("blue", 2) })
