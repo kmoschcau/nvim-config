@@ -151,6 +151,7 @@ return {
         "fugitive",
         "neo-tree",
         "nvim-dap-ui",
+        "mason",
         "quickfix",
       },
     }
