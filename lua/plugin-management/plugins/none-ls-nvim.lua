@@ -100,7 +100,9 @@ return {
         },
         diagnostics.fish,
         diagnostics.markdownlint,
-        diagnostics.markuplint,
+        diagnostics.markuplint.with {
+          extra_filetypes = { "svelte" },
+        },
         diagnostics.pmd.with {
           args = { "--format", "json" },
           extra_args = build_pmd_extra_args,
