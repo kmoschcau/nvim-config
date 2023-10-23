@@ -140,24 +140,30 @@ return {
     },
     window = {
       mappings = {
-        ["<C-j>"] = function(state)
-          local node = state.tree:get_node()
-          local siblings = get_siblings(state, node)
-          if not node.is_last_child then
+        ["<C-j>"] = {
+          desc = "Go to next sibling",
+          function(state)
+            local node = state.tree:get_node()
+            local siblings = get_siblings(state, node)
+            if not node.is_last_child then
+              local current_index = index_of(siblings, node.id)
+              local next_index = siblings[current_index + 1]
+              require("neo-tree.ui.renderer").focus_node(state, next_index)
+            end
+          end,
+        },
+        ["<C-k>"] = {
+          desc = "Go to previous sibling",
+          function(state)
+            local node = state.tree:get_node()
+            local siblings = get_siblings(state, node)
             local current_index = index_of(siblings, node.id)
-            local next_index = siblings[current_index + 1]
-            require("neo-tree.ui.renderer").focus_node(state, next_index)
-          end
-        end,
-        ["<C-k>"] = function(state)
-          local node = state.tree:get_node()
-          local siblings = get_siblings(state, node)
-          local current_index = index_of(siblings, node.id)
-          if current_index > 1 then
-            local previous_index = siblings[current_index - 1]
-            require("neo-tree.ui.renderer").focus_node(state, previous_index)
-          end
-        end,
+            if current_index > 1 then
+              local previous_index = siblings[current_index - 1]
+              require("neo-tree.ui.renderer").focus_node(state, previous_index)
+            end
+          end,
+        },
         ["<C-s>"] = "split_with_window_picker",
         ["<C-t>"] = "open_tabnew",
         ["<C-v>"] = "vsplit_with_window_picker",
@@ -165,16 +171,25 @@ return {
         ["<space>"] = { "toggle_node", nowait = true },
         ["[g"] = "none",
         ["]g"] = "none",
-        J = function(state)
-          local node = state.tree:get_node()
-          local siblings = get_siblings(state, node)
-          require("neo-tree.ui.renderer").focus_node(state, siblings[#siblings])
-        end,
-        K = function(state)
-          local node = state.tree:get_node()
-          local siblings = get_siblings(state, node)
-          require("neo-tree.ui.renderer").focus_node(state, siblings[1])
-        end,
+        J = {
+          desc = "Go to last sibling",
+          function(state)
+            local node = state.tree:get_node()
+            local siblings = get_siblings(state, node)
+            require("neo-tree.ui.renderer").focus_node(
+              state,
+              siblings[#siblings]
+            )
+          end,
+        },
+        K = {
+          desc = "Go to first sibling",
+          function(state)
+            local node = state.tree:get_node()
+            local siblings = get_siblings(state, node)
+            require("neo-tree.ui.renderer").focus_node(state, siblings[1])
+          end,
+        },
         S = "none",
         o = "open_with_window_picker",
         oc = "none",
