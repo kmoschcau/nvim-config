@@ -140,6 +140,16 @@ return {
     },
     window = {
       mappings = {
+        ["<C-h>"] = {
+          desc = "Go to parent",
+          function(state)
+            local node = state.tree:get_node()
+            require("neo-tree.ui.renderer").focus_node(
+              state,
+              node:get_parent_id()
+            )
+          end,
+        },
         ["<C-j>"] = {
           desc = "Go to next sibling",
           function(state)
