@@ -7,6 +7,7 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "lukas-reineke/cmp-under-comparator",
+    "micangl/cmp-vimtex",
     "onsails/lspkind.nvim",
     { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
     "rcarriga/cmp-dap",
@@ -113,6 +114,15 @@ return {
     cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
       sources = {
         { name = "dap" },
+      },
+    })
+
+    cmp.setup.filetype("tex", {
+      sources = {
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "vimtex" },
+        { name = "luasnip" },
       },
     })
 
