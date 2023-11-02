@@ -25,13 +25,16 @@ local style = {
   format = {
     enable = false,
   },
-  validate = {
+  lint = {
     duplicateProperties = "warning",
     idSelector = "warning",
     ieHack = "warning",
+    importStatement = "warning",
     important = "warning",
+    unknownProperties = "ignore", -- enforced via stylelint
     zeroUnits = "warning",
   },
+  validate = false, -- works badly with tailwind, so use stylelint instead
 }
 
 local js_inlay_vs_code = {
