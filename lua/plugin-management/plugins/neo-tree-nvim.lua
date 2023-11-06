@@ -76,66 +76,94 @@ return {
       },
     },
     nesting_rules = {
-      ["component.ts"] = {
-        "component.css",
-        "component.html",
-        "component.less",
-        "component.sass",
-        "component.scss",
-        "component.spec.ts",
+      [".NET config"] = {
+        pattern = "^(.*)%.config$",
+        files = {
+          "%1.*.config",
+        },
       },
-      ["config"] = {
-        "Debug.config",
-        "Release.config",
-        "debug.config",
-        "release.config",
+      [".NET appsettings.json"] = {
+        pattern = "^appsettings%.json$",
+        files = {
+          "appsettings.*.json",
+        },
       },
-      ["cs"] = {
-        "Designer.cs",
+      ["Angular components"] = {
+        pattern = "^(.*)%.component%.ts$",
+        files = {
+          "%1.component.css",
+          "%1.component.html",
+          "%1.component.less",
+          "%1.component.sass",
+          "%1.component.scss",
+          "%1.component.spec.ts",
+        },
       },
-      ["cshtml"] = {
-        "cshtml.cs",
-        "cshtml.js",
+      ["C Sharp"] = {
+        pattern = "^(.*)%.cs$",
+        files = {
+          "%1.Designer.cs",
+          "%1.designer.cs",
+        },
       },
-      ["css"] = {
-        "min.css",
-        "css.map",
+      ["Cascading Style Sheets"] = {
+        pattern = "^(.*)%.css$",
+        files = {
+          "%1.css.map",
+          "%1.min.css",
+          "%1.min.css.map",
+        },
       },
-      ["js"] = {
-        "js.map",
-        "min.js",
-        "spec.js",
-        "test.js",
+      ["eXtensible Application Markup Language"] = {
+        pattern = "^(.*)%.xaml$",
+        files = {
+          "%1.xaml.cs",
+        },
       },
-      ["json"] = {
-        "Development.json",
-        "Production.json",
-        "Staging.json",
-        "development.json",
-        "production.json",
-        "staging.json",
+      ["JavaScript"] = {
+        pattern = "^(.*)%.js$",
+        files = {
+          "%1.js.map",
+          "%1.min.js",
+          "%1.min.js.map",
+          "%1.spec.js",
+          "%1.test.js",
+        },
       },
-      ["min.css"] = {
-        "min.css.map",
+      ["Node package manifest"] = {
+        pattern = "^package%.json$",
+        files = {
+          "package-lock.json",
+          "yarn*",
+        },
       },
-      ["min.js"] = {
-        "min.map",
-        "min.js.map",
+      ["Razor components"] = {
+        pattern = "^(.*)%.razor$",
+        files = {
+          "%1.razor.cs",
+          "%1.razor.css",
+          "%1.razor.js",
+        },
       },
-      ["svg"] = {
-        "min.svg",
+      ["Razor pages"] = {
+        pattern = "^(.*)%.cshtml$",
+        files = {
+          "%1.cshtml.cs",
+          "%1.cshtml.js",
+        },
       },
-      ["razor"] = {
-        "razor.cs",
-        "razor.css",
-        "razor.js",
+      ["Scalable Vector Graphics"] = {
+        pattern = "^(.*)%.svg$",
+        files = {
+          "%1.min.svg",
+        },
       },
-      ["ts"] = {
-        "spec.ts",
-        "test.ts",
-      },
-      ["xaml"] = {
-        "xaml.cs",
+      ["TypeScript"] = {
+        pattern = "^(.*)%.ts$",
+        files = {
+          "%1.spec.ts",
+          "%1.test.ts",
+        },
       },
     },
     window = {
