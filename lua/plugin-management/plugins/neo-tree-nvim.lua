@@ -130,6 +130,16 @@ return {
           "%1.test.js",
         },
       },
+      ["JavaScript esModules"] = {
+        pattern = "^(.*)%.mjs$",
+        files = {
+          "%1.mjs.map",
+          "%1.min.mjs",
+          "%1.min.mjs.map",
+          "%1.spec.mjs",
+          "%1.test.mjs",
+        },
+      },
       ["Node package manifest"] = {
         pattern = "^package%.json$",
         files = {
