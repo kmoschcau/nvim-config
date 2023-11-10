@@ -21,6 +21,7 @@ return {
       "gradle_ls",
       "jedi_language_server",
       "jqls",
+      "kotlin_language_server",
       "lemminx",
       "ruff_lsp",
       "texlab",
