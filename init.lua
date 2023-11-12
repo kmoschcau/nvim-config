@@ -255,6 +255,10 @@ vim.keymap.set("n", "<F10>", vim.show_pos, {
   desc = "Show syntax highlight group information at cursor position.",
   silent = true,
 })
+vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
+  desc = "Show treesitter tree inspection window.",
+  silent = true,
+})
 
 -- plugin configurations {{{1
 
