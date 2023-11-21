@@ -51,6 +51,7 @@ return {
       "lua_ls",
       "omnisharp",
       "svelte",
+      "tailwindcss",
       "typescript-tools",
       "yamlls",
     }
