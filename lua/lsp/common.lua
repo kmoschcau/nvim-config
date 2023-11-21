@@ -83,6 +83,7 @@ local js_like = {
   preferences = {
     importModuleSpecifier = "relative",
     importModuleSpecifierEnding = "js",
+    preferTypeOnlyAutoImports = true,
     quoteStyle = "double",
     useAliasesForRenames = false,
   },
