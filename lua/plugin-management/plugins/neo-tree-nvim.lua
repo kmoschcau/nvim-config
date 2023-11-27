@@ -254,7 +254,7 @@ return {
     },
     filesystem = {
       group_empty_dirs = true,
-      hijack_netrw_behavior = "open_current",
+      hijack_netrw_behavior = "disabled",
       commands = {
         toggle_hidden = function(state)
           -- might break in the future, as we are using internals
