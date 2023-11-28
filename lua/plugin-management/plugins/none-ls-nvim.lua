@@ -101,7 +101,7 @@ return {
         diagnostics.fish,
         diagnostics.markdownlint,
         diagnostics.markuplint.with {
-          extra_filetypes = { "svelte" },
+          extra_filetypes = { "svelte", "vue" },
         },
         diagnostics.pmd.with {
           args = { "--format", "json" },
@@ -111,7 +111,7 @@ return {
         diagnostics.shellcheck,
         diagnostics.selene,
         diagnostics.stylelint.with {
-          extra_filetypes = { "svelte" },
+          extra_filetypes = { "svelte", "vue" },
         },
         -- This breaks joining lines with the newer treesitter APIs
         -- diagnostics.todo_comments,
