@@ -1,6 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
+    "L3MON4D3/cmp-luasnip-choice",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -8,6 +9,7 @@ return {
     "hrsh7th/cmp-cmdline",
     "lukas-reineke/cmp-under-comparator",
     "micangl/cmp-vimtex",
+    "mtoohey31/cmp-fish",
     "onsails/lspkind.nvim",
     { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
     "rcarriga/cmp-dap",
@@ -87,6 +89,7 @@ return {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
+        { name = "luasnip_choice" },
       }, {
         buffer_source,
       }),
@@ -104,9 +107,21 @@ return {
       },
     }
 
+    require("cmp_luasnip_choice").setup {}
+
     cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
       sources = {
         { name = "dap" },
+      },
+    })
+
+    cmp.setup.filetype("fish", {
+      sources = {
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "fish" },
+        { name = "luasnip" },
+        { name = "luasnip_choice" },
       },
     })
 
@@ -114,6 +129,7 @@ return {
       sources = cmp.config.sources({
         { name = "git" },
         { name = "luasnip" },
+        { name = "luasnip_choice" },
       }, {
         buffer_source,
       }),
@@ -126,6 +142,7 @@ return {
         { name = "nvim_lsp_signature_help" },
         { name = "vimtex" },
         { name = "luasnip" },
+        { name = "luasnip_choice" },
       },
     })
 
