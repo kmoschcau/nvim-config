@@ -24,7 +24,6 @@ return {
 
     local luasnip = require "luasnip"
     local cmp = require "cmp"
-    local types = require "cmp.types"
     cmp.setup {
       enabled = function()
         return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
@@ -34,16 +33,20 @@ return {
       },
       formatting = {
         format = function(entry, vim_item)
+          vim_item.menu = "[" .. entry.source.name .. "]"
+
           if vim.list_contains({ "path" }, entry.source.name) then
             local icon, hl_group = require("nvim-web-devicons").get_icon(
               entry:get_completion_item().label
             )
+
             if icon then
               vim_item.kind = icon
               vim_item.kind_hl_group = hl_group
               return vim_item
             end
           end
+
           return require("lspkind").cmp_format {
             mode = "symbol_text",
             symbol_map = require("icons").types,
@@ -101,6 +104,12 @@ return {
       },
     }
 
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+      sources = {
+        { name = "dap" },
+      },
+    })
+
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
         { name = "git" },
@@ -110,12 +119,6 @@ return {
       }),
     })
     require("cmp_git").setup()
-
-    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-      sources = {
-        { name = "dap" },
-      },
-    })
 
     cmp.setup.filetype("tex", {
       sources = {
@@ -128,9 +131,7 @@ return {
 
     cmp.setup.cmdline({ "/", "?" }, {
       completion = {
-        autocomplete = {
-          types.cmp.TriggerEvent.TextChanged,
-        },
+        autocomplete = false,
       },
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
@@ -139,16 +140,21 @@ return {
     })
 
     cmp.setup.cmdline(":", {
-      completion = {
-        autocomplete = {
-          types.cmp.TriggerEvent.TextChanged,
-        },
-      },
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" },
       }, {
-        { name = "cmdline" },
+        {
+          name = "cmdline",
+          option = {
+            ignore_cmds = {
+              "!",
+              "Man",
+              "Neotree",
+              "terminal",
+            },
+          },
+        },
       }),
     })
 
