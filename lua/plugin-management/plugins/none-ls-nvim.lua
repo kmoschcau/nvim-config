@@ -75,6 +75,64 @@ return {
       return args
     end
 
+    local sources = {
+      code_actions.eslint_d,
+      code_actions.gitsigns,
+      code_actions.shellcheck,
+
+      diagnostics.cfn_lint,
+      diagnostics.checkstyle.with {
+        args = { "-f", "sarif" },
+        extra_args = build_checkstyle_extra_args,
+        timeout = -1,
+      },
+      diagnostics.eslint_d.with {
+        extra_filetypes = { "svelte" },
+      },
+      diagnostics.markdownlint,
+      diagnostics.markuplint.with {
+        extra_filetypes = { "svelte", "vue" },
+      },
+      diagnostics.pmd.with {
+        args = { "--format", "json" },
+        extra_args = build_pmd_extra_args,
+        timeout = -1,
+      },
+      diagnostics.shellcheck,
+      diagnostics.selene,
+      diagnostics.stylelint.with {
+        extra_filetypes = { "svelte", "vue" },
+      },
+      -- This breaks joining lines with the newer treesitter APIs
+      -- diagnostics.todo_comments,
+      diagnostics.trail_space.with {
+        disabled_filetypes = { "markdown" },
+      },
+      diagnostics.yamllint,
+
+      formatting.black,
+      formatting.csharpier,
+      formatting.google_java_format,
+      formatting.markdownlint,
+      formatting.packer,
+      formatting.prettierd.with {
+        extra_filetypes = { "svelte" },
+      },
+      formatting.shellharden,
+      formatting.shfmt.with {
+        extra_args = { "--indent", "4" },
+      },
+      formatting.stylelint,
+      formatting.stylua,
+      formatting.trim_newlines,
+      formatting.trim_whitespace,
+    }
+
+    if vim.fn.executable "fish" == 1 then
+      table.insert(sources, diagnostics.fish)
+      table.insert(sources, formatting.fish_indent)
+    end
+
     none_ls.setup {
       border = "rounded",
       diagnostics_format = "#{s}: #{m}",
@@ -84,60 +142,7 @@ return {
           vim.api.nvim_get_option_value("filetype", { buf = bufnr })
         )
       end,
-      sources = {
-        code_actions.eslint_d,
-        code_actions.gitsigns,
-        code_actions.shellcheck,
-
-        diagnostics.cfn_lint,
-        diagnostics.checkstyle.with {
-          args = { "-f", "sarif" },
-          extra_args = build_checkstyle_extra_args,
-          timeout = -1,
-        },
-        diagnostics.eslint_d.with {
-          extra_filetypes = { "svelte" },
-        },
-        diagnostics.fish,
-        diagnostics.markdownlint,
-        diagnostics.markuplint.with {
-          extra_filetypes = { "svelte", "vue" },
-        },
-        diagnostics.pmd.with {
-          args = { "--format", "json" },
-          extra_args = build_pmd_extra_args,
-          timeout = -1,
-        },
-        diagnostics.shellcheck,
-        diagnostics.selene,
-        diagnostics.stylelint.with {
-          extra_filetypes = { "svelte", "vue" },
-        },
-        -- This breaks joining lines with the newer treesitter APIs
-        -- diagnostics.todo_comments,
-        diagnostics.trail_space.with {
-          disabled_filetypes = { "markdown" },
-        },
-        diagnostics.yamllint,
-
-        formatting.black,
-        formatting.csharpier,
-        formatting.fish_indent,
-        formatting.google_java_format,
-        formatting.markdownlint,
-        formatting.packer,
-        formatting.prettierd.with {
-          extra_filetypes = { "svelte" },
-        },
-        formatting.shellharden,
-        formatting.shfmt.with {
-          extra_args = { "--indent", "4" },
-        },
-        formatting.stylelint,
-        formatting.stylua,
-        formatting.trim_newlines,
-        formatting.trim_whitespace,
-      },
+      sources = sources,
     }
   end,
 }

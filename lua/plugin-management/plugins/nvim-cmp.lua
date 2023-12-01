@@ -1,21 +1,26 @@
+local dependencies = {
+  "L3MON4D3/cmp-luasnip-choice",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-nvim-lsp-signature-help",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
+  "lukas-reineke/cmp-under-comparator",
+  "micangl/cmp-vimtex",
+  "onsails/lspkind.nvim",
+  { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
+  "rcarriga/cmp-dap",
+  "saadparwaiz1/cmp_luasnip",
+  "windwp/nvim-autopairs",
+}
+
+if vim.fn.executable "fish" == 1 then
+  table.insert(dependencies, "mtoohey31/cmp-fish")
+end
+
 return {
   "hrsh7th/nvim-cmp",
-  dependencies = {
-    "L3MON4D3/cmp-luasnip-choice",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "lukas-reineke/cmp-under-comparator",
-    "micangl/cmp-vimtex",
-    "mtoohey31/cmp-fish",
-    "onsails/lspkind.nvim",
-    { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
-    "rcarriga/cmp-dap",
-    "saadparwaiz1/cmp_luasnip",
-    "windwp/nvim-autopairs",
-  },
+  dependencies = dependencies,
   config = function()
     local buffer_source = {
       name = "buffer",
@@ -115,15 +120,17 @@ return {
       },
     })
 
-    cmp.setup.filetype("fish", {
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
-        { name = "fish" },
-        { name = "luasnip" },
-        { name = "luasnip_choice" },
-      },
-    })
+    if vim.fn.executable "fish" == 1 then
+      cmp.setup.filetype("fish", {
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "fish" },
+          { name = "luasnip" },
+          { name = "luasnip_choice" },
+        },
+      })
+    end
 
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
