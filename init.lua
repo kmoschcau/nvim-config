@@ -1,6 +1,6 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
-local compat = require("system-compat")
+local compat = require "system-compat"
 local ehandler = require("error-handler").handler
 
 -- colors setup {{{1
@@ -18,12 +18,12 @@ vim.o.background = compat.get_system_background()
 
 -- set the paths for python executables
 local python_path
-if vim.fn.has "win32" > 0 then
+if vim.fn.has "win32" == 1 then
   python_path = vim.fs.normalize "C:/Python37/python"
 else
   python_path = vim.fs.normalize "~/.pyenv/versions/neovim3/bin/python"
 end
-if vim.fn.executable(python_path) > 0 then
+if vim.fn.executable(python_path) == 1 then
   vim.g.python3_host_prog = python_path
 end
 

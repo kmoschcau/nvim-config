@@ -29,7 +29,7 @@ return {
       "vimls",
     }
 
-    if vim.fn.has "win32" ~= 1 then
+    if vim.fn.has "win32" == 0 then
       -- phpactor is simply not supported on Windows.
       table.insert(simple_servers, "phpactor")
     end

@@ -6,7 +6,7 @@ local M = {}
 --- @param ext? string the extension to append, when on Windows
 --- @return string
 M.append_win_ext = function(baseName, ext)
-  if vim.fn.has "win32" ~= 1 then
+  if vim.fn.has "win32" == 0 then
     return baseName
   end
 
@@ -17,11 +17,11 @@ end
 --- running in.
 --- @return string?
 M.get_browser_command = function()
-  if vim.fn.executable "xdg-open" > 0 then
+  if vim.fn.executable "xdg-open" == 1 then
     return "xdg-open"
   end
 
-  if vim.fn.executable "wslview" > 0 then
+  if vim.fn.executable "wslview" == 1 then
     return "wslview"
   elseif M.is_running_in_wsl() then
     vim.notify(
@@ -38,7 +38,7 @@ end
 --- determined, fall back to "dark".
 --- @return "light" | "dark"
 M.get_system_background = function()
-  if vim.fn.has "win32" > 0 or M.is_running_in_wsl() then
+  if vim.fn.has "win32" == 1 or M.is_running_in_wsl() then
     local result = vim
       .system({
         "reg.exe",
@@ -56,7 +56,7 @@ M.get_system_background = function()
     return result.stdout:match "0x1" and "light" or "dark"
   end
 
-  if vim.fn.executable "darkman" > 0 then
+  if vim.fn.executable "darkman" == 1 then
     local result = vim.system({ "darkman", "get" }, { text = true }):wait()
 
     if result.code > 0 then
@@ -99,13 +99,13 @@ end
 --- @return boolean
 M.should_enable_termguicolors = function()
   local terminfo_colors
-  if vim.fn.executable "tput" > 0 then
+  if vim.fn.executable "tput" == 1 then
     local result = vim.system({ "tput", "colors" }, { text = true }):wait()
     if result.code == 0 then
       terminfo_colors = vim.trim(result.stdout)
     end
   else
-    if vim.fn.exists "$WT_SESSION" > 0 then
+    if vim.fn.exists "$WT_SESSION" == 1 then
       terminfo_colors = "256"
     else
       terminfo_colors = ""
