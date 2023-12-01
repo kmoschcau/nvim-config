@@ -2,7 +2,10 @@ local icons = require "icons"
 
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = "nvim-tree/nvim-web-devicons",
+  dependencies = {
+    "SmiteshP/nvim-navic",
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
     local vcs_shorten_width = 200
     local vcs_display_width = 120
@@ -140,7 +143,10 @@ return {
       },
       winbar = {
         lualine_c = {
-          { "navic" },
+          {
+            "navic",
+            padding = { right = 0 },
+          },
         },
         lualine_z = {
           win_number_section,
@@ -148,7 +154,10 @@ return {
       },
       inactive_winbar = {
         lualine_c = {
-          { "navic" },
+          {
+            "navic",
+            padding = { right = 0 },
+          },
         },
         lualine_z = {
           win_number_section,
