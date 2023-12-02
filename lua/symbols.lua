@@ -1,4 +1,15 @@
 return {
+  cmp_sources = {
+    buffer = " ",
+    cmdline = " ",
+    dap = " ",
+    fish = "󰈺 ",
+    git = "󰊢 ",
+    luasnip = " ",
+    nvim_lsp = " ",
+    path = " ",
+    vimtex = " ",
+  },
   diagnostics = {
     error = " ",
     warn = " ",

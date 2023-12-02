@@ -40,7 +40,10 @@ return {
       },
       formatting = {
         format = function(entry, vim_item)
-          vim_item.menu = "[" .. entry.source.name .. "]"
+          local symbols = require "symbols"
+
+          local menu_symbol = symbols.cmp_sources[entry.source.name] or "  "
+          vim_item.menu = "[" .. menu_symbol .. entry.source.name .. "]"
 
           if vim.list_contains({ "path" }, entry.source.name) then
             local icon, hl_group = require("nvim-web-devicons").get_icon(
@@ -56,7 +59,7 @@ return {
 
           return require("lspkind").cmp_format {
             mode = "symbol_text",
-            symbol_map = require("symbols").types,
+            symbol_map = symbols.types,
           }(entry, vim_item)
         end,
       },
