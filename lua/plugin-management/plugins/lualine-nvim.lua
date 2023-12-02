@@ -1,4 +1,5 @@
-local icons = require "icons"
+local symbols = require "symbols"
+local separators = symbols.separators
 
 return {
   "nvim-lualine/lualine.nvim",
@@ -15,14 +16,14 @@ return {
         "diagnostics",
         sources = { "nvim_diagnostic" },
         sections = { severity },
-        separator = { left = "", right = "" },
+        separator = { left = separators.level1.right, right = "" },
         diagnostics_color = {
           error = "DiagnosticError",
           warn = "DiagnosticWarn",
           info = "DiagnosticInfo",
           hint = "DiagnosticHint",
         },
-        symbols = icons.diagnostics,
+        symbols = symbols.diagnostics,
       }
     end
 
@@ -35,7 +36,7 @@ return {
         "filename",
         path = 1, -- relative path
         newfile_status = true,
-        symbols = icons.files,
+        symbols = symbols.files,
         color = function()
           return vim.bo.modified and "Material_LualineModified"
             or "Material_Lualine3"
@@ -56,15 +57,17 @@ return {
     }
 
     local lualine_y = {
-      "filetype",
+      {
+        "filetype",
+        padding = { left = 1, right = 0 },
+      },
       {
         "encoding",
-        padding = { left = 1, right = 0 },
-        separator = "",
+        padding = 0,
       },
       {
         "fileformat",
-        separator = "",
+        padding = { left = 0, right = 1 },
       },
     }
 
@@ -75,6 +78,8 @@ return {
     require("lualine").setup {
       options = {
         theme = "material",
+        component_separators = separators.level2,
+        section_separators = separators.level1,
       },
       sections = {
         lualine_a = { "mode" },
@@ -87,8 +92,8 @@ return {
               modified = "Material_VimDiffSignChange",
               removed = "Material_VimDiffSignDelete",
             },
-            symbols = icons.git.lines,
-            separator = { left = "", right = "" },
+            symbols = symbols.git.lines,
+            separator = { left = "", right = separators.level1.left },
             cond = function()
               return vim.fn.winwidth(0) > vcs_display_width
             end,

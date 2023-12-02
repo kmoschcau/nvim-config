@@ -1,9 +1,9 @@
-local icons = require "icons"
+local symbols = require "symbols"
 
 local function map_kinds()
   local ret_val = {}
 
-  for key, value in pairs(icons.types) do
+  for key, value in pairs(symbols.types) do
     ret_val[key] = { icon = value }
   end
 
@@ -69,10 +69,10 @@ return {
         highlight_opened_files = true,
       },
       modified = {
-        symbol = icons.files.modified,
+        symbol = symbols.files.modified,
       },
       git_status = {
-        symbols = vim.tbl_extend("error", icons.git.lines, icons.git.files),
+        symbols = vim.tbl_extend("error", symbols.git.lines, symbols.git.files),
       },
     },
     nesting_rules = {

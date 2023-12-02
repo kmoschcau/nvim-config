@@ -55,10 +55,10 @@ xpcall(require, ehandler, "lsp.attach")
 
 -- Customize the built-in signs used by the diagnostics API.
 local signs = {
-  Error = require("icons").diagnostics.error,
-  Warn = require("icons").diagnostics.warn,
-  Info = require("icons").diagnostics.info,
-  Hint = require("icons").diagnostics.hint,
+  Error = require("symbols").diagnostics.error,
+  Warn = require("symbols").diagnostics.warn,
+  Info = require("symbols").diagnostics.info,
+  Hint = require("symbols").diagnostics.hint,
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type

@@ -3,6 +3,6 @@ return {
   dependencies = "neovim/nvim-lspconfig",
   opts = {
     highlight = true,
-    icons = require("icons").types,
+    icons = require("symbols").types,
   },
 }

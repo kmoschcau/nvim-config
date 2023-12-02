@@ -27,6 +27,16 @@ return {
       untracked = "",
     },
   },
+  separators = {
+    level1 = {
+      left = "",
+      right = "",
+    },
+    level2 = {
+      left = "│",
+      right = "│",
+    },
+  },
   types = {
     Array = "󰅪 ",
     Boolean = "◩ ",

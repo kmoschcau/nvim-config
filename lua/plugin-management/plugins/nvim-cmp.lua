@@ -56,7 +56,7 @@ return {
 
           return require("lspkind").cmp_format {
             mode = "symbol_text",
-            symbol_map = require("icons").types,
+            symbol_map = require("symbols").types,
           }(entry, vim_item)
         end,
       },
