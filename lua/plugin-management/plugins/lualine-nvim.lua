@@ -11,7 +11,7 @@ return {
     local vcs_shorten_width = 200
     local vcs_display_width = 120
 
-    local function create_diagnostics_section(severity)
+    local function create_diagnostics_component(severity)
       return {
         "diagnostics",
         sources = { "nvim_diagnostic" },
@@ -27,7 +27,14 @@ return {
       }
     end
 
-    local win_number_section = function()
+    local navic_component = {
+      "navic",
+      fmt = function(text)
+        return string.gsub(text, "%%%*$", "")
+      end,
+    }
+
+    local win_number_component = function()
       return vim.api.nvim_win_get_number(0)
     end
 
@@ -50,10 +57,10 @@ return {
         cond = require("lazy.status").has_updates,
         color = "Material_LualineLazyPackages",
       },
-      create_diagnostics_section "hint",
-      create_diagnostics_section "info",
-      create_diagnostics_section "warn",
-      create_diagnostics_section "error",
+      create_diagnostics_component "hint",
+      create_diagnostics_component "info",
+      create_diagnostics_component "warn",
+      create_diagnostics_component "error",
     }
 
     local lualine_y = {
@@ -148,24 +155,18 @@ return {
       },
       winbar = {
         lualine_c = {
-          {
-            "navic",
-            padding = { right = 0 },
-          },
+          navic_component,
         },
         lualine_z = {
-          win_number_section,
+          win_number_component,
         },
       },
       inactive_winbar = {
         lualine_c = {
-          {
-            "navic",
-            padding = { right = 0 },
-          },
+          navic_component,
         },
         lualine_z = {
-          win_number_section,
+          win_number_component,
         },
       },
       extensions = {
