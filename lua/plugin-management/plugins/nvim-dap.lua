@@ -90,24 +90,25 @@ return {
       dapui.close()
     end
 
+    local debug = require("symbols").debug
     vim.fn.sign_define("DapBreakpoint", {
-      text = "",
+      text = debug.breakpoint.normal,
       texthl = "Material_SignBreakpoint",
     })
     vim.fn.sign_define("DapBreakpointCondition", {
-      text = "",
+      text = debug.breakpoint.conditional,
       texthl = "Material_SignBreakpointConditional",
     })
     vim.fn.sign_define("DapLogPoint", {
-      text = "",
+      text = debug.breakpoint.log,
       texthl = "Material_SignLogpoint",
     })
     vim.fn.sign_define("DapStopped", {
-      text = "",
+      text = debug.current_frame,
       texthl = "Material_SignCurrentFrame",
     })
     vim.fn.sign_define("DapBreakpointRejected", {
-      text = "",
+      text = debug.breakpoint.rejected,
       texthl = "Material_SignBreakpointRejected",
     })
   end,

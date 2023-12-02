@@ -10,6 +10,15 @@ return {
     path = " ",
     vimtex = " ",
   },
+  debug = {
+    breakpoint = {
+      normal = " ",
+      conditional = " ",
+      log = " ",
+      rejected = " ",
+    },
+    current_frame = " ",
+  },
   diagnostics = {
     error = " ",
     warn = " ",
