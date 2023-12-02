@@ -98,6 +98,7 @@ return {
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
+        { name = "path" },
       }, {
         buffer_source,
       }),
@@ -131,6 +132,7 @@ return {
           { name = "fish" },
           { name = "luasnip" },
           { name = "luasnip_choice" },
+          { name = "path" },
         },
       })
     end
@@ -140,6 +142,7 @@ return {
         { name = "git" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
+        { name = "path" },
       }, {
         buffer_source,
       }),
@@ -153,6 +156,7 @@ return {
         { name = "vimtex" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
+        { name = "path" },
       },
     })
 
