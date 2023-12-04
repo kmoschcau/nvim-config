@@ -677,6 +677,7 @@ highlight("Typedef", { link = "Material_SynTypedefKeyword" })
 
 highlight("Special", { link = "Material_SynSpecial" })
 highlight("SpecialChar", { link = "Material_SynSpecialChar" })
+highlight("Delimiter", { link = "Special" })
 
 highlight("Underlined", { link = "Material_SynUnderlined" })
 
