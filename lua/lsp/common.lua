@@ -132,6 +132,7 @@ local formatting_ignore_list = {
   "jsonls",
   "omnisharp",
   "typescript-tools",
+  "volar",
 }
 
 --- Check whether the given name designates an LSP that should be ignored for

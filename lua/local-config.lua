@@ -19,11 +19,18 @@ local config_name = ".lvimrc.json"
 --- @class LocalConfigNoneLs
 --- @field java LocalConfigNoneLsJava Java specific options
 
+--- @class LocalConfigLsp
+--- @field use_volar boolean Whether to use Volar instead of typescript-tools
+
 --- @class LocalConfig
+--- @field lsp LocalConfigLsp Options relating to LSP
 --- @field none_ls LocalConfigNoneLs Options for none-ls
 
 --- @type LocalConfig
 local default_config = {
+  lsp = {
+    use_volar = false,
+  },
   none_ls = {
     java = {
       checkstyle = {
