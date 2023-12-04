@@ -548,7 +548,7 @@ highlight("Material_SynModDeprecated", { strikethrough = true })
 
 highlight("MsgSeparator", { link = "Material_VimStrongFramingWithoutFg" })
 highlight("TabLineFill", { link = "Material_VimStrongFramingWithoutFg" })
-highlight("VertSplit", { link = "Material_VimStrongFramingWithoutFg" })
+highlight("WinSeparator", { link = "Material_VimStrongFramingWithoutFg" })
 
 highlight("FoldColumn", { link = "Material_VimLightFramingSubtleFg" })
 highlight("SignColumn", { link = "Material_VimLightFramingSubtleFg" })
