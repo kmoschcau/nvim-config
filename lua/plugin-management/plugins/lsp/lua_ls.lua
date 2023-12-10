@@ -13,6 +13,7 @@ lspconfig.lua_ls.setup {
       },
       completion = {
         callSnippet = "Both",
+        keywordSnippet = "Both",
       },
       format = {
         enable = false,
