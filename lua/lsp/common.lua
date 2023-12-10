@@ -6,7 +6,11 @@ M.augroup = vim.api.nvim_create_augroup("LanguageServer_InitVim", {})
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
 --- Generated capabilities for the LSP client
-M.capabilities = has_cmp and cmp_nvim_lsp.default_capabilities() or nil
+M.capabilities = vim.tbl_deep_extend(
+  "force",
+  vim.lsp.protocol.make_client_capabilities(),
+  has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+)
 
 --- Overridden handlers for the LSP client.
 M.handlers = {
