@@ -93,9 +93,6 @@ return {
       },
       diagnostics.shellcheck,
       diagnostics.selene,
-      diagnostics.stylelint.with {
-        extra_filetypes = { "svelte", "vue" },
-      },
       -- This breaks joining lines with the newer treesitter APIs
       -- diagnostics.todo_comments,
       diagnostics.trail_space.with {
@@ -115,7 +112,6 @@ return {
       formatting.shfmt.with {
         extra_args = { "--indent", "4" },
       },
-      formatting.stylelint,
       formatting.stylua,
       formatting.trim_newlines,
       formatting.trim_whitespace,

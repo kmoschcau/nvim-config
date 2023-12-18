@@ -51,6 +51,7 @@ return {
       "jsonls",
       "lua_ls",
       "omnisharp",
+      "stylelint-lsp",
       "svelte",
       "tailwindcss",
       "yamlls",
