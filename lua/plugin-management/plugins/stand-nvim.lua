@@ -1,4 +1,4 @@
 return {
   "mvllow/stand.nvim",
-  opts = {},
+  config = true,
 }

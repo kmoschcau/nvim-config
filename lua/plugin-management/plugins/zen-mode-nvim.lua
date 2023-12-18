@@ -1,4 +1,4 @@
 return {
   "folke/zen-mode.nvim",
-  opts = {},
+  config = true,
 }
