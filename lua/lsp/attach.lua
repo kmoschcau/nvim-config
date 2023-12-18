@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
       buffer = args.buf,
       desc = "Go to the declaration of the symbol under the cursor.",
-      silent = true,
     })
 
     -- textDocument/definition
@@ -40,7 +39,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         {
           buffer = args.buf,
           desc = "Fuzzy find definitions of the symbol under the cursor.",
-          silent = true,
         }
       )
     end
@@ -56,7 +54,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find implementations of the symbol under the cursor.",
-        silent = true,
       }
     )
 
@@ -64,19 +61,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, {
       buffer = args.buf,
       desc = "Show signature help for parameter under the cursor.",
-      silent = true,
     })
 
     -- workspace/didChangeWorkspaceFolders
     vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, {
       buffer = args.buf,
       desc = "Add a workspace folder.",
-      silent = true,
     })
     vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, {
       buffer = args.buf,
       desc = "Remove a workspace folder.",
-      silent = true,
     })
 
     vim.keymap.set("n", "<space>wl", function()
@@ -84,7 +78,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, {
       buffer = args.buf,
       desc = "Print the current workspace folders.",
-      silent = true,
     })
 
     -- textDocument/typeDefinition
@@ -96,7 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find type definitions of the symbol under the cursor.",
-        silent = true,
       }
     )
 
@@ -104,14 +96,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {
       buffer = args.buf,
       desc = "Rename the symbol under the cursor.",
-      silent = true,
     })
 
     -- textDocument/codeAction
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, {
       buffer = args.buf,
       desc = "Trigger the code actions menu for the position under the cursor.",
-      silent = true,
     })
 
     -- textDocument/references
@@ -122,7 +112,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find references of the symbol under the cursor.",
-        silent = true,
       }
     )
 
@@ -135,7 +124,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find incoming calls of the symbol under the cursor.",
-        silent = true,
       }
     )
 
@@ -148,7 +136,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find outgoing calls of the symbol under the cursor.",
-        silent = true,
       }
     )
 
@@ -161,7 +148,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find document symbols.",
-        silent = true,
       }
     )
 
@@ -174,7 +160,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       {
         buffer = args.buf,
         desc = "Fuzzy find workspace symbols.",
-        silent = true,
       }
     )
 
@@ -183,7 +168,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {
         buffer = args.buf,
         desc = "Trigger LSP hover for the symbol under the cursor.",
-        silent = true,
       })
     end
 
@@ -205,7 +189,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end, {
           buffer = args.buf,
           desc = "Format the current buffer.",
-          silent = true,
         })
       end
     end
@@ -226,7 +209,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
         buffer = args.buf,
         desc = "Do a full semantic tokens refresh.",
-        silent = true,
       })
     end
 
@@ -237,14 +219,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, {
       buffer = args.buf,
       desc = "Enable inlay hints in the buffer.",
-      silent = true,
     })
     vim.keymap.set("n", "]ih", function()
       vim.lsp.inlay_hint.enable(args.buf, false)
     end, {
       buffer = args.buf,
       desc = "Disable inlay hints in the buffer.",
-      silent = true,
     })
     vim.keymap.set("n", "yih", function()
       vim.lsp.inlay_hint.enable(
@@ -254,7 +234,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, {
       buffer = args.buf,
       desc = "Toggle inlay hints in the buffer.",
-      silent = true,
     })
 
     -- plugin hooks {{{1

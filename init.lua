@@ -227,33 +227,27 @@ vim.keymap.set("n", "<space>e", function()
   vim.diagnostic.open_float { border = "rounded" }
 end, {
   desc = "Open the floating window for the diagnostic closest to the cursor.",
-  silent = true,
 })
 vim.keymap.set("n", "[d", function()
   vim.diagnostic.goto_prev { float = { border = "rounded" } }
 end, {
   desc = "Go to the previous diagnostic from the cursor.",
-  silent = true,
 })
 vim.keymap.set("n", "]d", function()
   vim.diagnostic.goto_next { float = { border = "rounded" } }
 end, {
   desc = "Go to the next diagnostic from the cursor.",
-  silent = true,
 })
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
   desc = "Put all buffer diagnostics in the location list.",
-  silent = true,
 })
 
 -- highlight group inspection
 vim.keymap.set("n", "<F10>", vim.show_pos, {
   desc = "Show syntax highlight group information at cursor position.",
-  silent = true,
 })
 vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
   desc = "Show treesitter tree inspection window.",
-  silent = true,
 })
 
 -- plugin configurations {{{1

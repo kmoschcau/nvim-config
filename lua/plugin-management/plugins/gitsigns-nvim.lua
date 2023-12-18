@@ -59,7 +59,6 @@ return {
       vim.keymap.set("n", "ghp", gs.preview_hunk, {
         buffer = bufnr,
         desc = "Show a preview of the (git) diff hunk under the cursor.",
-        silent = true,
       })
     end,
   },

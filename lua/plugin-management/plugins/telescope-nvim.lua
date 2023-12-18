@@ -14,7 +14,6 @@ return {
         require("telescope.builtin").find_files()
       end,
       desc = "Open telescope file search.",
-      silent = true,
     },
     {
       vim.fn.has("mac") == 1 and "<C-/>" or "<C-_>",
@@ -22,7 +21,6 @@ return {
         require("telescope.builtin").live_grep()
       end,
       desc = "Open telescope live grep search.",
-      silent = true,
     },
     {
       "<space>t",
@@ -30,7 +28,6 @@ return {
         require("telescope.builtin").diagnostics { bufnr = 0 }
       end,
       desc = "Fuzzy search diagnostics in current buffer.",
-      silent = true,
     },
     {
       "<space>T",
@@ -38,7 +35,6 @@ return {
         require("telescope.builtin").diagnostics()
       end,
       desc = "Fuzzy search diagnostics in workspace.",
-      silent = true,
     },
   },
   config = function()

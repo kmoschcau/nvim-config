@@ -7,7 +7,6 @@ return {
         require("hover").hover()
       end,
       desc = "Trigger hover.nvim for the symbol under the cursor.",
-      silent = true,
     },
     {
       "gK",
@@ -15,7 +14,6 @@ return {
         require("hover").hover_select()
       end,
       desc = "Trigger selectable hover.nvim for the symbol under the cursor.",
-      silent = true,
     },
   },
   opts = {

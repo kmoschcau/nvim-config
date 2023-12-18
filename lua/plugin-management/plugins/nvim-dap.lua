@@ -16,15 +16,12 @@ return {
 
     vim.keymap.set("n", "<F4>", dap.continue, {
       desc = "Start debugging or continue a stopped thread.",
-      silent = true,
     })
     vim.keymap.set("n", "<M-d>B", dap.toggle_breakpoint, {
       desc = "Toggle a breakpoint.",
-      silent = true,
     })
     vim.keymap.set("n", "<M-d>b", dap.set_breakpoint, {
       desc = "Set a breakpoint.",
-      silent = true,
     })
     vim.keymap.set("n", "<M-d>c", function()
       vim.ui.input({ prompt = "Condition:" }, function(input)
@@ -32,47 +29,35 @@ return {
           dap.set_breakpoint(input)
         end
       end)
-    end, {
-      desc = "Set a conditional breakpoint.",
-      silent = true,
-    })
+    end, { desc = "Set a conditional breakpoint." })
     vim.keymap.set("n", "<M-d>l", function()
       vim.ui.input({ prompt = "Log point message:" }, function(input)
         if input and #input then
           dap.set_breakpoint(nil, nil, input)
         end
       end)
-    end, {
-      desc = "Set a logpoint.",
-      silent = true,
-    })
+    end, { desc = "Set a logpoint." })
 
     local function set_dynamic_keymaps()
       vim.keymap.set("n", "<F5>", dap.run_to_cursor, {
         desc = "Run to the cursor.",
-        silent = true,
       })
       vim.keymap.set("n", "<F6>", dap.step_over, {
         desc = "Step over the current line.",
-        silent = true,
       })
       vim.keymap.set("n", "<F7>", dap.step_into, {
         desc = "Step into the next function.",
-        silent = true,
       })
       vim.keymap.set("n", "<F19>", function()
         dap.step_into { askForTargets = true }
       end, {
         desc = "Step into a function with target selection.",
-        silent = true,
       })
       vim.keymap.set("n", "<F8>", dap.step_out, {
         desc = "Step out of the function.",
-        silent = true,
       })
       vim.keymap.set({ "n", "v" }, "<M-k>", dapui.eval, {
         desc = "Trigger a DAP hover.",
-        silent = true,
       })
     end
 
