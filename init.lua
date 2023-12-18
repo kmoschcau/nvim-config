@@ -14,19 +14,6 @@ vim.o.termguicolors = compat.should_enable_termguicolors()
 
 vim.o.background = compat.get_system_background()
 
--- path settings {{{1
-
--- set the paths for python executables
-local python_path
-if vim.fn.has "win32" == 1 then
-  python_path = vim.fs.normalize "C:/Python37/python"
-else
-  python_path = vim.fs.normalize "~/.pyenv/versions/neovim3/bin/python"
-end
-if vim.fn.executable(python_path) == 1 then
-  vim.g.python3_host_prog = python_path
-end
-
 -- theme settings {{{1
 
 -- Try to set the "material" colorscheme, fall back to "morning".
