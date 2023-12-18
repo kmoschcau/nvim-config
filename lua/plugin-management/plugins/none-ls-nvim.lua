@@ -4,39 +4,37 @@ local disabled_filetypes = {
 
 return {
   "nvimtools/none-ls.nvim",
-  dependencies = "nvim-lua/plenary.nvim",
+  dependencies = {
+    "folke/neoconf.nvim",
+    "nvim-lua/plenary.nvim",
+  },
   config = function()
     local none_ls = require "null-ls"
     local code_actions = none_ls.builtins.code_actions
     local diagnostics = none_ls.builtins.diagnostics
     local formatting = none_ls.builtins.formatting
 
-    local local_config = require "local-config"
-
     --- Build the extra arguments for checkstyle
     --- @return string[]
     local function build_checkstyle_extra_args()
-      local config = local_config.get_config()
+      local config = require("neoconf").get(
+        "none_ls.java.checkstyle",
+        require("neoconf-schemas.none-ls").defaults.java.checkstyle
+      )
 
       local args = {}
 
-      if config.none_ls.java.checkstyle.file then
+      if config.file then
         table.insert(args, "$FILENAME")
       else
         table.insert(args, "$ROOT")
       end
 
       table.insert(args, "-c")
-      if config.none_ls.java.checkstyle.config then
-        table.insert(args, config.none_ls.java.checkstyle.config)
-      else
-        table.insert(args, "/google_checks.xml")
-      end
+      table.insert(args, config.config)
 
-      if config.none_ls.java.checkstyle.options then
-        for _, arg in
-          ipairs(vim.fn.split(config.none_ls.java.checkstyle.options))
-        do
+      if config.options then
+        for _, arg in ipairs(vim.fn.split(config.options)) do
           table.insert(args, arg)
         end
       end
@@ -47,27 +45,22 @@ return {
     --- Build the extra arguments for PMD
     --- @return string[]
     local function build_pmd_extra_args()
-      local config = local_config.get_config()
+      local config = require("neoconf").get(
+        "none_ls.java.pmd",
+        require("neoconf-schemas.none-ls").defaults.java.pmd
+      )
 
       local args = {}
 
       table.insert(args, "--dir")
-      if config.none_ls.java.pmd.dir then
-        table.insert(args, config.none_ls.java.pmd.dir)
-      else
-        table.insert(args, "$ROOT")
-      end
+      table.insert(args, config.dir)
 
       table.insert(args, "--rulesets")
-      if config.none_ls.java.pmd.rulesets then
-        table.insert(args, config.none_ls.java.pmd.rulesets)
-      else
-        table.insert(args, "category/java/bestpractices.xml")
-      end
+      table.insert(args, config.rulesets)
 
-      if config.none_ls.java.pmd.cache then
+      if config.cache then
         table.insert(args, "--cache")
-        table.insert(args, config.none_ls.java.pmd.cache)
+        table.insert(args, config.cache)
       else
         table.insert(args, "--no-cache")
       end

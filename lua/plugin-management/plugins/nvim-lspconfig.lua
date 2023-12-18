@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "Hoffs/omnisharp-extended-lsp.nvim",
+    "folke/neoconf.nvim",
     "folke/neodev.nvim",
     "mfussenegger/nvim-jdtls",
     {
@@ -14,7 +15,6 @@ return {
   },
   config = function()
     local common = require "lsp.common"
-    local local_config = require "local-config"
     local lspconfig = require "lspconfig"
 
     local simple_servers = {
@@ -58,7 +58,12 @@ return {
 
     table.insert(
       server_config_modules,
-      local_config.get_config().lsp.use_volar and "volar" or "typescript-tools"
+      require("neoconf").get(
+        "lsp.use_volar",
+        require("neoconf-schemas.lsp").defaults.use_volar
+      )
+          and "volar"
+        or "typescript-tools"
     )
 
     for _, module_name in ipairs(server_config_modules) do
