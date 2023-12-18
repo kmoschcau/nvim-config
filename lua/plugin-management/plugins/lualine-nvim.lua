@@ -23,7 +23,7 @@ return {
           info = "DiagnosticInfo",
           hint = "DiagnosticHint",
         },
-        symbols = symbols.diagnostics,
+        symbols = symbols.diagnostics.severities,
       }
     end
 

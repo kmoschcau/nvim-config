@@ -20,10 +20,13 @@ return {
     current_frame = " ",
   },
   diagnostics = {
-    error = " ",
-    warn = " ",
-    info = " ",
-    hint = "󰌵 ",
+    indicator = "■",
+    severities = {
+      error = " ",
+      warn = " ",
+      info = " ",
+      hint = "󰌵 ",
+    },
   },
   files = {
     modified = " ",

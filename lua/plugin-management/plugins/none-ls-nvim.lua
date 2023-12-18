@@ -135,7 +135,6 @@ return {
 
     none_ls.setup {
       border = "rounded",
-      diagnostics_format = "#{s}: #{m}",
       should_attach = function(bufnr)
         return not vim.list_contains(
           disabled_filetypes,

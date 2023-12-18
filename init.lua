@@ -51,19 +51,22 @@ xpcall(require, ehandler, "plugin-management")
 xpcall(require, ehandler, "lsp.attach")
 
 -- general Neovim settings {{{1
--- appearance settings {{{2
+-- diagnostics settings {{{2
 
--- Customize the built-in signs used by the diagnostics API.
-local signs = {
-  Error = require("symbols").diagnostics.error,
-  Warn = require("symbols").diagnostics.warn,
-  Info = require("symbols").diagnostics.info,
-  Hint = require("symbols").diagnostics.hint,
+vim.diagnostic.config {
+  float = {
+    source = true,
+  },
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = require("symbols").diagnostics.severities.error,
+      [vim.diagnostic.severity.WARN] = require("symbols").diagnostics.severities.warn,
+      [vim.diagnostic.severity.INFO] = require("symbols").diagnostics.severities.info,
+      [vim.diagnostic.severity.HINT] = require("symbols").diagnostics.severities.hint,
+    },
+  },
 }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl })
-end
 
 -- Neovim options {{{2
 
