@@ -60,6 +60,7 @@
   "oil.nvim": { "branch": "master", "commit": "24027ed8d7f3ee5c38cfd713915e2e16d89e79b3" },
   "omnisharp-extended-lsp.nvim": { "branch": "main", "commit": "53edfb413a54c9e55dcddc9e9fa4977a897e4425" },
   "plenary.nvim": { "branch": "master", "commit": "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
+  "ssr.nvim": { "branch": "main", "commit": "bb323ba621ac647b4ac5638b47666e3ef3c279e1" },
   "stand.nvim": { "branch": "main", "commit": "0ea887e52b27b4ad1f9d53f77ce1cb8bd17d7f92" },
   "tabular": { "branch": "master", "commit": "339091ac4dd1f17e225fe7d57b48aff55f99b23a" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
