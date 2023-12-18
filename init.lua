@@ -73,7 +73,7 @@ vim.diagnostic.config {
 vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect", "popup" }
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
