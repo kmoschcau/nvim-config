@@ -278,6 +278,10 @@ highlight("Material_VimFolded", {
 })
 highlight("Material_VimSearch", {
   bg = color_table("yellow", 6),
+  bg_dark = color_table("lime", 9, { invert_dark = false }),
+})
+highlight("Material_VimCurSearch", {
+  bg = color_table("yellow", 2),
   bg_dark = color_table("lime", 10, { invert_dark = false }),
 })
 highlight("Material_VimIncSearch", {
@@ -588,12 +592,13 @@ highlight("MsgArea", { link = "Material_VimNormal" })
 
 -- Cursor {{{3
 
+highlight("CurSearch", { link = "Material_VimCurSearch" })
 highlight("Cursor", { link = "Material_VimCursor" })
-highlight("CursorInsert", { link = "Material_VimCursorInsert" })
-highlight("CursorReplace", { link = "Material_VimCursorReplace" })
-highlight("CursorIM", { link = "Material_DebugTest" })
 highlight("CursorColumn", { link = "Material_VimCursorLines" })
+highlight("CursorIM", { link = "Material_DebugTest" })
+highlight("CursorInsert", { link = "Material_VimCursorInsert" })
 highlight("CursorLine", { link = "Material_VimCursorLines" })
+highlight("CursorReplace", { link = "Material_VimCursorReplace" })
 highlight("IncSearch", { link = "Material_VimIncSearch" })
 highlight("MatchParen", { link = "Material_VimMatchParen" })
 highlight("QuickFixLine", { link = "Material_VimVisual" })
