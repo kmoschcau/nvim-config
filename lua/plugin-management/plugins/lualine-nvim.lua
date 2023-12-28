@@ -174,6 +174,7 @@ return {
         "neo-tree",
         "nvim-dap-ui",
         "mason",
+        "oil",
         "quickfix",
       },
     }
