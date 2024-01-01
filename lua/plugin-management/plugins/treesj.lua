@@ -1,24 +1,30 @@
 return {
   "Wansmer/treesj",
-  keys = { "<space>m", "<space>j", "<space>sp" },
-  dependencies = { "nvim-treesitter/nvim-treesitter" },
-  config = function()
-    local treesj = require "treesj"
-
-    treesj.setup {
-      use_default_keymaps = false,
-    }
-
-    vim.keymap.set("n", "<space>m", treesj.toggle, {
+  keys = {
+    {
+      "<space>m",
+      function()
+        require("treesj").toggle()
+      end,
       desc = "Toggle treesj joining.",
-    })
-
-    vim.keymap.set("n", "<space>j", treesj.join, {
+    },
+    {
+      "<space>j",
+      function()
+        require("treesj").join()
+      end,
       desc = "treesj join.",
-    })
-
-    vim.keymap.set("n", "<space>sp", treesj.split, {
+    },
+    {
+      "<space>sp",
+      function()
+        require("treesj").split()
+      end,
       desc = "treesj split.",
-    })
-  end,
+    },
+  },
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  opts = {
+    use_default_keymaps = false,
+  },
 }

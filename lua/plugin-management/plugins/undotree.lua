@@ -3,7 +3,7 @@ return {
   cmd = "UndotreeToggle",
   keys = {
     {
-      "<F5>",
+      "<F3>",
       ":UndotreeToggle<cr>",
       desc = "Toggle the Undotree window.",
       silent = true,
