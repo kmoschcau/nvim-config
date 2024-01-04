@@ -6,21 +6,21 @@ return {
       function()
         require("treesj").toggle()
       end,
-      desc = "Toggle treesj joining.",
+      desc = "treesj: Toggle join/split.",
     },
     {
       "<space>j",
       function()
         require("treesj").join()
       end,
-      desc = "treesj join.",
+      desc = "treesj: Join.",
     },
     {
       "<space>sp",
       function()
         require("treesj").split()
       end,
-      desc = "treesj split.",
+      desc = "treesj: Split.",
     },
   },
   dependencies = { "nvim-treesitter/nvim-treesitter" },

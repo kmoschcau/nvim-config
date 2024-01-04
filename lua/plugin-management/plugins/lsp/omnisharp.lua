@@ -13,7 +13,7 @@ require("lspconfig").omnisharp.setup {
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  desc = "Set up OmniSharp specific things when attaching with a language client to it.",
+  desc = "LSP: Set up OmniSharp specific things when attaching with a language client to it.",
   group = common.augroup,
   --- @param args LspAttachArgs the autocmd args
   callback = function(args)
@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/definition
     vim.keymap.set("n", "gd", omni_ext.telescope_lsp_definitions, {
       buffer = args.buf,
-      desc = "Fuzzy find definitions of the symbol under the cursor.",
+      desc = "LSP: Fuzzy find definitions of the symbol under the cursor.",
     })
 
     -- This is needed because OmniSharp's semantic tokens are off-spec

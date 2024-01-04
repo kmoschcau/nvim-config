@@ -34,7 +34,7 @@ return {
         return "<Ignore>"
       end, {
         buffer = bufnr,
-        desc = "Jump to the next (git) diff hunk.",
+        desc = "gitsigns: Jump to the next (git) diff hunk.",
         expr = true,
         silent = true,
       })
@@ -51,14 +51,14 @@ return {
         return "<Ignore>"
       end, {
         buffer = bufnr,
-        desc = "Jump to the previous (git) diff hunk.",
+        desc = "gitsigns: Jump to the previous (git) diff hunk.",
         expr = true,
         silent = true,
       })
 
       vim.keymap.set("n", "ghp", gs.preview_hunk, {
         buffer = bufnr,
-        desc = "Show a preview of the (git) diff hunk under the cursor.",
+        desc = "gitsigns: Show a preview of the (git) diff hunk under the cursor.",
       })
     end,
   },

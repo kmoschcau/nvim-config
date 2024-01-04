@@ -5,7 +5,7 @@ return {
     ssr.setup {}
 
     vim.keymap.set({ "n", "x" }, "<space>sr", ssr.open, {
-      desc = "Open structural search and replace.",
+      desc = "SSR: Open structural search and replace.",
     })
   end,
 }

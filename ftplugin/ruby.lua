@@ -42,7 +42,7 @@ if is_in_spec_file() then
   end, {
     buffer = true,
     silent = true,
-    desc = "Run all specs.",
+    desc = "RSpec: Run all specs.",
   })
   vim.keymap.set("n", "<space>sl", function()
     last_spec = vim.fn.expand "%" .. ":" .. vim.fn.line "."
@@ -50,7 +50,7 @@ if is_in_spec_file() then
   end, {
     buffer = true,
     silent = true,
-    desc = "Run all specs.",
+    desc = "RSpec: Run all specs.",
   })
   vim.keymap.set("n", "<space>s.", function()
     if last_spec then
@@ -59,7 +59,7 @@ if is_in_spec_file() then
   end, {
     buffer = true,
     silent = true,
-    desc = "Repeat the last spec run.",
+    desc = "RSpec: Repeat the last spec run.",
   })
   vim.keymap.set("n", "<space>sa", function()
     last_spec = ""
@@ -67,6 +67,6 @@ if is_in_spec_file() then
   end, {
     buffer = true,
     silent = true,
-    desc = "Run all specs.",
+    desc = "RSpec: Run all specs.",
   })
 end

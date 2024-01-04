@@ -226,28 +226,28 @@ vim.filetype.add {
 vim.keymap.set("n", "<space>d", function()
   vim.diagnostic.open_float { border = "rounded" }
 end, {
-  desc = "Open the floating window for the diagnostic closest to the cursor.",
+  desc = "Diagnostics: Open the floating window.",
 })
 vim.keymap.set("n", "[d", function()
   vim.diagnostic.goto_prev { float = { border = "rounded" } }
 end, {
-  desc = "Go to the previous diagnostic from the cursor.",
+  desc = "Diagnostics: Go to previous.",
 })
 vim.keymap.set("n", "]d", function()
   vim.diagnostic.goto_next { float = { border = "rounded" } }
 end, {
-  desc = "Go to the next diagnostic from the cursor.",
+  desc = "Diagnostics: Go to next.",
 })
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
-  desc = "Put all buffer diagnostics in the location list.",
+  desc = "Diagnostics: Put all buffer diagnostics in the location list.",
 })
 
 -- highlight group inspection
 vim.keymap.set("n", "<F10>", vim.show_pos, {
-  desc = "Show syntax highlight group information at cursor position.",
+  desc = "Syntax: Show highlight group information at cursor position.",
 })
 vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
-  desc = "Show treesitter tree inspection window.",
+  desc = "Treesitter: Show tree inspection window.",
 })
 
 -- plugin configurations {{{1

@@ -55,34 +55,34 @@ return {
 
     vim.keymap.set("n", "<C-a>", function()
       map.manipulate("increment", "normal")
-    end, { desc = "Dial increment" })
+    end, { desc = "Dial: increment" })
 
     vim.keymap.set("n", "<C-x>", function()
       map.manipulate("decrement", "normal")
-    end, { desc = "Dial decrement" })
+    end, { desc = "Dial: decrement" })
 
     vim.keymap.set("n", "g<C-a>", function()
       map.manipulate("increment", "gnormal")
-    end, { desc = "Start a new dial additive increment, use with ." })
+    end, { desc = "Dial: Start a new dial additive increment, use with ." })
 
     vim.keymap.set("n", "g<C-x>", function()
       map.manipulate("decrement", "gnormal")
-    end, { desc = "Start a new dial additive decrement, use with ." })
+    end, { desc = "Dial: Start a new dial additive decrement, use with ." })
 
     vim.keymap.set("v", "<C-a>", function()
       map.manipulate("increment", "visual")
-    end, { desc = "Dial increment" })
+    end, { desc = "Dial: increment" })
 
     vim.keymap.set("v", "<C-x>", function()
       map.manipulate("decrement", "visual")
-    end, { desc = "Dial decrement" })
+    end, { desc = "Dial: decrement" })
 
     vim.keymap.set("v", "g<C-a>", function()
       map.manipulate("increment", "gvisual")
-    end, { desc = "Additive dial increment" })
+    end, { desc = "Dial: Additive increment" })
 
     vim.keymap.set("v", "g<C-x>", function()
       map.manipulate("decrement", "gvisual")
-    end, { desc = "Additive dial decrement" })
+    end, { desc = "Dial: Additive decrement" })
   end,
 }

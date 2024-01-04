@@ -5,7 +5,7 @@ return {
     {
       "<F3>",
       ":UndotreeToggle<cr>",
-      desc = "Toggle the Undotree window.",
+      desc = "Undotree: Toggle.",
       silent = true,
     },
   },

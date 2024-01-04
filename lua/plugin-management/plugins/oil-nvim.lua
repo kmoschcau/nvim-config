@@ -14,7 +14,7 @@ return {
     }
 
     vim.keymap.set("n", "-", require("oil.actions").parent.callback, {
-      desc = "Open parent directory of current buffer.",
+      desc = "Oil: Open parent directory of current buffer.",
     })
   end,
 }
