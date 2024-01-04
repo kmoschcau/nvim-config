@@ -3,6 +3,7 @@ return {
     buffer = " ",
     cmdline = " ",
     dap = " ",
+    emmet_vim = "󰕣 ",
     fish = "󰈺 ",
     git = "󰊢 ",
     luasnip = " ",

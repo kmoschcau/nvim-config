@@ -1,5 +1,6 @@
 local dependencies = {
   "L3MON4D3/cmp-luasnip-choice",
+  { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -96,6 +97,24 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
+        {
+          name = "emmet_vim",
+          option = {
+            "css",
+            "html",
+            "javascriptreact",
+            "jsx",
+            "less",
+            "razor",
+            "sass",
+            "scss",
+            "svelte",
+            "tsx",
+            "typescriptreact",
+            "vue",
+            "xml",
+          },
+        },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
