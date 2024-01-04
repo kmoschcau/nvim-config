@@ -7,7 +7,8 @@
           (#any-of? @_prop "innerHTML" "outerHTML"))
   right: (call_expression
            function: (member_expression
-                       object: (template_string) @html
+                       object: (template_string) @injection.content
                        property: (property_identifier) @_prop2
                        (#any-of? @_prop2 "trim")
-                       (#offset! @html 0 1 0 -1))))
+                       (#offset! @injection.content 0 1 0 -1)
+                       (#set! injection.language "html"))))
