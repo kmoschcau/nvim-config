@@ -1,4 +1,4 @@
-;; extends
+; extends
 
 ; el.innerHTML = `<html>`.trim()
 (assignment_expression
