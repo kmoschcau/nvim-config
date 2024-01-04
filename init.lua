@@ -223,7 +223,7 @@ vim.filetype.add {
 -- key maps {{{2
 
 -- diagnostics API bindings
-vim.keymap.set("n", "<space>e", function()
+vim.keymap.set("n", "<space>d", function()
   vim.diagnostic.open_float { border = "rounded" }
 end, {
   desc = "Open the floating window for the diagnostic closest to the cursor.",
