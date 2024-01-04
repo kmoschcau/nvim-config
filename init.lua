@@ -206,17 +206,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.filetype.add {
   extension = {
     azcli = "ps1",
-    gotmpl = "gotmpl",
     nswag = "json",
     rasi = "rasi",
   },
   filename = {
     crypttab = "fstab",
-  },
-  pattern = {
-    [".*/templates/.*%.tpl"] = "helm",
-    [".*/templates/.*%.yaml"] = "helm",
-    ["helmfile.*%.yaml"] = "helm",
   },
 }
 

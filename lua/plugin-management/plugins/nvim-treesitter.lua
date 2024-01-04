@@ -4,16 +4,6 @@ return {
     require("nvim-treesitter.install").update { with_sync = true }()
   end,
   config = function()
-    local parser_config =
-      require("nvim-treesitter.parsers").get_parser_configs()
-    parser_config.gotmpl = {
-      install_info = {
-        url = "https://github.com/ngalaiko/tree-sitter-go-template",
-        files = { "src/parser.c" },
-      },
-    }
-    vim.treesitter.language.register("gotmpl", "helm")
-
     require("nvim-treesitter.configs").setup {
       ensure_installed = {
         -- This should only include what should be there on first setup, not what
