@@ -17,7 +17,6 @@ return {
         "gitattributes",
         "gitcommit",
         "gitignore",
-        "gotmpl",
         "gpg",
         "json",
         "jsonc",
