@@ -900,6 +900,10 @@ highlight("cssSelectorOp", { link = "Material_SynOperator" })
 highlight("@property.css", { link = "Material_SynFieldNameNonItalic" })
 highlight("@type.css", { link = "Material_SynStatement" })
 
+-- dosini {{{3
+
+highlight("dosiniLabel", { link = "Material_SynFieldNameNonItalic" })
+
 -- fish {{{3
 
 highlight("fishStatement", { link = "Material_SynFunctionName" })
