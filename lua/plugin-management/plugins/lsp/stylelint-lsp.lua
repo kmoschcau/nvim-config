@@ -8,13 +8,11 @@ lspconfig.stylelint_lsp.setup {
   handlers = common.handlers,
   filetypes = {
     "css",
-    "javascript",
     "javascriptreact",
     "less",
     "scss",
     "sugarss",
     "svelte",
-    "typescript",
     "typescriptreact",
     "vue",
     "wxss",
