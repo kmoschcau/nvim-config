@@ -59,7 +59,7 @@ vim.diagnostic.config {
 
 vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
-vim.o.colorcolumn = "+1"
+vim.opt.colorcolumn = { "+1" }
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 if not pcall(function()
   vim.opt.completeopt:append "popup"
@@ -79,7 +79,7 @@ vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
 vim.o.foldtext = "v:lua.vim.treesitter.foldtext()"
-vim.o.formatoptions = "cro/qnlj"
+vim.o.formatoptions = "cro/qanlj"
 vim.o.guicursor = table.concat({
   table.concat({
     "n",
@@ -121,12 +121,16 @@ vim.opt.listchars = {
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
 vim.o.number = true
+vim.o.relativenumber = true
+vim.o.scrolljump = -50
 vim.o.shiftwidth = 2
 vim.opt.shortmess:append "I"
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
+vim.o.sidescrolloff = 10
 vim.o.signcolumn = "auto:2"
 vim.o.smarttab = false
+vim.o.smoothscroll = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 
