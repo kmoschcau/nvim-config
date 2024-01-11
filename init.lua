@@ -60,7 +60,16 @@ vim.diagnostic.config {
 vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
 vim.o.colorcolumn = "+1"
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect", "popup" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+if not pcall(function()
+  vim.opt.completeopt:append "popup"
+end) then
+  vim.notify(
+    "\"popup\" is not supported by 'completeopt'.",
+    vim.log.levels.INFO,
+    { title = "init.lua" }
+  )
+end
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
