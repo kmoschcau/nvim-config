@@ -53,18 +53,10 @@ return {
       "stylelint-lsp",
       "svelte",
       "tailwindcss",
+      "typescript-tools",
+      "volar",
       "yamlls",
     }
-
-    table.insert(
-      server_config_modules,
-      require("neoconf").get(
-        "lsp.use_volar",
-        require("neoconf-schemas.lsp").defaults.use_volar
-      )
-          and "volar"
-        or "typescript-tools"
-    )
 
     for _, module_name in ipairs(server_config_modules) do
       require("plugin-management.plugins.lsp." .. module_name)
