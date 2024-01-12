@@ -9,6 +9,7 @@ return {
       },
       win_options = {
         colorcolumn = "",
+        signcolumn = "yes:2",
       },
       lsp_rename_autosave = true,
     }
