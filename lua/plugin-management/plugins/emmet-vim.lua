@@ -21,7 +21,7 @@ return {
       silent = true,
     })
 
-    vim.keymap.set("v", "<C-]>", "<Plug>(emmet-expand-abbr)", {
+    vim.keymap.set("x", "<C-]>", "<Plug>(emmet-expand-abbr)", {
       desc = "Emmet: Wrap with abbreviation.",
       silent = true,
     })
@@ -37,7 +37,7 @@ return {
     })
 
     vim.keymap.set(
-      { "n", "v" },
+      { "n", "x" },
       "<space>ee",
       "<Plug>(emmet-balance-tag-inward)",
       {
@@ -47,7 +47,7 @@ return {
     )
 
     vim.keymap.set(
-      { "n", "v" },
+      { "n", "x" },
       "<space>es",
       "<Plug>(emmet-balance-tag-outword)", -- (sic)
       {
@@ -120,7 +120,7 @@ return {
     })
 
     -- This doesn't work, because :TOhtml doesn't support treesitter.
-    -- vim.keymap.set("v", "<C-y>c", "<Plug>(emmet-code-pretty)", {
+    -- vim.keymap.set("x", "<C-y>c", "<Plug>(emmet-code-pretty)", {
     --   desc = "Emmet: Code pretty",
     --   silent = true,
     -- })

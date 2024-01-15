@@ -56,7 +56,7 @@ return {
       vim.keymap.set("n", "<F8>", dap.step_out, {
         desc = "Dap: Step out of the function.",
       })
-      vim.keymap.set({ "n", "v" }, "<M-k>", dapui.eval, {
+      vim.keymap.set({ "n", "x" }, "<M-k>", dapui.eval, {
         desc = "Dap: Hover.",
       })
     end
