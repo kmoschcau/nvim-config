@@ -79,7 +79,7 @@ vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
 vim.o.foldtext = "v:lua.vim.treesitter.foldtext()"
-vim.o.formatoptions = "cro/qanlj"
+vim.o.formatoptions = "cro/qnlj"
 vim.o.guicursor = table.concat({
   table.concat({
     "n",
