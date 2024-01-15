@@ -14,27 +14,30 @@ return {
     local diagnostics = none_ls.builtins.diagnostics
     local formatting = none_ls.builtins.formatting
 
+    --- @type NeoconfNoneLs
+    local config = require("neoconf").get(
+      "none_ls",
+      require("neoconf-schemas.none-ls").defaults
+    )
+
     --- Build the extra arguments for checkstyle
     --- @return string[]
     local function build_checkstyle_extra_args()
-      local config = require("neoconf").get(
-        "none_ls.java.checkstyle",
-        require("neoconf-schemas.none-ls").defaults.java.checkstyle
-      )
+      local cs_config = config.java.checkstyle
 
       local args = {}
 
-      if config.file then
+      if cs_config.file then
         table.insert(args, "$FILENAME")
       else
         table.insert(args, "$ROOT")
       end
 
       table.insert(args, "-c")
-      table.insert(args, config.config)
+      table.insert(args, cs_config.config)
 
-      if config.options then
-        for _, arg in ipairs(vim.fn.split(config.options)) do
+      if cs_config.options then
+        for _, arg in ipairs(vim.fn.split(cs_config.options)) do
           table.insert(args, arg)
         end
       end
@@ -45,22 +48,19 @@ return {
     --- Build the extra arguments for PMD
     --- @return string[]
     local function build_pmd_extra_args()
-      local config = require("neoconf").get(
-        "none_ls.java.pmd",
-        require("neoconf-schemas.none-ls").defaults.java.pmd
-      )
+      local pmd_config = config.java.pmd
 
       local args = {}
 
       table.insert(args, "--dir")
-      table.insert(args, config.dir)
+      table.insert(args, pmd_config.dir)
 
       table.insert(args, "--rulesets")
-      table.insert(args, config.rulesets)
+      table.insert(args, pmd_config.rulesets)
 
-      if config.cache then
+      if pmd_config.cache then
         table.insert(args, "--cache")
-        table.insert(args, config.cache)
+        table.insert(args, pmd_config.cache)
       else
         table.insert(args, "--no-cache")
       end

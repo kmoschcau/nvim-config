@@ -2,11 +2,12 @@ local common = require "lsp.common"
 
 local ts = common.settings.typescript
 
+--- @type NeoconfLsp
+local config =
+  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+
 require("typescript-tools").setup {
-  autostart = not require("neoconf").get(
-    "lsp.use_volar",
-    require("neoconf-schemas.lsp").defaults.use_volar
-  ),
+  autostart = not config.use_volar,
   capabilities = common.capabilities,
   handlers = common.handlers,
   settings = {

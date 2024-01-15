@@ -1,3 +1,6 @@
+--- @class NeoconfLsp
+--- @field use_volar boolean Whether to use volar
+
 return {
   defaults = {
     use_volar = false,
