@@ -121,7 +121,6 @@ vim.opt.listchars = {
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
 vim.o.number = true
-vim.o.relativenumber = true
 vim.o.scrolljump = -50
 vim.o.shiftwidth = 2
 vim.opt.shortmess:append "I"
