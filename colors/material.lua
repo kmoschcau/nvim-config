@@ -382,9 +382,6 @@ highlight("Material_SynUnderlined", {
   underline = true,
 })
 
--- Todo and linked groups
-highlight("Material_SynTodo", { bold = true })
-
 -- Custom {{{4
 -- General {{{5
 
@@ -392,7 +389,8 @@ highlight("Material_SynBold", { bold = true })
 highlight("Material_SynItalic", { italic = true })
 
 -- Non-Value symbols
-highlight("Material_SynDocComment", { fg = color_table("blue_grey", 6) })
+local h_syn_doc_comment = { fg = color_table("blue_grey", 6) }
+highlight("Material_SynDocComment", h_syn_doc_comment)
 highlight("Material_SynExtensionMethod", { fg = color_table("teal", 4) })
 highlight("Material_SynOperatorOverloaded", {
   fg = color_table("orange", 7),
@@ -541,7 +539,7 @@ highlight("Material_SynInterfaceName", h_syn_interface_name)
 -- Modifiers {{{5
 
 highlight("Material_SynModAbstract", { bg = color_table("purple", 1) })
-highlight("Material_SynModAsync", { bg = color_table("yellow", 2) })
+highlight("Material_SynModAsync", { bg = colors.syntax.coroutine.light })
 highlight("Material_SynModReadonly", { italic = false, nocombine = true })
 highlight("Material_SynModStatic", { bold = true })
 highlight("Material_SynModDeprecated", { strikethrough = true })
@@ -688,58 +686,65 @@ highlight("Underlined", { link = "Material_SynUnderlined" })
 
 highlight("Error", { link = "Material_VimErrorInverted" })
 
-highlight("Todo", { link = "Material_SynTodo" })
+highlight("Added", { link = "Material_VimDiffLineAdd" })
+highlight("Changed", { link = "Material_VimDiffLineText" })
+highlight("Removed", { link = "Material_VimDiffLineDelete" })
 
 -- Treesitter {{{3
 
 -- Built-in {{{4
 
-highlight("@text.emphasis", { link = "Material_SynItalic" })
-highlight("@text.literal", { link = "Material_SynString" })
-highlight("@text.reference", { link = "Material_SynUnderlined" })
-highlight("@text.strong", { link = "Material_SynBold" })
-
-highlight("@comment.documentation", { link = "Material_SynDocComment" })
+highlight("@variable", { link = "Material_SynVariableName" })
+highlight("@variable.parameter", { link = "Material_SynParameterName" })
+highlight("@variable.member", { link = "Material_SynFieldName" })
 
 highlight("@constant", { link = "Material_SynConstantName" })
 highlight("@constant.builtin", { link = "Material_SynConstant" })
-highlight("@constant.comment", { link = "Material_SynStatement" })
 
-highlight("@parameter", { link = "Material_SynParameterName" })
-highlight("@field", { link = "Material_SynFieldName" })
+highlight("@module", { link = "Material_SynNamespaceName" })
+
+highlight("@string.documentation", {
+  fg = h_syn_doc_comment.fg,
+  bg = h_syn_string.bg,
+})
+
+highlight("@type", { link = "Material_SynStructureName" })
+highlight("@type.definition", { link = "Material_SynTypedefName" })
+highlight("@type.qualifier", { link = "Material_SynStatement" })
+
+highlight("@attribute", { link = "Material_SynDecorator" })
 highlight("@property", { link = "Material_SynPropertyName" })
+
 highlight("@constructor", { link = "Material_SynFunctionName" })
 
-highlight("@variable", { link = "Material_SynVariableName" })
-highlight("@type", { link = "Material_SynStructureName" })
-highlight("@namespace", { link = "Material_SynNamespaceName" })
-highlight("@tag", { link = "Material_SynStatement" })
-highlight("@tag.delimiter", { link = "Material_SynSpecial" })
+highlight("@keyword.coroutine", {
+  fg = colors.syntax.coroutine.strong,
+  fg_dark = colors.syntax.coroutine.light,
+  bold = true,
+})
+highlight("@keyword.function", { link = "Material_SynFunctionKeyword" })
+highlight("@keyword.operator", { link = "Material_SynOperator" })
+highlight("@keyword.import", { link = "Material_SynNamespaceKeyword" })
 
-highlight("@error", { link = "Material_VimErrorUnderline" })
+highlight("@keyword.conditional.ternary", { link = "Material_SynOperator" })
+
+highlight("@comment.documentation", { link = "Material_SynDocComment" })
+
+highlight("@tag", { link = "Material_SynStatement" })
+highlight("@tag.attribute", { link = "Material_SynPropertyName" })
+highlight("@tag.delimiter", { link = "Material_SynSpecial" })
 
 -- Custom Query highlights {{{4
 
-highlight("@attribute", { link = "Material_SynDecorator" })
 highlight("@class", { link = "Material_SynTypedefName" })
-highlight("@comment.keyword", { link = "Material_SynStatement" })
-highlight("@decorator", { link = "Material_SynDecorator" })
 highlight("@enum", { link = "Material_SynEnumName" })
-highlight("@genericolors.special", { link = "Material_SynGenericSpecial" })
-highlight("@interface", { link = "Material_SynInterfaceName" })
+highlight("@generic.special", { link = "Material_SynGenericSpecial" })
 highlight("@keyword.class", { link = "Material_SynTypedefKeyword" })
 highlight("@keyword.enum", { link = "Material_SynEnumKeyword" })
-highlight("@keyword.function", { link = "Material_SynFunctionKeyword" })
 highlight("@keyword.interface", { link = "Material_SynInterfaceKeyword" })
-highlight("@keyword.namespace", { link = "Material_SynNamespaceKeyword" })
-highlight("@keyword.operator", { link = "Material_SynOperator" })
+highlight("@keyword.module", { link = "Material_SynNamespaceKeyword" })
 highlight("@keyword.property", { link = "Material_SynPropertyKeyword" })
-highlight("@text.danger", { link = "Material_VimErrorInverted" })
-highlight("@text.diff.add", { link = "Material_VimDiffAdd" })
-highlight("@text.diff.delete", { link = "Material_VimDiffDelete" })
-highlight("@type.builtin", { link = "Material_SynTypeName" })
-highlight("@type.qualifier", { link = "Material_SynStatement" })
-highlight("@variable.builtin", { link = "Material_SynSpecial" })
+highlight("@interface", { link = "Material_SynInterfaceName" })
 
 -- LSP {{{3
 
@@ -753,16 +758,9 @@ highlight("@lsp.type.enum", { link = "Material_SynEnumName" })
 highlight("@lsp.type.enumMember", { link = "Material_SynEnumMember" })
 highlight("@lsp.type.interface", { link = "Material_SynInterfaceName" })
 highlight("@lsp.type.member", { link = "Material_SynMemberName" })
-highlight("@lsp.type.namespace", { link = "Material_SynNamespaceName" })
-highlight("@lsp.type.parameter", { link = "Material_SynParameterName" })
-highlight("@lsp.type.property", { link = "Material_SynPropertyName" })
-highlight("@lsp.type.string", { link = "Material_SynString" })
-highlight("@lsp.type.struct", { link = "Material_SynStructureName" })
-highlight("@lsp.type.type", { link = "Material_SynStructureName" })
 highlight("@lsp.type.typeParameter", {
   link = "Material_SynGenericParameterName",
 })
-highlight("@lsp.type.variable", { link = "Material_SynVariableName" })
 
 -- Semantic Modifiers {{{4
 
@@ -985,18 +983,10 @@ highlight("jsonKeyword", { link = "Material_SynFieldNameNonItalic" })
 highlight("jsonNoise", { link = "Material_SynSpecial" })
 highlight("jsonNull", { link = "Material_SynConstant" })
 
--- Treesitter {{{4
-
-highlight("@label.json", { link = "Material_SynFieldNameNonItalic" })
-
 -- jsonc {{{3
 
 highlight("jsoncBraces", { link = "Material_SynSpecial" })
 highlight("jsoncKeywordMatch", { link = "Material_SynFieldNameNonItalic" })
-
--- Treesitter {{{4
-
-highlight("@label.jsonc", { link = "Material_SynFieldNameNonItalic" })
 
 -- JSP {{{3
 
@@ -1007,9 +997,9 @@ highlight("jspTag", { link = "Material_SynPreProc" })
 highlight("luaFuncCall", { link = "Material_SynFunctionName" })
 highlight("luaFuncKeyword", { link = "Material_SynFunctionKeyword" })
 
--- Treesitter {{{4
+-- LSP {{{4
 
-highlight("@comment.luadoc", { link = "Material_SynDocComment" })
+highlight("@lsp.type.comment.lua", { fg = "NONE" })
 
 -- make {{{3
 
@@ -1137,10 +1127,6 @@ highlight("xmlTagName", { link = "Material_SynStatement" })
 -- yaml {{{3
 
 highlight("yamlBlockMappingKey", { link = "Material_SynFieldName" })
-
--- Treesitter {{{4
-
-highlight("@field.yaml", { link = "Material_SynFieldNameNonItalic" })
 
 -- yardoc {{{3
 

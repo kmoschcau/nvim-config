@@ -3,11 +3,11 @@
 ; namespaces
 
 (ambient_declaration
-  "global" @namespace)
+  "global" @module)
 
 (internal_module
-  "namespace" @keyword.namespace
-  name: (identifier) @namespace)
+  "namespace" @keyword.module
+  name: (identifier) @module)
 
 ; generics
 

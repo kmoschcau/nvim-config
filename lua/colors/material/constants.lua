@@ -112,6 +112,10 @@ M.colors = function()
       },
     },
     syntax = {
+      coroutine = {
+        light = color_table("yellow", 2),
+        strong = color_table("yellow", 8),
+      },
       enum = {
         name = color_table("indigo", 6),
         member = color_table("light_blue", 6),

@@ -13,24 +13,24 @@
 ; namespaces
 
 (extern_alias_directive
-  "extern" @include
-  "alias" @include
-  name: (_) @namespace)
+  "extern" @keyword.import
+  "alias" @keyword.import
+  name: (_) @module)
 
 (using_directive
   "global" @keyword)
 
 (using_directive
-  name: (identifier) @namespace)
+  name: (identifier) @module)
 
 (qualified_name
-  qualifier: (identifier) @namespace)
+  qualifier: (identifier) @module)
 
 (file_scoped_namespace_declaration
-  "namespace" @keyword.namespace)
+  "namespace" @keyword.module)
 
 (namespace_declaration
-  "namespace" @keyword.namespace)
+  "namespace" @keyword.module)
 
 ; type declarations
 

@@ -3,29 +3,29 @@
 ; table refs
 
 (object_reference
-  schema: (identifier) @namespace)
+  schema: (identifier) @module)
 
 ; column refs
 
 (column
-  (identifier) @field)
+  (identifier) @variable.member)
 
 (column_definition
-  name: (identifier) @field)
+  name: (identifier) @variable.member)
 
 (column_position
-  col_name: (identifier) @field)
+  col_name: (identifier) @variable.member)
 
 (drop_column
-  name: (identifier) @field)
+  name: (identifier) @variable.member)
 
 (field
-  name: (identifier) @field)
+  name: (identifier) @variable.member)
 
 ; indices
 
 (drop_index
-  name: (identifier) @decorator)
+  name: (identifier) @attribute)
 
 ; keywords
 

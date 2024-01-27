@@ -9,14 +9,14 @@
   "." @operator)
 
 (wildcard
-  "?" @punctuation)
+  "?" @punctuation.special)
 
 ; namespaces
 
 (package_declaration
   "package" @keyword.namespace
   (scoped_identifier
-    name: (identifier) @namespace))
+    name: (identifier) @module))
 
 (import_declaration
   (scoped_identifier
@@ -24,7 +24,7 @@
 
 (scoped_identifier
   (scoped_identifier
-    (identifier) @namespace))
+    (identifier) @module))
 
 ; generics
 
