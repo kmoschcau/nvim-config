@@ -1399,6 +1399,69 @@ highlight("NotifyWARNBorder", { link = "Material_VimWarningBorder" })
 highlight("NotifyWARNIcon", { link = "Material_VimWarning" })
 highlight("NotifyWARNTitle", { link = "Material_VimWarning" })
 
+-- oil-git-status | refractalize/oil-git-status.nvim {{{3
+
+highlight("OilGitStatusIndexUnmodified", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexIgnored", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexUntracked", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexAdded", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexCopied", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexDeleted", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexModified", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexRenamed", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexTypeChanged", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusIndexUnmerged", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeUnmodified", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeIgnored", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeUntracked", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeAdded", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeCopied", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeDeleted", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeModified", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeRenamed", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeTypeChanged", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+highlight("OilGitStatusWorkingTreeUnmerged", {
+  link = "Material_VimLightFramingSubtleFg",
+})
+
 -- vim-git | tpope/vim-git {{{3
 
 highlight("diffAdded", { link = "Material_VimDiffAdd" })
