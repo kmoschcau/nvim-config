@@ -19,6 +19,7 @@ if vim.fn.executable "fish" == 1 then
   table.insert(dependencies, "mtoohey31/cmp-fish")
 end
 
+--- @type LazyPluginSpec
 return {
   "hrsh7th/nvim-cmp",
   dependencies = dependencies,

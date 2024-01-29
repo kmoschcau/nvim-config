@@ -1,5 +1,7 @@
+--- @type LazyPluginSpec
 return {
   "lewis6991/gitsigns.nvim",
+  -- @type Gitsigns.Config -- Does not work well, no optional fields
   opts = {
     signs = {
       delete = { show_count = true },

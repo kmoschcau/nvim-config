@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "lewis6991/hover.nvim",
   keys = {
@@ -16,6 +17,7 @@ return {
       desc = "Trigger selectable hover.nvim for the symbol under the cursor.",
     },
   },
+  --- @type Hover.Config
   opts = {
     init = function()
       require "hover.providers.gh"

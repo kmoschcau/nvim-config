@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "cshuaimin/ssr.nvim",
   config = function()

@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "mattn/emmet-vim",
   init = function()

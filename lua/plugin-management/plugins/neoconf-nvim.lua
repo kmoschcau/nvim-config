@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "folke/neoconf.nvim",
   config = function()

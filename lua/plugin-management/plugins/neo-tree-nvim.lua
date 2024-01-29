@@ -25,6 +25,7 @@ local function get_siblings(state, node)
   return siblings
 end
 
+--- @type LazyPluginSpec
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",

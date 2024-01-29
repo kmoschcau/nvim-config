@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "chaoren/vim-wordmotion",
   init = function()

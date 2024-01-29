@@ -1,6 +1,7 @@
 local symbols = require "symbols"
 local separators = symbols.separators
 
+--- @type LazyPluginSpec
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -105,7 +106,7 @@ return {
               return vim.fn.winwidth(0) > vcs_display_width
             end,
             source = function()
-              --- @diagnostic disable-next-line: undefined-field
+              --- @type Gitsigns.StatusObj
               local gitsigns = vim.b.gitsigns_status_dict
               if gitsigns then
                 return {

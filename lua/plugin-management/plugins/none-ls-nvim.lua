@@ -2,6 +2,7 @@ local disabled_filetypes = {
   "NvimTree",
 }
 
+--- @type LazyPluginSpec
 return {
   "nvimtools/none-ls.nvim",
   dependencies = {

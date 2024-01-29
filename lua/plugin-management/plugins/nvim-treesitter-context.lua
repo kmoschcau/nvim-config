@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
   "romgrk/nvim-treesitter-context",
   event = "BufReadPre",
