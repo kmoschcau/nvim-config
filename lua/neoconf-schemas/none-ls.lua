@@ -1,37 +1,29 @@
---- @class NeoconfNoneLsJavaCheckstyle
---- @field file boolean Whether to use file or project wide linting
---- @field config string The file name for the config file XML
---- @field options string | nil Additional options for checkstyle
-
---- @class NeoconfNoneLsJavaPmd
---- @field dir string The run directory for PMD
---- @field rulesets string The rulesets for PMD, comma-separated
---- @field cache string | nil The cache file path, if used
-
---- @class NeoconfNoneLsJava
---- @field checkstyle NeoconfNoneLsJavaCheckstyle Checkstyle options
---- @field pmd NeoconfNoneLsJavaPmd PMD options
-
---- @class NeoconfNoneLs
---- @field java NeoconfNoneLsJava Java specific options
-
 local checkstyle_default_config = "/google_checks.xml"
 
 local pmd_default_dir = "$ROOT"
 local pmd_default_rulesets = "category/java/bestpractices.xml"
 
 return {
-  --- @type NeoconfNoneLs
+  --- @class NeoconfNoneLs
   defaults = {
+    --- Java specific options
     java = {
+      --- Checkstyle options
       checkstyle = {
+        --- Whether to use file or project wide linting
         file = false,
+        --- The file name for the config file XML
         config = checkstyle_default_config,
+        --- @type string | nil Additional options for checkstyle
         options = nil,
       },
+      --- PMD options
       pmd = {
+        --- The run directory for PMD
         dir = pmd_default_dir,
+        --- The rulesets for PMD, comma-separated
         rulesets = pmd_default_rulesets,
+        --- @type string | nil The cache file path, if used
         cache = nil,
       },
     },

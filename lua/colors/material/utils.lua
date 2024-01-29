@@ -6,27 +6,10 @@ local normal_values = { 50, 100, 200, 300, 400, 500, 600, 700, 800, 900 }
 
 local accent_values = { "A100", "A200", "A400", "A700" }
 
---- @class HighlightConfig
---- @field fg? ColorDefinition|"NONE" The foreground color
---- @field bg? ColorDefinition|"NONE" The background color
---- @field sp? ColorDefinition|"NONE" The special color
+--- @class HighlightConfig: vim.api.keyset.highlight
 --- @field fg_dark? ColorDefinition|"NONE" The dark background override for the foreground color
 --- @field bg_dark? ColorDefinition|"NONE" The dark background override for the background color
 --- @field sp_dark? ColorDefinition|"NONE" The dark background override for the special color
---- @field blend? number The blend value for pumblend
---- @field bold? boolean
---- @field standout? boolean
---- @field underline? boolean
---- @field undercurl? boolean
---- @field underdouble? boolean
---- @field underdotted? boolean
---- @field underdashed? boolean
---- @field strikethrough? boolean
---- @field italic? boolean
---- @field reverse? boolean
---- @field nocombine? boolean
---- @field link? string
---- @field default? boolean
 
 --- Set the highlight group passed as group_name to the values specified in
 --- config.

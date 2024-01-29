@@ -1,8 +1,7 @@
---- @class NeoconfLsp
---- @field use_volar boolean Whether to use volar
-
 return {
+  --- @class NeoconfLsp
   defaults = {
+    --- Whether to use volar
     use_volar = false,
   },
   schema = {
