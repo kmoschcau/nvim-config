@@ -43,7 +43,7 @@ local apply_colorscheme = false
 ---
 --- Value for level 2 is taken from #14790 (as lightness of #1e1e1e).
 --- Others are the result of experiments to have passable contrast ratios.
-local L = { 2, 6, 13, 20, 35 }
+local L = { 2, 6, 13, 20, 35, 50 }
 
 --- REFERENCE CHROMA VALUES
 --- Chosen experimentally. Darker colors usually need higher chroma to appear
@@ -110,34 +110,35 @@ local function round(x)
 end
 
 --stylua: ignore
-local palette_dark = {
-  grey1   = convert(L[1],       C.grey,  SH.neutral), -- NormalFloat
-  grey2   = convert(L[2],       C.grey,  SH.neutral), -- Normal bg
-  grey3   = convert(L[3],       C.grey,  SH.neutral), -- CursorLine
-  grey4   = convert(L[4],       C.grey,  SH.neutral), -- Visual
+local palette_light = {
+  grey1   = convert(100 - L[1],       C.grey,  SH.neutral),
+  grey2   = convert(100 - L[2],       C.grey,  SH.neutral),
+  grey3   = convert(100 - L[3],       C.grey,  SH.neutral),
+  grey4   = convert(100 - L[4],       C.grey,  SH.neutral),
 
-  red     = convert(L[2],       C.dark,  H.red),      -- DiffDelete
-  yellow  = convert(L[2],       C.dark,  H.yellow),   -- Search
-  green   = convert(L[2],       C.dark,  H.green),    -- DiffAdd
-  cyan    = convert(L[2],       C.dark,  H.cyan),     -- DiffChange
-  blue    = convert(L[2],       C.dark,  H.blue),
-  magenta = convert(L[2],       C.dark,  H.magenta),
+  red     = convert(100 - L[2],       C.dark,  H.red),
+  yellow  = convert(100 - L[2],       C.dark,  H.yellow),
+  green   = convert(100 - L[2],       C.dark,  H.green),
+  cyan    = convert(100 - L[5],       C.dark,  H.cyan),
+  blue    = convert(100 - L[2],       C.dark,  H.blue),
+  magenta = convert(100 - L[2],       C.dark,  H.magenta),
 }
+
+local function invert_l(val)
+  return colors.modify_channel(val, "lightness", function(l)
+    return 100 - l
+  end, { gamut_clip = "chroma" })
+end
 
 --stylua: ignore
-local palette_light = {
-  grey1   = convert(100 - L[1], C.grey,  SH.neutral),
-  grey2   = convert(100 - L[2], C.grey,  SH.neutral), -- Normal fg
-  grey3   = convert(100 - L[3], C.grey,  SH.neutral),
-  grey4   = convert(100 - L[4], C.grey,  SH.neutral), -- Comment
-
-  red     = convert(100 - L[2], C.light, H.red),      -- DiagnosticError
-  yellow  = convert(100 - L[2], C.light, H.yellow),   -- DiagnosticWarn
-  green   = convert(100 - L[2], C.light, H.green),    -- String,     DiagnosticOk
-  cyan    = convert(100 - L[2], C.light, H.cyan),     -- Function,   DiagnosticInfo
-  blue    = convert(100 - L[2], C.light, H.blue),     -- Identifier, DiagnosticHint
-  magenta = convert(100 - L[2], C.light, H.magenta),
+local palette_dark_overrides = {
 }
+
+local palette_dark = vim.tbl_extend(
+  "force",
+  vim.tbl_map(invert_l, palette_light),
+  palette_dark_overrides
+)
 
 -- Data {{{1
 
@@ -146,15 +147,15 @@ local palette_light = {
 --- @field contrast? number
 
 --- @type table<string, vim.api.keyset.highlight>
-local highlights_dark = {
-  Cursor = { bg = palette_dark.cyan },
-  Normal = { fg = palette_light.grey1, bg = palette_dark.grey1 },
-}
-
---- @type table<string, vim.api.keyset.highlight>
 local highlights_light = {
   Cursor = { bg = palette_light.cyan },
   Normal = { fg = palette_dark.grey1, bg = palette_light.grey1 },
+}
+
+--- @type table<string, vim.api.keyset.highlight>
+local highlights_dark = {
+  Cursor = { bg = palette_dark.cyan },
+  Normal = { fg = palette_light.grey1, bg = palette_dark.grey1 },
 }
 
 --- @param highlights table<string, vim.api.keyset.highlight>
@@ -176,8 +177,8 @@ local function map_specs(highlights)
   return data
 end
 
-local data_dark = map_specs(highlights_dark)
 local data_light = map_specs(highlights_light)
+local data_dark = map_specs(highlights_dark)
 
 -- Contrast ratios {{{1
 local function correct_channel(x)
@@ -215,8 +216,8 @@ local function add_contrast_ratios(highlights)
   end
 end
 
-add_contrast_ratios(data_dark)
 add_contrast_ratios(data_light)
+add_contrast_ratios(data_dark)
 
 -- Preview buffer {{{1
 
@@ -272,11 +273,11 @@ local function create_preview_buffer()
   vim.list_extend(lines, { "source lua/color-tool.lua" })
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Highlights ---" })
-  vim.list_extend(lines, { "Dark:" })
-  create_preview_lines(lines, data_dark)
-  vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Light:" })
   create_preview_lines(lines, data_light)
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "Dark:" })
+  create_preview_lines(lines, data_dark)
   vim.list_extend(lines, { "", "" })
 
   vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
@@ -284,17 +285,17 @@ local function create_preview_buffer()
     buf_id,
     ext_ns,
     3,
-    highlights_dark,
-    highlights_dark.Normal,
-    "dark"
+    highlights_light,
+    highlights_light.Normal,
+    "light"
   )
   highlight_preview_lines(
     buf_id,
     ext_ns,
-    3 + #highlights_dark + 4,
-    highlights_light,
-    highlights_light.Normal,
-    "light"
+    3 + #highlights_light + 4,
+    highlights_dark,
+    highlights_dark.Normal,
+    "dark"
   )
   vim.api.nvim_set_current_buf(buf_id)
 end
