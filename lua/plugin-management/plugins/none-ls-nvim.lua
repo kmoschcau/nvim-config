@@ -94,11 +94,13 @@ return {
       },
       diagnostics.shellcheck,
       diagnostics.selene,
+      diagnostics.terraform_validate,
       -- This breaks joining lines with the newer treesitter APIs
       -- diagnostics.todo_comments,
       diagnostics.trail_space.with {
         disabled_filetypes = { "markdown" },
       },
+      diagnostics.trivy,
       diagnostics.yamllint,
 
       formatting.black,
@@ -114,6 +116,7 @@ return {
         extra_args = { "--indent", "4" },
       },
       formatting.stylua,
+      formatting.terraform_fmt,
       formatting.trim_newlines,
       formatting.trim_whitespace,
     }

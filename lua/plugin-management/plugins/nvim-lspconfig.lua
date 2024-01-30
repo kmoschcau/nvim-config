@@ -27,6 +27,7 @@ return {
       "kotlin_language_server",
       "lemminx",
       "ruff_lsp",
+      "terraformls",
       "texlab",
       "vimls",
     }
