@@ -74,6 +74,7 @@ return {
       code_actions.gitsigns,
       code_actions.shellcheck,
 
+      diagnostics.actionlint,
       diagnostics.cfn_lint,
       diagnostics.checkstyle.with {
         args = { "-f", "sarif" },
