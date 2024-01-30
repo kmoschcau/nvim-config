@@ -6,4 +6,11 @@ lspconfig.yamlls.setup {
   cmd = { compat.append_win_ext "yaml-language-server", "--stdio" },
   capabilities = common.capabilities,
   handlers = common.handlers,
+  settings = {
+    yaml = {
+      schemastore = {
+        enable = true,
+      },
+    },
+  },
 }
