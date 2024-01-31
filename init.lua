@@ -198,6 +198,7 @@ vim.filetype.add {
     azcli = "ps1",
     nswag = "json",
     rasi = "rasi",
+    tf = "terraform",
   },
   filename = {
     crypttab = "fstab",
