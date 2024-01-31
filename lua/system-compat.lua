@@ -94,24 +94,4 @@ M.set_dos_file_options = function()
   end
 end
 
---- Check whether the 'termguicolors' option can be enabled, because we are
---- running in an environment that supports truecolor.
---- @return boolean
-M.should_enable_termguicolors = function()
-  local terminfo_colors
-  if vim.fn.executable "tput" == 1 then
-    local result = vim.system({ "tput", "colors" }, { text = true }):wait()
-    if result.code == 0 then
-      terminfo_colors = vim.trim(result.stdout)
-    end
-  else
-    if vim.fn.exists "$WT_SESSION" == 1 then
-      terminfo_colors = "256"
-    else
-      terminfo_colors = ""
-    end
-  end
-  return terminfo_colors:match "256" and true or false
-end
-
 return M

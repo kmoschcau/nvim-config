@@ -1,35 +1,13 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
-local compat = require "system-compat"
-local ehandler = require("error-handler").handler
-
--- colors setup {{{1
-
--- When on, uses |highlight-guifg| and |highlight-guibg| attributes in the
--- terminal (thus using 24-bit color). Requires a ISO-8613-3 compatible
--- terminal.
---
--- Note: https://bruinsslot.jp/post/how-to-enable-true-color-for-neovim-tmux-and-gnome-terminal/
-vim.o.termguicolors = compat.should_enable_termguicolors()
-
-vim.o.background = compat.get_system_background()
-
 -- theme settings {{{1
 
--- Try to set the "material" colorscheme, fall back to "morning".
-if vim.o.termguicolors then
-  if not xpcall(vim.cmd.colorscheme, ehandler, "material") then
-    vim.notify(
-      [[Could not load the "material" colorscheme, using "morning" instead.]],
-      vim.log.levels.WARN
-    )
-    vim.cmd [[silent! colorscheme morning]]
-  end
-else
-  vim.cmd [[silent! colorscheme morning]]
-end
+vim.o.background = require("system-compat").get_system_background()
+vim.cmd.colorscheme "material"
 
 -- plugins and packages {{{1
+
+local ehandler = require("error-handler").handler
 
 -- load plugin infrastructure
 xpcall(require, ehandler, "plugin-management")
