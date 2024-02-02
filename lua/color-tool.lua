@@ -105,13 +105,8 @@ local function convert(l, c, h)
   })
 end
 
-local function round(x)
-  return math.floor(10 * x + 0.5) / 10
-end
-
 --stylua: ignore
 local palette = {
-  grey1   = convert(100 - L[1],       C.grey,  SH.neutral),
   grey2   = convert(100 - L[2],       C.grey,  SH.neutral),
   grey3   = convert(100 - L[3],       C.grey,  SH.neutral),
   grey4   = convert(100 - L[4],       C.grey,  SH.neutral),
@@ -123,31 +118,75 @@ local palette = {
   blue    = convert(100 - L[2],       C.dark,  H.blue),
   magenta = convert(100 - L[2],       C.dark,  H.magenta),
 
+  neutral = {
+    lightest        = convert(98.2, 0, SH.neutral),
+    light           = convert(80,   0, SH.neutral),
+    half_light      = convert(75,   0, SH.neutral),
+    mid_light       = convert(60,   0, SH.neutral),
+    mid             = convert(50,   0, SH.neutral),
+    mid_strong      = convert(40,   0, SH.neutral),
+    half_strong     = convert(25,   0, SH.neutral),
+    strong          = convert(20,   0, SH.neutral),
+    strongest       = convert(1.8,  0, SH.neutral),
+  },
+
   interact = convert(70, 100, SH.interact),
+
+  terminal_colors_light = {
+    "#424242",
+    "#f44336",
+    "#8bc34a",
+    "#ff9800",
+    "#2196f3",
+    "#9c27b0",
+    "#009688",
+    "#eeeeee",
+    "#212121",
+    "#d32f2f",
+    "#689f38",
+    "#f57c00",
+    "#1976d2",
+    "#7b1fa2",
+    "#00796b",
+    "#e0e0e0",
+  },
+
+  terminal_colors_dark = {
+    "#f5f5f5",
+    "#ef5350",
+    "#9ccc65",
+    "#ffa726",
+    "#42a5f5",
+    "#ab47bc",
+    "#26a69a",
+    "#616161",
+    "#fafafa",
+    "#ef9a9a",
+    "#c5e1a5",
+    "#ffcc80",
+    "#90caf9",
+    "#ce93d8",
+    "#80cbc4",
+    "#757575",
+  },
 }
 
-local function invert_l(val)
-  return colors.modify_channel(val, "lightness", function(l)
-    return 100 - l
-  end, { gamut_clip = "chroma" })
-end
-
-local palette_dark = vim.tbl_map(invert_l, palette)
-
 -- Data {{{1
-
---- @class HighlightData
---- @field spec vim.api.keyset.highlight
---- @field contrast? number
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_light = {
   Cursor = { bg = palette.interact },
-  Normal = { fg = palette_dark.grey1, bg = palette.grey1 },
+  Normal = { fg = palette.neutral.strongest, bg = palette.neutral.lightest },
 }
 
 --- @param highlight vim.api.keyset.highlight
-local function invert_hl(highlight)
+local function invert_highlight(highlight)
+  local function invert_l(val)
+    return colors.modify_channel(val, "lightness", function(l)
+      return 100 - l
+    end, { gamut_clip = "chroma" })
+  end
+
   return vim.tbl_extend("force", highlight, {
     fg = highlight.fg and invert_l(highlight.fg) or nil,
     bg = highlight.bg and invert_l(highlight.bg) or nil,
@@ -161,75 +200,68 @@ local highlights_dark_overrides = {
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark = vim.tbl_extend(
   "force",
-  vim.tbl_map(invert_hl, highlights_light),
+  vim.tbl_map(invert_highlight, highlights_light),
   highlights_dark_overrides
 )
 
 --- @param highlights table<string, vim.api.keyset.highlight>
---- @return table<string, HighlightData>
-local function map_specs(highlights)
-  local data = {}
-
-  for key, value in pairs(highlights) do
+local function add_cterm_values(highlights)
+  for _, value in pairs(highlights) do
     if value.fg then
       value.ctermfg = require("mini.colors").convert(value.fg, "8-bit")
     end
     if value.bg then
       value.ctermbg = require("mini.colors").convert(value.bg, "8-bit")
     end
-
-    data[key] = { spec = value }
   end
-
-  return data
 end
 
-local data_light = map_specs(highlights_light)
-local data_dark = map_specs(highlights_dark)
+add_cterm_values(highlights_light)
+add_cterm_values(highlights_dark)
 
 -- Contrast ratios {{{1
-local function correct_channel(x)
-  return x <= 0.04045 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
-end
-
--- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-local function get_luminance(hex)
-  local rgb = colors.convert(hex, "rgb") --[[@as table]]
-
-  -- Convert decimal color to [0; 1]
-  local r, g, b = rgb.r / 255, rgb.g / 255, rgb.b / 255
-
-  -- Correct channels
-  local R, G, B = correct_channel(r), correct_channel(g), correct_channel(b)
-
-  return 0.2126 * R + 0.7152 * G + 0.0722 * B
-end
 
 -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
---- @param highlights table<string, HighlightData>
-local function add_contrast_ratios(highlights)
-  for key, value in pairs(highlights) do
-    if value.spec.link then
-      return
-    end
+---@param fg string
+---@param bg string
+---@return number
+local function get_contrast_ratio(fg, bg)
+  -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+  local function get_luminance(hex)
+    local rgb = colors.convert(hex, "rgb") --[[@as table]]
 
-    local lum_fg, lum_bg =
-      get_luminance(value.spec.fg or highlights.Normal.spec.fg),
-      get_luminance(value.spec.bg or highlights.Normal.spec.bg)
-    local res = (math.max(lum_bg, lum_fg) + 0.05)
-      / (math.min(lum_bg, lum_fg) + 0.05)
-    -- Track only one decimal digit
-    highlights[key].contrast = round(res)
+    -- Convert decimal color to [0; 1]
+    local r, g, b = rgb.r / 255, rgb.g / 255, rgb.b / 255
+
+    -- Correct channels
+    local function correct_channel(x)
+      return x <= 0.04045 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
+    end
+    local R, G, B = correct_channel(r), correct_channel(g), correct_channel(b)
+
+    return 0.2126 * R + 0.7152 * G + 0.0722 * B
   end
+
+  local lum_fg, lum_bg = get_luminance(fg), get_luminance(bg)
+  local res = (math.max(lum_bg, lum_fg) + 0.05)
+    / (math.min(lum_bg, lum_fg) + 0.05)
+  return math.floor(10 * res + 0.5) / 10
 end
 
-add_contrast_ratios(data_light)
-add_contrast_ratios(data_dark)
+--- @param highlight vim.api.keyset.highlight
+--- @param normal vim.api.keyset.highlight
+--- @return number
+local function get_highlight_contrast_ratio(highlight, normal)
+  return get_contrast_ratio(
+    highlight.fg or normal.fg,
+    highlight.bg or normal.bg
+  )
+end
 
 -- Preview buffer {{{1
 
---- @param hls table<string, HighlightData>
-local function create_preview_lines(lines, hls)
+--- @param hls table<string, vim.api.keyset.highlight>
+local function create_highlight_preview_lines(lines, hls)
   local keys = vim.tbl_keys(hls)
   table.sort(keys)
 
@@ -239,21 +271,48 @@ local function create_preview_lines(lines, hls)
       string.format(
         "XXX %-20s %4.1f %7s %7s %7s %3s %3s",
         key,
-        hls[key].contrast,
-        hls[key].spec.fg,
-        hls[key].spec.bg,
-        hls[key].spec.special,
-        hls[key].spec.ctermfg,
-        hls[key].spec.ctermbg
+        get_highlight_contrast_ratio(hls, hls.Normal),
+        hls[key].fg,
+        hls[key].bg,
+        hls[key].special,
+        hls[key].ctermfg,
+        hls[key].ctermbg
       )
     )
   end
 end
 
-local function highlight_preview_lines(
+--- @param clrs string[]
+--- @param bg string
+local function create_terminal_colors_preview_lines(lines, clrs, bg)
+  for index, value in ipairs(clrs) do
+    table.insert(
+      lines,
+      string.format(
+        "XXX %2d %4.1f %7s",
+        index - 1,
+        get_contrast_ratio(value, bg),
+        value
+      )
+    )
+  end
+end
+
+--- @param name string
+--- @param spec vim.api.keyset.highlight
+--- @param buf_id integer
+--- @param ext_ns number
+--- @param line_index number
+local function color_preview(name, spec, buf_id, ext_ns, line_index)
+  vim.api.nvim_set_hl(0, name, spec)
+  vim.api.nvim_buf_add_highlight(buf_id, ext_ns, name, line_index, 0, 3)
+end
+
+--- @param normal vim.api.keyset.highlight
+local function color_highlight_preview_lines(
   buf_id,
   ext_ns,
-  offset,
+  start_after_line,
   hls,
   normal,
   suffix
@@ -266,8 +325,25 @@ local function highlight_preview_lines(
 
     local spec = vim.tbl_extend("keep", hls[key], normal)
 
-    vim.api.nvim_set_hl(0, name, spec)
-    vim.api.nvim_buf_add_highlight(buf_id, ext_ns, name, index + offset, 0, 3)
+    color_preview(name, spec, buf_id, ext_ns, index + start_after_line)
+  end
+end
+
+--- @param normal vim.api.keyset.highlight
+local function color_terminal_preview_lines(
+  buf_id,
+  ext_ns,
+  start_after_line,
+  clrs,
+  normal,
+  suffix
+)
+  for index, value in ipairs(clrs) do
+    local name = "terminal_color_" .. index - 1 .. "_" .. suffix
+
+    local spec = { fg = value, bg = normal.bg }
+
+    color_preview(name, spec, buf_id, ext_ns, index + start_after_line)
   end
 end
 
@@ -281,29 +357,70 @@ local function create_preview_buffer()
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Highlights ---" })
   vim.list_extend(lines, { "Light:" })
-  create_preview_lines(lines, data_light)
+  create_highlight_preview_lines(lines, highlights_light)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Dark:" })
-  create_preview_lines(lines, data_dark)
-  vim.list_extend(lines, { "", "" })
+  create_highlight_preview_lines(lines, highlights_dark)
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "--- Terminal colors ---" })
+  vim.list_extend(lines, { "Light:" })
+  create_terminal_colors_preview_lines(
+    lines,
+    palette.terminal_colors_light,
+    highlights_light.Normal.bg
+  )
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "Dark:" })
+  create_terminal_colors_preview_lines(
+    lines,
+    palette.terminal_colors_dark,
+    highlights_dark.Normal.bg
+  )
 
   vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
-  highlight_preview_lines(
+
+  local start_after_line = 3
+  color_highlight_preview_lines(
     buf_id,
     ext_ns,
-    3,
+    start_after_line,
     highlights_light,
     highlights_light.Normal,
     "light"
   )
-  highlight_preview_lines(
+
+  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
+  color_highlight_preview_lines(
     buf_id,
     ext_ns,
-    3 + #highlights_light + 4,
+    start_after_line,
     highlights_dark,
     highlights_dark.Normal,
     "dark"
   )
+
+  start_after_line = start_after_line + vim.tbl_count(highlights_dark) + 3
+  color_terminal_preview_lines(
+    buf_id,
+    ext_ns,
+    start_after_line,
+    palette.terminal_colors_light,
+    highlights_light.Normal,
+    "light"
+  )
+
+  start_after_line = start_after_line
+    + vim.tbl_count(palette.terminal_colors_light)
+    + 2
+  color_terminal_preview_lines(
+    buf_id,
+    ext_ns,
+    start_after_line,
+    palette.terminal_colors_dark,
+    highlights_dark.Normal,
+    "dark"
+  )
+
   vim.api.nvim_set_current_buf(buf_id)
 end
 
@@ -317,16 +434,11 @@ local function enable_colorscheme()
   vim.cmd.highlight "clear"
   vim.g.colors_name = "new_colors"
 
-  -- In 'background=dark' dark colors are used for background and light - for
-  -- foreground. In 'background=light' they reverse.
-  -- Inline comments show basic highlight group assuming dark background
-
   local is_dark = vim.o.background == "dark"
-  local bg = is_dark and palette_dark or palette
-  local fg = is_dark and palette or palette_dark
   local hls = is_dark and highlights_dark or highlights_light
+  local tcs = is_dark and palette.terminal_colors_dark
+    or palette.terminal_colors_light
 
-  -- Source for actual groups: 'src/nvim/highlight_group.c' in Neovim source code
   local function hi(name, data)
     vim.api.nvim_set_hl(0, name, data)
   end
@@ -335,25 +447,9 @@ local function enable_colorscheme()
     hi(key, value)
   end
 
-  --stylua: ignore start
-  -- Terminal colors (not ideal)
-  vim.g.terminal_color_0  = bg.grey2
-  vim.g.terminal_color_1  = fg.red
-  vim.g.terminal_color_2  = fg.green
-  vim.g.terminal_color_3  = fg.yellow
-  vim.g.terminal_color_4  = fg.blue
-  vim.g.terminal_color_5  = fg.magenta
-  vim.g.terminal_color_6  = fg.cyan
-  vim.g.terminal_color_7  = fg.grey2
-  vim.g.terminal_color_8  = bg.grey2
-  vim.g.terminal_color_9  = fg.red
-  vim.g.terminal_color_10 = fg.green
-  vim.g.terminal_color_11 = fg.yellow
-  vim.g.terminal_color_12 = fg.blue
-  vim.g.terminal_color_13 = fg.magenta
-  vim.g.terminal_color_14 = fg.cyan
-  vim.g.terminal_color_15 = fg.grey2
-  --stylua: ignore end
+  for index, value in ipairs(tcs) do
+    vim.g["terminal_color_" .. index + 1] = value
+  end
 end
 
 -- Comment this to not enable color scheme
