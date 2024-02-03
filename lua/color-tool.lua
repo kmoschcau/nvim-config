@@ -32,37 +32,7 @@ local apply_colorscheme = false
 
 -- Hyperparameters {{{1
 
---- REFERENCE LIGHTNESS VALUES
---- They are applied both to dark and light pallete, and indicate how far from
---- corresponding edge (0 for dark and 100 for light) it should be.
---- Level meaning for dark color scheme (reverse for light one):
---- - Level 1 is background for floating windows.
---- - Level 2 is basic lightness. Used in `Normal` (both bg and fg).
---- - Level 3 is `CursorLine` background.
---- - Level 4 is `Visual` background and `Comment` foreground.
----
---- Value for level 2 is taken from #14790 (as lightness of #1e1e1e).
---- Others are the result of experiments to have passable contrast ratios.
-local L = { 2, 6, 13, 20, 35, 50 }
-
---- REFERENCE CHROMA VALUES
---- Chosen experimentally. Darker colors usually need higher chroma to appear
---- visibly different (combined with proper gamut clipping)
-local C = { grey = 0, desat = 1, light = 10, dark = 15 }
-
---- REFERENCE HUE VALUES
---- - Grey is used for UI background and foreground. It is not exactly an
----   achromatic grey, but a "colored grey" (very desaturated colors). It adds
----   at least some character to the color scheme.
----   Choice 270 implements "cold" UI. Tweak to get a different feel. Examples:
----     - 90 for warm.
----     - 180 for neutral cyan.
----     - 0 for neutral pink.
---- - Red hue is taken roughly the same as in reference #D96D6A
---- - Green hue is taken roughly the same as in reference #87FFAF
---- - Cyan hue is taken roughly the same as in reference #00E6E6
---- - Yellow, blue, and magenta are chosen to be visibly different from others.
-local H = {
+local hues = {
   pink = 0,
   red = 25,
   amber = 60,
@@ -78,59 +48,120 @@ local H = {
 }
 
 --- SEMANITC HUE VALUES
---- These are not just hue constants, but associations of semantig objects to
+--- These are not just hue constants, but associations of semantic objects to
 --- hues.
-local SH = {
-  neutral = H.grey,
-  interact = H.cyan,
-  insert = H.blue,
-  replace = H.amber,
-  modified = H.purple,
+local H = {
+  neutral = hues.grey,
+  interact = hues.cyan,
+  insert = hues.blue,
+  replace = hues.amber,
+  modified = hues.purple,
+  search = hues.yellow,
+  messages = hues.green,
   diff = {
-    added = H.green,
-    changed = H.amber,
-    deleted = H.red,
-    text = H.orange,
+    add = hues.green,
+    change = hues.orange,
+    delete = hues.red,
+    text = hues.amber,
+  },
+  diagnostics = {
+    error = hues.red,
+    warn = hues.orange,
+  },
+  spell = {
+    bad = hues.red,
+    cap = hues.yellow,
+    loc = hues.green,
+    rare = hues.cyan,
   },
   syntax = {
-    namespace = H.brown,
+    directory = hues.blue,
+    namespace = hues.brown,
   },
 }
 
 -- Palettes {{{1
 
-local function convert(l, c, h)
+local function convert(l, c, h, opts)
   return colors.convert({ l = l, c = c, h = h }, "hex", {
-    gamut_clip = "chroma",
+    gamut_clip = opts and opts.gamut_clip or "chroma",
   })
 end
 
 --stylua: ignore
 local palette = {
-  grey2   = convert(100 - L[2],       C.grey,  SH.neutral),
-  grey3   = convert(100 - L[3],       C.grey,  SH.neutral),
-  grey4   = convert(100 - L[4],       C.grey,  SH.neutral),
-
-  red     = convert(100 - L[2],       C.dark,  H.red),
-  yellow  = convert(100 - L[2],       C.dark,  H.yellow),
-  green   = convert(100 - L[2],       C.dark,  H.green),
-  cyan    = convert(100 - L[5],       C.dark,  H.cyan),
-  blue    = convert(100 - L[2],       C.dark,  H.blue),
-  magenta = convert(100 - L[2],       C.dark,  H.magenta),
-
   neutral = {
-    lightest        = convert(98.2, 0, SH.neutral),
-    light           = convert(80,   0, SH.neutral),
-    half_light      = convert(75,   0, SH.neutral),
-    mid_light       = convert(60,   0, SH.neutral),
-    mid             = convert(50,   0, SH.neutral),
-    mid_strong      = convert(40,   0, SH.neutral),
-    half_strong     = convert(25,   0, SH.neutral),
-    strong          = convert(20,   0, SH.neutral),
-    strongest       = convert(1.8,  0, SH.neutral),
+    max            = convert(100,   0, H.neutral),
+    lightest       = convert( 97,   0, H.neutral),
+    lighter_still  = convert( 95,   0, H.neutral),
+    lighter        = convert( 92,   0, H.neutral),
+    light          = convert( 80,   0, H.neutral),
+    half_light     = convert( 75,   0, H.neutral),
+    mid_light      = convert( 60,   0, H.neutral),
+    mid            = convert( 50,   0, H.neutral),
+    mid_strong     = convert( 40,   0, H.neutral),
+    half_strong    = convert( 25,   0, H.neutral),
+    strong         = convert( 20,   0, H.neutral),
+    stronger       = convert(  8,   0, H.neutral),
+    stronger_still = convert(  5,   0, H.neutral),
+    strongest      = convert(  3,   0, H.neutral),
+    min            = convert(  0,   0, H.neutral),
   },
 
-  interact = convert(70, 100, SH.interact),
+  interact = {
+    cursor = {
+      normal      = convert(70, 100, H.interact),
+      non_current = convert(90,   7, H.interact),
+      markers     = convert(90,   4, H.interact),
+      visual      = convert(90,  10, H.interact),
+    },
+    statusline = {
+      current = convert(70, 100, H.interact),
+    },
+  },
+
+  search = {
+    inc     = convert(85, 100, H.search),
+    current = convert(90,   7, H.search),
+    search  = convert(90,  10, H.search),
+  },
+
+  diff = {
+    add = {
+      light = convert(90,   5, H.diff.add),
+    },
+    change = {
+      light = convert(89,  10, H.diff.change),
+    },
+    delete = {
+      light = convert(85,  10, H.diff.delete),
+    },
+    text = {
+      light = convert(85,  10, H.diff.text),
+    },
+  },
+
+  diagnostics = {
+    error = convert(40, 100, H.diagnostics.error),
+    warn  = convert(40, 100, H.diagnostics.warn),
+  },
+
+  spell = {
+    bad  = convert(50, 100, H.spell.bad),
+    cap  = convert(70, 100, H.spell.cap),
+    loc  = convert(70, 100, H.spell.loc),
+    rare = convert(70, 100, H.spell.rare),
+  },
+
+  messages = {
+    mode     = convert(30, 100, H.messages),
+    more     = convert(50, 100, H.messages),
+    question = convert(50, 100, H.messages),
+  },
+
+  syntax = {
+    directory = convert(60, 100, H.syntax.directory),
+  },
 
   terminal_colors_light = {
     "#424242",
@@ -171,20 +202,87 @@ local palette = {
   },
 }
 
--- Data {{{1
+-- Highlights {{{1
+
+local status_col_fg = palette.neutral.mid_strong
+local status_col_bg = palette.neutral.half_light
+
+local function modify_l(val, L)
+  return colors.modify_channel(val, "lightness", function(l)
+    return l + L
+  end, { gamut_clip = "lightness" })
+end
+
+--stylua: ignore start
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_light = {
-  Cursor = { bg = palette.interact },
-  Normal = { fg = palette.neutral.strongest, bg = palette.neutral.lightest },
+  -- built-in *highlight-groups* {{{2
+  ColorColumn   = {                                         bg = palette.neutral.lighter_still },
+  Conceal       = { fg = palette.neutral.mid_strong         },
+  CurSearch     = {                                         bg = palette.search.current },
+  Cursor        = {                                         bg = palette.interact.cursor.normal },
+  lCursor       = { link = "Cursor" },
+  CursorColumn  = {                                         bg = palette.interact.cursor.markers },
+  CursorLine    = {                                         bg = palette.interact.cursor.markers },
+  Directory     = { fg = palette.syntax.directory,                                                    bold = true },
+  DiffAdd       = {                                         bg = palette.diff.add.light },
+  DiffChange    = {                                         bg = palette.diff.change.light },
+  DiffDelete    = {                                         bg = palette.diff.delete.light },
+  DiffText      = {                                         bg = palette.diff.text.light,             bold = true },
+  TermCursor    = { link = "Cursor" },
+  TermCursorNC  = {                                         bg = palette.interact.cursor.non_current },
+  ErrorMsg      = { fg = palette.diagnostics.error },
+  WinSeparator  = { fg = palette.neutral.mid_strong,        bg = palette.neutral.mid_strong },
+  Folded        = { fg = palette.neutral.mid_light,         bg = palette.neutral.lighter },
+  SignColumn    = { fg = status_col_fg,                     bg = status_col_bg },
+  IncSearch     = {                                         bg = palette.search.inc },
+  LineNr        = { fg = status_col_fg,                     bg = status_col_bg },
+  LineNrAbove   = { fg = modify_l(status_col_fg, 5),        bg = modify_l(status_col_bg, 5) },
+  LineNrBelow   = { fg = modify_l(status_col_fg, -5),       bg = modify_l(status_col_bg, -5) },
+  CursorLineNr  = { fg = status_col_fg,                     bg = palette.interact.cursor.markers },
+  MatchParen    = {                                         bg = palette.interact.cursor.markers },
+  ModeMsg       = { fg = palette.messages.mode },
+  MsgSeparator  = {                                         bg = palette.neutral.mid_strong },
+  MoreMsg       = { fg = palette.messages.more },
+  NonText       = { fg = palette.neutral.light },
+  Normal        = { fg = palette.neutral.strongest,         bg = palette.neutral.lightest },
+  NormalFloat   = {                                         bg = palette.neutral.max },
+  Pmenu         = {                                         bg = palette.neutral.max },
+  PmenuSel      = {                                         bg = palette.interact.cursor.markers },
+  PmenuKindSel  = { link = "Pmenu" },
+  PmenuExtraSel = { link = "Pmenu" },
+  PmenuSbar     = {                                         bg = palette.neutral.lighter_still },
+  PmenuThumb    = {                                         bg = palette.neutral.mid },
+  Question      = { fg = palette.messages.more },
+  QuickFixLine  = {                                         bg = palette.interact.cursor.markers },
+  Search        = {                                         bg = palette.search.search },
+  SpecialKey    = { fg = palette.neutral.strong,            bg = palette.neutral.lighter,             italic = true },
+  SpellBad      = {                                                                                   undercurl = true, sp = palette.spell.bad },
+  SpellCap      = {                                                                                   undercurl = true, sp = palette.spell.cap },
+  SpellLocal    = {                                                                                   undercurl = true, sp = palette.spell.loc },
+  SpellRare     = {                                                                                   undercurl = true, sp = palette.spell.rare },
+  StatusLine    = { fg = palette.neutral.lightest,          bg = palette.interact.statusline.current, bold = true },
+  StatusLineNC  = { fg = palette.neutral.lightest,          bg = palette.neutral.mid_strong },
+  TabLine       = { fg = palette.neutral.lightest,          bg = palette.neutral.half_light },
+  TabLineFill   = {                                         bg = palette.neutral.mid_strong },
+  TabLineSel    = { link = "Normal" },
+  Title         = {                                                                                   bold = true },
+  Visual        = {                                         bg = palette.interact.cursor.visual },
+  WarningMsg    = { fg = palette.diagnostics.warn },
+  WinBar        = { link = "StatusLine" },
+  WinBarNC      = { link = "StatusLineNC" },
+
+  -- syntax groups *group-name* {{{2
 }
+--stylua: ignore end
 
 --- @param highlight vim.api.keyset.highlight
 local function invert_highlight(highlight)
   local function invert_l(val)
     return colors.modify_channel(val, "lightness", function(l)
       return 100 - l
-    end, { gamut_clip = "chroma" })
+    end, { gamut_clip = "lightness" })
   end
 
   return vim.tbl_extend("force", highlight, {
@@ -193,9 +291,12 @@ local function invert_highlight(highlight)
   })
 end
 
---stylua: ignore
+--stylua: ignore start
+
+--- @type table<string, vim.api.keyset.highlight>
 local highlights_dark_overrides = {
 }
+--stylua: ignore end
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark = vim.tbl_extend(
@@ -260,31 +361,87 @@ end
 
 -- Preview buffer {{{1
 
+local function insert_highlight_preview_header(lines)
+  table.insert(
+    lines,
+    string.format(
+      "%4s %-20s %-8s %7s %7s %7s %7s %7s %5s %s",
+      "Demo",
+      "Name",
+      "Contrast",
+      "fg",
+      "bg",
+      "special",
+      "ctermfg",
+      "ctermbg",
+      "blend",
+      "attrs"
+    )
+  )
+end
+
 --- @param hls table<string, vim.api.keyset.highlight>
-local function create_highlight_preview_lines(lines, hls)
+local function insert_highlight_preview_lines(lines, hls)
   local keys = vim.tbl_keys(hls)
   table.sort(keys)
 
+  local bool_keys = {
+    "bold",
+    "standout",
+    "strikethrough",
+    "underline",
+    "undercurl",
+    "underdouble",
+    "underdotted",
+    "underdashed",
+    "italic",
+    "reverse",
+    "altfont",
+    "nocombine",
+    "default",
+    "fallback",
+    "fg_indexed",
+    "bg_indexed",
+    "force",
+  }
+
   for _, key in ipairs(keys) do
-    table.insert(
-      lines,
-      string.format(
-        "XXX %-20s %4.1f %7s %7s %7s %3s %3s",
-        key,
-        get_highlight_contrast_ratio(hls, hls.Normal),
-        hls[key].fg,
-        hls[key].bg,
-        hls[key].special,
-        hls[key].ctermfg,
-        hls[key].ctermbg
-      )
-    )
+    local hl = hls[key]
+
+    if hl.link then
+      table.insert(lines, string.format("XXX  %-20s -> %s", key, hl.link))
+    else
+      table.insert(lines, (string
+        .format(
+          "XXX  %-20s %8.1f %7s %7s %7s %7s %7s %5d %s",
+          key,
+          get_highlight_contrast_ratio(hl, hls.Normal),
+          hl.fg or "",
+          hl.bg or "",
+          hl.special or "",
+          hl.ctermfg or "",
+          hl.ctermbg or "",
+          hl.blend or 0,
+          table.concat(
+            vim.tbl_filter(
+              function(k)
+                return k
+              end,
+              vim.tbl_map(function(k)
+                return hl[k] and k or nil
+              end, bool_keys)
+            ),
+            ","
+          )
+        )
+        :gsub("%s+$", "")))
+    end
   end
 end
 
 --- @param clrs string[]
 --- @param bg string
-local function create_terminal_colors_preview_lines(lines, clrs, bg)
+local function insert_terminal_colors_preview_lines(lines, clrs, bg)
   for index, value in ipairs(clrs) do
     table.insert(
       lines,
@@ -300,17 +457,15 @@ end
 
 --- @param name string
 --- @param spec vim.api.keyset.highlight
---- @param buf_id integer
 --- @param ext_ns number
 --- @param line_index number
-local function color_preview(name, spec, buf_id, ext_ns, line_index)
+local function color_preview(name, spec, ext_ns, line_index)
   vim.api.nvim_set_hl(0, name, spec)
-  vim.api.nvim_buf_add_highlight(buf_id, ext_ns, name, line_index, 0, 3)
+  vim.api.nvim_buf_add_highlight(0, ext_ns, name, line_index, 0, 3)
 end
 
 --- @param normal vim.api.keyset.highlight
 local function color_highlight_preview_lines(
-  buf_id,
   ext_ns,
   start_after_line,
   hls,
@@ -323,15 +478,18 @@ local function color_highlight_preview_lines(
   for index, key in ipairs(keys) do
     local name = key .. "_preview_" .. suffix
 
-    local spec = vim.tbl_extend("keep", hls[key], normal)
+    local spec = vim.tbl_extend(
+      "keep",
+      hls[key].link and hls[hls[key].link] or hls[key],
+      normal
+    )
 
-    color_preview(name, spec, buf_id, ext_ns, index + start_after_line)
+    color_preview(name, spec, ext_ns, index + start_after_line)
   end
 end
 
 --- @param normal vim.api.keyset.highlight
 local function color_terminal_preview_lines(
-  buf_id,
   ext_ns,
   start_after_line,
   clrs,
@@ -343,13 +501,12 @@ local function color_terminal_preview_lines(
 
     local spec = { fg = value, bg = normal.bg }
 
-    color_preview(name, spec, buf_id, ext_ns, index + start_after_line)
+    color_preview(name, spec, ext_ns, index + start_after_line)
   end
 end
 
 local function create_preview_buffer()
   local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
-  local buf_id = vim.api.nvim_create_buf(true, true)
 
   local lines = {}
 
@@ -357,31 +514,32 @@ local function create_preview_buffer()
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Highlights ---" })
   vim.list_extend(lines, { "Light:" })
-  create_highlight_preview_lines(lines, highlights_light)
+  insert_highlight_preview_header(lines)
+  insert_highlight_preview_lines(lines, highlights_light)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Dark:" })
-  create_highlight_preview_lines(lines, highlights_dark)
+  insert_highlight_preview_header(lines)
+  insert_highlight_preview_lines(lines, highlights_dark)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Terminal colors ---" })
   vim.list_extend(lines, { "Light:" })
-  create_terminal_colors_preview_lines(
+  insert_terminal_colors_preview_lines(
     lines,
     palette.terminal_colors_light,
     highlights_light.Normal.bg
   )
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Dark:" })
-  create_terminal_colors_preview_lines(
+  insert_terminal_colors_preview_lines(
     lines,
     palette.terminal_colors_dark,
     highlights_dark.Normal.bg
   )
 
-  vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 
-  local start_after_line = 3
+  local start_after_line = 4
   color_highlight_preview_lines(
-    buf_id,
     ext_ns,
     start_after_line,
     highlights_light,
@@ -389,9 +547,8 @@ local function create_preview_buffer()
     "light"
   )
 
-  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
+  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 3
   color_highlight_preview_lines(
-    buf_id,
     ext_ns,
     start_after_line,
     highlights_dark,
@@ -401,7 +558,6 @@ local function create_preview_buffer()
 
   start_after_line = start_after_line + vim.tbl_count(highlights_dark) + 3
   color_terminal_preview_lines(
-    buf_id,
     ext_ns,
     start_after_line,
     palette.terminal_colors_light,
@@ -413,15 +569,12 @@ local function create_preview_buffer()
     + vim.tbl_count(palette.terminal_colors_light)
     + 2
   color_terminal_preview_lines(
-    buf_id,
     ext_ns,
     start_after_line,
     palette.terminal_colors_dark,
     highlights_dark.Normal,
     "dark"
   )
-
-  vim.api.nvim_set_current_buf(buf_id)
 end
 
 if show_preview_buffer then
