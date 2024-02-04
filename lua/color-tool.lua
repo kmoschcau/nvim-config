@@ -61,8 +61,13 @@ local H = {
     rare = hues.cyan,
   },
   syntax = {
+    boolean   = hues.orange,
+    character = hues.green - 20,
     directory = hues.blue,
+    float     = hues.blue + 20,
     namespace = hues.brown,
+    number    = hues.blue,
+    string    = hues.green,
   },
 }
 
@@ -72,6 +77,17 @@ local function convert(l, c, h, opts)
   return colors.convert({ l = l, c = c, h = h }, "hex", {
     gamut_clip = opts and opts.gamut_clip or "chroma",
   })
+end
+
+local function make_syn(hue)
+  return convert(60, 100, hue)
+end
+
+local function make_syn_with_bg(hue)
+  return {
+    fg = convert(50, 100, hue),
+    bg = convert(95, 5, hue),
+  }
 end
 
 --stylua: ignore
@@ -146,7 +162,13 @@ local palette = {
   },
 
   syntax = {
-    directory = convert(60, 100, H.syntax.directory),
+    boolean   = make_syn_with_bg(H.syntax.boolean),
+    character = make_syn_with_bg(H.syntax.character),
+    comment   = convert(60,   0, H.neutral),
+    directory = make_syn(H.syntax.directory),
+    float     = make_syn_with_bg(H.syntax.float),
+    number    = make_syn_with_bg(H.syntax.number),
+    string    = make_syn_with_bg(H.syntax.string),
   },
 
   terminal_colors_light = {
@@ -260,6 +282,13 @@ local highlights_light = {
   WinBarNC      = { link = "StatusLineNC" },
 
   -- syntax groups *group-name* {{{2
+  Comment       = { fg = palette.syntax.comment },
+
+  String        = { fg = palette.syntax.string.fg,          bg = palette.syntax.string.bg },
+  Character     = { fg = palette.syntax.character.fg,       bg = palette.syntax.character.bg },
+  Number        = { fg = palette.syntax.number.fg,          bg = palette.syntax.number.bg },
+  Boolean       = { fg = palette.syntax.boolean.fg,         bg = palette.syntax.boolean.bg },
+  Float         = { fg = palette.syntax.float.fg,           bg = palette.syntax.float.bg },
 }
 --stylua: ignore end
 
