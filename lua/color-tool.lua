@@ -1,19 +1,5 @@
 -- vim: foldmethod=marker
 
--- General goals:
--- - Be extra minimal for `notermguicolors` while allowing more shades for
---   when `termguicolors` is set.
--- - Be accessible, i.e. have enough contrast ratios (CR):
---     - Fully passable `Normal` highlight group: CR>=7.
---     - Passable `Visual` highlight group (with `Normal` foreground): CR>=4.5.
---     - Passable comment in current line (foreground from `Comment` and
---       background from `CursorLine`): CR>=4.5.
---     - Passable diff highlight groups: CR>=4.5.
---     - Passable 'Search' highlight group: CR>=4.5.
--- - Have dark and light variants be a simple exchange of dark and light
---   palettes (as this is easier to implement).
--- - Be usable for more than one person.
-
 -- Setup {{{1
 -- NOTE: All manipulation is done in Oklch color space.
 -- Get interactive view at https://bottosson.github.io/misc/colorpicker/
@@ -465,10 +451,12 @@ local function color_preview(name, spec, ext_ns, line_index)
 end
 
 --- @param normal vim.api.keyset.highlight
+--- @param diagnostics vim.Diagnostic[]
 local function color_highlight_preview_lines(
   ext_ns,
   start_after_line,
   hls,
+  diagnostics,
   normal,
   suffix
 )
@@ -477,14 +465,32 @@ local function color_highlight_preview_lines(
 
   for index, key in ipairs(keys) do
     local name = key .. "_preview_" .. suffix
+    local hl = hls[key]
+    local line_index = start_after_line + index
 
-    local spec = vim.tbl_extend(
-      "keep",
-      hls[key].link and hls[hls[key].link] or hls[key],
-      normal
-    )
+    local spec
+    if hl.link then
+      spec = vim.tbl_extend("keep", hls[hl.link], normal)
+    else
+      spec = vim.tbl_extend("keep", hl, normal)
+    end
+    color_preview(name, spec, ext_ns, line_index)
 
-    color_preview(name, spec, ext_ns, index + start_after_line)
+    local contrast = get_highlight_contrast_ratio(hl, normal)
+    if contrast < 7 then
+      table.insert(
+        diagnostics,
+        {
+          lnum = line_index,
+          col = 31,
+          end_col = 34,
+          severity = vim.diagnostic.severity.W,
+          message = "Contrast is below 7.",
+          source = "color-tool",
+          code = "below-7",
+        }
+      )
+    end
   end
 end
 
@@ -507,18 +513,17 @@ end
 
 local function create_preview_buffer()
   local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
+  local diag_ns = vim.api.nvim_create_namespace "highlight-previews-diagnostics"
 
+  --- @type string[]
   local lines = {}
 
-  vim.list_extend(lines, { "source lua/color-tool.lua" })
-  vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Highlights ---" })
-  vim.list_extend(lines, { "Light:" })
   insert_highlight_preview_header(lines)
+  vim.list_extend(lines, { "Light:" })
   insert_highlight_preview_lines(lines, highlights_light)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Dark:" })
-  insert_highlight_preview_header(lines)
   insert_highlight_preview_lines(lines, highlights_dark)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Terminal colors ---" })
@@ -537,21 +542,25 @@ local function create_preview_buffer()
   )
 
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  --- @type vim.Diagnostic[]
+  local diagnostics = {}
 
-  local start_after_line = 4
+  local start_after_line = 2
   color_highlight_preview_lines(
     ext_ns,
     start_after_line,
     highlights_light,
+    diagnostics,
     highlights_light.Normal,
     "light"
   )
 
-  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 3
+  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
   color_highlight_preview_lines(
     ext_ns,
     start_after_line,
     highlights_dark,
+    diagnostics,
     highlights_dark.Normal,
     "dark"
   )
@@ -575,6 +584,8 @@ local function create_preview_buffer()
     highlights_dark.Normal,
     "dark"
   )
+
+  vim.diagnostic.set(diag_ns, 0, diagnostics)
 end
 
 if show_preview_buffer then
