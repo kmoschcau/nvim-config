@@ -1408,28 +1408,28 @@ highlight("OilGitStatusIndexIgnored", {
   link = "Material_VimLightFramingSubtleFg",
 })
 highlight("OilGitStatusIndexUntracked", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignAdd",
 })
 highlight("OilGitStatusIndexAdded", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignAdd",
 })
 highlight("OilGitStatusIndexCopied", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignAdd",
 })
 highlight("OilGitStatusIndexDeleted", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignDelete",
 })
 highlight("OilGitStatusIndexModified", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusIndexRenamed", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusIndexTypeChanged", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusIndexUnmerged", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChangeDelete",
 })
 highlight("OilGitStatusWorkingTreeUnmodified", {
   link = "Material_VimLightFramingSubtleFg",
@@ -1438,28 +1438,28 @@ highlight("OilGitStatusWorkingTreeIgnored", {
   link = "Material_VimLightFramingSubtleFg",
 })
 highlight("OilGitStatusWorkingTreeUntracked", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignDelete",
 })
 highlight("OilGitStatusWorkingTreeAdded", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignAdd",
 })
 highlight("OilGitStatusWorkingTreeCopied", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusWorkingTreeDeleted", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignDelete",
 })
 highlight("OilGitStatusWorkingTreeModified", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusWorkingTreeRenamed", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusWorkingTreeTypeChanged", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChange",
 })
 highlight("OilGitStatusWorkingTreeUnmerged", {
-  link = "Material_VimLightFramingSubtleFg",
+  link = "Material_VimDiffSignChangeDelete",
 })
 
 -- vim-git | tpope/vim-git {{{3
