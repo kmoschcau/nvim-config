@@ -179,7 +179,7 @@ vim.o.updatetime = 100
 
 -- autocommands {{{2
 
-local augroup = vim.api.nvim_create_augroup("InitVim", {})
+local augroup = vim.api.nvim_create_augroup("InitNvim", {})
 vim.api.nvim_create_autocmd("TermOpen", {
   desc = "Remove all columns from terminal buffers.",
   group = augroup,

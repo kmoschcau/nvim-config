@@ -1,7 +1,7 @@
 local M = {}
 
 --- The autocommand group for LSP init autocommands.
-M.augroup = vim.api.nvim_create_augroup("LanguageServer_InitVim", {})
+M.augroup = vim.api.nvim_create_augroup("InitNvimLanguageServer", {})
 
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
