@@ -208,7 +208,7 @@ vim.filetype.add {
 -- key maps {{{2
 
 -- diagnostics API bindings
-vim.keymap.set("n", "<space>d", function()
+vim.keymap.set("n", "<Space>d", function()
   vim.diagnostic.open_float { border = "rounded" }
 end, {
   desc = "Diagnostics: Open the floating window.",
@@ -223,7 +223,7 @@ vim.keymap.set("n", "]d", function()
 end, {
   desc = "Diagnostics: Go to next.",
 })
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {
+vim.keymap.set("n", "<Space>q", vim.diagnostic.setloclist, {
   desc = "Diagnostics: Put all buffer diagnostics in the location list.",
 })
 

@@ -24,14 +24,14 @@ return {
       desc = "Open telescope live grep search.",
     },
     {
-      "<space>t",
+      "<Space>t",
       function()
         require("telescope.builtin").diagnostics { bufnr = 0 }
       end,
       desc = "Fuzzy search diagnostics in current buffer.",
     },
     {
-      "<space>T",
+      "<Space>T",
       function()
         require("telescope.builtin").diagnostics()
       end,
@@ -49,12 +49,12 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<c-x>"] = false,
-            ["<c-s>"] = actions.select_horizontal,
+            ["<C-x>"] = false,
+            ["<C-s>"] = actions.select_horizontal,
           },
           n = {
-            ["<c-x>"] = false,
-            ["<c-s>"] = actions.select_horizontal,
+            ["<C-x>"] = false,
+            ["<C-s>"] = actions.select_horizontal,
           },
         },
       },
@@ -62,7 +62,7 @@ return {
         live_grep = vim.tbl_extend("force", lsp_common_opts, {
           mappings = {
             i = {
-              ["<c-f>"] = actions.to_fuzzy_refine,
+              ["<C-f>"] = actions.to_fuzzy_refine,
             },
           },
         }),

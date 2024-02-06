@@ -64,16 +64,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- workspace/didChangeWorkspaceFolders
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, {
+    vim.keymap.set("n", "<Space>wa", vim.lsp.buf.add_workspace_folder, {
       buffer = args.buf,
       desc = "LSP: Add a workspace folder.",
     })
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, {
+    vim.keymap.set("n", "<Space>wr", vim.lsp.buf.remove_workspace_folder, {
       buffer = args.buf,
       desc = "LSP: Remove a workspace folder.",
     })
 
-    vim.keymap.set("n", "<space>wl", function()
+    vim.keymap.set("n", "<Space>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, {
       buffer = args.buf,
@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/typeDefinition
     vim.keymap.set(
       "n",
-      "<space>D",
+      "<Space>D",
       has_telescope and tel_builtin.lsp_type_definitions
         or vim.lsp.buf.type_definition,
       {
@@ -93,13 +93,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
 
     -- textDocument/rename
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {
+    vim.keymap.set("n", "<Space>rn", vim.lsp.buf.rename, {
       buffer = args.buf,
       desc = "LSP: Rename the symbol under the cursor.",
     })
 
     -- textDocument/codeAction
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, {
+    vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, {
       buffer = args.buf,
       desc = "LSP: Trigger the code actions menu for the position under the cursor.",
     })
@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/documentSymbol
     vim.keymap.set(
       "n",
-      "<space>sd",
+      "<Space>sd",
       has_telescope and tel_builtin.lsp_document_symbols
         or vim.lsp.buf.document_symbol,
       {
@@ -154,7 +154,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- workspace/symbol
     vim.keymap.set(
       "n",
-      "<space>sw",
+      "<Space>sw",
       has_telescope and tel_builtin.lsp_dynamic_workspace_symbols
         or vim.lsp.buf.workspace_symbol,
       {
@@ -179,7 +179,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
           vim.log.levels.DEBUG
         )
       else
-        vim.keymap.set("n", "<space>f", function()
+        vim.keymap.set("n", "<Space>f", function()
           vim.lsp.buf.format {
             async = true,
             filter = function(formatting_client)

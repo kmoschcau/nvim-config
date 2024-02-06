@@ -5,7 +5,7 @@ return {
   keys = {
     {
       "<F3>",
-      ":UndotreeToggle<cr>",
+      ":UndotreeToggle<CR>",
       desc = "Undotree: Toggle.",
       silent = true,
     },

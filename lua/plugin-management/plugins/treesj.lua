@@ -3,21 +3,21 @@ return {
   "Wansmer/treesj",
   keys = {
     {
-      "<space>m",
+      "<Space>m",
       function()
         require("treesj").toggle()
       end,
       desc = "treesj: Toggle join/split.",
     },
     {
-      "<space>j",
+      "<Space>j",
       function()
         require("treesj").join()
       end,
       desc = "treesj: Join.",
     },
     {
-      "<space>sp",
+      "<Space>sp",
       function()
         require("treesj").split()
       end,

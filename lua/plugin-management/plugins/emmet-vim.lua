@@ -10,7 +10,7 @@ return {
     }
   end,
   config = function()
-    vim.keymap.set("n", "<space>ea", "<Plug>(emmet-expand-abbr)", {
+    vim.keymap.set("n", "<Space>ea", "<Plug>(emmet-expand-abbr)", {
       desc = "Emmet: Expand abbreviation.",
       silent = true,
     })
@@ -27,19 +27,19 @@ return {
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>ew", "<Plug>(emmet-expand-word)", {
+    vim.keymap.set("n", "<Space>ew", "<Plug>(emmet-expand-word)", {
       desc = "Emmet: Expand word.",
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>eu", "<Plug>(emmet-update-tag)", {
+    vim.keymap.set("n", "<Space>eu", "<Plug>(emmet-update-tag)", {
       desc = "Emmet: Update tag.",
       silent = true,
     })
 
     vim.keymap.set(
       { "n", "x" },
-      "<space>ee",
+      "<Space>ee",
       "<Plug>(emmet-balance-tag-inward)",
       {
         desc = "Emmet: Expand tag selection.",
@@ -49,7 +49,7 @@ return {
 
     vim.keymap.set(
       { "n", "x" },
-      "<space>es",
+      "<Space>es",
       "<Plug>(emmet-balance-tag-outword)", -- (sic)
       {
         desc = "Emment: Shrink/advance tag selection.",
@@ -57,7 +57,7 @@ return {
       }
     )
 
-    vim.keymap.set("n", "<space>en", "<Plug>(emmet-move-next)", {
+    vim.keymap.set("n", "<Space>en", "<Plug>(emmet-move-next)", {
       desc = "Emmet: Go to next edit point.",
       silent = true,
     })
@@ -67,7 +67,7 @@ return {
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>ep", "<Plug>(emmet-move-prev)", {
+    vim.keymap.set("n", "<Space>ep", "<Plug>(emmet-move-prev)", {
       desc = "Emmet: Go to previous edit point.",
       silent = true,
     })
@@ -78,12 +78,12 @@ return {
     --   silent = true,
     -- })
 
-    vim.keymap.set("n", "<space>eis", "<Plug>(emmet-image-size)", {
+    vim.keymap.set("n", "<Space>eis", "<Plug>(emmet-image-size)", {
       desc = "Emmet: Add/update <img> size.",
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>eie", "<Plug>(emmet-image-encode)", {
+    vim.keymap.set("n", "<Space>eie", "<Plug>(emmet-image-encode)", {
       desc = "Emmet: base64-encode <img> from src.",
       silent = true,
     })
@@ -100,22 +100,22 @@ return {
     --   silent = true,
     -- })
 
-    vim.keymap.set("n", "<space>em", "<Plug>(emmet-split-join-tag)", {
+    vim.keymap.set("n", "<Space>em", "<Plug>(emmet-split-join-tag)", {
       desc = "Emmet: Split/join tag.",
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>ec", "<Plug>(emmet-toggle-comment)", {
+    vim.keymap.set("n", "<Space>ec", "<Plug>(emmet-toggle-comment)", {
       desc = "Emmet: Toggle comment.",
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>ema", "<Plug>(emmet-anchorize-url)", {
+    vim.keymap.set("n", "<Space>ema", "<Plug>(emmet-anchorize-url)", {
       desc = "Emmet: Make anchor from URL.",
       silent = true,
     })
 
-    vim.keymap.set("n", "<space>ems", "<Plug>(emmet-anchorize-summary)", {
+    vim.keymap.set("n", "<Space>ems", "<Plug>(emmet-anchorize-summary)", {
       desc = "Emmet: Make quoted text from URL.",
       silent = true,
     })

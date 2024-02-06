@@ -50,7 +50,7 @@ return {
   keys = {
     {
       "<C-n>",
-      ":Neotree toggle=true<cr>",
+      ":Neotree toggle=true<CR>",
       desc = "Toggle the neo-tree window.",
       silent = true,
     },
@@ -216,8 +216,8 @@ return {
         ["<C-s>"] = "split_with_window_picker",
         ["<C-t>"] = "open_tabnew",
         ["<C-v>"] = "vsplit_with_window_picker",
-        ["<cr>"] = "open",
-        ["<space>"] = { "toggle_node", nowait = true },
+        ["<CR>"] = "open",
+        ["<Space>"] = { "toggle_node", nowait = true },
         ["[g"] = "none",
         ["]g"] = "none",
         J = {
