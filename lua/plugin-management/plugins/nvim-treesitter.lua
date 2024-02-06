@@ -53,6 +53,17 @@ return {
       },
 
       -- nvim-treesitter/nvim-treesitter
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<Tab>",
+          node_incremental = "<Tab>",
+          scope_incremental = "<CR>",
+          node_decremental = "<S-Tab>",
+        },
+      },
+
+      -- nvim-treesitter/nvim-treesitter
       indent = {
         enable = true,
         disable = {

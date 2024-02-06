@@ -37,25 +37,27 @@ return {
       silent = true,
     })
 
-    vim.keymap.set(
-      { "n", "x" },
-      "<Space>ee",
-      "<Plug>(emmet-balance-tag-inward)",
-      {
-        desc = "Emmet: Expand tag selection.",
-        silent = true,
-      }
-    )
+    -- This is done better by treesitter incremental selection.
+    -- vim.keymap.set(
+    --   { "n", "x" },
+    --   "<Space>ee",
+    --   "<Plug>(emmet-balance-tag-inward)",
+    --   {
+    --     desc = "Emmet: Expand tag selection.",
+    --     silent = true,
+    --   }
+    -- )
 
-    vim.keymap.set(
-      { "n", "x" },
-      "<Space>es",
-      "<Plug>(emmet-balance-tag-outword)", -- (sic)
-      {
-        desc = "Emment: Shrink/advance tag selection.",
-        silent = true,
-      }
-    )
+    -- This is done better by treesitter incremental selection.
+    -- vim.keymap.set(
+    --   { "n", "x" },
+    --   "<Space>es",
+    --   "<Plug>(emmet-balance-tag-outword)", -- (sic)
+    --   {
+    --     desc = "Emment: Shrink/advance tag selection.",
+    --     silent = true,
+    --   }
+    -- )
 
     vim.keymap.set("n", "<Space>en", "<Plug>(emmet-move-next)", {
       desc = "Emmet: Go to next edit point.",
