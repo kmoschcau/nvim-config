@@ -84,6 +84,7 @@ return {
       diagnostics.eslint_d.with {
         extra_filetypes = { "svelte" },
       },
+      diagnostics.ktlint,
       diagnostics.markdownlint,
       diagnostics.markuplint.with {
         extra_filetypes = { "svelte", "vue" },
@@ -107,6 +108,7 @@ return {
       formatting.black,
       formatting.csharpier,
       formatting.google_java_format,
+      formatting.ktlint,
       formatting.markdownlint,
       formatting.packer,
       formatting.prettierd.with {
