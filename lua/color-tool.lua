@@ -26,6 +26,7 @@ local hues = {
   orange = 70,
   yellow = 90,
   green = 150,
+  teal = 180,
   cyan = 195,
   blue = 240,
   grey = 270,
@@ -61,13 +62,18 @@ local H = {
     rare = hues.cyan,
   },
   syntax = {
-    boolean   = hues.orange,
-    character = hues.green - 20,
+    boolean = hues.orange,
     directory = hues.blue,
-    float     = hues.blue + 20,
+    ["function"] = hues.teal,
+    identifier = hues.green,
     namespace = hues.brown,
-    number    = hues.blue,
-    string    = hues.green,
+    number = hues.blue,
+    special = hues.red,
+    statement = hues.orange,
+    storage_class = hues.yellow,
+    string = hues.green,
+    typedef = hues.green,
+    underlined = hues.blue,
   },
 }
 
@@ -130,13 +136,16 @@ local palette = {
 
   diff = {
     add = {
-      light = convert(90,   5, H.diff.add),
+      light  = convert(90,   5, H.diff.add),
+      strong = convert(50, 100, H.diff.add),
     },
     change = {
-      light = convert(89,  10, H.diff.change),
+      light  = convert(89,  10, H.diff.change),
+      strong = convert(50, 100, H.diff.change),
     },
     delete = {
-      light = convert(85,  10, H.diff.delete),
+      light  = convert(85,  10, H.diff.delete),
+      strong = convert(50, 100, H.diff.delete),
     },
     text = {
       light = convert(85,  10, H.diff.text),
@@ -144,8 +153,8 @@ local palette = {
   },
 
   diagnostics = {
-    error = convert(40, 100, H.diagnostics.error),
-    warn  = convert(40, 100, H.diagnostics.warn),
+    error = convert(50, 100, H.diagnostics.error),
+    warn  = convert(50, 100, H.diagnostics.warn),
   },
 
   spell = {
@@ -162,13 +171,21 @@ local palette = {
   },
 
   syntax = {
-    boolean   = make_syn_with_bg(H.syntax.boolean),
-    character = make_syn_with_bg(H.syntax.character),
-    comment   = convert(60,   0, H.neutral),
-    directory = make_syn(H.syntax.directory),
-    float     = make_syn_with_bg(H.syntax.float),
-    number    = make_syn_with_bg(H.syntax.number),
-    string    = make_syn_with_bg(H.syntax.string),
+    boolean       = make_syn_with_bg(H.syntax.boolean),
+    character     = make_syn_with_bg(H.syntax.string - 20),
+    comment       = convert(60,   0, H.neutral),
+    directory     = make_syn(H.syntax.directory),
+    float         = make_syn_with_bg(H.syntax.number + 20),
+    ["function"]  = convert(60, 100, H.syntax["function"]),
+    identifier    = convert(70,  10, H.syntax.identifier),
+    number        = make_syn_with_bg(H.syntax.number),
+    special       = convert(55,  20, H.syntax.special),
+    statement     = convert(70, 100, H.syntax.statement),
+    storage_class = convert(80, 100, H.syntax.storage_class),
+    string        = make_syn_with_bg(H.syntax.string),
+    type          = convert(70, 100, H.syntax.typedef - 20),
+    typedef       = convert(50, 100, H.syntax.typedef),
+    underlined    = convert(50, 100, H.syntax.underlined),
   },
 
   terminal_colors_light = {
@@ -284,11 +301,38 @@ local highlights_light = {
   -- syntax groups *group-name* {{{2
   Comment       = { fg = palette.syntax.comment },
 
-  String        = { fg = palette.syntax.string.fg,          bg = palette.syntax.string.bg },
-  Character     = { fg = palette.syntax.character.fg,       bg = palette.syntax.character.bg },
-  Number        = { fg = palette.syntax.number.fg,          bg = palette.syntax.number.bg },
-  Boolean       = { fg = palette.syntax.boolean.fg,         bg = palette.syntax.boolean.bg },
-  Float         = { fg = palette.syntax.float.fg,           bg = palette.syntax.float.bg },
+  String        = palette.syntax.string,
+  Character     = palette.syntax.character,
+  Number        = palette.syntax.number,
+  Boolean       = palette.syntax.boolean,
+  Float         = palette.syntax.float,
+
+  Identifier    = { fg = palette.syntax.identifier },
+  Function      = { fg = palette.syntax["function"] },
+
+  Statement     = { fg = palette.syntax.statement,                                                    bold = true },
+  Operator      = { fg = palette.syntax.statement },
+
+  PreProc       = { fg = palette.syntax["function"],                                                  bold = true },
+
+  Type          = { fg = palette.syntax.type },
+  StorageClass  = { fg = palette.syntax.storage_class },
+  Structure     = { fg = modify_l(palette.syntax.typedef, 10) },
+  Typedef       = { fg = palette.syntax.typedef },
+
+  Special       = { fg = palette.syntax.special },
+  SpecialChar   = { fg = palette.syntax.special,            bg = palette.syntax.string.bg },
+  Delimiter     = { link = "Special" },
+
+  Underlined    = { fg = palette.syntax.underlined,                                                   underline = true, sp = palette.syntax.underlined },
+
+  Error         = { fg = palette.neutral.max,               bg = palette.diagnostics.error },
+
+  Todo          = {                                                                                   bold = true },
+
+  Added         = { fg = palette.diff.add.strong },
+  Changed       = { fg = palette.diff.change.strong },
+  Removed       = { fg = palette.diff.delete.strong },
 }
 --stylua: ignore end
 
@@ -507,18 +551,15 @@ local function color_highlight_preview_lines(
 
     local contrast = get_highlight_contrast_ratio(hl, normal)
     if contrast < 7 then
-      table.insert(
-        diagnostics,
-        {
-          lnum = line_index,
-          col = 31,
-          end_col = 34,
-          severity = vim.diagnostic.severity.W,
-          message = "Contrast is below 7.",
-          source = "color-tool",
-          code = "below-7",
-        }
-      )
+      table.insert(diagnostics, {
+        lnum = line_index,
+        col = 31,
+        end_col = 34,
+        severity = vim.diagnostic.severity.W,
+        message = "Contrast is below 7.",
+        source = "color-tool",
+        code = "below-7",
+      })
     end
   end
 end
