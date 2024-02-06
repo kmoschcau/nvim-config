@@ -28,6 +28,7 @@ local hues = {
   green = 150,
   teal = 180,
   cyan = 195,
+  seafoam = 220,
   blue = 240,
   grey = 270,
   purple = 300,
@@ -54,6 +55,9 @@ local H = {
   diagnostics = {
     error = hues.red,
     warn = hues.orange,
+    info = hues.blue,
+    hint = hues.cyan,
+    ok = hues.green,
   },
   spell = {
     bad = hues.red,
@@ -63,17 +67,25 @@ local H = {
   },
   syntax = {
     boolean = hues.orange,
+    ["coroutine"] = hues.yellow,
     directory = hues.blue,
+    doc_comment = hues.blue,
     ["function"] = hues.teal,
     identifier = hues.green,
-    namespace = hues.brown,
+    literal = hues.blue,
+    member = hues.blue,
+    metaprogramming = hues.purple,
+    module = hues.brown,
     number = hues.blue,
+    property = hues.seafoam,
     special = hues.red,
     statement = hues.orange,
     storage_class = hues.yellow,
     string = hues.green,
-    typedef = hues.green,
+    structure = hues.green,
+    typedef = hues.green, -- FIXME: think of a better hue for typedef and types
     underlined = hues.blue,
+    variable = hues.yellow - 10,
   },
 }
 
@@ -83,10 +95,6 @@ local function convert(l, c, h, opts)
   return colors.convert({ l = l, c = c, h = h }, "hex", {
     gamut_clip = opts and opts.gamut_clip or "chroma",
   })
-end
-
-local function make_syn(hue)
-  return convert(60, 100, hue)
 end
 
 local function make_syn_with_bg(hue)
@@ -155,6 +163,17 @@ local palette = {
   diagnostics = {
     error = convert(50, 100, H.diagnostics.error),
     warn  = convert(50, 100, H.diagnostics.warn),
+    info  = convert(50, 100, H.diagnostics.info),
+    hint  = convert(50, 100, H.diagnostics.hint),
+    ok    = convert(50, 100, H.diagnostics.ok),
+  },
+
+  lsp = {
+    reference = {
+      text  = convert(90, 3, hues.yellow),
+      read  = convert(90, 3, hues.green),
+      write = convert(90, 3, hues.blue),
+    },
   },
 
   spell = {
@@ -171,21 +190,31 @@ local palette = {
   },
 
   syntax = {
-    boolean       = make_syn_with_bg(H.syntax.boolean),
-    character     = make_syn_with_bg(H.syntax.string - 20),
-    comment       = convert(60,   0, H.neutral),
-    directory     = make_syn(H.syntax.directory),
-    float         = make_syn_with_bg(H.syntax.number + 20),
-    ["function"]  = convert(60, 100, H.syntax["function"]),
-    identifier    = convert(70,  10, H.syntax.identifier),
-    number        = make_syn_with_bg(H.syntax.number),
-    special       = convert(55,  20, H.syntax.special),
-    statement     = convert(70, 100, H.syntax.statement),
-    storage_class = convert(80, 100, H.syntax.storage_class),
-    string        = make_syn_with_bg(H.syntax.string),
-    type          = convert(70, 100, H.syntax.typedef - 20),
-    typedef       = convert(50, 100, H.syntax.typedef),
-    underlined    = convert(50, 100, H.syntax.underlined),
+    boolean         = make_syn_with_bg(H.syntax.boolean),
+    character       = make_syn_with_bg(H.syntax.string - 20),
+    comment         = convert(60,   0, H.neutral),
+    ["coroutine"]   = convert(70, 100, H.syntax["coroutine"]),
+    directory       = convert(60, 100, H.syntax.directory),
+    doc_comment     = convert(50,   5, H.syntax.doc_comment),
+    float           = make_syn_with_bg(H.syntax.number + 20),
+    ["function"]    = convert(60, 100, H.syntax["function"]),
+    identifier      = convert(70,  10, H.syntax.identifier),
+    literal         = make_syn_with_bg(nil),
+    member          = convert(60, 100, H.syntax.member),
+    metaprogramming = convert(60, 100, H.syntax.metaprogramming),
+    module          = convert(70, 100, H.syntax.module),
+    number          = make_syn_with_bg(H.syntax.number),
+    parameter       = convert(70, 100, H.syntax.variable - 10),
+    property        = convert(70, 100, H.syntax.property),
+    special         = convert(55,  20, H.syntax.special),
+    statement       = convert(70, 100, H.syntax.statement),
+    storage_class   = convert(80, 100, H.syntax.storage_class),
+    string          = make_syn_with_bg(H.syntax.string),
+    structure       = convert(50, 100, H.syntax.structure),
+    type            = convert(70, 100, H.syntax.typedef - 20),
+    typedef         = convert(60, 100, H.syntax.typedef),
+    underlined      = convert(50, 100, H.syntax.underlined),
+    variable        = convert(80, 100, H.syntax.variable),
   },
 
   terminal_colors_light = {
@@ -298,9 +327,37 @@ local highlights_light = {
   WinBar        = { link = "StatusLine" },
   WinBarNC      = { link = "StatusLineNC" },
 
+  -- diagnostics *diagnostic-highlights* {{{2
+
+  DiagnosticError = { fg = palette.diagnostics.error },
+  DiagnosticWarn  = { fg = palette.diagnostics.warn },
+  DiagnosticInfo  = { fg = palette.diagnostics.info },
+  DiagnosticHint  = { fg = palette.diagnostics.hint },
+  DiagnosticOk    = { fg = palette.diagnostics.ok },
+
+  DiagnosticUnderlineError = { underline = true, sp = palette.diagnostics.error },
+  DiagnosticUnderlineWarn  = { underline = true, sp = palette.diagnostics.warn },
+  DiagnosticUnderlineInfo  = { underline = true, sp = palette.diagnostics.info },
+  DiagnosticUnderlineHint  = { underline = true, sp = palette.diagnostics.hint },
+  DiagnosticUnderlineOk    = { underline = true, sp = palette.diagnostics.ok },
+
+  -- LSP highlights *lsp-highlight* {{{2
+
+  LspReferenceText  = { bg = palette.lsp.reference.text },
+  LspReferenceRead  = { bg = palette.lsp.reference.read },
+  LspReferenceWrite = { bg = palette.lsp.reference.write },
+
+  LspInlayHint = { fg = palette.neutral.mid_light, bg = palette.neutral.lighter },
+
+  LspCodeLens          = { link = "Comment" },
+  LspCodeLensSeparator = { link = "LspCodeLens" },
+
+  LspSignatureActiveParameter = { link = "Search" },
+
   -- syntax groups *group-name* {{{2
   Comment       = { fg = palette.syntax.comment },
 
+  Constant      = palette.syntax.literal,
   String        = palette.syntax.string,
   Character     = palette.syntax.character,
   Number        = palette.syntax.number,
@@ -313,11 +370,11 @@ local highlights_light = {
   Statement     = { fg = palette.syntax.statement, bold = true },
   Operator      = { fg = palette.syntax.statement },
 
-  PreProc       = { fg = palette.syntax["function"], bold = true },
+  PreProc       = { fg = palette.syntax.metaprogramming, bold = true },
 
   Type          = { fg = palette.syntax.type },
   StorageClass  = { fg = palette.syntax.storage_class },
-  Structure     = { fg = modify_l(palette.syntax.typedef, 10) },
+  Structure     = { fg = palette.syntax.structure },
   Typedef       = { fg = palette.syntax.typedef },
 
   Special       = { fg = palette.syntax.special },
@@ -333,6 +390,73 @@ local highlights_light = {
   Added         = { fg = palette.diff.add.strong },
   Changed       = { fg = palette.diff.change.strong },
   Removed       = { fg = palette.diff.delete.strong },
+
+  -- command line expressions *expr-highlight* {{{2
+  -- TODO
+
+  -- treesitter groups *treesitter-highlight-groups* {{{2
+  ["@variable"]                    = { fg = palette.syntax.variable, italic = true },
+  ["@variable.builtin"]            = { fg = palette.syntax.special, italic = true },
+  ["@variable.parameter"]          = { fg = palette.syntax.parameter, italic = true },
+  ["@variable.member"]             = { fg = palette.syntax.member, italic = true },
+
+  ["@constant"]                    = { fg = palette.syntax.variable },
+  ["@constant.builtin"]            = { link = "Constant" },
+
+  ["@module"]                      = { fg = palette.syntax.module },
+
+  ["@string.documenation"]         = { fg = palette.syntax.doc_comment, bg = palette.syntax.string.bg },
+  ["@string.regexp"]               = { link = "SpecialChar" },
+  ["@string.escape"]               = { link = "SpecialChar" },
+  ["@string.special"]              = { link = "SpecialChar" },
+  ["@string.special.symbol"]       = { link = "SpecialChar" },
+  ["@string.special.path"]         = { link = "SpecialChar" },
+
+  ["@character"]                   = { link = "Character" },
+  ["@character.special"]           = { fg = palette.syntax.special, bg = palette.syntax.character.bg },
+
+  ["@boolean"]                     = { link = "Boolean" },
+  ["@number"]                      = { link = "Number" },
+  ["@number.float"]                = { link = "Float" },
+
+  ["@type"]                        = { link = "Structure" },
+  ["@type.builtin"]                = { link = "Type" },
+  ["@type.definition"]             = { link = "Typedef" },
+  ["@type.qualifier"]              = { link = "Statement" },
+
+  ["@attribute"]                   = { fg = palette.syntax.metaprogramming },
+  ["@property"]                    = { fg = palette.syntax.property, italic = true },
+
+  ["@keyword.coroutine"]           = { fg = palette.syntax["coroutine"], bold = true },
+  ["@keyword.function"]            = { fg = palette.syntax["function"], bold = true },
+  ["@keyword.operator"]            = { link = "Operator" },
+  ["@keyword.import"]              = { fg = palette.syntax.module, bold = true },
+  ["@keyword.storage"]             = { link = "StorageClass" },
+  ["@keyword.repeat"]              = { link = "Repeat" },
+  ["@keyword.exception"]           = { link = "Exception" },
+
+  ["@keyword.conditional"]         = { link = "Conditional" },
+  ["@keyword.conditional.ternary"] = { link = "Operator" },
+
+  ["@keyword.directive"]           = { link = "PreProc" },
+  ["@keyword.directive.define"]    = { link = "Define" },
+
+  ["@comment.documentation"]       = { fg = palette.syntax.doc_comment },
+
+  ["@tag"]                         = { fg = palette.syntax.statement, bold = true },
+  ["@tag.attribute"]               = { link = "@property" },
+  ["@tag.delimiter"]               = { link = "Delimiter" },
+
+  -- LSP semantic highlight *lsp-semantic-highlight* {{{2
+  ["@lsp.type.decorator"]  = { link = "@attribute" },
+  ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
+  ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg }, -- TODO
+  ["@lsp.type.interface"]  = { link = "@attribute" },
+  ["@lsp.type.namespace"]  = { link = "@module" },
+  ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
+  ["@lsp.type.property"]   = { link = "@property" },
+  ["@lsp.type.variable"]   = { link = "@variable" },
+  -- }}}2
 }
 --stylua: ignore end
 
@@ -424,7 +548,7 @@ local function insert_highlight_preview_header(lines)
   table.insert(
     lines,
     string.format(
-      "%4s %-20s %-8s %7s %7s %7s %7s %7s %5s %s",
+      "%4s %-30s %-8s %7s %7s %7s %7s %7s %5s %s",
       "Demo",
       "Name",
       "Contrast",
@@ -468,11 +592,11 @@ local function insert_highlight_preview_lines(lines, hls)
     local hl = hls[key]
 
     if hl.link then
-      table.insert(lines, string.format("XXX  %-20s -> %s", key, hl.link))
+      table.insert(lines, string.format("XXX  %-30s -> %s", key, hl.link))
     else
       table.insert(lines, (string
         .format(
-          "XXX  %-20s %8.1f %7s %7s %7s %7s %7s %5d %s",
+          "XXX  %-30s %8.1f %7s %7s %7s %7s %7s %5d %s",
           key,
           get_highlight_contrast_ratio(hl, hls.Normal),
           hl.fg or "",
@@ -541,25 +665,33 @@ local function color_highlight_preview_lines(
     local hl = hls[key]
     local line_index = start_after_line + index
 
+    --- @type vim.api.keyset.highlight | nil
     local spec
     if hl.link then
-      spec = vim.tbl_extend("keep", hls[hl.link], normal)
+      local link_target = hls[hl.link]
+      if link_target then
+        spec = vim.tbl_extend("keep", link_target, normal)
+      else
+        spec = nil
+      end
     else
       spec = vim.tbl_extend("keep", hl, normal)
     end
-    color_preview(name, spec, ext_ns, line_index)
+    if spec then
+      color_preview(name, spec, ext_ns, line_index)
 
-    local contrast = get_highlight_contrast_ratio(hl, normal)
-    if contrast < 7 then
-      table.insert(diagnostics, {
-        lnum = line_index,
-        col = 31,
-        end_col = 34,
-        severity = vim.diagnostic.severity.W,
-        message = "Contrast is below 7.",
-        source = "color-tool",
-        code = "below-7",
-      })
+      local contrast = get_highlight_contrast_ratio(spec, normal)
+      if contrast < 7 then
+        table.insert(diagnostics, {
+          lnum = line_index,
+          col = 41,
+          end_col = 44,
+          severity = vim.diagnostic.severity.W,
+          message = "Contrast is below 7.",
+          source = "color-tool",
+          code = "below-7",
+        })
+      end
     end
   end
 end
