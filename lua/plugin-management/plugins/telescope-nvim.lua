@@ -17,7 +17,7 @@ return {
       desc = "Open telescope file search.",
     },
     {
-      vim.fn.has("mac") == 1 and "<C-/>" or "<C-_>",
+      vim.fn.has "mac" == 1 and "<C-/>" or "<C-_>",
       function()
         require("telescope.builtin").live_grep()
       end,
@@ -56,6 +56,16 @@ return {
             ["<C-x>"] = false,
             ["<C-s>"] = actions.select_horizontal,
           },
+        },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--engine=auto",
         },
       },
       pickers = {
