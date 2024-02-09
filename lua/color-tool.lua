@@ -788,6 +788,12 @@ local function create_preview_buffer()
   )
 
   vim.diagnostic.set(diag_ns, 0, diagnostics)
+
+  vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
+    buffer = true,
+    silent = true,
+    desc = "Reload the preview buffer.",
+  })
 end
 
 if show_preview_buffer then
