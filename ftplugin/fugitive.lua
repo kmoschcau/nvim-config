@@ -11,5 +11,17 @@ vim.opt_local.colorcolumn = "+2"
 vim.keymap.set("n", "CC", "<Cmd>G commit --no-verify<CR>", {
   buffer = true,
   silent = true,
-  desc = "Commit without git hooks."
+  desc = "Create a commit without running hooks.",
+})
+
+vim.keymap.set("n", "CA", "<Cmd>G commit --amend --no-verify<CR>", {
+  buffer = true,
+  silent = true,
+  desc = "Amend the last commit and edit the message without running hooks.",
+})
+
+vim.keymap.set("n", "CE", "<Cmd>G commit --amend --no-edit --no-verify<CR>", {
+  buffer = true,
+  silent = true,
+  desc = "Amend the last commit without editing the message without running hooks.",
 })
