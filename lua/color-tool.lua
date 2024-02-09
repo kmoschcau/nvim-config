@@ -10,15 +10,17 @@ if not success then
   return
 end
 
+local THEME_NAME = "new"
+
 -- WHETHER TO OPEN A BUFFER WITH DATA
-local show_preview_buffer = true
+local SHOW_PREVIEW_BUFFER = true
 
 -- WHETHER TO WRITE CONFIGURATION FILES FOR THE SCHEME
-local write_colorscheme = true
+local WRITE_COLORSCHEME = true
 
 -- Hyperparameters {{{1
 
-local hues = {
+local HUES = {
   pink = 0,
   red = 25,
   amber = 60,
@@ -39,53 +41,59 @@ local hues = {
 --- These are not just hue constants, but associations of semantic objects to
 --- hues.
 local H = {
-  neutral = hues.grey,
-  interact = hues.cyan,
-  insert = hues.blue,
-  replace = hues.amber,
-  modified = hues.purple,
-  search = hues.yellow,
-  messages = hues.green,
+  neutral = HUES.grey,
+  interact = HUES.cyan,
+  modified = HUES.purple,
+  search = HUES.yellow,
+  messages = HUES.green,
+  modes = {
+    insert = HUES.blue,
+    replace = HUES.amber,
+    visual = HUES.cyan,
+  },
   diff = {
-    add = hues.green,
-    change = hues.orange,
-    delete = hues.red,
-    text = hues.amber,
+    add = HUES.green,
+    change = HUES.orange,
+    delete = HUES.red,
+    text = HUES.amber,
   },
   diagnostics = {
-    error = hues.red,
-    warn = hues.orange,
-    info = hues.blue,
-    hint = hues.cyan,
-    ok = hues.green,
+    error = HUES.red,
+    warn = HUES.orange,
+    info = HUES.blue,
+    hint = HUES.cyan,
+    ok = HUES.green,
+    debug = HUES.grey,
+    trace = HUES.purple,
   },
   spell = {
-    bad = hues.red,
-    cap = hues.yellow,
-    loc = hues.green,
-    rare = hues.cyan,
+    bad = HUES.red,
+    cap = HUES.yellow,
+    loc = HUES.green,
+    rare = HUES.cyan,
   },
   syntax = {
-    boolean = hues.orange,
-    ["coroutine"] = hues.yellow,
-    directory = hues.blue,
-    doc_comment = hues.blue,
-    ["function"] = hues.teal,
-    identifier = hues.green,
-    literal = hues.blue,
-    member = hues.blue,
-    metaprogramming = hues.purple,
-    module = hues.brown,
-    number = hues.blue,
-    property = hues.seafoam,
-    special = hues.red,
-    statement = hues.orange,
-    storage_class = hues.yellow,
-    string = hues.green,
-    structure = hues.green,
-    typedef = hues.green, -- FIXME: think of a better hue for typedef and types
-    underlined = hues.blue,
-    variable = hues.yellow - 10,
+    boolean = HUES.orange,
+    ["coroutine"] = HUES.yellow,
+    directory = HUES.blue,
+    doc_comment = HUES.blue,
+    enum = HUES.blue,
+    ["function"] = HUES.teal,
+    identifier = HUES.green,
+    literal = HUES.blue,
+    member = HUES.blue,
+    metaprogramming = HUES.purple,
+    module = HUES.brown,
+    number = HUES.blue,
+    property = HUES.seafoam,
+    special = HUES.red,
+    statement = HUES.orange,
+    storage_class = HUES.yellow,
+    string = HUES.green,
+    structure = HUES.green,
+    typedef = HUES.green, -- FIXME: think of a better hue for typedef and types
+    underlined = HUES.blue,
+    variable = HUES.yellow - 10,
   },
 }
 
@@ -134,12 +142,21 @@ local palette = {
     statusline = {
       current = convert(70, 100, H.interact),
     },
+    modes = {
+      insert  = convert(50, 100, H.modes.insert),
+      replace = convert(50, 100, H.modes.replace),
+      visual  = convert(50, 100, H.modes.visual),
+    },
   },
 
   search = {
     inc     = convert(85, 100, H.search),
     current = convert(90,   7, H.search),
     search  = convert(90,  10, H.search),
+  },
+
+  status = {
+    modified = convert(50, 100, H.modified),
   },
 
   diff = {
@@ -166,13 +183,15 @@ local palette = {
     info  = convert(50, 100, H.diagnostics.info),
     hint  = convert(50, 100, H.diagnostics.hint),
     ok    = convert(50, 100, H.diagnostics.ok),
+    debug = convert(50,   0, H.diagnostics.debug),
+    trace = convert(50, 100, H.diagnostics.trace),
   },
 
   lsp = {
     reference = {
-      text  = convert(90, 3, hues.yellow),
-      read  = convert(90, 3, hues.green),
-      write = convert(90, 3, hues.blue),
+      text  = convert(90, 3, HUES.yellow),
+      read  = convert(90, 3, HUES.green),
+      write = convert(90, 3, HUES.blue),
     },
   },
 
@@ -196,13 +215,16 @@ local palette = {
     ["coroutine"]   = convert(70, 100, H.syntax["coroutine"]),
     directory       = convert(60, 100, H.syntax.directory),
     doc_comment     = convert(50,   5, H.syntax.doc_comment),
+    enum            = convert(50, 100, H.syntax.enum),
+    enum_member     = convert(50, 100, H.syntax.enum),
+    event           = convert(50, 100, H.syntax["coroutine"]),
     float           = make_syn_with_bg(H.syntax.number + 20),
     ["function"]    = convert(60, 100, H.syntax["function"]),
     identifier      = convert(70,  10, H.syntax.identifier),
     literal         = make_syn_with_bg(nil),
     member          = convert(60, 100, H.syntax.member),
     metaprogramming = convert(60, 100, H.syntax.metaprogramming),
-    module          = convert(70, 100, H.syntax.module),
+    module          = convert(30, 100, H.syntax.module),
     number          = make_syn_with_bg(H.syntax.number),
     parameter       = convert(70, 100, H.syntax.variable - 10),
     property        = convert(70, 100, H.syntax.property),
@@ -210,7 +232,7 @@ local palette = {
     statement       = convert(70, 100, H.syntax.statement),
     storage_class   = convert(80, 100, H.syntax.storage_class),
     string          = make_syn_with_bg(H.syntax.string),
-    structure       = convert(50, 100, H.syntax.structure),
+    structure       = convert(40, 100, H.syntax.structure),
     type            = convert(70, 100, H.syntax.typedef - 20),
     typedef         = convert(60, 100, H.syntax.typedef),
     underlined      = convert(50, 100, H.syntax.underlined),
@@ -258,8 +280,23 @@ local palette = {
 
 -- Highlights {{{1
 
-local status_col_fg = palette.neutral.mid_strong
-local status_col_bg = palette.neutral.half_light
+--stylua: ignore
+local framing = {
+  current = {
+    normal = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true }
+  },
+  neutral = {
+    a = { fg = palette.neutral.darkest, bg = palette.neutral.mid_light },
+    b = { fg = palette.neutral.mid_strong, bg = palette.neutral.half_light },
+    c = { fg = palette.neutral.lightest, bg = palette.neutral.mid_strong },
+  },
+}
+
+local function invert_l(val)
+  return colors.modify_channel(val, "lightness", function(l)
+    return 100 - l
+  end, { gamut_clip = "lightness" })
+end
 
 local function modify_l(val, L)
   return colors.modify_channel(val, "lightness", function(l)
@@ -277,7 +314,7 @@ local highlights_light = {
   CurSearch     = { bg = palette.search.current },
   Cursor        = { bg = palette.interact.cursor.normal },
   lCursor       = { link = "Cursor" },
-  CursorColumn  = { bg = palette.interact.cursor.markers },
+  CursorColumn  = { link = "CursorLine" },
   CursorLine    = { bg = palette.interact.cursor.markers },
   Directory     = { fg = palette.syntax.directory, bold = true },
   DiffAdd       = { bg = palette.diff.add.light },
@@ -287,39 +324,39 @@ local highlights_light = {
   TermCursor    = { link = "Cursor" },
   TermCursorNC  = { bg = palette.interact.cursor.non_current },
   ErrorMsg      = { fg = palette.diagnostics.error },
-  WinSeparator  = { fg = palette.neutral.mid_strong, bg = palette.neutral.mid_strong },
+  WinSeparator  = { fg = framing.neutral.c.bg, bg = framing.neutral.c.bg },
   Folded        = { fg = palette.neutral.mid_light, bg = palette.neutral.lighter },
-  SignColumn    = { fg = status_col_fg, bg = status_col_bg },
+  SignColumn    = { link = "LineNr" },
   IncSearch     = { bg = palette.search.inc },
-  LineNr        = { fg = status_col_fg, bg = status_col_bg },
-  LineNrAbove   = { fg = modify_l(status_col_fg, 5), bg = modify_l(status_col_bg, 5) },
-  LineNrBelow   = { fg = modify_l(status_col_fg, -5), bg = modify_l(status_col_bg, -5) },
-  CursorLineNr  = { fg = status_col_fg, bg = palette.interact.cursor.markers },
-  MatchParen    = { bg = palette.interact.cursor.markers },
+  LineNr        = framing.neutral.b,
+  LineNrAbove   = { fg = modify_l(framing.neutral.b.fg, 5), bg = modify_l(framing.neutral.b.bg, 5) },
+  LineNrBelow   = { fg = modify_l(framing.neutral.b.fg, -5), bg = modify_l(framing.neutral.b.bg, -5) },
+  CursorLineNr  = { fg = framing.neutral.b.fg, bg = palette.interact.cursor.markers },
+  MatchParen    = { link = "CursorLine" },
   ModeMsg       = { fg = palette.messages.mode },
-  MsgSeparator  = { bg = palette.neutral.mid_strong },
+  MsgSeparator  = { link = "StatusLineNC" },
   MoreMsg       = { fg = palette.messages.more },
   NonText       = { fg = palette.neutral.light },
   Normal        = { fg = palette.neutral.strongest, bg = palette.neutral.lightest },
   NormalFloat   = { bg = palette.neutral.max },
-  Pmenu         = { bg = palette.neutral.max },
-  PmenuSel      = { bg = palette.interact.cursor.markers },
+  Pmenu         = { link = "NormalFloat" },
+  PmenuSel      = { link = "CursorLine" },
   PmenuKindSel  = { link = "Pmenu" },
   PmenuExtraSel = { link = "Pmenu" },
   PmenuSbar     = { bg = palette.neutral.lighter_still },
   PmenuThumb    = { bg = palette.neutral.mid },
   Question      = { fg = palette.messages.more },
-  QuickFixLine  = { bg = palette.interact.cursor.markers },
+  QuickFixLine  = { link = "CursorLine" },
   Search        = { bg = palette.search.search },
   SpecialKey    = { fg = palette.neutral.strong, bg = palette.neutral.lighter, italic = true },
   SpellBad      = { undercurl = true, sp = palette.spell.bad },
   SpellCap      = { undercurl = true, sp = palette.spell.cap },
   SpellLocal    = { undercurl = true, sp = palette.spell.loc },
   SpellRare     = { undercurl = true, sp = palette.spell.rare },
-  StatusLine    = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true },
-  StatusLineNC  = { fg = palette.neutral.lightest, bg = palette.neutral.mid_strong },
-  TabLine       = { fg = palette.neutral.lightest, bg = palette.neutral.half_light },
-  TabLineFill   = { bg = palette.neutral.mid_strong },
+  StatusLine    = framing.current.normal,
+  StatusLineNC  = framing.neutral.c,
+  TabLine       = { link = "LineNr" },
+  TabLineFill   = { link = "StatusLineNC" },
   TabLineSel    = { link = "Normal" },
   Title         = { bold = true },
   Visual        = { bg = palette.interact.cursor.visual },
@@ -340,6 +377,14 @@ local highlights_light = {
   DiagnosticUnderlineInfo  = { underline = true, sp = palette.diagnostics.info },
   DiagnosticUnderlineHint  = { underline = true, sp = palette.diagnostics.hint },
   DiagnosticUnderlineOk    = { underline = true, sp = palette.diagnostics.ok },
+
+  DiagnosticSignError = { fg = palette.diagnostics.error, bg = framing.neutral.b.bg },
+  DiagnosticSignWarn  = { fg = palette.diagnostics.warn, bg = framing.neutral.b.bg },
+  DiagnosticSignInfo  = { fg = palette.diagnostics.info, bg = framing.neutral.b.bg },
+  DiagnosticSignHint  = { fg = palette.diagnostics.hint, bg = framing.neutral.b.bg },
+  DiagnosticSignOk    = { fg = palette.diagnostics.ok, bg = framing.neutral.b.bg },
+
+  DiagnosticDeprecated = { strikethrough = true, sp = palette.syntax.comment },
 
   -- LSP highlights *lsp-highlight* {{{2
 
@@ -400,7 +445,7 @@ local highlights_light = {
   ["@variable.parameter"]          = { fg = palette.syntax.parameter, italic = true },
   ["@variable.member"]             = { fg = palette.syntax.member, italic = true },
 
-  ["@constant"]                    = { fg = palette.syntax.variable },
+  ["@constant"]                    = { fg = palette.syntax.variable, italic = false, nocombine = true },
   ["@constant.builtin"]            = { link = "Constant" },
 
   ["@module"]                      = { fg = palette.syntax.module },
@@ -426,6 +471,8 @@ local highlights_light = {
 
   ["@attribute"]                   = { fg = palette.syntax.metaprogramming },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
+
+  ["@constructor"]                 = { fg = palette.syntax["function"] },
 
   ["@keyword.coroutine"]           = { fg = palette.syntax["coroutine"], bold = true },
   ["@keyword.function"]            = { fg = palette.syntax["function"], bold = true },
@@ -456,18 +503,78 @@ local highlights_light = {
   ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
   ["@lsp.type.property"]   = { link = "@property" },
   ["@lsp.type.variable"]   = { link = "@variable" },
+
+  -- Plugins {{{2
+  -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{3
+  GitSignsAdd    = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  GitSignsChange = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  GitSignsDelete = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
+
+  -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{3
+  LualineInactiveA    = framing.neutral.a,
+  LualineInsert       = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert },
+  LualineReplace      = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace },
+  LualineVisual       = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual },
+  LualineModified     = { fg = framing.current.normal.fg, bg = palette.status.modified },
+  LualineLazyPackages = { fg = palette.syntax.module, bg = framing.neutral.b.bg },
+
+  -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{3
+  NavicIconsArray         = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsBoolean       = { fg = invert_l(palette.syntax.boolean.fg), bg = framing.neutral.c.bg },
+  NavicIconsClass         = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsConstant      = { fg = invert_l(palette.syntax.variable), bg = framing.neutral.c.bg },
+  NavicIconsConstructor   = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsEnum          = { fg = invert_l(palette.syntax.enum), bg = framing.neutral.c.bg },
+  NavicIconsEnumMember    = { fg = invert_l(palette.syntax.enum_member), bg = framing.neutral.c.bg },
+  NavicIconsEvent         = { fg = invert_l(palette.syntax.event), bg = framing.neutral.c.bg },
+  NavicIconsField         = { fg = invert_l(palette.syntax.member), bg = framing.neutral.c.bg },
+  NavicIconsFile          = { link = "StatusLineNC" },
+  NavicIconsFunction      = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsInterface     = { fg = invert_l(palette.syntax.metaprogramming), bg = framing.neutral.c.bg },
+  NavicIconsKey           = { fg = invert_l(palette.syntax.property), bg = framing.neutral.c.bg },
+  NavicIconsMethod        = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsModule        = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsNamespace     = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsNull          = { fg = invert_l(palette.syntax.literal.fg), bg = framing.neutral.c.bg },
+  NavicIconsNumber        = { fg = invert_l(palette.syntax.number.fg), bg = framing.neutral.c.bg },
+  NavicIconsObject        = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsOperator      = { fg = invert_l(palette.syntax.statement), bg = framing.neutral.c.bg },
+  NavicIconsPackage       = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsProperty      = { fg = invert_l(palette.syntax.property), bg = framing.neutral.c.bg },
+  NavicIconsString        = { fg = invert_l(palette.syntax.string.fg), bg = framing.neutral.c.bg },
+  NavicIconsStruct        = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
+  -- NavicIconsTypeParameter = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsVariable      = { fg = invert_l(palette.syntax.variable), bg = framing.neutral.c.bg, italic = true },
+  NavicSeparator          = { link = "StatusLineNC" },
+  NavicText               = { link = "StatusLineNC" },
+
+  -- nvim-notify | https://github.com/rcarriga/nvim-notify {{{3
+  NotifyDEBUGBorder = { fg = palette.diagnostics.debug },
+  NotifyDEBUGIcon   = { fg = palette.diagnostics.debug },
+  NotifyDEBUGTitle  = { fg = palette.diagnostics.debug },
+  NotifyERRORBorder = { link = "DiagnosticError" },
+  NotifyERRORIcon   = { link = "DiagnosticError" },
+  NotifyERRORTitle  = { link = "DiagnosticError" },
+  NotifyINFOBorder  = { link = "DiagnosticInfo" },
+  NotifyINFOIcon    = { link = "DiagnosticInfo" },
+  NotifyINFOTitle   = { link = "DiagnosticInfo" },
+  NotifyTRACEBorder = { fg = palette.diagnostics.trace },
+  NotifyTRACEIcon   = { fg = palette.diagnostics.trace },
+  NotifyTRACETitle  = { fg = palette.diagnostics.trace },
+  NotifyWARNBorder  = { link = "DiagnosticWarn" },
+  NotifyWARNIcon    = { link = "DiagnosticWarn" },
+  NotifyWARNTitle   = { link = "DiagnosticWarn" },
+
+  -- vim-illuminate | https://github.com/RRethy/vim-illuminate {{{3
+  IlluminatedWordText  = { link = "LspReferenceText" },
+  IlluminatedWordRead  = { link = "LspReferenceRead" },
+  IlluminatedWordWrite = { link = "LspReferenceWrite" },
   -- }}}2
 }
 --stylua: ignore end
 
 --- @param highlight vim.api.keyset.highlight
 local function invert_highlight(highlight)
-  local function invert_l(val)
-    return colors.modify_channel(val, "lightness", function(l)
-      return 100 - l
-    end, { gamut_clip = "lightness" })
-  end
-
   return vim.tbl_extend("force", highlight, {
     fg = highlight.fg and invert_l(highlight.fg) or nil,
     bg = highlight.bg and invert_l(highlight.bg) or nil,
@@ -789,6 +896,8 @@ local function create_preview_buffer()
 
   vim.diagnostic.set(diag_ns, 0, diagnostics)
 
+  vim.opt_local.wrap = false
+
   vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
     buffer = true,
     silent = true,
@@ -796,14 +905,15 @@ local function create_preview_buffer()
   })
 end
 
-if show_preview_buffer then
+if SHOW_PREVIEW_BUFFER then
   create_preview_buffer()
 end
 
 -- Highlight groups {{{1
 
 local function write_nvim_colors()
-  local file = io.open(vim.fn.stdpath "config" .. "/colors/new.lua", "w")
+  local file =
+    io.open(vim.fn.stdpath "config" .. "/colors/" .. THEME_NAME .. ".lua", "w")
   if not file then
     vim.notify("Could not open nvim color scheme file.", vim.log.levels.WARN)
     return
@@ -854,7 +964,49 @@ local function write_nvim_colors()
   file:close()
 end
 
+local function write_lualine_colors()
+  local file = io.open(
+    vim.fn.stdpath "config" .. "/lua/lualine/themes/" .. THEME_NAME .. ".lua",
+    "w"
+  )
+  if not file then
+    vim.notify("Could not open lualine theme file.", vim.log.levels.WARN)
+    return
+  end
+
+  local lines = {
+    "-- This is a theme generated by color-tool.lua",
+    "",
+    "return " .. vim.inspect {
+      normal = {
+        a = "StatusLine",
+        b = "TabLine",
+        c = "StatusLineNC",
+      },
+      insert = {
+        a = "LualineInsert",
+      },
+      replace = {
+        a = "LualineReplace",
+      },
+      visual = {
+        a = "LualineVisual",
+      },
+      command = {},
+      inactive = {
+        a = "LualineInactiveA",
+      },
+    },
+  }
+
+  file:write(table.concat(lines, "\n"))
+
+  file:flush()
+  file:close()
+end
+
 -- Comment this to not enable color scheme
-if write_colorscheme then
+if WRITE_COLORSCHEME then
   write_nvim_colors()
+  write_lualine_colors()
 end

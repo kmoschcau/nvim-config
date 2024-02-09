@@ -12,22 +12,6 @@ return {
     local vcs_shorten_width = 200
     local vcs_display_width = 120
 
-    local function create_diagnostics_component(severity)
-      return {
-        "diagnostics",
-        sources = { "nvim_diagnostic" },
-        sections = { severity },
-        separator = { left = separators.level1.right, right = "" },
-        diagnostics_color = {
-          error = "DiagnosticError",
-          warn = "DiagnosticWarn",
-          info = "DiagnosticInfo",
-          hint = "DiagnosticHint",
-        },
-        symbols = symbols.diagnostics.severities,
-      }
-    end
-
     local navic_component = {
       "navic",
       fmt = function(text)
@@ -46,8 +30,7 @@ return {
         newfile_status = true,
         symbols = symbols.files,
         color = function()
-          return vim.bo.modified and "Material_LualineModified"
-            or "Material_Lualine3"
+          return vim.bo.modified and "LualineModified" or "StatusLineNC"
         end,
       },
     }
@@ -56,12 +39,21 @@ return {
       {
         require("lazy.status").updates,
         cond = require("lazy.status").has_updates,
-        color = "Material_LualineLazyPackages",
+        color = "LualineLazyPackages",
       },
-      create_diagnostics_component "hint",
-      create_diagnostics_component "info",
-      create_diagnostics_component "warn",
-      create_diagnostics_component "error",
+      {
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        -- sections = { severity },
+        separator = { left = separators.level1.right, right = "" },
+        diagnostics_color = {
+          error = "DiagnosticSignError",
+          warn = "DiagnosticSignWarn",
+          info = "DiagnosticSignInfo",
+          hint = "DiagnosticSignHint",
+        },
+        symbols = symbols.diagnostics.severities,
+      },
     }
 
     local lualine_y = {
@@ -85,7 +77,7 @@ return {
 
     require("lualine").setup {
       options = {
-        theme = "material",
+        theme = vim.g.colors_name,
         component_separators = separators.level2,
         section_separators = separators.level1,
       },
@@ -95,11 +87,6 @@ return {
           {
             "diff",
             colored = true,
-            diff_color = {
-              added = "Material_VimDiffSignAdd",
-              modified = "Material_VimDiffSignChange",
-              removed = "Material_VimDiffSignDelete",
-            },
             symbols = symbols.git.lines,
             separator = { left = "", right = separators.level1.left },
             cond = function()
