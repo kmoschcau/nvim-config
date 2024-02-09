@@ -8,7 +8,7 @@
 -- have one column more at the beginning of a line.
 vim.opt_local.colorcolumn = "+2"
 
-vim.keymap.set("n", "CC", ":G commit --no-verify<CR>", {
+vim.keymap.set("n", "CC", "<Cmd>G commit --no-verify<CR>", {
   buffer = true,
   silent = true,
   desc = "Commit without git hooks."

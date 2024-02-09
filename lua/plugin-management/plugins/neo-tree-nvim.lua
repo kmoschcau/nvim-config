@@ -50,7 +50,7 @@ return {
   keys = {
     {
       "<C-n>",
-      ":Neotree toggle=true<CR>",
+      "<Cmd>Neotree toggle=true<CR>",
       desc = "Toggle the neo-tree window.",
       silent = true,
     },
