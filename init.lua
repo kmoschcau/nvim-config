@@ -3,7 +3,7 @@
 -- theme settings {{{1
 
 vim.o.background = require("system-compat").get_system_background()
-vim.cmd.colorscheme "material"
+vim.cmd.colorscheme "new"
 
 -- plugins and packages {{{1
 
