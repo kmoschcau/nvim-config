@@ -52,6 +52,7 @@ return {
       "jsonls",
       "lua_ls",
       "omnisharp",
+      "rust-analyzer",
       "stylelint-lsp",
       "svelte",
       "tailwindcss",
