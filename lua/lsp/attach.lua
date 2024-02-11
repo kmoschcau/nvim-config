@@ -179,17 +179,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
           vim.log.levels.DEBUG
         )
       else
-        vim.keymap.set("n", "<Space>f", function()
+        local format = function()
           vim.lsp.buf.format {
             async = true,
             filter = function(formatting_client)
               return not common.is_ignored_formatter(formatting_client.name)
             end,
           }
-        end, {
+        end
+
+        vim.keymap.set("n", "<Space>f", format, {
           buffer = args.buf,
           desc = "LSP: Format the current buffer.",
         })
+
+        if common.supports_method(client, "textDocument/rangeFormatting") then
+          vim.keymap.set("x", "<Space>f", format, {
+            buffer = args.buf,
+            desc = "LSP: Format the selected range.",
+          })
+        end
       end
     end
 
