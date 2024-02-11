@@ -66,10 +66,6 @@ return {
       -- nvim-treesitter/nvim-treesitter
       indent = {
         enable = true,
-        disable = {
-          "javascript",
-          "typescript",
-        },
       },
 
       -- andymass/vim-matchup
