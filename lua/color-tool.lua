@@ -896,6 +896,9 @@ local function create_preview_buffer()
 
   vim.diagnostic.set(diag_ns, 0, diagnostics)
 
+  vim.opt_local.bufhidden = "hide"
+  vim.opt_local.buftype = "nofile"
+  vim.opt_local.swapfile = false
   vim.opt_local.wrap = false
 
   vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
