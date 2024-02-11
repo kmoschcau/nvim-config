@@ -48,6 +48,7 @@ end) then
     { title = "init.lua" }
   )
 end
+vim.o.conceallevel = 2
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
