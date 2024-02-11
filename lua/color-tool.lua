@@ -107,8 +107,8 @@ end
 
 local function make_syn_with_bg(hue)
   return {
-    fg = convert(50, 100, hue),
-    bg = convert(95, 5, hue),
+    fg = convert(30, 100, hue),
+    bg = convert(90, 5, hue),
   }
 end
 
@@ -302,6 +302,12 @@ local function modify_l(val, L)
   return colors.modify_channel(val, "lightness", function(l)
     return l + L
   end, { gamut_clip = "lightness" })
+end
+
+--- Map a color to a dark background variant.
+--- @param val string|table|number|nil
+local function map_to_dark(val)
+  return modify_l(invert_l(val), 20)
 end
 
 --stylua: ignore start
@@ -519,32 +525,32 @@ local highlights_light = {
   LualineLazyPackages = { fg = palette.syntax.module, bg = framing.neutral.b.bg },
 
   -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{3
-  NavicIconsArray         = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
-  NavicIconsBoolean       = { fg = invert_l(palette.syntax.boolean.fg), bg = framing.neutral.c.bg },
-  NavicIconsClass         = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
-  NavicIconsConstant      = { fg = invert_l(palette.syntax.variable), bg = framing.neutral.c.bg },
-  NavicIconsConstructor   = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
-  NavicIconsEnum          = { fg = invert_l(palette.syntax.enum), bg = framing.neutral.c.bg },
-  NavicIconsEnumMember    = { fg = invert_l(palette.syntax.enum_member), bg = framing.neutral.c.bg },
-  NavicIconsEvent         = { fg = invert_l(palette.syntax.event), bg = framing.neutral.c.bg },
-  NavicIconsField         = { fg = invert_l(palette.syntax.member), bg = framing.neutral.c.bg },
+  NavicIconsArray         = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsBoolean       = { fg = map_to_dark(palette.syntax.boolean.fg), bg = framing.neutral.c.bg },
+  NavicIconsClass         = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsConstant      = { fg = map_to_dark(palette.syntax.variable), bg = framing.neutral.c.bg },
+  NavicIconsConstructor   = { fg = map_to_dark(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsEnum          = { fg = map_to_dark(palette.syntax.enum), bg = framing.neutral.c.bg },
+  NavicIconsEnumMember    = { fg = map_to_dark(palette.syntax.enum_member), bg = framing.neutral.c.bg },
+  NavicIconsEvent         = { fg = map_to_dark(palette.syntax.event), bg = framing.neutral.c.bg },
+  NavicIconsField         = { fg = map_to_dark(palette.syntax.member), bg = framing.neutral.c.bg },
   NavicIconsFile          = { link = "StatusLineNC" },
-  NavicIconsFunction      = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
-  NavicIconsInterface     = { fg = invert_l(palette.syntax.metaprogramming), bg = framing.neutral.c.bg },
-  NavicIconsKey           = { fg = invert_l(palette.syntax.property), bg = framing.neutral.c.bg },
-  NavicIconsMethod        = { fg = invert_l(palette.syntax["function"]), bg = framing.neutral.c.bg },
-  NavicIconsModule        = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
-  NavicIconsNamespace     = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
-  NavicIconsNull          = { fg = invert_l(palette.syntax.literal.fg), bg = framing.neutral.c.bg },
-  NavicIconsNumber        = { fg = invert_l(palette.syntax.number.fg), bg = framing.neutral.c.bg },
-  NavicIconsObject        = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
-  NavicIconsOperator      = { fg = invert_l(palette.syntax.statement), bg = framing.neutral.c.bg },
-  NavicIconsPackage       = { fg = invert_l(palette.syntax.module), bg = framing.neutral.c.bg },
-  NavicIconsProperty      = { fg = invert_l(palette.syntax.property), bg = framing.neutral.c.bg },
-  NavicIconsString        = { fg = invert_l(palette.syntax.string.fg), bg = framing.neutral.c.bg },
-  NavicIconsStruct        = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
-  -- NavicIconsTypeParameter = { fg = invert_l(palette.syntax.structure), bg = framing.neutral.c.bg },
-  NavicIconsVariable      = { fg = invert_l(palette.syntax.variable), bg = framing.neutral.c.bg, italic = true },
+  NavicIconsFunction      = { fg = map_to_dark(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsInterface     = { fg = map_to_dark(palette.syntax.metaprogramming), bg = framing.neutral.c.bg },
+  NavicIconsKey           = { fg = map_to_dark(palette.syntax.property), bg = framing.neutral.c.bg },
+  NavicIconsMethod        = { fg = map_to_dark(palette.syntax["function"]), bg = framing.neutral.c.bg },
+  NavicIconsModule        = { fg = map_to_dark(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsNamespace     = { fg = map_to_dark(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsNull          = { fg = map_to_dark(palette.syntax.literal.fg), bg = framing.neutral.c.bg },
+  NavicIconsNumber        = { fg = map_to_dark(palette.syntax.number.fg), bg = framing.neutral.c.bg },
+  NavicIconsObject        = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsOperator      = { fg = map_to_dark(palette.syntax.statement), bg = framing.neutral.c.bg },
+  NavicIconsPackage       = { fg = map_to_dark(palette.syntax.module), bg = framing.neutral.c.bg },
+  NavicIconsProperty      = { fg = map_to_dark(palette.syntax.property), bg = framing.neutral.c.bg },
+  NavicIconsString        = { fg = map_to_dark(palette.syntax.string.fg), bg = framing.neutral.c.bg },
+  NavicIconsStruct        = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
+  -- NavicIconsTypeParameter = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
+  NavicIconsVariable      = { fg = map_to_dark(palette.syntax.variable), bg = framing.neutral.c.bg, italic = true },
   NavicSeparator          = { link = "StatusLineNC" },
   NavicText               = { link = "StatusLineNC" },
 
@@ -573,11 +579,13 @@ local highlights_light = {
 }
 --stylua: ignore end
 
+--- Map a highlight group spec to a dark background version.
 --- @param highlight vim.api.keyset.highlight
-local function invert_highlight(highlight)
+--- @return vim.api.keyset.highlight
+local function map_hl_to_dark(highlight)
   return vim.tbl_extend("force", highlight, {
-    fg = highlight.fg and invert_l(highlight.fg) or nil,
-    bg = highlight.bg and invert_l(highlight.bg) or nil,
+    fg = highlight.fg and map_to_dark(highlight.fg) or nil,
+    bg = highlight.bg and map_to_dark(highlight.bg) or nil,
   })
 end
 
@@ -591,7 +599,7 @@ local highlights_dark_overrides = {
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark = vim.tbl_extend(
   "force",
-  vim.tbl_map(invert_highlight, highlights_light),
+  vim.tbl_map(map_hl_to_dark, highlights_light),
   highlights_dark_overrides
 )
 
