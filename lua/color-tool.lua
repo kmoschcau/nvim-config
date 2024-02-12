@@ -559,6 +559,14 @@ local highlights_light = {
   NavicSeparator          = { link = "StatusLineNC" },
   NavicText               = { link = "StatusLineNC" },
 
+  -- noice.nvim | https://github.com/folke/noice.nvim {{{3
+  NoiceCmdlineIcon              = { link = "DiagnosticInfo" },
+  NoiceCmdlineIconSearch        = { link = "DiagnosticWarn" },
+  NoiceCmdlinePopup             = { link = "NormalFloat" },
+  NoiceCmdlinePopupBorder       = { link = "FloatBorder" },
+  NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
+  NoiceCmdlinePopupTitle        = { link = "Title" },
+
   -- nvim-notify | https://github.com/rcarriga/nvim-notify {{{3
   NotifyDEBUGBorder = { fg = palette.diagnostics.debug },
   NotifyDEBUGIcon   = { fg = palette.diagnostics.debug },

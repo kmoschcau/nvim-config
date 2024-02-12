@@ -3,6 +3,7 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
+    "folke/noice.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-fzf-native.nvim",
     "piersolenski/telescope-import.nvim",
@@ -90,6 +91,7 @@ return {
 
     require("telescope").load_extension "fzf"
     require("telescope").load_extension "import"
+    require("telescope").load_extension "noice"
     -- require("telescope").load_extension "notify"
   end,
 }

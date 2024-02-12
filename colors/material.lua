@@ -1159,10 +1159,6 @@ highlight("DiffviewStatusAdded", { link = "Material_VimDiffSignAdd" })
 highlight("DiffviewStatusModified", { link = "Material_VimDiffSignChange" })
 highlight("DiffviewStatusDeleted", { link = "Material_VimDiffSignDelete" })
 
--- fidget | j-hui/fidget.nvim {{{3
-
-highlight("FidgetTask", { link = "Material_SynComment" })
-
 -- gitsigns | lewis6991/gitsigns.nvim {{{3
 
 highlight("GitSignsAdd", { link = "Material_VimDiffSignAdd" })
