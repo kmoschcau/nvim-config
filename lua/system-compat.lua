@@ -49,7 +49,8 @@ M.get_system_background = function()
       }, { text = true })
       :wait()
 
-    if result.code > 0 then
+    if result.code ~= 0 then
+      vim.notify('Calling "reg.exe" failed.', vim.log.levels.ERROR)
       return "dark"
     end
 
