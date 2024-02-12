@@ -15,7 +15,6 @@ return {
     local diagnostics = none_ls.builtins.diagnostics
     local formatting = none_ls.builtins.formatting
 
-    --- @type NeoconfNoneLs
     local config = require("neoconf").get(
       "none_ls",
       require("neoconf-schemas.none-ls").defaults

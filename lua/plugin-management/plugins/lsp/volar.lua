@@ -2,7 +2,6 @@ local common = require "lsp.common"
 local compat = require "system-compat"
 local lspconfig = require "lspconfig"
 
---- @type NeoconfLsp
 local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
 

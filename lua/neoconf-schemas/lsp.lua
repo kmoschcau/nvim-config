@@ -1,5 +1,4 @@
 return {
-  --- @class NeoconfLsp
   defaults = {
     --- Whether to use volar
     use_volar = false,

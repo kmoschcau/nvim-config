@@ -4,7 +4,6 @@ local pmd_default_dir = "$ROOT"
 local pmd_default_rulesets = "category/java/bestpractices.xml"
 
 return {
-  --- @class NeoconfNoneLs
   defaults = {
     --- Java specific options
     java = {

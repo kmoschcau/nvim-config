@@ -2,7 +2,6 @@ local common = require "lsp.common"
 
 local ts = common.settings.typescript
 
---- @type NeoconfLsp
 local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
 
