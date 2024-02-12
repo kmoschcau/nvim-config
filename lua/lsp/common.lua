@@ -155,6 +155,11 @@ M.log_capabilities = function(client, buf_id)
     return
   end
 
+  if not package.loaded["notify"] then
+    -- We shouldn't log overly verbose messages when notify isn't available.
+    return
+  end
+
   local buffer_name = vim.api.nvim_buf_get_name(buf_id or 0)
   local title = "Capabilities for " .. client.name .. " at " .. buffer_name
 
