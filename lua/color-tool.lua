@@ -505,6 +505,7 @@ local highlights_light = {
   ["@tag.delimiter"]               = { link = "Delimiter" },
 
   -- LSP semantic highlight *lsp-semantic-highlight* {{{2
+  ["@lsp.type.comment"]    = { fg = "NONE" },
   ["@lsp.type.decorator"]  = { link = "@attribute" },
   ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
   ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg }, -- TODO
