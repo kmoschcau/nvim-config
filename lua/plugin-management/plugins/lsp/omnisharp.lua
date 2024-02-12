@@ -1,8 +1,9 @@
 local common = require "lsp.common"
 local compat = require "system-compat"
 local omni_ext = require "omnisharp_extended"
+local lspconfig = require "lspconfig"
 
-require("lspconfig").omnisharp.setup {
+lspconfig.omnisharp.setup {
   cmd = { compat.append_win_ext "omnisharp" },
   capabilities = common.capabilities,
   handlers = vim.tbl_extend(
