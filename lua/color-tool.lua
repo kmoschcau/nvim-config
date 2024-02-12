@@ -979,7 +979,7 @@ local function write_nvim_colors()
     for index, color in ipairs(clrs) do
       table.insert(
         lines,
-        string.format('  vim.g.terminal_color_%d = "%s"', index + 1, color)
+        string.format('  vim.g.terminal_color_%d = "%s"', index - 1, color)
       )
     end
   end
