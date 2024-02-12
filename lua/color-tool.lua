@@ -522,12 +522,16 @@ local highlights_light = {
   GitSignsDelete = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
 
   -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{3
-  LualineInactiveA    = framing.neutral.a,
-  LualineInsert       = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert },
-  LualineReplace      = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace },
-  LualineVisual       = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual },
-  LualineModified     = { fg = framing.current.normal.fg, bg = palette.status.modified },
-  LualineLazyPackages = { fg = palette.syntax.module, bg = framing.neutral.b.bg },
+  LualineInactiveA       = framing.neutral.a,
+  LualineInsert          = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert },
+  LualineReplace         = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace },
+  LualineVisual          = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual },
+  LualineModified        = { fg = framing.current.normal.fg, bg = palette.status.modified },
+  LualineLazyPackages    = { fg = map_to_dark(palette.syntax.module), bg = framing.neutral.c.bg },
+  LualineDiagnosticError = { fg = map_to_dark(palette.diagnostics.error), bg = framing.neutral.c.bg },
+  LualineDiagnosticWarn  = { fg = map_to_dark(palette.diagnostics.warn), bg = framing.neutral.c.bg },
+  LualineDiagnosticInfo  = { fg = map_to_dark(palette.diagnostics.info), bg = framing.neutral.c.bg },
+  LualineDiagnosticHint  = { fg = map_to_dark(palette.diagnostics.hint), bg = framing.neutral.c.bg },
 
   -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{3
   NavicIconsArray         = { fg = map_to_dark(palette.syntax.structure), bg = framing.neutral.c.bg },
