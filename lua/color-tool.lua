@@ -307,6 +307,10 @@ end
 --- Map a color to a dark background variant.
 --- @param val string|table|number|nil
 local function map_to_dark(val)
+  if val == nil or val == "NONE" then
+    return val
+  end
+
   return modify_l(invert_l(val), 20)
 end
 
@@ -584,8 +588,8 @@ local highlights_light = {
 --- @return vim.api.keyset.highlight
 local function map_hl_to_dark(highlight)
   return vim.tbl_extend("force", highlight, {
-    fg = highlight.fg and map_to_dark(highlight.fg) or nil,
-    bg = highlight.bg and map_to_dark(highlight.bg) or nil,
+    fg = map_to_dark(highlight.fg),
+    bg = map_to_dark(highlight.bg),
   })
 end
 
@@ -605,13 +609,17 @@ local highlights_dark = vim.tbl_extend(
 
 --- @param highlights table<string, vim.api.keyset.highlight>
 local function add_cterm_values(highlights)
+  local function convert_to_8bit(color)
+    if color == nil or color == "NONE" then
+      return color
+    end
+
+    return require("mini.colors").convert(color, "8-bit")
+  end
+
   for _, value in pairs(highlights) do
-    if value.fg then
-      value.ctermfg = require("mini.colors").convert(value.fg, "8-bit")
-    end
-    if value.bg then
-      value.ctermbg = require("mini.colors").convert(value.bg, "8-bit")
-    end
+    value.ctermfg = convert_to_8bit(value.fg)
+    value.ctermbg = convert_to_8bit(value.bg)
   end
 end
 
@@ -651,9 +659,17 @@ end
 --- @param normal vim.api.keyset.highlight
 --- @return number
 local function get_highlight_contrast_ratio(highlight, normal)
+  local function fallback_color(color, fallback)
+    if color == nil or color == "NONE" then
+      return fallback
+    end
+
+    return color
+  end
+
   return get_contrast_ratio(
-    highlight.fg or normal.fg,
-    highlight.bg or normal.bg
+    fallback_color(highlight.fg, normal.fg),
+    fallback_color(highlight.bg, normal.bg)
   )
 end
 
