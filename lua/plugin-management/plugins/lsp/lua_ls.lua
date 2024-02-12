@@ -26,8 +26,7 @@ lspconfig.lua_ls.setup {
         version = "LuaJIT",
       },
       workspace = {
-        checkThirdParty = false,
-        library = vim.api.nvim_get_runtime_file("", true),
+        -- There is no need to set this up, neodev takes care of this for us.
       },
     },
   },
