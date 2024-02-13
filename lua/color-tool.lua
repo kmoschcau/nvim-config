@@ -219,7 +219,7 @@ local palette = {
     enum_member     = convert(50, 100, H.syntax.enum),
     event           = convert(50, 100, H.syntax["coroutine"]),
     float           = make_syn_with_bg(H.syntax.number + 20),
-    ["function"]    = convert(60, 100, H.syntax["function"]),
+    ["function"]    = convert(50, 100, H.syntax["function"]),
     identifier      = convert(70,  10, H.syntax.identifier),
     literal         = make_syn_with_bg(nil),
     member          = convert(60, 100, H.syntax.member),
@@ -236,7 +236,7 @@ local palette = {
     type            = convert(70, 100, H.syntax.typedef - 20),
     typedef         = convert(60, 100, H.syntax.typedef),
     underlined      = convert(50, 100, H.syntax.underlined),
-    variable        = convert(80, 100, H.syntax.variable),
+    variable        = convert(70, 100, H.syntax.variable),
   },
 
   terminal_colors_light = {
