@@ -30,7 +30,7 @@ return {
         newfile_status = true,
         symbols = symbols.files,
         color = function()
-          return vim.bo.modified and "LualineModified" or "StatusLineNC"
+          return vim.bo.modified and "LualineModified" or "LualineC"
         end,
       },
     }

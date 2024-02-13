@@ -280,20 +280,6 @@ local palette = {
 
 -- Highlights {{{1
 
-local normal = { fg = palette.neutral.strongest, bg = palette.neutral.lightest }
-
---stylua: ignore
-local framing = {
-  current = {
-    normal = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true }
-  },
-  neutral = {
-    a = { fg = palette.neutral.darkest, bg = palette.neutral.lighter },
-    b = { fg = palette.neutral.mid_strong, bg = palette.neutral.half_light },
-    c = normal,
-  },
-}
-
 local function invert_l(val)
   return colors.modify_channel(val, "lightness", function(l)
     return 100 - l
@@ -305,6 +291,24 @@ local function modify_l(val, L)
     return l + L
   end, { gamut_clip = "lightness" })
 end
+
+local float_normal =
+  { fg = palette.neutral.strongest, bg = palette.neutral.max }
+local normal =
+  { fg = palette.neutral.strongest, bg = modify_l(float_normal.bg, -5) }
+
+--stylua: ignore
+local framing = {
+  current = {
+    normal = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true }
+  },
+  neutral = {
+    a       = { fg = normal.fg, bg = modify_l(normal.bg, -20) },
+    b       = { fg = normal.fg, bg = modify_l(normal.bg, -10) },
+    c       = normal,
+    c_no_fg = { fg = modify_l(normal.bg, -20), bg = modify_l(normal.bg, -20) },
+  },
+}
 
 --- Map a color to a dark background variant.
 --- @param val string|table|number|nil
@@ -321,7 +325,7 @@ end
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_light = {
   -- built-in *highlight-groups* {{{2
-  ColorColumn   = { bg = palette.neutral.lighter_still },
+  ColorColumn   = { bg = modify_l(normal.bg, -5) },
   Conceal       = { fg = palette.neutral.mid_strong },
   CurSearch     = { bg = palette.search.current },
   Cursor        = { bg = palette.interact.cursor.normal },
@@ -336,8 +340,8 @@ local highlights_light = {
   TermCursor    = { link = "Cursor" },
   TermCursorNC  = { bg = palette.interact.cursor.non_current },
   ErrorMsg      = { fg = palette.diagnostics.error },
-  WinSeparator  = { fg = framing.neutral.c.bg, bg = framing.neutral.c.bg },
-  Folded        = { fg = palette.neutral.mid_light, bg = palette.neutral.lighter },
+  WinSeparator  = framing.neutral.c_no_fg,
+  Folded        = { fg = modify_l(normal.fg, 50), bg = modify_l(normal.bg, -5) },
   SignColumn    = { link = "LineNr" },
   IncSearch     = { bg = palette.search.inc },
   LineNr        = framing.neutral.b,
@@ -366,7 +370,7 @@ local highlights_light = {
   SpellLocal    = { undercurl = true, sp = palette.spell.loc },
   SpellRare     = { undercurl = true, sp = palette.spell.rare },
   StatusLine    = framing.current.normal,
-  StatusLineNC  = framing.neutral.c,
+  StatusLineNC  = framing.neutral.a,
   TabLine       = { link = "LineNr" },
   TabLineFill   = { link = "StatusLineNC" },
   TabLineSel    = { link = "Normal" },
@@ -528,6 +532,8 @@ local highlights_light = {
 
   -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{3
   LualineA               = framing.current.normal,
+  LualineB               = framing.neutral.b,
+  LualineC               = framing.neutral.c,
   LualineInactiveA       = framing.neutral.a,
   LualineInsert          = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert, bold = true },
   LualineReplace         = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace, bold = true },
@@ -1032,8 +1038,8 @@ local function write_lualine_colors()
     "return " .. vim.inspect {
       normal = {
         a = "LualineA",
-        b = "TabLine",
-        c = "StatusLineNC",
+        b = "LualineB",
+        c = "LualineC",
       },
       insert = {
         a = "LualineInsert",
