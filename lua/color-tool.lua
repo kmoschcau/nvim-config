@@ -515,6 +515,9 @@ local highlights_light = {
   ["@lsp.type.property"]   = { link = "@property" },
   ["@lsp.type.variable"]   = { link = "@variable" },
 
+  -- LSP semantic highlight lang overrides {{{3
+  ["@lsp.type.string.terraform-vars"] = { link = "String" },
+
   -- Plugins {{{2
   -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{3
   GitSignsAdd    = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
