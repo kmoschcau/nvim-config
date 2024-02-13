@@ -286,7 +286,7 @@ local framing = {
     normal = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true }
   },
   neutral = {
-    a = { fg = palette.neutral.darkest, bg = palette.neutral.mid_light },
+    a = { fg = palette.neutral.darkest, bg = palette.neutral.lighter },
     b = { fg = palette.neutral.mid_strong, bg = palette.neutral.half_light },
     c = { fg = palette.neutral.lightest, bg = palette.neutral.mid_strong },
   },
