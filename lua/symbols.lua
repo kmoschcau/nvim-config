@@ -53,8 +53,8 @@ return {
   },
   separators = {
     level1 = {
-      left = "",
-      right = "",
+      left = "",
+      right = "",
     },
     level2 = {
       left = "│",

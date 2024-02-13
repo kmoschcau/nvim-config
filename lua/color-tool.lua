@@ -280,6 +280,8 @@ local palette = {
 
 -- Highlights {{{1
 
+local normal = { fg = palette.neutral.strongest, bg = palette.neutral.lightest }
+
 --stylua: ignore
 local framing = {
   current = {
@@ -288,7 +290,7 @@ local framing = {
   neutral = {
     a = { fg = palette.neutral.darkest, bg = palette.neutral.lighter },
     b = { fg = palette.neutral.mid_strong, bg = palette.neutral.half_light },
-    c = { fg = palette.neutral.lightest, bg = palette.neutral.mid_strong },
+    c = normal,
   },
 }
 
@@ -347,7 +349,7 @@ local highlights_light = {
   MsgSeparator  = { link = "StatusLineNC" },
   MoreMsg       = { fg = palette.messages.more },
   NonText       = { fg = palette.neutral.light },
-  Normal        = { fg = palette.neutral.strongest, bg = palette.neutral.lightest },
+  Normal        = normal,
   NormalFloat   = { bg = palette.neutral.max },
   Pmenu         = { link = "NormalFloat" },
   PmenuSel      = { link = "CursorLine" },
