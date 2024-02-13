@@ -524,9 +524,9 @@ local highlights_light = {
   -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{3
   LualineA               = framing.current.normal,
   LualineInactiveA       = framing.neutral.a,
-  LualineInsert          = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert },
-  LualineReplace         = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace },
-  LualineVisual          = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual },
+  LualineInsert          = { fg = framing.current.normal.fg, bg = palette.interact.modes.insert, bold = true },
+  LualineReplace         = { fg = framing.current.normal.fg, bg = palette.interact.modes.replace, bold = true },
+  LualineVisual          = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual, bold = true },
   LualineModified        = { fg = framing.current.normal.fg, bg = palette.status.modified },
   LualineLazyPackages    = { fg = map_to_dark(palette.syntax.module), bg = framing.neutral.c.bg },
   LualineDiagnosticError = { fg = map_to_dark(palette.diagnostics.error), bg = framing.neutral.c.bg },
