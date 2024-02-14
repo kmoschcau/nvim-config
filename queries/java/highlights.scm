@@ -14,7 +14,7 @@
 ; namespaces
 
 (package_declaration
-  "package" @keyword.namespace
+  "package" @keyword.module
   (scoped_identifier
     name: (identifier) @module))
 

@@ -512,6 +512,9 @@ local highlights_light = {
   ["@tag.attribute"]               = { link = "@property" },
   ["@tag.delimiter"]               = { link = "Delimiter" },
 
+  -- Custom captures {{{3
+  ["@keyword.module"] = { fg = palette.syntax.module, bold = true },
+
   -- LSP semantic highlight *lsp-semantic-highlight* {{{2
   ["@lsp.type.comment"]    = { fg = "NONE" },
   ["@lsp.type.decorator"]  = { link = "@attribute" },
