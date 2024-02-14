@@ -19,9 +19,12 @@ return {
       end,
     }
 
-    local win_number_component = function()
-      return vim.api.nvim_win_get_number(0)
-    end
+    local win_number_component = {
+      function()
+        return vim.api.nvim_win_get_number(0)
+      end,
+      separator = { left = separators.section.top.right },
+    }
 
     local lualine_c = {
       {
@@ -45,7 +48,7 @@ return {
         "diagnostics",
         sources = { "nvim_diagnostic" },
         -- sections = { severity },
-        separator = { left = separators.level1.right, right = "" },
+        separator = { left = separators.section.bottom.right, right = "" },
         diagnostics_color = {
           error = "DiagnosticSignError",
           warn = "DiagnosticSignWarn",
@@ -78,8 +81,8 @@ return {
     require("lualine").setup {
       options = {
         theme = vim.g.colors_name,
-        component_separators = separators.level2,
-        section_separators = separators.level1,
+        component_separators = separators.component.bottom,
+        section_separators = separators.section.bottom,
       },
       sections = {
         lualine_a = { "mode" },
@@ -88,7 +91,7 @@ return {
             "diff",
             colored = true,
             symbols = symbols.git.lines,
-            separator = { left = "", right = separators.level1.left },
+            separator = { left = "", right = separators.section.bottom.left },
             cond = function()
               return vim.fn.winwidth(0) > vcs_display_width
             end,

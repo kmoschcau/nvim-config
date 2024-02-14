@@ -52,13 +52,25 @@ return {
     },
   },
   separators = {
-    level1 = {
-      left = "",
-      right = "",
+    section = {
+      bottom = {
+        left = "",
+        right = "",
+      },
+      top = {
+        left = "",
+        right = "",
+      },
     },
-    level2 = {
-      left = "│",
-      right = "│",
+    component = {
+      bottom = {
+        left = "\\",
+        right = "/",
+      },
+      top = {
+        left = "/",
+        right = "\\",
+      },
     },
   },
   types = {
