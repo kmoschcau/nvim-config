@@ -428,7 +428,7 @@ local highlights_light = {
   Float         = palette.syntax.float,
 
   Identifier    = { fg = palette.syntax.identifier },
-  Function      = { fg = palette.syntax["function"] },
+  Function      = { fg = palette.syntax["function"], italic = false, nocombine = true },
 
   Statement     = { fg = palette.syntax.statement, bold = true },
   Operator      = { fg = palette.syntax.statement },
@@ -437,8 +437,8 @@ local highlights_light = {
 
   Type          = { fg = palette.syntax.type },
   StorageClass  = { fg = palette.syntax.storage_class },
-  Structure     = { fg = palette.syntax.structure },
-  Typedef       = { fg = palette.syntax.typedef },
+  Structure     = { fg = palette.syntax.structure, italic = false, nocombine = true },
+  Typedef       = { fg = palette.syntax.typedef, italic = false, nocombine = true },
 
   Special       = { fg = palette.syntax.special },
   SpecialChar   = { fg = palette.syntax.special, bg = palette.syntax.string.bg },
@@ -466,7 +466,7 @@ local highlights_light = {
   ["@constant"]                    = { fg = palette.syntax.variable, italic = false, nocombine = true },
   ["@constant.builtin"]            = { link = "Constant" },
 
-  ["@module"]                      = { fg = palette.syntax.module },
+  ["@module"]                      = { fg = palette.syntax.module, italic = false, nocombine = true },
 
   ["@string.documenation"]         = { fg = palette.syntax.doc_comment, bg = palette.syntax.string.bg },
   ["@string.regexp"]               = { link = "SpecialChar" },
@@ -487,10 +487,10 @@ local highlights_light = {
   ["@type.definition"]             = { link = "Typedef" },
   ["@type.qualifier"]              = { link = "Statement" },
 
-  ["@attribute"]                   = { fg = palette.syntax.metaprogramming },
+  ["@attribute"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
 
-  ["@constructor"]                 = { fg = palette.syntax["function"] },
+  ["@constructor"]                 = { link = "Function" },
 
   ["@keyword.coroutine"]           = { fg = palette.syntax["coroutine"], bold = true },
   ["@keyword.function"]            = { fg = palette.syntax["function"], bold = true },
@@ -516,12 +516,14 @@ local highlights_light = {
   ["@lsp.type.comment"]    = { fg = "NONE" },
   ["@lsp.type.decorator"]  = { link = "@attribute" },
   ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
-  ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg }, -- TODO
+  ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg, italic = false, nocombine = true }, -- TODO
   ["@lsp.type.interface"]  = { link = "@attribute" },
   ["@lsp.type.namespace"]  = { link = "@module" },
   ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
   ["@lsp.type.property"]   = { link = "@property" },
   ["@lsp.type.variable"]   = { link = "@variable" },
+
+  ["@lsp.mod.readonly"] = { italic = false, nocombine = true },
 
   -- LSP semantic highlight lang overrides {{{3
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
