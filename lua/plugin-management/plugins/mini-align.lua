@@ -1,5 +1,10 @@
 --- @type LazyPluginSpec
 return {
   "echasnovski/mini.align",
-  config = true,
+  opts = {
+    mappings = {
+      start = "<Space>a",
+      start_with_preview = "<Space>A",
+    }
+  },
 }
