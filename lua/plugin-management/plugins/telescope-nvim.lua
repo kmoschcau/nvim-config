@@ -92,6 +92,6 @@ return {
     require("telescope").load_extension "fzf"
     require("telescope").load_extension "import"
     require("telescope").load_extension "noice"
-    -- require("telescope").load_extension "notify"
+    require("telescope").load_extension "notify"
   end,
 }
