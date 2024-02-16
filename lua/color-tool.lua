@@ -1086,7 +1086,9 @@ local highlights_light = {
 
   -- Custom captures {{{
 
-  ["@keyword.module"] = { fg = palette.syntax.module, bold = true },
+  ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
+  ["@keyword.interface"] = { fg = palette.syntax.metaprogramming, bold = true },
+  ["@keyword.module"]    = { fg = palette.syntax.module, bold = true },
 
   -- }}}}}}
 
