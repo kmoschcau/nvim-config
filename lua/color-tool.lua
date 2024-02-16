@@ -572,6 +572,7 @@ local function write_lualine_colors()
     "-- highlight on the right side of the statusline for windows on the bottom when",
     "-- lualine is in use.",
     'vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })',
+    'vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })',
     "",
     "return " .. vim.inspect {
       normal = {
