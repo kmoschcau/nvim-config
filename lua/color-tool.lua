@@ -1,14 +1,8 @@
 -- vim: foldmethod=marker
 
--- Setup {{{1
--- NOTE: All manipulation is done in Oklch color space.
--- Get interactive view at https://bottosson.github.io/misc/colorpicker/
--- Install https://github.com/echasnovski/mini.colors to have this working
-local success, colors = pcall(require, "mini.colors")
-if not success then
-  vim.notify("Could not require mini.colors.", vim.log.levels.ERROR)
-  return
-end
+-- Setup {{{
+
+-- Script configuration vars {{{
 
 local THEME_NAME = "new"
 
@@ -18,7 +12,598 @@ local SHOW_PREVIEW_BUFFER = true
 -- WHETHER TO WRITE CONFIGURATION FILES FOR THE SCHEME
 local WRITE_COLORSCHEME = true
 
--- Hyperparameters {{{1
+-- }}}
+
+-- Dependencies {{{
+
+-- NOTE: All manipulation is done in Oklch color space.
+-- Get interactive view at https://bottosson.github.io/misc/colorpicker/
+-- Install https://github.com/echasnovski/mini.colors to have this working
+local success, colors = pcall(require, "mini.colors")
+if not success then
+  vim.notify("Could not require mini.colors.", vim.log.levels.ERROR)
+  return
+end
+
+-- }}}
+
+-- Helper types {{{
+
+--- @class MiniColorsRgb
+--- @field r integer the red amount, 0 - 255
+--- @field g integer the green amount, 0 - 255
+--- @field b integer the blue amount, 0 - 255
+
+--- @class MiniColorsOklab
+--- @field l number the perceived lightness, 0 - 100
+--- @field a number how green/red the color is, usually -30 - 30
+--- @field b number how blue/yellow the color is, usually -30 - 30
+
+--- @class MiniColorsOklch
+--- @field l number the perceived lightness, 0 - 100
+--- @field c number the chroma, usually 0 - 32
+--- @field h number the hue, 0 - 360; nil for gray
+
+--- @class MiniColorsOkhsl
+--- @field h number the hue, 0 - 360; nil for gray
+--- @field s number the percentile saturation of color, 0 - 100
+--- @field l number the perceived lightness, 0 - 100
+
+--- @alias MiniColorsColor
+--- | number cterm color index between 16 and 255
+--- | string a hex color string
+--- | MiniColorsRgb
+--- | MiniColorsOklab
+--- | MiniColorsOklch
+--- | MiniColorsOkhsl
+
+-- }}}
+
+-- Helper functions {{{
+
+--- Shorthand function to convert an Oklch color table into a hex string.
+--- @param l number the perceived lightness
+--- @param c number the chroma
+--- @param h number|nil the hue
+--- @param gamut_clip "chroma" | "lightness" | "cusp" | nil the clip method, defaults to "chroma"
+local function convert(l, c, h, gamut_clip)
+  return colors.convert({ l = l, c = c, h = h }, "hex", {
+    gamut_clip = gamut_clip or "chroma",
+  }) --[[@as string]]
+end
+
+--- Create a table that contains a hex color for foreground and background. This
+--- will create a color combination of the same hue, which has a strong
+--- foreground and a light background of the same hue.
+--- @param hue number|nil the hue to generate a color pair with, 0 - 360
+--- @return { fg: string, bg: string }
+local function make_syn_with_bg(hue)
+  return {
+    fg = convert(30, 100, hue),
+    bg = convert(90, 5, hue),
+  }
+end
+
+--- Invert the luminance of the given hex color.
+--- @param val MiniColorsColor
+local function invert_l(val)
+  return colors.modify_channel(val, "lightness", function(l)
+    return 100 - l
+  end, { gamut_clip = "lightness" }) --[[@as string]]
+end
+
+--- Shift the given color's perceived lightness.
+--- @param val MiniColorsColor
+local function modify_l(val, L)
+  return colors.modify_channel(val, "lightness", function(l)
+    return l + L
+  end, { gamut_clip = "lightness" }) --[[@as string]]
+end
+
+--- Map a color to a dark background variant.
+--- @param val MiniColorsColor|nil
+--- @return string|nil
+local function map_to_dark(val)
+  if val == nil or val == "NONE" then
+    return val
+  end
+
+  return modify_l(invert_l(val), 20)
+end
+
+--- Map a highlight group spec to a dark background version.
+--- @param highlight vim.api.keyset.highlight
+--- @return vim.api.keyset.highlight
+local function map_hl_to_dark(highlight)
+  return vim.tbl_extend("force", highlight, {
+    fg = map_to_dark(highlight.fg),
+    bg = map_to_dark(highlight.bg),
+  })
+end
+
+--- Add cterm values to a highlight group spec, derived from its truecolor
+--- fields.
+--- @param highlights table<string, vim.api.keyset.highlight>
+local function add_cterm_values(highlights)
+  local function convert_to_8bit(color)
+    if color == nil or color == "NONE" then
+      return color
+    end
+
+    return require("mini.colors").convert(color, "8-bit")
+  end
+
+  for _, value in pairs(highlights) do
+    value.ctermfg = convert_to_8bit(value.fg)
+    value.ctermbg = convert_to_8bit(value.bg)
+  end
+end
+
+--- Calculate the contrast ratio of the given foreground and background colors.
+--- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+--- @param fg MiniColorsColor
+--- @param bg MiniColorsColor
+--- @return number
+local function get_contrast_ratio(fg, bg)
+  -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+  local function get_luminance(val)
+    local rgb = colors.convert(val, "rgb") --[[@as MiniColorsRgb]]
+
+    -- Convert decimal color to [0; 1]
+    local r, g, b = rgb.r / 255, rgb.g / 255, rgb.b / 255
+
+    -- Correct channels
+    local function correct_channel(x)
+      return x <= 0.04045 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
+    end
+    local R, G, B = correct_channel(r), correct_channel(g), correct_channel(b)
+
+    return 0.2126 * R + 0.7152 * G + 0.0722 * B
+  end
+
+  local lum_fg, lum_bg = get_luminance(fg), get_luminance(bg)
+  local res = (math.max(lum_bg, lum_fg) + 0.05)
+    / (math.min(lum_bg, lum_fg) + 0.05)
+  return math.floor(10 * res + 0.5) / 10
+end
+
+--- Calculate the contrast ratio of the given highlight group.
+--- @param highlight vim.api.keyset.highlight the highlight group
+--- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+--- @return number
+local function get_highlight_contrast_ratio(highlight, normal)
+  local function fallback_color(color, fallback)
+    if color == nil or color == "NONE" then
+      return fallback
+    end
+
+    return color
+  end
+
+  return get_contrast_ratio(
+    fallback_color(highlight.fg, normal.fg),
+    fallback_color(highlight.bg, normal.bg)
+  )
+end
+
+--- Insert a header for the highlight preview buffer in the given lines.
+--- @param lines string[] the lines to insert into
+local function insert_highlight_preview_header(lines)
+  table.insert(
+    lines,
+    string.format(
+      "%4s %-30s %-8s %7s %7s %7s %7s %7s %5s %s",
+      "Demo",
+      "Name",
+      "Contrast",
+      "fg",
+      "bg",
+      "special",
+      "ctermfg",
+      "ctermbg",
+      "blend",
+      "attrs"
+    )
+  )
+end
+
+--- Insert the the preview lines for the given highlights into the given lines.
+--- @param lines string[] the lines to insert into
+--- @param hls table<string, vim.api.keyset.highlight> the highlights to preview
+local function insert_highlight_preview_lines(lines, hls)
+  local keys = vim.tbl_keys(hls)
+  table.sort(keys)
+
+  local bool_keys = {
+    "bold",
+    "standout",
+    "strikethrough",
+    "underline",
+    "undercurl",
+    "underdouble",
+    "underdotted",
+    "underdashed",
+    "italic",
+    "reverse",
+    "altfont",
+    "nocombine",
+    "default",
+    "fallback",
+    "fg_indexed",
+    "bg_indexed",
+    "force",
+  }
+
+  for _, key in ipairs(keys) do
+    local hl = hls[key]
+
+    if hl.link then
+      table.insert(lines, string.format("XXX  %-30s -> %s", key, hl.link))
+    else
+      table.insert(lines, (string
+        .format(
+          "XXX  %-30s %8.1f %7s %7s %7s %7s %7s %5d %s",
+          key,
+          get_highlight_contrast_ratio(hl, hls.Normal),
+          hl.fg or "",
+          hl.bg or "",
+          hl.special or "",
+          hl.ctermfg or "",
+          hl.ctermbg or "",
+          hl.blend or 0,
+          table.concat(
+            vim.tbl_filter(
+              function(k)
+                return k
+              end,
+              vim.tbl_map(function(k)
+                return hl[k] and k or nil
+              end, bool_keys)
+            ),
+            ","
+          )
+        )
+        :gsub("%s+$", "")))
+    end
+  end
+end
+
+--- Insert the preview lines for the terminal colors into the given lines.
+--- @param lines string[] the lines to insert into
+--- @param clrs string[] the colors to preview
+--- @param bg string the background color to contrast against
+local function insert_terminal_colors_preview_lines(lines, clrs, bg)
+  for index, value in ipairs(clrs) do
+    table.insert(
+      lines,
+      string.format(
+        "XXX %2d %4.1f %7s",
+        index - 1,
+        get_contrast_ratio(value, bg),
+        value
+      )
+    )
+  end
+end
+
+--- Add an extmark highlight for a given preview line.
+--- @param name string the name of the preview highlight
+--- @param spec vim.api.keyset.highlight the spec for the preview highlight
+--- @param ext_ns integer the extmark namespace ID
+--- @param line_index number the line index where to place the highlight
+local function color_preview(name, spec, ext_ns, line_index)
+  vim.api.nvim_set_hl(0, name, spec)
+  vim.api.nvim_buf_add_highlight(0, ext_ns, name, line_index, 0, 3)
+end
+
+--- Check the given spec's contrast ratio and add a diagnostic if it is too low.
+--- @param diagnostics vim.Diagnostic[] the diagnostics to append to
+--- @param spec vim.api.keyset.highlight the highlight spec to check
+--- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+--- @param line_index integer where to place a potential diagnostic
+local function check_contrast(diagnostics, spec, normal, line_index)
+  local contrast = get_highlight_contrast_ratio(spec, normal)
+  if contrast < 3 then
+    table.insert(diagnostics, {
+      lnum = line_index,
+      col = 41,
+      end_col = 44,
+      severity = vim.diagnostic.severity.E,
+      message = "Contrast is below 3.",
+      source = "color-tool",
+      code = "below-3",
+    })
+  elseif contrast < 7 then
+    table.insert(diagnostics, {
+      lnum = line_index,
+      col = 41,
+      end_col = 44,
+      severity = vim.diagnostic.severity.W,
+      message = "Contrast is below 7.",
+      source = "color-tool",
+      code = "below-7",
+    })
+  end
+end
+
+--- Add extmark highlights for the given highlights. This also adds diagnostics
+--- entries for highlights with poor contrast.
+--- @param ext_ns integer the extmark namespace ID
+--- @param start_after_line integer after which line to start
+--- @param hls table<string, vim.api.keyset.highlight> the highlights to use
+--- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+--- @param diagnostics vim.Diagnostic[] the diagnostics to append to
+--- @param suffix "light" | "dark" the suffix to add to the highlights
+local function color_highlight_preview_lines(
+  ext_ns,
+  start_after_line,
+  hls,
+  diagnostics,
+  normal,
+  suffix
+)
+  local keys = vim.tbl_keys(hls)
+  table.sort(keys)
+
+  for index, key in ipairs(keys) do
+    local name = key .. "_preview_" .. suffix
+    local hl = hls[key]
+    local line_index = start_after_line + index
+
+    --- @type vim.api.keyset.highlight | nil
+    local spec
+    if hl.link then
+      local link_target = hls[hl.link]
+      if link_target then
+        spec = vim.tbl_extend("keep", link_target, normal)
+      else
+        spec = nil
+      end
+    else
+      spec = vim.tbl_extend("keep", hl, normal)
+    end
+    if spec then
+      color_preview(name, spec, ext_ns, line_index)
+
+      check_contrast(diagnostics, spec, normal, line_index)
+    end
+  end
+end
+
+--- Add extmark highlights for the given terminal colors.
+--- @param ext_ns integer the extmark namespace ID
+--- @param start_after_line integer after which line to start
+--- @param clrs string[] the terminal colors to highlight
+--- @param diagnostics vim.Diagnostic[] the diagnostics to append to
+--- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+--- @param suffix "light" | "dark" the suffix to add to the highlights
+local function color_terminal_preview_lines(
+  ext_ns,
+  start_after_line,
+  clrs,
+  diagnostics,
+  normal,
+  suffix
+)
+  for index, value in ipairs(clrs) do
+    local name = "terminal_color_" .. index - 1 .. "_" .. suffix
+    local line_index = start_after_line + index
+    local spec = { fg = value, bg = normal.bg }
+
+    color_preview(name, spec, ext_ns, line_index)
+
+    check_contrast(diagnostics, spec, normal, line_index)
+  end
+end
+
+--- Create a preview buffer for the color scheme.
+--- @param highlights_light table<string, vim.api.keyset.highlight>
+--- @param highlights_dark table<string, vim.api.keyset.highlight>
+--- @param terminal_colors_light string[]
+--- @param terminal_colors_dark string[]
+local function create_preview_buffer(
+  highlights_light,
+  highlights_dark,
+  terminal_colors_light,
+  terminal_colors_dark
+)
+  local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
+  local diag_ns = vim.api.nvim_create_namespace "highlight-previews-diagnostics"
+
+  --- @type string[]
+  local lines = {}
+
+  vim.list_extend(lines, { "--- Highlights ---" })
+  insert_highlight_preview_header(lines)
+  vim.list_extend(lines, { "Light:" })
+  insert_highlight_preview_lines(lines, highlights_light)
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "Dark:" })
+  insert_highlight_preview_lines(lines, highlights_dark)
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "--- Terminal colors ---" })
+  vim.list_extend(lines, { "Light:" })
+  insert_terminal_colors_preview_lines(
+    lines,
+    terminal_colors_light,
+    highlights_light.Normal.bg
+  )
+  vim.list_extend(lines, { "" })
+  vim.list_extend(lines, { "Dark:" })
+  insert_terminal_colors_preview_lines(
+    lines,
+    terminal_colors_dark,
+    highlights_dark.Normal.bg
+  )
+
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  --- @type vim.Diagnostic[]
+  local diagnostics = {}
+
+  local start_after_line = 2
+  color_highlight_preview_lines(
+    ext_ns,
+    start_after_line,
+    highlights_light,
+    diagnostics,
+    highlights_light.Normal,
+    "light"
+  )
+
+  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
+  color_highlight_preview_lines(
+    ext_ns,
+    start_after_line,
+    highlights_dark,
+    diagnostics,
+    highlights_dark.Normal,
+    "dark"
+  )
+
+  start_after_line = start_after_line + vim.tbl_count(highlights_dark) + 3
+  color_terminal_preview_lines(
+    ext_ns,
+    start_after_line,
+    terminal_colors_light,
+    diagnostics,
+    highlights_light.Normal,
+    "light"
+  )
+
+  start_after_line = start_after_line + vim.tbl_count(terminal_colors_light) + 2
+  color_terminal_preview_lines(
+    ext_ns,
+    start_after_line,
+    terminal_colors_dark,
+    diagnostics,
+    highlights_dark.Normal,
+    "dark"
+  )
+
+  vim.diagnostic.set(diag_ns, 0, diagnostics)
+
+  vim.opt_local.bufhidden = "hide"
+  vim.opt_local.buftype = "nofile"
+  vim.opt_local.swapfile = false
+  vim.opt_local.wrap = false
+
+  vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
+    buffer = true,
+    silent = true,
+    desc = "Reload the preview buffer.",
+  })
+end
+
+--- @param highlights_light table<string, vim.api.keyset.highlight>
+--- @param highlights_dark table<string, vim.api.keyset.highlight>
+local function write_nvim_colors(
+  highlights_light,
+  highlights_dark,
+  terminal_colors_light,
+  terminal_colors_dark
+)
+  local file =
+    io.open(vim.fn.stdpath "config" .. "/colors/" .. THEME_NAME .. ".lua", "w")
+  if not file then
+    vim.notify("Could not open nvim color scheme file.", vim.log.levels.WARN)
+    return
+  end
+
+  local function insert_highlight_lines(lines, highlights)
+    local keys = vim.tbl_keys(highlights)
+    table.sort(keys)
+
+    for _, key in ipairs(keys) do
+      table.insert(
+        lines,
+        string.format(
+          '  vim.api.nvim_set_hl(0, "%s", %s)',
+          key,
+          vim.inspect(highlights[key], { indent = "", newline = "" })
+        )
+      )
+    end
+  end
+
+  local function insert_terminal_colors(lines, clrs)
+    for index, color in ipairs(clrs) do
+      table.insert(
+        lines,
+        string.format('  vim.g.terminal_color_%d = "%s"', index - 1, color)
+      )
+    end
+  end
+
+  local lines = {
+    "-- This is a theme generated by color-tool.lua.",
+    "",
+    'vim.cmd.highlight "clear"',
+    'vim.g.colors_name = vim.fn.expand "<sfile>:t:r"',
+    "",
+    'if vim.o.background == "light" then',
+  }
+  insert_highlight_lines(lines, highlights_light)
+  insert_terminal_colors(lines, terminal_colors_light)
+  table.insert(lines, "else")
+  insert_highlight_lines(lines, highlights_dark)
+  insert_terminal_colors(lines, terminal_colors_dark)
+  table.insert(lines, "end")
+
+  file:write(table.concat(lines, "\n"))
+  file:flush()
+  file:close()
+end
+
+local function write_lualine_colors()
+  local file = io.open(
+    vim.fn.stdpath "config" .. "/lua/lualine/themes/" .. THEME_NAME .. ".lua",
+    "w"
+  )
+  if not file then
+    vim.notify("Could not open lualine theme file.", vim.log.levels.WARN)
+    return
+  end
+
+  local lines = {
+    "-- This is a theme generated by color-tool.lua",
+    "",
+    "-- This replaces the default statusline highlight with the WinSeparator",
+    "-- highlight. This is meant to be used to remove the differing, one character",
+    "-- highlight on the right side of the statusline for windows on the bottom when",
+    "-- lualine is in use.",
+    'vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })',
+    "",
+    "return " .. vim.inspect {
+      normal = {
+        a = "LualineA",
+        b = "LualineB",
+        c = "LualineC",
+      },
+      insert = {
+        a = "LualineInsert",
+      },
+      replace = {
+        a = "LualineReplace",
+      },
+      visual = {
+        a = "LualineVisual",
+      },
+      command = {},
+      inactive = {
+        a = "LualineInactiveA",
+      },
+    },
+  }
+
+  file:write(table.concat(lines, "\n"))
+
+  file:flush()
+  file:close()
+end
+
+-- }}}
+
+-- Hyperparameters {{{
 
 local HUES = {
   pink = 0,
@@ -97,20 +682,9 @@ local H = {
   },
 }
 
--- Palettes {{{1
+-- }}}
 
-local function convert(l, c, h, opts)
-  return colors.convert({ l = l, c = c, h = h }, "hex", {
-    gamut_clip = opts and opts.gamut_clip or "chroma",
-  })
-end
-
-local function make_syn_with_bg(hue)
-  return {
-    fg = convert(30, 100, hue),
-    bg = convert(90, 5, hue),
-  }
-end
+-- Palettes {{{
 
 --stylua: ignore
 local palette = {
@@ -278,19 +852,9 @@ local palette = {
   },
 }
 
--- Highlights {{{1
+-- }}}
 
-local function invert_l(val)
-  return colors.modify_channel(val, "lightness", function(l)
-    return 100 - l
-  end, { gamut_clip = "lightness" })
-end
-
-local function modify_l(val, L)
-  return colors.modify_channel(val, "lightness", function(l)
-    return l + L
-  end, { gamut_clip = "lightness" })
-end
+-- Highlights setup {{{
 
 local float_normal =
   { fg = palette.neutral.strongest, bg = palette.neutral.max }
@@ -308,25 +872,20 @@ local framing = {
     a       = { fg = normal.fg, bg = modify_l(normal.bg, -20) },
     b       = { fg = normal.fg, bg = modify_l(normal.bg, -10) },
     c       = { fg = normal.fg, bg = modify_l(normal.bg, -2.5) },
-    c_no_fg = { fg = modify_l(normal.bg, -20), bg = modify_l(normal.bg, -20) },
+    c_no_fg = { fg = modify_l(normal.bg, -2.5), bg = modify_l(normal.bg, -2.5) },
   },
 }
 
---- Map a color to a dark background variant.
---- @param val string|table|number|nil
-local function map_to_dark(val)
-  if val == nil or val == "NONE" then
-    return val
-  end
+-- }}}}}}
 
-  return modify_l(invert_l(val), 20)
-end
+-- Highlight definitions {{{
 
 --stylua: ignore start
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_light = {
-  -- built-in *highlight-groups* {{{2
+  -- built-in *highlight-groups* {{{
+
   ColorColumn   = { bg = modify_l(normal.bg, -5) },
   Conceal       = { fg = palette.neutral.mid_strong },
   CurSearch     = { bg = palette.search.current },
@@ -382,7 +941,9 @@ local highlights_light = {
   WinBar        = { link = "StatusLine" },
   WinBarNC      = { link = "StatusLineNC" },
 
-  -- diagnostics *diagnostic-highlights* {{{2
+  -- }}}
+
+  -- diagnostics *diagnostic-highlights* {{{
 
   DiagnosticError = { fg = palette.diagnostics.error },
   DiagnosticWarn  = { fg = palette.diagnostics.warn },
@@ -404,7 +965,9 @@ local highlights_light = {
 
   DiagnosticDeprecated = { strikethrough = true, sp = palette.syntax.comment },
 
-  -- LSP highlights *lsp-highlight* {{{2
+  -- }}}
+
+  -- LSP highlights *lsp-highlight* {{{
 
   LspReferenceText  = { bg = palette.lsp.reference.text },
   LspReferenceRead  = { bg = palette.lsp.reference.read },
@@ -417,7 +980,10 @@ local highlights_light = {
 
   LspSignatureActiveParameter = { link = "Search" },
 
-  -- syntax groups *group-name* {{{2
+  -- }}}
+
+  -- syntax groups *group-name* {{{
+
   Comment       = { fg = palette.syntax.comment },
 
   Constant      = palette.syntax.literal,
@@ -454,10 +1020,16 @@ local highlights_light = {
   Changed       = { fg = palette.diff.change.strong },
   Removed       = { fg = palette.diff.delete.strong },
 
-  -- command line expressions *expr-highlight* {{{2
+  -- }}}
+
+  -- command line expressions *expr-highlight* {{{
+
   -- TODO
 
-  -- treesitter groups *treesitter-highlight-groups* {{{2
+  -- }}}
+
+  -- treesitter groups *treesitter-highlight-groups* {{{
+
   ["@variable"]                    = { fg = palette.syntax.variable, italic = true },
   ["@variable.builtin"]            = { fg = palette.syntax.special, italic = true },
   ["@variable.parameter"]          = { fg = palette.syntax.parameter, italic = true },
@@ -512,10 +1084,14 @@ local highlights_light = {
   ["@tag.attribute"]               = { link = "@property" },
   ["@tag.delimiter"]               = { link = "Delimiter" },
 
-  -- Custom captures {{{3
+  -- Custom captures {{{
+
   ["@keyword.module"] = { fg = palette.syntax.module, bold = true },
 
-  -- LSP semantic highlight *lsp-semantic-highlight* {{{2
+  -- }}}}}}
+
+  -- LSP semantic highlight *lsp-semantic-highlight* {{{
+
   ["@lsp.type.comment"]    = { fg = "NONE" },
   ["@lsp.type.decorator"]  = { link = "@attribute" },
   ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
@@ -528,16 +1104,52 @@ local highlights_light = {
 
   ["@lsp.mod.readonly"] = { italic = false, nocombine = true },
 
-  -- LSP semantic highlight lang overrides {{{3
+  -- LSP semantic highlight lang overrides {{{
+
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
 
-  -- Plugins {{{2
-  -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{3
+  -- }}}}}}
+
+  -- Plugins {{{
+
+  -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{
+
   GitSignsAdd    = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
   GitSignsChange = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
   GitSignsDelete = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
 
-  -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{3
+  -- }}}
+
+  -- lazy.nvim | https://github.com/folke/lazy.nvim {{{
+
+  -- These are only for backward-compatibility with Lazy. Lazy sometimes uses
+  -- these directly, so there is no better way to set these.
+  Bold   = { link = "@markup.strong" },
+  Italic = { link = "@markup.italic" },
+
+  LazyCommitScope   = { fg = palette.syntax.parameter, italic = true, nocombine = true },
+  LazyCommitType    = { link = "@keyword"},
+  LazyDir           = { link = "@markup.link" },
+  LazyProgressDone  = { fg = framing.current.normal.bg, bg = framing.current.normal.bg },
+  LazyProgressTodo  = framing.neutral.c_no_fg,
+  LazyProp          = { fg = palette.syntax.property },
+  LazyReasonCmd     = { link = "@function" },
+  LazyReasonEvent   = { fg = palette.syntax["coroutine"] },
+  LazyReasonFt      = { link = "@string" },
+  LazyReasonImport  = { link = "@module" },
+  LazyReasonInit    = { link = "@attribute" },
+  LazyReasonKeys    = { link = "@operator" },
+  LazyReasonPlugin  = { link = "@keyword.module" },
+  LazyReasonRequire = { link = "DevIconLua" },
+  LazyReasonRuntime = { link = "DevIconVim" },
+  LazyReasonSource  = { link = "@character" },
+  LazyReasonStart   = { link = "@keyword.directive" },
+  LazyUrl           = { link = "@markup.link" },
+
+  -- }}}
+
+  -- lualine.nvim | https://github.com/nvim-lualine/lualine.nvim {{{
+
   LualineA               = framing.current.normal,
   LualineB               = framing.neutral.b,
   LualineC               = framing.neutral.c,
@@ -552,7 +1164,57 @@ local highlights_light = {
   LualineDiagnosticInfo  = { fg = map_to_dark(palette.diagnostics.info), bg = framing.neutral.c.bg },
   LualineDiagnosticHint  = { fg = map_to_dark(palette.diagnostics.hint), bg = framing.neutral.c.bg },
 
-  -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{3
+  -- }}}
+
+  -- noice.nvim | https://github.com/folke/noice.nvim {{{
+
+  NoiceCmdlineIcon              = { link = "DiagnosticInfo" },
+  NoiceCmdlineIconSearch        = { link = "DiagnosticWarn" },
+  NoiceCmdlinePopup             = { link = "NormalFloat" },
+  NoiceCmdlinePopupBorder       = { link = "FloatBorder" },
+  NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
+  NoiceCmdlinePopupTitle        = { link = "Title" },
+
+  -- }}}
+
+  -- nvim-cmp | https://github.com/hrsh7th/nvim-cmp {{{
+
+  CmpItemAbbrDeprecated = { link = "DiagnosticDeprecated" },
+  CmpItemAbbrMatch      = { bold = true },
+  CmpItemAbbrMatchFuzzy = { link = "Character" },
+
+  -- TODO make the kind highlights dynamic.
+  CmpItemKindArray         = { fg = palette.syntax.structure },
+  CmpItemKindBoolean       = { fg = palette.syntax.boolean.fg },
+  CmpItemKindClass         = { fg = palette.syntax.structure },
+  CmpItemKindConstant      = { fg = palette.syntax.variable },
+  CmpItemKindConstructor   = { fg = palette.syntax["function"] },
+  CmpItemKindEnum          = { fg = palette.syntax.enum },
+  CmpItemKindEnumMember    = { fg = palette.syntax.enum_member },
+  CmpItemKindEvent         = { fg = palette.syntax.event },
+  CmpItemKindField         = { fg = palette.syntax.member },
+  CmpItemKindFile          = framing.neutral.c,
+  CmpItemKindFunction      = { fg = palette.syntax["function"] },
+  CmpItemKindInterface     = { fg = palette.syntax.metaprogramming },
+  CmpItemKindKey           = { fg = palette.syntax.property },
+  CmpItemKindMethod        = { fg = palette.syntax["function"] },
+  CmpItemKindModule        = { fg = palette.syntax.module },
+  CmpItemKindNamespace     = { fg = palette.syntax.module },
+  CmpItemKindNull          = { fg = palette.syntax.literal.fg },
+  CmpItemKindNumber        = { fg = palette.syntax.number.fg },
+  CmpItemKindObject        = { fg = palette.syntax.structure },
+  CmpItemKindOperator      = { fg = palette.syntax.statement },
+  CmpItemKindPackage       = { fg = palette.syntax.module },
+  CmpItemKindProperty      = { fg = palette.syntax.property },
+  CmpItemKindString        = { fg = palette.syntax.string.fg },
+  CmpItemKindStruct        = { fg = palette.syntax.structure },
+  CmpItemKindTypeParameter = { fg = palette.syntax.structure },
+  CmpItemKindVariable      = { fg = palette.syntax.variable, italic = true },
+
+  -- }}}
+
+  -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{
+
   NavicIconsArray         = { fg = palette.syntax.structure, bg = framing.neutral.c.bg },
   NavicIconsBoolean       = { fg = palette.syntax.boolean.fg, bg = framing.neutral.c.bg },
   NavicIconsClass         = { fg = palette.syntax.structure, bg = framing.neutral.c.bg },
@@ -582,15 +1244,10 @@ local highlights_light = {
   NavicSeparator          = framing.neutral.c,
   NavicText               = framing.neutral.c,
 
-  -- noice.nvim | https://github.com/folke/noice.nvim {{{3
-  NoiceCmdlineIcon              = { link = "DiagnosticInfo" },
-  NoiceCmdlineIconSearch        = { link = "DiagnosticWarn" },
-  NoiceCmdlinePopup             = { link = "NormalFloat" },
-  NoiceCmdlinePopupBorder       = { link = "FloatBorder" },
-  NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
-  NoiceCmdlinePopupTitle        = { link = "Title" },
+  -- }}}
 
-  -- nvim-notify | https://github.com/rcarriga/nvim-notify {{{3
+  -- nvim-notify | https://github.com/rcarriga/nvim-notify {{{
+
   NotifyDEBUGBorder = { fg = palette.diagnostics.debug },
   NotifyDEBUGIcon   = { fg = palette.diagnostics.debug },
   NotifyDEBUGTitle  = { fg = palette.diagnostics.debug },
@@ -607,30 +1264,30 @@ local highlights_light = {
   NotifyWARNIcon    = { link = "DiagnosticWarn" },
   NotifyWARNTitle   = { link = "DiagnosticWarn" },
 
-  -- vim-illuminate | https://github.com/RRethy/vim-illuminate {{{3
+  -- }}}
+
+  -- vim-illuminate | https://github.com/RRethy/vim-illuminate {{{
+
   IlluminatedWordText  = { link = "LspReferenceText" },
   IlluminatedWordRead  = { link = "LspReferenceRead" },
   IlluminatedWordWrite = { link = "LspReferenceWrite" },
-  -- }}}2
+
+  -- }}}}}}
 }
---stylua: ignore end
 
---- Map a highlight group spec to a dark background version.
---- @param highlight vim.api.keyset.highlight
---- @return vim.api.keyset.highlight
-local function map_hl_to_dark(highlight)
-  return vim.tbl_extend("force", highlight, {
-    fg = map_to_dark(highlight.fg),
-    bg = map_to_dark(highlight.bg),
-  })
-end
-
---stylua: ignore start
+-- Dark mode overrides {{{
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark_overrides = {
 }
+
+-- }}}
+
 --stylua: ignore end
+
+-- }}}
+
+-- Automation {{{
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark = vim.tbl_extend(
@@ -639,439 +1296,26 @@ local highlights_dark = vim.tbl_extend(
   highlights_dark_overrides
 )
 
---- @param highlights table<string, vim.api.keyset.highlight>
-local function add_cterm_values(highlights)
-  local function convert_to_8bit(color)
-    if color == nil or color == "NONE" then
-      return color
-    end
-
-    return require("mini.colors").convert(color, "8-bit")
-  end
-
-  for _, value in pairs(highlights) do
-    value.ctermfg = convert_to_8bit(value.fg)
-    value.ctermbg = convert_to_8bit(value.bg)
-  end
-end
-
 add_cterm_values(highlights_light)
 add_cterm_values(highlights_dark)
 
--- Contrast ratios {{{1
-
--- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
----@param fg string
----@param bg string
----@return number
-local function get_contrast_ratio(fg, bg)
-  -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-  local function get_luminance(hex)
-    local rgb = colors.convert(hex, "rgb") --[[@as table]]
-
-    -- Convert decimal color to [0; 1]
-    local r, g, b = rgb.r / 255, rgb.g / 255, rgb.b / 255
-
-    -- Correct channels
-    local function correct_channel(x)
-      return x <= 0.04045 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
-    end
-    local R, G, B = correct_channel(r), correct_channel(g), correct_channel(b)
-
-    return 0.2126 * R + 0.7152 * G + 0.0722 * B
-  end
-
-  local lum_fg, lum_bg = get_luminance(fg), get_luminance(bg)
-  local res = (math.max(lum_bg, lum_fg) + 0.05)
-    / (math.min(lum_bg, lum_fg) + 0.05)
-  return math.floor(10 * res + 0.5) / 10
-end
-
---- @param highlight vim.api.keyset.highlight
---- @param normal vim.api.keyset.highlight
---- @return number
-local function get_highlight_contrast_ratio(highlight, normal)
-  local function fallback_color(color, fallback)
-    if color == nil or color == "NONE" then
-      return fallback
-    end
-
-    return color
-  end
-
-  return get_contrast_ratio(
-    fallback_color(highlight.fg, normal.fg),
-    fallback_color(highlight.bg, normal.bg)
-  )
-end
-
--- Preview buffer {{{1
-
-local function insert_highlight_preview_header(lines)
-  table.insert(
-    lines,
-    string.format(
-      "%4s %-30s %-8s %7s %7s %7s %7s %7s %5s %s",
-      "Demo",
-      "Name",
-      "Contrast",
-      "fg",
-      "bg",
-      "special",
-      "ctermfg",
-      "ctermbg",
-      "blend",
-      "attrs"
-    )
-  )
-end
-
---- @param hls table<string, vim.api.keyset.highlight>
-local function insert_highlight_preview_lines(lines, hls)
-  local keys = vim.tbl_keys(hls)
-  table.sort(keys)
-
-  local bool_keys = {
-    "bold",
-    "standout",
-    "strikethrough",
-    "underline",
-    "undercurl",
-    "underdouble",
-    "underdotted",
-    "underdashed",
-    "italic",
-    "reverse",
-    "altfont",
-    "nocombine",
-    "default",
-    "fallback",
-    "fg_indexed",
-    "bg_indexed",
-    "force",
-  }
-
-  for _, key in ipairs(keys) do
-    local hl = hls[key]
-
-    if hl.link then
-      table.insert(lines, string.format("XXX  %-30s -> %s", key, hl.link))
-    else
-      table.insert(lines, (string
-        .format(
-          "XXX  %-30s %8.1f %7s %7s %7s %7s %7s %5d %s",
-          key,
-          get_highlight_contrast_ratio(hl, hls.Normal),
-          hl.fg or "",
-          hl.bg or "",
-          hl.special or "",
-          hl.ctermfg or "",
-          hl.ctermbg or "",
-          hl.blend or 0,
-          table.concat(
-            vim.tbl_filter(
-              function(k)
-                return k
-              end,
-              vim.tbl_map(function(k)
-                return hl[k] and k or nil
-              end, bool_keys)
-            ),
-            ","
-          )
-        )
-        :gsub("%s+$", "")))
-    end
-  end
-end
-
---- @param clrs string[]
---- @param bg string
-local function insert_terminal_colors_preview_lines(lines, clrs, bg)
-  for index, value in ipairs(clrs) do
-    table.insert(
-      lines,
-      string.format(
-        "XXX %2d %4.1f %7s",
-        index - 1,
-        get_contrast_ratio(value, bg),
-        value
-      )
-    )
-  end
-end
-
---- @param name string
---- @param spec vim.api.keyset.highlight
---- @param ext_ns number
---- @param line_index number
-local function color_preview(name, spec, ext_ns, line_index)
-  vim.api.nvim_set_hl(0, name, spec)
-  vim.api.nvim_buf_add_highlight(0, ext_ns, name, line_index, 0, 3)
-end
-
---- @param normal vim.api.keyset.highlight
---- @param diagnostics vim.Diagnostic[]
-local function color_highlight_preview_lines(
-  ext_ns,
-  start_after_line,
-  hls,
-  diagnostics,
-  normal,
-  suffix
-)
-  local keys = vim.tbl_keys(hls)
-  table.sort(keys)
-
-  for index, key in ipairs(keys) do
-    local name = key .. "_preview_" .. suffix
-    local hl = hls[key]
-    local line_index = start_after_line + index
-
-    --- @type vim.api.keyset.highlight | nil
-    local spec
-    if hl.link then
-      local link_target = hls[hl.link]
-      if link_target then
-        spec = vim.tbl_extend("keep", link_target, normal)
-      else
-        spec = nil
-      end
-    else
-      spec = vim.tbl_extend("keep", hl, normal)
-    end
-    if spec then
-      color_preview(name, spec, ext_ns, line_index)
-
-      local contrast = get_highlight_contrast_ratio(spec, normal)
-      if contrast < 7 then
-        table.insert(diagnostics, {
-          lnum = line_index,
-          col = 41,
-          end_col = 44,
-          severity = vim.diagnostic.severity.W,
-          message = "Contrast is below 7.",
-          source = "color-tool",
-          code = "below-7",
-        })
-      end
-    end
-  end
-end
-
---- @param normal vim.api.keyset.highlight
-local function color_terminal_preview_lines(
-  ext_ns,
-  start_after_line,
-  clrs,
-  normal,
-  suffix
-)
-  for index, value in ipairs(clrs) do
-    local name = "terminal_color_" .. index - 1 .. "_" .. suffix
-
-    local spec = { fg = value, bg = normal.bg }
-
-    color_preview(name, spec, ext_ns, index + start_after_line)
-  end
-end
-
-local function create_preview_buffer()
-  local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
-  local diag_ns = vim.api.nvim_create_namespace "highlight-previews-diagnostics"
-
-  --- @type string[]
-  local lines = {}
-
-  vim.list_extend(lines, { "--- Highlights ---" })
-  insert_highlight_preview_header(lines)
-  vim.list_extend(lines, { "Light:" })
-  insert_highlight_preview_lines(lines, highlights_light)
-  vim.list_extend(lines, { "" })
-  vim.list_extend(lines, { "Dark:" })
-  insert_highlight_preview_lines(lines, highlights_dark)
-  vim.list_extend(lines, { "" })
-  vim.list_extend(lines, { "--- Terminal colors ---" })
-  vim.list_extend(lines, { "Light:" })
-  insert_terminal_colors_preview_lines(
-    lines,
-    palette.terminal_colors_light,
-    highlights_light.Normal.bg
-  )
-  vim.list_extend(lines, { "" })
-  vim.list_extend(lines, { "Dark:" })
-  insert_terminal_colors_preview_lines(
-    lines,
-    palette.terminal_colors_dark,
-    highlights_dark.Normal.bg
-  )
-
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-  --- @type vim.Diagnostic[]
-  local diagnostics = {}
-
-  local start_after_line = 2
-  color_highlight_preview_lines(
-    ext_ns,
-    start_after_line,
-    highlights_light,
-    diagnostics,
-    highlights_light.Normal,
-    "light"
-  )
-
-  start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
-  color_highlight_preview_lines(
-    ext_ns,
-    start_after_line,
-    highlights_dark,
-    diagnostics,
-    highlights_dark.Normal,
-    "dark"
-  )
-
-  start_after_line = start_after_line + vim.tbl_count(highlights_dark) + 3
-  color_terminal_preview_lines(
-    ext_ns,
-    start_after_line,
-    palette.terminal_colors_light,
-    highlights_light.Normal,
-    "light"
-  )
-
-  start_after_line = start_after_line
-    + vim.tbl_count(palette.terminal_colors_light)
-    + 2
-  color_terminal_preview_lines(
-    ext_ns,
-    start_after_line,
-    palette.terminal_colors_dark,
-    highlights_dark.Normal,
-    "dark"
-  )
-
-  vim.diagnostic.set(diag_ns, 0, diagnostics)
-
-  vim.opt_local.bufhidden = "hide"
-  vim.opt_local.buftype = "nofile"
-  vim.opt_local.swapfile = false
-  vim.opt_local.wrap = false
-
-  vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
-    buffer = true,
-    silent = true,
-    desc = "Reload the preview buffer.",
-  })
-end
-
 if SHOW_PREVIEW_BUFFER then
-  create_preview_buffer()
-end
-
--- Highlight groups {{{1
-
-local function write_nvim_colors()
-  local file =
-    io.open(vim.fn.stdpath "config" .. "/colors/" .. THEME_NAME .. ".lua", "w")
-  if not file then
-    vim.notify("Could not open nvim color scheme file.", vim.log.levels.WARN)
-    return
-  end
-
-  local function insert_highlight_lines(lines, highlights)
-    local keys = vim.tbl_keys(highlights)
-    table.sort(keys)
-
-    for _, key in ipairs(keys) do
-      table.insert(
-        lines,
-        string.format(
-          '  vim.api.nvim_set_hl(0, "%s", %s)',
-          key,
-          vim.inspect(highlights[key], { indent = "", newline = "" })
-        )
-      )
-    end
-  end
-
-  local function insert_terminal_colors(lines, clrs)
-    for index, color in ipairs(clrs) do
-      table.insert(
-        lines,
-        string.format('  vim.g.terminal_color_%d = "%s"', index - 1, color)
-      )
-    end
-  end
-
-  local lines = {
-    "-- This is a theme generated by color-tool.lua.",
-    "",
-    'vim.cmd.highlight "clear"',
-    'vim.g.colors_name = vim.fn.expand "<sfile>:t:r"',
-    "",
-    'if vim.o.background == "light" then',
-  }
-  insert_highlight_lines(lines, highlights_light)
-  insert_terminal_colors(lines, palette.terminal_colors_light)
-  table.insert(lines, "else")
-  insert_highlight_lines(lines, highlights_dark)
-  insert_terminal_colors(lines, palette.terminal_colors_dark)
-  table.insert(lines, "end")
-
-  file:write(table.concat(lines, "\n"))
-  file:flush()
-  file:close()
-end
-
-local function write_lualine_colors()
-  local file = io.open(
-    vim.fn.stdpath "config" .. "/lua/lualine/themes/" .. THEME_NAME .. ".lua",
-    "w"
+  create_preview_buffer(
+    highlights_light,
+    highlights_dark,
+    palette.terminal_colors_light,
+    palette.terminal_colors_dark
   )
-  if not file then
-    vim.notify("Could not open lualine theme file.", vim.log.levels.WARN)
-    return
-  end
-
-  local lines = {
-    "-- This is a theme generated by color-tool.lua",
-    "",
-    "-- This replaces the default statusline highlight with the WinSeparator",
-    "-- highlight. This is meant to be used to remove the differing, one character",
-    "-- highlight on the right side of the statusline for windows on the bottom when",
-    "-- lualine is in use.",
-    'vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })',
-    "",
-    "return " .. vim.inspect {
-      normal = {
-        a = "LualineA",
-        b = "LualineB",
-        c = "LualineC",
-      },
-      insert = {
-        a = "LualineInsert",
-      },
-      replace = {
-        a = "LualineReplace",
-      },
-      visual = {
-        a = "LualineVisual",
-      },
-      command = {},
-      inactive = {
-        a = "LualineInactiveA",
-      },
-    },
-  }
-
-  file:write(table.concat(lines, "\n"))
-
-  file:flush()
-  file:close()
 end
 
--- Comment this to not enable color scheme
 if WRITE_COLORSCHEME then
-  write_nvim_colors()
+  write_nvim_colors(
+    highlights_light,
+    highlights_dark,
+    palette.terminal_colors_light,
+    palette.terminal_colors_dark
+  )
   write_lualine_colors()
 end
+
+-- }}}
