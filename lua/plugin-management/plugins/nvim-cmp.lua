@@ -37,6 +37,10 @@ return {
       enabled = function()
         return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
       end,
+      preselect = cmp.PreselectMode.None,
+      completion = {
+        autocomplete = false,
+      },
       view = {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
