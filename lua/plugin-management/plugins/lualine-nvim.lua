@@ -9,9 +9,6 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    local vcs_shorten_width = 200
-    local vcs_display_width = 120
-
     local navic_component = {
       "navic",
       fmt = function(text)
@@ -24,6 +21,42 @@ return {
         return vim.api.nvim_win_get_number(0)
       end,
       separator = { left = separators.section.top.right },
+    }
+    local lualine_b = {
+      {
+        "diff",
+        colored = true,
+        symbols = symbols.git.lines,
+        source = function()
+          --- @type Gitsigns.StatusObj
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
+        end,
+      },
+      {
+        "branch",
+        fmt = function(str)
+          if vim.fn.winwidth(0) > 200 then
+            return str
+          end
+          if #str <= 15 then
+            return str
+          end
+
+          local parts = vim.split(str, "/", { plain = true, trimempty = true })
+          if #parts == 0 then
+            return ""
+          end
+
+          return parts[#parts]:sub(1, 15) .. "…"
+        end,
+      },
     }
 
     local lualine_c = {
@@ -47,8 +80,6 @@ return {
       {
         "diagnostics",
         sources = { "nvim_diagnostic" },
-        -- sections = { severity },
-        separator = { left = separators.section.bottom.right, right = "" },
         diagnostics_color = {
           error = "LualineDiagnosticError",
           warn = "LualineDiagnosticWarn",
@@ -60,18 +91,9 @@ return {
     }
 
     local lualine_y = {
-      {
-        "filetype",
-        padding = { left = 1, right = 0 },
-      },
-      {
-        "encoding",
-        padding = 0,
-      },
-      {
-        "fileformat",
-        padding = { left = 0, right = 1 },
-      },
+      { "filetype" },
+      { "encoding" },
+      { "fileformat" },
     }
 
     local lualine_z = {
@@ -86,51 +108,7 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = {
-          {
-            "diff",
-            colored = true,
-            symbols = symbols.git.lines,
-            separator = { left = "", right = separators.section.bottom.left },
-            cond = function()
-              return vim.fn.winwidth(0) > vcs_display_width
-            end,
-            source = function()
-              --- @type Gitsigns.StatusObj
-              local gitsigns = vim.b.gitsigns_status_dict
-              if gitsigns then
-                return {
-                  added = gitsigns.added,
-                  modified = gitsigns.changed,
-                  removed = gitsigns.removed,
-                }
-              end
-            end,
-          },
-          {
-            "branch",
-            separator = "",
-            cond = function()
-              return vim.fn.winwidth(0) > vcs_display_width
-            end,
-            fmt = function(str)
-              if vim.fn.winwidth(0) > vcs_shorten_width then
-                return str
-              end
-              if #str <= 15 then
-                return str
-              end
-
-              local parts =
-                vim.split(str, "/", { plain = true, trimempty = true })
-              if #parts == 0 then
-                return ""
-              end
-
-              return parts[#parts]:sub(1, 15) .. "…"
-            end,
-          },
-        },
+        lualine_b = lualine_b,
         lualine_c = lualine_c,
         lualine_x = lualine_x,
         lualine_y = lualine_y,
@@ -138,7 +116,7 @@ return {
       },
       inactive_sections = {
         lualine_a = {},
-        lualine_b = {},
+        lualine_b = lualine_b,
         lualine_c = lualine_c,
         lualine_x = lualine_x,
         lualine_y = lualine_y,

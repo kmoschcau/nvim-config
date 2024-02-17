@@ -71,12 +71,12 @@ return {
     },
     component = {
       bottom = {
-        left = "\\",
-        right = "/",
+        left = "",
+        right = "",
       },
       top = {
-        left = "/",
-        right = "\\",
+        left = "",
+        right = "",
       },
     },
     hierarchy = {
