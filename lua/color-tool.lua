@@ -1081,6 +1081,8 @@ local highlights_light = {
 
   ["@comment.documentation"]       = { fg = palette.syntax.doc_comment },
 
+  ["@markup.raw.block"]            = { fg = "NONE" },
+
   ["@tag"]                         = { fg = palette.syntax.statement, bold = true },
   ["@tag.attribute"]               = { link = "@property" },
   ["@tag.delimiter"]               = { link = "Delimiter" },
