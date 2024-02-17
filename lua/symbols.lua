@@ -79,6 +79,9 @@ return {
         right = "\\",
       },
     },
+    hierarchy = {
+      right = "",
+    },
   },
   types = {
     Array = "󰅪 ",
