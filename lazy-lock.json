@@ -78,7 +78,6 @@
   "twilight.nvim": { "branch": "main", "commit": "8b7b50c0cb2dc781b2f4262a5ddd57571556d1e4" },
   "typescript-tools.nvim": { "branch": "master", "commit": "c43d9580c3ff5999a1eabca849f807ab33787ea7" },
   "undotree": { "branch": "master", "commit": "9dbbf3b7d19dda0d22ceca461818e4739ad8154d" },
-  "vim-endwise": { "branch": "master", "commit": "3719ffddb5e42bf67b55b2183d7a6fb8d3e5a2b8" },
   "vim-fugitive": { "branch": "master", "commit": "011cf4fcb93a9649ffc6dcdff56ef948f5d0f7cc" },
   "vim-groovy": { "branch": "master", "commit": "b78bbbbc2eea6499c4ad3d092ece68216a89af73" },
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" },
