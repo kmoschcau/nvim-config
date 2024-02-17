@@ -2,6 +2,19 @@
 return {
   "rcarriga/nvim-notify",
   config = function()
-    vim.notify = require "notify"
+    local icons = require("symbols").log
+
+    local notify = require "notify"
+    notify.setup {
+      icons = {
+        ERROR = icons.error,
+        WARN = icons.warn,
+        INFO = icons.info,
+        DEBUG = icons.debug,
+        TRACE = icons.trace,
+      },
+    }
+
+    vim.notify = notify
   end,
 }

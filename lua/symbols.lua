@@ -24,7 +24,7 @@ return {
     indicator = "■",
     severities = {
       error = " ",
-      warn = " ",
+      warn = " ",
       info = " ",
       hint = "󰌵 ",
     },
@@ -50,6 +50,13 @@ return {
       unstaged = "󰄱 ",
       untracked = "",
     },
+  },
+  log = {
+    error = " ",
+    warn = " ",
+    info = " ",
+    debug = " ",
+    trace = "󰛿 ",
   },
   separators = {
     section = {
