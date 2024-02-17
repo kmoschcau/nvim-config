@@ -1162,10 +1162,10 @@ local highlights_light = {
   LualineVisual          = { fg = framing.current.normal.fg, bg = palette.interact.modes.visual, bold = true },
   LualineModified        = { fg = palette.status.modified, bg = framing.neutral.c.bg },
   LualineLazyPackages    = { fg = palette.syntax.module, bg = framing.neutral.c.bg },
-  LualineDiagnosticError = { fg = map_to_dark(palette.diagnostics.error), bg = framing.neutral.c.bg },
-  LualineDiagnosticWarn  = { fg = map_to_dark(palette.diagnostics.warn), bg = framing.neutral.c.bg },
-  LualineDiagnosticInfo  = { fg = map_to_dark(palette.diagnostics.info), bg = framing.neutral.c.bg },
-  LualineDiagnosticHint  = { fg = map_to_dark(palette.diagnostics.hint), bg = framing.neutral.c.bg },
+  LualineDiagnosticError = { fg = palette.diagnostics.error, bg = framing.neutral.c.bg },
+  LualineDiagnosticWarn  = { fg = palette.diagnostics.warn, bg = framing.neutral.c.bg },
+  LualineDiagnosticInfo  = { fg = palette.diagnostics.info, bg = framing.neutral.c.bg },
+  LualineDiagnosticHint  = { fg = palette.diagnostics.hint, bg = framing.neutral.c.bg },
 
   -- }}}
 
