@@ -134,6 +134,7 @@ M.settings = {
 local formatting_ignore_list = {
   "html",
   "jsonls",
+  "kotlin_language_server",
   "omnisharp",
   "typescript-tools",
   "volar",
