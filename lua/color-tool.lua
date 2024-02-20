@@ -1271,6 +1271,31 @@ local highlights_light = {
 
   -- }}}
 
+  -- oil-git-status | https://github.com/refractalize/oil-git-status.nvim {{{
+
+  OilGitStatusIndexUnmodified        = framing.neutral.b,
+  OilGitStatusIndexIgnored           = framing.neutral.b,
+  OilGitStatusIndexUntracked         = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexAdded             = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexCopied            = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexDeleted           = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexModified          = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexRenamed           = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexTypeChanged       = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusIndexUnmerged          = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeUnmodified  = framing.neutral.b,
+  OilGitStatusWorkingTreeIgnored     = framing.neutral.b,
+  OilGitStatusWorkingTreeUntracked   = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeAdded       = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeCopied      = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeDeleted     = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeModified    = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeRenamed     = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeTypeChanged = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  OilGitStatusWorkingTreeUnmerged    = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+
+  -- }}}
+
   -- vim-illuminate | https://github.com/RRethy/vim-illuminate {{{
 
   IlluminatedWordText  = { link = "LspReferenceText" },
