@@ -16,7 +16,7 @@ return {
           lang = "fish",
         },
         fugitive = {
-          pattern = "^:%s*G",
+          pattern = "^:%s*Gi?t?%s",
           icon = require("symbols").noice.cmdline.fugitive,
         },
       },
