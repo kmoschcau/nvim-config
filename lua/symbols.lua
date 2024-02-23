@@ -60,6 +60,7 @@ return {
   },
   noice = {
     cmdline = {
+      fish = "󰈺",
       fugitive = "󰊢",
     },
   },

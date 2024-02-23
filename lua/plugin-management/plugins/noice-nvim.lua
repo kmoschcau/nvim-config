@@ -10,6 +10,11 @@ return {
     cmdline = {
       --- @type table<string, CmdlineFormat>
       format = {
+        fish = {
+          pattern = "^:%s*ter?m?i?n?a?l?%s",
+          icon = require("symbols").noice.cmdline.fish,
+          lang = "fish",
+        },
         fugitive = {
           pattern = "^:%s*G",
           icon = require("symbols").noice.cmdline.fugitive,
