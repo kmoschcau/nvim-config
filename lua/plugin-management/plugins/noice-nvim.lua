@@ -7,8 +7,16 @@ return {
   },
   --- @type NoiceConfig
   opts = {
-    cmdline = { enabled = false },
-    messages = { enabled = false },
+    cmdline = {
+      --- @type table<string, CmdlineFormat>
+      format = {
+        fugitive = {
+          pattern = "^:%s*G",
+          icon = require("symbols").noice.cmdline.fugitive,
+        },
+      },
+    },
+    popupmenu = { backend = "cmp" },
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -16,11 +24,42 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
-    --- @type NoiceConfigViews
-    views = {
-      mini = {
-        position = {
-          row = -2,
+    --- @type NoiceRouteConfig[]
+    routes = {
+      {
+        view = "mini",
+        filter = {
+          any = {
+            -- see |ui-messages|
+            {
+              event = "msg_show",
+            },
+            {
+              event = "msg_showmode",
+            },
+            {
+              event = "msg_showcmd",
+            },
+            {
+              event = "msg_ruler",
+            },
+          },
+        },
+      },
+      {
+        view = "notify",
+        filter = {
+          any = {
+            {
+              find = "No information available",
+            },
+            {
+              find = "method textDocument/codeLens is not supported by any of the servers registered for the current buffer",
+            },
+          },
+        },
+        opts = {
+          level = vim.log.levels.DEBUG,
         },
       },
     },
