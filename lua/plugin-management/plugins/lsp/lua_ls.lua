@@ -7,6 +7,7 @@ lspconfig.lua_ls.setup {
   capabilities = common.capabilities,
   handlers = common.handlers,
   settings = {
+    -- https://luals.github.io/wiki/settings/
     Lua = {
       codelens = {
         enable = true,

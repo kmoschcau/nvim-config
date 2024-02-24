@@ -5,7 +5,6 @@ local lspconfig = require "lspconfig"
 lspconfig.stylelint_lsp.setup {
   cmd = { compat.append_win_ext "stylelint-lsp", "--stdio" },
   capabilities = common.capabilities,
-  handlers = common.handlers,
   filetypes = {
     "css",
     "javascriptreact",
@@ -17,5 +16,5 @@ lspconfig.stylelint_lsp.setup {
     "vue",
     "wxss",
   },
-  settings = {},
+  handlers = common.handlers,
 }
