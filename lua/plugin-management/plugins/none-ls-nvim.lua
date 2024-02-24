@@ -65,9 +65,7 @@ return {
     end
 
     local sources = {
-      code_actions.eslint_d,
       code_actions.gitsigns,
-      code_actions.shellcheck,
 
       diagnostics.actionlint,
       diagnostics.cfn_lint,
@@ -75,9 +73,6 @@ return {
         args = { "-f", "sarif" },
         extra_args = build_checkstyle_extra_args,
         timeout = -1,
-      },
-      diagnostics.eslint_d.with {
-        extra_filetypes = { "svelte" },
       },
       diagnostics.ktlint,
       diagnostics.markdownlint,
@@ -89,7 +84,6 @@ return {
         extra_args = build_pmd_extra_args,
         timeout = -1,
       },
-      diagnostics.shellcheck,
       diagnostics.selene,
       diagnostics.terraform_validate,
       -- This breaks joining lines with the newer treesitter APIs
@@ -115,8 +109,6 @@ return {
       },
       formatting.stylua,
       formatting.terraform_fmt,
-      formatting.trim_newlines,
-      formatting.trim_whitespace,
     }
 
     if vim.fn.executable "fish" == 1 then

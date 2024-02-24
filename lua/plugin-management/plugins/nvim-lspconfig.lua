@@ -46,6 +46,7 @@ return {
     local server_config_modules = {
       "cssls",
       "ember",
+      "eslint",
       "glint",
       "html",
       "jsonls",
