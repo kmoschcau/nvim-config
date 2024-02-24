@@ -4,7 +4,6 @@ return {
   config = function()
     require("illuminate").configure {
       filetypes_denylist = {
-        "NvimTree",
         "fugitive",
         "lazy",
       },

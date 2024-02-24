@@ -1,7 +1,3 @@
-local disabled_filetypes = {
-  "NvimTree",
-}
-
 --- @type LazyPluginSpec
 return {
   "nvimtools/none-ls.nvim",
@@ -130,12 +126,6 @@ return {
 
     none_ls.setup {
       border = "rounded",
-      should_attach = function(bufnr)
-        return not vim.list_contains(
-          disabled_filetypes,
-          vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-        )
-      end,
       sources = sources,
     }
   end,
