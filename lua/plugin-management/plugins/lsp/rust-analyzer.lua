@@ -5,6 +5,7 @@ lspconfig.rust_analyzer.setup {
   capabilities = common.capabilities,
   handlers = common.handlers,
   settings = {
+    -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
     ["rust-analyzer"] = {
       assist = {
         emitMustUse = true,
@@ -20,6 +21,9 @@ lspconfig.rust_analyzer.setup {
             enable = true,
           },
         },
+        memoryLayout = {
+          niches = true,
+        },
       },
       inlayHints = {
         bindingModeHints = {
@@ -29,34 +33,27 @@ lspconfig.rust_analyzer.setup {
           enable = true,
         },
         closureReturnTypeHints = {
-          enable = "never", -- TODO: Figure out other values
+          enable = "always",
         },
-        closureStyle = "impl_fn", -- TODO: Figure out other values
+        closureStyle = "impl_fn",
         discriminantHints = {
-          enable = "never", -- TODO: Figure out other values
+          enable = "always",
         },
         expressionAdjustmentHints = {
-          enable = "never", -- TODO: Figure out other values
-          hideOutsideUnsafe = false,
-          mode = "prefix",
+          enable = "always",
         },
         implicitDrops = {
           enable = true,
         },
-        lifetimeEllisionHints = {
-          enable = "never", -- TODO: Figure out other values
+        lifetimeElisionHints = {
+          enable = "always",
           useParameterNames = true,
         },
         rangeExclusiveHints = {
           enable = true,
         },
-        reborrowHints = {
-          enable = "never", -- TODO: Figure out other values
-        },
       },
       lens = {
-        -- TODO: Figure out other values, likely no effect in neovim.
-        location = "above_name",
         references = {
           adt = {
             enable = true,
@@ -70,6 +67,14 @@ lspconfig.rust_analyzer.setup {
           trait = {
             enable = true,
           },
+        },
+      },
+      notifications = {
+        unindexedProject = true,
+      },
+      rustfmt = {
+        rangeFormatting = {
+          enable = true,
         },
       },
       semanticHighlighting = {
