@@ -4,8 +4,8 @@ local lspconfig = require "lspconfig"
 lspconfig.rust_analyzer.setup {
   capabilities = common.capabilities,
   handlers = common.handlers,
+  -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
   settings = {
-    -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
     ["rust-analyzer"] = {
       assist = {
         emitMustUse = true,

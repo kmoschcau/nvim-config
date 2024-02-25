@@ -131,8 +131,8 @@ M.start_or_attach = function()
     on_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }
     end,
+    -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     settings = {
-      -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
       java = {
         codeGeneration = {
           hashCodeEquals = {

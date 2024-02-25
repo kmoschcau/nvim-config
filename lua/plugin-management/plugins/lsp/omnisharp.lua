@@ -11,6 +11,7 @@ lspconfig.omnisharp.setup {
     common.handlers,
     { ["textDocument/definition"] = omni_ext.handler }
   ),
+  -- Configuration is done in `~/.omnisharp/`.
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -6,8 +6,8 @@ lspconfig.lua_ls.setup {
   cmd = { compat.append_win_ext "lua-language-server" },
   capabilities = common.capabilities,
   handlers = common.handlers,
+  -- https://luals.github.io/wiki/settings/
   settings = {
-    -- https://luals.github.io/wiki/settings/
     Lua = {
       codelens = {
         enable = true,

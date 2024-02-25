@@ -6,9 +6,8 @@ lspconfig.kotlin_language_server.setup {
   cmd = { compat.append_win_ext "kotlin-language-server" },
   capabilities = common.capabilities,
   handlers = common.handlers,
-
+  -- https://github.com/fwcd/vscode-kotlin/blob/main/package.json
   settings = {
-    -- https://github.com/fwcd/vscode-kotlin/blob/main/package.json
     kotlin = {
       inlayHints = {
         chainedHints = true,

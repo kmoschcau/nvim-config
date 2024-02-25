@@ -6,8 +6,8 @@ lspconfig.eslint.setup {
   cmd = { compat.append_win_ext "vscode-eslint-language-server", "--stdio" },
   capabilities = common.capabilities,
   handlers = common.handlers,
+  -- https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#settings-options
   settings = {
-    -- https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#settings-options
     eslint = {
       experimental = {
         useFlatConfig = true,

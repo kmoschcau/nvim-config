@@ -20,4 +20,6 @@ lspconfig.stylelint_lsp.setup {
     "svelte",
   },
   handlers = common.handlers,
+  -- https://github.com/bmatcuk/stylelint-lsp?tab=readme-ov-file#settings
+  settings = {}
 }
