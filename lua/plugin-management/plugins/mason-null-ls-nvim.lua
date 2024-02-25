@@ -5,7 +5,7 @@ return {
     "nvimtools/none-ls.nvim",
     "williamboman/mason.nvim",
   },
-  --- @type MasonNullLsSettings
+  -- @type MasonNullLsSettings -- Does not work well, no optional fields
   opts = {
     automatic_installation = {
       -- mason version has issues with GLIBC missing, use cargo
