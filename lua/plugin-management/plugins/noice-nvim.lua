@@ -7,6 +7,11 @@ return {
   },
   --- @type NoiceConfig
   opts = {
+    messages = {
+      -- Messages can't update existing messages. This is a limitation of core.
+      -- https://github.com/folke/noice.nvim/issues/544
+      enabled = false,
+    },
     cmdline = {
       --- @type table<string, CmdlineFormat>
       format = {
@@ -31,26 +36,6 @@ return {
     },
     --- @type NoiceRouteConfig[]
     routes = {
-      {
-        view = "mini",
-        filter = {
-          any = {
-            -- see |ui-messages|
-            {
-              event = "msg_show",
-            },
-            {
-              event = "msg_showmode",
-            },
-            {
-              event = "msg_showcmd",
-            },
-            {
-              event = "msg_ruler",
-            },
-          },
-        },
-      },
       {
         view = "notify",
         filter = {
