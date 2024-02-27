@@ -34,6 +34,14 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
+    --- @type NoiceConfigViews
+    views = {
+      mini = {
+        position = {
+          row = -2,
+        },
+      },
+    },
     --- @type NoiceRouteConfig[]
     routes = {
       {
