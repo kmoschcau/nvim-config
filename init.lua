@@ -181,13 +181,13 @@ vim.o.updatetime = 100
 
 local augroup = vim.api.nvim_create_augroup("InitNvim", {})
 vim.api.nvim_create_autocmd("TermOpen", {
-  desc = "Remove all columns from terminal buffers.",
+  desc = "Adjust settings to make more sense in a terminal.",
   group = augroup,
   callback = function()
-    vim.api.nvim_set_option_value("colorcolumn", "", { scope = "local" })
-    vim.api.nvim_set_option_value("number", false, { scope = "local" })
-    vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
-    vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
+    vim.opt_local.colorcolumn = ""
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
   end,
 })
 
