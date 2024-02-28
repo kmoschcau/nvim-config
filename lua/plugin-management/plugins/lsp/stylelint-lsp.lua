@@ -12,9 +12,7 @@ lspconfig.stylelint_lsp.setup {
     "sugarss",
     "vue",
     "wxss",
-    "javascript",
     "javascriptreact",
-    "typescript",
     "typescriptreact",
 
     "svelte",
