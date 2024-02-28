@@ -110,7 +110,7 @@ return {
     }
 
     local lualine_z = {
-      "%3p%% :%l/%L :%c",
+      "%3p%% :%l/%L :%5(%c%V%)",
     }
 
     require("lualine").setup {

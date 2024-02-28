@@ -168,10 +168,9 @@ vim.o.statusline =
   .. "%3p%% "
   -- %l: Line number.
   -- %L: Number of lines in buffer.
-  .. ":%l/%L☰ "
-  -- Column number and virtual column number, if different.
-  -- preceded by a literal ': ', minimum 5
-  .. "℅:%5(%c%V%) "
+  .. ":%l/%L "
+  -- Column number and virtual column number, if different; minimum 5
+  .. ":%5(%c%V%) "
 -- }}}3
 
 vim.o.textwidth = 80
