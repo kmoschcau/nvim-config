@@ -71,24 +71,37 @@ return {
       },
     }
 
-    local lualine_x = {
-      {
-        require("lazy.status").updates,
-        cond = require("lazy.status").has_updates,
+    local lualine_x = {}
+
+    local has_lazy, lazy_status = pcall(require, "lazy.status")
+    if has_lazy then
+      table.insert(lualine_x, {
+        lazy_status.updates,
+        cond = lazy_status.has_updates,
         color = "LualineLazyPackages",
+        on_click = function()
+          vim.cmd.Lazy()
+        end,
+      })
+    end
+
+    table.insert(lualine_x, {
+      "diagnostics",
+      sources = { "nvim_diagnostic" },
+      diagnostics_color = {
+        error = "LualineDiagnosticError",
+        warn = "LualineDiagnosticWarn",
+        info = "LualineDiagnosticInfo",
+        hint = "LualineDiagnosticHint",
       },
-      {
-        "diagnostics",
-        sources = { "nvim_diagnostic" },
-        diagnostics_color = {
-          error = "LualineDiagnosticError",
-          warn = "LualineDiagnosticWarn",
-          info = "LualineDiagnosticInfo",
-          hint = "LualineDiagnosticHint",
-        },
-        symbols = symbols.diagnostics.severities,
-      },
-    }
+      symbols = symbols.diagnostics.severities,
+      on_click = function()
+        local has_telescope, telescope = pcall(require, "telescope.builtin")
+        if has_telescope then
+          telescope.diagnostics { bufnr = 0 }
+        end
+      end
+    })
 
     local lualine_y = {
       { "filetype" },
