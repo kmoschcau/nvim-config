@@ -23,3 +23,5 @@
 
 (pipe_table_row
   "|" @punctuation.special (#set! conceal "│"))
+
+(code_fence_content) @nospell

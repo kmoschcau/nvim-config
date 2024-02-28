@@ -25,9 +25,12 @@ return {
       "jedi_language_server",
       "jqls",
       "lemminx",
+      "prosemd_lsp",
       "ruff_lsp",
       "terraformls",
       "texlab",
+      "typos_lsp",
+      "vale_ls",
       "vimls",
     }
 

@@ -109,6 +109,11 @@ vim.o.sidescrolloff = 10
 vim.o.signcolumn = "auto:2"
 vim.o.smarttab = false
 vim.o.smoothscroll = true
+vim.o.spell = true
+vim.o.spellfile = table.concat({
+  vim.fs.normalize "~/.config/nvim/spell/en.utf-8.add",
+  vim.fs.normalize "~/.config/nvim/spell/techspeak.utf-8.add",
+}, ",")
 vim.o.splitbelow = true
 vim.o.splitright = true
 
@@ -188,6 +193,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
+    vim.opt_local.spell = false
   end,
 })
 

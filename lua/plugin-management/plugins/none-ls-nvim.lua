@@ -66,6 +66,7 @@ return {
 
     local sources = {
       code_actions.gitsigns,
+      code_actions.proselint,
 
       diagnostics.actionlint,
       diagnostics.cfn_lint,
@@ -84,6 +85,7 @@ return {
         extra_args = build_pmd_extra_args,
         timeout = -1,
       },
+      diagnostics.proselint,
       diagnostics.selene,
       diagnostics.terraform_validate,
       -- This breaks joining lines with the newer treesitter APIs
