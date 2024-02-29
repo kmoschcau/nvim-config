@@ -712,7 +712,7 @@ local palette = {
       normal      = convert(70, 100, H.interact),
       non_current = convert(90,   7, H.interact),
       markers     = convert(90,   4, H.interact),
-      visual      = convert(90,  10, H.interact),
+      visual      = convert(90,   5, H.interact),
     },
     statusline = {
       current = convert(70, 100, H.interact),
