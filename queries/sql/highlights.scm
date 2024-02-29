@@ -38,8 +38,3 @@
 ; operators
 
 (keyword_like) @keyword.operator
-
-; special characters
-
-(identifier
-  "`" @punctuation.delimiter)
