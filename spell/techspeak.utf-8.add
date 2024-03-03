@@ -12,3 +12,14 @@ editorconfig
 k8s
 YAML
 SvelteKit
+param
+Oklch
+cterm
+truecolor
+extmark
+typedef
+stylua
+LSP
+lsp
+treesitter
+nvim

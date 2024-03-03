@@ -207,7 +207,7 @@ local function insert_highlight_preview_header(lines)
   )
 end
 
---- Insert the the preview lines for the given highlights into the given lines.
+--- Insert the preview lines for the given highlights into the given lines.
 --- @param lines string[] the lines to insert into
 --- @param hls table<string, vim.api.keyset.highlight> the highlights to preview
 local function insert_highlight_preview_lines(lines, hls)
@@ -604,7 +604,7 @@ end
 
 -- }}}
 
--- Hyperparameters {{{
+-- Hyper parameters {{{
 
 local HUES = {
   pink = 0,
@@ -623,7 +623,7 @@ local HUES = {
   magenta = 330,
 }
 
---- SEMANITC HUE VALUES
+--- SEMANTIC HUE VALUES
 --- These are not just hue constants, but associations of semantic objects to
 --- hues.
 local H = {
@@ -1041,7 +1041,7 @@ local highlights_light = {
 
   ["@module"]                      = { fg = palette.syntax.module, italic = false, nocombine = true },
 
-  ["@string.documenation"]         = { fg = palette.syntax.doc_comment, bg = palette.syntax.string.bg },
+  ["@string.documentation"]        = { fg = palette.syntax.doc_comment, bg = palette.syntax.string.bg },
   ["@string.regexp"]               = { link = "SpecialChar" },
   ["@string.escape"]               = { link = "SpecialChar" },
   ["@string.special"]              = { link = "SpecialChar" },
@@ -1110,7 +1110,7 @@ local highlights_light = {
 
   ["@lsp.mod.readonly"] = { italic = false, nocombine = true },
 
-  -- LSP semantic highlight lang overrides {{{
+  -- LSP semantic highlight language overrides {{{
 
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
 
