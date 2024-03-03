@@ -12,7 +12,9 @@ return {
         colorcolumn = "",
         signcolumn = "yes:2",
       },
-      lsp_rename_autosave = true,
+      lsp_file_methods = {
+        autosave_changes = true,
+      },
     }
 
     vim.keymap.set("n", "-", require("oil.actions").parent.callback, {
