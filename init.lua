@@ -185,6 +185,15 @@ vim.o.updatetime = 100
 -- autocommands {{{2
 
 local augroup = vim.api.nvim_create_augroup("InitNvim", {})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight yanked text after yanking.",
+  group = augroup,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
 vim.api.nvim_create_autocmd("TermOpen", {
   desc = "Adjust settings to make more sense in a terminal.",
   group = augroup,
