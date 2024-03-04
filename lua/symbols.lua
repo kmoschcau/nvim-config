@@ -89,6 +89,15 @@ return {
       right = "",
     },
   },
+  todo = {
+    fix = " ",
+    todo = " ",
+    hack = " ",
+    warn = " ",
+    perf = " ",
+    note = " ",
+    test = "⏲ ",
+  },
   types = {
     Array = "󰅪 ",
     Boolean = "◩ ",
