@@ -27,3 +27,6 @@ yamllint
 truthy
 SHA
 SonarQube
+Kotlin
+SVC
+DynamoDB
