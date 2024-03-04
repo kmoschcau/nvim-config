@@ -1037,7 +1037,7 @@ local highlights_light = {
   ["@variable.member"]             = { fg = palette.syntax.member, italic = true },
 
   ["@constant"]                    = { fg = palette.syntax.variable, italic = false, nocombine = true },
-  ["@constant.builtin"]            = { link = "Constant" },
+  ["@constant.builtin"]            = { fg = palette.syntax.special, italic = false, nocombine = true },
 
   ["@module"]                      = { fg = palette.syntax.module, italic = false, nocombine = true },
 
