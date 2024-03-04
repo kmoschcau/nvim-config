@@ -2,7 +2,7 @@
 return {
   "kmoschcau/tree-sitter-go-template",
   dependencies = "nvim-treesitter/nvim-treesitter",
-  enabled = false,
+  enabled = true,
   dev = true,
   config = true,
 }
