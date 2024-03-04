@@ -23,3 +23,7 @@ LSP
 lsp
 treesitter
 nvim
+yamllint
+truthy
+SHA
+SonarQube
