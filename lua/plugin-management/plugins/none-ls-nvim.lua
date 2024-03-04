@@ -104,6 +104,7 @@ return {
       formatting.packer,
       formatting.prettierd.with {
         extra_filetypes = { "svelte" },
+        disabled_filetypes = { "markdown" },
       },
       formatting.shellharden,
       formatting.shfmt.with {
