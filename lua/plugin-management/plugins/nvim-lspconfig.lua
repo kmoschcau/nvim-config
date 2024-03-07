@@ -27,6 +27,7 @@ return {
       "lemminx",
       "prosemd_lsp",
       "ruff_lsp",
+      "somesass_ls",
       "terraformls",
       "texlab",
       "typos_lsp",
