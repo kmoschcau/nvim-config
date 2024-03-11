@@ -30,3 +30,6 @@ SonarQube
 Kotlin
 SVC
 DynamoDB
+kubernetes
+yaml
+gradle
