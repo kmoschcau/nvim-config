@@ -710,7 +710,6 @@ highlight("@string.documentation", {
 
 highlight("@type", { link = "Material_SynStructureName" })
 highlight("@type.definition", { link = "Material_SynTypedefName" })
-highlight("@type.qualifier", { link = "Material_SynStatement" })
 
 highlight("@attribute", { link = "Material_SynDecorator" })
 highlight("@property", { link = "Material_SynPropertyName" })

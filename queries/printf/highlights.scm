@@ -5,7 +5,7 @@
   (type) @type)
 
 (format
-  (flags) @type.qualifier)
+  (flags) @keyword.modifier)
 
 (format
   (width) @number)

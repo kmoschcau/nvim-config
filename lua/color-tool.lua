@@ -1058,7 +1058,6 @@ local highlights_light = {
   ["@type"]                        = { link = "Structure" },
   ["@type.builtin"]                = { link = "Type" },
   ["@type.definition"]             = { link = "Typedef" },
-  ["@type.qualifier"]              = { link = "Statement" },
 
   ["@attribute"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
@@ -1069,7 +1068,6 @@ local highlights_light = {
   ["@keyword.function"]            = { fg = palette.syntax["function"], bold = true },
   ["@keyword.operator"]            = { link = "Operator" },
   ["@keyword.import"]              = { fg = palette.syntax.module, bold = true },
-  ["@keyword.storage"]             = { link = "StorageClass" },
   ["@keyword.repeat"]              = { link = "Repeat" },
   ["@keyword.exception"]           = { link = "Exception" },
 
