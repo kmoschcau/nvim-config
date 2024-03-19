@@ -26,6 +26,7 @@ return {
       "jqls",
       "lemminx",
       "prosemd_lsp",
+      "quick_lint_js",
       "ruff_lsp",
       "somesass_ls",
       "terraformls",
