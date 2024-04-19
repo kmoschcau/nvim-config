@@ -1021,7 +1021,17 @@ local highlights_light = {
   Changed       = { fg = palette.diff.change.strong },
   Removed       = { fg = palette.diff.delete.strong },
 
-  -- }}}
+  -- Syntax groups language overrides {{{
+
+  -- razor {{{
+
+  razorhtmlAttribute   = { link = "@tag.attribute" },
+  razorhtmlTagName     = { link = "@tag" },
+  razorcsIdentifier    = { link = "Identifier" },
+  razorTypeIdentifier  = { link = "Structure" },
+  razorUsingIdentifier = { link = "@module" },
+
+  -- }}}}}}}}}
 
   -- command line expressions *expr-highlight* {{{
 
