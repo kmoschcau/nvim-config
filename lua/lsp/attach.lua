@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/definition
+    -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
     if client and client.name ~= "omnisharp" then
       vim.keymap.set(
         "n",
@@ -57,11 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       }
     )
 
-    -- textDocument/signatureHelp
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, {
-      buffer = args.buf,
-      desc = "LSP: Show signature help for parameter under the cursor.",
-    })
+    -- textDocument/signatureHelp (mapped by default as <C-s>)
 
     -- workspace/didChangeWorkspaceFolders
     vim.keymap.set("n", "<Space>wa", vim.lsp.buf.add_workspace_folder, {
@@ -98,13 +95,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP: Rename the symbol under the cursor.",
     })
 
-    -- textDocument/codeAction
-    vim.keymap.set("n", "<Space>ca", vim.lsp.buf.code_action, {
-      buffer = args.buf,
-      desc = "LSP: Trigger the code actions menu for the position under the cursor.",
-    })
+    -- textDocument/codeAction (mapped by default as crr)
 
-    -- textDocument/references
+    -- textDocument/references (also mapped by default without telescope)
     vim.keymap.set(
       "n",
       "gr",
@@ -164,6 +157,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
 
     -- textDocument/hover
+    -- (mapped by default as K, explicit here because of hover.nvim)
     if common.supports_method(client, "textDocument/hover") then
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {
         buffer = args.buf,
