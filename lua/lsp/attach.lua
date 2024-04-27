@@ -218,21 +218,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- inlayHint/resolve
     -- textDocument/inlayHint
     vim.keymap.set("n", "[ih", function()
-      vim.lsp.inlay_hint.enable(args.buf, true)
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
     end, {
       buffer = args.buf,
       desc = "LSP: Enable inlay hints in the buffer.",
     })
     vim.keymap.set("n", "]ih", function()
-      vim.lsp.inlay_hint.enable(args.buf, false)
+      vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
     end, {
       buffer = args.buf,
       desc = "LSP: Disable inlay hints in the buffer.",
     })
     vim.keymap.set("n", "yih", function()
       vim.lsp.inlay_hint.enable(
-        args.buf,
-        not vim.lsp.inlay_hint.is_enabled(args.buf)
+        not vim.lsp.inlay_hint.is_enabled(args.buf),
+        { bufnr = args.buf }
       )
     end, {
       buffer = args.buf,
