@@ -149,7 +149,7 @@ M.is_ignored_formatter = function(name)
 end
 
 --- Log the given client's server's capabilities
---- @param client lsp.Client|nil the LSP client to log capabilities for
+--- @param client vim.lsp.Client|nil the LSP client to log capabilities for
 --- @param buf_id? integer the buffer number, defaults to 0
 M.log_capabilities = function(client, buf_id)
   if client == nil then
@@ -207,7 +207,7 @@ end
 
 --- Check whether the given client's server supports the given LSP method. If
 --- the given client is `nil`, this always returns false.
---- @param client lsp.Client|nil the LSP client whose server to check
+--- @param client vim.lsp.Client|nil the LSP client whose server to check
 --- @param method string the method name of the method to check
 --- @return boolean
 M.supports_method = function(client, method)
