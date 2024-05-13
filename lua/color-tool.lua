@@ -944,6 +944,13 @@ local highlights_light = {
 
   -- }}}
 
+  -- custom cursor highlight groups (see init.lua and *'guicursor'*) {{{
+
+  CursorInsert  = { bg = palette.interact.modes.insert },
+  CursorReplace = { bg = palette.interact.modes.replace },
+
+  -- }}}
+
   -- diagnostics *diagnostic-highlights* {{{
 
   DiagnosticError = { fg = palette.diagnostics.error },
