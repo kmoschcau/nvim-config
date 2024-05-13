@@ -1107,7 +1107,7 @@ local highlights_light = {
 
   ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
   ["@keyword.interface"] = { fg = palette.syntax.metaprogramming, bold = true },
-  ["@keyword.module"]    = { fg = palette.syntax.module, bold = true },
+  ["@keyword.module"]    = { link = "@keyword.import" },
 
   -- }}}}}}
 
@@ -1160,7 +1160,7 @@ local highlights_light = {
   LazyReasonImport  = { link = "@module" },
   LazyReasonInit    = { link = "@attribute" },
   LazyReasonKeys    = { link = "@operator" },
-  LazyReasonPlugin  = { link = "@keyword.module" },
+  LazyReasonPlugin  = { link = "@keyword.import" },
   LazyReasonRequire = { link = "DevIconLua" },
   LazyReasonRuntime = { link = "DevIconVim" },
   LazyReasonSource  = { link = "@character" },
