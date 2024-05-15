@@ -222,6 +222,14 @@ vim.filetype.add {
 
 -- key maps {{{2
 
+-- formatoptions toggles
+vim.keymap.set("n", "[Fa", function()
+  vim.opt_local.formatoptions:append "a"
+end, { desc = "Formatoptions: Enable automatic paragraph formatting." })
+vim.keymap.set("n", "]Fa", function()
+  vim.opt_local.formatoptions:remove "a"
+end, { desc = "Formatoptions: Disable automatic paragraph formatting." })
+
 -- diagnostics API bindings
 vim.keymap.set("n", "<Space>q", vim.diagnostic.setloclist, {
   desc = "Diagnostics: Put all buffer diagnostics in the location list.",
