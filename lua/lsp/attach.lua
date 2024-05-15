@@ -59,9 +59,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
 
     -- textDocument/signatureHelp
-    vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, {
+    vim.keymap.set("i", "<C-x>", vim.lsp.buf.signature_help, {
       buffer = args.buf,
-      desc = "LSP: Add a workspace folder.",
+      desc = "LSP: Show signature help.",
     })
 
     -- workspace/didChangeWorkspaceFolders
