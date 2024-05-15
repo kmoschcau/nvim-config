@@ -58,7 +58,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       }
     )
 
-    -- textDocument/signatureHelp (mapped by default as <C-s>)
+    -- textDocument/signatureHelp
+    vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, {
+      buffer = args.buf,
+      desc = "LSP: Add a workspace folder.",
+    })
 
     -- workspace/didChangeWorkspaceFolders
     vim.keymap.set("n", "<Space>wa", vim.lsp.buf.add_workspace_folder, {
@@ -95,7 +99,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP: Rename the symbol under the cursor.",
     })
 
-    -- textDocument/codeAction (mapped by default as crr)
+    -- textDocument/codeAction
+    vim.keymap.set({ "n", "x" }, "<Space>ca", vim.lsp.buf.code_action, {
+      buffer = args.buf,
+      desc = "LSP: Trigger the code actions menu.",
+    })
 
     -- textDocument/references (also mapped by default without telescope)
     vim.keymap.set(
