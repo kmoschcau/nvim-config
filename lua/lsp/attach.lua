@@ -239,7 +239,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
     vim.keymap.set("n", "yih", function()
       vim.lsp.inlay_hint.enable(
-        not vim.lsp.inlay_hint.is_enabled(args.buf),
+        not vim.lsp.inlay_hint.is_enabled { bufnr = args.buf },
         { bufnr = args.buf }
       )
     end, {
