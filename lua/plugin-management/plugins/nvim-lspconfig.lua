@@ -25,6 +25,7 @@ return {
       "jedi_language_server",
       "jqls",
       "lemminx",
+      "marksman",
       "prosemd_lsp",
       "quick_lint_js",
       "ruff_lsp",
