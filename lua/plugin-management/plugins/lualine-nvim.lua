@@ -42,19 +42,38 @@ return {
       {
         "branch",
         fmt = function(str)
-          if vim.fn.winwidth(0) > 200 then
-            return str
-          end
-          if #str <= 15 then
+          local min_trim_width = 200
+          local max_trimmed_width = 15
+          local split_char = "/"
+          local ellipsis = "…"
+          local ellipsis_width = 1
+
+          if vim.fn.winwidth(0) > min_trim_width then
             return str
           end
 
-          local parts = vim.split(str, "/", { plain = true, trimempty = true })
+          if #str <= max_trimmed_width then
+            return str
+          end
+
+          local parts =
+            vim.split(str, split_char, { plain = true, trimempty = true })
           if #parts == 0 then
             return ""
           end
 
-          return parts[#parts]:sub(1, 15) .. "…"
+          local max_text_width = max_trimmed_width
+          local result = parts[#parts]
+          if #parts > 1 then
+            result = ellipsis .. split_char .. result
+            max_text_width = max_text_width - ellipsis_width - #split_char
+          end
+
+          if #result <= max_trimmed_width then
+            return result
+          end
+
+          return result:sub(1, max_text_width - ellipsis_width) .. ellipsis
         end,
       },
     }
@@ -100,7 +119,7 @@ return {
         if has_telescope then
           telescope.diagnostics { bufnr = 0 }
         end
-      end
+      end,
     })
 
     local lualine_y = {
