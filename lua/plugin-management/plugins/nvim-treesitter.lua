@@ -38,11 +38,6 @@ return {
 
       -- modules below
 
-      -- windwp/nvim-ts-autotag
-      autotag = {
-        enable = true,
-      },
-
       -- RRethy/nvim-treesitter-endwise
       endwise = {
         enable = true,
