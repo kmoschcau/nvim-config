@@ -11,5 +11,25 @@ return {
     do
       loadfile(ft_path)()
     end
+
+    local ls = require "luasnip"
+
+    vim.keymap.set({ "i", "s" }, "<C-l>", function()
+      if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+      end
+    end, {
+      silent = true,
+      desc = "LuaSnip: Expand or jump to next placeholder",
+    })
+
+    vim.keymap.set({ "i", "s" }, "<C-h>", function()
+      if ls.jumpable(-1) then
+        ls.jump(-1)
+      end
+    end, {
+      silent = true,
+      desc = "LuaSnip: Expand or jump to next placeholder",
+    })
   end,
 }
