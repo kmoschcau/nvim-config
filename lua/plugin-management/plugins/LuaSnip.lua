@@ -5,6 +5,11 @@ return {
   build = "make install_jsregexp",
   config = function()
     require("luasnip.loaders.from_vscode").lazy_load()
-    require("snippets")
+
+    for _, ft_path in
+      ipairs(vim.api.nvim_get_runtime_file("lua/snippets/*.lua", true))
+    do
+      loadfile(ft_path)()
+    end
   end,
 }
