@@ -2,6 +2,23 @@
 
 local common = require "lsp.common"
 
+local format = function()
+  vim.lsp.buf.format {
+    async = true,
+    filter = function(formatting_client)
+      if common.is_ignored_formatter(formatting_client.name) then
+        vim.notify_once(
+          "Ignoring " .. formatting_client.name .. " as formatting provider.",
+          vim.log.levels.DEBUG
+        )
+        return false
+      else
+        return true
+      end
+    end,
+  }
+end
+
 --- @class LspAttachData
 --- @field client_id number the number of the LSP client
 
@@ -14,13 +31,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = common.augroup,
   --- @param args LspAttachArgs the autocmd args
   callback = function(args)
-    local has_telescope, tel_builtin = pcall(require, "telescope.builtin")
-
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     common.log_capabilities(client)
 
     -- keymaps {{{1
+
     -- textDocument/declaration
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
       buffer = args.buf,
@@ -30,33 +46,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/definition
     -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
     if client and client.name ~= "omnisharp" then
-      vim.keymap.set(
-        "n",
-        "gd",
-        common.supports_method(client, "textDocument/definition")
-            and has_telescope
-            and tel_builtin.lsp_definitions
-          or vim.lsp.buf.definition,
-        {
-          buffer = args.buf,
-          desc = "LSP: Fuzzy find definitions of the symbol under the cursor.",
-        }
-      )
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+        buffer = args.buf,
+        desc = "LSP: Fuzzy find definitions of the symbol under the cursor.",
+      })
     end
 
     -- textDocument/implementation
-    vim.keymap.set(
-      "n",
-      "gi",
-      common.supports_method(client, "textDocument/implementation")
-          and has_telescope
-          and tel_builtin.lsp_implementations
-        or vim.lsp.buf.implementation,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find implementations of the symbol under the cursor.",
-      }
-    )
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find implementations of the symbol under the cursor.",
+    })
 
     -- textDocument/signatureHelp | mapped to <C-s> by default
 
@@ -78,138 +78,65 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/typeDefinition
-    vim.keymap.set(
-      "n",
-      "<Space>D",
-      has_telescope and tel_builtin.lsp_type_definitions
-        or vim.lsp.buf.type_definition,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find type definitions of the symbol under the cursor.",
-      }
-    )
+    vim.keymap.set("n", "<Space>D", vim.lsp.buf.type_definition, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find type definitions of the symbol under the cursor.",
+    })
 
     -- textDocument/rename | mapped to grn by default
 
     -- textDocument/codeAction | mapped to gra by default
 
-    -- textDocument/references (also mapped by default without telescope)
-    vim.keymap.set(
-      "n",
-      "grr",
-      has_telescope and tel_builtin.lsp_references or vim.lsp.buf.references,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find references of the symbol under the cursor.",
-      }
-    )
+    -- textDocument/references | mapped to grr by default
 
     -- callHierarchy/incomingCalls
-    vim.keymap.set(
-      "n",
-      "<Space>ci",
-      has_telescope and tel_builtin.lsp_incoming_calls
-        or vim.lsp.buf.incoming_calls,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find incoming calls of the symbol under the cursor.",
-      }
-    )
+    vim.keymap.set("n", "<Space>ci", vim.lsp.buf.incoming_calls, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find incoming calls of the symbol under the cursor.",
+    })
 
     -- callHierarchy/outgoingCalls
-    vim.keymap.set(
-      "n",
-      "<Space>co",
-      has_telescope and tel_builtin.lsp_outgoing_calls
-        or vim.lsp.buf.outgoing_calls,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find outgoing calls of the symbol under the cursor.",
-      }
-    )
+    vim.keymap.set("n", "<Space>co", vim.lsp.buf.outgoing_calls, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find outgoing calls of the symbol under the cursor.",
+    })
 
     -- textDocument/documentSymbol
-    vim.keymap.set(
-      "n",
-      "<Space>sd",
-      has_telescope and tel_builtin.lsp_document_symbols
-        or vim.lsp.buf.document_symbol,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find document symbols.",
-      }
-    )
+    vim.keymap.set("n", "<Space>sd", vim.lsp.buf.document_symbol, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find document symbols.",
+    })
 
     -- workspace/symbol
-    vim.keymap.set(
-      "n",
-      "<Space>sw",
-      has_telescope and tel_builtin.lsp_dynamic_workspace_symbols
-        or vim.lsp.buf.workspace_symbol,
-      {
-        buffer = args.buf,
-        desc = "LSP: Fuzzy find workspace symbols.",
-      }
-    )
+    vim.keymap.set("n", "<Space>sw", vim.lsp.buf.workspace_symbol, {
+      buffer = args.buf,
+      desc = "LSP: Fuzzy find workspace symbols.",
+    })
 
     -- textDocument/hover
     -- (mapped by default as K, explicit here because of hover.nvim)
-    if common.supports_method(client, "textDocument/hover") then
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-        buffer = args.buf,
-        desc = "LSP: Hover.",
-      })
-    end
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+      buffer = args.buf,
+      desc = "LSP: Hover.",
+    })
 
-    if common.supports_method(client, "textDocument/formatting") then
-      if common.is_ignored_formatter(client and client.name) then
-        local c = client or { name = "NilClient" }
-        vim.notify_once(
-          "Ignoring " .. c.name .. " as formatting provider.",
-          vim.log.levels.DEBUG
-        )
-      else
-        local format = function()
-          vim.lsp.buf.format {
-            async = true,
-            filter = function(formatting_client)
-              return not common.is_ignored_formatter(formatting_client.name)
-            end,
-          }
-        end
+    -- textDocument/formatting
+    vim.keymap.set("n", "<Space>f", format, {
+      buffer = args.buf,
+      desc = "LSP: Format the current buffer.",
+    })
 
-        vim.keymap.set("n", "<Space>f", format, {
-          buffer = args.buf,
-          desc = "LSP: Format the current buffer.",
-        })
+    -- textDocument/rangeFormatting
+    vim.keymap.set("x", "<Space>f", format, {
+      buffer = args.buf,
+      desc = "LSP: Format the selected range.",
+    })
 
-        if common.supports_method(client, "textDocument/rangeFormatting") then
-          vim.keymap.set("x", "<Space>f", format, {
-            buffer = args.buf,
-            desc = "LSP: Format the selected range.",
-          })
-        end
-      end
-    end
-
-    if
-      common.supports_method(client, "textDocument/codeLens")
-      or common.supports_method(client, "codeLens/resolve")
-    then
-      vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-        desc = "LSP: Update the code lenses of the buffer.",
-        group = common.augroup,
-        buffer = args.buf,
-        callback = vim.lsp.codelens.refresh,
-      })
-    end
-
-    if common.supports_method(client, "textDocument/semanticTokens/full") then
-      vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
-        buffer = args.buf,
-        desc = "LSP: Do a full semantic tokens refresh.",
-      })
-    end
+    -- textDocument/semanticTokens/full
+    vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {
+      buffer = args.buf,
+      desc = "LSP: Do a full semantic tokens refresh.",
+    })
 
     -- inlayHint/resolve
     -- textDocument/inlayHint
@@ -234,6 +161,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
       buffer = args.buf,
       desc = "LSP: Toggle inlay hints in the buffer.",
     })
+
+    -- autocommands {{{1
+
+    if
+      common.supports_method(client, "textDocument/codeLens")
+      or common.supports_method(client, "codeLens/resolve")
+    then
+      vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+        desc = "LSP: Update the code lenses of the buffer.",
+        group = common.augroup,
+        buffer = args.buf,
+        callback = vim.lsp.codelens.refresh,
+      })
+    end
 
     -- plugin hooks {{{1
 
