@@ -1,5 +1,11 @@
 --- @type LazyPluginSpec
 return {
   "numToStr/Comment.nvim",
-  config = true,
+  config = function()
+    require("Comment").setup()
+    vim.keymap.del("x", "gc")
+    vim.keymap.set("x", "gcc", "<Plug>(comment_toggle_linewise_visual)", {
+      desc = "Comment toggle linewise (visual)",
+    })
+  end,
 }

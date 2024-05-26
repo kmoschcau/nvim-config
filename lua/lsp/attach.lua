@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- callHierarchy/incomingCalls
     vim.keymap.set(
       "n",
-      "gci",
+      "<Space>ci",
       has_telescope and tel_builtin.lsp_incoming_calls
         or vim.lsp.buf.incoming_calls,
       {
@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- callHierarchy/outgoingCalls
     vim.keymap.set(
       "n",
-      "gco",
+      "<Space>co",
       has_telescope and tel_builtin.lsp_outgoing_calls
         or vim.lsp.buf.outgoing_calls,
       {
