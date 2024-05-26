@@ -36,7 +36,7 @@ vim.diagnostic.config {
 -- Neovim options {{{2
 
 vim.o.breakindent = true
-vim.o.breakindentopt = "min:80,shift:2,sbr"
+vim.opt.breakindentopt = { "min:80", "shift:2", "sbr" }
 vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 if not pcall(function()
@@ -59,32 +59,19 @@ vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
 vim.o.foldtext = ""
 vim.o.formatoptions = "cro/qnlj"
-vim.o.guicursor = table.concat({
-  table.concat({
-    "n",
-    "block-blinkwait1000-blinkon500-blinkoff500-Cursor",
-  }, ":"),
-  table.concat({
-    "v",
-    "block-blinkon0-Cursor",
-  }, ":"),
-  table.concat({
-    "c",
-    "ver20-blinkwait1000-blinkon500-blinkoff500-Cursor",
-  }, ":"),
-  table.concat({
-    "i-ci-sm",
-    "ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert",
-  }, ":"),
-  table.concat({
-    "r-cr",
-    "hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace",
-  }, ":"),
-  table.concat({
-    "o",
-    "hor50-Cursor",
-  }, ":"),
-}, ",")
+vim.o.guicursor = table.concat(
+  vim.tbl_map(function(pair)
+    return table.concat(pair, ":")
+  end, {
+    { "n", "block-blinkwait1000-blinkon500-blinkoff500-Cursor" },
+    { "v", "block-blinkon0-Cursor" },
+    { "c", "ver20-blinkwait1000-blinkon500-blinkoff500-Cursor" },
+    { "i-ci-sm", "ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert" },
+    { "r-cr", "hor10-blinkwait1000-blinkon500-blinkoff500-CursorReplace" },
+    { "o", "hor50-Cursor" },
+  }),
+  ","
+)
 vim.o.guifont = "FiraMono Nerd Font:h10"
 vim.o.inccommand = "split"
 vim.o.linebreak = true
@@ -110,10 +97,10 @@ vim.o.signcolumn = "auto:2"
 vim.o.smarttab = false
 vim.o.smoothscroll = true
 vim.o.spell = true
-vim.o.spellfile = table.concat({
+vim.opt.spellfile = {
   vim.fs.normalize "~/.config/nvim/spell/en.utf-8.add",
   vim.fs.normalize "~/.config/nvim/spell/techspeak.utf-8.add",
-}, ",")
+}
 vim.o.splitbelow = true
 vim.o.splitright = true
 
