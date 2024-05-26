@@ -27,6 +27,20 @@ return {
       desc = "Open telescope live grep search.",
     },
     {
+      "<Space>gg",
+      function()
+        require("telescope.builtin").git_commits()
+      end,
+      desc = "Telescope: List git commits of current directory.",
+    },
+    {
+      "<Space>gb",
+      function()
+        require("telescope.builtin").git_bcommits()
+      end,
+      desc = "Telescope: List git commits of current buffer.",
+    },
+    {
       "<Space>t",
       function()
         require("telescope.builtin").diagnostics { bufnr = 0 }
