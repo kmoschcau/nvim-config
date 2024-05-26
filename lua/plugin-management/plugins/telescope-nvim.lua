@@ -56,13 +56,14 @@ return {
     },
   },
   config = function()
+    local telescope = require "telescope"
     local actions = require "telescope.actions"
 
     local lsp_common_opts = {
       fname_width = 0.5,
     }
 
-    require("telescope").setup {
+    telescope.setup {
       defaults = {
         mappings = {
           i = {
@@ -105,10 +106,10 @@ return {
       },
     }
 
-    require("telescope").load_extension "fzf"
-    require("telescope").load_extension "import"
-    require("telescope").load_extension "noice"
-    require("telescope").load_extension "notify"
-    require("telescope").load_extension "lsp_handlers"
+    telescope.load_extension "fzf"
+    telescope.load_extension "import"
+    telescope.load_extension "noice"
+    telescope.load_extension "notify"
+    telescope.load_extension "lsp_handlers"
   end,
 }
