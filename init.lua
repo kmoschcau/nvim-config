@@ -37,7 +37,7 @@ vim.diagnostic.config {
 
 vim.o.breakindent = true
 vim.o.breakindentopt = "min:80,shift:2,sbr"
-vim.opt.colorcolumn = { "+1" }
+vim.o.colorcolumn = "+1"
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 if not pcall(function()
   vim.opt.completeopt:append "popup"
@@ -198,7 +198,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   desc = "Adjust settings to make more sense in a terminal.",
   group = augroup,
   callback = function()
-    vim.opt_local.colorcolumn = ""
+    vim.opt_local.colorcolumn = { "" }
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
