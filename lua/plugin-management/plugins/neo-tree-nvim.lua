@@ -51,7 +51,7 @@ return {
     {
       "<C-n>",
       "<Cmd>Neotree toggle=true<CR>",
-      desc = "Toggle the neo-tree window.",
+      desc = "neo-tree: Toggle the window.",
       silent = true,
     },
   },
@@ -180,7 +180,7 @@ return {
     window = {
       mappings = {
         ["<C-h>"] = {
-          desc = "Go to parent",
+          desc = "neo-tree: Go to parent",
           function(state)
             local node = state.tree:get_node()
             require("neo-tree.ui.renderer").focus_node(
@@ -190,7 +190,7 @@ return {
           end,
         },
         ["<C-j>"] = {
-          desc = "Go to next sibling",
+          desc = "neo-tree: Go to next sibling",
           function(state)
             local node = state.tree:get_node()
             local siblings = get_siblings(state, node)
@@ -202,7 +202,7 @@ return {
           end,
         },
         ["<C-k>"] = {
-          desc = "Go to previous sibling",
+          desc = "neo-tree: Go to previous sibling",
           function(state)
             local node = state.tree:get_node()
             local siblings = get_siblings(state, node)
@@ -221,7 +221,7 @@ return {
         ["[g"] = "none",
         ["]g"] = "none",
         J = {
-          desc = "Go to last sibling",
+          desc = "neo-tree: Go to last sibling",
           function(state)
             local node = state.tree:get_node()
             local siblings = get_siblings(state, node)
@@ -232,7 +232,7 @@ return {
           end,
         },
         K = {
-          desc = "Go to first sibling",
+          desc = "neo-tree: Go to first sibling",
           function(state)
             local node = state.tree:get_node()
             local siblings = get_siblings(state, node)

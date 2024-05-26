@@ -17,14 +17,14 @@ return {
       function()
         require("telescope.builtin").find_files()
       end,
-      desc = "Open telescope file search.",
+      desc = "Telescope: Open file search.",
     },
     {
       vim.fn.has "mac" == 1 and "<C-/>" or "<C-_>",
       function()
         require("telescope.builtin").live_grep()
       end,
-      desc = "Open telescope live grep search.",
+      desc = "Telescope: Open live grep search.",
     },
     {
       "<Space>gg",
@@ -45,14 +45,14 @@ return {
       function()
         require("telescope.builtin").diagnostics { bufnr = 0 }
       end,
-      desc = "Fuzzy search diagnostics in current buffer.",
+      desc = "Telescope: Fuzzy search diagnostics in current buffer.",
     },
     {
       "<Space>T",
       function()
         require("telescope.builtin").diagnostics()
       end,
-      desc = "Fuzzy search diagnostics in workspace.",
+      desc = "Telescope: Fuzzy search diagnostics in workspace.",
     },
   },
   config = function()

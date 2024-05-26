@@ -7,14 +7,14 @@ return {
       function()
         require("hover").hover()
       end,
-      desc = "Trigger hover.nvim for the symbol under the cursor.",
+      desc = "hover.nvim: Trigger for the symbol under the cursor.",
     },
     {
       "gK",
       function()
         require("hover").hover_select()
       end,
-      desc = "Trigger selectable hover.nvim for the symbol under the cursor.",
+      desc = "hover.nvim Trigger selectable for the symbol under the cursor.",
     },
   },
   --- @type Hover.Config
