@@ -67,10 +67,14 @@ return {
       defaults = {
         mappings = {
           i = {
+            ["<C-Down>"] = actions.cycle_history_next,
+            ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
             ["<C-X>"] = false,
           },
           n = {
+            ["<C-Down>"] = actions.cycle_history_next,
+            ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
             ["<C-X>"] = false,
           },
