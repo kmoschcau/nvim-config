@@ -4,6 +4,7 @@ return {
   branch = "0.1.x",
   dependencies = {
     "folke/noice.nvim",
+    "folke/trouble.nvim",
     "gbrlsnchs/telescope-lsp-handlers.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -40,24 +41,11 @@ return {
       end,
       desc = "Telescope: List git commits of current buffer.",
     },
-    {
-      "<Space>t",
-      function()
-        require("telescope.builtin").diagnostics { bufnr = 0 }
-      end,
-      desc = "Telescope: Fuzzy search diagnostics in current buffer.",
-    },
-    {
-      "<Space>T",
-      function()
-        require("telescope.builtin").diagnostics()
-      end,
-      desc = "Telescope: Fuzzy search diagnostics in workspace.",
-    },
   },
   config = function()
     local telescope = require "telescope"
     local actions = require "telescope.actions"
+    local trouble = require "trouble.providers.telescope"
 
     local lsp_common_opts = {
       fname_width = 0.5,
@@ -70,12 +58,14 @@ return {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
+            ["<C-K>"] = trouble.open_with_trouble,
             ["<C-X>"] = false,
           },
           n = {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
+            ["<C-K>"] = trouble.open_with_trouble,
             ["<C-X>"] = false,
           },
         },

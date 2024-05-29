@@ -177,6 +177,7 @@ return {
         "mason",
         "oil",
         "quickfix",
+        "trouble",
       },
     }
   end,
