@@ -2,10 +2,11 @@ local dependencies = {
   "L3MON4D3/cmp-luasnip-choice",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
   "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-cmdline",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
+  "jmbuhr/otter.nvim",
   "lukas-reineke/cmp-under-comparator",
   "micangl/cmp-vimtex",
   "onsails/lspkind.nvim",
@@ -86,6 +87,7 @@ return {
         end,
       },
       sources = cmp.config.sources({
+        { name = "otter" },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         {

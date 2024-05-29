@@ -115,7 +115,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- textDocument/hover
     -- (mapped by default as K, explicit here because of hover.nvim)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+    vim.keymap.set("n", "K", function()
+      local has_otter, otter = pcall(require, "otter")
+      if has_otter then
+        xpcall(otter.ask_hover, vim.lsp.buf.hover)
+      else
+        vim.lsp.buf.hover()
+      end
+    end, {
       buffer = args.buf,
       desc = "LSP: Hover.",
     })
