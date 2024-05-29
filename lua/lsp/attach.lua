@@ -46,7 +46,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/definition
     -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
     if client and client.name ~= "omnisharp" then
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+      vim.keymap.set("n", "gd", function()
+        local has_otter, otter = pcall(require, "otter")
+        if has_otter then
+          xpcall(otter.ask_definition, vim.lsp.buf.definition)
+        else
+          vim.lsp.buf.definition()
+        end
+      end, {
         buffer = args.buf,
         desc = "LSP: Fuzzy find definitions of the symbol under the cursor.",
       })
