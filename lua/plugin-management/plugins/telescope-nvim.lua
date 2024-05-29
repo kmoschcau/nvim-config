@@ -67,12 +67,12 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-x>"] = false,
-            ["<C-s>"] = actions.select_horizontal,
+            ["<C-S>"] = actions.select_horizontal,
+            ["<C-X>"] = false,
           },
           n = {
-            ["<C-x>"] = false,
-            ["<C-s>"] = actions.select_horizontal,
+            ["<C-S>"] = actions.select_horizontal,
+            ["<C-X>"] = false,
           },
         },
         vimgrep_arguments = {
