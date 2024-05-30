@@ -49,7 +49,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "gd", function()
         local has_otter, otter = pcall(require, "otter")
         if has_otter then
-          xpcall(otter.ask_definition, vim.lsp.buf.definition)
+          xpcall(otter.ask_definition, function()
+            vim.lsp.buf.definition()
+          end)
         else
           vim.lsp.buf.definition()
         end
@@ -125,7 +127,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", function()
       local has_otter, otter = pcall(require, "otter")
       if has_otter then
-        xpcall(otter.ask_hover, vim.lsp.buf.hover)
+        xpcall(otter.ask_hover, function()
+          vim.lsp.buf.hover()
+        end)
       else
         vim.lsp.buf.hover()
       end
