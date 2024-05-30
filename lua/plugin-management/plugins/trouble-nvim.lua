@@ -6,27 +6,20 @@ return {
     {
       "<Space>t",
       function()
-        require("trouble").toggle "document_diagnostics"
+        require("trouble").toggle { mode = "diagnostics", filter = { buf = 0 } }
       end,
       desc = "Trouble: Toggle the document diagnostics",
     },
     {
       "<Space>T",
       function()
-        require("trouble").toggle "workspace_diagnostics"
+        require("trouble").toggle { mode = "diagnostics" }
       end,
       desc = "Trouble: Toggle the workspace diagnostics",
     },
   },
-  --- @type TroubleOptions
+  --- @type trouble.Config
   opts = {
-    padding = false,
-    signs = {
-      error = require("symbols").diagnostics.severities.error,
-      warning = require("symbols").diagnostics.severities.warn,
-      information = require("symbols").diagnostics.severities.info,
-      hint = require("symbols").diagnostics.severities.hint,
-      other = require("symbols").diagnostics.severities.info,
-    },
+    auto_preview = false,
   },
 }

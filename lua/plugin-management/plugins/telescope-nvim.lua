@@ -45,7 +45,7 @@ return {
   config = function()
     local telescope = require "telescope"
     local actions = require "telescope.actions"
-    local trouble = require "trouble.providers.telescope"
+    local trouble = require "trouble.sources.telescope"
 
     local lsp_common_opts = {
       fname_width = 0.5,
@@ -58,14 +58,14 @@ return {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
-            ["<C-K>"] = trouble.open_with_trouble,
+            ["<C-K>"] = trouble.open,
             ["<C-X>"] = false,
           },
           n = {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
-            ["<C-K>"] = trouble.open_with_trouble,
+            ["<C-K>"] = trouble.open,
             ["<C-X>"] = false,
           },
         },
