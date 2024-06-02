@@ -26,9 +26,6 @@ lspconfig.lua_ls.setup {
       runtime = {
         version = "LuaJIT",
       },
-      workspace = {
-        -- There is no need to set this up, neodev takes care of this for us.
-      },
     },
   },
 }
