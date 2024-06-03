@@ -19,6 +19,7 @@ return {
 
     local simple_servers = {
       "bashls",
+      "fish_lsp",
       "gradle_ls",
       "helm_ls",
       "jedi_language_server",
