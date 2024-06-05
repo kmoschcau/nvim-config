@@ -62,7 +62,6 @@ return {
       "git_status",
       "document_symbols",
     },
-    enable_normal_mode_for_inputs = true,
     popup_border_style = "rounded",
     default_component_configs = {
       name = {
