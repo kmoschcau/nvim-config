@@ -33,6 +33,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+    local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
+    local has_otter, otter = pcall(require, "otter")
+    local keymap_implementation = common.which_keymap_implementation(
+      args.buf,
+      client,
+      has_omni_ext,
+      has_otter
+    )
+
     common.log_capabilities(client)
 
     -- keymaps {{{1
@@ -45,27 +54,39 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- textDocument/definition
     -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
-    if client and client.name ~= "omnisharp" then
-      vim.keymap.set("n", "gd", function()
-        local has_otter, otter = pcall(require, "otter")
-        if has_otter then
-          xpcall(otter.ask_definition, function()
-            vim.lsp.buf.definition()
-          end)
-        else
-          vim.lsp.buf.definition()
-        end
-      end, {
+    local definition_impl, definition_impl_descr =
+      common.choose_keymap_implementation(
+        keymap_implementation,
+        vim.lsp.buf.definition,
+        {
+          otter_impl = otter.ask_definition,
+          omni_ext_impl = omni_ext.telescope_lsp_definition,
+        }
+      )
+    if definition_impl then
+      vim.keymap.set("n", "gd", definition_impl, {
         buffer = args.buf,
-        desc = "LSP: Fuzzy find definitions of the symbol under the cursor.",
+        desc = "LSP("
+          .. definition_impl_descr
+          .. "): Fuzzy find definitions of the symbol under the cursor.",
       })
     end
 
     -- textDocument/implementation
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {
-      buffer = args.buf,
-      desc = "LSP: Fuzzy find implementations of the symbol under the cursor.",
-    })
+    local implementation_impl, implementation_impl_descr =
+      common.choose_keymap_implementation(
+        keymap_implementation,
+        vim.lsp.buf.implementation,
+        { omni_ext_impl = omni_ext.telescope_lsp_implementation }
+      )
+    if implementation_impl then
+      vim.keymap.set("n", "gi", implementation_impl, {
+        buffer = args.buf,
+        desc = "LSP("
+          .. implementation_impl_descr
+          .. "): Fuzzy find implementations of the symbol under the cursor.",
+      })
+    end
 
     -- textDocument/signatureHelp | mapped to <C-s> by default
 
@@ -87,16 +108,61 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/typeDefinition
-    vim.keymap.set("n", "<Space>D", vim.lsp.buf.type_definition, {
-      buffer = args.buf,
-      desc = "LSP: Fuzzy find type definitions of the symbol under the cursor.",
-    })
+    local type_definition_impl, type_definition_impl_descr =
+      common.choose_keymap_implementation(
+        keymap_implementation,
+        vim.lsp.buf.type_definition,
+        {
+          omni_ext_impl = omni_ext.telescope_lsp_type_definition,
+          otter = otter.ask_type_definition,
+        }
+      )
+    if type_definition_impl then
+      vim.keymap.set("n", "<Space>D", type_definition_impl, {
+        buffer = args.buf,
+        desc = "LSP("
+          .. type_definition_impl_descr
+          .. "): Fuzzy find type definitions of the symbol under the cursor.",
+      })
+    end
 
     -- textDocument/rename | mapped to grn by default
+    local rename_impl, rename_impl_descr = common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.rename,
+      {
+        otter_impl = otter.ask_rename,
+      }
+    )
+    if rename_impl then
+      vim.keymap.set("n", "grn", rename_impl, {
+        buffer = args.buf,
+        desc = "LSP("
+          .. rename_impl_descr
+          .. "): Rename the symbol under the cursor.",
+      })
+    end
 
     -- textDocument/codeAction | mapped to gra by default
 
     -- textDocument/references | mapped to grr by default
+    local references_impl, references_impl_descr =
+      common.choose_keymap_implementation(
+        keymap_implementation,
+        vim.lsp.buf.references,
+        {
+          omni_ext_impl = omni_ext.telescope_lsp_references,
+          otter_impl = otter.ask_references,
+        }
+      )
+    if references_impl then
+      vim.keymap.set("n", "grr", references_impl, {
+        buffer = args.buf,
+        desc = "LSP("
+          .. references_impl_descr
+          .. "): Fuzzy find references for the symbol under the cursor.",
+      })
+    end
 
     -- callHierarchy/incomingCalls
     vim.keymap.set("n", "<Space>ci", vim.lsp.buf.incoming_calls, {
@@ -111,10 +177,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/documentSymbol
-    vim.keymap.set("n", "<Space>sd", vim.lsp.buf.document_symbol, {
-      buffer = args.buf,
-      desc = "LSP: Fuzzy find document symbols.",
-    })
+    local document_symbol_impl, document_symbol_impl_descr =
+      common.choose_keymap_implementation(
+        keymap_implementation,
+        vim.lsp.buf.document_symbol,
+        { otter_impl = otter.ask_document_symbols }
+      )
+    if document_symbol_impl then
+      vim.keymap.set("n", "<Space>sd", document_symbol_impl, {
+        buffer = args.buf,
+        desc = "LSP("
+          .. document_symbol_impl_descr
+          .. "): Fuzzy find document symbols.",
+      })
+    end
 
     -- workspace/symbol
     vim.keymap.set("n", "<Space>sw", vim.lsp.buf.workspace_symbol, {
@@ -124,31 +200,36 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- textDocument/hover
     -- (mapped by default as K, explicit here because of hover.nvim)
-    vim.keymap.set("n", "K", function()
-      local has_otter, otter = pcall(require, "otter")
-      if has_otter then
-        xpcall(otter.ask_hover, function()
-          vim.lsp.buf.hover()
-        end)
-      else
-        vim.lsp.buf.hover()
-      end
-    end, {
-      buffer = args.buf,
-      desc = "LSP: Hover.",
-    })
+    local hover_impl, hover_impl_descr = common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.hover,
+      { otter_impl = otter.ask_hover }
+    )
+    if hover_impl then
+      vim.keymap.set("n", "K", hover_impl, {
+        buffer = args.buf,
+        desc = "LSP(" .. hover_impl_descr .. "): Hover.",
+      })
+    end
 
-    -- textDocument/formatting
-    vim.keymap.set("n", "<Space>f", format, {
-      buffer = args.buf,
-      desc = "LSP: Format the current buffer.",
-    })
+    local format_impl, format_impl_descr = common.choose_keymap_implementation(
+      keymap_implementation,
+      format,
+      { otter_impl = otter.ask_format }
+    )
+    if format_impl then
+      -- textDocument/formatting
+      vim.keymap.set("n", "<Space>f", format_impl, {
+        buffer = args.buf,
+        desc = "LSP(" .. format_impl_descr .. "): Format the current buffer.",
+      })
 
-    -- textDocument/rangeFormatting
-    vim.keymap.set("x", "<Space>f", format, {
-      buffer = args.buf,
-      desc = "LSP: Format the selected range.",
-    })
+      -- textDocument/rangeFormatting
+      vim.keymap.set("x", "<Space>f", format_impl, {
+        buffer = args.buf,
+        desc = "LSP(" .. format_impl_descr .. "): Format the selected range.",
+      })
+    end
 
     -- textDocument/semanticTokens/full
     vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {

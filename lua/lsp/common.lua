@@ -226,4 +226,71 @@ M.supports_method = function(client, method)
   ) and true or false
 end
 
+--- @alias KeymapImplementation "nvim"|"omnisharp_extended"|"otter"|nil
+
+--- Determine which implementation to use for a given keymap. This does not need
+--- to be used for all keymaps, just the ones where multiple implementations are
+--- available.
+--- @param buf integer the buffer number
+--- @param client vim.lsp.Client|nil the LSP client for the buffer
+--- @param has_omni_ext boolean whether omnisharp extended is available
+--- @param has_otter boolean whether otter is available
+--- @return KeymapImplementation
+M.which_keymap_implementation = function(buf, client, has_omni_ext, has_otter)
+  if not client then
+    return nil
+  end
+
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+  if filetype == "cs" and has_omni_ext then
+    return client.name == "omnisharp" and "omnisharp_extended" or nil
+  end
+
+  if has_otter then
+    return "otter"
+  end
+
+  return "nvim"
+end
+
+--- @class ChooseKeymapImplOptions
+--- @field otter_impl? function the otter implementation
+--- @field omni_ext_impl? function the omnisharp extended implementation
+
+--- Select from the given keymap implementations.
+--- @param keymap_implementation KeymapImplementation the determined implementation
+--- @param nvim_impl function the native Neovim implementation
+--- @param opts ChooseKeymapImplOptions the implementation options
+--- @return function|nil, string|nil
+M.choose_keymap_implementation = function(
+  keymap_implementation,
+  nvim_impl,
+  opts
+)
+  local o = opts or {}
+
+  if keymap_implementation == "omnisharp_extended" then
+    if o.omni_ext_impl then
+      return o.omni_ext_impl, "omnisharp_extended"
+    end
+
+    return nvim_impl, "nvim"
+  elseif keymap_implementation == "otter" then
+    if o.otter_impl then
+      return function()
+        xpcall(o.otter_impl, function()
+          nvim_impl()
+        end)
+      end,
+        "otter"
+    end
+
+    return nvim_impl, "nvim"
+  elseif keymap_implementation == "nvim" then
+    return nvim_impl, "nvim"
+  end
+
+  return nil, nil
+end
+
 return M
