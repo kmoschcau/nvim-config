@@ -129,10 +129,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- textDocument/rename | mapped to grn by default
     local rename_impl, rename_impl_descr = common.choose_keymap_implementation(
       keymap_implementation,
-      vim.lsp.buf.rename,
-      {
-        otter_impl = otter.ask_rename,
-      }
+      vim.lsp.buf.rename
     )
     if rename_impl then
       vim.keymap.set("n", "grn", rename_impl, {
@@ -212,11 +209,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
-    local format_impl, format_impl_descr = common.choose_keymap_implementation(
-      keymap_implementation,
-      format,
-      { otter_impl = otter.ask_format }
-    )
+    local format_impl, format_impl_descr =
+      common.choose_keymap_implementation(keymap_implementation, format)
     if format_impl then
       -- textDocument/formatting
       vim.keymap.set("n", "<Space>f", format_impl, {

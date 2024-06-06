@@ -260,7 +260,7 @@ end
 --- Select from the given keymap implementations.
 --- @param keymap_implementation KeymapImplementation the determined implementation
 --- @param nvim_impl function the native Neovim implementation
---- @param opts ChooseKeymapImplOptions the implementation options
+--- @param opts? ChooseKeymapImplOptions the implementation options
 --- @return function|nil, string|nil
 M.choose_keymap_implementation = function(
   keymap_implementation,
