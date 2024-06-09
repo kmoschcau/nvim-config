@@ -277,12 +277,7 @@ M.choose_keymap_implementation = function(
     return nvim_impl, "nvim"
   elseif keymap_implementation == "otter" then
     if o.otter_impl then
-      return function()
-        xpcall(o.otter_impl, function()
-          nvim_impl()
-        end)
-      end,
-        "otter"
+      return o.otter_impl, "otter"
     end
 
     return nvim_impl, "nvim"
