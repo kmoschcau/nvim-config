@@ -32,7 +32,6 @@ return {
       "somesass_ls",
       "terraformls",
       "texlab",
-      "typos_lsp",
       "vale_ls",
       "vimls",
     }
@@ -64,6 +63,7 @@ return {
       "svelte",
       "tailwindcss",
       "typescript-tools",
+      "typos_lsp",
       "volar",
       "yamlls",
     }

@@ -1,0 +1,15 @@
+local common = require "lsp.common"
+local lspconfig = require "lspconfig"
+
+lspconfig.typos_lsp.setup {
+  root_dir = lspconfig.util.root_pattern(
+    "typos.toml",
+    "_typos.toml",
+    ".typos.toml",
+    "pyproject.toml"
+  ),
+  -- HACK: Has to be explicitly set to false, otherwise config files don't work.
+  single_file_support = false,
+  capabilities = common.capabilities,
+  handlers = common.handlers,
+}
