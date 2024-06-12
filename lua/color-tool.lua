@@ -1118,6 +1118,7 @@ local highlights_light = {
   ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
   ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg, italic = false, nocombine = true }, -- TODO
   ["@lsp.type.interface"]  = { link = "@attribute" },
+  ["@lsp.type.keyword"]    = { fg = "NONE" },
   ["@lsp.type.namespace"]  = { link = "@module" },
   ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
   ["@lsp.type.property"]   = { link = "@property" },
