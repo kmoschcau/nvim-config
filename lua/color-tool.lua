@@ -1124,6 +1124,7 @@ local highlights_light = {
   ["@lsp.type.property"]   = { link = "@property" },
   ["@lsp.type.variable"]   = { link = "@variable" },
 
+  ["@lsp.mod.static"]   = { bold = true },
   ["@lsp.mod.readonly"] = { italic = false, nocombine = true },
 
   -- LSP semantic highlight language overrides {{{
