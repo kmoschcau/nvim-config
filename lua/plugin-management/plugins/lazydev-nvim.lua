@@ -5,7 +5,6 @@ return {
   opts = {
     library = {
       "gitsigns.nvim/lua/gitsigns/status.lua",
-      "hover.nvim/lua/hover/config.lua",
       "hydrate.nvim/lua/hydrate/config.lua",
       "lazy.nvim/lua/lazy/types.lua",
       "luvit-meta/library",

@@ -196,7 +196,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- textDocument/hover
-    -- (mapped by default as K, explicit here because of hover.nvim)
     local hover_impl, hover_impl_descr = common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.hover,
