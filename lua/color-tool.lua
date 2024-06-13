@@ -1127,9 +1127,15 @@ local highlights_light = {
   ["@lsp.mod.static"]   = { bold = true },
   ["@lsp.mod.readonly"] = { italic = false, nocombine = true },
 
-  -- LSP semantic highlight language overrides {{{
+  -- language overrides {{{
 
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
+
+  -- }}}
+
+  -- non-standard extensions {{{
+
+  ["@lsp.type.constantName"] = { link = "@constant" },
 
   -- }}}}}}
 
