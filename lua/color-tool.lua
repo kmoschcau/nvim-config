@@ -1455,6 +1455,8 @@ local highlights_light = {
 
 --- @type table<string, vim.api.keyset.highlight>
 local highlights_dark_overrides = {
+  Cursor    = { bg = palette.interact.cursor.normal },
+  IncSearch = { bg = invert_l(highlights_light.IncSearch.bg, "cusp") },
 }
 
 -- }}}
