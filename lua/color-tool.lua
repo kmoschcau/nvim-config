@@ -935,44 +935,6 @@ local palette = {
     underlined      = convert(50, 100, H.syntax.underlined),
     variable        = convert(70, 100, H.syntax.variable),
   },
-
-  terminal_colors_light = {
-    "#424242",
-    "#f44336",
-    "#8bc34a",
-    "#ff9800",
-    "#2196f3",
-    "#9c27b0",
-    "#009688",
-    "#eeeeee",
-    "#212121",
-    "#d32f2f",
-    "#689f38",
-    "#f57c00",
-    "#1976d2",
-    "#7b1fa2",
-    "#00796b",
-    "#e0e0e0",
-  },
-
-  terminal_colors_dark = {
-    "#f5f5f5",
-    "#ef5350",
-    "#9ccc65",
-    "#ffa726",
-    "#42a5f5",
-    "#ab47bc",
-    "#26a69a",
-    "#616161",
-    "#fafafa",
-    "#ef9a9a",
-    "#c5e1a5",
-    "#ffcc80",
-    "#90caf9",
-    "#ce93d8",
-    "#80cbc4",
-    "#757575",
-  },
 }
 
 -- }}}
@@ -983,6 +945,24 @@ local float_normal =
   { fg = palette.neutral.strongest, bg = palette.neutral.max }
 local normal =
   { fg = palette.neutral.strongest, bg = modify_l(float_normal.bg, -5) }
+
+local terminal_colors_light = {
+  modify_l(normal.fg, 20),
+  convert(60, 100, HUES.red),
+  convert(60, 100, HUES.green),
+  convert(60, 100, HUES.orange),
+  convert(60, 100, HUES.blue),
+  convert(60, 100, HUES.purple),
+  convert(60, 100, HUES.teal),
+  modify_l(normal.fg, 80),
+}
+
+vim.list_extend(
+  terminal_colors_light,
+  vim.tbl_map(function(c)
+    return modify_l(c, -15, "chroma")
+  end, terminal_colors_light)
+)
 
 --stylua: ignore
 local framing = {
@@ -1474,6 +1454,11 @@ local highlights_dark = vim.tbl_extend(
   highlights_dark_overrides
 )
 
+--- @type table<string, vim.api.keyset.highlight>
+local terminal_colors_dark = vim.tbl_map(function(c)
+  return modify_l(invert_l(c), 10)
+end, terminal_colors_light)
+
 add_cterm_values(highlights_light)
 add_cterm_values(highlights_dark)
 
@@ -1481,8 +1466,8 @@ if SHOW_PREVIEW_BUFFER then
   create_preview_buffer(
     highlights_light,
     highlights_dark,
-    palette.terminal_colors_light,
-    palette.terminal_colors_dark
+    terminal_colors_light,
+    terminal_colors_dark
   )
 end
 
@@ -1490,8 +1475,8 @@ if WRITE_COLORSCHEME then
   write_nvim_colors(
     highlights_light,
     highlights_dark,
-    palette.terminal_colors_light,
-    palette.terminal_colors_dark
+    terminal_colors_light,
+    terminal_colors_dark
   )
   write_lualine_colors()
 end
