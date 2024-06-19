@@ -6,10 +6,26 @@
 
 local THEME_NAME = "new"
 
--- WHETHER TO OPEN A BUFFER WITH DATA
+-- Whether to open a buffer with data.
 local SHOW_PREVIEW_BUFFER = true
 
--- WHETHER TO WRITE CONFIGURATION FILES FOR THE SCHEME
+-- The contrast threshold below which error diagnostics are created.
+local CONTRAST_ERROR_THRESHOLD = 2
+
+-- The contrast threshold below which error diagnostics are created.
+local CONTRAST_WARNING_THRESHOLD = 3
+
+-- Highlight group names, which should not be included in contrast diagnostics.
+local CONTRAST_IGNORE = {
+  "CursorInsert",
+  "CursorReplace",
+  "LazyProgressDone",
+  "LazyProgressTodo",
+  "NonText",
+  "WinSeparator",
+}
+
+-- Whether to write configuration files for the scheme.
 local WRITE_COLORSCHEME = true
 
 -- }}}
@@ -57,6 +73,11 @@ end
 --- | MiniColorsOklch
 --- | MiniColorsOkhsl
 
+--- @alias MiniColorsGamutClip
+--- | "chroma"
+--- | "lightness"
+--- | "cusp"
+
 -- }}}
 
 -- Helper functions {{{
@@ -65,7 +86,7 @@ end
 --- @param l number the perceived lightness
 --- @param c number the chroma
 --- @param h number|nil the hue
---- @param gamut_clip "chroma" | "lightness" | "cusp" | nil the clip method, defaults to "chroma"
+--- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "chroma"
 local function convert(l, c, h, gamut_clip)
   return colors.convert({ l = l, c = c, h = h }, "hex", {
     gamut_clip = gamut_clip or "chroma",
@@ -86,18 +107,21 @@ end
 
 --- Invert the luminance of the given hex color.
 --- @param val MiniColorsColor
-local function invert_l(val)
+--- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
+local function invert_l(val, gamut_clip)
   return colors.modify_channel(val, "lightness", function(l)
     return 100 - l
-  end, { gamut_clip = "lightness" }) --[[@as string]]
+  end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
 
 --- Shift the given color's perceived lightness.
 --- @param val MiniColorsColor
-local function modify_l(val, L)
+--- @param L number
+--- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
+local function modify_l(val, L, gamut_clip)
   return colors.modify_channel(val, "lightness", function(l)
     return l + L
-  end, { gamut_clip = "lightness" }) --[[@as string]]
+  end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
 
 --- Map a color to a dark background variant.
@@ -188,11 +212,12 @@ end
 
 --- Insert a header for the highlight preview buffer in the given lines.
 --- @param lines string[] the lines to insert into
-local function insert_highlight_preview_header(lines)
+--- @param max_name_length integer the maximum length of highlight names
+local function insert_highlight_preview_header(lines, max_name_length)
   table.insert(
     lines,
     string.format(
-      "%4s %-30s %-8s %7s %7s %7s %7s %7s %5s %s",
+      "%4s %-" .. max_name_length .. "s %-8s %7s %7s %7s %7s %7s %5s %s",
       "Demo",
       "Name",
       "Contrast",
@@ -210,10 +235,14 @@ end
 --- Insert the preview lines for the given highlights into the given lines.
 --- @param lines string[] the lines to insert into
 --- @param hls table<string, vim.api.keyset.highlight> the highlights to preview
-local function insert_highlight_preview_lines(lines, hls)
-  local keys = vim.tbl_keys(hls)
-  table.sort(keys)
-
+--- @param names string[] the highlight names in display order
+--- @param max_name_length integer the maximum length of highlight names
+local function insert_highlight_preview_lines(
+  lines,
+  hls,
+  names,
+  max_name_length
+)
   local bool_keys = {
     "bold",
     "standout",
@@ -234,16 +263,24 @@ local function insert_highlight_preview_lines(lines, hls)
     "force",
   }
 
-  for _, key in ipairs(keys) do
-    local hl = hls[key]
+  for _, name in ipairs(names) do
+    local hl = hls[name]
 
     if hl.link then
-      table.insert(lines, string.format("XXX  %-30s -> %s", key, hl.link))
+      table.insert(
+        lines,
+        string.format(
+          "XXX  %-" .. max_name_length .. "s %54s -> %s",
+          name,
+          "",
+          hl.link
+        )
+      )
     else
       table.insert(lines, (string
         .format(
-          "XXX  %-30s %8.1f %7s %7s %7s %7s %7s %5d %s",
-          key,
+          "XXX  %-" .. max_name_length .. "s %8.1f %7s %7s %7s %7s %7s %5d %s",
+          name,
           get_highlight_contrast_ratio(hl, hls.Normal),
           hl.fg or "",
           hl.bg or "",
@@ -277,7 +314,7 @@ local function insert_terminal_colors_preview_lines(lines, clrs, bg)
     table.insert(
       lines,
       string.format(
-        "XXX %2d %4.1f %7s",
+        "XXX  %2d %8.1f %7s",
         index - 1,
         get_contrast_ratio(value, bg),
         value
@@ -287,67 +324,95 @@ local function insert_terminal_colors_preview_lines(lines, clrs, bg)
 end
 
 --- Add an extmark highlight for a given preview line.
+--- @param bufnr integer the ID of the buffer
 --- @param name string the name of the preview highlight
 --- @param spec vim.api.keyset.highlight the spec for the preview highlight
 --- @param ext_ns integer the extmark namespace ID
 --- @param line_index number the line index where to place the highlight
-local function color_preview(name, spec, ext_ns, line_index)
+local function color_preview(bufnr, name, spec, ext_ns, line_index)
   vim.api.nvim_set_hl(0, name, spec)
-  vim.api.nvim_buf_add_highlight(0, ext_ns, name, line_index, 0, 3)
+  vim.api.nvim_buf_add_highlight(bufnr, ext_ns, name, line_index, 0, 3)
 end
 
 --- Check the given spec's contrast ratio and add a diagnostic if it is too low.
 --- @param diagnostics vim.Diagnostic[] the diagnostics to append to
+--- @param name string the name of the highlight to check
 --- @param spec vim.api.keyset.highlight the highlight spec to check
+--- @param max_name_length integer the maximum length of highlight names
 --- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
 --- @param line_index integer where to place a potential diagnostic
-local function check_contrast(diagnostics, spec, normal, line_index)
+local function check_contrast(
+  diagnostics,
+  name,
+  spec,
+  max_name_length,
+  normal,
+  line_index
+)
+  if vim.list_contains(CONTRAST_IGNORE, name) then
+    return
+  end
+
   local contrast = get_highlight_contrast_ratio(spec, normal)
-  if contrast < 3 then
+  local number_length = #string.format("%.1f", contrast)
+
+  if contrast < CONTRAST_ERROR_THRESHOLD then
     table.insert(diagnostics, {
       lnum = line_index,
-      col = 41,
-      end_col = 44,
+      col = 5 + max_name_length + 9 - number_length,
+      end_col = 5 + max_name_length + 9,
       severity = vim.diagnostic.severity.E,
-      message = "Contrast is below 3.",
+      message = string.format(
+        "%s: Contrast %.1f is below %.1f",
+        name,
+        contrast,
+        CONTRAST_ERROR_THRESHOLD
+      ),
       source = "color-tool",
-      code = "below-3",
+      code = "contrast-below-error-threshold",
     })
-  elseif contrast < 7 then
+  elseif contrast < CONTRAST_WARNING_THRESHOLD then
     table.insert(diagnostics, {
       lnum = line_index,
-      col = 41,
-      end_col = 44,
+      col = 5 + max_name_length + 9 - number_length,
+      end_col = 5 + max_name_length + 9,
       severity = vim.diagnostic.severity.W,
-      message = "Contrast is below 7.",
+      message = string.format(
+        "%s: Contrast %.1f is below %.1f",
+        name,
+        contrast,
+        CONTRAST_WARNING_THRESHOLD
+      ),
       source = "color-tool",
-      code = "below-7",
+      code = "contrast-below-warning-threshold",
     })
   end
 end
 
 --- Add extmark highlights for the given highlights. This also adds diagnostics
 --- entries for highlights with poor contrast.
+--- @param bufnr integer the ID of the buffer
 --- @param ext_ns integer the extmark namespace ID
 --- @param start_after_line integer after which line to start
 --- @param hls table<string, vim.api.keyset.highlight> the highlights to use
+--- @param names string[] the highlight names in display order
+--- @param max_name_length integer the maximum length of highlight names
 --- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
 --- @param diagnostics vim.Diagnostic[] the diagnostics to append to
 --- @param suffix "light" | "dark" the suffix to add to the highlights
 local function color_highlight_preview_lines(
+  bufnr,
   ext_ns,
   start_after_line,
   hls,
+  names,
+  max_name_length,
   diagnostics,
   normal,
   suffix
 )
-  local keys = vim.tbl_keys(hls)
-  table.sort(keys)
-
-  for index, key in ipairs(keys) do
-    local name = key .. "_preview_" .. suffix
-    local hl = hls[key]
+  for index, name in ipairs(names) do
+    local hl = hls[name]
     local line_index = start_after_line + index
 
     --- @type vim.api.keyset.highlight | nil
@@ -363,14 +428,30 @@ local function color_highlight_preview_lines(
       spec = vim.tbl_extend("keep", hl, normal)
     end
     if spec then
-      color_preview(name, spec, ext_ns, line_index)
+      color_preview(
+        bufnr,
+        name .. "_preview_" .. suffix,
+        spec,
+        ext_ns,
+        line_index
+      )
 
-      check_contrast(diagnostics, spec, normal, line_index)
+      if not hl.link then
+        check_contrast(
+          diagnostics,
+          name,
+          spec,
+          max_name_length,
+          normal,
+          line_index
+        )
+      end
     end
   end
 end
 
 --- Add extmark highlights for the given terminal colors.
+--- @param bufnr integer the ID of the buffer
 --- @param ext_ns integer the extmark namespace ID
 --- @param start_after_line integer after which line to start
 --- @param clrs string[] the terminal colors to highlight
@@ -378,6 +459,7 @@ end
 --- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
 --- @param suffix "light" | "dark" the suffix to add to the highlights
 local function color_terminal_preview_lines(
+  bufnr,
   ext_ns,
   start_after_line,
   clrs,
@@ -390,9 +472,9 @@ local function color_terminal_preview_lines(
     local line_index = start_after_line + index
     local spec = { fg = value, bg = normal.bg }
 
-    color_preview(name, spec, ext_ns, line_index)
+    color_preview(bufnr, name, spec, ext_ns, line_index)
 
-    check_contrast(diagnostics, spec, normal, line_index)
+    check_contrast(diagnostics, name, spec, 2, normal, line_index)
   end
 end
 
@@ -407,19 +489,32 @@ local function create_preview_buffer(
   terminal_colors_light,
   terminal_colors_dark
 )
-  local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
-  local diag_ns = vim.api.nvim_create_namespace "highlight-previews-diagnostics"
+  -- FIXME: Make this whole thing less fragile and allow reloading when in the
+  -- new buffer.
+  -- TODO: Make the highlight colors survive a background color change.
+
+  local names = vim.tbl_keys(highlights_light)
+  table.sort(names)
+
+  local max_name_length = math.max(unpack(vim.tbl_map(function(key)
+    return #key
+  end, names)))
 
   --- @type string[]
   local lines = {}
 
   vim.list_extend(lines, { "--- Highlights ---" })
-  insert_highlight_preview_header(lines)
+  insert_highlight_preview_header(lines, max_name_length)
   vim.list_extend(lines, { "Light:" })
-  insert_highlight_preview_lines(lines, highlights_light)
+  insert_highlight_preview_lines(
+    lines,
+    highlights_light,
+    names,
+    max_name_length
+  )
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "Dark:" })
-  insert_highlight_preview_lines(lines, highlights_dark)
+  insert_highlight_preview_lines(lines, highlights_dark, names, max_name_length)
   vim.list_extend(lines, { "" })
   vim.list_extend(lines, { "--- Terminal colors ---" })
   vim.list_extend(lines, { "Light:" })
@@ -436,15 +531,33 @@ local function create_preview_buffer(
     highlights_dark.Normal.bg
   )
 
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_name(bufnr, "Color Tool Preview")
+  vim.api.nvim_set_option_value("bufhidden", "delete", {
+    buf = bufnr,
+    scope = "local",
+  })
+  vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
+    buffer = bufnr,
+    silent = true,
+    desc = "Reload the preview buffer.",
+  })
+
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+
   --- @type vim.Diagnostic[]
   local diagnostics = {}
 
+  local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
+
   local start_after_line = 2
   color_highlight_preview_lines(
+    bufnr,
     ext_ns,
     start_after_line,
     highlights_light,
+    names,
+    max_name_length,
     diagnostics,
     highlights_light.Normal,
     "light"
@@ -452,9 +565,12 @@ local function create_preview_buffer(
 
   start_after_line = start_after_line + vim.tbl_count(highlights_light) + 2
   color_highlight_preview_lines(
+    bufnr,
     ext_ns,
     start_after_line,
     highlights_dark,
+    names,
+    max_name_length,
     diagnostics,
     highlights_dark.Normal,
     "dark"
@@ -462,6 +578,7 @@ local function create_preview_buffer(
 
   start_after_line = start_after_line + vim.tbl_count(highlights_dark) + 3
   color_terminal_preview_lines(
+    bufnr,
     ext_ns,
     start_after_line,
     terminal_colors_light,
@@ -472,6 +589,7 @@ local function create_preview_buffer(
 
   start_after_line = start_after_line + vim.tbl_count(terminal_colors_light) + 2
   color_terminal_preview_lines(
+    bufnr,
     ext_ns,
     start_after_line,
     terminal_colors_dark,
@@ -480,17 +598,21 @@ local function create_preview_buffer(
     "dark"
   )
 
-  vim.diagnostic.set(diag_ns, 0, diagnostics)
+  vim.diagnostic.set(
+    vim.api.nvim_create_namespace "highlight-previews-diagnostics",
+    bufnr,
+    diagnostics
+  )
 
-  vim.opt_local.bufhidden = "hide"
-  vim.opt_local.buftype = "nofile"
-  vim.opt_local.swapfile = false
-  vim.opt_local.wrap = false
+  local winnr = vim.api.nvim_open_win(bufnr, true, { vertical = true })
 
-  vim.keymap.set("n", "R", "<Cmd>source lua/color-tool.lua<CR>", {
-    buffer = true,
-    silent = true,
-    desc = "Reload the preview buffer.",
+  vim.api.nvim_set_option_value("spell", false, {
+    scope = "local",
+    win = winnr,
+  })
+  vim.api.nvim_set_option_value("wrap", false, {
+    scope = "local",
+    win = winnr,
   })
 end
 
