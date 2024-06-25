@@ -246,3 +246,8 @@ vim.g.omni_sql_default_compl_type = "syntax"
 
 -- disable the plugin creating keymaps by default
 vim.g.omni_sql_no_default_maps = 1
+
+-- ft_markdown | markdown plugin, that's shipped by default {{{2
+
+-- Do not let the filetype plugin overwrite formatting settings.
+vim.g.markdown_recommended_style  = 0
