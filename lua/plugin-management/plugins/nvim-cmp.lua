@@ -6,7 +6,6 @@ local dependencies = {
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "hrsh7th/cmp-path",
-  "jmbuhr/otter.nvim",
   "lukas-reineke/cmp-under-comparator",
   "micangl/cmp-vimtex",
   "onsails/lspkind.nvim",
@@ -88,7 +87,6 @@ return {
       },
       sources = cmp.config.sources({
         { name = "lazydev", group_index = 0 },
-        { name = "otter" },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         {

@@ -226,7 +226,7 @@ M.supports_method = function(client, method)
   ) and true or false
 end
 
---- @alias KeymapImplementation "nvim"|"omnisharp_extended"|"otter"|nil
+--- @alias KeymapImplementation "nvim"|"omnisharp_extended"|nil
 
 --- Determine which implementation to use for a given keymap. This does not need
 --- to be used for all keymaps, just the ones where multiple implementations are
@@ -234,9 +234,8 @@ end
 --- @param buf integer the buffer number
 --- @param client vim.lsp.Client|nil the LSP client for the buffer
 --- @param has_omni_ext boolean whether omnisharp extended is available
---- @param has_otter boolean whether otter is available
 --- @return KeymapImplementation
-M.which_keymap_implementation = function(buf, client, has_omni_ext, has_otter)
+M.which_keymap_implementation = function(buf, client, has_omni_ext)
   if not client then
     return nil
   end
@@ -246,15 +245,10 @@ M.which_keymap_implementation = function(buf, client, has_omni_ext, has_otter)
     return client.name == "omnisharp" and "omnisharp_extended" or nil
   end
 
-  if has_otter then
-    return "otter"
-  end
-
   return "nvim"
 end
 
 --- @class ChooseKeymapImplOptions
---- @field otter_impl? function the otter implementation
 --- @field omni_ext_impl? function the omnisharp extended implementation
 
 --- Select from the given keymap implementations.
@@ -272,12 +266,6 @@ M.choose_keymap_implementation = function(
   if keymap_implementation == "omnisharp_extended" then
     if o.omni_ext_impl then
       return o.omni_ext_impl, "omnisharp_extended"
-    end
-
-    return nvim_impl, "nvim"
-  elseif keymap_implementation == "otter" then
-    if o.otter_impl then
-      return o.otter_impl, "otter"
     end
 
     return nvim_impl, "nvim"

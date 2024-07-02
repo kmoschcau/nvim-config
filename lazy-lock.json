@@ -72,7 +72,7 @@
   "oil-git-status.nvim": { "branch": "main", "commit": "a7ea816bac0cc3b8b4c3605e2f2b87960be60a05" },
   "oil.nvim": { "branch": "master", "commit": "ace46a41a1ea56d544a3775adf30490f2abd9235" },
   "omnisharp-extended-lsp.nvim": { "branch": "main", "commit": "aad7bf06b4ca0de816b919d475a75b30f5f62b61" },
-  "otter.nvim": { "branch": "main", "commit": "cbb1be0586eae18cbea38ada46af428d2bebf81a" },
+  "otter.nvim": { "branch": "main", "commit": "e8787988f2f51dc4678aa13c4553613fff0132b5" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "ssr.nvim": { "branch": "main", "commit": "bb323ba621ac647b4ac5638b47666e3ef3c279e1" },
   "stand.nvim": { "branch": "main", "commit": "0ea887e52b27b4ad1f9d53f77ce1cb8bd17d7f92" },
