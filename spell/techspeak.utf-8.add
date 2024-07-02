@@ -84,3 +84,34 @@ NFSv4
 SRR
 CRR
 techspeak
+serverless
+ENIs
+ElastiCache
+Memcached
+Redis
+DAX
+DMS
+SCT
+CloudFormation
+IaC
+CDK
+CodeWhisperer
+NATs
+VIF
+iSCSI
+SMB
+DataSync
+SFTP
+AS2
+ruggedized
+Snowcone
+SNS
+Fargate
+SQS
+RESTful
+WebSocket
+SigV4
+Gbit
+Apache Flink
+EventBridge
+Amazon Redshift
