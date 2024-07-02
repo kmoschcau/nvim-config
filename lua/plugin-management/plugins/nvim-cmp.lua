@@ -48,8 +48,13 @@ return {
         format = function(entry, vim_item)
           local symbols = require "symbols"
 
-          local menu_symbol = symbols.cmp_sources[entry.source.name] or "  "
-          vim_item.menu = "[" .. menu_symbol .. entry.source.name .. "]"
+          local return_item = vim.tbl_extend("force", {}, vim_item)
+
+          return_item.menu = string.format(
+            "[%s%s]",
+            symbols.cmp_sources[entry.source.name] or "  ",
+            entry.source.name
+          )
 
           if vim.list_contains({ "path" }, entry.source.name) then
             local icon, hl_group = require("nvim-web-devicons").get_icon(
@@ -57,16 +62,28 @@ return {
             )
 
             if icon then
-              vim_item.kind = icon
-              vim_item.kind_hl_group = hl_group
-              return vim_item
+              return_item.kind = icon
+              return_item.kind_hl_group = hl_group
+              return return_item
             end
           end
 
-          return require("lspkind").cmp_format {
+          return_item = require("lspkind").cmp_format {
             mode = "symbol_text",
             symbol_map = symbols.types,
-          }(entry, vim_item)
+          }(entry, return_item)
+
+          if vim_item.kind == "Color" then
+            local color_item = require("nvim-highlight-colors").format(
+              entry,
+              vim.tbl_extend("force", {}, vim_item)
+            )
+            if color_item.abbr_hl_group then
+              return_item.kind_hl_group = color_item.abbr_hl_group
+            end
+          end
+
+          return return_item
         end,
       },
       mapping = cmp.mapping.preset.insert {
