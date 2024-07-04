@@ -4,6 +4,7 @@ return {
   ft = "lua",
   opts = {
     library = {
+      "conform.nvim/lua/conform/types.lua",
       "gitsigns.nvim/lua/gitsigns/status.lua",
       "hydrate.nvim/lua/hydrate/config.lua",
       "lazy.nvim/lua/lazy/types.lua",

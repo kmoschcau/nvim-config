@@ -130,25 +130,6 @@ M.settings = {
   typescript = js_like,
 }
 
--- This is a list of servers that do not have an option to disable formatting.
-local formatting_ignore_list = {
-  "cssls",
-  "html",
-  "jsonls",
-  "kotlin_language_server",
-  "omnisharp",
-  "typescript-tools",
-  "volar",
-}
-
---- Check whether the given name designates an LSP that should be ignored for
---- formatting.
---- @param name string|nil
---- @return boolean
-M.is_ignored_formatter = function(name)
-  return vim.list_contains(formatting_ignore_list, name)
-end
-
 --- Log the given client's server's capabilities
 --- @param client vim.lsp.Client|nil the LSP client to log capabilities for
 --- @param buf_id? integer the buffer number, defaults to 0

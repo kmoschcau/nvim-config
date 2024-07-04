@@ -2,23 +2,6 @@
 
 local common = require "lsp.common"
 
-local format = function()
-  vim.lsp.buf.format {
-    async = true,
-    filter = function(formatting_client)
-      if common.is_ignored_formatter(formatting_client.name) then
-        vim.notify_once(
-          "Ignoring " .. formatting_client.name .. " as formatting provider.",
-          vim.log.levels.DEBUG
-        )
-        return false
-      else
-        return true
-      end
-    end,
-  }
-end
-
 --- @class LspAttachData
 --- @field client_id number the number of the LSP client
 
@@ -161,21 +144,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- textDocument/hover | mapped to K by default
 
-    local format_impl, format_impl_descr =
-      common.choose_keymap_implementation(keymap_implementation, format)
-    if format_impl then
-      -- textDocument/formatting
-      vim.keymap.set("n", "<Space>f", format_impl, {
-        buffer = args.buf,
-        desc = "LSP(" .. format_impl_descr .. "): Format the current buffer.",
-      })
+    -- textDocument/formatting | see conform plugin
 
-      -- textDocument/rangeFormatting
-      vim.keymap.set("x", "<Space>f", format_impl, {
-        buffer = args.buf,
-        desc = "LSP(" .. format_impl_descr .. "): Format the selected range.",
-      })
-    end
+    -- textDocument/rangeFormatting | see conform plugin
 
     -- textDocument/semanticTokens/full
     vim.keymap.set("n", "<F9>", vim.lsp.semantic_tokens.force_refresh, {

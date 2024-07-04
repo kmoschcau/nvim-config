@@ -9,7 +9,6 @@ return {
     local none_ls = require "null-ls"
     local code_actions = none_ls.builtins.code_actions
     local diagnostics = none_ls.builtins.diagnostics
-    local formatting = none_ls.builtins.formatting
 
     local config = require("neoconf").get(
       "none_ls",
@@ -95,27 +94,10 @@ return {
       },
       diagnostics.trivy,
       diagnostics.yamllint,
-
-      formatting.black,
-      formatting.csharpier,
-      formatting.google_java_format,
-      formatting.ktlint,
-      formatting.markdownlint,
-      formatting.packer,
-      formatting.prettierd.with {
-        disabled_filetypes = { "markdown" },
-      },
-      formatting.shellharden,
-      formatting.shfmt.with {
-        extra_args = { "--indent", "4" },
-      },
-      formatting.stylua,
-      formatting.terraform_fmt,
     }
 
     if vim.fn.executable "fish" == 1 then
       table.insert(sources, diagnostics.fish)
-      table.insert(sources, formatting.fish_indent)
     end
 
     none_ls.setup {
