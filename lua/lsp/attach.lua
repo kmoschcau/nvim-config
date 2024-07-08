@@ -1,4 +1,4 @@
--- vim: set foldmethod=marker
+-- vim: foldmethod=marker
 
 local common = require "lsp.common"
 
@@ -178,7 +178,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP: Toggle inlay hints in the buffer.",
     })
 
-    -- autocommands {{{1
+    -- }}}
+
+    -- autocommands {{{
 
     if
       common.supports_method(client, "textDocument/codeLens")
@@ -192,7 +194,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
-    -- plugin hooks {{{1
+    -- }}}
+
+    -- plugin hooks {{{
 
     if common.supports_method(client, "textDocument/documentSymbol") then
       local c = client or { name = "NilClient" }
@@ -205,6 +209,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end
     end
 
-    -- }}}1
+    -- }}}
   end,
 })

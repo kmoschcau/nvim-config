@@ -1,11 +1,13 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
--- theme settings {{{1
+-- theme settings {{{
 
 vim.o.background = require("system-compat").get_system_background()
 vim.cmd.colorscheme "new"
 
--- plugins and packages {{{1
+-- }}}
+
+-- plugins and packages {{{
 
 local ehandler = require("error-handler").handler
 
@@ -15,8 +17,11 @@ xpcall(require, ehandler, "plugin-management")
 -- load LSP keymaps
 xpcall(require, ehandler, "lsp.attach")
 
--- general Neovim settings {{{1
--- diagnostics settings {{{2
+-- }}}
+
+-- general Neovim settings {{{
+
+-- diagnostics settings {{{
 
 vim.diagnostic.config {
   float = {
@@ -33,7 +38,9 @@ vim.diagnostic.config {
   },
 }
 
--- Neovim options {{{2
+-- }}}
+
+-- Neovim options {{{
 
 vim.o.breakindent = true
 vim.opt.breakindentopt = { "min:80", "shift:2", "sbr" }
@@ -104,7 +111,7 @@ vim.opt.spellfile = {
 vim.o.splitbelow = true
 vim.o.splitright = true
 
--- statusline {{{3
+-- statusline {{{
 -- selene: allow(unused_variable)
 
 --- Convert the current mode from `vim.fn.mode()` into a readable string.
@@ -163,13 +170,16 @@ vim.o.statusline =
   .. ":%l/%L "
   -- Column number and virtual column number, if different; minimum 5
   .. ":%5(%c%V%) "
--- }}}3
+
+-- }}}
 
 vim.o.textwidth = 80
 vim.o.title = true
 vim.o.updatetime = 100
 
--- autocommands {{{2
+-- }}}
+
+-- autocommands {{{
 
 local augroup = vim.api.nvim_create_augroup("InitNvim", {})
 
@@ -193,7 +203,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- file type detection {{{2
+-- }}}
+
+-- file type detection {{{
 
 vim.filetype.add {
   extension = {
@@ -214,7 +226,9 @@ vim.filetype.add {
   },
 }
 
--- key maps {{{2
+-- }}}
+
+-- key maps {{{
 
 -- formatoptions toggles
 vim.keymap.set("n", "[Fa", function()
@@ -237,9 +251,11 @@ vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
   desc = "Treesitter: Show tree inspection window.",
 })
 
--- plugin configurations {{{1
+-- }}}}}}
 
--- ft_sql | really old vimscript plugin, that's shipped by default {{{2
+-- plugin configurations {{{
+
+-- ft_sql | really old vimscript plugin, that's shipped by default {{{
 
 -- set the default completion type to be syntax based
 vim.g.omni_sql_default_compl_type = "syntax"
@@ -247,7 +263,11 @@ vim.g.omni_sql_default_compl_type = "syntax"
 -- disable the plugin creating keymaps by default
 vim.g.omni_sql_no_default_maps = 1
 
--- ft_markdown | markdown plugin, that's shipped by default {{{2
+-- }}}
+
+-- ft_markdown | markdown plugin, that's shipped by default {{{
 
 -- Do not let the filetype plugin overwrite formatting settings.
 vim.g.markdown_recommended_style = 0
+
+-- }}}}}}
