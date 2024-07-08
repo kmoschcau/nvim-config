@@ -57,7 +57,8 @@ return {
           )
 
           if vim.list_contains({ "path" }, entry.source.name) then
-            local icon, hl_group = require("nvim-web-devicons").get_icon(
+            local icon, hl_group = require("mini.icons").get(
+              "file",
               entry:get_completion_item().label
             )
 

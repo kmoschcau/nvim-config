@@ -740,6 +740,7 @@ local HUES = {
   cyan = 195,
   seafoam = 220,
   blue = 240,
+  azure = 256,
   grey = 270,
   purple = 300,
   magenta = 330,
@@ -783,7 +784,7 @@ local H = {
   syntax = {
     boolean = HUES.orange,
     ["coroutine"] = HUES.yellow,
-    directory = HUES.blue,
+    directory = HUES.azure,
     doc_comment = HUES.blue,
     enum = HUES.blue,
     ["function"] = HUES.teal,
@@ -1294,6 +1295,20 @@ local highlights_light = {
   LualineDiagnosticWarn  = { fg = palette.diagnostics.warn, bg = framing.neutral.c.bg },
   LualineDiagnosticInfo  = { fg = palette.diagnostics.info, bg = framing.neutral.c.bg },
   LualineDiagnosticHint  = { fg = palette.diagnostics.hint, bg = framing.neutral.c.bg },
+
+  -- }}}
+
+  -- mini.icons | https://github.com/echasnovski/mini.colors{{{
+
+  MiniIconsAzure  = { fg = convert(60, 100, HUES.azure) },
+  MiniIconsBlue   = { fg = convert(60, 100, HUES.blue) },
+  MiniIconsCyan   = { fg = convert(60, 100, HUES.cyan) },
+  MiniIconsGreen  = { fg = convert(60, 100, HUES.green) },
+  MiniIconsGrey   = { fg = convert(60, 100, HUES.grey) },
+  MiniIconsOrange = { fg = convert(60, 100, HUES.orange) },
+  MiniIconsPurple = { fg = convert(60, 100, HUES.purple) },
+  MiniIconsRed    = { fg = convert(60, 100, HUES.red) },
+  MiniIconsYellow = { fg = convert(60, 100, HUES.yellow) },
 
   -- }}}
 
