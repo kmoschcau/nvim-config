@@ -253,6 +253,51 @@ vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
 
 -- }}}}}}
 
+-- neovide settings {{{
+
+if vim.g.neovide then
+  -- options {{{
+
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_theme = "auto"
+
+  -- }}}
+
+  -- scaling {{{
+
+  vim.g.neovide_scale_factor = 1.0
+
+  vim.keymap.set("n", "<C-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1 / 1.25
+  end, {
+    desc = "Neovide: Scale down.",
+  })
+
+  vim.keymap.set("n", "<C-+>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1.25
+  end, {
+    desc = "Neovide: Scale up.",
+  })
+
+  vim.keymap.set("n", "<C-0>", function()
+    vim.g.neovide_scale_factor = 1.0
+  end, {
+    desc = "Neovide: Reset scaling.",
+  })
+
+  -- }}}
+
+  -- fullscreen {{{
+
+  vim.keymap.set("n", "<F11>", function()
+    vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+  end)
+
+  -- }}}
+end
+
+-- }}}
+
 -- plugin configurations {{{
 
 -- ft_sql | really old vimscript plugin, that's shipped by default {{{

@@ -21,7 +21,14 @@ return {
       desc = "Telescope: Open file search.",
     },
     {
-      vim.fn.has "mac" == 1 and "<C-/>" or "<C-_>",
+      "<C-/>",
+      function()
+        require("telescope.builtin").live_grep()
+      end,
+      desc = "Telescope: Open live grep search.",
+    },
+    {
+      "<C-_>",
       function()
         require("telescope.builtin").live_grep()
       end,
