@@ -121,3 +121,8 @@ CloudFront
 ELB
 OSI
 SSM
+LDAP
+SSO
+IdP
+ECS
+ECR
