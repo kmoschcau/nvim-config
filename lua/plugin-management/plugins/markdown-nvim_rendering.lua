@@ -4,8 +4,8 @@ return {
   name = "markdown.nvim-render",
   ft = "markdown",
   opts = {
-    highlights = {
-      dash = "NonText",
+    dash = {
+      highlight = "NonText",
     },
   },
 }
