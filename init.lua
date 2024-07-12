@@ -14,8 +14,8 @@ local ehandler = require("error-handler").handler
 -- load plugin infrastructure
 xpcall(require, ehandler, "plugin-management")
 
--- load LSP keymaps
-xpcall(require, ehandler, "lsp.attach")
+-- setup LSP
+xpcall(require, ehandler, "lsp.setup")
 
 -- }}}
 

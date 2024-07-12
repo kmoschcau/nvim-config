@@ -1,9 +1,4 @@
-local common = require "lsp.common"
-local lspconfig = require "lspconfig"
-
-lspconfig.rust_analyzer.setup {
-  capabilities = common.capabilities,
-  handlers = common.handlers,
+require("lspconfig").rust_analyzer.setup {
   -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
   settings = {
     ["rust-analyzer"] = {

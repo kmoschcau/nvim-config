@@ -1,9 +1,5 @@
 local M = {}
 
-local jdtls = require "jdtls"
-local common = require "lsp.common"
-local mason_reg = require "mason-registry"
-
 --- Get the config file path for jdtls.
 --- @param jdtls_package Package the mason registry package for jdtls
 --- @return string
@@ -65,6 +61,8 @@ end
 --- Get the plugin bundle paths for jdtls.
 --- @return string[]
 local function get_plugin_bundle_paths()
+  local mason_reg = require "mason-registry"
+
   local bundles = {}
 
   local java_debug_package = mason_reg.get_package "java-debug-adapter"
@@ -117,11 +115,14 @@ end
 
 --- Start the language server (if not started), and attach the current buffer.
 M.start_or_attach = function()
-  local jdtls_package = mason_reg.get_package "jdtls"
+  local jdtls_package = require("mason-registry").get_package "jdtls"
 
   if not jdtls_package:is_installed() then
     return
   end
+
+  local common = require "lsp.common"
+  local jdtls = require "jdtls"
 
   jdtls.start_or_attach {
     capabilities = common.capabilities,

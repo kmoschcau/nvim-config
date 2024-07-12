@@ -1,11 +1,5 @@
-local common = require "lsp.common"
-local compat = require "system-compat"
-local lspconfig = require "lspconfig"
-
-lspconfig.kotlin_language_server.setup {
-  cmd = { compat.append_win_ext "kotlin-language-server" },
-  capabilities = common.capabilities,
-  handlers = common.handlers,
+require("lspconfig").kotlin_language_server.setup {
+  cmd = { require("system-compat").append_win_ext "kotlin-language-server" },
   -- https://github.com/fwcd/vscode-kotlin/blob/main/package.json
   settings = {
     kotlin = {

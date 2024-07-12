@@ -7,8 +7,6 @@ local config =
 
 require("typescript-tools").setup {
   autostart = not config.use_volar,
-  capabilities = common.capabilities,
-  handlers = common.handlers,
   -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
   settings = {
     expose_as_code_action = "all",

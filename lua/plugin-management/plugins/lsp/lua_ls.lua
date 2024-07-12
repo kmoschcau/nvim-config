@@ -1,11 +1,5 @@
-local common = require "lsp.common"
-local compat = require "system-compat"
-local lspconfig = require "lspconfig"
-
-lspconfig.lua_ls.setup {
-  cmd = { compat.append_win_ext "lua-language-server" },
-  capabilities = common.capabilities,
-  handlers = common.handlers,
+require("lspconfig").lua_ls.setup {
+  cmd = { require("system-compat").append_win_ext "lua-language-server" },
   -- https://luals.github.io/wiki/settings/
   settings = {
     Lua = {

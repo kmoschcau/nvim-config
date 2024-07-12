@@ -1,4 +1,3 @@
-local common = require "lsp.common"
 local lspconfig = require "lspconfig"
 
 lspconfig.typos_lsp.setup {
@@ -10,6 +9,4 @@ lspconfig.typos_lsp.setup {
   ),
   -- HACK: Has to be explicitly set to false, otherwise config files don't work.
   single_file_support = false,
-  capabilities = common.capabilities,
-  handlers = common.handlers,
 }

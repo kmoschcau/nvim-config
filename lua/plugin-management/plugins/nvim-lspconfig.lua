@@ -17,6 +17,12 @@ return {
     local common = require "lsp.common"
     local lspconfig = require "lspconfig"
 
+    lspconfig.util.default_config =
+      vim.tbl_extend("force", lspconfig.util.default_config, {
+        capabilities = common.capabilities,
+        handlers = common.handlers,
+      })
+
     local simple_servers = {
       "bashls",
       "fish_lsp",
@@ -42,10 +48,7 @@ return {
     end
 
     for _, lsp in ipairs(simple_servers) do
-      lspconfig[lsp].setup {
-        capabilities = common.capabilities,
-        handlers = common.handlers,
-      }
+      lspconfig[lsp].setup {}
     end
 
     local server_config_modules = {
