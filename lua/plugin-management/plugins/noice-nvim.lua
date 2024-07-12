@@ -7,11 +7,6 @@ return {
   },
   --- @type NoiceConfig
   opts = {
-    messages = {
-      -- Messages can't update existing messages. This is a limitation of core.
-      -- https://github.com/folke/noice.nvim/issues/544
-      enabled = false,
-    },
     cmdline = {
       --- @type table<string, CmdlineFormat>
       format = {
@@ -26,7 +21,6 @@ return {
         },
       },
     },
-    popupmenu = { backend = "cmp" },
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -34,13 +28,14 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
-    --- @type NoiceConfigViews
-    views = {
-      mini = {
-        position = {
-          row = -2,
-        },
-      },
+    messages = {
+      -- Messages can't update existing messages. This is a limitation of core.
+      -- https://github.com/folke/noice.nvim/issues/544
+      enabled = false,
+    },
+    popupmenu = {
+      -- I don't use the popup-menu.
+      enabled = false,
     },
     --- @type NoiceRouteConfig[]
     routes = {
@@ -58,6 +53,14 @@ return {
         },
         opts = {
           level = vim.log.levels.DEBUG,
+        },
+      },
+    },
+    --- @type NoiceConfigViews
+    views = {
+      mini = {
+        position = {
+          row = -2,
         },
       },
     },
