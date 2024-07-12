@@ -44,9 +44,6 @@ return {
         filter = {
           any = {
             {
-              find = "No information available",
-            },
-            {
               find = "method textDocument/codeLens is not supported by any of the servers registered for the current buffer",
             },
           },
