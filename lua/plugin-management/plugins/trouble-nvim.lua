@@ -1,7 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "folke/trouble.nvim",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "echasnovski/mini.nvim" },
   keys = {
     {
       "<Space>t",

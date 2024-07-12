@@ -1,6 +1,7 @@
 local dependencies = {
   "L3MON4D3/cmp-luasnip-choice",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
+  "echasnovski/mini.nvim",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/cmp-nvim-lsp",

@@ -31,7 +31,7 @@ return {
   branch = "v3.x",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "echasnovski/mini.icons",
+    "echasnovski/mini.nvim",
     "nvim-lua/plenary.nvim",
     {
       "s1n7ax/nvim-window-picker",

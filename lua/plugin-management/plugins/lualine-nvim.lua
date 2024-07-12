@@ -6,7 +6,7 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "SmiteshP/nvim-navic",
-    "echasnovski/mini.icons",
+    "echasnovski/mini.nvim",
   },
   config = function()
     local navic_component = {

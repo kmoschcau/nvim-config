@@ -1,7 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "stevearc/oil.nvim",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "echasnovski/mini.nvim" },
   config = function()
     --- @type oil.setupOpts
     require("oil").setup {
