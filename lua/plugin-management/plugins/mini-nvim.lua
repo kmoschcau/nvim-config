@@ -21,5 +21,25 @@ return {
       },
     }
     require("mini.icons").mock_nvim_web_devicons()
+
+    local surround = require "mini.surround"
+    surround.setup {
+      mappings = {
+        add = "ys",
+        delete = "ds",
+        find = "",
+        find_left = "",
+        highlight = "",
+        replace = "cs",
+        update_n_lines = "",
+      },
+      respect_selection_type = true,
+      search_method = "cover_or_next",
+    }
+    vim.keymap.del("x", "ys")
+    vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], {
+      desc = "mini.surround: Surround visual selection.",
+      silent = true,
+    })
   end,
 }
