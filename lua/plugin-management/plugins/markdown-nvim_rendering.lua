@@ -4,15 +4,10 @@ return {
   dependencies = { "echasnovski/mini.icons" },
   name = "markdown.nvim-render",
   ft = "markdown",
-  -- @type render.md.Config -- Does not work well, no optional fields
+  --- @type render.md.UserConfig
   opts = {
     dash = {
       highlight = "NonText",
-    },
-    exclude = {
-      buftypes = {
-        "nofile",
-      },
     },
   },
 }
