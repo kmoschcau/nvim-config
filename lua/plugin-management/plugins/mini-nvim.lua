@@ -37,7 +37,7 @@ return {
       search_method = "cover_or_next",
     }
     vim.keymap.del("x", "ys")
-    vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], {
+    vim.keymap.set("x", "S", ':<C-u>lua MiniSurround.add "visual"<CR>', {
       desc = "mini.surround: Surround visual selection.",
       silent = true,
     })
