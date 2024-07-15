@@ -853,7 +853,7 @@ local H = {
 --- The blend values for light and dark mode
 local BLEND = {
   light = 20,
-  dark = 80,
+  dark = 20,
 }
 
 -- }}}
