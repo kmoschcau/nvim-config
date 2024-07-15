@@ -658,16 +658,27 @@ local function write_nvim_colors(
     end
   end
 
-  local function insert_blend_lines(lines, float_hl, blend)
-    vim.list_extend(lines, {
-      "  if vim.g.neovide then",
-      string.format(
-        '  vim.api.nvim_set_hl(0, "NormalFloat", %s)',
+  local function insert_blend_lines(
+    lines,
+    hl_normal_float,
+    hl_float_title,
+    blend
+  )
+    local function highlight_with_blend(name, highlight, b)
+      return string.format(
+        '    vim.api.nvim_set_hl(0, "%s", %s)',
+        name,
         vim.inspect(
-          vim.tbl_extend("keep", float_hl, { blend = blend }),
+          vim.tbl_extend("keep", highlight, { blend = b }),
           { indent = "", newline = "" }
         )
-      ),
+      )
+    end
+
+    vim.list_extend(lines, {
+      "  if vim.g.neovide then",
+      highlight_with_blend("NormalFloat", hl_normal_float, blend),
+      highlight_with_blend("FloatTitle", hl_float_title, blend),
       string.format("    vim.o.pumblend = %s", blend),
       "  end",
     })
@@ -685,13 +696,23 @@ local function write_nvim_colors(
   table.insert(lines, "")
   insert_terminal_colors(lines, terminal_colors_light)
   table.insert(lines, "")
-  insert_blend_lines(lines, highlights_light.NormalFloat, blend_light)
+  insert_blend_lines(
+    lines,
+    highlights_light.NormalFloat,
+    highlights_light.FloatTitle,
+    blend_light
+  )
   table.insert(lines, "else")
   insert_highlight_lines(lines, highlights_dark)
   table.insert(lines, "")
   insert_terminal_colors(lines, terminal_colors_dark)
   table.insert(lines, "")
-  insert_blend_lines(lines, highlights_dark.NormalFloat, blend_dark)
+  insert_blend_lines(
+    lines,
+    highlights_dark.NormalFloat,
+    highlights_dark.FloatTitle,
+    blend_dark
+  )
   table.insert(lines, "end")
 
   file:write(table.concat(lines, "\n"))
@@ -1049,6 +1070,7 @@ local highlights_light = {
   NonText       = { fg = palette.neutral.light },
   Normal        = normal,
   NormalFloat   = { bg = palette.neutral.max },
+  FloatTitle    = { bg = palette.neutral.max, bold = true },
   Pmenu         = { link = "NormalFloat" },
   PmenuSel      = { link = "CursorLine" },
   PmenuKindSel  = { link = "Pmenu" },
@@ -1348,7 +1370,7 @@ local highlights_light = {
   NoiceCmdlinePopup             = { link = "NormalFloat" },
   NoiceCmdlinePopupBorder       = { link = "FloatBorder" },
   NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
-  NoiceCmdlinePopupTitle        = { link = "Title" },
+  NoiceCmdlinePopupTitle        = { link = "FloatTitle" },
 
   -- }}}
 
