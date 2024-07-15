@@ -20,6 +20,8 @@ return {
       "noice.nvim/lua/noice/ui/cmdline.lua",
       "oil.nvim/lua/oil/types.lua",
       "trouble.nvim/lua/trouble/config/init.lua",
+      "which-key.nvim/lua/which-key/config.lua",
+      "which-key.nvim/lua/which-key/types.lua",
     },
   },
 }

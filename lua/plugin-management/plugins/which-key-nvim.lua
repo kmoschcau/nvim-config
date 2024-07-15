@@ -1,5 +1,8 @@
 --- @type LazyPluginSpec
 return {
   "folke/which-key.nvim",
-  config = true,
+  --- @type wk.Opts
+  opts = {
+    preset = "modern",
+  },
 }
