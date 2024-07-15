@@ -43,18 +43,10 @@ vim.diagnostic.config {
 -- Neovim options {{{
 
 vim.o.breakindent = true
-vim.opt.breakindentopt = { "min:80", "shift:2", "sbr" }
+vim.opt.breakindentopt = { "list:-1", "min:80", "shift:2", "sbr" }
 vim.o.colorcolumn = "+1"
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
-if not pcall(function()
-  vim.opt.completeopt:append "popup"
-end) then
-  vim.notify(
-    "\"popup\" is not supported by 'completeopt'.",
-    vim.log.levels.INFO,
-    { title = "init.lua" }
-  )
-end
+vim.opt.completeopt =
+  { "fuzzy", "menu", "menuone", "noinsert", "noselect", "popup" }
 vim.o.conceallevel = 2
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
@@ -64,7 +56,7 @@ vim.opt.fillchars = { diff = " " }
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
-vim.o.foldtext = ""
+vim.o.foldtext = "" -- TODO: Find a way to have highlighted fold and info.
 vim.o.formatoptions = "cro/qnlj"
 vim.o.guicursor = table.concat(
   vim.tbl_map(function(pair)
@@ -108,7 +100,9 @@ vim.opt.spellfile = {
   vim.fs.normalize "~/.config/nvim/spell/en.utf-8.add",
   vim.fs.normalize "~/.config/nvim/spell/techspeak.utf-8.add",
 }
+-- TODO: Look at 'spelloptions'.
 vim.o.splitbelow = true
+vim.o.splitkeep = "screen"
 vim.o.splitright = true
 
 -- statusline {{{
@@ -176,6 +170,7 @@ vim.o.statusline =
 vim.o.textwidth = 80
 vim.o.title = true
 vim.o.updatetime = 100
+vim.opt.wildoptions:append "fuzzy"
 
 -- }}}
 
