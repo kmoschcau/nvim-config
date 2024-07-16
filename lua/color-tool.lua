@@ -1363,17 +1363,6 @@ local highlights_light = {
 
   -- }}}
 
-  -- noice.nvim | https://github.com/folke/noice.nvim {{{
-
-  NoiceCmdlineIcon              = { link = "DiagnosticInfo" },
-  NoiceCmdlineIconSearch        = { link = "DiagnosticWarn" },
-  NoiceCmdlinePopup             = { link = "NormalFloat" },
-  NoiceCmdlinePopupBorder       = { link = "FloatBorder" },
-  NoiceCmdlinePopupBorderSearch = { link = "FloatBorder" },
-  NoiceCmdlinePopupTitle        = { link = "FloatTitle" },
-
-  -- }}}
-
   -- nvim-cmp | https://github.com/hrsh7th/nvim-cmp {{{
 
   CmpItemAbbrDeprecated = { link = "DiagnosticDeprecated" },

@@ -3,7 +3,6 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
-    "folke/noice.nvim",
     "folke/trouble.nvim",
     "gbrlsnchs/telescope-lsp-handlers.nvim",
     "nvim-lua/plenary.nvim",
@@ -102,7 +101,6 @@ return {
 
     telescope.load_extension "fzf"
     telescope.load_extension "import"
-    telescope.load_extension "noice"
     telescope.load_extension "notify"
     telescope.load_extension "lsp_handlers"
   end,

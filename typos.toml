@@ -1,5 +1,2 @@
 [default]
-extend-ignore-identifiers-re = [
-  "Noice.*",
-  "noice",
-]
+extend-ignore-identifiers-re = []

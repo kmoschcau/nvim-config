@@ -58,12 +58,6 @@ return {
     debug = " ",
     trace = "󰛿 ",
   },
-  noice = {
-    cmdline = {
-      fish = "󰈺",
-      fugitive = "󰊢",
-    },
-  },
   separators = {
     section = {
       bottom = {
