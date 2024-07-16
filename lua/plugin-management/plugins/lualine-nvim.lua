@@ -124,7 +124,7 @@ return {
 
     local lualine_y = {
       { "filetype" },
-      { "encoding" },
+      { "encoding", show_bomb = true },
       { "fileformat" },
     }
 
