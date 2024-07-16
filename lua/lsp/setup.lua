@@ -190,7 +190,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP: Update the code lenses of the buffer.",
         group = common.augroup,
         buffer = args.buf,
-        callback = vim.lsp.codelens.refresh,
+        callback = function()
+          vim.lsp.codelens.refresh { bufnr = args.buf }
+        end,
       })
     end
 
