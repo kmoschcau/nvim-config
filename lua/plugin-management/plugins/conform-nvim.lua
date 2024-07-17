@@ -21,7 +21,7 @@ return {
       scss = { "prettierd" },
       sh = { "shellharden", "shfmt" },
       svelte = { "prettierd" },
-      typepscript = { "prettierd" },
+      typescript = { "prettierd" },
       vue = { "prettierd" },
       xml = { "xmllint" },
       yaml = { "prettierd" },
