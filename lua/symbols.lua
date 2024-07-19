@@ -8,6 +8,7 @@ return {
     git = "󰊢 ",
     luasnip = " ",
     nvim_lsp = " ",
+    nvim_lsp_signature_help = "󰷻 ",
     path = " ",
     vimtex = " ",
   },
