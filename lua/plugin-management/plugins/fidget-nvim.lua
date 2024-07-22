@@ -1,5 +1,5 @@
 --- @type LazyPluginSpec
 return {
-  "deathbeam/lspecho.nvim",
+  "j-hui/fidget.nvim",
   config = true,
 }
