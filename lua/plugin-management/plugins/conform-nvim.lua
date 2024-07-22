@@ -26,6 +26,9 @@ return {
       xml = { "xmllint" },
       yaml = { "prettierd" },
     },
+    default_format_opts = {
+      lsp_format = "fallback",
+    },
     formatters = {
       shfmt = {
         prepend_args = { "--indent", "4" },
@@ -36,7 +39,7 @@ return {
         return
       end
 
-      return { timeout_ms = 500, lsp_format = "fallback" }
+      return { timeout_ms = 500 }
     end,
   },
   init = function()
@@ -52,7 +55,6 @@ return {
       end
       require("conform").format {
         async = true,
-        lsp_format = "fallback",
         range = range,
       }
     end, { range = true })
