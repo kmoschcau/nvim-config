@@ -20,10 +20,9 @@ return {
         },
       },
     }
-    require("mini.icons").mock_nvim_web_devicons()
+    icons.mock_nvim_web_devicons()
 
-    local surround = require "mini.surround"
-    surround.setup {
+    require("mini.surround").setup {
       mappings = {
         add = "ys",
         delete = "ds",
