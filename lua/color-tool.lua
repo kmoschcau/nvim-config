@@ -1283,9 +1283,17 @@ local highlights_light = {
 
   -- language overrides {{{
 
-  ["@lsp.type.string.terraform-vars"] = { link = "String" },
+  -- C# {{{
+
+  ["@lsp.type.macro.cs"] = { link = "PreProc" },
 
   -- }}}
+
+  -- terraform-vars {{{
+
+  ["@lsp.type.string.terraform-vars"] = { link = "String" },
+
+  -- }}}}}}
 
   -- non-standard extensions {{{
 
