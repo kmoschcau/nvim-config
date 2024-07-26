@@ -22,6 +22,16 @@ return {
     }
     icons.mock_nvim_web_devicons()
 
+    local starter = require "mini.starter"
+    starter.setup {
+      evaluate_single = true,
+      items = {
+        starter.sections.recent_files(nil, true),
+        starter.sections.recent_files(),
+        starter.sections.builtin_actions(),
+      },
+    }
+
     require("mini.surround").setup {
       mappings = {
         add = "ys",

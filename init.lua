@@ -88,7 +88,6 @@ vim.o.mousemodel = "extend"
 vim.o.number = true
 vim.o.scrolljump = -50
 vim.o.shiftwidth = 2
-vim.opt.shortmess:append "I"
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
 vim.o.sidescrolloff = 10
