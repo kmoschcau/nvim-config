@@ -50,5 +50,15 @@ return {
       desc = "mini.surround: Surround visual selection.",
       silent = true,
     })
+    vim.keymap.set("i", "<C-g>s", "<C-o>vS", {
+      desc = "mini.surround: Surround inline.",
+      remap = true,
+      silent = true,
+    })
+    vim.keymap.set("i", "<C-g>S", "<C-o>VS", {
+      desc = "mini.surround: Surround with lines.",
+      remap = true,
+      silent = true,
+    })
   end,
 }
