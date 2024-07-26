@@ -29,6 +29,8 @@ return {
         starter.sections.recent_files(nil, true),
         starter.sections.recent_files(),
         starter.sections.builtin_actions(),
+        { name = "Lazy", action = "Lazy", section = "Updates" },
+        { name = "Mason", action = "Mason", section = "Updates" },
       },
     }
 
