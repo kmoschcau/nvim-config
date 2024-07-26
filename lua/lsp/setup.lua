@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         { omni_ext_impl = omni_ext.telescope_lsp_implementation }
       )
     if implementation_impl then
-      vim.keymap.set("n", "gi", implementation_impl, {
+      vim.keymap.set("n", "gri", implementation_impl, {
         buffer = args.buf,
         desc = "LSP("
           .. implementation_impl_descr
