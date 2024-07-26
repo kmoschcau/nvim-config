@@ -30,13 +30,26 @@ return {
         end
 
         vim.schedule(function()
-          gs.next_hunk()
+          gs.nav_hunk "next"
         end)
 
         return "<Ignore>"
       end, {
         buffer = bufnr,
-        desc = "gitsigns: Jump to the next (git) diff hunk.",
+        desc = "gitsigns: Jump to the next hunk.",
+        expr = true,
+        silent = true,
+      })
+
+      vim.keymap.set("n", "]C", function()
+        vim.schedule(function()
+          gs.nav_hunk("next", { target = "staged" })
+        end)
+
+        return "<Ignore>"
+      end, {
+        buffer = bufnr,
+        desc = "gitsigns: Jump to the next staged hunk.",
         expr = true,
         silent = true,
       })
@@ -47,20 +60,33 @@ return {
         end
 
         vim.schedule(function()
-          gs.prev_hunk()
+          gs.nav_hunk "prev"
         end)
 
         return "<Ignore>"
       end, {
         buffer = bufnr,
-        desc = "gitsigns: Jump to the previous (git) diff hunk.",
+        desc = "gitsigns: Jump to the previous hunk.",
+        expr = true,
+        silent = true,
+      })
+
+      vim.keymap.set("n", "[C", function()
+        vim.schedule(function()
+          gs.nav_hunk("prev", { target = "staged" })
+        end)
+
+        return "<Ignore>"
+      end, {
+        buffer = bufnr,
+        desc = "gitsigns: Jump to the previous staged hunk.",
         expr = true,
         silent = true,
       })
 
       vim.keymap.set("n", "ghp", gs.preview_hunk, {
         buffer = bufnr,
-        desc = "gitsigns: Show a preview of the (git) diff hunk under the cursor.",
+        desc = "gitsigns: Show a preview of the hunk under the cursor.",
       })
     end,
   },
