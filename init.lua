@@ -23,12 +23,39 @@ xpcall(require, ehandler, "lsp.setup")
 
 -- diagnostics settings {{{
 
+--- Create a function, that returns a severity filter table, based on the passed
+--- buffer's filetype. Any overrides given to this create function extend the
+--- resulting table.
+--- @param overrides? table properties to extend the severity filter
+--- @return fun(namespace: integer, buf: integer): vim.diagnostic.SeverityFilter
+local function create_cs_severity_filter(overrides)
+  --- @param _ integer
+  --- @param buf integer
+  --- @return vim.diagnostic.SeverityFilter
+  return function(_, buf)
+    local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+    local severities = {
+      vim.diagnostic.severity.ERROR,
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.INFO,
+    }
+    if filetype ~= "cs" then
+      table.insert(severities, vim.diagnostic.severity.HINT)
+    end
+    return vim.tbl_extend("force", {
+      severity = severities,
+    }, overrides or {})
+  end
+end
+
 vim.diagnostic.config {
+  underline = create_cs_severity_filter(),
+  virtual_text = create_cs_severity_filter(),
   float = {
     source = true,
   },
   severity_sort = true,
-  signs = {
+  signs = create_cs_severity_filter {
     text = {
       [vim.diagnostic.severity.ERROR] = require("symbols").diagnostics.severities.error,
       [vim.diagnostic.severity.WARN] = require("symbols").diagnostics.severities.warn,
