@@ -14,5 +14,16 @@ return {
     dash = {
       highlight = "NonText",
     },
+    overrides = {
+      buftype = {
+        nofile = {
+          code = {
+            left_pad = 0,
+            right_pad = 0,
+            width = "full",
+          },
+        },
+      },
+    },
   },
 }
