@@ -1196,7 +1196,7 @@ local highlights_light = {
 
   -- command line expressions *expr-highlight* {{{
 
-  -- TODO
+  -- TODO: implement
 
   -- }}}
 
@@ -1269,8 +1269,8 @@ local highlights_light = {
 
   ["@lsp.type.comment"]    = { fg = "NONE" },
   ["@lsp.type.decorator"]  = { link = "@attribute" },
-  ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO
-  ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg, italic = false, nocombine = true }, -- TODO
+  ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO: check if it looks good
+  ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg, italic = false, nocombine = true }, -- TODO: see above
   ["@lsp.type.interface"]  = { link = "@attribute" },
   ["@lsp.type.keyword"]    = { fg = "NONE" },
   ["@lsp.type.namespace"]  = { link = "@module" },
@@ -1377,7 +1377,7 @@ local highlights_light = {
   CmpItemAbbrMatch      = { bold = true },
   CmpItemAbbrMatchFuzzy = { link = "Character" },
 
-  -- TODO make the kind highlights dynamic.
+  -- TODO: make the kind highlights dynamic.
   CmpItemKindArray         = { fg = palette.syntax.structure },
   CmpItemKindBoolean       = { fg = palette.syntax.boolean.fg },
   CmpItemKindClass         = { fg = palette.syntax.structure },
