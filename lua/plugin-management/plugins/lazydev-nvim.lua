@@ -9,7 +9,7 @@ return {
       "hydrate.nvim/lua/hydrate/config.lua",
       "lazy.nvim/lua/lazy/types.lua",
       "luvit-meta/library",
-      "markdown.nvim-render/lua/render-markdown/init.lua",
+      "render-markdown.nvim/lua/render-markdown/init.lua",
       "mason-lspconfig.nvim/lua/mason-lspconfig/settings.lua",
       "mason-nvim-dap.nvim/lua/mason-nvim-dap/settings.lua",
       "mason.nvim/lua/mason-core/package/init.lua",
