@@ -22,6 +22,9 @@ return {
     }
     icons.mock_nvim_web_devicons()
 
+    local misc = require "mini.misc"
+    misc.setup_termbg_sync()
+
     local starter = require "mini.starter"
     starter.setup {
       evaluate_single = true,
