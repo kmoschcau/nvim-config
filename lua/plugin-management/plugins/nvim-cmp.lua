@@ -9,7 +9,6 @@ local dependencies = {
   "hrsh7th/cmp-path",
   "lukas-reineke/cmp-under-comparator",
   "micangl/cmp-vimtex",
-  "onsails/lspkind.nvim",
   { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
   "rcarriga/cmp-dap",
   "saadparwaiz1/cmp_luasnip",
@@ -70,10 +69,8 @@ return {
             end
           end
 
-          return_item = require("lspkind").cmp_format {
-            mode = "symbol_text",
-            symbol_map = symbols.types,
-          }(entry, return_item)
+          return_item.kind =
+            string.format("%s%s", symbols.types[vim_item.kind], vim_item.kind)
 
           if vim_item.kind == "Color" then
             local color_item = require("nvim-highlight-colors").format(
