@@ -9,6 +9,7 @@ return {
       inline_surround_toggle_line = false,
       inline_surround_delete = false,
       inline_surround_change = false,
+      link_follow = false,
       go_curr_heading = "]h",
     },
   },
