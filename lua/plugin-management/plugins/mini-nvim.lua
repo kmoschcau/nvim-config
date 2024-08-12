@@ -23,7 +23,9 @@ return {
     icons.mock_nvim_web_devicons()
 
     local misc = require "mini.misc"
-    misc.setup_termbg_sync()
+    if not vim.g.neovide then
+      misc.setup_termbg_sync()
+    end
 
     local starter = require "mini.starter"
     starter.setup {
