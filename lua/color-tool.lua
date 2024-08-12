@@ -819,6 +819,11 @@ local H = {
     debug = HUES.grey,
     trace = HUES.purple,
   },
+  debug = {
+    breakpoint = HUES.red,
+    logpoint = HUES.yellow,
+    current_frame = HUES.green,
+  },
   spell = {
     bad = HUES.red,
     cap = HUES.yellow,
@@ -933,6 +938,15 @@ local palette = {
     ok    = convert(50, 100, H.diagnostics.ok),
     debug = convert(50,   0, H.diagnostics.debug),
     trace = convert(50, 100, H.diagnostics.trace),
+  },
+
+  debug = {
+    breakpoint = {
+      normal = convert(50, 100, H.debug.breakpoint),
+      conditional = convert(50, 100, H.debug.breakpoint),
+      log = convert(50, 100, H.debug.logpoint),
+    },
+    current_frame = convert(50, 100, H.debug.current_frame),
   },
 
   lsp = {
@@ -1404,6 +1418,16 @@ local highlights_light = {
   CmpItemKindStruct        = { fg = palette.syntax.structure },
   CmpItemKindTypeParameter = { fg = palette.syntax.structure },
   CmpItemKindVariable      = { fg = palette.syntax.variable, italic = true },
+
+  -- }}}
+
+  -- nvim-dap | https://github.com/mfussenegger/nvim-dap {{{
+
+  DapBreakpoint          = { fg = palette.debug.breakpoint.normal, bg = framing.neutral.b.bg },
+  DapBreakpointCondition = { fg = palette.debug.breakpoint.conditional, bg = framing.neutral.b.bg },
+  DapLogPoint            = { fg = palette.debug.breakpoint.log, bg = framing.neutral.b.bg },
+  DapStopped             = { fg = palette.debug.current_frame, bg = framing.neutral.b.bg },
+  DapBreakpointRejected  = { bg = framing.neutral.b.bg },
 
   -- }}}
 
