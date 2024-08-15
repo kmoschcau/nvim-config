@@ -18,6 +18,7 @@ return {
       lua = { "stylua" },
       markdown = { "injected", "markdownlint" },
       query = { "format-queries" },
+      razor = { lsp_format = "never" },
       scss = { "prettierd" },
       sh = { "shellharden", "shfmt" },
       svelte = { "prettierd" },
