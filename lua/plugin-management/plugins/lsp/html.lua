@@ -3,7 +3,7 @@ require("lspconfig").html.setup {
     require("system-compat").append_win_ext "vscode-html-language-server",
     "--stdio",
   },
-  filetypes = { "html", "jsp", "templ" },
+  filetypes = { "html", "jsp", "razor", "templ" },
   settings = {
     html = require("lsp.common").settings.html,
   },
