@@ -97,6 +97,11 @@ return {
         lsp_implementations = lsp_common_opts,
         lsp_workspace_symbols = lsp_common_opts,
       },
+      extensions = {
+        import = {
+          insert_at_top = true,
+        },
+      },
     }
 
     telescope.load_extension "fzf"
