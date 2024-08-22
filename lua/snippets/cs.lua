@@ -7,6 +7,21 @@ local fmt = require("luasnip.extras.fmt").fmt
 ls.add_snippets("cs", {
   s(
     {
+      name = "C# comment",
+      trig = "xc",
+      desc = "A C# doc comment with starting <summary> XML tag.",
+    },
+    fmt(
+      [[
+        /// <summary>
+        /// {description}
+        /// </summary>
+      ]],
+      { description = i(1) }
+    )
+  ),
+  s(
+    {
       name = "C# exception comment",
       trig = "xe",
       desc = "A C# doc comment <exception> XML tag.",
