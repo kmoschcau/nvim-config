@@ -1285,6 +1285,7 @@ local highlights_light = {
   ["@lsp.type.decorator"]  = { link = "@attribute" },
   ["@lsp.type.enum"]       = { fg = palette.syntax.number.fg }, -- TODO: check if it looks good
   ["@lsp.type.enumMember"] = { fg = palette.syntax.number.fg, italic = false, nocombine = true }, -- TODO: see above
+  ["@lsp.type.fieldName"]  = { fg = palette.syntax.member },
   ["@lsp.type.interface"]  = { link = "@attribute" },
   ["@lsp.type.keyword"]    = { fg = "NONE" },
   ["@lsp.type.namespace"]  = { link = "@module" },
