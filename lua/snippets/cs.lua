@@ -20,6 +20,9 @@ ls.add_snippets("cs", {
       { description = i(1) }
     )
   ),
+})
+
+ls.add_snippets("comment", {
   s(
     {
       name = "C# exception comment",

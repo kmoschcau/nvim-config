@@ -12,7 +12,15 @@ return {
       loadfile(ft_path)()
     end
 
+    local ext_ft = require "luasnip.extras.filetype_functions"
     local ls = require "luasnip"
+    ls.setup {
+      ft_func = ext_ft.from_cursor_pos,
+      load_ft_func = ext_ft.extend_load_ft {
+        html = { "css", "javascript" },
+        cs = { "comment" },
+      },
+    }
 
     vim.keymap.set({ "i", "s" }, "<C-l>", function()
       if ls.expand_or_jumpable() then
