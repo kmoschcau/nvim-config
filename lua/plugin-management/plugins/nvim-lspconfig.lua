@@ -62,6 +62,7 @@ return {
       "kotlin_language_server",
       "lua_ls",
       "omnisharp",
+      "powershell_es",
       -- "roslyn",
       "rust-analyzer",
       "stylelint-lsp",
