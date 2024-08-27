@@ -4,6 +4,7 @@ return {
   dependencies = {
     "Hoffs/omnisharp-extended-lsp.nvim",
     "folke/neoconf.nvim",
+    "jmederosalvarado/roslyn.nvim",
     "mfussenegger/nvim-jdtls",
     {
       "pmizio/typescript-tools.nvim",
@@ -61,6 +62,7 @@ return {
       "kotlin_language_server",
       "lua_ls",
       "omnisharp",
+      -- "roslyn",
       "rust-analyzer",
       "stylelint-lsp",
       "svelte",
