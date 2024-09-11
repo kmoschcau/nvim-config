@@ -41,7 +41,7 @@ ls.add_snippets("comment", {
       desc = "A C# doc comment <param> XML tag.",
     },
     fmt(
-      [[<param name="{name}">{description}</exception>]],
+      [[<param name="{name}">{description}</param>]],
       { name = i(1), description = i(2) }
     )
   ),
