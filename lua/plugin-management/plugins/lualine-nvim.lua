@@ -16,6 +16,17 @@ return {
       end,
     }
 
+    local oil_pwd_component = {
+      function()
+        local dir = require("oil").get_current_dir()
+        if dir then
+          return vim.fn.fnamemodify(dir, ":~")
+        else
+          return ""
+        end
+      end,
+    }
+
     local win_number_component = {
       function()
         return vim.api.nvim_win_get_number(0)
@@ -156,6 +167,7 @@ return {
       },
       winbar = {
         lualine_c = {
+          oil_pwd_component,
           navic_component,
         },
         lualine_z = {
@@ -164,6 +176,7 @@ return {
       },
       inactive_winbar = {
         lualine_c = {
+          oil_pwd_component,
           navic_component,
         },
         lualine_z = {
