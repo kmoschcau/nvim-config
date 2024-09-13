@@ -101,7 +101,9 @@ return {
       },
     }
 
-    local lualine_x = {}
+    local lualine_x = {
+      { "rest" },
+    }
 
     local has_lazy, lazy_status = pcall(require, "lazy.status")
     if has_lazy then
