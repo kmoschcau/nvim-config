@@ -2,5 +2,9 @@
 return {
   "MoaidHathot/dotnet.nvim",
   cmd = "DotnetUI",
-  config = true,
+  opts = {
+    project_selection = {
+      path_display = "smart",
+    },
+  },
 }

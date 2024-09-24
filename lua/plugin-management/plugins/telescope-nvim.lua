@@ -46,10 +46,6 @@ return {
     local actions = require "telescope.actions"
     local trouble = require "trouble.sources.telescope"
 
-    local lsp_common_opts = {
-      fname_width = 0.5,
-    }
-
     telescope.setup {
       defaults = {
         mappings = {
@@ -68,6 +64,7 @@ return {
             ["<C-X>"] = false,
           },
         },
+        path_display = { "smart" },
         vimgrep_arguments = {
           "rg",
           "--color=never",
@@ -80,22 +77,13 @@ return {
         },
       },
       pickers = {
-        live_grep = vim.tbl_extend("force", lsp_common_opts, {
+        live_grep = {
           mappings = {
             i = {
               ["<C-f>"] = actions.to_fuzzy_refine,
             },
           },
-        }),
-        lsp_references = vim.tbl_extend("force", lsp_common_opts, {
-          include_declaration = false,
-        }),
-        lsp_incoming_calls = lsp_common_opts,
-        lsp_outgoing_calls = lsp_common_opts,
-        lsp_definitions = lsp_common_opts,
-        lsp_type_definitions = lsp_common_opts,
-        lsp_implementations = lsp_common_opts,
-        lsp_workspace_symbols = lsp_common_opts,
+        },
       },
       extensions = {
         import = {
