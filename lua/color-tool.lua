@@ -785,6 +785,26 @@ local function write_fish_colors(highlights_light, highlights_dark)
     return color:gsub("^#", "")
   end
 
+  --- @param highlight vim.api.keyset.highlight
+  --- @return string
+  local function get_decoration_flags(highlight)
+    local result = ""
+
+    if highlight.bold then
+      result = result .. " --bold"
+    end
+
+    if highlight.italic then
+      result = result .. " --italics"
+    end
+
+    if highlight.underline then
+      result = result .. " --underline"
+    end
+
+    return result
+  end
+
   --- @param lines table<string>
   --- @param name string
   --- @param highlight vim.api.keyset.highlight
@@ -800,17 +820,7 @@ local function write_fish_colors(highlights_light, highlights_dark)
       line = line .. " --background " .. convert_to_fish(highlight.bg)
     end
 
-    if highlight.bold then
-      line = line .. " --bold"
-    end
-
-    if highlight.italic then
-      line = line .. " --italics"
-    end
-
-    if highlight.underline then
-      line = line .. " --underline"
-    end
+    line = line .. get_decoration_flags(highlight)
 
     line = line .. " #"
 
@@ -835,6 +845,8 @@ local function write_fish_colors(highlights_light, highlights_dark)
         .. name
         .. " "
         .. convert_to_fish(color)
+        .. " # "
+        .. color
     )
   end
 
@@ -880,16 +892,16 @@ local function write_fish_colors(highlights_light, highlights_dark)
     insert_highlight_line(lines, "pager_color_selected_background", highlights.Visual)
     insert_color_line(lines, "prompt_color_mode_normal_fg", highlights.LualineA.fg)
     insert_color_line(lines, "prompt_color_mode_normal_bg", highlights.LualineA.bg)
-    insert_string_line(lines, "prompt_color_mode_normal_bold", "--bold")
+    insert_string_line(lines, "prompt_color_mode_normal_decorations", get_decoration_flags(highlights.LualineA):gsub("^%s+", ""))
     insert_color_line(lines, "prompt_color_mode_insert_fg", highlights.LualineInsert.fg)
     insert_color_line(lines, "prompt_color_mode_insert_bg", highlights.LualineInsert.bg)
-    insert_string_line(lines, "prompt_color_mode_insert_bold", "--bold")
+    insert_string_line(lines, "prompt_color_mode_insert_decorations", get_decoration_flags(highlights.LualineInsert):gsub("^%s+", ""))
     insert_color_line(lines, "prompt_color_mode_replace_fg", highlights.LualineReplace.fg)
     insert_color_line(lines, "prompt_color_mode_replace_bg", highlights.LualineReplace.bg)
-    insert_string_line(lines, "prompt_color_mode_replace_bold", "--bold")
+    insert_string_line(lines, "prompt_color_mode_replace_decorations", get_decoration_flags(highlights.LualineReplace):gsub("^%s+", ""))
     insert_color_line(lines, "prompt_color_mode_visual_fg", highlights.LualineVisual.fg)
     insert_color_line(lines, "prompt_color_mode_visual_bg", highlights.LualineVisual.bg)
-    insert_string_line(lines, "prompt_color_mode_visual_bold", "--bold")
+    insert_string_line(lines, "prompt_color_mode_visual_decorations", get_decoration_flags(highlights.LualineVisual):gsub("^%s+", ""))
     --stylua: ignore end
   end
 
