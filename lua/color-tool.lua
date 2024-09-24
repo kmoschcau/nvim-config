@@ -778,107 +778,143 @@ local function write_fish_colors(highlights_light, highlights_dark)
     return
   end
 
+  --- @param color string
+  --- @return string
+  --- @return number
+  local function convert_to_fish(color)
+    return color:gsub("^#", "")
+  end
+
+  --- @param lines table<string>
+  --- @param name string
+  --- @param highlight vim.api.keyset.highlight
+  --- @param omit_bg boolean|nil
+  local function insert_highlight_line(lines, name, highlight, omit_bg)
+    local line = "            set --universal fish_" .. name
+
+    if highlight.fg then
+      line = line .. " " .. convert_to_fish(highlight.fg)
+    end
+
+    if highlight.bg and not omit_bg then
+      line = line .. " --background " .. convert_to_fish(highlight.bg)
+    end
+
+    if highlight.bold then
+      line = line .. " --bold"
+    end
+
+    if highlight.italic then
+      line = line .. " --italics"
+    end
+
+    if highlight.underline then
+      line = line .. " --underline"
+    end
+
+    line = line .. " #"
+
+    if highlight.fg then
+      line = line .. " fg: " .. highlight.fg
+    end
+
+    if highlight.bg and not omit_bg then
+      line = line .. " bg: " .. highlight.bg
+    end
+
+    table.insert(lines, line)
+  end
+
+  --- @param lines table<string>
+  --- @param name string
+  --- @param color string
+  local function insert_color_line(lines, name, color)
+    table.insert(
+      lines,
+      "            set --universal fish_"
+        .. name
+        .. " "
+        .. convert_to_fish(color)
+    )
+  end
+
+  --- @param lines table<string>
+  --- @param name string
+  --- @param string string
+  local function insert_string_line(lines, name, string)
+    table.insert(
+      lines,
+      "            set --universal fish_" .. name .. " " .. string
+    )
+  end
+
   --- @param lines table<string>
   --- @param highlights table<string, vim.api.keyset.highlight>
   local function insert_colors(lines, highlights)
-    --- @param lines table<string>
-    --- @param name string
-    --- @param highlight vim.api.keyset.highlight
-    --- @param omit_bg boolean|nil
-    local function insert_color_line(lines, name, highlight, omit_bg)
-      --- @param color string
-      --- @return string
-      --- @return number
-      local function convert_to_fish(color)
-        return color:gsub("^#", "")
-      end
-
-      local line = "            set --universal fish_" .. name
-
-      if highlight.fg then
-        line = line .. " " .. convert_to_fish(highlight.fg)
-      end
-
-      if highlight.bg and not omit_bg then
-        line = line .. " --background " .. convert_to_fish(highlight.bg)
-      end
-
-      if highlight.bold then
-        line = line .. " --bold"
-      end
-
-      if highlight.italic then
-        line = line .. " --italics"
-      end
-
-      if highlight.underline then
-        line = line .. " --underline"
-      end
-
-      line = line .. " #"
-
-      if highlight.fg then
-        line = line .. " fg: " .. highlight.fg
-      end
-
-      if highlight.bg and not omit_bg then
-        line = line .. " bg: " .. highlight.bg
-      end
-
-      table.insert(lines, line)
-    end
 
     --stylua: ignore start
-    insert_color_line(lines, "color_normal", highlights.Normal, true)
-    insert_color_line(lines, "color_command", highlights.Function)
-    insert_color_line(lines, "color_keyword", highlights.Statement)
-    insert_color_line(lines, "color_quote", highlights.String)
-    insert_color_line(lines, "color_redirection", highlights.Operator)
-    insert_color_line(lines, "color_end", highlights.Special)
-    insert_color_line(lines, "color_error", highlights.DiagnosticError)
-    insert_color_line(lines, "color_param", highlights["@variable.parameter"])
+    insert_highlight_line(lines, "color_normal", highlights.Normal, true)
+    insert_highlight_line(lines, "color_command", highlights.Function)
+    insert_highlight_line(lines, "color_keyword", highlights.Statement)
+    insert_highlight_line(lines, "color_quote", highlights.String)
+    insert_highlight_line(lines, "color_redirection", highlights.Operator)
+    insert_highlight_line(lines, "color_end", highlights.Special)
+    insert_highlight_line(lines, "color_error", highlights.DiagnosticError)
+    insert_highlight_line(lines, "color_param", highlights["@variable.parameter"])
     -- Not sure if I like this...
-    -- insert_color_line(lines, "color_valid_path", highlights["@string.special.path"])
-    -- insert_color_line(lines, "color_option", highlights["@variable.parameter"])
-    insert_color_line(lines, "color_comment", highlights.Comment)
-    insert_color_line(lines, "color_selection", highlights.Visual)
-    insert_color_line(lines, "color_operator", highlights.Operator)
-    insert_color_line(lines, "color_escape", highlights.SpecialChar)
-    insert_color_line(lines, "color_autosuggestion", highlights.Comment)
-    insert_color_line(lines, "color_cancel", highlights.SpecialKey)
-    insert_color_line(lines, "color_search_match", highlights.Search)
-    insert_color_line(lines, "color_history_current", highlights.Title)
-    insert_color_line(lines, "pager_color_progress", highlights.MoreMsg)
-    insert_color_line(lines, "pager_color_background", highlights.NormalFloat)
-    insert_color_line(lines, "pager_color_prefix", highlights.SpecialChar, true)
-    insert_color_line(lines, "pager_color_completion", highlights.Normal, true)
-    insert_color_line(lines, "pager_color_description", highlights.Comment)
-    insert_color_line(lines, "pager_color_selected_background", highlights.Visual)
+    -- insert_highlight_line(lines, "color_valid_path", highlights["@string.special.path"])
+    -- insert_highlight_line(lines, "color_option", highlights["@variable.parameter"])
+    insert_highlight_line(lines, "color_comment", highlights.Comment)
+    insert_highlight_line(lines, "color_selection", highlights.Visual)
+    insert_highlight_line(lines, "color_operator", highlights.Operator)
+    insert_highlight_line(lines, "color_escape", highlights.SpecialChar)
+    insert_highlight_line(lines, "color_autosuggestion", highlights.Comment)
+    insert_highlight_line(lines, "color_cancel", highlights.SpecialKey)
+    insert_highlight_line(lines, "color_search_match", highlights.Search)
+    insert_highlight_line(lines, "color_history_current", highlights.Title)
+    insert_highlight_line(lines, "pager_color_progress", highlights.MoreMsg)
+    insert_highlight_line(lines, "pager_color_background", highlights.NormalFloat)
+    insert_highlight_line(lines, "pager_color_prefix", highlights.SpecialChar, true)
+    insert_highlight_line(lines, "pager_color_completion", highlights.Normal, true)
+    insert_highlight_line(lines, "pager_color_description", highlights.Comment)
+    insert_highlight_line(lines, "pager_color_selected_background", highlights.Visual)
+    insert_color_line(lines, "prompt_color_mode_normal_fg", highlights.LualineA.fg)
+    insert_color_line(lines, "prompt_color_mode_normal_bg", highlights.LualineA.bg)
+    insert_string_line(lines, "prompt_color_mode_normal_bold", "--bold")
+    insert_color_line(lines, "prompt_color_mode_insert_fg", highlights.LualineInsert.fg)
+    insert_color_line(lines, "prompt_color_mode_insert_bg", highlights.LualineInsert.bg)
+    insert_string_line(lines, "prompt_color_mode_insert_bold", "--bold")
+    insert_color_line(lines, "prompt_color_mode_replace_fg", highlights.LualineReplace.fg)
+    insert_color_line(lines, "prompt_color_mode_replace_bg", highlights.LualineReplace.bg)
+    insert_string_line(lines, "prompt_color_mode_replace_bold", "--bold")
+    insert_color_line(lines, "prompt_color_mode_visual_fg", highlights.LualineVisual.fg)
+    insert_color_line(lines, "prompt_color_mode_visual_bg", highlights.LualineVisual.bg)
+    insert_string_line(lines, "prompt_color_mode_visual_bold", "--bold")
     --stylua: ignore end
+  end
+
+  --- @param lines table<string>
+  --- @param name string
+  --- @param color string
+  local function insert_cursor_color(lines, name, color)
+    local line = "            set --universal fish_cursor_color_"
+      .. name
+      .. ' "\\e]12;rgb:'
+      .. color:sub(2, 3)
+      .. "/"
+      .. color:sub(4, 5)
+      .. "/"
+      .. color:sub(6, 7)
+      .. '\\e\\\\"'
+      .. " # bg: "
+      .. color
+
+    table.insert(lines, line)
   end
 
   --- @param lines table<string>
   --- @param highlights table<string, vim.api.keyset.highlight>
   local function insert_cursor_colors(lines, highlights)
-    --- @param lines table<string>
-    --- @param name string
-    --- @param color string
-    local function insert_cursor_color(lines, name, color)
-      local line = "            set --universal fish_cursor_color_"
-        .. name
-        .. ' "\\e]12;rgb:'
-        .. color:sub(2, 3)
-        .. "/"
-        .. color:sub(4, 5)
-        .. "/"
-        .. color:sub(6, 7)
-        .. '\\e\\\\"'
-        .. " # bg: "
-        .. color
-
-      table.insert(lines, line)
-    end
-
     insert_cursor_color(lines, "normal", highlights.Cursor.bg)
     insert_cursor_color(lines, "insert", highlights.CursorInsert.bg)
     insert_cursor_color(lines, "replace", highlights.CursorReplace.bg)
