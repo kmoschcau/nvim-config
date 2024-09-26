@@ -34,6 +34,11 @@ ls.add_snippets("comment", {
       { member = i(1), description = i(2) }
     )
   ),
+  s({
+    name = "C# inheritdoc comment",
+    trig = "xi",
+    desc = "A C# doc comment <inheritdoc> XML tag.",
+  }, fmt([[<inheritdoc cref="{member}" />]], { member = i(1) })),
   s(
     {
       name = "C# param comment",
