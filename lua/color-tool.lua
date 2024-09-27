@@ -1511,6 +1511,7 @@ local highlights_light = {
   ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
   ["@keyword.interface"] = { fg = palette.syntax.metaprogramming, bold = true },
   ["@keyword.module"]    = { link = "@keyword.import" },
+  ["@keyword.property"]  = { fg = palette.syntax.property, bold = true },
 
   -- }}}}}}
 
