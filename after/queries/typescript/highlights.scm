@@ -1,7 +1,6 @@
 ; extends
 
 ; namespaces
-
 (ambient_declaration
   "global" @module)
 
@@ -10,30 +9,24 @@
   name: (identifier) @module)
 
 ; generics
-
 (type_arguments
-  ["<" ">"] @generic.special)
+  [
+    "<"
+    ">"
+  ] @generic.special)
 
 (type_parameters
-  ["<" ">"] @generic.special)
+  [
+    "<"
+    ">"
+  ] @generic.special)
 
 ; type declarations
-
-(lexical_declaration
-  "const"
-  (variable_declarator
-    name: (identifier) @constant))
-
-(for_in_statement
-  "const"
-  left: (identifier) @constant)
-
 (method_signature
-  ["get" "set"] @keyword.property
-  name: (property_identifier) @property)
-
-(method_definition
-  ["get" "set"] @keyword.property
+  [
+    "get"
+    "set"
+  ] @keyword.property
   name: (property_identifier) @property)
 
 (interface_declaration
