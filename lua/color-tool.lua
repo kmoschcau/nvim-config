@@ -702,6 +702,8 @@ local function write_nvim_colors(
     highlights_light.FloatTitle,
     blend_light
   )
+  table.insert(lines, "")
+  table.insert(lines, '  vim.env.fish_background_color = "light"')
   table.insert(lines, "else")
   insert_highlight_lines(lines, highlights_dark)
   table.insert(lines, "")
@@ -713,6 +715,8 @@ local function write_nvim_colors(
     highlights_dark.FloatTitle,
     blend_dark
   )
+  table.insert(lines, "")
+  table.insert(lines, '  vim.env.fish_background_color = "dark"')
   table.insert(lines, "end")
 
   file:write(table.concat(lines, "\n"))
