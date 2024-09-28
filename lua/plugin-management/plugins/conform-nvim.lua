@@ -23,6 +23,7 @@ return {
       sh = { "shellharden", "shfmt" },
       svelte = { "prettierd" },
       typescript = { "prettierd" },
+      typescriptreact = { "prettierd" },
       vue = { "prettierd" },
       xml = { "xmllint" },
       yaml = { "prettierd" },
