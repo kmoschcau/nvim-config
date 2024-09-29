@@ -6,6 +6,11 @@ return {
   opts = {
     icons = require("symbols").types,
     highlight = true,
+    lsp = {
+      preference = {
+        "typescript-tools",
+      },
+    },
     separator = " " .. require("symbols").separators.hierarchy.right .. " ",
   },
 }
