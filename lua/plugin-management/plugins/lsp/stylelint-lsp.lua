@@ -9,10 +9,6 @@ require("lspconfig").stylelint_lsp.setup {
     "sugarss",
     "vue",
     "wxss",
-    "", -- FIXME: Remove once https://github.com/neovim/nvim-lspconfig/pull/3324 is merged
-    "",
-    "",
-    "",
   },
   -- https://github.com/bmatcuk/stylelint-lsp?tab=readme-ov-file#settings
   settings = {},
