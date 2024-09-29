@@ -814,7 +814,7 @@ local function write_fish_colors(highlights_light, highlights_dark)
   --- @param highlight vim.api.keyset.highlight
   --- @param omit_bg boolean|nil
   local function insert_highlight_line(lines, name, highlight, omit_bg)
-    local line = "            set --universal fish_" .. name
+    local line = "            set --global fish_" .. name
 
     if highlight.fg then
       line = line .. " " .. convert_to_fish(highlight.fg)
@@ -845,7 +845,7 @@ local function write_fish_colors(highlights_light, highlights_dark)
   local function insert_color_line(lines, name, color)
     table.insert(
       lines,
-      "            set --universal fish_"
+      "            set --global fish_"
         .. name
         .. " "
         .. convert_to_fish(color)
@@ -860,7 +860,7 @@ local function write_fish_colors(highlights_light, highlights_dark)
   local function insert_string_line(lines, name, string)
     table.insert(
       lines,
-      "            set --universal fish_" .. name .. " " .. string
+      "            set --global fish_" .. name .. " " .. string
     )
   end
 
@@ -913,7 +913,7 @@ local function write_fish_colors(highlights_light, highlights_dark)
   --- @param name string
   --- @param color string
   local function insert_cursor_color(lines, name, color)
-    local line = "            set --universal fish_cursor_color_"
+    local line = "            set --global fish_cursor_color_"
       .. name
       .. ' "\\e]12;rgb:'
       .. color:sub(2, 3)
