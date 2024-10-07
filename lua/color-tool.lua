@@ -41,6 +41,8 @@ if not success then
   return
 end
 
+local symbols = require "symbols"
+
 -- }}}
 
 -- Helper types {{{
@@ -996,6 +998,52 @@ local function write_fish(highlights_light, highlights_dark)
   table.insert(lines, "end")
   table.insert(lines, "")
   table.insert(lines, "fish_handle_background_color_change")
+  table.insert(lines, "")
+  table.insert(
+    lines,
+    "set fish_prompt_separator_section_bottom_left "
+      .. symbols.separators.section.bottom.left
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_section_bottom_right "
+      .. symbols.separators.section.bottom.right
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_section_top_left "
+      .. symbols.separators.section.top.left
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_section_top_right "
+      .. symbols.separators.section.top.right
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_component_bottom_left "
+      .. symbols.separators.component.bottom.left
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_component_bottom_right "
+      .. symbols.separators.component.bottom.right
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_component_top_left "
+      .. symbols.separators.component.top.left
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_component_top_right "
+      .. symbols.separators.component.top.right
+  )
+  table.insert(
+    lines,
+    "set fish_prompt_separator_hierarchy_right "
+      .. symbols.separators.hierarchy.right
+  )
   table.insert(lines, "")
   table.insert(lines, "set fish_cursor_default block blink")
   table.insert(lines, "set fish_cursor_insert line blink")
