@@ -774,9 +774,11 @@ end
 
 --- @param highlights_light table<string, vim.api.keyset.highlight>
 --- @param highlights_dark table<string, vim.api.keyset.highlight>
-local function write_fish_colors(highlights_light, highlights_dark)
-  local file =
-    io.open(vim.fn.stdpath "config" .. "/../fish/conf.d/1-theme.fish", "w")
+local function write_fish(highlights_light, highlights_dark)
+  local file = io.open(
+    vim.fn.stdpath "config" .. "/../fish/conf.d/1-" .. THEME_NAME .. ".fish",
+    "w"
+  )
   if not file then
     vim.notify("Could not open fish theme file.", vim.log.levels.WARN)
     return
@@ -1815,7 +1817,7 @@ if WRITE_COLORSCHEME then
     BLEND.dark
   )
   write_lualine_colors()
-  write_fish_colors(highlights_light, highlights_dark)
+  write_fish(highlights_light, highlights_dark)
 end
 
 -- }}}
