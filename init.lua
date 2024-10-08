@@ -268,7 +268,8 @@ vim.keymap.set("n", "<Space>q", vim.diagnostic.setloclist, {
 vim.keymap.set("n", "<F10>", vim.show_pos, {
   desc = "Syntax: Show highlight group information at cursor position.",
 })
-vim.keymap.set("n", "<F22>", vim.treesitter.inspect_tree, {
+
+vim.keymap.set("n", "<S-F10>", vim.treesitter.inspect_tree, {
   desc = "Treesitter: Show tree inspection window.",
 })
 

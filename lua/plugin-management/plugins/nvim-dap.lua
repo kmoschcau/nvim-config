@@ -205,7 +205,7 @@ return {
       vim.keymap.set("n", "<F7>", dap.step_into, {
         desc = "Dap: Step into the next function.",
       })
-      vim.keymap.set("n", "<F19>", function()
+      vim.keymap.set("n", "<S-F7>", function()
         dap.step_into { askForTargets = true }
       end, {
         desc = "Dap: Step into a function with target selection.",
