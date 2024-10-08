@@ -1516,7 +1516,7 @@ local highlights_light = {
   ["@module"]                      = { fg = palette.syntax.module, italic = false, nocombine = true },
 
   ["@string.documentation"]        = { fg = palette.syntax.doc_comment, bg = palette.syntax.string.bg },
-  ["@string.regexp"]               = { link = "SpecialChar" },
+  ["@string.regexp"]               = { link = "String" },
   ["@string.escape"]               = { link = "SpecialChar" },
   ["@string.special"]              = { link = "SpecialChar" },
   ["@string.special.symbol"]       = { link = "SpecialChar" },
