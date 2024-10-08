@@ -23,39 +23,8 @@ xpcall(require, ehandler, "lsp.setup")
 
 -- diagnostics settings {{{
 
---- Create a function, that returns a severity filter table, based on the passed
---- buffer's filetype. Any overrides given to this create function extend the
---- resulting table.
---- @param overrides? table properties to extend the severity filter
---- @return fun(namespace: integer, buf: integer): vim.diagnostic.SeverityFilter
-local function create_cs_severity_filter(overrides)
-  --- @param _ integer
-  --- @param buf integer
-  --- @return vim.diagnostic.SeverityFilter
-  return function(_, buf)
-    local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
-    local severities = {
-      vim.diagnostic.severity.ERROR,
-      vim.diagnostic.severity.WARN,
-      vim.diagnostic.severity.INFO,
-    }
-    if filetype ~= "cs" then
-      table.insert(severities, vim.diagnostic.severity.HINT)
-    end
-    return vim.tbl_extend("force", {
-      severity = severities,
-    }, overrides or {})
-  end
-end
-
 vim.diagnostic.config {
-  underline = create_cs_severity_filter(),
-  virtual_text = create_cs_severity_filter(),
-  float = {
-    source = true,
-  },
-  severity_sort = true,
-  signs = create_cs_severity_filter {
+  signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = require("symbols").diagnostics.severities.error,
       [vim.diagnostic.severity.WARN] = require("symbols").diagnostics.severities.warn,
@@ -63,6 +32,10 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = require("symbols").diagnostics.severities.hint,
     },
   },
+  float = {
+    source = true,
+  },
+  severity_sort = true,
 }
 
 -- }}}
@@ -246,6 +219,42 @@ vim.filetype.add {
     ["helmfile.*%.yaml"] = "helm",
   },
 }
+
+-- }}}
+
+-- user commands {{{
+
+-- diagnostics
+
+vim.api.nvim_create_user_command("HighlightSeverity", function(args)
+  local argument = args.fargs[1]
+  local severity = vim.diagnostic.severity[argument]
+  if not severity then
+    vim.notify(
+      "An invalid argument was provided: " .. argument,
+      vim.log.levels.ERROR,
+      { title = args.name }
+    )
+    return
+  end
+
+  vim.diagnostic.config {
+    underline = { severity = { min = severity } },
+    virtual_text = { severity = { min = severity } },
+  }
+end, {
+  complete = function()
+    local candidates = {}
+
+    for key, _ in pairs(vim.diagnostic.severity) do
+      candidates[#candidates + 1] = key
+    end
+
+    return candidates
+  end,
+  desc = "Diagnostics: Set the minimum severity level of in-buffer diagnostics",
+  nargs = 1,
+})
 
 -- }}}
 
