@@ -65,7 +65,6 @@ EBS
 CloudWatch
 cooldown
 lifecycle
-#eregistration
 PostgreSQL
 Serverless
 RCU
@@ -115,7 +114,6 @@ Gbit
 Apache Flink
 EventBridge
 Amazon Redshift
-#mazon CloudFront
 WAF
 CloudFront
 ELB
