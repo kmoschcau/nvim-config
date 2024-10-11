@@ -59,7 +59,7 @@ return {
         async = true,
         range = range,
       }
-    end, { range = true })
+    end, { bar = true, range = true })
 
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       if args.bang then
@@ -69,6 +69,7 @@ return {
       end
     end, {
       bang = true,
+      bar = true,
       desc = "Conform: Disable autoformat-on-save.",
     })
 
@@ -80,6 +81,7 @@ return {
       end
     end, {
       bang = true,
+      bar = true,
       desc = "Conform: Enable autoformat-on-save.",
     })
 

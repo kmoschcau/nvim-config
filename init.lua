@@ -243,6 +243,7 @@ vim.api.nvim_create_user_command("HighlightSeverity", function(args)
     virtual_text = { severity = { min = severity } },
   }
 end, {
+  bar = true,
   complete = function()
     local candidates = {}
 
