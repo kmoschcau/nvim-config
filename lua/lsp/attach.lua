@@ -52,7 +52,11 @@ return function(client, bufnr)
     })
   end
 
-  -- textDocument/signatureHelp | mapped to <C-s> by default
+  -- textDocument/signatureHelp | mapped in insert to <C-s> by default
+  vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, {
+    buffer = bufnr,
+    desc = "LSP: Show signature help.",
+  })
 
   -- workspace/didChangeWorkspaceFolders
   vim.keymap.set("n", "<Space>wa", vim.lsp.buf.add_workspace_folder, {
