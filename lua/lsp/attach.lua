@@ -36,7 +36,7 @@ return function(client, bufnr)
     })
   end
 
-  -- textDocument/implementation
+  -- textDocument/implementation | mapped to gri by default
   local implementation_impl, implementation_impl_descr =
     common.choose_keymap_implementation(
       keymap_implementation,
