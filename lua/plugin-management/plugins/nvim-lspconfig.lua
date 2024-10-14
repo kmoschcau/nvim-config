@@ -4,7 +4,6 @@ return {
   dependencies = {
     "Hoffs/omnisharp-extended-lsp.nvim",
     "folke/neoconf.nvim",
-    "jmederosalvarado/roslyn.nvim",
     "mfussenegger/nvim-jdtls",
     {
       "pmizio/typescript-tools.nvim",
@@ -12,6 +11,7 @@ return {
         "nvim-lua/plenary.nvim",
       },
     },
+    "seblj/roslyn.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
