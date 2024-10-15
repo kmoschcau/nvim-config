@@ -6,6 +6,7 @@ return function(client, bufnr)
   local common = require "lsp.common"
 
   local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
+  has_omni_ext = false
   local keymap_implementation =
     common.which_keymap_implementation(bufnr, client, has_omni_ext)
 
