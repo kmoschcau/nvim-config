@@ -3,6 +3,6 @@
 return {
   "cappyzawa/trim.nvim",
   opts = {
-    ft_blocklist = { "markdown" }
-  }
+    ft_blocklist = { "markdown" },
+  },
 }
