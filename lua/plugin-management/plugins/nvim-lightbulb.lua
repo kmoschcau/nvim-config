@@ -5,6 +5,7 @@ return {
     autocmd = {
       enabled = true,
     },
+    code_lenses = true,
     ignore = {
       clients = { "null-ls" },
     },
