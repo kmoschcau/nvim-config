@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 local dependencies = {
   "L3MON4D3/cmp-luasnip-choice",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
@@ -19,6 +20,7 @@ if vim.fn.executable "fish" == 1 then
   table.insert(dependencies, "mtoohey31/cmp-fish")
 end
 
+-- selene: allow(mixed_table)
 --- @type LazyPluginSpec
 return {
   "hrsh7th/nvim-cmp",

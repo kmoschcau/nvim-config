@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 --- @type LazyPluginSpec
 return {
   "lewis6991/gitsigns.nvim",

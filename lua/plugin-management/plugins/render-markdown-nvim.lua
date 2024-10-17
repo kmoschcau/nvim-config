@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 --- @type LazyPluginSpec
 return {
   "MeanderingProgrammer/render-markdown.nvim",

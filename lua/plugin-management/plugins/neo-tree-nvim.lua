@@ -25,6 +25,7 @@ local function get_siblings(state, node)
   return siblings
 end
 
+-- selene: allow(mixed_table)
 --- @type LazyPluginSpec
 return {
   "nvim-neo-tree/neo-tree.nvim",

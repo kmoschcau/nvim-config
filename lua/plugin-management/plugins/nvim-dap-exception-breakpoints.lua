@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 return {
   "lucaSartore/nvim-dap-exception-breakpoints",
   config = function()
