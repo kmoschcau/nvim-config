@@ -1464,7 +1464,7 @@ local highlights_light = {
   Statement     = { fg = palette.syntax.statement, bold = true },
   Operator      = { fg = palette.syntax.statement },
 
-  PreProc       = { fg = palette.syntax.metaprogramming, bold = true },
+  PreProc       = { fg = palette.syntax.metaprogramming, bold = true, italic = false, nocombine = true },
 
   Type          = { fg = palette.syntax.type },
   StorageClass  = { fg = palette.syntax.storage_class },
@@ -1536,6 +1536,8 @@ local highlights_light = {
   ["@attribute"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
 
+  ["@function.macro"]              = { link = "Macro" },
+
   ["@constructor"]                 = { link = "Function" },
 
   ["@keyword.coroutine"]           = { fg = palette.syntax["coroutine"], bold = true },
@@ -1578,6 +1580,7 @@ local highlights_light = {
   ["@lsp.type.fieldName"]  = { fg = palette.syntax.member },
   ["@lsp.type.interface"]  = { link = "@attribute" },
   ["@lsp.type.keyword"]    = { fg = "NONE" },
+  ["@lsp.type.macro"]      = { link = "Macro" },
   ["@lsp.type.namespace"]  = { link = "@module" },
   ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
   ["@lsp.type.property"]   = { link = "@property" },
