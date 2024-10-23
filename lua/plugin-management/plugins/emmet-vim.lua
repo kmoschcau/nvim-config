@@ -2,6 +2,7 @@
 --- @type LazyPluginSpec
 return {
   "mattn/emmet-vim",
+  dir = "~/Code/emmet-vim",
   init = function()
     vim.g.emmet_install_only_plug = 1
     vim.g.user_emmet_settings = {
