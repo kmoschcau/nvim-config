@@ -24,19 +24,7 @@ local function monkey_patch_semantic_tokens(client)
       return request_inner(method, params, handler)
     end
 
-    local function find_buf_by_uri(search_uri)
-      local bufs = vim.api.nvim_list_bufs()
-      local normalized_search_uri = vim.fs.normalize(search_uri)
-      for _, buf in ipairs(bufs) do
-        local name = vim.api.nvim_buf_get_name(buf)
-        local uri = vim.fs.normalize("file://" .. name)
-        if uri == normalized_search_uri then
-          return buf
-        end
-      end
-    end
-
-    local target_bufnr = find_buf_by_uri(params.textDocument.uri)
+    local target_bufnr = vim.uri_to_bufnr(params.textDocument.uri)
     local line_count = vim.api.nvim_buf_line_count(target_bufnr)
     local last_line = vim.api.nvim_buf_get_lines(
       target_bufnr,
