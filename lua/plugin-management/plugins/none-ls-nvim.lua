@@ -88,8 +88,6 @@ return {
       diagnostics.proselint,
       diagnostics.selene,
       diagnostics.terraform_validate,
-      -- This breaks joining lines with the newer treesitter APIs
-      -- diagnostics.todo_comments,
       diagnostics.trail_space.with {
         disabled_filetypes = { "markdown" },
       },
