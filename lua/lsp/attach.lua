@@ -124,11 +124,7 @@ return function(client, bufnr)
     desc = "LSP: Fuzzy find outgoing calls of the symbol under the cursor.",
   })
 
-  -- textDocument/documentSymbol
-  vim.keymap.set("n", "<Space>sd", vim.lsp.buf.document_symbol, {
-    buffer = bufnr,
-    desc = "LSP: Fuzzy find document symbols.",
-  })
+  -- textDocument/documentSymbol | mapped to gO by default
 
   -- workspace/symbol
   vim.keymap.set("n", "<Space>sw", vim.lsp.buf.workspace_symbol, {
