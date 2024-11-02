@@ -90,7 +90,7 @@ vim.o.scrolljump = -50
 
 local has_pwsh = vim.fn.executable "pwsh"
 local has_powershell = vim.fn.executable "powershell"
-if vim.fn.has "win32" == 1 and has_pwsh or has_powershell then
+if vim.fn.has "win32" == 1 and (has_pwsh or has_powershell) then
   vim.o.shell = has_pwsh and "pwsh" or "powershell"
   vim.o.shellcmdflag = "-NoLogo"
     .. " -NonInteractive"
