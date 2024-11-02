@@ -1562,6 +1562,16 @@ local highlights_light = {
   ["@tag.attribute"]               = { link = "@property" },
   ["@tag.delimiter"]               = { link = "Delimiter" },
 
+  -- language overrides {{{
+
+  -- rust {{{
+
+  ["@variable.rust"]                    = { fg = palette.syntax.variable },
+  ["@variable.builtin.rust"]            = { fg = palette.syntax.special },
+  ["@variable.parameter.rust"]          = { fg = palette.syntax.parameter },
+
+  -- }}}}}}
+
   -- Custom captures {{{
 
   ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
@@ -1600,6 +1610,15 @@ local highlights_light = {
   ["@lsp.type.xmlDocCommentAttributeValue.cs"]  = { link = "String" },
 
   ["@lsp.type.macro.cs"] = { link = "PreProc" },
+
+  -- }}}
+
+  -- rust {{{
+
+  ["@lsp.type.parameter.rust"]   = { link = "@variable.parameter.rust" },
+  ["@lsp.type.variable.rust"]   = { link = "@variable.rust" },
+
+  ["@lsp.mod.mutable"] = { italic = true },
 
   -- }}}
 
