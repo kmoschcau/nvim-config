@@ -12,18 +12,6 @@ M.capabilities = vim.tbl_deep_extend(
   has_cmp and cmp_nvim_lsp.default_capabilities() or {}
 )
 
---- Overridden handlers for the LSP client.
-M.handlers = {
-  ["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    { border = "rounded", silent = true }
-  ),
-  ["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    { border = "rounded" }
-  ),
-}
-
 -- https://code.visualstudio.com/docs/languages/css
 local style = {
   format = {

@@ -127,7 +127,6 @@ M.start_or_attach = function()
   jdtls.start_or_attach {
     capabilities = common.capabilities,
     cmd = get_cmd(jdtls_package),
-    handlers = common.handlers,
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }

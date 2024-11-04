@@ -22,7 +22,6 @@ return {
     lspconfig.util.default_config =
       vim.tbl_extend("force", lspconfig.util.default_config, {
         capabilities = common.capabilities,
-        handlers = common.handlers,
       })
 
     local simple_servers = {

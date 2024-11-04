@@ -52,7 +52,6 @@ end
 require("roslyn").setup {
   config = {
     capabilities = common.capabilities,
-    handlers = common.handlers,
     on_attach = function(client, bufnr)
       require "lsp.attach"(client, bufnr)
 
