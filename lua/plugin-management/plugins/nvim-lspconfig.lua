@@ -13,6 +13,7 @@ return {
       },
     },
     "seblj/roslyn.nvim",
+    "tris203/rzls.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
@@ -65,6 +66,7 @@ return {
       "powershell_es",
       "roslyn",
       "rust-analyzer",
+      -- "rzls",
       "stylelint-lsp",
       "svelte",
       "tailwindcss",

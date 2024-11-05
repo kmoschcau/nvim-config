@@ -1,5 +1,3 @@
-local common = require "lsp.common"
-
 --- @param client vim.lsp.Client the LSP client
 local function monkey_patch_semantic_tokens(client)
   -- NOTE: Super hacky... Don't know if I like that we set a random variable on
@@ -51,7 +49,8 @@ end
 
 require("roslyn").setup {
   config = {
-    capabilities = common.capabilities,
+    capabilities = require("lsp.common").capabilities,
+    -- handlers = require "rzls.roslyn_handlers",
     on_attach = function(client, bufnr)
       require "lsp.attach"(client, bufnr)
 
