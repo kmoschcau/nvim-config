@@ -36,7 +36,7 @@ return {
       "marksman",
       "prosemd_lsp",
       "quick_lint_js",
-      "ruff_lsp",
+      "ruff",
       "somesass_ls",
       "terraformls",
       "texlab",
