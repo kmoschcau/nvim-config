@@ -8,32 +8,15 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup {
       ensure_installed = {
-        -- This should only include what should be there on first setup, not what
-        -- I end up using over time.
-        "bash",
+        -- This should only include languages that are not automatically
+        -- installed, most often because they are injected.
         "comment",
-        "diff",
-        "fish",
-        "git_config",
-        "git_rebase",
-        "gitattributes",
-        "gitcommit",
-        "gitignore",
-        "gpg",
-        "json",
-        "jsonc",
-        "lua",
         "luadoc",
-        "luap",
         "markdown",
         "markdown_inline",
+        "mermaid",
         "printf",
-        "query",
         "regex",
-        "toml",
-        "vim",
-        "vimdoc",
-        "yaml",
       },
       auto_install = true,
 
