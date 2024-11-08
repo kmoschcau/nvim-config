@@ -88,23 +88,7 @@ vim.o.mousemodel = "extend"
 vim.o.number = true
 vim.o.scrolljump = -50
 
-local has_pwsh = vim.fn.executable "pwsh"
-local has_powershell = vim.fn.executable "powershell"
-if vim.fn.has "win32" == 1 and (has_pwsh or has_powershell) then
-  vim.o.shell = has_pwsh and "pwsh" or "powershell"
-  vim.o.shellcmdflag = "-NoLogo"
-    .. " -NonInteractive"
-    .. " -ExecutionPolicy RemoteSigned"
-    .. " -Command [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()"
-    .. "; $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'"
-    .. "; $PSStyle.OutputRendering = 'plaintext'"
-    .. "; Remove-Alias -Force -ErrorAction SilentlyContinue tee"
-    .. ";"
-  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-  vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-  vim.o.shellquote = ""
-  vim.o.shellxquote = ""
-end
+require("system-compat").set_up_shell()
 
 vim.o.shiftwidth = 2
 vim.o.showbreak = "↪ "
@@ -243,7 +227,7 @@ vim.filetype.add {
 
 -- user commands {{{
 
--- diagnostics
+-- diagnostics {{{
 
 vim.api.nvim_create_user_command("HighlightSeverity", function(args)
   local argument = args.fargs[1]
@@ -277,6 +261,18 @@ end, {
 })
 
 -- }}}
+
+-- shell {{{
+
+vim.api.nvim_create_user_command("SetUpShell", function(args)
+  require("system-compat").set_up_shell(args.bang)
+end, {
+  bang = true,
+  bar = true,
+  desc = "Shell: Set up shell, bang resets to default.",
+})
+
+-- }}}}}}
 
 -- key maps {{{
 

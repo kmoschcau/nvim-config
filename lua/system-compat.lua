@@ -95,4 +95,46 @@ M.set_dos_file_options = function()
   end
 end
 
+--- Set up the shell, depending on the platform.
+--- @param use_default? boolean force using the default settings
+M.set_up_shell = function(use_default)
+  if use_default then
+    local function reset(option_name)
+      vim.opt_global[option_name] =
+        vim.api.nvim_get_option_info2(option_name, { scope = "global" }).default
+    end
+
+    reset "shell"
+    reset "shellcmdflag"
+    reset "shellredir"
+    reset "shellpipe"
+    reset "shellquote"
+    reset "shellxquote"
+
+    return
+  end
+
+  if vim.fn.has "win32" ~= 1 then
+    return
+  end
+
+  local has_pwsh = vim.fn.executable "pwsh"
+  local has_powershell = vim.fn.executable "powershell"
+  if has_pwsh or has_powershell then
+    vim.o.shell = has_pwsh and "pwsh" or "powershell"
+    vim.o.shellcmdflag = "-NoLogo"
+      .. " -NonInteractive"
+      .. " -ExecutionPolicy RemoteSigned"
+      .. " -Command [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()"
+      .. "; $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'"
+      .. "; $PSStyle.OutputRendering = 'plaintext'"
+      .. "; Remove-Alias -Force -ErrorAction SilentlyContinue tee"
+      .. ";"
+    vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+    vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+    vim.o.shellquote = ""
+    vim.o.shellxquote = ""
+  end
+end
+
 return M
