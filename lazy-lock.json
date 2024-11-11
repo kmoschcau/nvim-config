@@ -74,7 +74,7 @@
   "otter.nvim": { "branch": "main", "commit": "ca9ce67d0399380b659923381b58d174344c9ee7" },
   "overseer.nvim": { "branch": "master", "commit": "c136856c7556c0eeb0554839ddcd499b02f66832" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
-  "render-markdown.nvim": { "branch": "main", "commit": "3da1bfc4bd3a13fee57551f0b705ebcf2614d7a2" },
+  "render-markdown.nvim": { "branch": "main", "commit": "d69a885e1bf21cb329d2eafe56fd80b6de627216" },
   "rest.nvim": { "branch": "main", "commit": "e82dc524894b1b55bcc3296d3644f15c9e06d5ad" },
   "roslyn.nvim": { "branch": "main", "commit": "6122b4c6216d7e6a0fd384038eae4d0f031fbc50" },
   "rzls.nvim": { "branch": "main", "commit": "5474f68492724473aef55e54e4ace4ee5b769ce8" },
