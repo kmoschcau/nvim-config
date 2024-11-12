@@ -1611,7 +1611,12 @@ local highlights_light = {
 
   ["@lsp.type.macro.cs"] = { link = "PreProc" },
 
-  -- }}}
+  -- razor {{{
+
+  ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
+  ["@lsp.type.keyword.razor"]         = { link = "Statement" },
+
+  -- }}}}}}
 
   -- rust {{{
 
