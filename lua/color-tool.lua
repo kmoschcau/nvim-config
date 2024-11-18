@@ -1240,9 +1240,10 @@ local palette = {
 
   lsp = {
     reference = {
-      text  = convert(90, 3, HUES.yellow),
-      read  = convert(90, 3, HUES.green),
-      write = convert(90, 3, HUES.blue),
+      text   = convert(90, 3, HUES.yellow),
+      read   = convert(90, 3, HUES.green),
+      target = convert(90, 3, HUES.purple),
+      write  = convert(90, 3, HUES.blue),
     },
   },
 
@@ -1434,9 +1435,10 @@ local highlights_light = {
 
   -- LSP highlights *lsp-highlight* {{{
 
-  LspReferenceText  = { bg = palette.lsp.reference.text },
-  LspReferenceRead  = { bg = palette.lsp.reference.read },
-  LspReferenceWrite = { bg = palette.lsp.reference.write },
+  LspReferenceText   = { bg = palette.lsp.reference.text },
+  LspReferenceRead   = { bg = palette.lsp.reference.read },
+  LspReferenceTarget = { bg = palette.lsp.reference.target },
+  LspReferenceWrite  = { bg = palette.lsp.reference.write },
 
   LspInlayHint = { fg = palette.neutral.mid_light, bg = palette.neutral.lighter },
 
