@@ -1605,15 +1605,29 @@ local highlights_light = {
 
   -- C# {{{
 
+  -- Omnisharp {{{
+
+  ["@lsp.type.constantName.cs"] = { fg = palette.syntax.member, italic = false, nocombine = true },
+
   ["@lsp.type.xmlDocCommentDelimiter.cs"]       = { link = "SpecialComment" },
   ["@lsp.type.xmlDocCommentName.cs"]            = { link = "@tag" },
   ["@lsp.type.xmlDocCommentAttributeName.cs"]   = { link = "@tag.attribute" },
   ["@lsp.type.xmlDocCommentAttributeQuotes.cs"] = { link = "SpecialComment" },
   ["@lsp.type.xmlDocCommentAttributeValue.cs"]  = { link = "String" },
 
-  ["@lsp.type.macro.cs"] = { link = "PreProc" },
+  -- }}}
+
+  -- Roslyn {{{
+
+  ["@lsp.type.constant.cs"] = { fg = palette.syntax.member, italic = false, nocombine = true },
+  ["@lsp.type.field.cs"]    = { link = "@lsp.type.fieldName" },
+  ["@lsp.type.macro.cs"]    = { link = "PreProc" },
+
+  -- }}}}}}
 
   -- razor {{{
+
+  -- Roslyn {{{
 
   ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
   ["@lsp.type.keyword.razor"]         = { link = "Statement" },
@@ -1633,13 +1647,7 @@ local highlights_light = {
 
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
 
-  -- }}}}}}
-
-  -- non-standard extensions {{{
-
-  ["@lsp.type.constantName"] = { link = "@constant" },
-
-  -- }}}}}}
+  -- }}}}}}}}}
 
   -- Plugins {{{
 
