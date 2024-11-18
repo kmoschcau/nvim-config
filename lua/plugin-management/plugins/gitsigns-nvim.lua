@@ -9,6 +9,8 @@ return {
       topdelete = { show_count = true },
       changedelete = { show_count = true },
     },
+    -- This is just so gitsigns are always on the left of the signcolumn.
+    sign_priority = 1000,
     count_chars = {
       [1] = "₁",
       [2] = "₂",
