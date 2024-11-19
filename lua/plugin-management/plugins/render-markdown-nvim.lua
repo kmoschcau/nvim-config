@@ -25,5 +25,10 @@ return {
         },
       },
     },
+    win_options = {
+      conceallevel = {
+        rendered = 2,
+      },
+    },
   },
 }
