@@ -287,12 +287,66 @@ vim.keymap.set("n", "]Fa", function()
 end, { desc = "Formatoptions: Disable automatic paragraph formatting." })
 
 -- diagnostics
-vim.keymap.set("n", "<Space>l", vim.diagnostic.setloclist, {
+vim.keymap.set("n", "<Space>L", vim.diagnostic.setloclist, {
   desc = "Diagnostics: Put all buffer diagnostics in the location list.",
 })
 
-vim.keymap.set("n", "<Space>q", vim.diagnostic.setqflist, {
-  desc = "Diagnostics: Put all buffer diagnostics in the location list.",
+vim.keymap.set("n", "<Space>le", function()
+  vim.diagnostic.setloclist {
+    severity = { min = vim.diagnostic.severity.ERROR },
+    title = "Error diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all buffer error diagnostics in the location list.",
+})
+
+vim.keymap.set("n", "<Space>lw", function()
+  vim.diagnostic.setloclist {
+    severity = { min = vim.diagnostic.severity.WARN },
+    title = "Warning and higher diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all buffer warning and higher diagnostics in the location list.",
+})
+
+vim.keymap.set("n", "<Space>li", function()
+  vim.diagnostic.setloclist {
+    severity = { min = vim.diagnostic.severity.INFO },
+    title = "Info and higher diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all buffer info and higher diagnostics in the location list.",
+})
+
+vim.keymap.set("n", "<Space>Q", vim.diagnostic.setqflist, {
+  desc = "Diagnostics: Put all project diagnostics in the quickfix list.",
+})
+
+vim.keymap.set("n", "<Space>qe", function()
+  vim.diagnostic.setqflist {
+    severity = { min = vim.diagnostic.severity.ERROR },
+    title = "Error diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all project error diagnostics in the quickfix list.",
+})
+
+vim.keymap.set("n", "<Space>qw", function()
+  vim.diagnostic.setqflist {
+    severity = { min = vim.diagnostic.severity.WARN },
+    title = "Warning and higher diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all project warning and higher diagnostics in the quickfix list.",
+})
+
+vim.keymap.set("n", "<Space>qi", function()
+  vim.diagnostic.setqflist {
+    severity = { min = vim.diagnostic.severity.INFO },
+    title = "Info and higher diagnostics",
+  }
+end, {
+  desc = "Diagnostics: Put all project info and higher diagnostics in the quickfix list.",
 })
 
 -- highlight group inspection
