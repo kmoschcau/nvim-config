@@ -20,6 +20,11 @@ ls.add_snippets("cs", {
       { description = i(1) }
     )
   ),
+  s({
+    name = "C# DisplayAttribute",
+    trig = "dis",
+    desc = "A C# DisplayAttribute call with the Name property.",
+  }, fmt('[Display(Name = "{name}")]', { name = i(1) })),
 })
 
 ls.add_snippets("comment", {
