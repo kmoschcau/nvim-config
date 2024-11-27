@@ -4,7 +4,6 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
-    "folke/trouble.nvim",
     "gbrlsnchs/telescope-lsp-handlers.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -45,7 +44,6 @@ return {
   config = function()
     local telescope = require "telescope"
     local actions = require "telescope.actions"
-    local trouble = require "trouble.sources.telescope"
 
     telescope.setup {
       defaults = {
@@ -54,14 +52,12 @@ return {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
-            ["<C-K>"] = trouble.open,
             ["<C-X>"] = false,
           },
           n = {
             ["<C-Down>"] = actions.cycle_history_next,
             ["<C-Up>"] = actions.cycle_history_prev,
             ["<C-S>"] = actions.select_horizontal,
-            ["<C-K>"] = trouble.open,
             ["<C-X>"] = false,
           },
         },

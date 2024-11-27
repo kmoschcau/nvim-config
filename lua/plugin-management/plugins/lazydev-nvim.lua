@@ -17,7 +17,6 @@ return {
       "mason.nvim/lua/mason-core/package/init.lua",
       "mason.nvim/lua/mason/settings.lua",
       "oil.nvim/lua/oil/types.lua",
-      "trouble.nvim/lua/trouble/config/init.lua",
     },
   },
 }
