@@ -19,7 +19,6 @@
   "coop.nvim": { "branch": "main", "commit": "036f2aed6b7799668da5b0a67f2179a18c6b02cc" },
   "csv.vim": { "branch": "master", "commit": "bddfcbadd788ab11eb3dbba4550a38a412fe3705" },
   "dial.nvim": { "branch": "master", "commit": "46b4375e84e8eb771129bff6b2b1e47746601ef9" },
-  "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dotnet.nvim": { "branch": "main", "commit": "f5c52f9f52a3d8ca8dff6916c2228fb41a075274" },
   "dressing.nvim": { "branch": "master", "commit": "fc78a3ca96f4db9f8893bb7e2fd9823e0780451b" },
   "fidget.nvim": { "branch": "main", "commit": "e2a175c2abe2d4f65357da1c98c59a5cfb2b543f" },
