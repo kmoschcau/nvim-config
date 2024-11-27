@@ -2,6 +2,7 @@
 --- @type LazyPluginSpec
 return {
   "mbbill/undotree",
+  enabled = vim.fn.has "win32" == 0,
   cmd = "UndotreeToggle",
   keys = {
     {
