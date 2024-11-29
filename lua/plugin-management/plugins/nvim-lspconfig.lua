@@ -26,6 +26,7 @@ return {
       })
 
     local simple_servers = {
+      "astro",
       "bashls",
       "fish_lsp",
       "gradle_ls",
