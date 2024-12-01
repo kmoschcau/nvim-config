@@ -18,6 +18,7 @@ return {
       less = { "prettierd" },
       lua = { "stylua" },
       markdown = { "injected", "markdownlint" },
+      ocaml = { "ocamlformat" },
       query = { "format-queries" },
       razor = { lsp_format = "never" },
       scss = { "prettierd" },

@@ -35,6 +35,7 @@ return {
       "jqls",
       "lemminx",
       "marksman",
+      "ocamllsp",
       "prosemd_lsp",
       "quick_lint_js",
       "ruff",
