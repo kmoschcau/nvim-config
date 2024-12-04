@@ -17,9 +17,9 @@ local function monkey_patch_semantic_tokens(client)
 
   -- monkey patch the request proxy
   local request_inner = client.request
-  client.request = function(method, params, handler, req_bufnr)
+  function client:request(method, params, handler, req_bufnr)
     if method ~= vim.lsp.protocol.Methods.textDocument_semanticTokens_full then
-      return request_inner(method, params, handler)
+      return request_inner(self, method, params, handler)
     end
 
     local target_bufnr = vim.uri_to_bufnr(params.textDocument.uri)
@@ -31,7 +31,7 @@ local function monkey_patch_semantic_tokens(client)
       true
     )[1]
 
-    return request_inner("textDocument/semanticTokens/range", {
+    return request_inner(self, "textDocument/semanticTokens/range", {
       textDocument = params.textDocument,
       range = {
         ["start"] = {
