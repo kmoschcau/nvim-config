@@ -63,11 +63,8 @@ return {
       "jsonls",
       "kotlin_language_server",
       "lua_ls",
-      -- "omnisharp",
       "powershell_es",
-      "roslyn",
       "rust-analyzer",
-      -- "rzls",
       "stylelint-lsp",
       "svelte",
       "tailwindcss",
@@ -76,6 +73,13 @@ return {
       "volar",
       "yamlls",
     }
+
+    if true then
+      table.insert(server_config_modules, "omnisharp")
+    else
+      table.insert(server_config_modules, "roslyn")
+      table.insert(server_config_modules, "rzls")
+    end
 
     for _, module_name in ipairs(server_config_modules) do
       require("plugin-management.plugins.lsp." .. module_name)
