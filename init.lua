@@ -1,5 +1,12 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
+-- global variables {{{
+
+-- Whether to use roslyn and rzls instead of OmniSharp for C#.
+vim.g.use_roslyn = false
+
+-- }}}
+
 -- theme settings {{{
 
 vim.o.background = require("system-compat").get_system_background()

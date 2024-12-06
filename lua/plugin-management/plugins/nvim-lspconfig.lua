@@ -74,11 +74,11 @@ return {
       "yamlls",
     }
 
-    if true then
-      table.insert(server_config_modules, "omnisharp")
-    else
+    if vim.g.use_roslyn then
       table.insert(server_config_modules, "roslyn")
       table.insert(server_config_modules, "rzls")
+    else
+      table.insert(server_config_modules, "omnisharp")
     end
 
     for _, module_name in ipairs(server_config_modules) do
