@@ -4,7 +4,6 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
-    "gbrlsnchs/telescope-lsp-handlers.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-fzf-native.nvim",
     "nvim-telescope/telescope-symbols.nvim",
@@ -91,7 +90,6 @@ return {
 
     telescope.load_extension "fzf"
     telescope.load_extension "import"
-    telescope.load_extension "lsp_handlers"
     telescope.load_extension "notify"
     telescope.load_extension "rest"
   end,
