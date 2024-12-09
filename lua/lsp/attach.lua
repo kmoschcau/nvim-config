@@ -179,6 +179,15 @@ return function(client, bufnr)
 
   -- }}}
 
+  -- settings {{{
+
+  if common.supports_method(client, "textDocument/foldingRange") then
+    vim.opt_local.foldexpr = "v:lua.vim.lsp.foldexpr()"
+    vim.opt_local.foldtext = "v:lua.vim.lsp.foldtext()"
+  end
+
+  -- }}}
+
   -- autocommands {{{
 
   if
