@@ -104,7 +104,6 @@ return {
         end,
       },
       sources = cmp.config.sources({
-        { name = "lazydev", group_index = 0 },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         {
@@ -155,14 +154,16 @@ return {
 
     if vim.fn.executable "fish" == 1 then
       cmp.setup.filetype("fish", {
-        sources = {
+        sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
           { name = "fish" },
           { name = "luasnip" },
           { name = "luasnip_choice" },
           { name = "path" },
-        },
+        }, {
+          buffer_source,
+        }),
       })
     end
 
@@ -178,15 +179,30 @@ return {
     })
     require("cmp_git").setup()
 
+    cmp.setup.filetype("lua", {
+      sources = cmp.config.sources({
+        { name = "lazydev", group_index = 0 },
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "luasnip" },
+        { name = "luasnip_choice" },
+        { name = "path" },
+      }, {
+        buffer_source,
+      }),
+    })
+
     cmp.setup.filetype("tex", {
-      sources = {
+      sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "vimtex" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      },
+      }, {
+        buffer_source,
+      }),
     })
 
     cmp.setup.cmdline({ "/", "?" }, {
