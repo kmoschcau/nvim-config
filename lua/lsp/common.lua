@@ -186,7 +186,7 @@ M.supports_method = function(client, method)
   end
 
   if client.supports_method then
-    return client.supports_method(method)
+    return client:supports_method(method)
   end
 
   return vim.tbl_get(
