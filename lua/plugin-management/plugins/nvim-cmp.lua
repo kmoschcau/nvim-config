@@ -1,6 +1,7 @@
 -- selene: allow(mixed_table)
 local dependencies = {
   "L3MON4D3/cmp-luasnip-choice",
+  "MeanderingProgrammer/render-markdown.nvim",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
   "echasnovski/mini.nvim",
   "hrsh7th/cmp-buffer",
@@ -184,6 +185,19 @@ return {
         { name = "lazydev", group_index = 0 },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
+        { name = "luasnip" },
+        { name = "luasnip_choice" },
+        { name = "path" },
+      }, {
+        buffer_source,
+      }),
+    })
+
+    cmp.setup.filetype("markdown", {
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "render-markdown" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
