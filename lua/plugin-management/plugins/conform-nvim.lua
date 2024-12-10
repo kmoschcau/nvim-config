@@ -1,3 +1,12 @@
+local ignored_servers = {
+  "html",
+}
+
+--- @param client vim.lsp.Client
+local function formatter_filter(client)
+  return not vim.list_contains(ignored_servers, client.name)
+end
+
 -- selene: allow(mixed_table)
 --- @type LazyPluginSpec
 return {
@@ -20,7 +29,6 @@ return {
       markdown = { "injected", "markdownlint" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
-      razor = { lsp_format = "never" },
       scss = { "prettierd" },
       sh = { "shellharden", "shfmt" },
       svelte = { "prettierd" },
@@ -43,7 +51,7 @@ return {
         return
       end
 
-      return { timeout_ms = 500 }
+      return { filter = formatter_filter, timeout_ms = 500 }
     end,
   },
   init = function()
@@ -59,6 +67,7 @@ return {
       end
       require("conform").format {
         async = true,
+        filter = formatter_filter,
         range = range,
       }
     end, { bar = true, range = true })
