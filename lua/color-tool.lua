@@ -1631,6 +1631,8 @@ local highlights_light = {
 
   ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
   ["@lsp.type.keyword.razor"]         = { link = "Statement" },
+  ["@lsp.type.markupAttribute.razor"] = { link = "@tag.attribute" },
+  ["@lsp.type.razorTransition.razor"] = { link = "PreProc" },
 
   -- }}}}}}
 
