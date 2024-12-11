@@ -7,8 +7,15 @@ return function(client, bufnr)
 
   local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
   has_omni_ext = false
-  local keymap_implementation =
-    common.which_keymap_implementation(bufnr, client, has_omni_ext)
+
+  local has_telescope, telescope_builtins = pcall(require, "telescope.builtin")
+
+  local keymap_implementation = common.which_keymap_implementation(
+    bufnr,
+    client,
+    has_telescope,
+    has_omni_ext
+  )
 
   common.log_capabilities(client)
 
@@ -22,34 +29,40 @@ return function(client, bufnr)
 
   -- textDocument/definition
   -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
-  local definition_impl, definition_impl_descr =
+  local definition_impl, definition_impl_desc =
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.definition,
-      { omni_ext_impl = omni_ext.telescope_lsp_definition }
+      {
+        omni_ext_impl = omni_ext.telescope_lsp_definition,
+        telescope_impl = telescope_builtins.lsp_definitions,
+      }
     )
   if definition_impl then
     vim.keymap.set("n", "gd", definition_impl, {
       buffer = bufnr,
       desc = "LSP("
-        .. definition_impl_descr
-        .. "): Fuzzy find definitions of the symbol under the cursor.",
+        .. definition_impl_desc
+        .. "): Find definitions of the symbol under the cursor.",
     })
   end
 
   -- textDocument/implementation | mapped to gri by default
-  local implementation_impl, implementation_impl_descr =
+  local implementation_impl, implementation_impl_desc =
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.implementation,
-      { omni_ext_impl = omni_ext.telescope_lsp_implementation }
+      {
+        omni_ext_impl = omni_ext.telescope_lsp_implementation,
+        telescope_impl = telescope_builtins.lsp_implementations,
+      }
     )
   if implementation_impl then
     vim.keymap.set("n", "gri", implementation_impl, {
       buffer = bufnr,
       desc = "LSP("
-        .. implementation_impl_descr
-        .. "): Fuzzy find implementations of the symbol under the cursor.",
+        .. implementation_impl_desc
+        .. "): Find implementations of the symbol under the cursor.",
     })
   end
 
@@ -79,18 +92,21 @@ return function(client, bufnr)
   })
 
   -- textDocument/typeDefinition
-  local type_definition_impl, type_definition_impl_descr =
+  local type_definition_impl, type_definition_impl_desc =
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.type_definition,
-      { omni_ext_impl = omni_ext.telescope_lsp_type_definition }
+      {
+        omni_ext_impl = omni_ext.telescope_lsp_type_definition,
+        telescope_impl = telescope_builtins.lsp_type_definitions,
+      }
     )
   if type_definition_impl then
     vim.keymap.set("n", "<Space>D", type_definition_impl, {
       buffer = bufnr,
       desc = "LSP("
-        .. type_definition_impl_descr
-        .. "): Fuzzy find type definitions of the symbol under the cursor.",
+        .. type_definition_impl_desc
+        .. "): Find type definitions of the symbol under the cursor.",
     })
   end
 
@@ -99,40 +115,85 @@ return function(client, bufnr)
   -- textDocument/codeAction | mapped to gra by default
 
   -- textDocument/references | mapped to grr by default
-  local references_impl, references_impl_descr =
+  local references_impl, references_impl_desc =
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.references,
-      { omni_ext_impl = omni_ext.telescope_lsp_references }
+      {
+        omni_ext_impl = omni_ext.telescope_lsp_references,
+        telescope_impl = telescope_builtins.lsp_references,
+      }
     )
   if references_impl then
     vim.keymap.set("n", "grr", references_impl, {
       buffer = bufnr,
       desc = "LSP("
-        .. references_impl_descr
-        .. "): Fuzzy find references for the symbol under the cursor.",
+        .. references_impl_desc
+        .. "): Find references for the symbol under the cursor.",
     })
   end
 
   -- callHierarchy/incomingCalls
-  vim.keymap.set("n", "<Space>ci", vim.lsp.buf.incoming_calls, {
-    buffer = bufnr,
-    desc = "LSP: Fuzzy find incoming calls of the symbol under the cursor.",
-  })
+  local incoming_calls_impl, incoming_calls_impl_desc =
+    common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.incoming_calls,
+      { telescope_impl = telescope_builtins.lsp_incoming_calls }
+    )
+  if incoming_calls_impl then
+    vim.keymap.set("n", "<Space>ci", incoming_calls_impl, {
+      buffer = bufnr,
+      desc = "LSP("
+        .. incoming_calls_impl_desc
+        .. "): Find incoming calls of the symbol under the cursor.",
+    })
+  end
 
   -- callHierarchy/outgoingCalls
-  vim.keymap.set("n", "<Space>co", vim.lsp.buf.outgoing_calls, {
-    buffer = bufnr,
-    desc = "LSP: Fuzzy find outgoing calls of the symbol under the cursor.",
-  })
+  local outgoing_calls_impl, outgoing_calls_impl_desc =
+    common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.outgoing_calls,
+      { telescope_impl = telescope_builtins.lsp_outgoing_calls }
+    )
+  if outgoing_calls_impl then
+    vim.keymap.set("n", "<Space>co", outgoing_calls_impl, {
+      buffer = bufnr,
+      desc = "LSP("
+        .. outgoing_calls_impl_desc
+        .. "): Find outgoing calls of the symbol under the cursor.",
+    })
+  end
 
   -- textDocument/documentSymbol | mapped to gO by default
+  local document_symbol_impl, document_symbol_impl_desc =
+    common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.document_symbol,
+      { telescope_impl = telescope_builtins.lsp_document_symbols }
+    )
+  if document_symbol_impl then
+    vim.keymap.set("n", "gO", document_symbol_impl, {
+      buffer = bufnr,
+      desc = "LSP(" .. document_symbol_impl_desc .. "): Find document symbols.",
+    })
+  end
 
   -- workspace/symbol
-  vim.keymap.set("n", "<Space>sw", vim.lsp.buf.workspace_symbol, {
-    buffer = bufnr,
-    desc = "LSP: Fuzzy find workspace symbols.",
-  })
+  local workspace_symbol_impl, workspace_symbol_impl_desc =
+    common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.workspace_symbol,
+      { telescope_impl = telescope_builtins.lsp_workspace_symbols }
+    )
+  if workspace_symbol_impl then
+    vim.keymap.set("n", "<Space>sw", workspace_symbol_impl, {
+      buffer = bufnr,
+      desc = "LSP("
+        .. workspace_symbol_impl_desc
+        .. "): Find workspace symbols.",
+    })
+  end
 
   -- textDocument/hover | mapped to K by default
   vim.keymap.set("n", "K", function()

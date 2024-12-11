@@ -195,16 +195,22 @@ M.supports_method = function(client, method)
   ) and true or false
 end
 
---- @alias KeymapImplementation "nvim"|"omnisharp_extended"|nil
+--- @alias KeymapImplementation "nvim"|"telescope"|"omnisharp_extended"|nil
 
 --- Determine which implementation to use for a given keymap. This does not need
 --- to be used for all keymaps, just the ones where multiple implementations are
 --- available.
 --- @param buf integer the buffer number
 --- @param client vim.lsp.Client|nil the LSP client for the buffer
+--- @param has_telescope boolean whether telescope is available
 --- @param has_omni_ext boolean whether omnisharp extended is available
 --- @return KeymapImplementation
-M.which_keymap_implementation = function(buf, client, has_omni_ext)
+M.which_keymap_implementation = function(
+  buf,
+  client,
+  has_telescope,
+  has_omni_ext
+)
   if not client then
     return nil
   end
@@ -214,17 +220,18 @@ M.which_keymap_implementation = function(buf, client, has_omni_ext)
     return client.name == "omnisharp" and "omnisharp_extended" or nil
   end
 
-  return "nvim"
+  return has_telescope and "telescope" or "nvim"
 end
 
 --- @class ChooseKeymapImplOptions
+--- @field telescope_impl? function the telescope implementation
 --- @field omni_ext_impl? function the omnisharp extended implementation
 
 --- Select from the given keymap implementations.
 --- @param keymap_implementation KeymapImplementation the determined implementation
 --- @param nvim_impl function the native Neovim implementation
 --- @param opts? ChooseKeymapImplOptions the implementation options
---- @return function|nil, string|nil
+--- @return function|nil, KeymapImplementation|nil
 M.choose_keymap_implementation = function(
   keymap_implementation,
   nvim_impl,
@@ -235,6 +242,16 @@ M.choose_keymap_implementation = function(
   if keymap_implementation == "omnisharp_extended" then
     if o.omni_ext_impl then
       return o.omni_ext_impl, "omnisharp_extended"
+    end
+
+    if o.telescope_impl then
+      return o.telescope_impl, "telescope"
+    end
+
+    return nvim_impl, "nvim"
+  elseif keymap_implementation == "telescope" then
+    if o.telescope_impl then
+      return o.telescope_impl, "telescope"
     end
 
     return nvim_impl, "nvim"
