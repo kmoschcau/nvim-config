@@ -12,31 +12,23 @@ return {
   },
   keys = {
     {
-      "<C-p>",
-      function()
-        require("telescope.builtin").find_files()
-      end,
+      "<Space>tf",
+      require("telescope.builtin").find_files,
       desc = "Telescope: Open file search.",
     },
     {
-      vim.fn.has "mac" == 1 or vim.g.neovide and "<C-/>" or "<C-_>",
-      function()
-        require("telescope.builtin").live_grep()
-      end,
+      "<Space>tr",
+      require("telescope.builtin").live_grep,
       desc = "Telescope: Open live grep search.",
     },
     {
-      "<Space>gg",
-      function()
-        require("telescope.builtin").git_commits()
-      end,
+      "<Space>tgc",
+      require("telescope.builtin").git_commits,
       desc = "Telescope: List git commits of current directory.",
     },
     {
-      "<Space>gb",
-      function()
-        require("telescope.builtin").git_bcommits()
-      end,
+      "<Space>tgb",
+      require("telescope.builtin").git_bcommits,
       desc = "Telescope: List git commits of current buffer.",
     },
   },
