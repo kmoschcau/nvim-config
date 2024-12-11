@@ -36,6 +36,8 @@ return {
     local telescope = require "telescope"
     local actions = require "telescope.actions"
 
+    local default_picker_settings = { theme = "ivy" }
+
     telescope.setup {
       defaults = {
         mappings = {
@@ -65,13 +67,24 @@ return {
         },
       },
       pickers = {
-        live_grep = {
+        find_files = default_picker_settings,
+        git_commits = default_picker_settings,
+        git_bcommits = default_picker_settings,
+        live_grep = vim.tbl_extend("force", default_picker_settings, {
           mappings = {
             i = {
               ["<C-f>"] = actions.to_fuzzy_refine,
             },
           },
-        },
+        }),
+        lsp_definitions = default_picker_settings,
+        lsp_implementations = default_picker_settings,
+        lsp_type_definitions = default_picker_settings,
+        lsp_references = default_picker_settings,
+        lsp_incoming_calls = default_picker_settings,
+        lsp_outgoing_calls = default_picker_settings,
+        lsp_document_symbols = default_picker_settings,
+        lsp_workspace_symbols = default_picker_settings,
       },
       extensions = {
         import = {
