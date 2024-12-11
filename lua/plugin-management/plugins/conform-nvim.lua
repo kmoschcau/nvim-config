@@ -14,7 +14,7 @@ return {
   --- @type conform.setupOpts
   opts = {
     formatters_by_ft = {
-      cs = { "csharpier" },
+      cs = { "csharpier", "trim_newlines" },
       css = { "prettierd" },
       fish = { "fish_indent" },
       html = { "prettierd" },
@@ -23,7 +23,7 @@ return {
       jq = { "jq" },
       json = { "prettierd" },
       jsonc = { "prettierd" },
-      latex = { "latexindent" },
+      latex = { "latexindent", "trim_newlines", "trim_whitespace" },
       less = { "prettierd" },
       lua = { "stylua" },
       markdown = { "injected", "markdownlint" },
@@ -35,8 +35,9 @@ return {
       typescript = { "prettierd" },
       typescriptreact = { "prettierd" },
       vue = { "prettierd" },
-      xml = { "xmllint" },
+      xml = { "xmllint", "trim_newlines", "trim_whitespace" },
       yaml = { "prettierd" },
+      ["_"] = { "trim_newlines", "trim_whitespace" },
     },
     default_format_opts = {
       lsp_format = "fallback",
