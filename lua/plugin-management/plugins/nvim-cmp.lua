@@ -60,10 +60,8 @@ return {
           )
 
           if vim.list_contains({ "path" }, entry.source.name) then
-            local icon, hl_group = require("mini.icons").get(
-              "file",
-              entry:get_completion_item().label
-            )
+            local icon, hl_group =
+              require("mini.icons").get("file", entry.completion_item().label)
 
             if icon then
               return_item.kind = icon
