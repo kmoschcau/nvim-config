@@ -14,12 +14,14 @@ return {
   --- @type conform.setupOpts
   opts = {
     formatters_by_ft = {
+      astro = { "prettierd" },
       cs = { "csharpier", "trim_newlines" },
       css = { "prettierd" },
       fish = { "fish_indent" },
       html = { "prettierd" },
       java = { "google-java-format" },
       javascript = { "prettierd" },
+      javascriptreact = { "prettierd" },
       jq = { "jq" },
       json = { "prettierd" },
       jsonc = { "prettierd" },
@@ -28,6 +30,7 @@ return {
       markdown = { "injected", "markdownlint" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
+      sass = { "prettierd" },
       scss = { "prettierd" },
       sh = { "shellharden", "shfmt" },
       svelte = { "prettierd" },
