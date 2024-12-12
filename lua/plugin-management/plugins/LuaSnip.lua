@@ -37,7 +37,7 @@ return {
       end
     end, {
       silent = true,
-      desc = "LuaSnip: Expand or jump to next placeholder",
+      desc = "LuaSnip: Expand or jump to previous placeholder",
     })
   end,
 }
