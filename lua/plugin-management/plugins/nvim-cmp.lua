@@ -1,10 +1,10 @@
 -- selene: allow(mixed_table)
 local dependencies = {
+  "L3MON4D3/LuaSnip",
   "L3MON4D3/cmp-luasnip-choice",
   "MeanderingProgrammer/render-markdown.nvim",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
   "echasnovski/mini.nvim",
-  "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -27,13 +27,6 @@ return {
   "hrsh7th/nvim-cmp",
   dependencies = dependencies,
   config = function()
-    local buffer_source = {
-      name = "buffer",
-      option = {
-        keyword_pattern = [[\k\+]],
-      },
-    }
-
     local luasnip = require "luasnip"
     local cmp = require "cmp"
     cmp.setup {
@@ -86,23 +79,55 @@ return {
           return return_item
         end,
       },
-      mapping = cmp.mapping.preset.insert {
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
+      mapping = {
+        ["<C-x><C-u>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-n>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            fallback()
+          end
+        end,
+        ["<C-p>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            fallback()
+          end
+        end,
+        ["<Down>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          else
+            fallback()
+          end
+        end,
+        ["<Up>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+          else
+            fallback()
+          end
+        end,
         ["<C-l>"] = cmp.mapping.complete_common_string(),
+        ["<C-y>"] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        },
         ["<CR>"] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
       },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         {
@@ -126,9 +151,7 @@ return {
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      }, {
-        buffer_source,
-      }),
+      },
       sorting = {
         comparators = {
           cmp.config.compare.offset,
@@ -143,7 +166,9 @@ return {
       },
     }
 
-    require("cmp_luasnip_choice").setup {}
+    require("cmp_luasnip_choice").setup {
+      auto_open = false,
+    }
 
     cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
       sources = {
@@ -153,77 +178,57 @@ return {
 
     if vim.fn.executable "fish" == 1 then
       cmp.setup.filetype("fish", {
-        sources = cmp.config.sources({
+        sources = cmp.config.sources {
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
           { name = "fish" },
           { name = "luasnip" },
           { name = "luasnip_choice" },
           { name = "path" },
-        }, {
-          buffer_source,
-        }),
+        },
       })
     end
 
     cmp.setup.filetype("gitcommit", {
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "git" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      }, {
-        buffer_source,
-      }),
+      },
     })
     require("cmp_git").setup()
 
     cmp.setup.filetype("lua", {
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "lazydev", group_index = 0 },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      }, {
-        buffer_source,
-      }),
+      },
     })
 
     cmp.setup.filetype("markdown", {
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "render-markdown" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      }, {
-        buffer_source,
-      }),
+      },
     })
 
     cmp.setup.filetype("tex", {
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "vimtex" },
         { name = "luasnip" },
         { name = "luasnip_choice" },
         { name = "path" },
-      }, {
-        buffer_source,
-      }),
-    })
-
-    cmp.setup.cmdline({ "/", "?" }, {
-      completion = {
-        autocomplete = false,
-      },
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        buffer_source,
       },
     })
 
@@ -238,7 +243,6 @@ return {
             ignore_cmds = {
               "!",
               "Man",
-              "Neotree",
               "terminal",
             },
           },
