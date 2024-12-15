@@ -33,10 +33,6 @@ return {
       enabled = function()
         return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
       end,
-      preselect = cmp.PreselectMode.None,
-      completion = {
-        autocomplete = false,
-      },
       view = {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
@@ -190,6 +186,9 @@ return {
     end
 
     cmp.setup.filetype("gitcommit", {
+      completion = {
+        autocomplete = false,
+      },
       sources = cmp.config.sources {
         { name = "git" },
         { name = "luasnip" },
