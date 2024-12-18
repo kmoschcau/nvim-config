@@ -69,7 +69,7 @@ vim.o.guicursor = table.concat(
   vim.tbl_map(function(pair)
     return table.concat(pair, ":")
   end, {
-    { "n", "block-blinkwait1000-blinkon500-blinkoff500-Cursor" },
+    { "n-t", "block-blinkwait1000-blinkon500-blinkoff500-Cursor" },
     { "v", "block-blinkon0-Cursor" },
     { "c", "ver20-blinkwait1000-blinkon500-blinkoff500-Cursor" },
     { "i-ci-sm", "ver20-blinkwait1000-blinkon500-blinkoff500-CursorInsert" },
