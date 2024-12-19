@@ -32,6 +32,7 @@ return {
       markdown = { "injected", "markdownlint" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
+      razor = { prettier, "trim_newlines" },
       sass = { prettier },
       scss = { prettier },
       sh = { "shellharden", "shfmt" },
