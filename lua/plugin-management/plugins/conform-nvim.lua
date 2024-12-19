@@ -1,3 +1,5 @@
+local prettier = "prettier"
+
 local ignored_servers = {
   "html",
 }
@@ -14,32 +16,32 @@ return {
   --- @type conform.setupOpts
   opts = {
     formatters_by_ft = {
-      astro = { "prettierd" },
+      astro = { prettier },
       cs = { "csharpier", "trim_newlines" },
-      css = { "prettierd" },
+      css = { prettier },
       fish = { "fish_indent" },
-      html = { "prettierd" },
+      html = { prettier },
       java = { "google-java-format" },
-      javascript = { "prettierd" },
-      javascriptreact = { "prettierd" },
+      javascript = { prettier },
+      javascriptreact = { prettier },
       jq = { "jq" },
-      json = { "prettierd" },
-      jsonc = { "prettierd" },
-      less = { "prettierd" },
+      json = { prettier },
+      jsonc = { prettier },
+      less = { prettier },
       lua = { "stylua" },
       markdown = { "injected", "markdownlint" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
-      sass = { "prettierd" },
-      scss = { "prettierd" },
+      sass = { prettier },
+      scss = { prettier },
       sh = { "shellharden", "shfmt" },
-      svelte = { "prettierd" },
+      svelte = { prettier },
       tex = { "latexindent", "trim_newlines", "trim_whitespace" },
-      typescript = { "prettierd" },
-      typescriptreact = { "prettierd" },
-      vue = { "prettierd" },
+      typescript = { prettier },
+      typescriptreact = { prettier },
+      vue = { prettier },
       xml = { "xmllint", "trim_newlines", "trim_whitespace" },
-      yaml = { "prettierd" },
+      yaml = { prettier },
       ["_"] = { "trim_newlines", "trim_whitespace" },
     },
     default_format_opts = {
