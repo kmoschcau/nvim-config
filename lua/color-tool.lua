@@ -1653,6 +1653,39 @@ local highlights_light = {
 
   -- Plugins {{{
 
+  -- blink.cmp | https://github.com/Saghen/blink.cmp {{{
+
+  BlinkCmpLabelDeprecated = { link = "DiagnosticDeprecated" },
+
+  BlinkCmpKindArray         = { fg = palette.syntax.structure },
+  BlinkCmpKindBoolean       = { fg = palette.syntax.boolean.fg },
+  BlinkCmpKindClass         = { fg = palette.syntax.structure },
+  BlinkCmpKindConstant      = { fg = palette.syntax.variable },
+  BlinkCmpKindConstructor   = { fg = palette.syntax["function"] },
+  BlinkCmpKindEnum          = { fg = palette.syntax.enum },
+  BlinkCmpKindEnumMember    = { fg = palette.syntax.enum_member },
+  BlinkCmpKindEvent         = { fg = palette.syntax.event },
+  BlinkCmpKindField         = { fg = palette.syntax.member },
+  BlinkCmpKindFile          = framing.neutral.c,
+  BlinkCmpKindFunction      = { fg = palette.syntax["function"] },
+  BlinkCmpKindInterface     = { fg = palette.syntax.metaprogramming },
+  BlinkCmpKindKey           = { fg = palette.syntax.property },
+  BlinkCmpKindMethod        = { fg = palette.syntax["function"] },
+  BlinkCmpKindModule        = { fg = palette.syntax.module },
+  BlinkCmpKindNamespace     = { fg = palette.syntax.module },
+  BlinkCmpKindNull          = { fg = palette.syntax.literal.fg },
+  BlinkCmpKindNumber        = { fg = palette.syntax.number.fg },
+  BlinkCmpKindObject        = { fg = palette.syntax.structure },
+  BlinkCmpKindOperator      = { fg = palette.syntax.statement },
+  BlinkCmpKindPackage       = { fg = palette.syntax.module },
+  BlinkCmpKindProperty      = { fg = palette.syntax.property },
+  BlinkCmpKindString        = { fg = palette.syntax.string.fg },
+  BlinkCmpKindStruct        = { fg = palette.syntax.structure },
+  BlinkCmpKindTypeParameter = { fg = palette.syntax.structure },
+  BlinkCmpKindVariable      = { fg = palette.syntax.variable, italic = true },
+
+  -- }}}
+
   -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{
 
   GitSignsAdd    = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },

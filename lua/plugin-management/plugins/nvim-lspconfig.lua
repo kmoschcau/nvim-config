@@ -12,6 +12,7 @@ return {
         "nvim-lua/plenary.nvim",
       },
     },
+    "saghen/blink.cmp",
     "seblj/roslyn.nvim",
     "tris203/rzls.nvim",
     "williamboman/mason-lspconfig.nvim",

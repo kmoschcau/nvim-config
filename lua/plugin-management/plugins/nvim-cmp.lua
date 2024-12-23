@@ -5,6 +5,7 @@ local dependencies = {
   "MeanderingProgrammer/render-markdown.nvim",
   { "dcampos/cmp-emmet-vim", dependencies = "mattn/emmet-vim" },
   "echasnovski/mini.nvim",
+  "folke/lazydev.nvim",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -25,6 +26,7 @@ end
 --- @type LazyPluginSpec
 return {
   "hrsh7th/nvim-cmp",
+  enabled = false,
   dependencies = dependencies,
   config = function()
     local luasnip = require "luasnip"
