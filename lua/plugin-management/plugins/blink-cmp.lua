@@ -34,6 +34,11 @@ return {
   opts = {
     completion = {
       documentation = { window = { border = "rounded" } },
+      list = {
+        selection = function(ctx)
+          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+        end,
+      },
       menu = {
         draw = {
           columns = {
