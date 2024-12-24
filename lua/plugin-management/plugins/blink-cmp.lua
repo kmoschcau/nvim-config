@@ -20,6 +20,7 @@ return {
   "saghen/blink.cmp",
   dependencies = {
     "L3MON4D3/LuaSnip",
+    "MeanderingProgrammer/render-markdown.nvim",
     "folke/lazydev.nvim",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
@@ -122,23 +123,26 @@ return {
       jump = require("luasnip").jump,
     },
     sources = {
+      default = default_sources,
       per_filetype = {
         ["dap-repl"] = { "dap" },
         ["dapui_hover"] = { "dap" },
         ["dapui_watches"] = { "dap" },
         lua = vim.list_extend({ "lazydev" }, default_sources),
+        markdown = vim.list_extend({ "markdown" }, default_sources),
       },
-      default = default_sources,
       providers = {
         dap = {
           name = "dap",
           module = "blink.compat.source",
-          score_offset = 90,
         },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
-          score_offset = 100,
+        },
+        markdown = {
+          name = "RenderMarkdown",
+          module = "render-markdown.integ.blink",
         },
       },
     },
