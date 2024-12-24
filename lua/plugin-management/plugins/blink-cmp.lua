@@ -22,6 +22,7 @@ return {
     "L3MON4D3/LuaSnip",
     "MeanderingProgrammer/render-markdown.nvim",
     "folke/lazydev.nvim",
+    "micangl/cmp-vimtex",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
     { "saghen/blink.compat", lazy = true, config = true },
@@ -130,6 +131,7 @@ return {
         ["dapui_watches"] = { "dap" },
         lua = vim.list_extend({ "lazydev" }, default_sources),
         markdown = vim.list_extend({ "markdown" }, default_sources),
+        tex = vim.list_extend({ "vimtex" }, default_sources),
       },
       providers = {
         dap = {
@@ -143,6 +145,10 @@ return {
         markdown = {
           name = "RenderMarkdown",
           module = "render-markdown.integ.blink",
+        },
+        vimtex = {
+          name = "vimtex",
+          module = "blink.compat.source",
         },
       },
     },
