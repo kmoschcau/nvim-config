@@ -23,6 +23,7 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
+    "mtoohey31/cmp-fish",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
     { "saghen/blink.compat", lazy = true, config = true },
@@ -131,11 +132,16 @@ return {
         ["dapui_watches"] = { "dap" },
         lua = vim.list_extend({ "lazydev" }, default_sources),
         markdown = vim.list_extend({ "markdown" }, default_sources),
+        fish = vim.list_extend({ "fish" }, default_sources),
         tex = vim.list_extend({ "vimtex" }, default_sources),
       },
       providers = {
         dap = {
           name = "dap",
+          module = "blink.compat.source",
+        },
+        fish = {
+          name = "fish",
           module = "blink.compat.source",
         },
         lazydev = {
