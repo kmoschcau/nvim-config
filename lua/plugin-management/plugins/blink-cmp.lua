@@ -21,6 +21,7 @@ return {
   dependencies = {
     "L3MON4D3/LuaSnip",
     "MeanderingProgrammer/render-markdown.nvim",
+    "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
     "mtoohey31/cmp-fish",
