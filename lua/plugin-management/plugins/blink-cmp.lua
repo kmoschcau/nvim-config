@@ -1,5 +1,7 @@
 local symbols = require "symbols"
 
+local default_sources = { "lsp", "path", "snippets", "buffer" }
+
 --- @param ctx blink.cmp.DrawItemContext
 --- @return string, string
 local function get_path_component(ctx)
@@ -120,7 +122,13 @@ return {
       jump = require("luasnip").jump,
     },
     sources = {
-      default = { "lazydev", "dap", "lsp", "path", "snippets", "buffer" },
+      per_filetype = {
+        ["dap-repl"] = { "dap" },
+        ["dapui_hover"] = { "dap" },
+        ["dapui_watches"] = { "dap" },
+        lua = vim.list_extend({ "lazydev" }, default_sources),
+      },
+      default = default_sources,
       providers = {
         dap = {
           name = "dap",
