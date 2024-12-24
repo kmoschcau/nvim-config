@@ -20,6 +20,8 @@ return {
     "L3MON4D3/LuaSnip",
     "folke/lazydev.nvim",
     "rafamadriz/friendly-snippets",
+    "rcarriga/cmp-dap",
+    { "saghen/blink.compat", lazy = true, config = true },
   },
   build = "cargo build --release",
   init = function()
@@ -93,6 +95,9 @@ return {
         },
       },
     },
+    enabled = function()
+      return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
+    end,
     keymap = {
       preset = "none",
       ["<C-e>"] = { "cancel", "fallback" },
@@ -115,8 +120,13 @@ return {
       jump = require("luasnip").jump,
     },
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      default = { "lazydev", "dap", "lsp", "path", "snippets", "buffer" },
       providers = {
+        dap = {
+          name = "dap",
+          module = "blink.compat.source",
+          score_offset = 90,
+        },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",

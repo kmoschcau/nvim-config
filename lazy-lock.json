@@ -1,6 +1,7 @@
 {
   "LuaSnip": { "branch": "master", "commit": "33b06d72d220aa56a7ce80a0dd6f06c70cd82b9d" },
   "blink.cmp": { "branch": "main", "commit": "b430d358080f464f10233b013215c57b1f0fcfe7" },
+  "blink.compat": { "branch": "main", "commit": "74b251a1e9478c4fa6d7c6bc2921d7124e6f6cbb" },
   "cmp-cmdline": { "branch": "main", "commit": "d250c63aa13ead745e3a40f61fdd3470efde3923" },
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
   "cmp-emmet-vim": { "branch": "master", "commit": "0fb9a6eae7c1a56b7f460a80a09a402a57a7cc99" },
