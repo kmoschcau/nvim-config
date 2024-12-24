@@ -88,9 +88,6 @@ return {
         },
       },
     },
-    enabled = function()
-      return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
-    end,
     keymap = {
       preset = "none",
       ["<C-e>"] = { "cancel", "fallback" },
