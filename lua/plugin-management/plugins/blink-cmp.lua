@@ -63,13 +63,12 @@ return {
                 end
 
                 if ctx.kind == "Color" then
-                  local color_item = require("nvim-highlight-colors").format({
-                    get_completion_item = function()
-                      return { documentation = ctx.item.documentation }
-                    end,
-                  }, {
-                    kind = "Color",
-                  })
+                  local color_item = require("nvim-highlight-colors").format(
+                    ctx.item.documentation,
+                    {
+                      kind = ctx.kind,
+                    }
+                  )
 
                   if color_item.abbr_hl_group then
                     return color_item.abbr_hl_group
