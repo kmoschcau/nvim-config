@@ -114,6 +114,18 @@ return {
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       ["<C-l>"] = { "snippet_forward", "fallback" },
       ["<C-h>"] = { "snippet_backward", "fallback" },
+      cmdline = {
+        preset = "none",
+        ["<Tab>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "cancel", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-y>"] = { "accept", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-l>"] = { "snippet_forward", "fallback" },
+        ["<C-h>"] = { "snippet_backward", "fallback" },
+      },
     },
     snippets = {
       active = function(filter)
