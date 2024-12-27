@@ -1,6 +1,6 @@
 local symbols = require "symbols"
 
-local default_sources = { "lsp", "path", "snippets", "buffer" }
+local default_sources = { "lsp", "path", "snippets", "emoji", "buffer" }
 
 --- @param ctx blink.cmp.DrawItemContext
 --- @return string, string
@@ -24,6 +24,7 @@ return {
     "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
+    "moyiz/blink-emoji.nvim",
     "mtoohey31/cmp-fish",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
@@ -154,24 +155,28 @@ return {
       },
       providers = {
         dap = {
-          name = "dap",
           module = "blink.compat.source",
+          name = "dap",
+        },
+        emoji = {
+          module = "blink-emoji",
+          name = "Emoji",
         },
         fish = {
-          name = "fish",
           module = "blink.compat.source",
+          name = "fish",
         },
         lazydev = {
-          name = "LazyDev",
           module = "lazydev.integrations.blink",
+          name = "LazyDev",
         },
         markdown = {
-          name = "RenderMarkdown",
           module = "render-markdown.integ.blink",
+          name = "RenderMarkdown",
         },
         vimtex = {
-          name = "vimtex",
           module = "blink.compat.source",
+          name = "vimtex",
         },
       },
     },
