@@ -48,6 +48,10 @@ return {
         end,
       },
       menu = {
+        auto_show = function(ctx)
+          return ctx.mode ~= "cmdline"
+            or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+        end,
         draw = {
           columns = {
             { "label", "label_description", gap = 1 },
