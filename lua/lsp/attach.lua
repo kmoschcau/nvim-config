@@ -19,7 +19,7 @@ return function(client, bufnr)
 
   common.log_capabilities(client)
 
-  -- keymaps {{{1
+  -- keymaps {{{
 
   -- textDocument/declaration
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
@@ -113,6 +113,14 @@ return function(client, bufnr)
   -- textDocument/rename | mapped to grn by default
 
   -- textDocument/codeAction | mapped to gra by default
+
+  -- textDocument/codeLens
+  if common.supports_method(client, "codeLens/resolve") then
+    vim.keymap.set("n", "grc", vim.lsp.codelens.run, {
+      buffer = bufnr,
+      desc = "LSP: Run the code lens in the current line.",
+    })
+  end
 
   -- textDocument/references | mapped to grr by default
   local references_impl, references_impl_desc =
@@ -251,10 +259,7 @@ return function(client, bufnr)
 
   -- autocommands {{{
 
-  if
-    common.supports_method(client, "textDocument/codeLens")
-    or common.supports_method(client, "codeLens/resolve")
-  then
+  if common.supports_method(client, "textDocument/codeLens") then
     vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
       desc = "LSP: Update the code lenses of the buffer.",
       group = common.augroup,
