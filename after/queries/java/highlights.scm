@@ -1,7 +1,6 @@
 ; extends
 
 ; operators
-
 (method_invocation
   "." @operator)
 
@@ -12,7 +11,6 @@
   "?" @punctuation.special)
 
 ; namespaces
-
 (package_declaration
   "package" @keyword.module
   (scoped_identifier
@@ -27,13 +25,14 @@
     (identifier) @module))
 
 ; generics
-
 (generic_type
   (type_arguments
-    ["<" ">"] @generic.special))
+    [
+      "<"
+      ">"
+    ] @generic.special))
 
 ; type declarations
-
 (enum_declaration
   "enum" @keyword.enum
   name: (identifier) @enum)
@@ -50,10 +49,11 @@
   name: (identifier) @class)
 
 ; type references
-
 (class_declaration
   interfaces: (super_interfaces
     (type_list
-      [(type_identifier) @interface
-       (generic_type
-        (type_identifier) @interface)])))
+      [
+        (type_identifier) @interface
+        (generic_type
+          (type_identifier) @interface)
+      ])))
