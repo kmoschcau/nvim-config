@@ -39,6 +39,7 @@ local function capitalization_preserving_transform(ctx, items)
   return corrected_texts
 end
 
+--- Get the icon string and highlight for a file path.
 --- @param ctx blink.cmp.DrawItemContext the blink context
 --- @return string icon the icon string
 --- @return string highlight the highlight group name
@@ -50,6 +51,45 @@ local function get_path_component(ctx)
   end
 
   return icons.get("file", full_path)
+end
+
+--- Get the kind icon for a specific completion item.
+--- @param ctx blink.cmp.DrawItemContext the blink context
+--- @return string icon_text the icon string
+local function kind_icon_text(ctx)
+  if ctx.source_id == "path" then
+    local kind_icon = get_path_component(ctx)
+    return kind_icon
+  end
+
+  if ctx.kind == "Color" then
+    return ctx.kind_icon
+  end
+
+  return symbols.types[ctx.kind]
+end
+
+--- Get the highlight group name for a specific completion item.
+--- @param ctx blink.cmp.DrawItemContext the blink context
+--- @return string highlight the highlight group name
+local function kind_icon_highlight(ctx)
+  if ctx.source_id == "path" then
+    local _, highlight = get_path_component(ctx)
+    return highlight
+  end
+
+  if ctx.kind == "Color" then
+    local color_item =
+      require("nvim-highlight-colors").format(ctx.item.documentation, {
+        kind = ctx.kind,
+      })
+
+    if color_item.abbr_hl_group then
+      return color_item.abbr_hl_group
+    end
+  end
+
+  return "BlinkCmpKind" .. ctx.kind
 end
 
 -- selene: allow(mixed_table)
@@ -100,44 +140,11 @@ return {
           components = {
             kind_icon = {
               ellipsis = false,
-              text = function(ctx)
-                if ctx.source_id == "path" then
-                  local kind_icon = get_path_component(ctx)
-                  return kind_icon
-                end
-
-                if ctx.kind == "Color" then
-                  return ctx.kind_icon
-                end
-
-                return symbols.types[ctx.kind]
-              end,
-              highlight = function(ctx)
-                if ctx.source_id == "path" then
-                  local _, highlight = get_path_component(ctx)
-                  return highlight
-                end
-
-                if ctx.kind == "Color" then
-                  local color_item = require("nvim-highlight-colors").format(
-                    ctx.item.documentation,
-                    {
-                      kind = ctx.kind,
-                    }
-                  )
-
-                  if color_item.abbr_hl_group then
-                    return color_item.abbr_hl_group
-                  end
-                end
-
-                return "BlinkCmpKind" .. ctx.kind
-              end,
+              text = kind_icon_text,
+              highlight = kind_icon_highlight,
             },
             kind = {
-              highlight = function()
-                return "None"
-              end,
+              highlight = "None",
             },
           },
           treesitter = { "lazydev", "lsp" },
