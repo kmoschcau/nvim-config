@@ -58,6 +58,7 @@ return {
 
     local server_config_modules = {
       "cssls",
+      "denols",
       "eslint",
       "glint",
       "html",

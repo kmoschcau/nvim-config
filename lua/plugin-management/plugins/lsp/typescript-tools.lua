@@ -28,4 +28,6 @@ require("typescript-tools").setup {
     javascript = common.settings.javascript,
     typescript = ts,
   },
+  -- HACK: Explicitly set this to false, to avoid conflicts with denols.
+  single_file_support = false,
 }
