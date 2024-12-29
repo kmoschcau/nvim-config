@@ -2,8 +2,46 @@ local symbols = require "symbols"
 
 local default_sources = { "lsp", "path", "snippets", "emoji", "buffer" }
 
---- @param ctx blink.cmp.DrawItemContext
---- @return string, string
+--- This is a transform to preserve the capitalization of the keyword to
+--- complete in the suggested completion items.
+--- @param ctx blink.cmp.Context the blink context
+--- @param items blink.cmp.CompletionItem[] the completion items
+--- @return blink.cmp.CompletionItem[]? items the adjusted completion items
+local function capitalization_preserving_transform(ctx, items)
+  local keyword = ctx.get_keyword()
+  local other_case_pattern, case_corrector
+  if keyword:match "^%l" then
+    other_case_pattern = "^%u%l+$"
+    case_corrector = string.lower
+  elseif keyword:match "^%u" then
+    other_case_pattern = "^%l+$"
+    case_corrector = string.upper
+  else
+    return items
+  end
+
+  local seen_texts = {}
+  local corrected_texts = {}
+  for _, item in ipairs(items) do
+    local raw = item.insertText
+    if type(raw) == "string" and raw:match(other_case_pattern) then
+      local text = case_corrector(raw:sub(1, 1)) .. raw:sub(2)
+      item.insertText = text
+      item.label = text
+    end
+
+    if not seen_texts[item.insertText] then
+      seen_texts[item.insertText] = true
+      table.insert(corrected_texts, item)
+    end
+  end
+
+  return corrected_texts
+end
+
+--- @param ctx blink.cmp.DrawItemContext the blink context
+--- @return string icon the icon string
+--- @return string highlight the highlight group name
 local function get_path_component(ctx)
   local full_path = ctx.item.data.full_path
   local icons = require "mini.icons"
@@ -154,6 +192,9 @@ return {
         tex = vim.list_extend({ "vimtex" }, default_sources),
       },
       providers = {
+        buffer = {
+          transform_items = capitalization_preserving_transform,
+        },
         dap = {
           module = "blink.compat.source",
           name = "dap",
