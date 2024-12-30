@@ -10,7 +10,7 @@ return {
       on_schema = function(schema)
         local lsp = require "neoconf-schemas.lsp"
         schema:import("lsp", lsp.defaults)
-        schema:set("lsp.use_volar", lsp.schema.use_volar)
+        schema:set("lsp.ecma_server", lsp.schema.ecma_server)
       end,
     }
 

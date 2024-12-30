@@ -2,7 +2,7 @@ local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
 
 require("lspconfig").volar.setup {
-  autostart = config.use_volar,
+  autostart = config.ecma_server == "volar",
   cmd = {
     require("system-compat").append_win_ext "vue-language-server",
     "--stdio",

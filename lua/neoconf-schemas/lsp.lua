@@ -1,13 +1,15 @@
 return {
   defaults = {
-    --- Whether to use volar
-    use_volar = false,
+    --- Which LSP server to use for ECMAScript.
+    --- @type "denols" | "ts_ls" | "volar"
+    ecma_server = "ts_ls",
   },
   schema = {
-    use_volar = {
-      type = "boolean",
-      description = "Whether to use volar in place of a typescript server",
-      default = false,
-    }
-  }
+    ecma_server = {
+      type = "string",
+      description = "Which LSP server to use for ECMAScript.",
+      default = "ts_ls",
+      enum = { "denols", "ts_ls", "volar" },
+    },
+  },
 }

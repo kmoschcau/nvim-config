@@ -6,7 +6,7 @@ local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
 
 require("typescript-tools").setup {
-  autostart = not config.use_volar,
+  autostart = config.ecma_server == "ts_ls",
   -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
   settings = {
     expose_as_code_action = "all",
@@ -28,6 +28,4 @@ require("typescript-tools").setup {
     javascript = common.settings.javascript,
     typescript = ts,
   },
-  -- HACK: Explicitly set this to false, to avoid conflicts with denols.
-  single_file_support = false,
 }
