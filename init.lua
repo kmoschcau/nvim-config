@@ -213,13 +213,7 @@ vim.filetype.add {
   extension = {
     azcli = "ps1",
     gotmpl = "gotmpl",
-    log = "log",
     nswag = "json",
-    rasi = "rasi",
-    tfvars = "hcl",
-  },
-  filename = {
-    crypttab = "fstab",
   },
   pattern = {
     [".*/templates/.*%.tpl"] = "helm",
