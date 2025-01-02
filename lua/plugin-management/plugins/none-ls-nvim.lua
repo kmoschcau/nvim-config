@@ -8,38 +8,12 @@ return {
   },
   config = function()
     local none_ls = require "null-ls"
-    local code_actions = none_ls.builtins.code_actions
     local diagnostics = none_ls.builtins.diagnostics
 
     local config = require("neoconf").get(
       "none_ls",
       require("neoconf-schemas.none-ls").defaults
     )
-
-    --- Build the extra arguments for checkstyle
-    --- @return string[]
-    local function build_checkstyle_extra_args()
-      local cs_config = config.java.checkstyle
-
-      local args = {}
-
-      if cs_config.file then
-        table.insert(args, "$FILENAME")
-      else
-        table.insert(args, "$ROOT")
-      end
-
-      table.insert(args, "-c")
-      table.insert(args, cs_config.config)
-
-      if cs_config.options then
-        for _, arg in ipairs(vim.fn.split(cs_config.options)) do
-          table.insert(args, arg)
-        end
-      end
-
-      return args
-    end
 
     --- Build the extra arguments for PMD
     --- @return string[]
@@ -65,39 +39,12 @@ return {
     end
 
     local sources = {
-      code_actions.gitsigns,
-      code_actions.proselint,
-
-      diagnostics.actionlint,
-      diagnostics.cfn_lint,
-      diagnostics.checkstyle.with {
-        args = { "-f", "sarif" },
-        extra_args = build_checkstyle_extra_args,
-        timeout = -1,
-      },
-      diagnostics.ktlint,
-      diagnostics.markdownlint,
-      diagnostics.markuplint.with {
-        extra_filetypes = { "svelte", "vue" },
-      },
       diagnostics.pmd.with {
         args = { "--format", "json" },
         extra_args = build_pmd_extra_args,
         timeout = -1,
       },
-      diagnostics.proselint,
-      diagnostics.selene,
-      diagnostics.terraform_validate,
-      diagnostics.trail_space.with {
-        disabled_filetypes = { "markdown" },
-      },
-      diagnostics.trivy,
-      diagnostics.yamllint,
     }
-
-    if vim.fn.executable "fish" == 1 then
-      table.insert(sources, diagnostics.fish)
-    end
 
     none_ls.setup {
       border = "rounded",
