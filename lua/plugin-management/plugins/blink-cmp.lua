@@ -1,6 +1,7 @@
 local symbols = require "symbols"
 
-local default_sources = { "lsp", "path", "snippets", "emoji", "buffer" }
+local default_sources =
+  { "lsp", "path", "luasnip", "luasnip_choice", "emoji", "buffer" }
 
 --- This is a transform to preserve the capitalization of the keyword to
 --- complete in the suggested completion items.
@@ -98,6 +99,7 @@ return {
   "saghen/blink.cmp",
   dependencies = {
     "L3MON4D3/LuaSnip",
+    "L3MON4D3/cmp-luasnip-choice",
     "MeanderingProgrammer/render-markdown.nvim",
     "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
@@ -217,6 +219,10 @@ return {
         lazydev = {
           module = "lazydev.integrations.blink",
           name = "LazyDev",
+        },
+        luasnip_choice = {
+          module = "blink.compat.source",
+          name = "luasnip_choice",
         },
         markdown = {
           module = "render-markdown.integ.blink",
