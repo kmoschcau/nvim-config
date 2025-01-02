@@ -87,7 +87,29 @@ return {
         silent = true,
       })
 
-      vim.keymap.set("n", "ghp", gs.preview_hunk, {
+      vim.keymap.set("n", "gsbb", function()
+        vim.schedule(gs.blame)
+
+        return "<Ignore>"
+      end, {
+        buffer = bufnr,
+        desc = "gitsigns: Show the blame for the current buffer.",
+        expr = true,
+        silent = true,
+      })
+
+      vim.keymap.set("n", "gsbl", function()
+        vim.schedule(gs.blame_line)
+
+        return "<Ignore>"
+      end, {
+        buffer = bufnr,
+        desc = "gitsigns: Show the blame for the current line.",
+        expr = true,
+        silent = true,
+      })
+
+      vim.keymap.set("n", "gsp", gs.preview_hunk, {
         buffer = bufnr,
         desc = "gitsigns: Show a preview of the hunk under the cursor.",
       })
