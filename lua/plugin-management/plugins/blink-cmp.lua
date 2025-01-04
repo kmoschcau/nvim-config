@@ -3,13 +3,25 @@ local symbols = require "symbols"
 local default_sources =
   { "lsp", "path", "luasnip", "luasnip_choice", "emoji", "buffer" }
 
+--- @param context blink.cmp.Context the blink context
+local function get_keyword(context)
+  local keyword = require("blink.cmp.config").completion.keyword
+  local range = context.get_bounds(keyword.range)
+  return string.sub(
+    context.get_line(),
+    range.start_col,
+    range.start_col + range.length - 1
+  )
+end
+
 --- This is a transform to preserve the capitalization of the keyword to
 --- complete in the suggested completion items.
---- @param ctx blink.cmp.Context the blink context
+--- @param context blink.cmp.Context the blink context
 --- @param items blink.cmp.CompletionItem[] the completion items
 --- @return blink.cmp.CompletionItem[]? items the adjusted completion items
-local function capitalization_preserving_transform(ctx, items)
-  local keyword = ctx.get_keyword()
+local function capitalization_preserving_transform(context, items)
+  local keyword = get_keyword(context)
+
   local other_case_pattern, case_corrector
   if keyword:match "^%l" then
     other_case_pattern = "^%u%l+$"
@@ -41,13 +53,13 @@ local function capitalization_preserving_transform(ctx, items)
 end
 
 --- Get the icon string and highlight for a file path.
---- @param ctx blink.cmp.DrawItemContext the blink context
+--- @param context blink.cmp.DrawItemContext the blink context
 --- @return string icon the icon string
 --- @return string highlight the highlight group name
-local function get_path_component(ctx)
-  local full_path = ctx.item.data.full_path
+local function get_path_component(context)
+  local full_path = context.item.data.full_path
   local icons = require "mini.icons"
-  if ctx.kind == "Folder" then
+  if context.kind == "Folder" then
     return icons.get("directory", full_path)
   end
 
@@ -55,34 +67,34 @@ local function get_path_component(ctx)
 end
 
 --- Get the kind icon for a specific completion item.
---- @param ctx blink.cmp.DrawItemContext the blink context
+--- @param context blink.cmp.DrawItemContext the blink context
 --- @return string icon_text the icon string
-local function kind_icon_text(ctx)
-  if ctx.source_id == "path" then
-    local kind_icon = get_path_component(ctx)
+local function kind_icon_text(context)
+  if context.source_id == "path" then
+    local kind_icon = get_path_component(context)
     return kind_icon
   end
 
-  if ctx.kind == "Color" then
-    return ctx.kind_icon
+  if context.kind == "Color" then
+    return context.kind_icon
   end
 
-  return symbols.types[ctx.kind]
+  return symbols.types[context.kind]
 end
 
 --- Get the highlight group name for a specific completion item.
---- @param ctx blink.cmp.DrawItemContext the blink context
+--- @param context blink.cmp.DrawItemContext the blink context
 --- @return string highlight the highlight group name
-local function kind_icon_highlight(ctx)
-  if ctx.source_id == "path" then
-    local _, highlight = get_path_component(ctx)
+local function kind_icon_highlight(context)
+  if context.source_id == "path" then
+    local _, highlight = get_path_component(context)
     return highlight
   end
 
-  if ctx.kind == "Color" then
+  if context.kind == "Color" then
     local color_item =
-      require("nvim-highlight-colors").format(ctx.item.documentation, {
-        kind = ctx.kind,
+      require("nvim-highlight-colors").format(context.item.documentation, {
+        kind = context.kind,
       })
 
     if color_item.abbr_hl_group then
@@ -90,7 +102,7 @@ local function kind_icon_highlight(ctx)
     end
   end
 
-  return "BlinkCmpKind" .. ctx.kind
+  return "BlinkCmpKind" .. context.kind
 end
 
 -- selene: allow(mixed_table)
@@ -124,13 +136,13 @@ return {
     completion = {
       documentation = { window = { border = "rounded" } },
       list = {
-        selection = function(ctx)
-          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+        selection = function(context)
+          return context.mode == "cmdline" and "auto_insert" or "preselect"
         end,
       },
       menu = {
-        auto_show = function(ctx)
-          return ctx.mode ~= "cmdline"
+        auto_show = function(context)
+          return context.mode ~= "cmdline"
             or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
         end,
         draw = {
