@@ -17,6 +17,17 @@ return {
       desc = "Telescope: Open file search.",
     },
     {
+      "<Space>tF",
+      function()
+        require("telescope.builtin").find_files {
+          hidden = true,
+          no_ignore = true,
+          no_ignore_parent = true,
+        }
+      end,
+      desc = "Telescope: Open file search without ignoring files.",
+    },
+    {
       "<Space>tr",
       require("telescope.builtin").live_grep,
       desc = "Telescope: Open live grep search.",
