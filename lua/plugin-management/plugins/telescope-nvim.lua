@@ -80,7 +80,9 @@ return {
         lsp_definitions = default_picker_settings,
         lsp_implementations = default_picker_settings,
         lsp_type_definitions = default_picker_settings,
-        lsp_references = default_picker_settings,
+        lsp_references = vim.tbl_extend("force", default_picker_settings, {
+          include_declaration = false,
+        }),
         lsp_incoming_calls = default_picker_settings,
         lsp_outgoing_calls = default_picker_settings,
         lsp_document_symbols = default_picker_settings,
