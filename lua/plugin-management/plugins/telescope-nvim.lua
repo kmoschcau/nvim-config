@@ -42,6 +42,11 @@ return {
       require("telescope.builtin").git_bcommits,
       desc = "Telescope: List git commits of current buffer.",
     },
+    {
+      "<Space>t=",
+      require("telescope.builtin").spell_suggest,
+      desc = "Telescope: List spelling suggestions for the current word.",
+    },
   },
   config = function()
     local telescope = require "telescope"
