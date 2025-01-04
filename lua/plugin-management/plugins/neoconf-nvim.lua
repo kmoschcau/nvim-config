@@ -17,9 +17,9 @@ return {
     require("neoconf.plugins").register {
       name = "none_ls",
       on_schema = function(schema)
-        local none_ls = require "neoconf-schemas.none-ls"
-        schema:import("none_ls", none_ls.defaults)
-        schema:set("none_ls.java", none_ls.schema)
+        local linters = require "neoconf-schemas.linters"
+        schema:import("linters", linters.defaults)
+        schema:set("linters.java", linters.schema)
       end,
     }
   end,

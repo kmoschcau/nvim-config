@@ -115,7 +115,7 @@ local function do_lint(event_args)
         event_args.event,
         vim.inspect(names)
       ),
-      vim.log.levels.INFO,
+      vim.log.levels.DEBUG,
       {
         title = "nvim-lint",
       }
@@ -136,7 +136,7 @@ return {
     local linters_by_ft = {
       fish = { "fish" },
       html = { "markuplint" },
-      java = { "checkstyle" },
+      java = { "checkstyle", "pmd" },
       json = { "cfn_lint" },
       kotlin = { "ktlint" },
       lua = { "selene" },
@@ -151,27 +151,32 @@ return {
 
     local config = require("neoconf").get(
       "none_ls",
-      require("neoconf-schemas.none-ls").defaults
+      require("neoconf-schemas.linters").defaults
     )
 
     local checkstyle_config = config.java.checkstyle
 
-    local checkstyle_args = {}
-
-    if checkstyle_config.file then
-      table.insert(checkstyle_args, "$FILENAME")
-    else
-      table.insert(checkstyle_args, "$ROOT")
-    end
-
-    table.insert(checkstyle_args, "-c")
-    table.insert(checkstyle_args, checkstyle_config.config)
+    local checkstyle_args = { "-f", "sarif", "-c", checkstyle_config.config }
 
     if checkstyle_config.options then
       for _, arg in ipairs(vim.fn.split(checkstyle_config.options)) do
         table.insert(checkstyle_args, arg)
       end
     end
+
+    local pmd_config = config.java.pmd
+
+    local pmd_args =
+      { "check", "--format", "json", "--rulesets", pmd_config.rulesets }
+
+    if pmd_config.cache then
+      table.insert(pmd_args, "--cache")
+      table.insert(pmd_args, pmd_config.cache)
+    else
+      table.insert(pmd_args, "--no-cache")
+    end
+
+    table.insert(pmd_args, "--dir")
 
     ---@type table<string, lint.LinterOverrideConfig>
     local linter_overrides = {
@@ -210,6 +215,9 @@ return {
           return false
         end),
         ignore_exitcode = true,
+      },
+      pmd = {
+        args = pmd_args,
       },
       selene = {
         condition = cache.by_bufnr(function(event_args)
