@@ -380,9 +380,16 @@ vim.keymap.set("n", "<S-F10>", vim.treesitter.inspect_tree, {
 if vim.g.neovide then
   -- options {{{
 
+  vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_floating_corner_radius = 0.2
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_theme = "auto"
-  vim.g.neovide_cursor_vfx_mode = "railgun"
+
+  if vim.fn.has "mac" == 1 then
+    vim.g.neovide_normal_opacity = 0.8
+    vim.g.neovide_transparency = 1
+    vim.g.neovide_window_blurred = true
+  end
 
   -- }}}
 
