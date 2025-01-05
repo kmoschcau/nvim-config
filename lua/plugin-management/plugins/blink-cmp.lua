@@ -3,24 +3,13 @@ local symbols = require "symbols"
 local default_sources =
   { "lsp", "path", "luasnip", "luasnip_choice", "emoji", "buffer" }
 
---- @param context blink.cmp.Context the blink context
-local function get_keyword(context)
-  local keyword = require("blink.cmp.config").completion.keyword
-  local range = context.get_bounds(keyword.range)
-  return string.sub(
-    context.get_line(),
-    range.start_col,
-    range.start_col + range.length - 1
-  )
-end
-
 --- This is a transform to preserve the capitalization of the keyword to
 --- complete in the suggested completion items.
 --- @param context blink.cmp.Context the blink context
 --- @param items blink.cmp.CompletionItem[] the completion items
 --- @return blink.cmp.CompletionItem[]? items the adjusted completion items
 local function capitalization_preserving_transform(context, items)
-  local keyword = get_keyword(context)
+  local keyword = context.get_keyword()
 
   local other_case_pattern, case_corrector
   if keyword:match "^%l" then
