@@ -98,7 +98,7 @@ M.set_up_shell = function(use_default)
     return
   end
 
-  if vim.fn.has "win32" ~= 1 then
+  if vim.fn.has "win32" == 0 then
     return
   end
 
