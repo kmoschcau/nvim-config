@@ -67,6 +67,7 @@
   "rzls.nvim": { "branch": "main", "commit": "494a0a377d84f7424fc95d5f04f57027e24dedd7" },
   "ssr.nvim": { "branch": "main", "commit": "7c95cfa5836508f08ae833a4b31d2ed265560f64" },
   "stand.nvim": { "branch": "main", "commit": "0ea887e52b27b4ad1f9d53f77ce1cb8bd17d7f92" },
+  "statuscol.nvim": { "branch": "main", "commit": "81d1cfb47e91780f72a8d9a3529f146731864313" },
   "tabular": { "branch": "master", "commit": "12437cd1b53488e24936ec4b091c9324cafee311" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "dae2eac9d91464448b584c7949a31df8faefec56" },
   "telescope-import.nvim": { "branch": "main", "commit": "6fd69447679a99b463025e7f2f787e8b185dd740" },

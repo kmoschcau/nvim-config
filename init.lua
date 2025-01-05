@@ -72,7 +72,7 @@ vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
 vim.o.exrc = true
-vim.opt.fillchars = { diff = " " }
+vim.opt.fillchars = require("symbols").fillchars
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
@@ -114,7 +114,11 @@ vim.o.shiftwidth = 2
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
 vim.o.sidescrolloff = 10
-vim.o.signcolumn = "auto:2-9"
+if pcall(require, "statuscol") then
+  vim.o.signcolumn = "number"
+else
+  vim.o.signcolumn = "auto:2-9"
+end
 vim.o.smarttab = false
 vim.o.smoothscroll = true
 vim.o.spell = true

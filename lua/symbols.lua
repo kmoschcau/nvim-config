@@ -36,6 +36,9 @@ return {
     unnamed = "",
     newfile = " ",
   },
+  fillchars = {
+    diff = " ",
+  },
   git = {
     lines = {
       added = "󰐕",
