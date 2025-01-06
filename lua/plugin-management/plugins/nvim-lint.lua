@@ -167,7 +167,7 @@ return {
     local pmd_config = config.java.pmd
 
     local pmd_args =
-      { "check", "--format", "json", "--rulesets", pmd_config.rulesets }
+      { "check", "--format", "sarif", "--rulesets", pmd_config.rulesets }
 
     if pmd_config.cache then
       table.insert(pmd_args, "--cache")
