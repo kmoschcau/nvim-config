@@ -1593,6 +1593,7 @@ local highlights_light = {
   ["@lsp.type.interface"]  = { link = "@attribute" },
   ["@lsp.type.keyword"]    = { fg = "NONE" },
   ["@lsp.type.macro"]      = { link = "Macro" },
+  ["@lsp.type.modifier"]   = { link = "@keyword.modifier" },
   ["@lsp.type.namespace"]  = { link = "@module" },
   ["@lsp.type.parameter"]  = { link = "@variable.parameter" },
   ["@lsp.type.property"]   = { link = "@property" },
