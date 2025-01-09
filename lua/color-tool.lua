@@ -1181,6 +1181,12 @@ local palette = {
       markers     = convert(90,   4, H.interact),
       visual      = convert(90,   5, H.interact),
     },
+    snippet = {
+      active    = convert(70, 100, H.interact),
+      passive   = convert(50, 100, H.interact),
+      univisted = convert(100, 100, H.interact),
+      visited   = convert(30, 100, H.interact),
+    },
     statusline = {
       current = convert(70, 100, H.interact),
     },
@@ -1357,7 +1363,6 @@ local highlights_light = {
   DiffDelete    = { bg = palette.diff.delete.light },
   DiffText      = { bg = palette.diff.text.light, bold = true },
   TermCursor    = { link = "Cursor" },
-  TermCursorNC  = { bg = palette.interact.cursor.non_current },
   ErrorMsg      = { fg = palette.diagnostics.error },
   WinSeparator  = framing.neutral.c_no_fg,
   Folded        = { fg = modify_l(normal.fg, 50), bg = modify_l(normal.bg, -5) },
@@ -1653,6 +1658,15 @@ local highlights_light = {
   -- }}}}}}}}}
 
   -- Plugins {{{
+
+  -- LuaLine | https://github.com/L3MON4D3/LuaSnip {{{
+
+  LuaSnipActive    = { bg = palette.interact.snippet.active },
+  LuaSnipPassive   = { bg = palette.interact.snippet.passive },
+  LuaSnipUnvisited = { bg = palette.interact.snippet.unvisited },
+  LuaSnipVisited   = { bg = palette.interact.snippet.visited },
+
+  -- }}}
 
   -- blink.cmp | https://github.com/Saghen/blink.cmp {{{
 
