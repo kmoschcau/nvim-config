@@ -1,7 +1,7 @@
 local symbols = require "symbols"
 
 local default_sources =
-  { "lsp", "path", "luasnip", "luasnip_choice", "emoji", "buffer" }
+  { "lsp", "path", "snippets", "luasnip_choice", "emoji", "buffer" }
 
 --- This is a transform to preserve the capitalization of the keyword to
 --- complete in the suggested completion items.
@@ -124,11 +124,6 @@ return {
   opts = {
     completion = {
       documentation = { window = { border = "rounded" } },
-      list = {
-        selection = function(context)
-          return context.mode == "cmdline" and "auto_insert" or "preselect"
-        end,
-      },
       menu = {
         auto_show = function(context)
           return context.mode ~= "cmdline"
@@ -180,16 +175,7 @@ return {
         ["<C-h>"] = { "snippet_backward", "fallback" },
       },
     },
-    snippets = {
-      active = function(filter)
-        if filter and filter.direction then
-          return require("luasnip").jumpable(filter.direction)
-        end
-        return require("luasnip").in_snippet()
-      end,
-      expand = require("luasnip").lsp_expand,
-      jump = require("luasnip").jump,
-    },
+    snippets = { preset = "luasnip" },
     sources = {
       default = default_sources,
       per_filetype = {

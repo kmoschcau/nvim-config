@@ -65,8 +65,7 @@ vim.diagnostic.config {
 vim.o.breakindent = true
 vim.opt.breakindentopt = { "list:-1", "min:80", "shift:2", "sbr" }
 vim.o.colorcolumn = "+1"
-vim.opt.completeopt =
-  { "fuzzy", "menu", "menuone", "noinsert", "noselect", "popup" }
+vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
 vim.o.conceallevel = 2
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:append "linematch:60"
