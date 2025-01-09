@@ -125,7 +125,7 @@ vim.opt.spellfile = {
   vim.fs.normalize "~/.config/nvim/spell/en.utf-8.add",
   vim.fs.normalize "~/.config/nvim/spell/techspeak.utf-8.add",
 }
--- TODO: Look at 'spelloptions'.
+vim.opt.spelloptions = { "camel" }
 vim.o.splitbelow = true
 vim.o.splitkeep = "screen"
 vim.o.splitright = true
