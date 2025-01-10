@@ -1177,15 +1177,14 @@ local palette = {
   interact = {
     cursor = {
       normal      = convert(70, 100, H.interact),
-      non_current = convert(90,   7, H.interact),
       markers     = convert(90,   4, H.interact),
       visual      = convert(90,   5, H.interact),
     },
     snippet = {
-      active    = convert(70, 100, H.interact),
-      passive   = convert(50, 100, H.interact),
-      univisted = convert(100, 100, H.interact),
-      visited   = convert(30, 100, H.interact),
+      active    = convert(60, 100, HUES.cyan),
+      passive   = convert(60,   0, HUES.grey),
+      unvisited = convert(60, 100, HUES.red),
+      visited   = convert(60, 100, HUES.green),
     },
     statusline = {
       current = convert(70, 100, H.interact),
@@ -1306,6 +1305,7 @@ local float_normal =
   { fg = palette.neutral.strongest, bg = palette.neutral.max }
 local normal =
   { fg = palette.neutral.strongest, bg = modify_l(float_normal.bg, -5) }
+local snippet_placeholder_bg = modify_l(normal.bg, -5)
 
 local terminal_colors_light = {
   modify_l(normal.fg, 20),
@@ -1661,10 +1661,15 @@ local highlights_light = {
 
   -- LuaLine | https://github.com/L3MON4D3/LuaSnip {{{
 
-  LuaSnipActive    = { bg = palette.interact.snippet.active },
-  LuaSnipPassive   = { bg = palette.interact.snippet.passive },
-  LuaSnipUnvisited = { bg = palette.interact.snippet.unvisited },
-  LuaSnipVisited   = { bg = palette.interact.snippet.visited },
+  LuaSnipActive    = { bg = snippet_placeholder_bg, underdotted = true, sp = palette.interact.snippet.active },
+  LuaSnipPassive   = { bg = snippet_placeholder_bg, underdotted = true, sp = palette.interact.snippet.passive },
+  LuaSnipUnvisited = { bg = snippet_placeholder_bg, underdotted = true, sp = palette.interact.snippet.unvisited },
+  LuaSnipVisited   = { bg = snippet_placeholder_bg, underdotted = true, sp = palette.interact.snippet.visited },
+
+  LuaSnipVirtualActive    = { fg = palette.interact.snippet.active, bg = palette.interact.cursor.visual },
+  LuaSnipVirtualPassive   = { fg = palette.interact.snippet.passive },
+  LuaSnipVirtualUnvisited = { fg = palette.interact.snippet.unvisited },
+  LuaSnipVirtualVisited   = { fg = palette.interact.snippet.visited },
 
   -- }}}
 

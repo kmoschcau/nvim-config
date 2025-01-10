@@ -16,37 +16,30 @@ return {
     local ext_ft = require "luasnip.extras.filetype_functions"
     local types = require "luasnip.util.types"
 
+    local ext_opts = {
+      active = {
+        hl_group = "LuaSnipActive",
+        virt_text = { { "…", "LuaSnipVirtualActive" } },
+      },
+      passive = {
+        hl_group = "LuaSnipPassive",
+        virt_text = { { "…", "LuaSnipVirtualPassive" } },
+      },
+      visited = {
+        hl_group = "LuaSnipVisited",
+        virt_text = { { "…", "LuaSnipVirtualVisited" } },
+      },
+      unvisited = {
+        hl_group = "LuaSnipUnvisited",
+        virt_text = { { "…", "LuaSnipVirtualUnvisited" } },
+      },
+    }
+
     ls.setup {
+      enable_autosnippets = true,
       ext_opts = {
-        [types.choiceNode] = {
-          active = {
-            hl_group = "LuaSnipActive",
-            virt_text = { { "●", "LuaSnipChoice" } },
-          },
-          passive = {
-            hl_group = "LuaSnipPassive",
-          },
-          visited = {
-            hl_group = "LuaSnipVisited",
-          },
-          unvisited = {
-            hl_group = "LuaSnipUnvisited",
-          },
-        },
-        [types.insertNode] = {
-          active = {
-            hl_group = "LuaSnipActive",
-          },
-          passive = {
-            hl_group = "LuaSnipPassive",
-          },
-          visited = {
-            hl_group = "LuaSnipVisited",
-          },
-          unvisited = {
-            hl_group = "LuaSnipUnvisited",
-          },
-        },
+        [types.choiceNode] = ext_opts,
+        [types.insertNode] = ext_opts,
       },
       ft_func = ext_ft.from_cursor_pos,
       load_ft_func = ext_ft.extend_load_ft {
@@ -60,7 +53,6 @@ return {
         ls.expand_or_jump()
       end
     end, {
-      silent = true,
       desc = "LuaSnip: Expand or jump to next placeholder",
     })
 
@@ -69,7 +61,6 @@ return {
         ls.jump(-1)
       end
     end, {
-      silent = true,
       desc = "LuaSnip: Expand or jump to previous placeholder",
     })
   end,
