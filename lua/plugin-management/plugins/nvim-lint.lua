@@ -216,6 +216,13 @@ return {
         end),
         ignore_exitcode = true,
       },
+      markdownlint = {
+        condition = function(event_args)
+          return vim.api.nvim_get_option_value("buftype", {
+            buf = event_args.buf,
+          }) ~= "nofile"
+        end,
+      },
       pmd = {
         args = pmd_args,
       },
