@@ -70,6 +70,7 @@ return {
       "stylelint-lsp",
       "svelte",
       "tailwindcss",
+      "ts_ls",
       "typescript-tools",
       "typos_lsp",
       "volar",

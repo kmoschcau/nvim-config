@@ -31,6 +31,7 @@ local style = {
   validate = false, -- works badly with tailwind, so use stylelint instead
 }
 
+-- https://code.visualstudio.com/docs/languages/javascript#_inlay-hints
 local js_inlay_vs_code = {
   enumMemberValues = { enabled = true },
   functionLikeReturnTypes = { enabled = true },
@@ -46,6 +47,7 @@ local js_inlay_vs_code = {
   },
 }
 
+-- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
 local js_inlay_tsserver = {
   includeInlayEnumMemberValueHints = js_inlay_vs_code.enumMemberValues.enabled,
   includeInlayFunctionLikeReturnTypeHints = js_inlay_vs_code.functionLikeReturnTypes.enabled,
@@ -62,6 +64,8 @@ M.js_inlay = {
   tsserver = js_inlay_tsserver,
 }
 
+-- https://code.visualstudio.com/docs/languages/javascript
+-- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
 local js_like = {
   format = {
     enable = false,
@@ -75,11 +79,9 @@ local js_like = {
     js_inlay_tsserver
   ),
   preferences = {
-    importModuleSpecifier = "relative",
+    importModuleSpecifierPreference = "relative",
     importModuleSpecifierEnding = "js",
-    preferTypeOnlyAutoImports = true,
-    quoteStyle = "double",
-    useAliasesForRenames = false,
+    quotePreference = "double",
   },
   referencesCodeLens = {
     enabled = true,
