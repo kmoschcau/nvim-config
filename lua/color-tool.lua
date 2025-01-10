@@ -1667,9 +1667,9 @@ local highlights_light = {
   LuaSnipVisited   = { bg = snippet_placeholder_bg, underdotted = true, sp = palette.interact.snippet.visited },
 
   LuaSnipVirtualActive    = { fg = palette.interact.snippet.active, bg = palette.interact.cursor.visual },
-  LuaSnipVirtualPassive   = { fg = palette.interact.snippet.passive },
-  LuaSnipVirtualUnvisited = { fg = palette.interact.snippet.unvisited },
-  LuaSnipVirtualVisited   = { fg = palette.interact.snippet.visited },
+  LuaSnipVirtualPassive   = { fg = palette.interact.snippet.passive, bg = snippet_placeholder_bg },
+  LuaSnipVirtualUnvisited = { fg = palette.interact.snippet.unvisited, bg = snippet_placeholder_bg },
+  LuaSnipVirtualVisited   = { fg = palette.interact.snippet.visited, bg = snippet_placeholder_bg },
 
   -- }}}
 
