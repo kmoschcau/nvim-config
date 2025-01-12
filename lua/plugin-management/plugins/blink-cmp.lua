@@ -3,6 +3,28 @@ local symbols = require "symbols"
 local default_sources =
   { "lsp", "path", "snippets", "luasnip_choice", "emoji", "buffer" }
 
+local buffer_source_include_buftypes = { "", "help" }
+
+--- Test whether a given buffer should be included for the buffer completion
+--- source.
+--- @param bufnr integer the number of the buffer to check
+--- @return boolean whether to include the buffer for completion
+local function buffer_source_should_include_buffer(bufnr)
+  return vim.list_contains(
+    buffer_source_include_buftypes,
+    vim.bo[bufnr].buftype
+  )
+end
+
+--- Get the buffer numbers for the buffer completion source.
+--- @return integer[] bufnrs the buffer numbers
+local function get_buffers_for_buffer_source()
+  return vim.tbl_filter(
+    buffer_source_should_include_buffer,
+    vim.api.nvim_list_bufs()
+  )
+end
+
 --- This is a transform to preserve the capitalization of the keyword to
 --- complete in the suggested completion items.
 --- @param context blink.cmp.Context the blink context
@@ -189,6 +211,9 @@ return {
       },
       providers = {
         buffer = {
+          opts = {
+            get_bufnrs = get_buffers_for_buffer_source,
+          },
           transform_items = capitalization_preserving_transform,
         },
         dap = {
