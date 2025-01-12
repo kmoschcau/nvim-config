@@ -139,7 +139,21 @@ return {
       require("blink.cmp").show()
       require("blink.cmp").show_documentation()
       require("blink.cmp").hide_documentation()
-    end)
+    end, {
+      desc = "blink.cmp: Trigger completion.",
+    })
+
+    vim.keymap.set({ "c", "i" }, "<Down>", function()
+      require("blink.cmp").select_next { auto_insert = false }
+    end, {
+      desc = "blink.cmp: Select next completion item without inserting.",
+    })
+
+    vim.keymap.set({ "c", "i" }, "<Up>", function()
+      require("blink.cmp").select_prev { auto_insert = false }
+    end, {
+      desc = "blink.cmp: Select next completion item without inserting.",
+    })
   end,
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
