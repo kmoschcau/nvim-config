@@ -143,13 +143,13 @@ return {
       desc = "blink.cmp: Trigger completion.",
     })
 
-    vim.keymap.set({ "c", "i" }, "<Down>", function()
+    vim.keymap.set("i", "<Down>", function()
       require("blink.cmp").select_next { auto_insert = false }
     end, {
       desc = "blink.cmp: Select next completion item without inserting.",
     })
 
-    vim.keymap.set({ "c", "i" }, "<Up>", function()
+    vim.keymap.set("i", "<Up>", function()
       require("blink.cmp").select_prev { auto_insert = false }
     end, {
       desc = "blink.cmp: Select next completion item without inserting.",
