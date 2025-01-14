@@ -218,9 +218,10 @@ return {
       },
       markdownlint = {
         condition = function(event_args)
-          return vim.api.nvim_get_option_value("buftype", {
-            buf = event_args.buf,
-          }) ~= "nofile"
+          return not vim.list_contains(
+            { "help", "nofile" },
+            vim.api.nvim_get_option_value("buftype", { buf = event_args.buf })
+          )
         end,
       },
       pmd = {
