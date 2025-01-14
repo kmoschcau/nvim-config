@@ -30,6 +30,7 @@ return {
       "astro",
       "bashls",
       "fish_lsp",
+      "gh_actions_ls",
       "gradle_ls",
       "helm_ls",
       "jedi_language_server",
