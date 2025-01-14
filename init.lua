@@ -233,8 +233,8 @@ vim.filetype.add {
   },
   pattern = {
     [".*/templates/.*%.tpl"] = "helm",
-    [".*/templates/.*%.yaml"] = "helm",
-    ["helmfile.*%.yaml"] = "helm",
+    [".*/templates/.*%.ya?ml"] = "helm",
+    ["helmfile.*%.ya?ml"] = "helm",
   },
 }
 
