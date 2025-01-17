@@ -10,47 +10,46 @@ return {
     "piersolenski/telescope-import.nvim",
     "rcarriga/nvim-notify",
   },
-  keys = {
-    {
-      "<Space>tf",
-      require("telescope.builtin").find_files,
-      desc = "Telescope: Open file search.",
-    },
-    {
-      "<Space>tF",
-      function()
-        require("telescope.builtin").find_files {
-          hidden = true,
-          no_ignore = true,
-          no_ignore_parent = true,
-        }
-      end,
-      desc = "Telescope: Open file search without ignoring files.",
-    },
-    {
-      "<Space>tr",
-      require("telescope.builtin").live_grep,
-      desc = "Telescope: Open live grep search.",
-    },
-    {
-      "<Space>tgc",
-      require("telescope.builtin").git_commits,
-      desc = "Telescope: List git commits of current directory.",
-    },
-    {
-      "<Space>tgb",
-      require("telescope.builtin").git_bcommits,
-      desc = "Telescope: List git commits of current buffer.",
-    },
-    {
-      "<Space>t=",
-      require("telescope.builtin").spell_suggest,
-      desc = "Telescope: List spelling suggestions for the current word.",
-    },
-  },
   config = function()
     local telescope = require "telescope"
     local actions = require "telescope.actions"
+
+    vim.keymap.set("n", "<Space>tf", require("telescope.builtin").find_files, {
+      desc = "Telescope: Open file search.",
+    })
+
+    vim.keymap.set("n", "<Space>tF", function()
+      require("telescope.builtin").find_files {
+        hidden = true,
+        no_ignore = true,
+        no_ignore_parent = true,
+      }
+    end, { desc = "Telescope: Open file search without ignoring files." })
+
+    vim.keymap.set("n", "<Space>tr", require("telescope.builtin").live_grep, {
+      desc = "Telescope: Open live grep search.",
+    })
+
+    vim.keymap.set(
+      "n",
+      "<Space>tgc",
+      require("telescope.builtin").git_commits,
+      { desc = "Telescope: List git commits of current directory." }
+    )
+
+    vim.keymap.set(
+      "n",
+      "<Space>tgb",
+      require("telescope.builtin").git_bcommits,
+      { desc = "Telescope: List git commits of current buffer." }
+    )
+
+    vim.keymap.set(
+      "n",
+      "<Space>t=",
+      require("telescope.builtin").spell_suggest,
+      { desc = "Telescope: List spelling suggestions for the current word." }
+    )
 
     local default_picker_settings = { theme = "ivy" }
 
