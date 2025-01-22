@@ -200,7 +200,11 @@ return {
       ["<C-h>"] = { "snippet_backward", "fallback" },
       cmdline = {
         preset = "none",
-        ["<Tab>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<Tab>"] = {
+          "show_and_insert",
+          "show_documentation",
+          "hide_documentation",
+        },
         ["<C-e>"] = { "cancel", "fallback" },
         ["<C-n>"] = { "select_next", "fallback" },
         ["<C-p>"] = { "select_prev", "fallback" },
