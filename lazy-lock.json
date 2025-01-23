@@ -8,6 +8,7 @@
   "cmp-luasnip-choice": { "branch": "master", "commit": "4f49232e51c9df379b9daf43f25f7ee6320450f0" },
   "cmp-vimtex": { "branch": "master", "commit": "5283bf9108ef33d41e704027b9ef22437ce7a15b" },
   "coerce.nvim": { "branch": "main", "commit": "8bdd725b866a96bbd763f8eb800ea0c7b829850b" },
+  "colorful-menu.nvim": { "branch": "master", "commit": "c2c4bdac86c414453d71e0770028c09cd24fd6b7" },
   "conform.nvim": { "branch": "master", "commit": "f8d743ce333bedc47821de2cd4d23c43856ecbe5" },
   "coop.nvim": { "branch": "main", "commit": "01108731b52828f6bca4b4e962f29ee773dfbbbd" },
   "csv.vim": { "branch": "master", "commit": "44aeb7e26e8b42f7c14c328f16ac4744ae53b22c" },

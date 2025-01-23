@@ -132,6 +132,7 @@ return {
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
     { "saghen/blink.compat", lazy = true, config = true },
+    "xzbdmw/colorful-menu.nvim",
   },
   build = "cargo build --release",
   init = function()
@@ -167,11 +168,21 @@ return {
         end,
         draw = {
           columns = {
-            { "label", "label_description", gap = 1 },
+            { "label", gap = 1 },
             { "kind_icon", "kind", gap = 1 },
             { "source_name" },
           },
           components = {
+            label = {
+              text = function(context)
+                return require("colorful-menu").blink_components_text(context)
+              end,
+              highlight = function(context)
+                return require("colorful-menu").blink_components_highlight(
+                  context
+                )
+              end,
+            },
             kind_icon = {
               ellipsis = false,
               text = kind_icon_text,
