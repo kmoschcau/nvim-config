@@ -5,7 +5,6 @@ require("lspconfig").html.setup {
   },
   filetypes = {
     "jsp",
-    "razor",
     -- default ones below
     "html",
     "templ",
