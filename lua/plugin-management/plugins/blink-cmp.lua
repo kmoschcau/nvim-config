@@ -212,8 +212,6 @@ return {
       ["<C-y>"] = { "accept", "fallback" },
       ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-      ["<C-l>"] = { "snippet_forward", "fallback" },
-      ["<C-h>"] = { "snippet_backward", "fallback" },
       cmdline = {
         preset = "none",
         ["<Tab>"] = {
@@ -227,8 +225,6 @@ return {
         ["<C-y>"] = { "accept", "fallback" },
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-l>"] = { "snippet_forward", "fallback" },
-        ["<C-h>"] = { "snippet_backward", "fallback" },
       },
     },
     snippets = { preset = "luasnip" },
