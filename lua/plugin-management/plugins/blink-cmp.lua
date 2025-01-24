@@ -160,7 +160,12 @@ return {
   ---@type blink.cmp.Config
   opts = {
     completion = {
-      documentation = { window = { border = "rounded" } },
+      documentation = {
+        auto_show = true,
+        window = {
+          border = "rounded",
+        },
+      },
       menu = {
         auto_show = function(context)
           return context.mode ~= "cmdline"
