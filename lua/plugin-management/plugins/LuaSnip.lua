@@ -16,30 +16,36 @@ return {
     local ext_ft = require "luasnip.extras.filetype_functions"
     local types = require "luasnip.util.types"
 
-    local ext_opts = {
-      active = {
-        hl_group = "LuaSnipActive",
-        virt_text = { { "…", "LuaSnipVirtualActive" } },
-      },
-      passive = {
-        hl_group = "LuaSnipPassive",
-        virt_text = { { "…", "LuaSnipVirtualPassive" } },
-      },
-      visited = {
-        hl_group = "LuaSnipVisited",
-        virt_text = { { "…", "LuaSnipVirtualVisited" } },
-      },
-      unvisited = {
-        hl_group = "LuaSnipUnvisited",
-        virt_text = { { "…", "LuaSnipVirtualUnvisited" } },
-      },
-    }
+    local function make_ext_opts(sign)
+      return {
+        active = {
+          hl_group = "LuaSnipActive",
+          virt_text = { { sign, "LuaSnipVirtualActive" } },
+        },
+        passive = {
+          hl_group = "LuaSnipPassive",
+          virt_text = { { sign, "LuaSnipVirtualPassive" } },
+        },
+        visited = {
+          hl_group = "LuaSnipVisited",
+          virt_text = { { sign, "LuaSnipVirtualVisited" } },
+        },
+        unvisited = {
+          hl_group = "LuaSnipUnvisited",
+          virt_text = { { sign, "LuaSnipVirtualUnvisited" } },
+        },
+      }
+    end
 
     ls.setup {
       enable_autosnippets = true,
       ext_opts = {
-        [types.choiceNode] = ext_opts,
-        [types.insertNode] = ext_opts,
+        [types.choiceNode] = make_ext_opts(
+          require("symbols").snippet.choice_virt_text
+        ),
+        [types.insertNode] = make_ext_opts(
+          require("symbols").snippet.insert_virt_text
+        ),
       },
       ft_func = function()
         local ts_fts = ext_ft.from_cursor_pos()

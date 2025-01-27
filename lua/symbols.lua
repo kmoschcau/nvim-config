@@ -87,6 +87,10 @@ return {
       right = "",
     },
   },
+  snippet = {
+    choice_virt_text = " ",
+    insert_virt_text = "…",
+  },
   todo = {
     fix = " ",
     todo = " ",
