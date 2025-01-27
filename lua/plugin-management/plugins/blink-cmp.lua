@@ -227,6 +227,9 @@ return {
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       },
     },
+    signature = {
+      enabled = true,
+    },
     snippets = { preset = "luasnip" },
     sources = {
       default = default_sources,
