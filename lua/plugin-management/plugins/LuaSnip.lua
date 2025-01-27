@@ -66,5 +66,11 @@ return {
     end, {
       desc = "LuaSnip: Expand or jump to previous placeholder",
     })
+
+    vim.keymap.set({ "i", "s" }, "<C-j>", function()
+      ls.change_choice(1)
+    end, {
+      desc = "LuaSnip: Change choice node choice.",
+    })
   end,
 }
