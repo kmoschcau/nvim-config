@@ -145,15 +145,27 @@ return {
     })
 
     vim.keymap.set("i", "<Down>", function()
-      require("blink.cmp").select_next { auto_insert = false }
+      if require("blink.cmp").select_next { auto_insert = false } then
+        return "<Ignore>"
+      end
+
+      return "<Down>"
     end, {
       desc = "blink.cmp: Select next completion item without inserting.",
+      expr = true,
+      silent = true,
     })
 
     vim.keymap.set("i", "<Up>", function()
-      require("blink.cmp").select_prev { auto_insert = false }
+      if require("blink.cmp").select_prev { auto_insert = false } then
+        return "<Ignore>"
+      end
+
+      return "<Up>"
     end, {
       desc = "blink.cmp: Select next completion item without inserting.",
+      expr = true,
+      silent = true,
     })
   end,
   ---@module 'blink.cmp'
