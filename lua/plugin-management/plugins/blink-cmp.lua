@@ -1,6 +1,7 @@
 local symbols = require "symbols"
 
-local default_sources = { "lsp", "path", "snippets", "emoji", "buffer" }
+local default_sources =
+  { "lsp", "path", "snippets", "emoji", "spell", "buffer" }
 
 local buffer_source_include_buftypes = { "", "help" }
 
@@ -129,6 +130,7 @@ return {
     "mtoohey31/cmp-fish",
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
+    "ribru17/blink-cmp-spell",
     { "saghen/blink.compat", lazy = true, config = true },
     "xzbdmw/colorful-menu.nvim",
   },
@@ -214,6 +216,19 @@ return {
     enabled = function()
       return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
     end,
+    fuzzy = {
+      sorts = {
+        function(a, b)
+          local sort = require "blink.cmp.fuzzy.sort"
+          if a.source_id == "spell" and b.source_id == "spell" then
+            return sort.label(a, b)
+          end
+        end,
+        "score",
+        "kind",
+        "label",
+      },
+    },
     keymap = {
       preset = "none",
       ["<C-e>"] = { "cancel", "fallback" },
@@ -278,6 +293,10 @@ return {
         markdown = {
           module = "render-markdown.integ.blink",
           name = "RenderMarkdown",
+        },
+        spell = {
+          module = "blink-cmp-spell",
+          name = "Spell",
         },
         vimtex = {
           module = "blink.compat.source",
