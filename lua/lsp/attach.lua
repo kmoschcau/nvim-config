@@ -275,13 +275,11 @@ return function(client, bufnr)
   -- plugin hooks {{{
 
   if common.supports_method(client, "textDocument/documentSymbol") then
-    local c = client or { name = "NilClient" }
-
     local has_navic, navic = pcall(require, "nvim-navic")
-    if has_navic then
+    if client and has_navic then
       navic.attach(client, bufnr)
 
-      vim.notify("Attached navic to: " .. c.name, vim.log.levels.DEBUG)
+      vim.notify("Attached navic to: " .. client.name, vim.log.levels.DEBUG)
     end
   end
 
