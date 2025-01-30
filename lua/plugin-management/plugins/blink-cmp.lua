@@ -297,6 +297,21 @@ return {
         spell = {
           module = "blink-cmp-spell",
           name = "Spell",
+          opts = {
+            enable_in_context = function()
+              local captures = vim.treesitter.get_captures_at_cursor()
+              for i = #captures, 1, -1 do
+                local capture = captures[i]
+                if capture == "spell" then
+                  return true
+                elseif capture == "nospell" then
+                  return false
+                end
+              end
+
+              return false
+            end,
+          },
         },
         vimtex = {
           module = "blink.compat.source",
