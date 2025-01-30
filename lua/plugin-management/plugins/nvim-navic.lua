@@ -8,6 +8,7 @@ return {
     icons = require("symbols").types,
     highlight = true,
     lsp = {
+      auto_attach = true,
       preference = {
         "volar",
         "typescript-tools",
