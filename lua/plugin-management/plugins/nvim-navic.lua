@@ -9,6 +9,7 @@ return {
     highlight = true,
     lsp = {
       preference = {
+        "volar",
         "typescript-tools",
       },
     },
