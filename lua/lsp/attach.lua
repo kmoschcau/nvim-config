@@ -111,6 +111,20 @@ return function(client, bufnr)
   end
 
   -- textDocument/rename | mapped to grn by default
+  if client and client.name == "volar" then
+    vim.keymap.set("n", "<Space>grnv", function()
+      vim.lsp.buf.rename(nil, {
+        filter = function(c)
+          -- TODO: Check filetype and injected language instead and move to grn
+          -- keymap.
+          return c.name == "volar"
+        end,
+      })
+    end, {
+      buffer = bufnr,
+      desc = "LSP: Rename the symbol under the cursor with volar",
+    })
+  end
 
   -- textDocument/codeAction | mapped to gra by default
 
