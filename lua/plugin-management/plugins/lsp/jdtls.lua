@@ -172,6 +172,10 @@ M.start_or_attach = function()
               name = "JavaSE-11",
               path = "/usr/lib/jvm/java-11-openjdk-amd64",
             },
+            {
+              name = "JavaSE-23",
+              path = "/usr/lib/jvm/java-23-openjdk",
+            },
           },
           updateBuildConfiguration = "automatic",
         },
