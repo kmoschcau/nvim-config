@@ -299,12 +299,17 @@ return {
           name = "Spell",
           opts = {
             enable_in_context = function()
-              local captures = vim.treesitter.get_captures_at_cursor()
+              local cursor = vim.api.nvim_win_get_cursor(0)
+              local captures = vim.treesitter.get_captures_at_pos(
+                0,
+                cursor[1] - 1,
+                cursor[2] - 1
+              )
               local in_spell_capture = false
               for _, capture in ipairs(captures) do
-                if capture == "spell" then
+                if capture.capture == "spell" then
                   in_spell_capture = true
-                elseif capture == "nospell" then
+                elseif capture.capture == "nospell" then
                   return false
                 end
               end
