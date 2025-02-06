@@ -301,6 +301,11 @@ vim.keymap.set("n", "]Fa", function()
 end, { desc = "Formatoptions: Disable automatic paragraph formatting." })
 
 -- diagnostics
+vim.keymap.set("n", "<Space>dl", function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config { virtual_lines = new_config }
+end, { desc = "Diagnostics: Toggle showing virtual lines." })
+
 vim.keymap.set("n", "<Space>L", vim.diagnostic.setloclist, {
   desc = "Diagnostics: Put all buffer diagnostics in the location list.",
 })
