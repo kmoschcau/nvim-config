@@ -13,7 +13,7 @@ return {
       },
     },
     "saghen/blink.cmp",
-    "seblj/roslyn.nvim",
+    "seblyng/roslyn.nvim",
     "tris203/rzls.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
