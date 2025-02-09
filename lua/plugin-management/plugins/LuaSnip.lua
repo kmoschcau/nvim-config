@@ -57,7 +57,7 @@ return {
       },
     }
 
-    vim.keymap.set({ "i", "s" }, "<C-l>", function()
+    vim.keymap.set({ "n", "i", "s" }, "<M-l>", function()
       if ls.expand_or_jumpable() then
         ls.expand_or_jump()
       end
@@ -65,7 +65,7 @@ return {
       desc = "LuaSnip: Expand or jump to next placeholder",
     })
 
-    vim.keymap.set({ "i", "s" }, "<C-h>", function()
+    vim.keymap.set({ "n", "i", "s" }, "<M-h>", function()
       if ls.jumpable(-1) then
         ls.jump(-1)
       end
@@ -73,10 +73,16 @@ return {
       desc = "LuaSnip: Expand or jump to previous placeholder",
     })
 
-    vim.keymap.set({ "i", "s" }, "<C-j>", function()
+    vim.keymap.set({ "n", "i", "s" }, "<M-k>", function()
+      ls.change_choice(-1)
+    end, {
+      desc = "LuaSnip: Change to previous choice node choice.",
+    })
+
+    vim.keymap.set({ "n", "i", "s" }, "<M-j>", function()
       ls.change_choice(1)
     end, {
-      desc = "LuaSnip: Change choice node choice.",
+      desc = "LuaSnip: Change to next choice node choice.",
     })
   end,
 }
