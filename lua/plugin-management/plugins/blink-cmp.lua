@@ -249,6 +249,7 @@ return {
         ["<C-n>"] = { "select_next", "fallback" },
         ["<C-p>"] = { "select_prev", "fallback" },
         ["<C-y>"] = { "accept", "fallback" },
+        ["<CR>"] = { "select_accept_and_enter", "fallback" },
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       },
