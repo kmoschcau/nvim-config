@@ -7,6 +7,8 @@ return {
       filetypes_denylist = {
         "fugitive",
         "lazy",
+        "mason",
+        "notify",
       },
     }
   end,
