@@ -276,6 +276,9 @@ return {
           },
           transform_items = capitalization_preserving_transform,
         },
+        cmdline = {
+          min_keyword_length = 2,
+        },
         dap = {
           module = "blink.compat.source",
           name = "dap",
