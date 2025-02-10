@@ -62,23 +62,6 @@ return {
     end,
   },
   init = function()
-    vim.api.nvim_create_user_command("Format", function(args)
-      local range = nil
-      if args.count ~= -1 then
-        local end_line =
-          vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-        range = {
-          start = { args.line1, 0 },
-          ["end"] = { args.line2, end_line:len() },
-        }
-      end
-      require("conform").format {
-        async = true,
-        filter = formatter_filter,
-        range = range,
-      }
-    end, { bar = true, range = true })
-
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       if args.bang then
         vim.g.disable_autoformat = true
@@ -103,12 +86,13 @@ return {
       desc = "Conform: Enable autoformat-on-save.",
     })
 
-    vim.keymap.set("n", "<Space>f", "<Cmd>Format<CR>", {
-      desc = "Conform: Format the current buffer.",
-      silent = true,
-    })
-    vim.keymap.set("x", "<Space>f", "<Cmd>'<,'>Format<CR>", {
-      desc = "Conform: Format the current selection.",
+    vim.keymap.set({ "n", "x" }, "<Space>f", function()
+      require("conform").format {
+        async = true,
+        filter = formatter_filter,
+      }
+    end, {
+      desc = "Conform: Format the current buffer or selection.",
       silent = true,
     })
     vim.keymap.set("n", "]Fc", "<Cmd>FormatDisable<CR>", {
