@@ -21,8 +21,11 @@ require("typescript-tools").setup {
     code_lens = "all",
     disable_member_code_lens = false,
 
-    tsserver_plugins = {
-      "@vue/typescript-plugin",
+    tsserver_format_options = {
+      -- TODO: Wire this up properly. Ideally dynamically loaded via neoconf.
+      -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+      -- https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3418
+      insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
     },
     tsserver_file_preferences = vim.tbl_deep_extend(
       "error",
@@ -33,6 +36,9 @@ require("typescript-tools").setup {
         quotePreference = ts.preferences.quotePreference,
       }
     ),
+    tsserver_plugins = {
+      "@vue/typescript-plugin",
+    },
 
     javascript = common.settings.javascript,
     typescript = ts,
