@@ -91,9 +91,14 @@ return {
         async = true,
         filter = formatter_filter,
       }
+    end, { desc = "Conform: Format the current buffer or selection." })
+    vim.keymap.set({ "n", "x" }, "<Space>lf", function()
+      require("conform").format {
+        async = true,
+        lsp_format = "prefer",
+      }
     end, {
-      desc = "Conform: Format the current buffer or selection.",
-      silent = true,
+      desc = "Conform: Format the current buffer or selection with LSP.",
     })
   end,
 }
