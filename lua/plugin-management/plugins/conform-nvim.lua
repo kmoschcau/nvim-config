@@ -95,13 +95,5 @@ return {
       desc = "Conform: Format the current buffer or selection.",
       silent = true,
     })
-    vim.keymap.set("n", "]Fc", "<Cmd>FormatDisable<CR>", {
-      desc = "Conform: Disable autoformat-on-save.",
-      silent = true,
-    })
-    vim.keymap.set("n", "[Fc", "<Cmd>FormatEnable<CR>", {
-      desc = "Conform: Enable autoformat-on-save.",
-      silent = true,
-    })
   end,
 }
