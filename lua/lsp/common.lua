@@ -99,6 +99,8 @@ local js_like = {
 }
 
 --- Common configuration settings shared between multiple servers
+--- This mostly affects VS Code extracted language servers.
+--- https://code.visualstudio.com/docs/getstarted/settings#_default-settings
 M.settings = {
   css = vim.tbl_deep_extend("force", style, {
     customData = {
@@ -118,8 +120,20 @@ M.settings = {
     },
   },
 
-  javascript = js_like,
-  typescript = js_like,
+  javascript = vim.tbl_deep_extend("force", js_like, {
+    format = require("neoconf").get("vscode.javascript.format", js_like.format),
+    preferences = require("neoconf").get(
+      "vscode.javascript.preferences",
+      js_like.preferences
+    ),
+  }),
+  typescript = vim.tbl_deep_extend("force", js_like, {
+    format = require("neoconf").get("vscode.typescript.format", js_like.format),
+    preferences = require("neoconf").get(
+      "vscode.typescript.preferences",
+      js_like.preferences
+    ),
+  }),
 }
 
 --- Log the given client's server's capabilities
