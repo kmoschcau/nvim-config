@@ -2,7 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
   "blink-cmp-spell": { "branch": "master", "commit": "38d6797dea6f72baa6e8b3bfca6da96d8fcac64d" },
   "blink-emoji.nvim": { "branch": "master", "commit": "a77aebc092ebece1eed108f301452ae774d6b67a" },
-  "blink.cmp": { "branch": "main", "commit": "75741d8c8208ed6b94b8e1c60758bb3d7208fa94" },
+  "blink.cmp": { "branch": "main", "commit": "32ba7174ad987720bb5852f20fd33ea17bf33880" },
   "blink.compat": { "branch": "main", "commit": "4104671562c663d059d91a99da3780bead5bc467" },
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
   "cmp-fish": { "branch": "main", "commit": "3a23492e2aead05522a9887ec685d70e8c987323" },
