@@ -231,6 +231,9 @@ vim.filetype.add {
     gotmpl = "gotmpl",
     nswag = "json",
   },
+  filename = {
+    ["quick-lint-js.config"] = "json",
+  },
   pattern = {
     [".*/templates/.*%.tpl"] = "helm",
     [".*/templates/.*%.ya?ml"] = "helm",
