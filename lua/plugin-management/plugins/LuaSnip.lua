@@ -47,6 +47,7 @@ return {
           require("symbols").snippet.insert_virt_text
         ),
       },
+      ext_prio_increase = 2,
       ft_func = function()
         local ts_fts = ext_ft.from_cursor_pos()
         return #ts_fts > 0 and ts_fts or ext_ft.from_filetype()
