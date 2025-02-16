@@ -171,6 +171,23 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    cmdline = {
+      keymap = {
+        preset = "none",
+        ["<Tab>"] = {
+          "show_and_insert",
+          "show_documentation",
+          "hide_documentation",
+        },
+        ["<C-e>"] = { "cancel", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-y>"] = { "accept", "fallback" },
+        ["<CR>"] = { "select_accept_and_enter", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      },
+    },
     completion = {
       documentation = {
         auto_show = true,
@@ -238,21 +255,6 @@ return {
       ["<C-y>"] = { "accept", "fallback" },
       ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-      cmdline = {
-        preset = "none",
-        ["<Tab>"] = {
-          "show_and_insert",
-          "show_documentation",
-          "hide_documentation",
-        },
-        ["<C-e>"] = { "cancel", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback" },
-        ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-y>"] = { "accept", "fallback" },
-        ["<CR>"] = { "select_accept_and_enter", "fallback" },
-        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-      },
     },
     signature = {
       enabled = true,
