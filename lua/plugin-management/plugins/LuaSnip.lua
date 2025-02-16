@@ -85,5 +85,11 @@ return {
     end, {
       desc = "LuaSnip: Change to next choice node choice.",
     })
+
+    vim.keymap.set({ "n" }, "<Esc>", function()
+      ls.unlink_current()
+    end, {
+      desc = "LuaSnip: Unlink the current snippet.",
+    })
   end,
 }
