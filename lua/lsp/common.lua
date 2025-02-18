@@ -78,11 +78,7 @@ local js_like = {
     js_inlay_vs_code,
     js_inlay_tsserver
   ),
-  preferences = {
-    importModuleSpecifierPreference = "relative",
-    importModuleSpecifierEnding = "js",
-    quotePreference = "double",
-  },
+  preferences = {},
   referencesCodeLens = {
     enabled = true,
     showOnAllFunctions = true,
