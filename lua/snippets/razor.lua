@@ -26,6 +26,7 @@ ls.add_snippets("razor", {
         enumerable = c(2, {
           i(nil, "Model"),
           sn(nil, { t "Model.", i(1) }),
+          -- TODO: Expand with restore node.
           sn(nil, { i(1, "Model"), t ".", i(2) }),
         }),
         body = i(0),

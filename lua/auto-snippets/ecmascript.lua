@@ -2,6 +2,7 @@ local M = {}
 
 --- When typing "await" add "async" to the function declaration if the function
 --- isn't async already.
+-- TODO: handle `public foo() in typescript`
 function M.add_async()
   vim.api.nvim_feedkeys("t", "n", true)
 

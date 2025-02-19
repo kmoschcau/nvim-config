@@ -32,6 +32,7 @@ require("typescript-tools").setup {
       }
     ),
     tsserver_plugins = {
+      -- TODO: Notify when this is not installed.
       "@vue/typescript-plugin",
     },
 
