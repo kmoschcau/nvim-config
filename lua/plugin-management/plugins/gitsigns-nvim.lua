@@ -5,11 +5,11 @@ return {
   dependencies = {
     "luukvbaal/statuscol.nvim",
   },
-  -- @type Gitsigns.Config -- Does not work well, no optional fields
   config = function()
     local has_statuscol = pcall(require, "statuscol")
 
-    require("gitsigns").setup {
+    -- @type Gitsigns.Config -- Does not work well, no optional fields
+    local config = {
       signs = {
         delete = { show_count = true },
         topdelete = { show_count = true },
@@ -121,5 +121,7 @@ return {
         })
       end,
     }
+
+    require("gitsigns").setup(config)
   end,
 }

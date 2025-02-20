@@ -4,7 +4,6 @@ return {
   "stevearc/oil.nvim",
   dependencies = { "echasnovski/mini.nvim" },
   config = function()
-    --- @type oil.setupOpts
     require("oil").setup {
       columns = {
         "icon",
