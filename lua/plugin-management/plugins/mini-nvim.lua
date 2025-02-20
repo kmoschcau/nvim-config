@@ -28,18 +28,6 @@ return {
       misc.setup_termbg_sync()
     end
 
-    local starter = require "mini.starter"
-    starter.setup {
-      evaluate_single = true,
-      items = {
-        starter.sections.recent_files(nil, true),
-        starter.sections.recent_files(),
-        starter.sections.builtin_actions(),
-        { name = "Lazy", action = "Lazy", section = "Updates" },
-        { name = "Mason", action = "Mason", section = "Updates" },
-      },
-    }
-
     require("mini.surround").setup {
       mappings = {
         add = "ys",
