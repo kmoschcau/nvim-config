@@ -64,7 +64,7 @@
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "render-markdown.nvim": { "branch": "main", "commit": "57fa691b9e374c6539cc0340062dac8f42d4bd8b" },
   "rest.nvim": { "branch": "main", "commit": "ac22892989de93ac2ffdd0d5549ed13ee631c1d1" },
-  "roslyn.nvim": { "branch": "main", "commit": "ff6dd40e9ae7237e3dbd757af54cc93a29fc6cf8" },
+  "roslyn.nvim": { "branch": "main", "commit": "633a61c30801a854cf52f4492ec8702a8c4ec0e9" },
   "rzls.nvim": { "branch": "main", "commit": "93130e44cbc16c592081716d59905353c6a9ad10" },
   "snacks.nvim": { "branch": "main", "commit": "5fa93cb6846b5998bc0b4b4ac9de47108fe39ce6" },
   "ssr.nvim": { "branch": "main", "commit": "7c95cfa5836508f08ae833a4b31d2ed265560f64" },
