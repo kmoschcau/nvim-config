@@ -172,6 +172,13 @@ return {
   ---@type blink.cmp.Config
   opts = {
     cmdline = {
+      completion = {
+        menu = {
+          auto_show = function()
+            return not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+          end,
+        },
+      },
       keymap = {
         preset = "none",
         ["<Tab>"] = {
@@ -196,10 +203,7 @@ return {
         },
       },
       menu = {
-        auto_show = function(context)
-          return context.mode ~= "cmdline"
-            or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-        end,
+        auto_show = true,
         draw = {
           columns = {
             { "label", gap = 1 },
