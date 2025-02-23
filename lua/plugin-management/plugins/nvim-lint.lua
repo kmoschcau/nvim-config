@@ -149,6 +149,7 @@ return {
       yaml = { "actionlint", "cfn_lint", "yamllint" },
     }
 
+    -- TODO: extract this into override functions.
     local config = require("neoconf").get(
       "none_ls",
       require("neoconf-schemas.linters").defaults
