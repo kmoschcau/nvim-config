@@ -151,7 +151,13 @@ M.log_capabilities = function(client, buf_id)
   local longest_cap = 0
   local longest_meth = 0
   local entries = {}
-  for meth_name, capability in pairs(vim.lsp._request_name_to_capability) do
+  for meth_name, capability in
+    pairs(
+      vim.lsp.protocol._request_name_to_capability
+        or vim.lsp._request_name_to_capability
+        or {}
+    )
+  do
     local cap_name = table.concat(capability, ".")
     longest_cap = math.max(longest_cap, #cap_name)
     longest_meth = math.max(longest_meth, #meth_name)
