@@ -1382,8 +1382,6 @@ local highlights_light = {
   FloatTitle    = { bg = palette.neutral.max, bold = true },
   Pmenu         = { link = "NormalFloat" },
   PmenuSel      = { link = "CursorLine" },
-  PmenuKindSel  = { link = "Pmenu" },
-  PmenuExtraSel = { link = "Pmenu" },
   PmenuSbar     = { bg = palette.neutral.lighter_still },
   PmenuThumb    = { bg = palette.neutral.mid },
   Question      = { fg = palette.messages.more },
@@ -1676,6 +1674,7 @@ local highlights_light = {
   -- blink.cmp | https://github.com/Saghen/blink.cmp {{{
 
   BlinkCmpLabelDeprecated = { link = "DiagnosticDeprecated" },
+  BlinkCmpLabelMatch      = { link = "PmenuMatch" },
 
   BlinkCmpKindArray         = { fg = palette.syntax.structure },
   BlinkCmpKindBoolean       = { fg = palette.syntax.boolean.fg },

@@ -202,7 +202,7 @@ return {
               text = kind_icon_text,
               highlight = kind_icon_highlight,
             },
-            kind = {
+            source_name = {
               highlight = "None",
             },
           },
