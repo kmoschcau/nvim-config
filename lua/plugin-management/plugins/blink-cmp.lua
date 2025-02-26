@@ -171,30 +171,6 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    cmdline = {
-      completion = {
-        menu = {
-          auto_show = function()
-            return not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-          end,
-        },
-      },
-      keymap = {
-        preset = "none",
-        ["<Tab>"] = {
-          "show_and_insert",
-          "show_documentation",
-          "hide_documentation",
-        },
-        ["<C-e>"] = { "cancel", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback" },
-        ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-y>"] = { "accept", "fallback" },
-        ["<CR>"] = { "select_accept_and_enter", "fallback" },
-        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-      },
-    },
     completion = {
       documentation = {
         auto_show = true,
@@ -234,9 +210,6 @@ return {
         },
       },
     },
-    enabled = function()
-      return vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()
-    end,
     fuzzy = {
       sorts = {
         function(a, b)
@@ -281,9 +254,6 @@ return {
             get_bufnrs = get_buffers_for_buffer_source,
           },
           transform_items = capitalization_preserving_transform,
-        },
-        cmdline = {
-          min_keyword_length = 2,
         },
         dap = {
           module = "blink.compat.source",
