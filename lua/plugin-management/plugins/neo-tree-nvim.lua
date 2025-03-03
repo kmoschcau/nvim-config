@@ -29,6 +29,7 @@ end
 --- @type LazyPluginSpec
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  enabled = vim.g.presentation_mode or false,
   branch = "v3.x",
   dependencies = {
     "MunifTanjim/nui.nvim",

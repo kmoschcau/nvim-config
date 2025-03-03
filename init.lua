@@ -15,6 +15,9 @@
 
 -- global variables {{{
 
+-- Global switch for when I want to show code to others.
+vim.g.presentation_mode = false
+
 -- Whether to use roslyn and rzls instead of OmniSharp for C#.
 vim.g.use_roslyn = false
 
@@ -387,6 +390,13 @@ vim.keymap.set("n", "<S-F10>", vim.treesitter.inspect_tree, {
 if vim.g.neovide then
   -- options {{{
 
+  if vim.g.presentation_mode then
+    vim.g.neovide_cursor_animate_command_line = true
+    vim.g.neovide_cursor_animation_length = 0.1
+    vim.g.neovide_cursor_trail_size = 0.85
+  else
+    vim.g.neovide_cursor_animate_command_line = false
+  end
   vim.g.neovide_cursor_vfx_mode = "railgun"
   vim.g.neovide_floating_corner_radius = 0.2
   vim.g.neovide_hide_mouse_when_typing = true
