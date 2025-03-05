@@ -15,6 +15,10 @@
 
 -- global variables {{{
 
+-- This is a temporary workaround to prevent highlight flickering.
+-- See: https://github.com/neovim/neovim/issues/32660
+vim.g._ts_force_sync_parsing = true
+
 -- Whether to use roslyn and rzls instead of OmniSharp for C#.
 vim.g.use_roslyn = false
 
