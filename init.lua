@@ -48,6 +48,10 @@ xpcall(require, ehandler, "lsp.setup")
 -- diagnostics settings {{{
 
 vim.diagnostic.config {
+  float = {
+    source = true,
+  },
+  severity_sort = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = require("symbols").diagnostics.severities.error,
@@ -56,10 +60,6 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = require("symbols").diagnostics.severities.hint,
     },
   },
-  float = {
-    source = true,
-  },
-  severity_sort = true,
 }
 
 -- }}}
@@ -309,8 +309,24 @@ end, { desc = "Formatoptions: Disable automatic paragraph formatting." })
 
 -- diagnostics
 vim.keymap.set("n", "<Space>dl", function()
-  local new_config = not vim.diagnostic.config().virtual_lines
-  vim.diagnostic.config { virtual_lines = new_config }
+  local old_config = vim.diagnostic.config().virtual_lines
+  if old_config then
+    vim.diagnostic.config { virtual_lines = false }
+    return
+  end
+
+  vim.diagnostic.config {
+    virtual_lines = {
+      format = function(diagnostic)
+        return string.format(
+          "%s: %s [%s]",
+          diagnostic.source,
+          diagnostic.message,
+          diagnostic.code
+        )
+      end,
+    },
+  }
 end, { desc = "Diagnostics: Toggle showing virtual lines." })
 
 vim.keymap.set("n", "<Space>L", vim.diagnostic.setloclist, {
