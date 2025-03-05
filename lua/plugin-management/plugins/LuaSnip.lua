@@ -53,8 +53,9 @@ return {
         return #ts_fts > 0 and ts_fts or ext_ft.from_filetype()
       end,
       load_ft_func = ext_ft.extend_load_ft {
-        html = { "css", "javascript" },
         cs = { "comment" },
+        html = { "css", "javascript" },
+        vue = { "css", "javascript", "sass", "scss", "typescript" },
       },
     }
 
