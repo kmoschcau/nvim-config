@@ -17,8 +17,7 @@ return {
       silent = true,
     })
 
-    -- This replaces the built-in abbreviation trigger, but I don't use
-    -- abbreviations anyway.
+    -- This replaces the built-in abbreviation trigger.
     vim.keymap.set("i", "<C-]>", "<Plug>(emmet-expand-abbr)", {
       desc = "Emmet: Expand abbreviation.",
       silent = true,
@@ -124,7 +123,7 @@ return {
       silent = true,
     })
 
-    -- This doesn't work, because :TOhtml doesn't support treesitter.
+    -- This is done better by :TOhtml.
     -- vim.keymap.set("x", "<C-y>c", "<Plug>(emmet-code-pretty)", {
     --   desc = "Emmet: Code pretty",
     --   silent = true,
