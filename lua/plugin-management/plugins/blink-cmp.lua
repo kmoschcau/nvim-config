@@ -122,7 +122,6 @@ return {
   "saghen/blink.cmp",
   dependencies = {
     "L3MON4D3/LuaSnip",
-    "MeanderingProgrammer/render-markdown.nvim",
     "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
@@ -244,7 +243,6 @@ return {
         ["dapui_hover"] = { "dap" },
         ["dapui_watches"] = { "dap" },
         lua = vim.list_extend({ "lazydev" }, default_sources),
-        markdown = vim.list_extend({ "markdown" }, default_sources),
         fish = vim.list_extend({ "fish" }, default_sources),
         tex = vim.list_extend({ "vimtex" }, default_sources),
       },
@@ -270,10 +268,6 @@ return {
         lazydev = {
           module = "lazydev.integrations.blink",
           name = "LazyDev",
-        },
-        markdown = {
-          module = "render-markdown.integ.blink",
-          name = "RenderMarkdown",
         },
         spell = {
           module = "blink-cmp-spell",

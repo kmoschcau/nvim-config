@@ -11,6 +11,11 @@ return {
       right_pad = 1,
       width = "block",
     },
+    completions = {
+      lsp = {
+        enabled = true,
+      },
+    },
     dash = {
       highlight = "NonText",
     },
