@@ -35,7 +35,7 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<Space>C", ":Telescope todo-comments<CR>", {
+    vim.keymap.set("n", "<Space>C", "<Cmd>Telescope todo-comments<CR>", {
       silent = true,
     })
   end,
