@@ -1689,6 +1689,7 @@ local highlights_light = {
   BlinkCmpKindFunction      = { fg = palette.syntax["function"] },
   BlinkCmpKindInterface     = { fg = palette.syntax.metaprogramming },
   BlinkCmpKindKey           = { fg = palette.syntax.property },
+  BlinkCmpKindKeyword       = { fg = palette.syntax.statement },
   BlinkCmpKindMethod        = { fg = palette.syntax["function"] },
   BlinkCmpKindModule        = { fg = palette.syntax.module },
   BlinkCmpKindNamespace     = { fg = palette.syntax.module },
@@ -1698,8 +1699,10 @@ local highlights_light = {
   BlinkCmpKindOperator      = { fg = palette.syntax.statement },
   BlinkCmpKindPackage       = { fg = palette.syntax.module },
   BlinkCmpKindProperty      = { fg = palette.syntax.property },
+  BlinkCmpKindSnippet       = { fg = palette.syntax.metaprogramming },
   BlinkCmpKindString        = { fg = palette.syntax.string.fg },
   BlinkCmpKindStruct        = { fg = palette.syntax.structure },
+  BlinkCmpKindText          = { fg = palette.neutral.strongest },
   BlinkCmpKindTypeParameter = { fg = palette.syntax.structure },
   BlinkCmpKindVariable      = { fg = palette.syntax.variable, italic = true },
 
