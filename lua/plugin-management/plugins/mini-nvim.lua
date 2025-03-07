@@ -28,6 +28,15 @@ return {
       misc.setup_termbg_sync()
     end
 
+    require("mini.splitjoin").setup {
+      -- See treesj config.
+      mappings = {
+        join = "",
+        split = "",
+        toggle = "",
+      },
+    }
+
     require("mini.surround").setup {
       mappings = {
         add = "ys",
