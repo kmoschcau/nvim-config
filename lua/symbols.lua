@@ -60,7 +60,7 @@ return {
     warn = " ",
     info = " ",
     debug = " ",
-    trace = "󰛿 ",
+    trace = " ",
   },
   separators = {
     section = {
