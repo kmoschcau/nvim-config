@@ -217,10 +217,8 @@ return {
             return sort.label(a, b)
           end
         end,
-        "exact",
         "score",
-        "kind",
-        "label",
+        "sort_text",
       },
     },
     keymap = {
