@@ -8,24 +8,30 @@ return function(client, bufnr)
   local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
   has_omni_ext = false
 
-  local has_telescope, telescope_builtins = pcall(require, "telescope.builtin")
+  local has_snacks, snacks = pcall(require, "snacks")
 
-  local keymap_implementation = common.which_keymap_implementation(
-    bufnr,
-    client,
-    has_telescope,
-    has_omni_ext
-  )
+  local keymap_implementation =
+    common.which_keymap_implementation(bufnr, client, has_snacks, has_omni_ext)
 
   common.log_capabilities(client)
 
   -- keymaps {{{
 
   -- textDocument/declaration
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
-    buffer = bufnr,
-    desc = "LSP: Go to the declaration of the symbol under the cursor.",
-  })
+  local declaration_impl, declaration_impl_desc =
+    common.choose_keymap_implementation(
+      keymap_implementation,
+      vim.lsp.buf.declaration,
+      { snacks_impl = snacks.picker.lsp_declarations }
+    )
+  if declaration_impl then
+    vim.keymap.set("n", "gD", declaration_impl, {
+      buffer = bufnr,
+      desc = "LSP"
+        .. declaration_impl_desc
+        .. ": Go to the declaration of the symbol under the cursor.",
+    })
+  end
 
   -- textDocument/definition
   -- (also mapped as limited variant by default as <C-]>, <C-w>] and <C-w>})
@@ -34,8 +40,8 @@ return function(client, bufnr)
       keymap_implementation,
       vim.lsp.buf.definition,
       {
-        omni_ext_impl = omni_ext.telescope_lsp_definition,
-        telescope_impl = telescope_builtins.lsp_definitions,
+        omni_ext_impl = omni_ext.lsp_definition,
+        snacks_impl = snacks.picker.lsp_definitions,
       }
     )
   if definition_impl then
@@ -53,8 +59,8 @@ return function(client, bufnr)
       keymap_implementation,
       vim.lsp.buf.implementation,
       {
-        omni_ext_impl = omni_ext.telescope_lsp_implementation,
-        telescope_impl = telescope_builtins.lsp_implementations,
+        omni_ext_impl = omni_ext.lsp_implementation,
+        snacks_impl = snacks.picker.lsp_implementations,
       }
     )
   if implementation_impl then
@@ -97,8 +103,8 @@ return function(client, bufnr)
       keymap_implementation,
       vim.lsp.buf.type_definition,
       {
-        omni_ext_impl = omni_ext.telescope_lsp_type_definition,
-        telescope_impl = telescope_builtins.lsp_type_definitions,
+        omni_ext_impl = omni_ext.lsp_type_definition,
+        snacks_impl = snacks.picker.lsp_type_definitions,
       }
     )
   if type_definition_impl then
@@ -142,8 +148,8 @@ return function(client, bufnr)
       keymap_implementation,
       vim.lsp.buf.references,
       {
-        omni_ext_impl = omni_ext.telescope_lsp_references,
-        telescope_impl = telescope_builtins.lsp_references,
+        omni_ext_impl = omni_ext.lsp_references,
+        snacks_impl = snacks.picker.lsp_references,
       }
     )
   if references_impl then
@@ -160,7 +166,7 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.incoming_calls,
-      { telescope_impl = telescope_builtins.lsp_incoming_calls }
+      {}
     )
   if incoming_calls_impl then
     vim.keymap.set("n", "<Space>ci", incoming_calls_impl, {
@@ -176,7 +182,7 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.outgoing_calls,
-      { telescope_impl = telescope_builtins.lsp_outgoing_calls }
+      {}
     )
   if outgoing_calls_impl then
     vim.keymap.set("n", "<Space>co", outgoing_calls_impl, {
@@ -192,7 +198,7 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.document_symbol,
-      { telescope_impl = telescope_builtins.lsp_document_symbols }
+      { snacks_impl = snacks.picker.lsp_symbols }
     )
   if document_symbol_impl then
     vim.keymap.set("n", "gO", document_symbol_impl, {
@@ -206,7 +212,7 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.workspace_symbol,
-      { telescope_impl = telescope_builtins.lsp_workspace_symbols }
+      { snacks_impl = snacks.picker.lsp_workspace_symbols }
     )
   if workspace_symbol_impl then
     vim.keymap.set("n", "<Space>sw", workspace_symbol_impl, {

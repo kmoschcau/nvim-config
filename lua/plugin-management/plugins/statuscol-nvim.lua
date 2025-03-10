@@ -28,7 +28,10 @@ return {
       clickhandlers = {
         ["todo%-"] = function(args)
           if args.button == "l" then
-            vim.cmd.TodoTelescope()
+            local has_snacks, snacks = pcall(require, "snacks")
+            if has_snacks then
+              snacks.picker.todo_comments()
+            end
           end
         end,
       },

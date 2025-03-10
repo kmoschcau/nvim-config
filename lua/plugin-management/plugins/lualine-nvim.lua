@@ -129,9 +129,9 @@ return {
       },
       symbols = symbols.diagnostics.severities,
       on_click = function()
-        local has_telescope, telescope = pcall(require, "telescope.builtin")
-        if has_telescope then
-          telescope.diagnostics { bufnr = 0 }
+        local has_snacks, snacks = pcall(require, "snacks")
+        if has_snacks then
+          snacks.picker.diagnostics_buffer()
         end
       end,
     })

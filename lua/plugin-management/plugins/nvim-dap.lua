@@ -2,10 +2,12 @@
 --- @type LazyPluginSpec
 return {
   "mfussenegger/nvim-dap",
+  dependencies = { "nvim-telescope/telescope.nvim" },
   config = function()
     local dap = require "dap"
     local dapui = require "dapui"
 
+    -- TODO: Replace this with Snacks.picker.
     local action_state = require "telescope.actions.state"
     local actions = require "telescope.actions"
     local conf = require("telescope.config").values
