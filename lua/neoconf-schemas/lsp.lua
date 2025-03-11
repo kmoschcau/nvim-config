@@ -8,7 +8,7 @@ return {
     ecma_server = {
       type = "string",
       description = "Which LSP server to use for ECMAScript.",
-      default = "ts_ls",
+      default = "typescript-tools",
       enum = { "denols", "ts_ls", "typescript-tools" },
     },
   },
