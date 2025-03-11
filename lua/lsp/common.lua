@@ -288,4 +288,15 @@ M.choose_keymap_implementation = function(
   return nil, nil
 end
 
+--- Create a wrapper function that calls the given function with the given
+--- options.
+--- @param func function
+--- @param options table
+--- @return function
+M.with_options = function(func, options)
+  return function()
+    func(options)
+  end
+end
+
 return M

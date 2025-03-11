@@ -9,6 +9,7 @@ return function(client, bufnr)
   has_omni_ext = false
 
   local has_snacks, snacks = pcall(require, "snacks")
+  local snacks_default_options = { jump = { reuse_win = false } }
 
   local keymap_implementation =
     common.which_keymap_implementation(bufnr, client, has_snacks, has_omni_ext)
@@ -22,7 +23,12 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.declaration,
-      { snacks_impl = snacks.picker.lsp_declarations }
+      {
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_declarations,
+          snacks_default_options
+        ),
+      }
     )
   if declaration_impl then
     vim.keymap.set("n", "gD", declaration_impl, {
@@ -41,7 +47,10 @@ return function(client, bufnr)
       vim.lsp.buf.definition,
       {
         omni_ext_impl = omni_ext.lsp_definition,
-        snacks_impl = snacks.picker.lsp_definitions,
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_definitions,
+          snacks_default_options
+        ),
       }
     )
   if definition_impl then
@@ -60,7 +69,10 @@ return function(client, bufnr)
       vim.lsp.buf.implementation,
       {
         omni_ext_impl = omni_ext.lsp_implementation,
-        snacks_impl = snacks.picker.lsp_implementations,
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_implementations,
+          snacks_default_options
+        ),
       }
     )
   if implementation_impl then
@@ -104,7 +116,10 @@ return function(client, bufnr)
       vim.lsp.buf.type_definition,
       {
         omni_ext_impl = omni_ext.lsp_type_definition,
-        snacks_impl = snacks.picker.lsp_type_definitions,
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_type_definitions,
+          snacks_default_options
+        ),
       }
     )
   if type_definition_impl then
@@ -149,7 +164,12 @@ return function(client, bufnr)
       vim.lsp.buf.references,
       {
         omni_ext_impl = omni_ext.lsp_references,
-        snacks_impl = snacks.picker.lsp_references,
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_references,
+          vim.tbl_deep_extend("force", snacks_default_options, {
+            include_declaration = false,
+          })
+        ),
       }
     )
   if references_impl then
