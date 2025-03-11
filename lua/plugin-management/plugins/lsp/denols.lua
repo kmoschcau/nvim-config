@@ -1,6 +1,8 @@
 local common = require "lsp.common"
 local lspconfig = require "lspconfig"
 
+local ts = common.settings.typescript
+
 local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
 
@@ -10,11 +12,11 @@ lspconfig.denols.setup {
   settings = {
     deno = {
       codeLens = {
-        implementations = true,
-        references = true,
-        referencesAllFunctions = true,
+        implementations = ts.implementationsCodeLens.enabled,
+        references = ts.referencesCodeLens.enabled,
+        referencesAllFunctions = ts.referencesCodeLens.showOnAllFunctions,
       },
-      inlayHints = common.js_inlay.vs_code,
+      inlayHints = common.ts_inlay_vs_code_settings,
     },
   },
 }

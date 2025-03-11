@@ -22,15 +22,7 @@ require("typescript-tools").setup {
     disable_member_code_lens = false,
 
     tsserver_format_options = ts.format,
-    tsserver_file_preferences = vim.tbl_deep_extend(
-      "error",
-      common.js_inlay.tsserver,
-      {
-        importModuleSpecifierEnding = ts.preferences.importModuleSpecifierEnding,
-        importModuleSpecifierPreference = ts.preferences.importModuleSpecifierPreference,
-        quotePreference = ts.preferences.quotePreference,
-      }
-    ),
+    tsserver_file_preferences = ts.preferences,
     tsserver_plugins = {
       -- TODO: Notify when this is not installed.
       "@vue/typescript-plugin",

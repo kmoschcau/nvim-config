@@ -32,8 +32,7 @@ local style = {
 }
 
 -- https://code.visualstudio.com/docs/languages/javascript#_inlay-hints
-local js_inlay_vs_code = {
-  enumMemberValues = { enabled = true },
+M.js_inlay_vs_code_settings = {
   functionLikeReturnTypes = { enabled = true },
   parameterNames = {
     enabled = "all",
@@ -47,21 +46,21 @@ local js_inlay_vs_code = {
   },
 }
 
--- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
-local js_inlay_tsserver = {
-  includeInlayEnumMemberValueHints = js_inlay_vs_code.enumMemberValues.enabled,
-  includeInlayFunctionLikeReturnTypeHints = js_inlay_vs_code.functionLikeReturnTypes.enabled,
-  includeInlayFunctionParameterTypeHints = js_inlay_vs_code.parameterTypes.enabled,
-  includeInlayParameterNameHints = js_inlay_vs_code.parameterNames.enabled,
-  includeInlayParameterNameHintsWhenArgumentMatchesName = not js_inlay_vs_code.parameterNames.suppressWhenArgumentMatchesName,
-  includeInlayPropertyDeclarationTypeHints = js_inlay_vs_code.propertyDeclarationTypes.enabled,
-  includeInlayVariableTypeHints = js_inlay_vs_code.variableTypes.enabled,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = not js_inlay_vs_code.variableTypes.suppressWhenTypeMatchesName,
-}
+M.ts_inlay_vs_code_settings =
+  vim.tbl_deep_extend("force", M.js_inlay_vs_code_settings, {
+    enumMemberValues = { enabled = true },
+  })
 
-M.js_inlay = {
-  vs_code = js_inlay_vs_code,
-  tsserver = js_inlay_tsserver,
+-- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#workspacedidchangeconfiguration
+M.ts_inlay_tsserver_workspace_did_change_configuration = {
+  includeInlayEnumMemberValueHints = M.ts_inlay_vs_code_settings.enumMemberValues.enabled,
+  includeInlayFunctionLikeReturnTypeHints = M.ts_inlay_vs_code_settings.functionLikeReturnTypes.enabled,
+  includeInlayFunctionParameterTypeHints = M.ts_inlay_vs_code_settings.parameterTypes.enabled,
+  includeInlayParameterNameHints = M.ts_inlay_vs_code_settings.parameterNames.enabled,
+  includeInlayParameterNameHintsWhenArgumentMatchesName = not M.ts_inlay_vs_code_settings.parameterNames.suppressWhenArgumentMatchesName,
+  includeInlayPropertyDeclarationTypeHints = M.ts_inlay_vs_code_settings.propertyDeclarationTypes.enabled,
+  includeInlayVariableTypeHints = M.ts_inlay_vs_code_settings.variableTypes.enabled,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = not M.ts_inlay_vs_code_settings.variableTypes.suppressWhenTypeMatchesName,
 }
 
 -- https://code.visualstudio.com/docs/languages/javascript
@@ -75,10 +74,15 @@ local js_like = {
   },
   inlayHints = vim.tbl_deep_extend(
     "error",
-    js_inlay_vs_code,
-    js_inlay_tsserver
+    M.ts_inlay_vs_code_settings,
+    M.ts_inlay_tsserver_workspace_did_change_configuration
   ),
-  preferences = {},
+  -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#preferences-options
+  preferences = vim.tbl_deep_extend(
+    "force",
+    {},
+    M.ts_inlay_tsserver_workspace_did_change_configuration
+  ),
   referencesCodeLens = {
     enabled = true,
     showOnAllFunctions = true,
@@ -96,7 +100,7 @@ local js_like = {
 
 --- Common configuration settings shared between multiple servers
 --- This mostly affects VS Code extracted language servers.
---- https://code.visualstudio.com/docs/getstarted/settings#_default-settings
+--- https://code.visualstudio.com/docs/reference/default-settings
 M.settings = {
   css = vim.tbl_deep_extend("force", style, {
     customData = {
@@ -122,13 +126,20 @@ M.settings = {
       "vscode.javascript.preferences",
       js_like.preferences
     ),
+  }, {
+    preferences = M.ts_inlay_tsserver_workspace_did_change_configuration,
   }),
   typescript = vim.tbl_deep_extend("force", js_like, {
     format = require("neoconf").get("vscode.typescript.format", js_like.format),
+    implementationsCodeLens = {
+      showOnInterfaceMethods = true,
+    },
     preferences = require("neoconf").get(
       "vscode.typescript.preferences",
       js_like.preferences
     ),
+  }, {
+    preferences = M.ts_inlay_tsserver_workspace_did_change_configuration,
   }),
 }
 
