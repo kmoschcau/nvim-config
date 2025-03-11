@@ -87,7 +87,7 @@ local config = {
       monkey_patch_semantic_tokens(client)
     end,
   },
-  filewatching = false,
+  filewatching = "off",
 }
 
 local roslyn_package = mason_registry.get_package "roslyn"
