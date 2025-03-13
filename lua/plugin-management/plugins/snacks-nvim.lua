@@ -14,6 +14,7 @@ return {
       },
     },
 
+    image = { enabled = true },
     input = { enabled = true },
     picker = { enabled = true },
   },
