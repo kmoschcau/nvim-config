@@ -5,7 +5,6 @@ return {
   config = function()
     local builtin = require "statuscol.builtin"
     require("statuscol").setup {
-      ft_ignore = { "ministarter" },
       bt_ignore = { "help", "prompt", "quickfix", "terminal" },
       segments = {
         { text = { "%C" }, click = "v:lua.ScFa" },
@@ -13,8 +12,7 @@ return {
           sign = {
             name = { ".*" },
             namespace = { ".*" },
-            maxwidth = 9,
-            auto = true,
+            maxwidth = 2,
             foldclosed = true,
           },
           click = "v:lua.ScSa",

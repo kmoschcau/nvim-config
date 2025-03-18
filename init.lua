@@ -123,7 +123,7 @@ vim.o.sidescrolloff = 10
 if pcall(require, "statuscol") then
   vim.o.signcolumn = "number"
 else
-  vim.o.signcolumn = "auto:2-9"
+  vim.o.signcolumn = "yes:2"
 end
 vim.o.smarttab = false
 vim.o.smoothscroll = true
