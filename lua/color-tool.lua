@@ -1776,42 +1776,6 @@ local highlights_light = {
 
   -- }}}
 
-  -- nvim-cmp | https://github.com/hrsh7th/nvim-cmp {{{
-
-  CmpItemAbbrDeprecated = { link = "DiagnosticDeprecated" },
-  CmpItemAbbrMatch      = { bold = true },
-  CmpItemAbbrMatchFuzzy = { link = "Character" },
-
-  -- TODO: make the kind highlights dynamic.
-  CmpItemKindArray         = { fg = palette.syntax.structure },
-  CmpItemKindBoolean       = { fg = palette.syntax.boolean.fg },
-  CmpItemKindClass         = { fg = palette.syntax.structure },
-  CmpItemKindConstant      = { fg = palette.syntax.variable },
-  CmpItemKindConstructor   = { fg = palette.syntax["function"] },
-  CmpItemKindEnum          = { fg = palette.syntax.enum },
-  CmpItemKindEnumMember    = { fg = palette.syntax.enum_member },
-  CmpItemKindEvent         = { fg = palette.syntax.event },
-  CmpItemKindField         = { fg = palette.syntax.member },
-  CmpItemKindFile          = framing.neutral.c,
-  CmpItemKindFunction      = { fg = palette.syntax["function"] },
-  CmpItemKindInterface     = { fg = palette.syntax.metaprogramming },
-  CmpItemKindKey           = { fg = palette.syntax.property },
-  CmpItemKindMethod        = { fg = palette.syntax["function"] },
-  CmpItemKindModule        = { fg = palette.syntax.module },
-  CmpItemKindNamespace     = { fg = palette.syntax.module },
-  CmpItemKindNull          = { fg = palette.syntax.literal.fg },
-  CmpItemKindNumber        = { fg = palette.syntax.number.fg },
-  CmpItemKindObject        = { fg = palette.syntax.structure },
-  CmpItemKindOperator      = { fg = palette.syntax.statement },
-  CmpItemKindPackage       = { fg = palette.syntax.module },
-  CmpItemKindProperty      = { fg = palette.syntax.property },
-  CmpItemKindString        = { fg = palette.syntax.string.fg },
-  CmpItemKindStruct        = { fg = palette.syntax.structure },
-  CmpItemKindTypeParameter = { fg = palette.syntax.structure },
-  CmpItemKindVariable      = { fg = palette.syntax.variable, italic = true },
-
-  -- }}}
-
   -- nvim-dap | https://github.com/mfussenegger/nvim-dap {{{
 
   DapBreakpoint          = { fg = palette.debug.breakpoint.normal, bg = framing.neutral.b.bg },
