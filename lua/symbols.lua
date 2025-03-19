@@ -62,6 +62,21 @@ return {
     debug = " ",
     trace = " ",
   },
+  progress = {
+    done = " ",
+    spinner = {
+      "⠋",
+      "⠙",
+      "⠹",
+      "⠸",
+      "⠼",
+      "⠴",
+      "⠦",
+      "⠧",
+      "⠇",
+      "⠏",
+    },
+  },
   separators = {
     section = {
       bottom = {

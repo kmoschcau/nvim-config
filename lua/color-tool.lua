@@ -1855,26 +1855,6 @@ local highlights_light = {
 
   -- }}}
 
-  -- nvim-notify | https://github.com/rcarriga/nvim-notify {{{
-
-  NotifyDEBUGBorder = { fg = palette.diagnostics.debug },
-  NotifyDEBUGIcon   = { fg = palette.diagnostics.debug },
-  NotifyDEBUGTitle  = { fg = palette.diagnostics.debug },
-  NotifyERRORBorder = { link = "DiagnosticError" },
-  NotifyERRORIcon   = { link = "DiagnosticError" },
-  NotifyERRORTitle  = { link = "DiagnosticError" },
-  NotifyINFOBorder  = { link = "DiagnosticInfo" },
-  NotifyINFOIcon    = { link = "DiagnosticInfo" },
-  NotifyINFOTitle   = { link = "DiagnosticInfo" },
-  NotifyTRACEBorder = { fg = palette.diagnostics.trace },
-  NotifyTRACEIcon   = { fg = palette.diagnostics.trace },
-  NotifyTRACETitle  = { fg = palette.diagnostics.trace },
-  NotifyWARNBorder  = { link = "DiagnosticWarn" },
-  NotifyWARNIcon    = { link = "DiagnosticWarn" },
-  NotifyWARNTitle   = { link = "DiagnosticWarn" },
-
-  -- }}}
-
   -- oil-git-status | https://github.com/refractalize/oil-git-status.nvim {{{
 
   OilGitStatusIndexUnmodified        = framing.neutral.b,
@@ -1897,6 +1877,31 @@ local highlights_light = {
   OilGitStatusWorkingTreeRenamed     = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
   OilGitStatusWorkingTreeTypeChanged = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
   OilGitStatusWorkingTreeUnmerged    = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+
+  -- }}}
+
+  -- Snacks-notifier | https://github.com/folke/snacks.nvim {{{
+
+  SnacksNotifierBorderDebug  = { fg = palette.diagnostics.debug },
+  SnacksNotifierBorderError  = { link = "DiagnosticError" },
+  SnacksNotifierBorderInfo   = { link = "DiagnosticInfo" },
+  SnacksNotifierBorderTrace  = { fg = palette.diagnostics.trace },
+  SnacksNotifierBorderWarn   = { link = "DiagnosticWarn" },
+  SnacksNotifierFooterDebug  = { fg = palette.diagnostics.debug },
+  SnacksNotifierFooterError  = { link = "DiagnosticError" },
+  SnacksNotifierFooterInfo   = { link = "DiagnosticInfo" },
+  SnacksNotifierFooterTrace  = { fg = palette.diagnostics.trace },
+  SnacksNotifierFooterWarn   = { link = "DiagnosticWarn" },
+  SnacksNotifierIconDebug    = { fg = palette.diagnostics.debug },
+  SnacksNotifierIconError    = { link = "DiagnosticError" },
+  SnacksNotifierIconInfo     = { link = "DiagnosticInfo" },
+  SnacksNotifierIconTrace    = { fg = palette.diagnostics.trace },
+  SnacksNotifierIconWarn     = { link = "DiagnosticWarn" },
+  SnacksNotifierTitleDebug   = { fg = palette.diagnostics.debug },
+  SnacksNotifierTitleError   = { link = "DiagnosticError" },
+  SnacksNotifierTitleInfo    = { link = "DiagnosticInfo" },
+  SnacksNotifierTitleTrace   = { fg = palette.diagnostics.trace },
+  SnacksNotifierTitleWarn    = { link = "DiagnosticWarn" },
 
   -- }}}
 

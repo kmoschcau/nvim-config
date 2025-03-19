@@ -146,8 +146,9 @@ M.log_capabilities = function(client, buf_id)
     return
   end
 
-  if not package.loaded["notify"] then
-    -- We shouldn't log overly verbose messages when notify isn't available.
+  if not package.loaded["snacks"] then
+    -- We shouldn't log overly verbose messages when the notification plugin
+    -- isn't available.
     return
   end
 
