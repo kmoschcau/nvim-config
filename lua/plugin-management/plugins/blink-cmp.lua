@@ -174,7 +174,7 @@ return {
       documentation = {
         auto_show = true,
         window = {
-          border = "rounded",
+          border = "rounded", -- TODO: winborder
         },
       },
       menu = {

@@ -86,7 +86,7 @@ return function(client, bufnr)
 
   -- textDocument/signatureHelp | mapped in insert to <C-s> by default
   vim.keymap.set({ "n", "i" }, "<C-s>", function()
-    vim.lsp.buf.signature_help { border = "rounded" }
+    vim.lsp.buf.signature_help { border = "rounded" } -- TODO: winborder
   end, {
     buffer = bufnr,
     desc = "LSP: Show signature help.",
@@ -245,7 +245,7 @@ return function(client, bufnr)
 
   -- textDocument/hover | mapped to K by default
   vim.keymap.set("n", "K", function()
-    vim.lsp.buf.hover { border = "rounded" }
+    vim.lsp.buf.hover { border = "rounded" } -- TODO: winborder
   end, {
     buffer = bufnr,
     desc = "LSP: Display hover information about the symbol under the cursor"

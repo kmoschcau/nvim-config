@@ -10,7 +10,7 @@ require("lazy").setup("plugin-management.plugins", {
     missing = false,
   },
   ui = {
-    border = "rounded",
+    border = "rounded", -- TODO: winborder
     browser = require("system-compat").get_browser_command(),
   },
 })
