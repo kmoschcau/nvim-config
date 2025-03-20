@@ -19,6 +19,7 @@ return {
     image = {},
     input = {},
     notifier = {
+      padding = false,
       level = vim.log.levels.INFO,
       icons = symbols.log,
       style = "fancy",
