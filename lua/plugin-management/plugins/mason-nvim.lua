@@ -9,7 +9,7 @@ return {
       "github:Crashdummyy/mason-registry",
     },
     ui = {
-      border = "rounded", -- TODO: winborder
+      border = "rounded",
     },
   },
 }

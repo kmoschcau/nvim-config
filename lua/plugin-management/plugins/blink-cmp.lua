@@ -173,9 +173,6 @@ return {
     completion = {
       documentation = {
         auto_show = true,
-        window = {
-          border = "rounded", -- TODO: winborder
-        },
       },
       menu = {
         auto_show = true,
