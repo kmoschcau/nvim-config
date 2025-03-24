@@ -1558,6 +1558,8 @@ local highlights_light = {
   ["@keyword.directive"]           = { link = "PreProc" },
   ["@keyword.directive.define"]    = { link = "Define" },
 
+  ["@punctuation.special"]         = { fg = palette.syntax.metaprogramming },
+
   ["@comment.documentation"]       = { fg = palette.syntax.doc_comment },
 
   ["@markup.raw.block"]            = { fg = "NONE" },
@@ -1636,7 +1638,7 @@ local highlights_light = {
   ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
   ["@lsp.type.keyword.razor"]         = { link = "Statement" },
   ["@lsp.type.markupAttribute.razor"] = { link = "@tag.attribute" },
-  ["@lsp.type.razorTransition.razor"] = { link = "PreProc" },
+  ["@lsp.type.razorTransition.razor"] = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
 
   -- }}}}}}
 
