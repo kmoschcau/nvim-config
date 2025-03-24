@@ -30,7 +30,7 @@
     [
       "<"
       ">"
-    ] @generic.special))
+    ] @punctuation.special))
 
 ; type declarations
 (enum_declaration

@@ -29,6 +29,19 @@
 (namespace_declaration
   "namespace" @keyword.module)
 
+; generics
+(type_parameter_list
+  [
+    "<"
+    ">"
+  ] @punctuation.special)
+
+(type_argument_list
+  [
+    "<"
+    ">"
+  ] @punctuation.special)
+
 ; type declarations
 (class_declaration
   "class" @keyword.class)

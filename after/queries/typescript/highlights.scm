@@ -13,13 +13,13 @@
   [
     "<"
     ">"
-  ] @generic.special)
+  ] @punctuation.special)
 
 (type_parameters
   [
     "<"
     ">"
-  ] @generic.special)
+  ] @punctuation.special)
 
 ; type declarations
 (method_signature
