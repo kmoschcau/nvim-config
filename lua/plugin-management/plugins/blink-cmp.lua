@@ -5,6 +5,18 @@ local default_sources =
 
 local buffer_source_include_buftypes = { "", "help" }
 
+--- @type table<integer, boolean?>
+local spell_enabled_cache = {}
+
+vim.api.nvim_create_autocmd("OptionSet", {
+  group = vim.api.nvim_create_augroup("blink_cmp_spell", {}),
+  desc = "Reset the cache for enabling the spell source for blink.cmp.",
+  pattern = "spelllang",
+  callback = function()
+    spell_enabled_cache[vim.fn.bufnr()] = nil
+  end,
+})
+
 --- Test whether a given buffer should be included for the buffer completion
 --- source.
 --- @param bufnr integer the number of the buffer to check
@@ -267,6 +279,16 @@ return {
         spell = {
           module = "blink-cmp-spell",
           name = "Spell",
+          enabled = function()
+            local bufnr = vim.fn.bufnr()
+            local enabled = spell_enabled_cache[bufnr]
+            if type(enabled) ~= "boolean" then
+              enabled =
+                not vim.list_contains(vim.opt_local.spelllang:get(), "de")
+              spell_enabled_cache[bufnr] = enabled
+            end
+            return enabled
+          end,
           opts = {
             enable_in_context = function()
               local cursor = vim.api.nvim_win_get_cursor(0)
