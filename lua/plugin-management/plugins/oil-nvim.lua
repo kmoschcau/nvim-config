@@ -7,14 +7,14 @@ return {
     require("oil").setup {
       columns = {
         "icon",
-        { "permissions", highlight = "Material_SynDecorator" },
+        { "permissions", highlight = "@attribute" },
       },
       win_options = {
         colorcolumn = "",
         signcolumn = "yes:2",
       },
       lsp_file_methods = {
-        autosave_changes = true,
+        autosave_changes = "unmodified",
       },
     }
 
