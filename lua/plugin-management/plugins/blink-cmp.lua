@@ -94,7 +94,7 @@ end
 --- @return string icon_text the icon string
 local function kind_icon_text(context)
   if context.source_id == "path" then
-    local kind_icon = get_path_component(context)
+    local kind_icon, _ = get_path_component(context)
     return kind_icon
   end
 
