@@ -241,6 +241,9 @@ return {
     },
     signature = {
       enabled = true,
+      window = {
+        show_documentation = false,
+      },
     },
     snippets = { preset = "luasnip" },
     sources = {
