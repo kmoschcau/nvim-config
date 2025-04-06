@@ -1219,7 +1219,10 @@ local palette = {
       light  = convert(85,  10, H.diff.delete),
       strong = convert(50, 100, H.diff.delete),
     },
-    text = {
+    text_add = {
+      light = convert(85,  10, H.diff.add),
+    },
+    text_change = {
       light = convert(85,  10, H.diff.text),
     },
   },
@@ -1361,7 +1364,8 @@ local highlights_light = {
   DiffAdd       = { bg = palette.diff.add.light },
   DiffChange    = { bg = palette.diff.change.light },
   DiffDelete    = { bg = palette.diff.delete.light },
-  DiffText      = { bg = palette.diff.text.light, bold = true },
+  DiffText      = { bg = palette.diff.text_change.light },
+  DiffTextAdd   = { bg = palette.diff.text_add.light },
   TermCursor    = { link = "Cursor" },
   ErrorMsg      = { fg = palette.diagnostics.error },
   WinSeparator  = framing.neutral.c_no_fg,
@@ -1712,9 +1716,12 @@ local highlights_light = {
 
   -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{
 
-  GitSignsAdd    = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
-  GitSignsChange = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
-  GitSignsDelete = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
+  GitSignsAdd          = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
+  GitSignsChange       = { fg = palette.diff.change.strong, bg = framing.neutral.b.bg },
+  GitSignsDelete       = { fg = palette.diff.delete.strong, bg = framing.neutral.b.bg },
+  GitSignsAddInline    = { link = "DiffAdd" },
+  GitSignsChangeInline = { link = "DiffChange" },
+  GitSignsDeleteInline = { link = "DiffDelete" },
 
   -- }}}
 
