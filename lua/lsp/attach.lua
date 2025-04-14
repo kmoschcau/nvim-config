@@ -302,4 +302,6 @@ return function(client, bufnr)
       end,
     })
   end
+
+  -- }}}
 end
