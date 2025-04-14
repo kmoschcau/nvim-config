@@ -29,6 +29,7 @@ end
 --- @type RoslynNvimConfig
 local config = {
   args = args,
+  --- @diagnostic disable-next-line: missing-fields
   config = {
     capabilities = require("lsp.common").capabilities,
     handlers = require "rzls.roslyn_handlers",
