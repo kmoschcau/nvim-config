@@ -1,5 +1,4 @@
-require("lspconfig").lua_ls.setup {
-  cmd = { require("system-compat").append_win_ext "lua-language-server" },
+return {
   -- https://luals.github.io/wiki/settings/
   settings = {
     Lua = {

@@ -19,9 +19,6 @@
 -- See: https://github.com/neovim/neovim/issues/32660
 vim.g._ts_force_sync_parsing = true
 
--- Whether to use roslyn and rzls instead of OmniSharp for C#.
-vim.g.use_roslyn = false
-
 -- }}}
 
 -- theme settings {{{
@@ -39,7 +36,7 @@ local ehandler = require("error-handler").handler
 xpcall(require, ehandler, "plugin-management")
 
 -- setup LSP
-xpcall(require, ehandler, "lsp.setup")
+xpcall(require, ehandler, "lsp")
 
 -- }}}
 

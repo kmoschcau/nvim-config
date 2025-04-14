@@ -1,4 +1,4 @@
-require("lspconfig").rust_analyzer.setup {
+return {
   -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
   settings = {
     ["rust-analyzer"] = {

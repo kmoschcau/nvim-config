@@ -1,6 +1,6 @@
 local lspconfig = require "lspconfig"
 
-lspconfig.typos_lsp.setup {
+return {
   root_dir = lspconfig.util.root_pattern(
     "typos.toml",
     "_typos.toml",

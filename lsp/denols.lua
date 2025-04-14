@@ -1,13 +1,7 @@
 local common = require "lsp.common"
-local lspconfig = require "lspconfig"
-
 local ts = common.settings.typescript
 
-local config =
-  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
-
-lspconfig.denols.setup {
-  autostart = config.ecma_server == "denols",
+return {
   -- https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno
   settings = {
     deno = {

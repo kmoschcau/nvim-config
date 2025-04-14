@@ -1,8 +1,4 @@
-require("lspconfig").eslint.setup {
-  cmd = {
-    require("system-compat").append_win_ext "vscode-eslint-language-server",
-    "--stdio",
-  },
+return {
   filetypes = {
     "html", -- needs @html-eslint/parser
     -- default ones below

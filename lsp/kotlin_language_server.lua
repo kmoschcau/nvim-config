@@ -1,5 +1,4 @@
-require("lspconfig").kotlin_language_server.setup {
-  cmd = { require("system-compat").append_win_ext "kotlin-language-server" },
+return {
   -- https://github.com/fwcd/vscode-kotlin/blob/main/package.json
   settings = {
     kotlin = {

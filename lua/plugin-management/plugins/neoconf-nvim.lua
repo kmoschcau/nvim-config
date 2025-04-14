@@ -10,6 +10,7 @@ return {
       on_schema = function(schema)
         local lsp = require "neoconf-schemas.lsp"
         schema:import("lsp", lsp.defaults)
+        schema:set("lsp.dotnet_server", lsp.schema.dotnet_server)
         schema:set("lsp.ecma_server", lsp.schema.ecma_server)
       end,
     }

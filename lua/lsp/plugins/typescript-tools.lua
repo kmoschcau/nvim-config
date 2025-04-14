@@ -2,11 +2,7 @@ local common = require "lsp.common"
 
 local ts = common.settings.typescript
 
-local config =
-  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
-
 require("typescript-tools").setup {
-  autostart = config.ecma_server == "typescript-tools",
   filetypes = {
     "javascript",
     "javascriptreact",

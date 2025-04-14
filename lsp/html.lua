@@ -1,8 +1,4 @@
-require("lspconfig").html.setup {
-  cmd = {
-    require("system-compat").append_win_ext "vscode-html-language-server",
-    "--stdio",
-  },
+return {
   filetypes = {
     "jsp",
     -- default ones below

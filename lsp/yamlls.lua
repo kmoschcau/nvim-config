@@ -1,8 +1,4 @@
-require("lspconfig").yamlls.setup {
-  cmd = {
-    require("system-compat").append_win_ext "yaml-language-server",
-    "--stdio",
-  },
+return {
   -- https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings
   settings = {
     yaml = {

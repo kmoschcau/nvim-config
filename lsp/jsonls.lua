@@ -1,8 +1,4 @@
-require("lspconfig").jsonls.setup {
-  cmd = {
-    require("system-compat").append_win_ext "vscode-json-language-server",
-    "--stdio",
-  },
+return {
   -- https://code.visualstudio.com/docs/languages/json
   settings = {
     json = {

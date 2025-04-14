@@ -1,5 +1,4 @@
-require("lspconfig").stylelint_lsp.setup {
-  cmd = { require("system-compat").append_win_ext "stylelint-lsp", "--stdio" },
+return {
   filetypes = {
     "html", -- needs stylelint-config-html
     -- default ones below
