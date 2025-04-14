@@ -53,8 +53,11 @@ vim.lsp.enable {
   "tailwindcss",
   "terraformls",
   "texlab",
+  "typos_lsp",
   "vale_ls",
   "vimls",
+  "volar",
+  "yamlls",
 }
 
 local config =
