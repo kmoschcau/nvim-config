@@ -22,7 +22,6 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable {
-  "astro",
   "bashls",
   "cssls",
   "denols",
@@ -30,7 +29,6 @@ vim.lsp.enable {
   "eslint",
   "fish_lsp",
   "gh_actions_ls",
-  "glint",
   "gradle_ls",
   "helm_ls",
   "html",
@@ -50,13 +48,11 @@ vim.lsp.enable {
   "stylelint_lsp",
   "somesass_ls",
   "svelte",
-  "tailwindcss",
   "terraformls",
   "texlab",
   "typos_lsp",
   "vale_ls",
   "vimls",
-  "volar",
   "yamlls",
 }
 

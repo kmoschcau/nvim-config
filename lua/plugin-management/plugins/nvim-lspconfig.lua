@@ -17,4 +17,21 @@ return {
     "tris203/rzls.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
+  config = function()
+    -- HACK: These calls are only needed for as long as these servers are not
+    -- yet migrated.
+
+    local servers = {
+      "astro",
+      "glint",
+      "tailwindcss",
+      "volar",
+    }
+
+    local lspconfig = require "lspconfig"
+
+    for _, server in ipairs(servers) do
+      lspconfig[server].setup {}
+    end
+  end,
 }
