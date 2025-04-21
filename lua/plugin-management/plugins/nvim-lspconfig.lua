@@ -24,8 +24,6 @@ return {
     local servers = {
       "astro",
       "glint",
-      "tailwindcss",
-      "volar",
     }
 
     local lspconfig = require "lspconfig"

@@ -48,11 +48,13 @@ vim.lsp.enable {
   "stylelint_lsp",
   "somesass_ls",
   "svelte",
+  "tailwindcss",
   "terraformls",
   "texlab",
   "typos_lsp",
   "vale_ls",
   "vimls",
+  "volar",
   "yamlls",
 }
 
