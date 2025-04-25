@@ -279,7 +279,7 @@ return function(client, bufnr)
   -- textDocument/signatureHelp
   -- mapped in insert to <C-s> by default
   -- TODO: Add custom handler for overloads.
-  -- https://github.com/neovim/neovim/blob/mater/runtime/lua/vim/lsp/handlers.lua#L411
+  -- https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/handlers.lua#L411
   -- https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/util.lua#L720
   vim.keymap.set({ "n", "i" }, "<C-s>", vim.lsp.buf.signature_help, {
     buffer = bufnr,
