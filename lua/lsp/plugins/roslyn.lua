@@ -1,34 +1,48 @@
 local mason_registry = require "mason-registry"
 
 --- @type string[]
-local args = {
-  "--stdio",
-  "--logLevel=Information",
-  "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-}
+local cmd = {}
 
-local rzls_package = mason_registry.get_package "rzls"
-if rzls_package:is_installed() then
-  local rzls_path = vim.fs.joinpath(rzls_package:get_install_path(), "libexec")
-  table.insert(
-    args,
-    "--razorSourceGenerator="
-      .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll")
-  )
-  table.insert(
-    args,
-    "--razorDesignTimePath="
-      .. vim.fs.joinpath(
-        rzls_path,
-        "Targets",
-        "Microsoft.NET.Sdk.Razor.DesignTime.targets"
-      )
-  )
+local roslyn_package = mason_registry.get_package "roslyn"
+if roslyn_package:is_installed() then
+  vim.list_extend(cmd, {
+    "dotnet",
+    vim.fs.joinpath(
+      roslyn_package:get_install_path(),
+      "libexec",
+      "Microsoft.CodeAnalysis.LanguageServer.dll"
+    ),
+    "--stdio",
+    "--logLevel=Information",
+    "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+  })
+
+  local rzls_package = mason_registry.get_package "rzls"
+  if rzls_package:is_installed() then
+    local rzls_path =
+      vim.fs.joinpath(rzls_package:get_install_path(), "libexec")
+    table.insert(
+      cmd,
+      "--razorSourceGenerator="
+        .. vim.fs.joinpath(
+          rzls_path,
+          "Microsoft.CodeAnalysis.Razor.Compiler.dll"
+        )
+    )
+    table.insert(
+      cmd,
+      "--razorDesignTimePath="
+        .. vim.fs.joinpath(
+          rzls_path,
+          "Targets",
+          "Microsoft.NET.Sdk.Razor.DesignTime.targets"
+        )
+    )
+  end
 end
 
---- @type RoslynNvimConfig
-local config = {
-  args = args,
+require("roslyn").setup {
+  cmd = cmd,
   --- @diagnostic disable-next-line: missing-fields
   config = {
     capabilities = vim.tbl_deep_extend(
@@ -52,20 +66,6 @@ local config = {
   },
   filewatching = "off",
 }
-
-local roslyn_package = mason_registry.get_package "roslyn"
-if roslyn_package:is_installed() then
-  config.exe = {
-    "dotnet",
-    vim.fs.joinpath(
-      roslyn_package:get_install_path(),
-      "libexec",
-      "Microsoft.CodeAnalysis.LanguageServer.dll"
-    ),
-  }
-end
-
-require("roslyn").setup(config)
 
 local augroup = vim.api.nvim_create_augroup("RoslynLanguageServer", {})
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -105,6 +105,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
           vim.defer_fn(function()
             vim.lsp.buf_request(
               attach_args.buf,
+              ---@diagnostic disable-next-line: param-type-mismatch
               "textDocument/_vs_onAutoInsert",
               params
             )
