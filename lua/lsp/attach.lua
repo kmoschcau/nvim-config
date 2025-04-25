@@ -207,7 +207,18 @@ return function(client, bufnr)
 
   -- textDocument/prepareTypeHierarchy
   -- see: |vim.lsp.buf.typehierarchy()|
-  -- TODO: add keymaps
+  vim.keymap.set("n", "<Space>tb", function()
+    vim.lsp.buf.typehierarchy "subtypes"
+  end, {
+    buffer = bufnr,
+    desc = "LSP: List all the subtypes of the symbol under the cursor.",
+  })
+  vim.keymap.set("n", "<Space>tp", function()
+    vim.lsp.buf.typehierarchy "supertypes"
+  end, {
+    buffer = bufnr,
+    desc = "LSP: List all the supertypes of the symbol under the cursor.",
+  })
 
   -- textDocument/publishDiagnostics
   -- see: textDocument/diagnostic
