@@ -121,8 +121,8 @@ return function(client, bufnr)
   -- see: |vim.diagnostic|
 
   -- textDocument/documentColor
+  -- plugin: brenoprata10/nvim-highlight-colors
   -- see: |lsp-document_color|
-  -- TODO: enable
 
   -- textDocument/documentHighlight
   -- plugin: RRethy/vim-illuminate
