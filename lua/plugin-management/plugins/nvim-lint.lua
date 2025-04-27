@@ -1,6 +1,6 @@
 --- @class lint.LinterOverrideConfig
 --- @field args? string[]
---- @field condition? fun(event_args: EventArgs): boolean, boolean?
+--- @field condition? fun(event_args: vim.api.keyset.create_autocmd.callback_args): boolean, boolean?
 --- @field ignore_exitcode? boolean
 --- @field prepend_args? string[]
 
@@ -65,7 +65,7 @@ local function merge_linter_configurations(linters_by_ft, linter_overrides)
   nvim_lint.linters_by_ft = linters_by_ft
 end
 
---- @param event_args EventArgs
+--- @param event_args vim.api.keyset.create_autocmd.callback_args
 --- @return boolean
 local function persisted_file(event_args)
   return vim.list_contains({ "BufReadPost", "BufWritePost" }, event_args.event)
@@ -75,7 +75,7 @@ end
 -- * checks if linters exist for the full filetype first
 -- * otherwise will split filetype by "." and add all those linters
 -- * this differs from conform.nvim which only uses the first filetype that has a formatter
---- @param event_args EventArgs
+--- @param event_args vim.api.keyset.create_autocmd.callback_args
 local function do_lint(event_args)
   local nvim_lint = require "lint"
 

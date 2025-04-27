@@ -3,7 +3,7 @@ local common = require "lsp.common"
 --- @class LspAttachData
 --- @field client_id number the number of the LSP client
 
---- @class LspAttachArgs: EventArgs
+--- @class LspAttachArgs: vim.api.keyset.create_autocmd.callback_args
 --- @field data LspAttachData the LspAttach specific data
 
 vim.api.nvim_create_autocmd("LspAttach", {

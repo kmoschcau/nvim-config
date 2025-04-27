@@ -14,14 +14,14 @@ M._reset()
 --- Creates a function that caches the output of a callback, indexed by a buffer
 --- number.
 --- @generic T
---- @param cb fun(event_args: EventArgs): T
---- @return fun(event_args: EventArgs): T
+--- @param cb fun(event_args: vim.api.keyset.create_autocmd.callback_args): T
+--- @return fun(event_args: vim.api.keyset.create_autocmd.callback_args): T
 M.by_bufnr = function(cb)
   -- Assign next available key, since we just want to avoid collisions.
   local key = next_key
   next_key = next_key + 1
 
-  --- @param event_args EventArgs
+  --- @param event_args vim.api.keyset.create_autocmd.callback_args
   return function(event_args)
     local bufnr = event_args.buf
 
