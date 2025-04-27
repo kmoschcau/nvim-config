@@ -1,6 +1,7 @@
 local common = require "lsp.common"
 local ts = common.settings.typescript
 
+--- @type vim.lsp.Config
 return {
   -- https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno
   settings = {

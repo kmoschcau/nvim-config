@@ -1,3 +1,4 @@
+--- @type vim.lsp.Config
 return {
   -- https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings
   settings = {

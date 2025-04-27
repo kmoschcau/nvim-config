@@ -10,6 +10,7 @@ local filetypes = {
   "vue",
 }
 
+--- @type vim.lsp.Config
 return {
   filetypes = filetypes,
   -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#initializationoptions
