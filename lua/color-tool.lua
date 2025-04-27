@@ -35,10 +35,26 @@ local WRITE_COLORSCHEME = true
 -- NOTE: All manipulation is done in Oklch color space.
 -- Get interactive view at https://bottosson.github.io/misc/colorpicker/
 -- Install https://github.com/echasnovski/mini.colors to have this working
-local success, colors = pcall(require, "mini.colors")
-if not success then
+local has_mini_colors, colors = pcall(require, "mini.colors")
+if not has_mini_colors then
   vim.notify("Could not require mini.colors.", vim.log.levels.ERROR)
   return
+end
+
+local has_mini_icons, icons = pcall(require, "mini.icons")
+
+--- Get the highlight group from mini.icons for the given file name.
+--- @param name string the name of the file to get the highlight for
+--- @param opts GetMiniIconHlOptions? additional options
+--- @return string?
+local function get_mini_icon_hl(name, opts)
+  local options = opts or {}
+
+  if not has_mini_icons then
+    return nil
+  end
+
+  return ({ icons.get(options.category or "default", name) })[2]
 end
 
 local symbols = require "symbols"
@@ -79,6 +95,18 @@ local symbols = require "symbols"
 --- | "chroma"
 --- | "lightness"
 --- | "cusp"
+
+--- @alias MiniIconsCategory
+--- | "default"
+--- | "directory"
+--- | "extension"
+--- | "file"
+--- | "filetype"
+--- | "lsp"
+--- | "os"
+
+--- @class GetMiniIconHlOptions
+--- @field category string? the category to use to get the highlight, defaults to `"default"`
 
 -- }}}
 
@@ -1745,8 +1773,8 @@ local highlights_light = {
   LazyReasonInit    = { link = "@attribute" },
   LazyReasonKeys    = { link = "@operator" },
   LazyReasonPlugin  = { link = "@keyword.import" },
-  LazyReasonRequire = { link = "DevIconLua" },
-  LazyReasonRuntime = { link = "DevIconVim" },
+  LazyReasonRequire = { link = get_mini_icon_hl("lua", { category = "filetype" }) },
+  LazyReasonRuntime = { link = get_mini_icon_hl("vim", { category = "filetype" }) },
   LazyReasonSource  = { link = "@character" },
   LazyReasonStart   = { link = "@keyword.directive" },
   LazyUrl           = { link = "@markup.link" },
