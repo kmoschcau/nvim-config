@@ -391,7 +391,7 @@ local function check_contrast(
       lnum = line_index,
       col = 5 + max_name_length + 9 - number_length,
       end_col = 5 + max_name_length + 9,
-      severity = vim.diagnostic.severity.E,
+      severity = vim.diagnostic.severity.ERROR,
       message = string.format(
         "%s: Contrast %.1f is below %.1f",
         name,
@@ -406,7 +406,7 @@ local function check_contrast(
       lnum = line_index,
       col = 5 + max_name_length + 9 - number_length,
       end_col = 5 + max_name_length + 9,
-      severity = vim.diagnostic.severity.W,
+      severity = vim.diagnostic.severity.WARN,
       message = string.format(
         "%s: Contrast %.1f is below %.1f",
         name,
