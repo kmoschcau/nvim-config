@@ -12,6 +12,7 @@ return {
       preference = {
         "volar",
         "typescript-tools",
+        "ts_ls",
       },
     },
     separator = " " .. require("symbols").separators.hierarchy.right .. " ",
