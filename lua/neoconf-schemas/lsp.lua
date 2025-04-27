@@ -1,24 +1,27 @@
-return {
-  defaults = {
-    --- Which LSP server to use for .NET.
-    --- @type "omnisharp" | "roslyn"
-    dotnet_server = "roslyn",
-    --- Which LSP server to use for ECMAScript.
-    --- @type "denols" | "ts_ls" | "typescript-tools"
-    ecma_server = "ts_ls",
+local M = {}
+
+M.defaults = {
+  --- Which LSP server to use for .NET.
+  --- @type "omnisharp" | "roslyn_ls" | "roslyn.nvim"
+  dotnet_server = "roslyn_ls",
+  --- Which LSP server to use for ECMAScript.
+  --- @type "denols" | "ts_ls" | "typescript-tools"
+  ecma_server = "ts_ls",
+}
+
+M.schema = {
+  dotnet_server = {
+    type = "string",
+    description = "Which LSP server to use for .NET.",
+    default = M.defaults.dotnet_server,
+    enum = { "omnisharp", "roslyn_ls", "roslyn.nvim" },
   },
-  schema = {
-    dotnet_server = {
-      type = "string",
-      description = "Which LSP server to use for .NET.",
-      default = "roslyn",
-      enum = { "omnisharp", "roslyn" },
-    },
-    ecma_server = {
-      type = "string",
-      description = "Which LSP server to use for ECMAScript.",
-      default = "ts_ls",
-      enum = { "denols", "ts_ls", "typescript-tools" },
-    },
+  ecma_server = {
+    type = "string",
+    description = "Which LSP server to use for ECMAScript.",
+    default = M.defaults.ecma_server,
+    enum = { "denols", "ts_ls", "typescript-tools" },
   },
 }
+
+return M
