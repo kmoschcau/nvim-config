@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "mattn/emmet-vim",
   dir = "~/Code/emmet-vim",

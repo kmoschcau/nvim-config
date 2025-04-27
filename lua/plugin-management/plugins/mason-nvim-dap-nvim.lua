@@ -1,12 +1,12 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "jay-babu/mason-nvim-dap.nvim",
   dependencies = {
     "mfussenegger/nvim-dap",
     "williamboman/mason.nvim",
   },
-  --- @type MasonNvimDapSettings
+  ---@type MasonNvimDapSettings
   opts = {
     automatic_installation = true,
   },

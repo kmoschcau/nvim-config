@@ -1,8 +1,8 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "williamboman/mason.nvim",
-  --- @type MasonSettings
+  ---@type MasonSettings
   opts = {
     registries = {
       "github:mason-org/mason-registry",

@@ -1,7 +1,7 @@
 -- NOTE: This is only kept for nvim-dap's C# debugging selects.
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "nvim-telescope/telescope.nvim",
   lazy = true,

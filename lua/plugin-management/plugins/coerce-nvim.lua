@@ -1,8 +1,8 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "gregorias/coerce.nvim",
-  --- @type CoerceConfigUser
+  ---@type CoerceConfigUser
   opts = {
     default_mode_keymap_prefixes = {
       normal_mode = "<Space>cc",

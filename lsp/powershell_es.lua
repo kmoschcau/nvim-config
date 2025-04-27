@@ -1,7 +1,7 @@
 local package =
   require("mason-registry").get_package "powershell-editor-services"
 
---- @type vim.lsp.Config
+---@type vim.lsp.Config
 return {
   bundle_path = package:is_installed() and package:get_install_path() or nil,
 }

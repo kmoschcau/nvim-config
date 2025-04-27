@@ -1,7 +1,7 @@
 -- vim: foldmethod=marker
 
---- @param client vim.lsp.Client|nil the LSP client
---- @param bufnr number the buffer number
+---@param client vim.lsp.Client | nil the LSP client
+---@param bufnr number the buffer number
 return function(client, bufnr)
   local common = require "lsp.common"
 

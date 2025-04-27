@@ -1,6 +1,6 @@
 require("roslyn").setup {
   cmd = require("lsp.helpers").get_roslyn_cmd(),
-  --- @diagnostic disable-next-line: missing-fields
+  ---@diagnostic disable-next-line: missing-fields
   config = {
     capabilities = vim.tbl_deep_extend(
       "error",
@@ -28,7 +28,7 @@ local augroup = vim.api.nvim_create_augroup("RoslynLanguageServer", {})
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Roslyn: Set up things when attaching to a buffer.",
   group = augroup,
-  --- @param attach_args LspAttachArgs the autocmd args
+  ---@param attach_args LspAttachArgs the autocmd args
   callback = function(attach_args)
     local client = vim.lsp.get_client_by_id(attach_args.data.client_id)
 

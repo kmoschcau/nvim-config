@@ -1,8 +1,8 @@
 local M = {}
 
---- Get the config file path for jdtls.
---- @param jdtls_package Package the mason registry package for jdtls
---- @return string
+---Get the config file path for jdtls.
+---@param jdtls_package Package the mason registry package for jdtls
+---@return string
 local function get_config_path(jdtls_package)
   local os
   if vim.fn.has "win32" == 1 then
@@ -14,9 +14,9 @@ local function get_config_path(jdtls_package)
   return jdtls_package:get_install_path() .. "/config_" .. os
 end
 
---- Get the launcher jar file path for jdtls.
---- @param jdtls_package Package the mason registry package for jdtls
---- @return string
+---Get the launcher jar file path for jdtls.
+---@param jdtls_package Package the mason registry package for jdtls
+---@return string
 local function get_launch_jar_path(jdtls_package)
   return vim.fn.glob(
     jdtls_package:get_install_path()
@@ -24,17 +24,17 @@ local function get_launch_jar_path(jdtls_package)
   )
 end
 
---- Get the workspace path for the current working directory.
---- @return string
+---Get the workspace path for the current working directory.
+---@return string
 local function get_workspace_path()
   return vim.fs.normalize(
     "~/.local/share/jdt-ws/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h")
   )
 end
 
---- Get the command for jdtls.
---- @param jdtls_package Package the mason registry package for jdtls
---- @return string[]
+---Get the command for jdtls.
+---@param jdtls_package Package the mason registry package for jdtls
+---@return string[]
 local function get_cmd(jdtls_package)
   return {
     "java",
@@ -58,8 +58,8 @@ local function get_cmd(jdtls_package)
   }
 end
 
---- Get the plugin bundle paths for jdtls.
---- @return string[]
+---Get the plugin bundle paths for jdtls.
+---@return string[]
 local function get_plugin_bundle_paths()
   local mason_reg = require "mason-registry"
 
@@ -113,7 +113,7 @@ local function get_plugin_bundle_paths()
   return bundles
 end
 
---- Start the language server (if not started), and attach the current buffer.
+---Start the language server (if not started), and attach the current buffer.
 M.start_or_attach = function()
   local jdtls_package = require("mason-registry").get_package "jdtls"
 

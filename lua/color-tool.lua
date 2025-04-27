@@ -43,10 +43,10 @@ end
 
 local has_mini_icons, icons = pcall(require, "mini.icons")
 
---- Get the highlight group from mini.icons for the given file name.
---- @param name string the name of the file to get the highlight for
---- @param opts GetMiniIconHlOptions? additional options
---- @return string?
+---Get the highlight group from mini.icons for the given file name.
+---@param name string the name of the file to get the highlight for
+---@param opts GetMiniIconHlOptions? additional options
+---@return string?
 local function get_mini_icon_hl(name, opts)
   local options = opts or {}
 
@@ -63,71 +63,97 @@ local symbols = require "symbols"
 
 -- Helper types {{{
 
---- @class MiniColorsRgb
---- @field r integer the red amount, 0 - 255
---- @field g integer the green amount, 0 - 255
---- @field b integer the blue amount, 0 - 255
+---@class MiniColorsRgb
+---
+---the red amount, 0 - 255
+---@field r integer
+---
+---the green amount, 0 - 255
+---@field g integer
+---
+---the blue amount, 0 - 255
+---@field b integer
 
---- @class MiniColorsOklab
---- @field l number the perceived lightness, 0 - 100
---- @field a number how green/red the color is, usually -30 - 30
---- @field b number how blue/yellow the color is, usually -30 - 30
+---@class MiniColorsOklab
+---
+---the perceived lightness, 0 - 100
+---@field l number
+---
+---how green/red the color is, usually -30 - 30
+---@field a number
+---
+---how blue/yellow the color is, usually -30 - 30
+---@field b number
 
---- @class MiniColorsOklch
---- @field l number the perceived lightness, 0 - 100
---- @field c number the chroma, usually 0 - 32
---- @field h number the hue, 0 - 360; nil for gray
+---@class MiniColorsOklch
+---
+---the perceived lightness, 0 - 100
+---@field l number
+---
+---the chroma, usually 0 - 32
+---@field c number
+---
+---the hue, 0 - 360; nil for gray
+---@field h number
 
---- @class MiniColorsOkhsl
---- @field h number the hue, 0 - 360; nil for gray
---- @field s number the percentile saturation of color, 0 - 100
---- @field l number the perceived lightness, 0 - 100
+---@class MiniColorsOkhsl
+---
+---the hue, 0 - 360; nil for gray
+---@field h number
+---
+---the percentile saturation of color, 0 - 100
+---@field s number
+---
+---the perceived lightness, 0 - 100
+---@field l number
 
---- @alias MiniColorsColor
---- | number cterm color index between 16 and 255
---- | string a hex color string
---- | MiniColorsRgb
---- | MiniColorsOklab
---- | MiniColorsOklch
---- | MiniColorsOkhsl
+---@alias MiniColorsColor
+---| number cterm color index between 16 and 255
+---| string a hex color string
+---| MiniColorsRgb
+---| MiniColorsOklab
+---| MiniColorsOklch
+---| MiniColorsOkhsl
 
---- @alias MiniColorsGamutClip
---- | "chroma"
---- | "lightness"
---- | "cusp"
+---@alias MiniColorsGamutClip
+---| "chroma"
+---| "lightness"
+---| "cusp"
 
---- @alias MiniIconsCategory
---- | "default"
---- | "directory"
---- | "extension"
---- | "file"
---- | "filetype"
---- | "lsp"
---- | "os"
+---@alias MiniIconsCategory
+---| "default"
+---| "directory"
+---| "extension"
+---| "file"
+---| "filetype"
+---| "lsp"
+---| "os"
 
---- @class GetMiniIconHlOptions
---- @field category string? the category to use to get the highlight, defaults to `"default"`
+---@class GetMiniIconHlOptions
+---
+---the category to use to get the highlight, defaults to `"default"`
+---@field category string?
 
 -- }}}
 
 -- Helper functions {{{
 
---- Shorthand function to convert an Oklch color table into a hex string.
---- @param l number the perceived lightness
---- @param c number the chroma
---- @param h number|nil the hue
---- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "chroma"
+---Shorthand function to convert an Oklch color table into a hex string.
+---@param l number the perceived lightness
+---@param c number the chroma
+---@param h number | nil the hue
+---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "chroma"
 local function convert(l, c, h, gamut_clip)
   return colors.convert({ l = l, c = c, h = h }, "hex", {
     gamut_clip = gamut_clip or "chroma",
   }) --[[@as string]]
 end
 
---- Create a table that contains a hex color for foreground and background. This
---- will create a color combination of the same hue, which has a strong
---- foreground and a light background of the same hue.
---- @param hue number|nil the hue to generate a color pair with, 0 - 360
---- @return { fg: string, bg: string }
+---Create a table that contains a hex color for foreground and background. This
+---will create a color combination of the same hue, which has a strong
+---foreground and a light background of the same hue.
+---@param hue number | nil the hue to generate a color pair with, 0 - 360
+---@return { fg: string, bg: string }
 local function make_syn_with_bg(hue)
   return {
     fg = convert(30, 100, hue),
@@ -135,28 +161,28 @@ local function make_syn_with_bg(hue)
   }
 end
 
---- Invert the luminance of the given hex color.
---- @param val MiniColorsColor
---- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
+---Invert the luminance of the given hex color.
+---@param val MiniColorsColor
+---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
 local function invert_l(val, gamut_clip)
   return colors.modify_channel(val, "lightness", function(l)
     return 100 - l
   end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
 
---- Shift the given color's perceived lightness.
---- @param val MiniColorsColor
---- @param L number
---- @param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
+---Shift the given color's perceived lightness.
+---@param val MiniColorsColor
+---@param L number
+---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
 local function modify_l(val, L, gamut_clip)
   return colors.modify_channel(val, "lightness", function(l)
     return l + L
   end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
 
---- Map a color to a dark background variant.
---- @param val MiniColorsColor|nil
---- @return string|nil
+---Map a color to a dark background variant.
+---@param val MiniColorsColor | nil
+---@return string | nil
 local function map_to_dark(val)
   if val == nil or val == "NONE" then
     return val
@@ -165,9 +191,9 @@ local function map_to_dark(val)
   return modify_l(invert_l(val), 20)
 end
 
---- Map a highlight group spec to a dark background version.
---- @param highlight vim.api.keyset.highlight
---- @return vim.api.keyset.highlight
+---Map a highlight group spec to a dark background version.
+---@param highlight vim.api.keyset.highlight
+---@return vim.api.keyset.highlight
 local function map_hl_to_dark(highlight)
   return vim.tbl_extend("force", highlight, {
     fg = map_to_dark(highlight.fg),
@@ -175,9 +201,9 @@ local function map_hl_to_dark(highlight)
   })
 end
 
---- Add cterm values to a highlight group spec, derived from its truecolor
---- fields.
---- @param highlights table<string, vim.api.keyset.highlight>
+---Add cterm values to a highlight group spec, derived from its truecolor
+---fields.
+---@param highlights table<string, vim.api.keyset.highlight>
 local function add_cterm_values(highlights)
   local function convert_to_8bit(color)
     if color == nil or color == "NONE" then
@@ -193,11 +219,11 @@ local function add_cterm_values(highlights)
   end
 end
 
---- Calculate the contrast ratio of the given foreground and background colors.
---- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
---- @param fg MiniColorsColor
---- @param bg MiniColorsColor
---- @return number
+---Calculate the contrast ratio of the given foreground and background colors.
+---Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+---@param fg MiniColorsColor
+---@param bg MiniColorsColor
+---@return number
 local function get_contrast_ratio(fg, bg)
   -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
   local function get_luminance(val)
@@ -221,10 +247,10 @@ local function get_contrast_ratio(fg, bg)
   return math.floor(10 * res + 0.5) / 10
 end
 
---- Calculate the contrast ratio of the given highlight group.
---- @param highlight vim.api.keyset.highlight the highlight group
---- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
---- @return number
+---Calculate the contrast ratio of the given highlight group.
+---@param highlight vim.api.keyset.highlight the highlight group
+---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+---@return number
 local function get_highlight_contrast_ratio(highlight, normal)
   local function fallback_color(color, fallback)
     if color == nil or color == "NONE" then
@@ -240,9 +266,9 @@ local function get_highlight_contrast_ratio(highlight, normal)
   )
 end
 
---- Insert a header for the highlight preview buffer in the given lines.
---- @param lines string[] the lines to insert into
---- @param max_name_length integer the maximum length of highlight names
+---Insert a header for the highlight preview buffer in the given lines.
+---@param lines string[] the lines to insert into
+---@param max_name_length integer the maximum length of highlight names
 local function insert_highlight_preview_header(lines, max_name_length)
   table.insert(
     lines,
@@ -262,11 +288,11 @@ local function insert_highlight_preview_header(lines, max_name_length)
   )
 end
 
---- Insert the preview lines for the given highlights into the given lines.
---- @param lines string[] the lines to insert into
---- @param hls table<string, vim.api.keyset.highlight> the highlights to preview
---- @param names string[] the highlight names in display order
---- @param max_name_length integer the maximum length of highlight names
+---Insert the preview lines for the given highlights into the given lines.
+---@param lines string[] the lines to insert into
+---@param hls table<string, vim.api.keyset.highlight> the highlights to preview
+---@param names string[] the highlight names in display order
+---@param max_name_length integer the maximum length of highlight names
 local function insert_highlight_preview_lines(
   lines,
   hls,
@@ -335,10 +361,10 @@ local function insert_highlight_preview_lines(
   end
 end
 
---- Insert the preview lines for the terminal colors into the given lines.
---- @param lines string[] the lines to insert into
---- @param clrs string[] the colors to preview
---- @param bg string the background color to contrast against
+---Insert the preview lines for the terminal colors into the given lines.
+---@param lines string[] the lines to insert into
+---@param clrs string[] the colors to preview
+---@param bg string the background color to contrast against
 local function insert_terminal_colors_preview_lines(lines, clrs, bg)
   for index, value in ipairs(clrs) do
     table.insert(
@@ -353,24 +379,24 @@ local function insert_terminal_colors_preview_lines(lines, clrs, bg)
   end
 end
 
---- Add an extmark highlight for a given preview line.
---- @param bufnr integer the ID of the buffer
---- @param name string the name of the preview highlight
---- @param spec vim.api.keyset.highlight the spec for the preview highlight
---- @param ext_ns integer the extmark namespace ID
---- @param line_index number the line index where to place the highlight
+---Add an extmark highlight for a given preview line.
+---@param bufnr integer the ID of the buffer
+---@param name string the name of the preview highlight
+---@param spec vim.api.keyset.highlight the spec for the preview highlight
+---@param ext_ns integer the extmark namespace ID
+---@param line_index number the line index where to place the highlight
 local function color_preview(bufnr, name, spec, ext_ns, line_index)
   vim.api.nvim_set_hl(0, name, spec)
   vim.api.nvim_buf_add_highlight(bufnr, ext_ns, name, line_index, 0, 3)
 end
 
---- Check the given spec's contrast ratio and add a diagnostic if it is too low.
---- @param diagnostics vim.Diagnostic[] the diagnostics to append to
---- @param name string the name of the highlight to check
---- @param spec vim.api.keyset.highlight the highlight spec to check
---- @param max_name_length integer the maximum length of highlight names
---- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
---- @param line_index integer where to place a potential diagnostic
+---Check the given spec's contrast ratio and add a diagnostic if it is too low.
+---@param diagnostics vim.Diagnostic[] the diagnostics to append to
+---@param name string the name of the highlight to check
+---@param spec vim.api.keyset.highlight the highlight spec to check
+---@param max_name_length integer the maximum length of highlight names
+---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+---@param line_index integer where to place a potential diagnostic
 local function check_contrast(
   diagnostics,
   name,
@@ -419,17 +445,17 @@ local function check_contrast(
   end
 end
 
---- Add extmark highlights for the given highlights. This also adds diagnostics
---- entries for highlights with poor contrast.
---- @param bufnr integer the ID of the buffer
---- @param ext_ns integer the extmark namespace ID
---- @param start_after_line integer after which line to start
---- @param hls table<string, vim.api.keyset.highlight> the highlights to use
---- @param names string[] the highlight names in display order
---- @param max_name_length integer the maximum length of highlight names
---- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
---- @param diagnostics vim.Diagnostic[] the diagnostics to append to
---- @param suffix "light" | "dark" the suffix to add to the highlights
+---Add extmark highlights for the given highlights. This also adds diagnostics
+---entries for highlights with poor contrast.
+---@param bufnr integer the ID of the buffer
+---@param ext_ns integer the extmark namespace ID
+---@param start_after_line integer after which line to start
+---@param hls table<string, vim.api.keyset.highlight> the highlights to use
+---@param names string[] the highlight names in display order
+---@param max_name_length integer the maximum length of highlight names
+---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+---@param diagnostics vim.Diagnostic[] the diagnostics to append to
+---@param suffix "light" | "dark" the suffix to add to the highlights
 local function color_highlight_preview_lines(
   bufnr,
   ext_ns,
@@ -445,7 +471,7 @@ local function color_highlight_preview_lines(
     local hl = hls[name]
     local line_index = start_after_line + index
 
-    --- @type vim.api.keyset.highlight | nil
+    ---@type vim.api.keyset.highlight | nil
     local spec
     if hl.link then
       local link_target = hls[hl.link]
@@ -480,14 +506,14 @@ local function color_highlight_preview_lines(
   end
 end
 
---- Add extmark highlights for the given terminal colors.
---- @param bufnr integer the ID of the buffer
---- @param ext_ns integer the extmark namespace ID
---- @param start_after_line integer after which line to start
---- @param clrs string[] the terminal colors to highlight
---- @param diagnostics vim.Diagnostic[] the diagnostics to append to
---- @param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
---- @param suffix "light" | "dark" the suffix to add to the highlights
+---Add extmark highlights for the given terminal colors.
+---@param bufnr integer the ID of the buffer
+---@param ext_ns integer the extmark namespace ID
+---@param start_after_line integer after which line to start
+---@param clrs string[] the terminal colors to highlight
+---@param diagnostics vim.Diagnostic[] the diagnostics to append to
+---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
+---@param suffix "light" | "dark" the suffix to add to the highlights
 local function color_terminal_preview_lines(
   bufnr,
   ext_ns,
@@ -508,11 +534,11 @@ local function color_terminal_preview_lines(
   end
 end
 
---- Create a preview buffer for the color scheme.
---- @param highlights_light table<string, vim.api.keyset.highlight>
---- @param highlights_dark table<string, vim.api.keyset.highlight>
---- @param terminal_colors_light string[]
---- @param terminal_colors_dark string[]
+---Create a preview buffer for the color scheme.
+---@param highlights_light table<string, vim.api.keyset.highlight>
+---@param highlights_dark table<string, vim.api.keyset.highlight>
+---@param terminal_colors_light string[]
+---@param terminal_colors_dark string[]
 local function create_preview_buffer(
   highlights_light,
   highlights_dark,
@@ -530,10 +556,10 @@ local function create_preview_buffer(
     return #key
   end, names)))
 
-  --- @type string[]
+  ---@type string[]
   local lines = {}
 
-  vim.list_extend(lines, { "--- Highlights ---" })
+  vim.list_extend(lines, { "-- Highlights --" })
   insert_highlight_preview_header(lines, max_name_length)
   vim.list_extend(lines, { "Light:" })
   insert_highlight_preview_lines(
@@ -546,7 +572,7 @@ local function create_preview_buffer(
   vim.list_extend(lines, { "Dark:" })
   insert_highlight_preview_lines(lines, highlights_dark, names, max_name_length)
   vim.list_extend(lines, { "" })
-  vim.list_extend(lines, { "--- Terminal colors ---" })
+  vim.list_extend(lines, { "-- Terminal colors --" })
   vim.list_extend(lines, { "Light:" })
   insert_terminal_colors_preview_lines(
     lines,
@@ -575,7 +601,7 @@ local function create_preview_buffer(
 
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 
-  --- @type vim.Diagnostic[]
+  ---@type vim.Diagnostic[]
   local diagnostics = {}
 
   local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
@@ -646,8 +672,8 @@ local function create_preview_buffer(
   })
 end
 
---- @param highlights_light table<string, vim.api.keyset.highlight>
---- @param highlights_dark table<string, vim.api.keyset.highlight>
+---@param highlights_light table<string, vim.api.keyset.highlight>
+---@param highlights_dark table<string, vim.api.keyset.highlight>
 local function write_nvim_colors(
   highlights_light,
   highlights_dark,
@@ -802,8 +828,8 @@ local function write_lualine_colors()
   file:close()
 end
 
---- @param highlights_light table<string, vim.api.keyset.highlight>
---- @param highlights_dark table<string, vim.api.keyset.highlight>
+---@param highlights_light table<string, vim.api.keyset.highlight>
+---@param highlights_dark table<string, vim.api.keyset.highlight>
 local function write_fish(highlights_light, highlights_dark)
   local file = io.open(
     vim.fn.stdpath "config" .. "/../fish/conf.d/1-" .. THEME_NAME .. ".fish",
@@ -814,15 +840,15 @@ local function write_fish(highlights_light, highlights_dark)
     return
   end
 
-  --- @param color string
-  --- @return string
-  --- @return number
+  ---@param color string
+  ---@return string
+  ---@return number
   local function convert_to_fish(color)
     return color:gsub("^#", "")
   end
 
-  --- @param highlight vim.api.keyset.highlight
-  --- @return string
+  ---@param highlight vim.api.keyset.highlight
+  ---@return string
   local function get_decoration_flags(highlight)
     local result = ""
 
@@ -841,10 +867,10 @@ local function write_fish(highlights_light, highlights_dark)
     return result
   end
 
-  --- @param lines table<string>
-  --- @param name string
-  --- @param highlight vim.api.keyset.highlight
-  --- @param omit_bg boolean|nil
+  ---@param lines table<string>
+  ---@param name string
+  ---@param highlight vim.api.keyset.highlight
+  ---@param omit_bg boolean | nil
   local function insert_highlight_line(lines, name, highlight, omit_bg)
     local line = "            set --global fish_" .. name
 
@@ -871,9 +897,9 @@ local function write_fish(highlights_light, highlights_dark)
     table.insert(lines, line)
   end
 
-  --- @param lines table<string>
-  --- @param name string
-  --- @param color string
+  ---@param lines table<string>
+  ---@param name string
+  ---@param color string
   local function insert_color_line(lines, name, color)
     table.insert(
       lines,
@@ -886,9 +912,9 @@ local function write_fish(highlights_light, highlights_dark)
     )
   end
 
-  --- @param lines table<string>
-  --- @param name string
-  --- @param string string
+  ---@param lines table<string>
+  ---@param name string
+  ---@param string string
   local function insert_string_line(lines, name, string)
     table.insert(
       lines,
@@ -896,8 +922,8 @@ local function write_fish(highlights_light, highlights_dark)
     )
   end
 
-  --- @param lines table<string>
-  --- @param highlights table<string, vim.api.keyset.highlight>
+  ---@param lines table<string>
+  ---@param highlights table<string, vim.api.keyset.highlight>
   local function insert_colors(lines, highlights)
 
     --stylua: ignore start
@@ -941,9 +967,9 @@ local function write_fish(highlights_light, highlights_dark)
     --stylua: ignore end
   end
 
-  --- @param lines table<string>
-  --- @param name string
-  --- @param color string
+  ---@param lines table<string>
+  ---@param name string
+  ---@param color string
   local function insert_cursor_color(lines, name, color)
     local line = "            set --global fish_cursor_color_"
       .. name
@@ -960,8 +986,8 @@ local function write_fish(highlights_light, highlights_dark)
     table.insert(lines, line)
   end
 
-  --- @param lines table<string>
-  --- @param highlights table<string, vim.api.keyset.highlight>
+  ---@param lines table<string>
+  ---@param highlights table<string, vim.api.keyset.highlight>
   local function insert_cursor_colors(lines, highlights)
     insert_cursor_color(lines, "normal", highlights.Cursor.bg)
     insert_cursor_color(lines, "insert", highlights.CursorInsert.bg)
@@ -1107,9 +1133,9 @@ local HUES = {
   magenta = 330,
 }
 
---- SEMANTIC HUE VALUES
---- These are not just hue constants, but associations of semantic objects to
---- hues.
+---SEMANTIC HUE VALUES
+---These are not just hue constants, but associations of semantic objects to
+---hues.
 local H = {
   neutral = HUES.grey,
   interact = HUES.cyan,
@@ -1172,7 +1198,7 @@ local H = {
   },
 }
 
---- The blend values for light and dark mode
+---The blend values for light and dark mode
 local BLEND = {
   light = 20,
   dark = 20,
@@ -1358,11 +1384,11 @@ vim.list_extend(
 
 --stylua: ignore
 local framing = {
-  --- @type table<string, vim.api.keyset.highlight>
+  ---@type table<string, vim.api.keyset.highlight>
   current = {
     normal = { fg = palette.neutral.lightest, bg = palette.interact.statusline.current, bold = true }
   },
-  --- @type table<string, vim.api.keyset.highlight>
+  ---@type table<string, vim.api.keyset.highlight>
   neutral = {
     a       = { fg = normal.fg, bg = modify_l(normal.bg, -20) },
     b       = { fg = normal.fg, bg = modify_l(normal.bg, -10) },
@@ -1377,7 +1403,7 @@ local framing = {
 
 --stylua: ignore start
 
---- @type table<string, vim.api.keyset.highlight>
+---@type table<string, vim.api.keyset.highlight>
 local highlights_light = {
   -- built-in *highlight-groups* {{{
 
@@ -1917,7 +1943,7 @@ local highlights_light = {
 
 -- Dark mode overrides {{{
 
---- @type table<string, vim.api.keyset.highlight>
+---@type table<string, vim.api.keyset.highlight>
 local highlights_dark_overrides = {
   Cursor    = { bg = palette.interact.cursor.normal },
   IncSearch = { bg = invert_l(highlights_light.IncSearch.bg, "cusp") },
@@ -1931,14 +1957,14 @@ local highlights_dark_overrides = {
 
 -- Automation {{{
 
---- @type table<string, vim.api.keyset.highlight>
+---@type table<string, vim.api.keyset.highlight>
 local highlights_dark = vim.tbl_extend(
   "force",
   vim.tbl_map(map_hl_to_dark, highlights_light),
   highlights_dark_overrides
 )
 
---- @type table<string, vim.api.keyset.highlight>
+---@type table<string, vim.api.keyset.highlight>
 local terminal_colors_dark = vim.tbl_map(function(c)
   return modify_l(invert_l(c), 10)
 end, terminal_colors_light)

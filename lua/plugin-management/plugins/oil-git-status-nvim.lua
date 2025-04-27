@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "refractalize/oil-git-status.nvim",
   dependencies = { "stevearc/oil.nvim" },

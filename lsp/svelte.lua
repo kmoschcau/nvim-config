@@ -1,6 +1,6 @@
 local common = require "lsp.common"
 
---- @type vim.lsp.Config
+---@type vim.lsp.Config
 return {
   -- https://github.com/sveltejs/language-tools/tree/master/packages/language-server#settings
   settings = {

@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "echasnovski/mini.nvim",
   config = function()

@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "RRethy/nvim-treesitter-endwise",
   dependencies = "nvim-treesitter/nvim-treesitter",

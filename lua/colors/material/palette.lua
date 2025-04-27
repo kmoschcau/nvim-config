@@ -1,14 +1,18 @@
 local M = {}
 
---- @class ColorDefinition
---- @field gui string The GUI and termguicolors hex value of the color
---- @field cterm number|"NONE" The cterm color index of the color
+---@class ColorDefinition
+---
+---The GUI and termguicolors hex value of the color
+---@field gui string
+---
+---The cterm color index of the color
+---@field cterm number | "NONE"
 
---- @alias ColorGradient { [number|string]: ColorDefinition }
+---@alias ColorGradient { [number | string]: ColorDefinition }
 
---- @alias Palette { [string]: ColorGradient, transparent: ColorDefinition }
+---@alias Palette { [string]: ColorGradient, transparent: ColorDefinition }
 
---- @type Palette
+---@type Palette
 M.palette = {
   red = {
     [50] = { gui = "#ffebee", cterm = 255 },

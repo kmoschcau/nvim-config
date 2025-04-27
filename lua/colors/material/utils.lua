@@ -6,16 +6,22 @@ local normal_values = { 50, 100, 200, 300, 400, 500, 600, 700, 800, 900 }
 
 local accent_values = { "A100", "A200", "A400", "A700" }
 
---- @class HighlightConfig: vim.api.keyset.highlight
---- @field fg_dark? ColorDefinition|"NONE" The dark background override for the foreground color
---- @field bg_dark? ColorDefinition|"NONE" The dark background override for the background color
---- @field sp_dark? ColorDefinition|"NONE" The dark background override for the special color
+---@class HighlightConfig: vim.api.keyset.highlight
+---
+---The dark background override for the foreground color
+---@field fg_dark? ColorDefinition | "NONE"
+---
+---The dark background override for the background color
+---@field bg_dark? ColorDefinition | "NONE"
+---
+---The dark background override for the special color
+---@field sp_dark? ColorDefinition | "NONE"
 
---- Set the highlight group passed as group_name to the values specified in
---- config.
---- @param group_name string the name of the group
---- @param config HighlightConfig the highlight config
---- @return nil
+---Set the highlight group passed as group_name to the values specified in
+---config.
+---@param group_name string the name of the group
+---@param config HighlightConfig the highlight config
+---@return nil
 M.highlight = function(group_name, config)
   local def = {}
 
@@ -99,9 +105,9 @@ M.highlight = function(group_name, config)
   vim.api.nvim_set_hl(0, group_name, def)
 end
 
---- @param invert_dark boolean
---- @param flip_inversion boolean
---- @return boolean
+---@param invert_dark boolean
+---@param flip_inversion boolean
+---@return boolean
 local function use_dark(invert_dark, flip_inversion)
   if not invert_dark then
     return flip_inversion
@@ -114,10 +120,10 @@ local function use_dark(invert_dark, flip_inversion)
   end
 end
 
---- Get the value number for the passed index, dependent on the 'background'.
---- @param index number
---- @param invert_dark boolean
---- @param flip_inversion boolean
+---Get the value number for the passed index, dependent on the 'background'.
+---@param index number
+---@param invert_dark boolean
+---@param flip_inversion boolean
 M.value = function(index, invert_dark, flip_inversion)
   local clamped = math.max(math.min(index, 10), 1)
 
@@ -131,11 +137,11 @@ M.value = function(index, invert_dark, flip_inversion)
   return normal_values[value_index]
 end
 
---- Get the accent value string for the passed index, dependent on the
---- 'background'.
---- @param index number
---- @param invert_dark boolean
---- @param flip_inversion boolean
+---Get the accent value string for the passed index, dependent on the
+---'background'.
+---@param index number
+---@param invert_dark boolean
+---@param flip_inversion boolean
 M.accent_value = function(index, invert_dark, flip_inversion)
   local clamped = math.max(math.min(index, 4), 1)
 
@@ -149,16 +155,23 @@ M.accent_value = function(index, invert_dark, flip_inversion)
   return accent_values[value_index]
 end
 
---- @class ColorTableOptions
---- @field accent? boolean whether to interpret the index as an accent index
---- @field invert_dark? boolean whether to invert the index when 'background' is dark (default true)
---- @field flip_inversion? boolean whether to flip the index inversion (meaning the decision whether to use light or dark colors is flipped based on background)
+---@class ColorTableOptions
+---
+---whether to interpret the index as an accent index
+---@field accent? boolean
+---
+---whether to invert the index when 'background' is dark (default true)
+---@field invert_dark? boolean
+---
+---whether to flip the index inversion (meaning the decision whether to use
+---light or dark colors is flipped based on background)
+---@field flip_inversion? boolean
 
---- Get a color table by the passed color name and the passed index, dependent
---- on the 'background'.
---- @param color_name string
---- @param color_index number
---- @param options? ColorTableOptions
+---Get a color table by the passed color name and the passed index, dependent
+---on the 'background'.
+---@param color_name string
+---@param color_index number
+---@param options? ColorTableOptions
 M.color_table = function(color_name, color_index, options)
   local accent = false
   local invert_dark = true
@@ -177,11 +190,7 @@ M.color_table = function(color_name, color_index, options)
       :match_str(color_name) and raw_accent_value:sub(2) or raw_accent_value
     return palette[color_name][clamped_accent_value]
   else
-    return palette[color_name][M.value(
-      color_index,
-      invert_dark,
-      flip_inversion
-    )]
+    return palette[color_name][M.value(color_index, invert_dark, flip_inversion)]
   end
 end
 

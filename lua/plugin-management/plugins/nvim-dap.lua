@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "mfussenegger/nvim-dap",
   dependencies = { "nvim-telescope/telescope.nvim" },
@@ -20,7 +20,7 @@ return {
       args = { "--interpreter=vscode" },
     }
 
-    --- @type dap.Configuration[]
+    ---@type dap.Configuration[]
     dap.configurations.cs = {
       {
         name = "Launch - ASP.NET Core",

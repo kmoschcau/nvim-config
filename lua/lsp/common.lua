@@ -1,11 +1,11 @@
 local M = {}
 
---- The autocommand group for LSP init autocommands.
+---The autocommand group for LSP init autocommands.
 M.augroup = vim.api.nvim_create_augroup("InitNvimLanguageServer", {})
 
 local has_blink, blink = pcall(require, "blink.cmp")
 
---- Generated capabilities for the LSP client
+---Generated capabilities for the LSP client
 M.capabilities = has_blink and blink.get_lsp_capabilities()
   or vim.lsp.protocol.make_client_capabilities()
 
@@ -93,9 +93,9 @@ local js_like = {
   },
 }
 
---- Common configuration settings shared between multiple servers
---- This mostly affects VS Code extracted language servers.
---- https://code.visualstudio.com/docs/reference/default-settings
+---Common configuration settings shared between multiple servers
+---This mostly affects VS Code extracted language servers.
+---https://code.visualstudio.com/docs/reference/default-settings
 M.settings = {
   css = vim.tbl_deep_extend("force", style, {
     customData = {
@@ -138,9 +138,9 @@ M.settings = {
   }),
 }
 
---- Log the given client's server's capabilities
---- @param client vim.lsp.Client|nil the LSP client to log capabilities for
---- @param buf_id? integer the buffer number, defaults to 0
+---Log the given client's server's capabilities
+---@param client vim.lsp.Client | nil the LSP client to log capabilities for
+---@param buf_id? integer the buffer number, defaults to 0
 M.log_capabilities = function(client, buf_id)
   if client == nil then
     return
@@ -202,11 +202,11 @@ M.log_capabilities = function(client, buf_id)
   vim.notify(table.concat(lines, "\n"), vim.log.levels.DEBUG, { title = title })
 end
 
---- Check whether the given client's server supports the given LSP method. If
---- the given client is `nil`, this always returns false.
---- @param client vim.lsp.Client|nil the LSP client whose server to check
---- @param method string the method name of the method to check
---- @return boolean
+---Check whether the given client's server supports the given LSP method. If
+---the given client is `nil`, this always returns false.
+---@param client vim.lsp.Client | nil the LSP client whose server to check
+---@param method string the method name of the method to check
+---@return boolean
 M.supports_method = function(client, method)
   if client == nil then
     return false
@@ -222,16 +222,16 @@ M.supports_method = function(client, method)
   ) and true or false
 end
 
---- @alias KeymapImplementation "nvim"|"snacks"|"omnisharp_extended"|nil
+---@alias KeymapImplementation "nvim" | "snacks" | "omnisharp_extended" | nil
 
---- Determine which implementation to use for a given keymap. This does not need
---- to be used for all keymaps, just the ones where multiple implementations are
---- available.
---- @param buf integer the buffer number
---- @param client vim.lsp.Client|nil the LSP client for the buffer
---- @param has_snacks boolean whether snacks is available
---- @param has_omni_ext boolean whether omnisharp extended is available
---- @return KeymapImplementation
+---Determine which implementation to use for a given keymap. This does not need
+---to be used for all keymaps, just the ones where multiple implementations are
+---available.
+---@param buf integer the buffer number
+---@param client vim.lsp.Client | nil the LSP client for the buffer
+---@param has_snacks boolean whether snacks is available
+---@param has_omni_ext boolean whether omnisharp extended is available
+---@return KeymapImplementation
 M.which_keymap_implementation = function(buf, client, has_snacks, has_omni_ext)
   if not client then
     return nil
@@ -245,15 +245,19 @@ M.which_keymap_implementation = function(buf, client, has_snacks, has_omni_ext)
   return has_snacks and "snacks" or "nvim"
 end
 
---- @class ChooseKeymapImplOptions
---- @field snacks_impl? function the snacks implementation
---- @field omni_ext_impl? function the omnisharp extended implementation
+---@class ChooseKeymapImplOptions
+---
+---the snacks implementation
+---@field snacks_impl? function
+---
+---the omnisharp extended implementation
+---@field omni_ext_impl? function
 
---- Select from the given keymap implementations.
---- @param keymap_implementation KeymapImplementation the determined implementation
---- @param nvim_impl function the native Neovim implementation
---- @param opts? ChooseKeymapImplOptions the implementation options
---- @return function|nil, KeymapImplementation|nil
+---Select from the given keymap implementations.
+---@param keymap_implementation KeymapImplementation the determined implementation
+---@param nvim_impl function the native Neovim implementation
+---@param opts? ChooseKeymapImplOptions the implementation options
+---@return function | nil, KeymapImplementation | nil
 M.choose_keymap_implementation = function(
   keymap_implementation,
   nvim_impl,
@@ -284,11 +288,11 @@ M.choose_keymap_implementation = function(
   return nil, nil
 end
 
---- Create a wrapper function that calls the given function with the given
---- options.
---- @param func function
---- @param options table
---- @return function
+---Create a wrapper function that calls the given function with the given
+---options.
+---@param func function
+---@param options table
+---@return function
 M.with_options = function(func, options)
   return function()
     func(options)

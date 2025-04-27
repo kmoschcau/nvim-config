@@ -4,20 +4,20 @@ local pmd_default_rulesets = "rulesets/java/quickstart.xml"
 
 return {
   defaults = {
-    --- Java specific options
+    ---Java specific options
     java = {
-      --- Checkstyle options
+      ---Checkstyle options
       checkstyle = {
-        --- The file name for the config file XML
+        ---The file name for the config file XML
         config = checkstyle_default_config,
-        --- @type string | nil Additional options for checkstyle
+        ---@type string | nil Additional options for checkstyle
         options = nil,
       },
-      --- PMD options
+      ---PMD options
       pmd = {
-        --- The rulesets for PMD, comma-separated
+        ---The rulesets for PMD, comma-separated
         rulesets = pmd_default_rulesets,
-        --- @type string | nil The cache file path, if used
+        ---@type string | nil The cache file path, if used
         cache = nil,
       },
     },

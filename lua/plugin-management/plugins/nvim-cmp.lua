@@ -22,7 +22,7 @@ if vim.fn.executable "fish" == 1 then
 end
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "hrsh7th/nvim-cmp",
   enabled = false,

@@ -1,7 +1,7 @@
 local M = {}
 
---- When typing "await" add "async" to the function declaration if the function
---- isn't async already.
+---When typing "await" add "async" to the function declaration if the function
+---isn't async already.
 -- TODO: handle `public foo() in typescript`
 function M.add_async()
   vim.api.nvim_feedkeys("t", "n", true)
@@ -41,8 +41,8 @@ function M.add_async()
   )
 end
 
---- Register an insert mode keymap to automatically add "async" to the next
---- surrounding function, when typing "await".
+---Register an insert mode keymap to automatically add "async" to the next
+---surrounding function, when typing "await".
 function M.register_add_async()
   vim.keymap.set("i", "t", M.add_async, { buffer = true })
 end

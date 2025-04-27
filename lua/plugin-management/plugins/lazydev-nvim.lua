@@ -1,11 +1,11 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "folke/lazydev.nvim",
   ft = "lua",
-  --- @type lazydev.Config
+  ---@type lazydev.Config
   opts = {
-    --- @type lazydev.Library.spec[]
+    ---@type lazydev.Library.spec[]
     library = {
       { path = "coerce.nvim/lua/coerce.lua", words = { "CoerceConfigUser" } },
       {

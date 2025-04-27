@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",

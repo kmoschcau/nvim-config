@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "L3MON4D3/LuaSnip",
   dependencies = { "rafamadriz/friendly-snippets" },

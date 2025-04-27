@@ -4,16 +4,16 @@ local ignored_servers = {
   "html",
 }
 
---- @param client vim.lsp.Client
+---@param client vim.lsp.Client
 local function formatter_filter(client)
   return not vim.list_contains(ignored_servers, client.name)
 end
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
-  --- @type conform.setupOpts
+  ---@type conform.setupOpts
   opts = {
     formatters_by_ft = {
       astro = { prettier },

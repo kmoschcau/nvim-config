@@ -1,15 +1,15 @@
---- @class lint.LinterOverrideConfig
---- @field args? string[]
---- @field condition? fun(event_args: vim.api.keyset.create_autocmd.callback_args): boolean, boolean?
---- @field ignore_exitcode? boolean
---- @field prepend_args? string[]
+---@class lint.LinterOverrideConfig
+---@field args? string[]
+---@field condition? fun(event_args: vim.api.keyset.create_autocmd.callback_args): boolean, boolean?
+---@field ignore_exitcode? boolean
+---@field prepend_args? string[]
 
---- @alias lint.LinterOverride lint.Linter | lint.LinterOverrideConfig
+---@alias lint.LinterOverride lint.Linter | lint.LinterOverrideConfig
 
 local cache = require "cache"
 
---- @param timeout_ms number
---- @param fn function
+---@param timeout_ms number
+---@param fn function
 local function debounce(timeout_ms, fn)
   local timer = vim.uv.new_timer()
   return function(...)
@@ -21,8 +21,8 @@ local function debounce(timeout_ms, fn)
   end
 end
 
---- @param name string
---- @return lint.LinterOverride?
+---@param name string
+---@return lint.LinterOverride?
 local function get_effective_linter(name)
   local nvim_lint = require "lint"
   local found_linter = nvim_lint.linters[name]
@@ -37,8 +37,8 @@ local function get_effective_linter(name)
   end
 end
 
---- @param linters_by_ft table<string, string[]>
---- @param linter_overrides table<string, lint.LinterOverride>
+---@param linters_by_ft table<string, string[]>
+---@param linter_overrides table<string, lint.LinterOverride>
 local function merge_linter_configurations(linters_by_ft, linter_overrides)
   local nvim_lint = require "lint"
 
@@ -65,8 +65,8 @@ local function merge_linter_configurations(linters_by_ft, linter_overrides)
   nvim_lint.linters_by_ft = linters_by_ft
 end
 
---- @param event_args vim.api.keyset.create_autocmd.callback_args
---- @return boolean
+---@param event_args vim.api.keyset.create_autocmd.callback_args
+---@return boolean
 local function persisted_file(event_args)
   return vim.list_contains({ "BufReadPost", "BufWritePost" }, event_args.event)
 end
@@ -75,7 +75,7 @@ end
 -- * checks if linters exist for the full filetype first
 -- * otherwise will split filetype by "." and add all those linters
 -- * this differs from conform.nvim which only uses the first filetype that has a formatter
---- @param event_args vim.api.keyset.create_autocmd.callback_args
+---@param event_args vim.api.keyset.create_autocmd.callback_args
 local function do_lint(event_args)
   local nvim_lint = require "lint"
 
@@ -125,7 +125,7 @@ local function do_lint(event_args)
 end
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "mfussenegger/nvim-lint",
   dependencies = {

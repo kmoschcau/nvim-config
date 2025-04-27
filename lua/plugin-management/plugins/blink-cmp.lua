@@ -5,7 +5,7 @@ local default_sources =
 
 local buffer_source_include_buftypes = { "", "help" }
 
---- @type table<integer, boolean?>
+---@type table<integer, boolean?>
 local spell_enabled_cache = {}
 
 vim.api.nvim_create_autocmd("OptionSet", {
@@ -17,10 +17,10 @@ vim.api.nvim_create_autocmd("OptionSet", {
   end,
 })
 
---- Test whether a given buffer should be included for the buffer completion
---- source.
---- @param bufnr integer the number of the buffer to check
---- @return boolean whether to include the buffer for completion
+---Test whether a given buffer should be included for the buffer completion
+---source.
+---@param bufnr integer the number of the buffer to check
+---@return boolean include whether to include the buffer for completion
 local function buffer_source_should_include_buffer(bufnr)
   return vim.list_contains(
     buffer_source_include_buftypes,
@@ -28,8 +28,8 @@ local function buffer_source_should_include_buffer(bufnr)
   )
 end
 
---- Get the buffer numbers for the buffer completion source.
---- @return integer[] bufnrs the buffer numbers
+---Get the buffer numbers for the buffer completion source.
+---@return integer[] bufnrs the buffer numbers
 local function get_buffers_for_buffer_source()
   return vim.tbl_filter(
     buffer_source_should_include_buffer,
@@ -37,11 +37,11 @@ local function get_buffers_for_buffer_source()
   )
 end
 
---- This is a transform to preserve the capitalization of the keyword to
---- complete in the suggested completion items.
---- @param context blink.cmp.Context the blink context
---- @param items blink.cmp.CompletionItem[] the completion items
---- @return blink.cmp.CompletionItem[]? items the adjusted completion items
+---This is a transform to preserve the capitalization of the keyword to
+---complete in the suggested completion items.
+---@param context blink.cmp.Context the blink context
+---@param items blink.cmp.CompletionItem[] the completion items
+---@return blink.cmp.CompletionItem[]? items the adjusted completion items
 local function capitalization_preserving_transform(context, items)
   local keyword = context.get_keyword()
 
@@ -75,10 +75,10 @@ local function capitalization_preserving_transform(context, items)
   return corrected_texts
 end
 
---- Get the icon string and highlight for a file path.
---- @param context blink.cmp.DrawItemContext the blink context
---- @return string icon the icon string
---- @return string highlight the highlight group name
+---Get the icon string and highlight for a file path.
+---@param context blink.cmp.DrawItemContext the blink context
+---@return string icon the icon string
+---@return string highlight the highlight group name
 local function get_path_component(context)
   local full_path = context.item.data.full_path
   local icons = require "mini.icons"
@@ -89,9 +89,9 @@ local function get_path_component(context)
   return icons.get("file", full_path)
 end
 
---- Get the kind icon for a specific completion item.
---- @param context blink.cmp.DrawItemContext the blink context
---- @return string icon_text the icon string
+---Get the kind icon for a specific completion item.
+---@param context blink.cmp.DrawItemContext the blink context
+---@return string icon_text the icon string
 local function kind_icon_text(context)
   if context.source_id == "path" then
     local kind_icon, _ = get_path_component(context)
@@ -105,9 +105,9 @@ local function kind_icon_text(context)
   return symbols.types[context.kind]
 end
 
---- Get the highlight group name for a specific completion item.
---- @param context blink.cmp.DrawItemContext the blink context
---- @return string highlight the highlight group name
+---Get the highlight group name for a specific completion item.
+---@param context blink.cmp.DrawItemContext the blink context
+---@return string highlight the highlight group name
 local function kind_icon_highlight(context)
   if context.source_id == "path" then
     local _, highlight = get_path_component(context)
@@ -129,7 +129,7 @@ local function kind_icon_highlight(context)
 end
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "saghen/blink.cmp",
   dependencies = {

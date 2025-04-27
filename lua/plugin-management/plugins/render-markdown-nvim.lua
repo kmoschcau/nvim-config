@@ -1,10 +1,10 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = { "echasnovski/mini.nvim" },
   ft = "markdown",
-  --- @type render.md.UserConfig
+  ---@type render.md.UserConfig
   opts = {
     code = {
       left_pad = 1,

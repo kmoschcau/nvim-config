@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "Wansmer/treesj",
   dependencies = { "echasnovski/mini.nvim" },

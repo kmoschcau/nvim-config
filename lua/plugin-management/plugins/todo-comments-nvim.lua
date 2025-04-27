@@ -1,5 +1,5 @@
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },

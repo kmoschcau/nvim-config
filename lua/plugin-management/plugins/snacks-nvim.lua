@@ -1,13 +1,13 @@
 local symbols = require "symbols"
 
 -- selene: allow(mixed_table)
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
   "folke/snacks.nvim",
   priority = 1000,
-  --- @type snacks.Config
+  ---@type snacks.Config
   opts = {
-    --- @type table<string, snacks.win.Config>
+    ---@type table<string, snacks.win.Config>
     styles = {
       input = {
         relative = "cursor",

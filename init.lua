@@ -127,8 +127,8 @@ vim.o.splitright = true
 -- statusline {{{
 -- selene: allow(unused_variable)
 
---- Convert the current mode from `vim.fn.mode()` into a readable string.
---- @return string
+---Convert the current mode from `vim.fn.mode()` into a readable string.
+---@return string
 function StatuslineModeName()
   return ({
     n = "NORMAL",

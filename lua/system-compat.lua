@@ -1,10 +1,10 @@
 local M = {}
 
---- Append a file extension (default: "cmd") to the given base name, when
---- running on Windows. Otherwise this returns the given base name.
---- @param baseName string the base name to extend
---- @param ext? string the extension to append, when on Windows
---- @return string
+---Append a file extension (default: "cmd") to the given base name, when
+---running on Windows. Otherwise this returns the given base name.
+---@param baseName string the base name to extend
+---@param ext? string the extension to append, when on Windows
+---@return string
 M.append_win_ext = function(baseName, ext)
   if vim.fn.has "win32" == 0 then
     return baseName
@@ -13,9 +13,9 @@ M.append_win_ext = function(baseName, ext)
   return baseName .. "." .. (ext or "cmd")
 end
 
---- Try and get the appropriate browser command for the environment neovim is
---- running in.
---- @return string?
+---Try and get the appropriate browser command for the environment neovim is
+---running in.
+---@return string?
 M.get_browser_command = function()
   if vim.fn.executable "xdg-open" == 1 then
     return "xdg-open"
@@ -34,9 +34,9 @@ M.get_browser_command = function()
   return nil
 end
 
---- Try to determine the system background (or dark mode). If it can't be
---- determined, fall back to "dark".
---- @return "light" | "dark"
+---Try to determine the system background (or dark mode). If it can't be
+---determined, fall back to "dark".
+---@return "light" | "dark"
 M.get_system_background = function()
   if vim.fn.has "win32" == 1 or vim.fn.has "wsl" == 1 then
     local result = vim
@@ -70,7 +70,7 @@ M.get_system_background = function()
   return "dark"
 end
 
---- Set the options common for a dos formatted file for the current buffer.
+---Set the options common for a dos formatted file for the current buffer.
 M.set_dos_file_options = function()
   vim.opt_local.endofline = false
   vim.opt_local.fixendofline = false
@@ -79,8 +79,8 @@ M.set_dos_file_options = function()
   end
 end
 
---- Set up the shell, depending on the platform.
---- @param use_default? boolean force using the default settings
+---Set up the shell, depending on the platform.
+---@param use_default? boolean force using the default settings
 M.set_up_shell = function(use_default)
   if use_default then
     local function reset(option_name)

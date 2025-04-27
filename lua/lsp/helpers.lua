@@ -1,11 +1,11 @@
 local M = {}
 
---- Get the roslyn command for the roslyn language server.
---- @return string[]
+---Get the roslyn command for the roslyn language server.
+---@return string[]
 function M.get_roslyn_cmd()
   local mason_registry = require "mason-registry"
 
-  --- @type string[]
+  ---@type string[]
   local cmd = {}
 
   local roslyn_package = mason_registry.get_package "roslyn"
