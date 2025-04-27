@@ -1,5 +1,6 @@
--- FIXME: This does not seem to work at all.
+local package =
+  require("mason-registry").get_package "powershell-editor-services"
+
 return {
-  bundle_path = vim.fn.stdpath "data"
-    .. "/mason/packages/powershell-editor-services",
+  bundle_path = package:is_installed() and package:get_install_path() or nil,
 }
