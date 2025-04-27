@@ -63,13 +63,14 @@ local config =
 
 vim.lsp.enable("denols", config.ecma_server == "denols")
 vim.lsp.enable("omnisharp", config.dotnet_server == "omnisharp")
+vim.lsp.enable("roslyn_ls", config.dotnet_server == "roslyn_ls")
 vim.lsp.enable("ts_ls", config.ecma_server == "ts_ls")
 
 if config.ecma_server == "typescript-tools" then
   require "lsp.plugins.typescript-tools"
 end
 
-if config.dotnet_server == "roslyn" then
-  require "lsp.plugins.roslyn"
-  require "lsp.plugins.rzls"
+if config.dotnet_server == "roslyn.nvim" then
+  require "lsp.plugins.rzls-nvim"
+  require "lsp.plugins.roslyn-nvim"
 end
