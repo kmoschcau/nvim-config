@@ -1,17 +1,4 @@
 return {
-  cmp_sources = {
-    buffer = " ",
-    cmdline = " ",
-    dap = " ",
-    emmet_vim = "󰕣 ",
-    fish = "󰈺 ",
-    git = "󰊢 ",
-    luasnip = " ",
-    nvim_lsp = " ",
-    nvim_lsp_signature_help = "󰷻 ",
-    path = " ",
-    vimtex = " ",
-  },
   debug = {
     breakpoint = {
       normal = " ",
