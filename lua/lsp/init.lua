@@ -1,15 +1,9 @@
 local common = require "lsp.common"
 
----@class LspAttachData
----@field client_id number the number of the LSP client
-
----@class LspAttachArgs: vim.api.keyset.create_autocmd.callback_args
----@field data LspAttachData the LspAttach specific data
-
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP: Set up things when attaching with a language client to a buffer.",
   group = common.augroup,
-  ---@param args LspAttachArgs the autocmd args
+  ---@param args LspAttachArgs
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
