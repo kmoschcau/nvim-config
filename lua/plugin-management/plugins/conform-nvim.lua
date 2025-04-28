@@ -49,6 +49,11 @@ return {
       lsp_format = "fallback",
     },
     formatters = {
+      -- HACK: until https://github.com/stevearc/conform.nvim/pull/695 is merged
+      csharpier = {
+        command = "csharpier",
+        args = "format",
+      },
       shfmt = {
         prepend_args = { "--indent", "4" },
       },
