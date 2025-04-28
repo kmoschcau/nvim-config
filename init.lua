@@ -27,6 +27,12 @@ xpcall(require, ehandler, "lsp")
 
 -- }}}
 
+-- configuration modules {{{
+
+xpcall(require, ehandler, "terminal")
+
+-- }}}
+
 -- general Neovim settings {{{
 
 -- diagnostics settings {{{
@@ -204,15 +210,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup,
   callback = function()
     vim.hl.on_yank()
-  end,
-})
-
-vim.api.nvim_create_autocmd("TermOpen", {
-  desc = "Adjust settings to make more sense in a terminal.",
-  group = augroup,
-  callback = function()
-    vim.opt_local.colorcolumn = { "" }
-    vim.opt_local.spell = false
   end,
 })
 

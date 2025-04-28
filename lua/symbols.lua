@@ -89,6 +89,9 @@ return {
       right = "",
     },
   },
+  signs = {
+    term_prompt = " ",
+  },
   snippet = {
     choice_virt_text = " ",
     insert_virt_text = "…",
