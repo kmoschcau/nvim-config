@@ -1,3 +1,9 @@
+local config =
+  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+if config.dotnet_server ~= "roslyn.nvim" then
+  return
+end
+
 require("roslyn").setup {
   cmd = require("lsp.helpers").get_roslyn_cmd(),
   ---@diagnostic disable-next-line: missing-fields

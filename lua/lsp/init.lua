@@ -33,10 +33,12 @@ vim.lsp.enable {
   "lemminx",
   "lua_ls",
   "marksman",
+  "omnisharp",
   "phpactor",
   "powershell_es",
   "prosemd_lsp",
   "quick_lint_js",
+  "roslyn_ls",
   "ruff",
   "rust_analyzer",
   "stylelint_lsp",
@@ -45,6 +47,7 @@ vim.lsp.enable {
   "tailwindcss",
   "terraformls",
   "texlab",
+  "ts_ls",
   "typos_lsp",
   "vale_ls",
   "vimls",
@@ -52,19 +55,6 @@ vim.lsp.enable {
   "yamlls",
 }
 
-local config =
-  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
-
-vim.lsp.enable("denols", config.ecma_server == "denols")
-vim.lsp.enable("omnisharp", config.dotnet_server == "omnisharp")
-vim.lsp.enable("roslyn_ls", config.dotnet_server == "roslyn_ls")
-vim.lsp.enable("ts_ls", config.ecma_server == "ts_ls")
-
-if config.ecma_server == "typescript-tools" then
-  require "lsp.plugins.typescript-tools"
-end
-
-if config.dotnet_server == "roslyn.nvim" then
-  require "lsp.plugins.rzls-nvim"
-  require "lsp.plugins.roslyn-nvim"
-end
+require "lsp.plugins.typescript-tools"
+require "lsp.plugins.rzls-nvim"
+require "lsp.plugins.roslyn-nvim"

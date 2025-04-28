@@ -3,6 +3,20 @@ local ts = common.settings.typescript
 
 ---@type vim.lsp.Config
 return {
+  root_dir = function(bufnr, on_dir)
+    local config =
+      require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+    if config.ecma_server ~= "denols" then
+      return
+    end
+
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    on_dir(
+      require("lspconfig.util").root_pattern("deno.json", "deno.jsonc", ".git")(
+        fname
+      )
+    )
+  end,
   -- https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno
   settings = {
     deno = {
