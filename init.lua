@@ -206,6 +206,7 @@ vim.filetype.add {
     nswag = "json",
   },
   filename = {
+    [".csharpierignore"] = "gitignore",
     ["quick-lint-js.config"] = "json",
   },
   pattern = {
