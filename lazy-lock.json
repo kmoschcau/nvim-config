@@ -60,7 +60,7 @@
   "otter.nvim": { "branch": "main", "commit": "a7766be1592bfa9e88e67512646e343d0b4b2ff5" },
   "overseer.nvim": { "branch": "master", "commit": "72c68aab0358c92f451168b704c411c4a3e3410e" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-  "render-markdown.nvim": { "branch": "main", "commit": "5eaa6c2b6bb812a096bef91070549234973966da" },
+  "render-markdown.nvim": { "branch": "main", "commit": "bff12b4655d1537cf0f10859fcd63ef2cec65010" },
   "rest.nvim": { "branch": "main", "commit": "2ded89dbda1fd3c1430685ffadf2df8beb28336d" },
   "roslyn.nvim": { "branch": "main", "commit": "7f8c18c6aac3667e0c0ec1aa30ecc77d3d36807f" },
   "rzls.nvim": { "branch": "main", "commit": "ebb652a4876c3c6af344333a6fc6bacffd85a27a" },
@@ -82,7 +82,7 @@
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
   "vimtex": { "branch": "master", "commit": "4fbf861dbe91f0ea6cb0adedcdf3e6551fe395da" },
-  "yazi.nvim": { "branch": "main", "commit": "312bef6c94c5593f41650d8b1b4da921d0363a6e" },
+  "yazi.nvim": { "branch": "main", "commit": "8cf2c9003c3cff4ab03915855de238c734d8029b" },
   "zen-mode.nvim": { "branch": "main", "commit": "863f150ca321b3dd8aa1a2b69b5f411a220e144f" },
   "zoxide.vim": { "branch": "master", "commit": "b1e70b6fc1682a83929aee63680d2b43456fe9a5" }
 }
