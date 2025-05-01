@@ -12,9 +12,9 @@ return {
 
     local fname = vim.api.nvim_buf_get_name(bufnr)
     on_dir(
-      require("lspconfig.util").root_pattern("deno.json", "deno.jsonc", ".git")(
-        fname
-      )
+      require("lspconfig.util").root_pattern(
+        vim.lsp.config["denols"].root_markers
+      )(fname)
     )
   end,
   -- https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno

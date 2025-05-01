@@ -36,10 +36,7 @@ return {
     local fname = vim.api.nvim_buf_get_name(bufnr)
     on_dir(
       require("lspconfig.util").root_pattern(
-        "tsconfig.json",
-        "jsconfig.json",
-        "package.json",
-        ".git"
+        vim.lsp.config["ts_ls"].root_markers
       )(fname)
     )
   end,
