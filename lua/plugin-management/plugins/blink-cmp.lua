@@ -1,8 +1,5 @@
 local symbols = require "symbols"
 
-local default_sources =
-  { "lsp", "path", "snippets", "emoji", "spell", "buffer" }
-
 local buffer_source_include_buftypes = { "", "help" }
 
 ---@type table<integer, boolean?>
@@ -247,14 +244,14 @@ return {
     },
     snippets = { preset = "luasnip" },
     sources = {
-      default = default_sources,
+      default = { "lsp", "path", "snippets", "emoji", "spell", "buffer" },
       per_filetype = {
         ["dap-repl"] = { "dap" },
         ["dapui_hover"] = { "dap" },
         ["dapui_watches"] = { "dap" },
-        lua = vim.list_extend({ "lazydev" }, default_sources),
-        fish = vim.list_extend({ "fish" }, default_sources),
-        tex = vim.list_extend({ "vimtex" }, default_sources),
+        lua = { inherit_defaults = true, "lazydev" },
+        fish = { inherit_defaults = true, "fish" },
+        tex = { inherit_defaults = true, "vimtex" },
       },
       providers = {
         buffer = {
