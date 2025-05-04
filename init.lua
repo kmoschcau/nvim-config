@@ -30,6 +30,7 @@ xpcall(require, ehandler, "lsp")
 -- configuration modules {{{
 
 xpcall(require, ehandler, "diagnostics")
+xpcall(require, ehandler, "extui")
 xpcall(require, ehandler, "terminal")
 
 -- }}}
