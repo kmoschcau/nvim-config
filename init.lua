@@ -60,7 +60,6 @@ vim.opt.fillchars = opt_sym.fillchars
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
-vim.o.foldtext = "" -- TODO: Find a way to have highlighted fold and info.
 vim.o.formatoptions = "cro/qnlj"
 vim.o.guicursor = table.concat(
   vim.tbl_map(function(pair)
