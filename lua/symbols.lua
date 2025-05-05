@@ -23,9 +23,6 @@ return {
     unnamed = "",
     newfile = " ",
   },
-  fillchars = {
-    diff = " ",
-  },
   git = {
     lines = {
       added = "󰐕",
@@ -48,6 +45,24 @@ return {
     info = " ",
     debug = " ",
     trace = " ",
+  },
+  options = {
+    fillchars = {
+      diff = " ",
+    },
+    listchars = {
+      tab = "⊳ ⎹",
+      trail = "·",
+      extends = "≻",
+      precedes = "≺",
+      conceal = "◌",
+      nbsp = "⨯",
+    },
+    showbreak = "↪ ",
+    statusline = {
+      line = "",
+      column = "",
+    },
   },
   progress = {
     done = " ",

@@ -39,6 +39,8 @@ xpcall(require, ehandler, "terminal")
 
 -- Neovim options {{{
 
+local opt_sym = require("symbols").options
+
 vim.o.breakindent = true
 vim.opt.breakindentopt = { "list:-1", "min:80", "shift:2", "sbr" }
 vim.o.colorcolumn = "+1"
@@ -54,7 +56,7 @@ vim.opt.diffopt:append "inline:word"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
 vim.o.exrc = true
-vim.opt.fillchars = require("symbols").fillchars
+vim.opt.fillchars = opt_sym.fillchars
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
@@ -77,14 +79,7 @@ vim.o.guifont = "FiraMono Nerd Font:h10"
 vim.o.inccommand = "split"
 vim.o.linebreak = true
 vim.o.list = true
-vim.opt.listchars = {
-  tab = "⊳ ⎹",
-  trail = "·",
-  extends = "≻",
-  precedes = "≺",
-  conceal = "◌",
-  nbsp = "⨯",
-}
+vim.opt.listchars = opt_sym.listchars
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
 vim.o.number = true
@@ -93,7 +88,7 @@ vim.o.scrolljump = -50
 require("system-compat").set_up_shell()
 
 vim.o.shiftwidth = 2
-vim.o.showbreak = "↪ "
+vim.o.showbreak = opt_sym.showbreak
 vim.o.showmode = false
 vim.o.sidescrolloff = 10
 if pcall(require, "statuscol") then
@@ -169,9 +164,11 @@ vim.o.statusline =
   .. "%3p%% "
   -- %l: Line number.
   -- %L: Number of lines in buffer.
-  .. ":%l/%L "
+  .. opt_sym.statusline.line
+  .. ":%l/%L "
   -- Column number and virtual column number, if different; minimum 5
-  .. ":%5(%c%V%) "
+  .. opt_sym.statusline.column
+  .. ":%5(%c%V%) "
 
 -- }}}
 
