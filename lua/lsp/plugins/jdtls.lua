@@ -1,9 +1,9 @@
 local M = {}
 
 ---Get the config file path for jdtls.
----@param jdtls_package Package the mason registry package for jdtls
+---@param jdtls_package_path string the mason registry package path for jdtls
 ---@return string
-local function get_config_path(jdtls_package)
+local function get_config_path(jdtls_package_path)
   local os
   if vim.fn.has "win32" == 1 then
     os = "win"
@@ -11,16 +11,19 @@ local function get_config_path(jdtls_package)
     os = "linux"
   end
 
-  return jdtls_package:get_install_path() .. "/config_" .. os
+  return vim.fs.joinpath(jdtls_package_path, "config_" .. os)
 end
 
 ---Get the launcher jar file path for jdtls.
----@param jdtls_package Package the mason registry package for jdtls
+---@param jdtls_package_path string the mason registry package path for jdtls
 ---@return string
-local function get_launch_jar_path(jdtls_package)
+local function get_launch_jar_path(jdtls_package_path)
   return vim.fn.glob(
-    jdtls_package:get_install_path()
-      .. "/plugins/org.eclipse.equinox.launcher_*.jar"
+    vim.fs.joinpath(
+      jdtls_package_path,
+      "plugins",
+      "org.eclipse.equinox.launcher_*.jar"
+    )
   )
 end
 
@@ -33,9 +36,9 @@ local function get_workspace_path()
 end
 
 ---Get the command for jdtls.
----@param jdtls_package Package the mason registry package for jdtls
+---@param jdtls_package_path string the mason registry package path for jdtls
 ---@return string[]
-local function get_cmd(jdtls_package)
+local function get_cmd(jdtls_package_path)
   return {
     "java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -50,9 +53,9 @@ local function get_cmd(jdtls_package)
     "--add-opens",
     "java.base/java.lang=ALL-UNNAMED",
     "-jar",
-    get_launch_jar_path(jdtls_package),
+    get_launch_jar_path(jdtls_package_path),
     "-configuration",
-    get_config_path(jdtls_package),
+    get_config_path(jdtls_package_path),
     "-data",
     get_workspace_path(),
   }
@@ -76,11 +79,7 @@ local function get_plugin_bundle_paths()
   if java_debug_package:is_installed() then
     table.insert(
       bundles,
-      vim.fn.glob(
-        java_debug_package:get_install_path()
-          .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
-        true
-      )
+      vim.fn.expand "$MASON/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
     )
   end
 
@@ -94,14 +93,11 @@ local function get_plugin_bundle_paths()
   if java_test_package:is_installed() then
     vim.list_extend(
       bundles,
-      vim.split(
-        vim.fn.glob(
-          java_test_package:get_install_path()
-            .. "/extension/server/com.microsoft.java.test.plugin-*.jar",
-          true
-        ),
-        "\n"
-      )
+      vim.fn.expand(
+        "$MASON/packages/java-test/extension/server/com.microsoft.java.test.plugin-*.jar",
+        true,
+        true
+      ) --[[ @as string[] ]]
     )
   end
 
@@ -121,12 +117,14 @@ M.start_or_attach = function()
     return
   end
 
+  local jdtls_package_path = vim.fn.expand "$MASON/packages/jdtls"
+
   local common = require "lsp.common"
   local jdtls = require "jdtls"
 
   jdtls.start_or_attach {
     capabilities = common.capabilities,
-    cmd = get_cmd(jdtls_package),
+    cmd = get_cmd(jdtls_package_path),
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
       jdtls.setup_dap { hotcodereplace = "auto" }

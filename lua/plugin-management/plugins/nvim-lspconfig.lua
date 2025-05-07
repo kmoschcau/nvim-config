@@ -15,7 +15,6 @@ return {
     "saghen/blink.cmp",
     "seblyng/roslyn.nvim",
     "tris203/rzls.nvim",
-    "williamboman/mason-lspconfig.nvim",
   },
   config = function()
     -- HACK: These calls are only needed for as long as these servers are not

@@ -21,10 +21,6 @@ return {
       { path = "lazydev.nvim/lua/lazydev/config.lua", words = { "lazydev" } },
       "luvit-meta/library",
       {
-        path = "mason-lspconfig.nvim/lua/mason-lspconfig/settings.lua",
-        words = { "MasonLspconfigSettings" },
-      },
-      {
         path = "mason-nvim-dap.nvim/lua/mason-nvim-dap/settings.lua",
         words = { "MasonNvimDapSettings" },
       },
