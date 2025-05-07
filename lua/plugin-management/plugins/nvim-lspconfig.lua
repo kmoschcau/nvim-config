@@ -21,7 +21,6 @@ return {
     -- yet migrated.
 
     local servers = {
-      "astro",
       "glint",
     }
 
