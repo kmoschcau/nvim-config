@@ -16,7 +16,7 @@
   "dotnet.nvim": { "branch": "main", "commit": "f5c52f9f52a3d8ca8dff6916c2228fb41a075274" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "gitsigns.nvim": { "branch": "main", "commit": "43b0c856ae5f32a195d83f4a27fe21d63e6c966c" },
-  "grug-far.nvim": { "branch": "main", "commit": "78c8d27c6f3300bfa92bb535236732d8e9bcb614" },
+  "grug-far.nvim": { "branch": "main", "commit": "5ddfc2e9d1967084162c2c77e7036a43029abf78" },
   "hawtkeys.nvim": { "branch": "main", "commit": "261cc311d4abdc88decceca6dc1013faa14c56ea" },
   "indent-blankline.nvim": { "branch": "master", "commit": "005b56001b2cb30bfa61b7986bc50657816ba4ba" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
@@ -81,7 +81,7 @@
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
   "vimtex": { "branch": "master", "commit": "7d16d56c765476f3101b2daa2a09f8ab82df9c5d" },
-  "yazi.nvim": { "branch": "main", "commit": "75766fab481fd8b7877c460dd3ed02e78adc2c24" },
+  "yazi.nvim": { "branch": "main", "commit": "82873628a2b78dce48b5bcf8d1d8ed14f0ee985f" },
   "zen-mode.nvim": { "branch": "main", "commit": "863f150ca321b3dd8aa1a2b69b5f411a220e144f" },
   "zoxide.vim": { "branch": "master", "commit": "b1e70b6fc1682a83929aee63680d2b43456fe9a5" }
 }
