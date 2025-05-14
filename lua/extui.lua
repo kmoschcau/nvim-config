@@ -1,5 +1,1 @@
-require("vim._extui").enable {
-  msg = {
-    pos = "box",
-  },
-}
+require("vim._extui").enable {}
