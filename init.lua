@@ -74,7 +74,12 @@ vim.o.guicursor = table.concat(
   }),
   ","
 )
-vim.o.guifont = "FiraMono Nerd Font:h10"
+local base_font = "FiraMono Nerd Font"
+if vim.fn.has "win32" == 1 then
+  vim.o.guifont = base_font .. ",Segoe UI Emoji:h10"
+else
+  vim.o.guifont = base_font .. ":h10"
+end
 vim.o.inccommand = "split"
 vim.o.linebreak = true
 vim.o.list = true
