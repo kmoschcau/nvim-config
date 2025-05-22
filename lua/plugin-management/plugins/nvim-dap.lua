@@ -1,7 +1,7 @@
 -- selene: allow(mixed_table)
 ---@type LazyPluginSpec
 return {
-  "mfussenegger/nvim-dap",
+  "https://codeberg.org/mfussenegger/nvim-dap",
   dependencies = { "nvim-telescope/telescope.nvim" },
   config = function()
     local dap = require "dap"
