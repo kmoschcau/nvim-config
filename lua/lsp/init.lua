@@ -52,7 +52,7 @@ vim.lsp.enable {
   "typos_lsp",
   "vale_ls",
   "vimls",
-  "volar",
+  "vue_ls",
   "yamlls",
 }
 
