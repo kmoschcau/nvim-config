@@ -1,7 +1,7 @@
 {
   "LuaSnip": { "branch": "master", "commit": "faf3c94a44508cec1b961406d36cc65113ff3b98" },
   "blink-cmp-spell": { "branch": "master", "commit": "782bc76be09c0c5dd08e3edd04e4ec1054c3158e" },
-  "blink-emoji.nvim": { "branch": "master", "commit": "a77aebc092ebece1eed108f301452ae774d6b67a" },
+  "blink-emoji.nvim": { "branch": "master", "commit": "c333509be8ca464fe05c72763c95b072392cceb6" },
   "blink.cmp": { "branch": "main", "commit": "196711b89a97c953877d6c257c62f18920a970f3" },
   "blink.compat": { "branch": "main", "commit": "f1836ed7a07f8d082ff6c3fbae1e476ba2adee84" },
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
@@ -59,7 +59,7 @@
   "otter.nvim": { "branch": "main", "commit": "fa436071c67233e6cd466268212feaf4ff4ed406" },
   "overseer.nvim": { "branch": "master", "commit": "72c68aab0358c92f451168b704c411c4a3e3410e" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-  "render-markdown.nvim": { "branch": "main", "commit": "dac01bd6660af337613e8cfcb23a4aec5d3c0e38" },
+  "render-markdown.nvim": { "branch": "main", "commit": "ca5c29f6032338b71bdcae9b3e525d131557d363" },
   "rest.nvim": { "branch": "main", "commit": "2ded89dbda1fd3c1430685ffadf2df8beb28336d" },
   "roslyn.nvim": { "branch": "main", "commit": "8dc729a651ae980088246caf651e5ff24e21077a" },
   "rzls.nvim": { "branch": "main", "commit": "db123cecb6bd5e2d97c01e5877865162697d51a6" },
