@@ -5,7 +5,7 @@ local M = {}
 ---@param baseName string the base name to extend
 ---@param ext? string the extension to append, when on Windows
 ---@return string
-M.append_win_ext = function(baseName, ext)
+function M.append_win_ext(baseName, ext)
   if vim.fn.has "win32" == 0 then
     return baseName
   end
@@ -16,7 +16,7 @@ end
 ---Try and get the appropriate browser command for the environment neovim is
 ---running in.
 ---@return string?
-M.get_browser_command = function()
+function M.get_browser_command()
   if vim.fn.executable "xdg-open" == 1 then
     return "xdg-open"
   end
@@ -37,7 +37,7 @@ end
 ---Try to determine the system background (or dark mode). If it can't be
 ---determined, fall back to "dark".
 ---@return "light" | "dark"
-M.get_system_background = function()
+function M.get_system_background()
   if vim.fn.has "win32" == 1 or vim.fn.has "wsl" == 1 then
     local result = vim
       .system({
@@ -71,7 +71,7 @@ M.get_system_background = function()
 end
 
 ---Set the options common for a dos formatted file for the current buffer.
-M.set_dos_file_options = function()
+function M.set_dos_file_options()
   vim.opt_local.endofline = false
   vim.opt_local.fixendofline = false
   if vim.opt_local.modifiable:get() then
@@ -81,7 +81,7 @@ end
 
 ---Set up the shell, depending on the platform.
 ---@param use_default? boolean force using the default settings
-M.set_up_shell = function(use_default)
+function M.set_up_shell(use_default)
   if use_default then
     local function reset(option_name)
       vim.opt_global[option_name] =

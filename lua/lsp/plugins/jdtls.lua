@@ -110,7 +110,7 @@ local function get_plugin_bundle_paths()
 end
 
 ---Start the language server (if not started), and attach the current buffer.
-M.start_or_attach = function()
+function M.start_or_attach()
   local jdtls_package = require("mason-registry").get_package "jdtls"
 
   if not jdtls_package:is_installed() then

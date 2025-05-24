@@ -5,7 +5,7 @@ local next_key = 0
 
 local M = {}
 
-M._reset = function()
+function M._reset()
   M.cache = {}
 end
 
@@ -16,7 +16,7 @@ M._reset()
 ---@generic T
 ---@param cb fun(event_args: vim.api.keyset.create_autocmd.callback_args): T
 ---@return fun(event_args: vim.api.keyset.create_autocmd.callback_args): T
-M.by_bufnr = function(cb)
+function M.by_bufnr(cb)
   -- Assign next available key, since we just want to avoid collisions.
   local key = next_key
   next_key = next_key + 1

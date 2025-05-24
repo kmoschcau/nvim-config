@@ -141,7 +141,7 @@ M.settings = {
 ---Log the given client's server's capabilities
 ---@param client vim.lsp.Client | nil the LSP client to log capabilities for
 ---@param buf_id? integer the buffer number, defaults to 0
-M.log_capabilities = function(client, buf_id)
+function M.log_capabilities(client, buf_id)
   if client == nil then
     return
   end
@@ -207,7 +207,7 @@ end
 ---@param client vim.lsp.Client | nil the LSP client whose server to check
 ---@param method string the method name of the method to check
 ---@return boolean
-M.supports_method = function(client, method)
+function M.supports_method(client, method)
   if client == nil then
     return false
   end
@@ -232,7 +232,7 @@ end
 ---@param has_snacks boolean whether snacks is available
 ---@param has_omni_ext boolean whether omnisharp extended is available
 ---@return KeymapImplementation
-M.which_keymap_implementation = function(buf, client, has_snacks, has_omni_ext)
+function M.which_keymap_implementation(buf, client, has_snacks, has_omni_ext)
   if not client then
     return nil
   end
@@ -258,11 +258,7 @@ end
 ---@param nvim_impl function the native Neovim implementation
 ---@param opts? ChooseKeymapImplOptions the implementation options
 ---@return function | nil, KeymapImplementation | nil
-M.choose_keymap_implementation = function(
-  keymap_implementation,
-  nvim_impl,
-  opts
-)
+function M.choose_keymap_implementation(keymap_implementation, nvim_impl, opts)
   local o = opts or {}
 
   if keymap_implementation == "omnisharp_extended" then
@@ -293,7 +289,7 @@ end
 ---@param func function
 ---@param options table
 ---@return function
-M.with_options = function(func, options)
+function M.with_options(func, options)
   return function()
     func(options)
   end
