@@ -3,6 +3,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   lazy = false,
+  -- TODO: migrate to "main"
   branch = "master",
   build = ":TSUpdate",
   config = function()
