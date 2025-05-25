@@ -1,5 +1,6 @@
 local config =
   require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+
 if config.ecma_server ~= "typescript-tools" then
   return
 end
