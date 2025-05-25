@@ -62,6 +62,8 @@ return {
     vim.keymap.set({ "n", "i", "s" }, "<M-l>", function()
       if ls.expand_or_jumpable() then
         ls.expand_or_jump()
+      elseif vim.snippet.active() then
+        vim.snippet.jump(1)
       end
     end, {
       desc = "LuaSnip: Expand or jump to next placeholder",
@@ -70,6 +72,8 @@ return {
     vim.keymap.set({ "n", "i", "s" }, "<M-h>", function()
       if ls.jumpable(-1) then
         ls.jump(-1)
+      elseif vim.snippet.active() then
+        vim.snippet.jump(-1)
       end
     end, {
       desc = "LuaSnip: Expand or jump to previous placeholder",
