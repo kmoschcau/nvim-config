@@ -1,6 +1,6 @@
 ---@type vim.lsp.Config
 return {
-  cmd = require("lsp.helpers").get_roslyn_cmd(),
+  cmd = require("lsp.common.roslyn").get_roslyn_cmd(),
   root_dir = function(bufnr, cb)
     local config =
       require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)

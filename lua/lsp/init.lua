@@ -1,5 +1,8 @@
 local common = require "lsp.common"
 
+require "lsp.plugins.roslyn-nvim"
+require "lsp.plugins.typescript-tools"
+
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP: Set up things when attaching with a language client to a buffer.",
   group = common.augroup,
@@ -55,7 +58,3 @@ vim.lsp.enable {
   "vue_ls",
   "yamlls",
 }
-
-require "lsp.plugins.typescript-tools"
-require "lsp.plugins.rzls-nvim"
-require "lsp.plugins.roslyn-nvim"

@@ -321,4 +321,7 @@ return function(client, bufnr)
   -- see: |vim.lsp.buf.add_workspace_folder()|
   -- see: |vim.lsp.buf.list_workspace_folders()|
   -- see: |vim.lsp.buf.remove_workspace_folder()|
+
+  -- textDocument/_vs_onAutoInsert
+  require("lsp.common.roslyn").set_up_vs_on_auto_insert_autocmd(client, bufnr)
 end
