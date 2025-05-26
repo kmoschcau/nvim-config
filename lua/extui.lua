@@ -1,1 +1,3 @@
-require("vim._extui").enable {}
+pcall(function()
+  require("vim._extui").enable {}
+end)
