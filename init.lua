@@ -80,6 +80,7 @@ if vim.fn.has "win32" == 1 then
 else
   vim.o.guifont = base_font .. ":h10"
 end
+vim.o.ignorecase = true
 vim.o.inccommand = "split"
 vim.o.linebreak = true
 vim.o.list = true
@@ -100,6 +101,7 @@ if pcall(require, "statuscol") then
 else
   vim.o.signcolumn = "yes:2"
 end
+vim.o.smartcase = true
 vim.o.smarttab = false
 vim.o.smoothscroll = true
 vim.o.spell = true
