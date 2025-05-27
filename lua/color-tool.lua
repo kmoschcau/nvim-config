@@ -1596,7 +1596,9 @@ local highlights_light = {
   ["@type.builtin"]                = { link = "Type" },
   ["@type.definition"]             = { link = "Typedef" },
 
-  ["@attribute"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
+  ["@interface"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
+
+  ["@attribute"]                   = { link = "@interface" },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
 
   ["@function.macro"]              = { link = "Macro" },
