@@ -44,14 +44,14 @@ return {
     })
 
     vim.keymap.set("n", "<Space>pf", function()
-      snacks.picker.pick "files"
+      snacks.picker.files()
     end, { desc = "Snacks picker: Open file search." })
 
     vim.keymap.set("n", "<Space>pg", function()
-      snacks.picker.pick "grep"
+      snacks.picker.grep()
     end, { desc = "Snacks picker: Open live grep search." })
 
-    ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+    ---@type table<number, { token: lsp.ProgressToken, msg: string, done: boolean }[]>
     local progress = vim.defaulttable()
     vim.api.nvim_create_autocmd("LspProgress", {
       ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
@@ -83,14 +83,12 @@ return {
           return table.insert(msg, v.msg) or not v.done
         end, p)
 
-        vim.notify(table.concat(msg, "\n"), "info", {
+        vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,
           opts = function(notif)
             notif.icon = #progress[client.id] == 0 and symbols.progress.done
-              or symbols.progress.spinner[math.floor(
-                vim.uv.hrtime() / (1e6 * 80)
-              ) % #symbols.progress.spinner + 1]
+              or symbols.progress.get_dynamic_spinner()
           end,
         })
       end,

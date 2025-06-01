@@ -1,4 +1,4 @@
-return {
+local M = {
   debug = {
     breakpoint = {
       normal = " ",
@@ -62,21 +62,6 @@ return {
     statusline = {
       line = "",
       column = "",
-    },
-  },
-  progress = {
-    done = " ",
-    spinner = {
-      "⠋",
-      "⠙",
-      "⠹",
-      "⠸",
-      "⠼",
-      "⠴",
-      "⠦",
-      "⠧",
-      "⠇",
-      "⠏",
     },
   },
   separators = {
@@ -157,3 +142,28 @@ return {
     Variable = "󰀫 ",
   },
 }
+
+M.progress = {
+  done = " ",
+  spinner = {
+    "⠋",
+    "⠙",
+    "⠹",
+    "⠸",
+    "⠼",
+    "⠴",
+    "⠦",
+    "⠧",
+    "⠇",
+    "⠏",
+  },
+}
+
+---Gets a dynamic spinner at the current time. This can be called repeatedly to
+---create a spinner animation.
+---@return string symbol the spinner symbol at the current time
+function M.progress.get_dynamic_spinner()
+  return M.progress.spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #M.progress.spinner + 1]
+end
+
+return M

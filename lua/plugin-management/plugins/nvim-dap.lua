@@ -2,17 +2,12 @@
 ---@type LazyPluginSpec
 return {
   "https://codeberg.org/mfussenegger/nvim-dap",
-  dependencies = { "nvim-telescope/telescope.nvim" },
+  dependencies = { "folke/snacks.nvim" },
   config = function()
     local dap = require "dap"
     local dapui = require "dapui"
-
-    -- TODO: Replace this with Snacks.picker.
-    local action_state = require "telescope.actions.state"
-    local actions = require "telescope.actions"
-    local conf = require("telescope.config").values
-    local finders = require "telescope.finders"
-    local pickers = require "telescope.pickers"
+    local asp_net_core =
+      require "plugin-management.plugins.nvim-dap.asp-net-core"
 
     dap.adapters.netcoredbg = {
       type = "executable",
@@ -32,135 +27,8 @@ return {
           ASPNETCORE_ENVIRONMENT = "Development",
           ASPNETCORE_URLS = "http://localhost:5274",
         },
-        cwd = function()
-          return coroutine.create(function(dap_cwd_coro)
-            pickers
-              .new({}, {
-                prompt_title = "Project working directory (via csproj)",
-                finder = finders.new_oneshot_job(
-                  { "fd", "--extension", "csproj" },
-                  {}
-                ),
-                sorter = conf.generic_sorter {},
-                attach_mappings = function(buf, map)
-                  actions.select_default:replace(function()
-                    actions.close(buf)
-                    local work_dir = vim.fs.normalize(
-                      vim.fs.dirname(
-                        vim.fs.joinpath(
-                          vim.fn.getcwd(),
-                          action_state.get_selected_entry()[1]
-                        )
-                      )
-                    )
-                    coroutine.resume(dap_cwd_coro, work_dir)
-                  end)
-
-                  map({ "i", "n" }, "<C-c>", function(bufnr)
-                    actions.close(bufnr)
-                    coroutine.resume(dap_cwd_coro, dap.ABORT)
-                  end)
-
-                  return true
-                end,
-              })
-              :find()
-          end)
-        end,
-        program = function()
-          return coroutine.create(function(dap_program_coro)
-            local function select_dll()
-              pickers
-                .new({}, {
-                  prompt_title = "dll to debug",
-                  finder = finders.new_oneshot_job({
-                    "fd",
-                    "--full-path",
-                    "--no-ignore",
-                    "--extension",
-                    "dll",
-                    "bin[\\\\/]Debug",
-                  }, {}),
-                  sorter = conf.generic_sorter {},
-                  attach_mappings = function(buf, map)
-                    actions.select_default:replace(function()
-                      actions.close(buf)
-                      local dll = vim.fs.normalize(
-                        vim.fs.joinpath(
-                          vim.fn.getcwd(),
-                          action_state.get_selected_entry()[1]
-                        )
-                      )
-                      coroutine.resume(dap_program_coro, dll)
-                    end)
-
-                    map({ "i", "n" }, "<C-c>", function(bufnr)
-                      actions.close(bufnr)
-                      coroutine.resume(dap_program_coro, dap.ABORT)
-                    end)
-
-                    return true
-                  end,
-                })
-                :find()
-            end
-
-            if
-              vim.fn.confirm("Should I recompile first?", "&yes\n&no", 2) == 1
-            then
-              pickers
-                .new({}, {
-                  prompt_title = "csproj to build",
-                  finder = finders.new_oneshot_job(
-                    { "fd", "--extension", "csproj" },
-                    {}
-                  ),
-                  sorter = conf.generic_sorter {},
-                  attach_mappings = function(buf, map)
-                    actions.select_default:replace(function()
-                      actions.close(buf)
-                      local csproj = vim.fs.normalize(
-                        vim.fs.joinpath(
-                          vim.fn.getcwd(),
-                          action_state.get_selected_entry()[1]
-                        )
-                      )
-                      local result = vim
-                        .system({
-                          "dotnet",
-                          "build",
-                          csproj,
-                          "--configuration",
-                          "Debug",
-                        }, { text = true })
-                        :wait()
-                      if result.code == 0 then
-                        vim.notify("✔", vim.log.levels.INFO, {
-                          title = "Build",
-                        })
-                        select_dll()
-                      else
-                        vim.notify("❌", vim.log.levels.ERROR, {
-                          title = "Build",
-                        })
-                        coroutine.resume(dap_program_coro, dap.ABORT)
-                      end
-                    end)
-
-                    map({ "i", "n" }, "<C-c>", function(bufnr)
-                      actions.close(bufnr)
-                      coroutine.resume(dap_program_coro, dap.ABORT)
-                    end)
-
-                    return true
-                  end,
-                })
-                :find()
-            else
-              select_dll()
-            end
-          end)
-        end,
+        cwd = asp_net_core.cwd,
+        program = asp_net_core.program,
       },
     }
 
