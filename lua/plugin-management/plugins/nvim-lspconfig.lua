@@ -19,6 +19,7 @@ return {
   config = function()
     -- HACK: These calls are only needed for as long as these servers are not
     -- yet migrated.
+    -- See: https://github.com/neovim/nvim-lspconfig/issues/3705
 
     local servers = {
       "glint",
