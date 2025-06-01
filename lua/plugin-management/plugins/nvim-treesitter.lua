@@ -24,6 +24,8 @@ return {
       -- modules below
 
       -- RRethy/nvim-treesitter-endwise
+      -- FIXME: This doesn't work with nvim-treesitter main branch
+      -- https://github.com/RRethy/nvim-treesitter-endwise/issues/27
       endwise = {
         enable = true,
       },
@@ -50,6 +52,7 @@ return {
       },
 
       -- andymass/vim-matchup
+      -- FIXME: This doesn't work with nvim-treesitter main branch
       matchup = {
         enable = true,
       },
