@@ -137,7 +137,7 @@ return {
       fish = { "fish" },
       html = { "markuplint" },
       java = { "checkstyle", "pmd" },
-      json = { "cfn_lint" },
+      ["json.cloudformation"] = { "cfn_lint" },
       kotlin = { "ktlint" },
       lua = { "selene" },
       markdown = { "markdownlint", "proselint" },
@@ -146,7 +146,8 @@ return {
       tf = { "trivy" },
       ["terraform-vars"] = { "trivy" },
       vue = { "markuplint" },
-      yaml = { "actionlint", "cfn_lint", "yamllint" },
+      yaml = { "actionlint", "yamllint" },
+      ["yaml.cloudformation"] = { "cfn_lint", "yamllint" },
     }
 
     -- TODO: extract this into override functions.
@@ -190,32 +191,6 @@ return {
       },
       checkstyle = {
         args = checkstyle_args,
-      },
-      cfn_lint = {
-        condition = cache.by_bufnr(function(event_args)
-          local lines = vim.api.nvim_buf_get_lines(event_args.buf, 0, -1, false)
-
-          local found_resources = false
-          for _, line in ipairs(lines) do
-            if line:match '%s*"?AWSTemplateFormatVersion"?%s*:' then
-              return true
-            end
-
-            if line:match '"?Resources"?%s*:' then
-              found_resources = true
-            end
-
-            if
-              found_resources
-              and line:match '"?Type"?%s*:%s*"?\'?AWS::%w+::%w+"?\'?'
-            then
-              return true
-            end
-          end
-
-          return false
-        end),
-        ignore_exitcode = true,
       },
       markdownlint = {
         condition = function(event_args)
