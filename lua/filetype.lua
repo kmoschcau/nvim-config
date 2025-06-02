@@ -27,7 +27,7 @@ end
 ---@param filetype string the base filetype to use
 ---@return fun(path: string, bufnr: number): string func the check function
 local function with_cloud_formation(filetype)
-  return function(_path, bufnr)
+  return function(_, bufnr)
     if is_cloud_formation(bufnr) then
       return filetype .. ".cloudformation"
     end
