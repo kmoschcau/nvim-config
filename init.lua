@@ -31,6 +31,7 @@ xpcall(require, ehandler, "lsp")
 
 xpcall(require, ehandler, "diagnostics")
 xpcall(require, ehandler, "extui")
+xpcall(require, ehandler, "filetype")
 xpcall(require, ehandler, "terminal")
 
 -- }}}
@@ -198,27 +199,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
 })
-
--- }}}
-
--- file type detection {{{
-
-vim.filetype.add {
-  extension = {
-    azcli = "ps1",
-    gotmpl = "gotmpl",
-    nswag = "json",
-  },
-  filename = {
-    [".csharpierignore"] = "gitignore",
-    ["quick-lint-js.config"] = "json",
-  },
-  pattern = {
-    [".*/templates/.*%.tpl"] = "helm",
-    [".*/templates/.*%.ya?ml"] = "helm",
-    ["helmfile.*%.ya?ml"] = "helm",
-  },
-}
 
 -- }}}
 
