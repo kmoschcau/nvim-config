@@ -25,6 +25,7 @@ return {
       style = "fancy",
     },
     picker = {
+      ---@diagnostic disable-next-line: missing-fields
       icons = {
         diagnostics = {
           Error = symbols.diagnostics.severities.error,
@@ -33,6 +34,9 @@ return {
           Hint = symbols.diagnostics.severities.hint,
         },
         kinds = symbols.types,
+      },
+      layout = {
+        preset = "ivy",
       },
     },
   },
