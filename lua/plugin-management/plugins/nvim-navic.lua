@@ -10,7 +10,7 @@ return {
     lsp = {
       auto_attach = true,
       preference = {
-        "volar",
+        "vue_ls",
         "typescript-tools",
         "ts_ls",
       },

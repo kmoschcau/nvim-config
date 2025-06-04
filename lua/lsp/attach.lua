@@ -254,18 +254,18 @@ return function(client, bufnr)
 
   -- textDocument/rename
   -- mapped to grn by default
-  if client and client.name == "volar" then
+  if client and client.name == "vue_ls" then
     vim.keymap.set("n", "<Space>grnv", function()
       vim.lsp.buf.rename(nil, {
         filter = function(c)
           -- TODO: Check filetype and injected language instead and move to grn
           -- keymap.
-          return c.name == "volar"
+          return c.name == "vue_ls"
         end,
       })
     end, {
       buffer = bufnr,
-      desc = "LSP: Rename the symbol under the cursor with volar",
+      desc = "LSP: Rename the symbol under the cursor with vue_ls",
     })
   end
 
