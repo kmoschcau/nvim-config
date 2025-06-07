@@ -2,7 +2,10 @@
 ---@type LazyPluginSpec
 return {
   "https://codeberg.org/mfussenegger/nvim-dap",
-  dependencies = { "folke/snacks.nvim" },
+  dependencies = {
+    "folke/snacks.nvim",
+    "jbyuki/one-small-step-for-vimkind",
+  },
   config = function()
     local dap = require "dap"
     local dapui = require "dapui"
@@ -15,10 +18,17 @@ return {
       args = { "--interpreter=vscode" },
     }
 
-    ---@type dap.Configuration[]
+    function dap.adapters.nlua(callback, config)
+      callback {
+        type = "server",
+        host = config.host or "127.0.0.1",
+        port = config.port or 8086,
+      }
+    end
+
     dap.configurations.cs = {
       {
-        name = "Launch - ASP.NET Core",
+        name = "ASP.NET Core: Launch",
         type = "netcoredbg",
         request = "launch",
         justMyCode = false,
@@ -34,7 +44,7 @@ return {
 
     dap.configurations.java = {
       {
-        name = "Debug (Attach) - Remote",
+        name = "Java: Attach to localhost",
         type = "java",
         request = "attach",
         hostName = "127.0.0.1",
@@ -42,15 +52,30 @@ return {
       },
     }
 
+    dap.configurations.lua = {
+      {
+        name = "Neovim: Attach",
+        type = "nlua",
+        request = "attach",
+      },
+    }
+
+    vim.keymap.set("n", "<F12>", function()
+      require("osv").launch { port = 8086, log = true }
+    end)
+
     vim.keymap.set("n", "<F4>", dap.continue, {
       desc = "Dap: Start debugging or continue a stopped thread.",
     })
+
     vim.keymap.set("n", "<M-d>B", dap.toggle_breakpoint, {
       desc = "Dap: Toggle a breakpoint.",
     })
+
     vim.keymap.set("n", "<M-d>b", dap.set_breakpoint, {
       desc = "Dap: Set a breakpoint.",
     })
+
     vim.keymap.set("n", "<M-d>c", function()
       vim.ui.input({ prompt = "Condition:" }, function(input)
         if input and #input then
@@ -58,6 +83,7 @@ return {
         end
       end)
     end, { desc = "Dap: Set a conditional breakpoint." })
+
     vim.keymap.set("n", "<M-d>l", function()
       vim.ui.input({ prompt = "Log point message:" }, function(input)
         if input and #input then
@@ -70,20 +96,25 @@ return {
       vim.keymap.set("n", "<F5>", dap.run_to_cursor, {
         desc = "Dap: Run to the cursor.",
       })
+
       vim.keymap.set("n", "<F6>", dap.step_over, {
         desc = "Dap: Step over the current line.",
       })
+
       vim.keymap.set("n", "<F7>", dap.step_into, {
         desc = "Dap: Step into the next function.",
       })
+
       vim.keymap.set("n", "<S-F7>", function()
         dap.step_into { askForTargets = true }
       end, {
         desc = "Dap: Step into a function with target selection.",
       })
+
       vim.keymap.set("n", "<F8>", dap.step_out, {
         desc = "Dap: Step out of the function.",
       })
+
       vim.keymap.set({ "n", "x" }, "<M-k>", dapui.eval, {
         desc = "Dap: Hover.",
       })
