@@ -3,6 +3,7 @@
 return {
   "https://codeberg.org/mfussenegger/nvim-dap",
   dependencies = {
+    "LiadOz/nvim-dap-repl-highlights",
     "folke/snacks.nvim",
     "jbyuki/one-small-step-for-vimkind",
   },

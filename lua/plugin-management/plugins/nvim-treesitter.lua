@@ -2,6 +2,9 @@
 ---@type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    "LiadOz/nvim-dap-repl-highlights",
+  },
   lazy = false,
   -- TODO: migrate to "main"
   branch = "master",
@@ -13,6 +16,7 @@ return {
         -- This should only include languages that are not automatically
         -- installed, most often because they are injected.
         "comment",
+        "dap_repl",
         "luadoc",
         "markdown",
         "markdown_inline",
