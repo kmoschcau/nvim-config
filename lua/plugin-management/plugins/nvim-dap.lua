@@ -62,7 +62,7 @@ return {
     }
 
     vim.keymap.set("n", "<F12>", function()
-      require("osv").launch { port = 8086, log = true }
+      require("osv").launch { port = 8086 }
     end)
 
     vim.keymap.set("n", "<F4>", dap.continue, {
