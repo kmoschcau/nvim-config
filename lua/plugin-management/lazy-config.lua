@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: missing-fields
 require("lazy").setup("plugin-management.plugins", {
   checker = {
     enabled = true,
