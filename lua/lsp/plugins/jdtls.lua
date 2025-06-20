@@ -1,3 +1,5 @@
+local mason_utils = require "plugin-management.mason-utils"
+
 local M = {}
 
 ---Get the config file path for jdtls.
@@ -64,33 +66,16 @@ end
 ---Get the plugin bundle paths for jdtls.
 ---@return string[]
 local function get_plugin_bundle_paths()
-  local mason_reg = require "mason-registry"
-
   local bundles = {}
 
-  local java_debug_package = mason_reg.get_package "java-debug-adapter"
-
-  vim.notify(
-    "java-debug-adapter installed: "
-      .. vim.inspect(java_debug_package:is_installed()),
-    vim.log.levels.DEBUG
-  )
-
-  if java_debug_package:is_installed() then
+  if mason_utils.is_package_installed "java-debug-adapter" then
     table.insert(
       bundles,
       vim.fn.expand "$MASON/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
     )
   end
 
-  local java_test_package = mason_reg.get_package "java-test"
-
-  vim.notify(
-    "java-test installed: " .. vim.inspect(java_test_package:is_installed()),
-    vim.log.levels.DEBUG
-  )
-
-  if java_test_package:is_installed() then
+  if mason_utils.is_package_installed "java-test" then
     vim.list_extend(
       bundles,
       vim.fn.expand(
@@ -111,22 +96,18 @@ end
 
 ---Start the language server (if not started), and attach the current buffer.
 function M.start_or_attach()
-  local jdtls_package = require("mason-registry").get_package "jdtls"
-
-  if not jdtls_package:is_installed() then
+  if not mason_utils.is_package_installed "jdtls" then
     return
   end
 
-  local jdtls_package_path = vim.fn.expand "$MASON/packages/jdtls"
-
-  local common = require "lsp.common"
   local jdtls = require "jdtls"
 
   jdtls.start_or_attach {
-    capabilities = common.capabilities,
-    cmd = get_cmd(jdtls_package_path),
+    capabilities = require("lsp.common").capabilities,
+    cmd = get_cmd(vim.fn.expand "$MASON/packages/jdtls"),
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
+      ---@diagnostic disable-next-line: missing-fields
       jdtls.setup_dap { hotcodereplace = "auto" }
     end,
     -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request

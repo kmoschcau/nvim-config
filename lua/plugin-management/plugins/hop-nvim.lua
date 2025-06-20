@@ -8,7 +8,11 @@ return {
     multi_windows = true,
   },
   init = function()
-    local hop = require "hop"
+    local has_hop, hop = pcall(require, "hop")
+    if not has_hop then
+      return
+    end
+
     local hint = require "hop.hint"
 
     vim.keymap.set({ "n" }, "s", function()

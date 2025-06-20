@@ -1,5 +1,7 @@
+local has_neoconf, neoconf = pcall(require, "neoconf")
+
 local config =
-  require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+  has_neoconf and neoconf.get("lsp", require("neoconf-schemas.lsp").defaults) or {}
 
 if config.dotnet_server ~= "roslyn.nvim" then
   return

@@ -42,7 +42,10 @@ return {
     },
   },
   init = function()
-    local snacks = require "snacks"
+    local has_snacks, snacks = pcall(require, "snacks")
+    if not has_snacks then
+      return
+    end
 
     vim.keymap.set("n", "<Space>P", snacks.picker.pick, {
       desc = "Snacks picker: Open pickers.",

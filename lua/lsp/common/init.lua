@@ -93,6 +93,8 @@ local js_like = {
   },
 }
 
+local has_neoconf, neoconf = pcall(require, "neoconf")
+
 ---Common configuration settings shared between multiple servers
 ---This mostly affects VS Code extracted language servers.
 ---https://code.visualstudio.com/docs/reference/default-settings
@@ -116,23 +118,25 @@ M.settings = {
   },
 
   javascript = vim.tbl_deep_extend("force", js_like, {
-    format = require("neoconf").get("vscode.javascript.format", js_like.format),
-    preferences = require("neoconf").get(
-      "vscode.javascript.preferences",
-      js_like.preferences
-    ),
+    format = has_neoconf
+        and neoconf.get("vscode.javascript.format", js_like.format)
+      or {},
+    preferences = has_neoconf
+        and neoconf.get("vscode.javascript.preferences", js_like.preferences)
+      or {},
   }, {
     preferences = M.ts_inlay_tsserver_workspace_did_change_configuration,
   }),
   typescript = vim.tbl_deep_extend("force", js_like, {
-    format = require("neoconf").get("vscode.typescript.format", js_like.format),
+    format = has_neoconf
+        and neoconf.get("vscode.typescript.format", js_like.format)
+      or {},
     implementationsCodeLens = {
       showOnInterfaceMethods = true,
     },
-    preferences = require("neoconf").get(
-      "vscode.typescript.preferences",
-      js_like.preferences
-    ),
+    preferences = has_neoconf
+        and neoconf.get("vscode.typescript.preferences", js_like.preferences)
+      or {},
   }, {
     preferences = M.ts_inlay_tsserver_workspace_did_change_configuration,
   }),
