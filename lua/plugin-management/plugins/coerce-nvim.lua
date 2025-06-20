@@ -3,6 +3,9 @@
 ---@type LazyPluginSpec
 return {
   "gregorias/coerce.nvim",
+  dependencies = {
+    "gregorias/coop.nvim",
+  },
   ---@module "coerce"
   ---@type CoerceConfigUser
   opts = {
