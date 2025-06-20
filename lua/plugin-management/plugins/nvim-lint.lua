@@ -153,7 +153,7 @@ return {
 
     -- TODO: extract this into override functions.
     local config = require("neoconf").get(
-      "none_ls",
+      "linters",
       require("neoconf-schemas.linters").defaults
     )
 

@@ -17,7 +17,7 @@ return {
     }
 
     require("neoconf.plugins").register {
-      name = "none_ls",
+      name = "linters",
       on_schema = function(schema)
         local linters = require "neoconf-schemas.linters"
         schema:import("linters", linters.defaults)
