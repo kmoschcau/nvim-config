@@ -126,6 +126,7 @@ local function kind_icon_highlight(context)
 end
 
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "saghen/blink.cmp",
@@ -176,7 +177,7 @@ return {
       silent = true,
     })
   end,
-  ---@module 'blink.cmp'
+  ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
     completion = {

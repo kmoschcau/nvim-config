@@ -2,6 +2,7 @@ local symbols = require "symbols"
 local separators = symbols.separators
 
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "nvim-lualine/lualine.nvim",

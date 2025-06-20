@@ -1,4 +1,5 @@
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "https://codeberg.org/mfussenegger/nvim-dap",

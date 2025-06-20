@@ -10,6 +10,7 @@ local function formatter_filter(client)
 end
 
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "stevearc/conform.nvim",

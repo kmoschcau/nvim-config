@@ -1,4 +1,5 @@
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "lewis6991/gitsigns.nvim",
@@ -8,11 +9,15 @@ return {
   config = function()
     local has_statuscol = pcall(require, "statuscol")
 
-    -- @type Gitsigns.Config -- Does not work well, no optional fields
+    ---@type Gitsigns.Config
+    ---@diagnostic disable-next-line: missing-fields
     local config = {
       signs = {
+        ---@diagnostic disable-next-line: missing-fields
         delete = { show_count = true },
+        ---@diagnostic disable-next-line: missing-fields
         topdelete = { show_count = true },
+        ---@diagnostic disable-next-line: missing-fields
         changedelete = { show_count = true },
       },
       -- This is just so gitsigns are always on the left of the signcolumn.

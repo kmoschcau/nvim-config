@@ -125,6 +125,7 @@ local function do_lint(event_args)
 end
 
 -- selene: allow(mixed_table)
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "mfussenegger/nvim-lint",
