@@ -4,9 +4,11 @@ return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = { "echasnovski/mini.nvim" },
   ft = "markdown",
+  ---@module "render-markdown"
   ---@type render.md.UserConfig
   opts = {
     code = {
+      language_border = " ",
       left_pad = 1,
       right_pad = 1,
       width = "block",
