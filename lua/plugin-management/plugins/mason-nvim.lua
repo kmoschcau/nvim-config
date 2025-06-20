@@ -5,6 +5,105 @@ local always_install = {
   "typos-lsp",
 }
 
+local prettier = "prettier"
+
+local pkgs_by_ft = {
+  astro = { prettier },
+  cs = { "csharpier", "netcoredbg" },
+  cshtml = { "roslyn", "rzls" },
+  css = { prettier },
+  html = { "markuplint" },
+  java = {
+    "checkstyle",
+    "google-java-format",
+    "java-debug-adapter",
+    "java-test",
+  },
+  javascript = { prettier },
+  javascriptreact = { prettier },
+  jq = { "jq" },
+  json = { prettier },
+  ["json.cloudformation"] = { "cfn-lint" },
+  jsonc = { prettier },
+  less = { prettier },
+  kotlin = { "ktlint" },
+  lua = { "selene", "stylua" },
+  markdown = { "markdownlint", "proselint" },
+  ocaml = { "ocamlformat" },
+  razor = { "roslyn", "rzls" },
+  sass = { prettier },
+  scss = { prettier },
+  sh = { "shellharden", "shfmt" },
+  svelte = { "markuplint", prettier },
+  tex = { "latexindent", "proselint" },
+  tf = { "trivy" },
+  ["terraform-vars"] = { "trivy" },
+  typescript = { prettier },
+  typescriptreact = { prettier },
+  vue = { "markuplint", prettier },
+  yaml = { "yamllint", prettier },
+  ["yaml.cloudformation"] = { "cfn-lint", "yamllint" },
+}
+
+local lsp_to_mason_package = {
+  astro = "astro-language-server",
+  bashls = "bash-language-server",
+  cssls = "css-lsp",
+  denols = "deno",
+  -- ember = "ember-language-server",
+  eslint = "eslint",
+  fish_lsp = "fish-lsp",
+  -- gh_actions_ls = "gh-actions-language-server",
+  gradle_ls = "gradle-language-server",
+  helm_ls = "helm-ls",
+  html = "html-lsp",
+  jedi_language_server = "jedi-language-server",
+  jqls = "jq-lsp",
+  jsonls = "json-lsp",
+  kotlin_language_server = "kotlin-language-server",
+  lemminx = "lemminx",
+  lua_ls = "lua-language-server",
+  marksman = "marksman",
+  -- omnisharp = "omnisharp",
+  phpactor = "phpactor",
+  powershell_es = "powershell-editor-services",
+  prosemd_lsp = "prosemd-lsp",
+  quick_lint_js = "quick-lint-js",
+  roslyn_ls = "roslyn",
+  ruff = "ruff",
+  rust_analyzer = "rust-analyzer",
+  stylelint_lsp = "stylelint-lsp",
+  somesass_ls = "some-sass-language-server",
+  svelte = "svelte-language-server",
+  tailwindcss = "tailwindcss-language-server",
+  terraform_lsp = "terraform-ls",
+  texlab = "texlab",
+  ts_ls = "typescript-language-server",
+  vale_ls = "vale-ls",
+  vimls = "vim-language-server",
+  vue_ls = "vue-language-server",
+  yamlls = "yaml-language-server",
+}
+
+local function add_package_names_from_lsp_config()
+  for server_name, package_name in pairs(lsp_to_mason_package) do
+    local server_config = vim.lsp.config[server_name]
+    if server_config then
+      local filetypes = server_config.filetypes
+
+      if filetypes and #filetypes > 0 then
+        for _, filetype in ipairs(filetypes) do
+          if pkgs_by_ft[filetype] == nil then
+            pkgs_by_ft[filetype] = { package_name }
+          else
+            table.insert(pkgs_by_ft[filetype], package_name)
+          end
+        end
+      end
+    end
+  end
+end
+
 local function install_pkg(pkg_name)
   local has_reg, reg = pcall(require, "mason-registry")
   if not has_reg or not reg.has_package(pkg_name) then
@@ -116,4 +215,16 @@ return {
       "github:Crashdummyy/mason-registry",
     },
   },
+  config = function(_, opts)
+    require("mason").setup(opts)
+    add_package_names_from_lsp_config()
+
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      group = vim.api.nvim_create_augroup("MasonNvimInstall", {}),
+      desc = "mason.nvim: Automatically install packages for specific file types.",
+      callback = function()
+        install_pgks(pkgs_by_ft[vim.bo.filetype])
+      end,
+    })
+  end,
 }
