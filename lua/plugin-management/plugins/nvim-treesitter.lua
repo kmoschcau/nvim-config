@@ -18,6 +18,7 @@ return {
         -- installed, most often because they are injected.
         "comment",
         "dap_repl",
+        "diff", -- injected in git commit
         "luadoc",
         "markdown",
         "markdown_inline",
