@@ -1,0 +1,18 @@
+# cspell:words lualine
+---
+version: "0.2"
+dictionaryDefinitions:
+  - name: tech-speak
+    path: ./.cspell/tech-speak.txt
+  - name: vim
+    path: ./.cspell/vim.txt
+dictionaries:
+  - tech-speak
+  - vim
+ignorePaths:
+  - "/colors/new.lua"
+  - "/external-config/eclipse-formatter.xml"
+  - "/lazy-lock.json"
+  - "/lua/lualine/themes/new.lua"
+  - "/spell/"
+  - "**/Session.vim"

@@ -4,6 +4,7 @@ local symbols = require "symbols"
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "folke/snacks.nvim",
   priority = 1000,
   ---@type snacks.Config
@@ -94,8 +95,9 @@ return {
         vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,
-          opts = function(notif)
-            notif.icon = #progress[client.id] == 0 and symbols.progress.done
+          opts = function(notification)
+            notification.icon = #progress[client.id] == 0
+                and symbols.progress.done
               or symbols.progress.get_dynamic_spinner()
           end,
         })

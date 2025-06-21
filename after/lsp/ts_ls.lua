@@ -1,3 +1,5 @@
+-- cspell:words lspconfig neoconf
+
 local common = require "lsp.common"
 
 local ts = common.settings.typescript

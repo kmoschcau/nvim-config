@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "tadmccorkle/markdown.nvim",
   ft = "markdown",
   -- @type MarkdownConfig -- Does not work well, no optional fields

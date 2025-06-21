@@ -2,9 +2,12 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "gregorias/coerce.nvim",
   dependencies = {
+    -- cspell:disable
     "gregorias/coop.nvim",
+    -- cspell:enable
   },
   ---@module "coerce"
   ---@type CoerceConfigUser

@@ -1,5 +1,6 @@
 -- selene: allow(mixed_table)
 return {
+  -- cspell:disable-next-line
   "lucaSartore/nvim-dap-exception-breakpoints",
   config = function()
     vim.api.nvim_create_user_command(

@@ -93,8 +93,8 @@ local M = {
     term_prompt = " ",
   },
   snippet = {
-    choice_virt_text = " ",
-    insert_virt_text = "…",
+    choice_virtual_text = " ",
+    insert_virtual_text = "…",
   },
   todo = {
     fix = " ",

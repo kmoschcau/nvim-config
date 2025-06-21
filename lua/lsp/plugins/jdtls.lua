@@ -1,3 +1,5 @@
+-- cspell:words jdtls
+
 local mason_utils = require "plugin-management.mason-utils"
 
 local M = {}
@@ -43,11 +45,13 @@ end
 local function get_cmd(jdtls_package_path)
   return {
     "java",
+    -- cspell:disable
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
+    -- cspell:enable
     "-Xmx1G",
     "--add-modules=ALL-SYSTEM",
     "--add-opens",
@@ -108,7 +112,9 @@ function M.start_or_attach()
     init_options = { bundles = get_plugin_bundle_paths() },
     on_attach = function()
       ---@diagnostic disable-next-line: missing-fields
-      jdtls.setup_dap { hotcodereplace = "auto" }
+      jdtls.setup_dap {
+        hotcodereplace = "auto", -- cspell:disable-line
+      }
     end,
     -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     settings = {
@@ -132,12 +138,14 @@ function M.start_or_attach()
         completion = {
           guessMethodArguments = "insertBestGuessedArguments",
           importOrder = {
+            -- cspell:disable
             "#",
             "com",
             "java",
             "javassist",
             "javax",
             "org",
+            -- cspell:enable
           },
           overwrite = false,
         },

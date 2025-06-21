@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "RRethy/vim-illuminate",
   config = function()
     require("illuminate").configure {

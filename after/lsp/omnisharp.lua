@@ -1,3 +1,5 @@
+-- cspell:words lspconfig neoconf omnisharp
+
 ---@type vim.lsp.Config
 return {
   root_dir = function(bufnr, on_dir)

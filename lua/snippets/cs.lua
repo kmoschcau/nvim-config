@@ -1,3 +1,5 @@
+-- cspell:words cref inheritdoc langword luasnip paramref seealso typeparam typeparamref
+
 local ls = require "luasnip"
 local s = ls.snippet
 local i = ls.insert_node
@@ -62,42 +64,42 @@ ls.add_snippets("comment", {
   }, fmt([[<paramref name="{name}" />]], { name = i(1) })),
   s({
     name = "C# remarks comment",
-    trig = "xrem",
+    trig = "xrem", -- cspell:disable-line
     desc = "A C# doc comment <remarks> XML tag.",
   }, fmt([[<remarks>{description}</remarks>]], { description = i(1) })),
   s({
     name = "C# returns comment",
-    trig = "xret",
+    trig = "xret", -- cspell:disable-line
     desc = "A C# doc comment <returns> XML tag.",
   }, fmt([[<returns>{description}</returns>]], { description = i(1) })),
   s({
     name = "C# see-cref comment",
-    trig = "xsec",
+    trig = "xsec", -- cspell:disable-line
     desc = "A C# doc comment <see cref> XML tag.",
   }, fmt([[<see cref="{member}" />]], { member = i(1) })),
   s({
     name = "C# see-href comment",
-    trig = "xseh",
+    trig = "xseh", -- cspell:disable-line
     desc = "A C# doc comment <see href> XML tag.",
   }, fmt([[<see href="{url}" />]], { url = i(1) })),
   s({
     name = "C# see-langword comment",
-    trig = "xsel",
+    trig = "xsel", -- cspell:disable-line
     desc = "A C# doc comment <see langword> XML tag.",
   }, fmt([[<see langword="{keyword}" />]], { keyword = i(1, "null") })),
   s({
     name = "C# seealso-cref comment",
-    trig = "xsac",
+    trig = "xsac", -- cspell:disable-line
     desc = "A C# doc comment <seealso cref> XML tag.",
   }, fmt([[<seealso cref="{member}" />]], { member = i(1) })),
   s({
     name = "C# seealso-href comment",
-    trig = "xsah",
+    trig = "xsah", -- cspell:disable-line
     desc = "A C# doc comment <seealso href> XML tag.",
   }, fmt([[<seealso href="{url}" />]], { url = i(1) })),
   s({
     name = "C# summary comment",
-    trig = "xsum",
+    trig = "xsum", -- cspell:disable-line
     desc = "A C# doc comment <summary> XML tag.",
   }, fmt([[<summary>{description}</summary>]], { description = i(1) })),
   s(
@@ -113,7 +115,7 @@ ls.add_snippets("comment", {
   ),
   s({
     name = "C# typeparamref comment",
-    trig = "xtpr",
+    trig = "xtpr", -- cspell:disable-line
     desc = "A C# doc comment <typeparamref> XML tag.",
   }, fmt([[<typeparamref name="{name}" />]], { name = i(1) })),
 })

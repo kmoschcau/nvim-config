@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "subnut/nvim-ghost.nvim",
   init = function()
     local patterns = {

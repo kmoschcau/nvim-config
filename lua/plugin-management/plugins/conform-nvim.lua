@@ -13,10 +13,12 @@ end
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "stevearc/conform.nvim",
   ---@type conform.setupOpts
   opts = {
     formatters_by_ft = {
+      -- cspell:disable
       astro = { prettier },
       cs = { "csharpier", "trim_newlines" },
       css = { prettier },
@@ -45,6 +47,7 @@ return {
       xml = { "xmllint", "trim_newlines", "trim_whitespace" },
       yaml = { prettier },
       ["_"] = { "trim_newlines", "trim_whitespace" },
+      -- cspell:enable
     },
     default_format_opts = {
       lsp_format = "fallback",
@@ -55,6 +58,7 @@ return {
         command = "csharpier",
         args = "format",
       },
+      -- cspell:disable-next-line
       shfmt = {
         prepend_args = { "--indent", "4" },
       },

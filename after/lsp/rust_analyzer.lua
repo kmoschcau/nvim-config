@@ -66,7 +66,7 @@ return {
         },
       },
       notifications = {
-        unindexedProject = true,
+        unindexedProject = true, -- cspell:disable-line
       },
       rustfmt = {
         rangeFormatting = {

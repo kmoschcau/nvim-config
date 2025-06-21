@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "cshuaimin/ssr.nvim",
   config = function()
     local ssr = require "ssr"

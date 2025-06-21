@@ -5,7 +5,11 @@ require("lazy").setup("plugin-management.plugins", {
   },
   dev = {
     path = "~/Code",
-    patterns = { "kmoschcau" },
+    patterns = {
+      -- cspell:disable
+      "kmoschcau",
+      -- cspell:enable
+    },
   },
   install = {
     missing = false,

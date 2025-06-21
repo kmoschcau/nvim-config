@@ -1,4 +1,5 @@
 -- vim: foldmethod=marker
+-- cspell:words omnisharp
 
 ---@param client vim.lsp.Client | nil the LSP client
 ---@param bufnr number the buffer number
@@ -68,6 +69,7 @@ return function(client, bufnr)
   })
 
   -- textDocument/completion
+  -- cspell:disable-next-line
   -- plugin: Saghen/blink.cmp
   -- see: |lsp-completion|
 
@@ -116,15 +118,18 @@ return function(client, bufnr)
   end
 
   -- textDocument/diagnostic
+  -- cspell:disable-next-line
   -- plugin: mfussenegger/nvim-lint
   -- see: |lsp-diagnostic|
   -- see: |vim.diagnostic|
 
   -- textDocument/documentColor
+  -- cspell:disable-next-line
   -- plugin: brenoprata10/nvim-highlight-colors
   -- see: |lsp-document_color|
 
   -- textDocument/documentHighlight
+  -- cspell:disable-next-line
   -- plugin: RRethy/vim-illuminate
   -- see: |vim.lsp.buf.clear_references()|
   -- see: |vim.lsp.buf.document_highlight()|
@@ -150,6 +155,7 @@ return function(client, bufnr)
   end
 
   -- textDocument/formatting
+  -- cspell:disable-next-line
   -- plugin: stevearc/conform.nvim
   -- see: |vim.lsp.buf.format()|
 
@@ -255,18 +261,23 @@ return function(client, bufnr)
   -- textDocument/rename
   -- mapped to grn by default
   if client and client.name == "vue_ls" then
-    vim.keymap.set("n", "<Space>grnv", function()
-      vim.lsp.buf.rename(nil, {
-        filter = function(c)
-          -- TODO: Check filetype and injected language instead and move to grn
-          -- keymap.
-          return c.name == "vue_ls"
-        end,
-      })
-    end, {
-      buffer = bufnr,
-      desc = "LSP: Rename the symbol under the cursor with vue_ls",
-    })
+    vim.keymap.set(
+      "n",
+      "<Space>grnv", -- cspell:disable-line
+      function()
+        vim.lsp.buf.rename(nil, {
+          filter = function(c)
+            -- TODO: Check filetype and injected language instead and move to grn
+            -- keymap.
+            return c.name == "vue_ls"
+          end,
+        })
+      end,
+      {
+        buffer = bufnr,
+        desc = "LSP: Rename the symbol under the cursor with vue_ls",
+      }
+    )
   end
 
   -- textDocument/semanticTokens/full
@@ -314,6 +325,7 @@ return function(client, bufnr)
   -- see: textDocument/prepareTypeHierarchy
 
   -- workspace/symbol
+  -- cspell:disable-next-line
   -- plugin: folke/snacks.nvim
 
   -- workspace/workspaceFolders

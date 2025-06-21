@@ -1,7 +1,10 @@
+-- cspell:words anchorize
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "mattn/emmet-vim",
   dir = "~/Code/emmet-vim",
   init = function()
@@ -54,9 +57,9 @@ return {
     -- vim.keymap.set(
     --   { "n", "x" },
     --   "<Space>es",
-    --   "<Plug>(emmet-balance-tag-outword)", -- (sic)
+    --   "<Plug>(emmet-balance-tag-outword)", -- cspell:disable-line
     --   {
-    --     desc = "Emment: Shrink/advance tag selection.",
+    --     desc = "Emmet: Shrink/advance tag selection.",
     --     silent = true,
     --   }
     -- )

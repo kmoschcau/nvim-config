@@ -1,3 +1,5 @@
+-- cspell:words luasnip
+
 local ls = require "luasnip"
 local s = ls.snippet
 local i = ls.insert_node

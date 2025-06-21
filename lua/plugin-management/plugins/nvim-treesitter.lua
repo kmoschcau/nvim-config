@@ -1,10 +1,15 @@
+-- cspell:words textobjects
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
+    -- cspell:disable
     "LiadOz/nvim-dap-repl-highlights",
+    -- cspell:enable
   },
   lazy = false,
   -- TODO: migrate to "main"
@@ -45,6 +50,7 @@ return {
 
       -- modules below
 
+      -- cspell:disable-next-line
       -- RRethy/nvim-treesitter-endwise
       -- FIXME: This doesn't work with nvim-treesitter main branch
       -- https://github.com/RRethy/nvim-treesitter-endwise/issues/27
@@ -73,6 +79,7 @@ return {
         enable = true,
       },
 
+      -- cspell:disable-next-line
       -- andymass/vim-matchup
       -- FIXME: This doesn't work with nvim-treesitter main branch
       matchup = {

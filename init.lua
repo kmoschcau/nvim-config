@@ -17,22 +17,22 @@ vim.cmd.colorscheme "new"
 
 -- plugins and packages {{{
 
-local ehandler = require("error-handler").handler
+local error_handler = require("error-handler").handler
 
 -- load plugin infrastructure
-xpcall(require, ehandler, "plugin-management")
+xpcall(require, error_handler, "plugin-management")
 
 -- setup LSP
-xpcall(require, ehandler, "lsp")
+xpcall(require, error_handler, "lsp")
 
 -- }}}
 
 -- configuration modules {{{
 
-xpcall(require, ehandler, "diagnostics")
-xpcall(require, ehandler, "extui")
-xpcall(require, ehandler, "filetype")
-xpcall(require, ehandler, "terminal")
+xpcall(require, error_handler, "diagnostics")
+xpcall(require, error_handler, "extui")
+xpcall(require, error_handler, "filetype")
+xpcall(require, error_handler, "terminal")
 
 -- }}}
 
@@ -46,7 +46,7 @@ vim.o.breakindent = true
 vim.opt.breakindentopt = { "list:-1", "min:80", "shift:2", "sbr" }
 vim.o.colorcolumn = "+1"
 vim.opt.comments:remove "n:>"
-vim.opt.comments:remove ":XCOMM"
+vim.opt.comments:remove ":XCOMM" -- cspell:disable-line
 vim.opt.comments:remove ":%"
 vim.opt.completefuzzycollect = { "files", "keyword", "whole_line" }
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
@@ -61,7 +61,7 @@ vim.opt.fillchars = opt_sym.fillchars
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldmethod = "expr"
-vim.o.formatoptions = "cro/qnlj"
+vim.o.formatoptions = "cro/qnlj" -- cspell:disable-line
 vim.o.guicursor = table.concat(
   vim.tbl_map(function(pair)
     return table.concat(pair, ":")
@@ -75,9 +75,9 @@ vim.o.guicursor = table.concat(
   }),
   ","
 )
-local base_font = "FiraMono Nerd Font"
+local base_font = "FiraMono Nerd Font" -- cspell:disable-line
 if vim.fn.has "win32" == 1 then
-  vim.o.guifont = base_font .. ",Segoe UI Emoji:h10"
+  vim.o.guifont = base_font .. ",Segoe UI Emoji:h10" -- cspell:disable-line
 else
   vim.o.guifont = base_font .. ":h10"
 end
@@ -97,6 +97,7 @@ vim.o.shiftwidth = 2
 vim.o.showbreak = opt_sym.showbreak
 vim.o.showmode = false
 vim.o.sidescrolloff = 10
+-- cspell:disable-next-line
 if pcall(require, "statuscol") then
   vim.o.signcolumn = "number"
 else
@@ -108,6 +109,7 @@ vim.o.smoothscroll = true
 vim.o.spell = true
 vim.opt.spellfile = {
   vim.fs.normalize "~/.config/nvim/spell/en.utf-8.add",
+  -- cspell:disable-next-line
   vim.fs.normalize "~/.config/nvim/spell/techspeak.utf-8.add",
 }
 vim.opt.spelloptions = { "camel" }
@@ -244,7 +246,7 @@ if vim.g.neovide then
   -- options {{{
 
   vim.g.neovide_cursor_animate_command_line = false
-  vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_cursor_vfx_mode = "railgun" -- cspell:disable-line
   vim.g.neovide_floating_corner_radius = 0.2
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_theme = "auto"
@@ -297,7 +299,7 @@ end
 -- ft_sql | really old vimscript plugin, that's shipped by default {{{
 
 -- set the default completion type to be syntax based
-vim.g.omni_sql_default_compl_type = "syntax"
+vim.g.omni_sql_default_compl_type = "syntax" -- cspell:disable-line
 
 -- disable the plugin creating keymaps by default
 vim.g.omni_sql_no_default_maps = 1

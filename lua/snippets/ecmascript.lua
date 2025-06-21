@@ -1,3 +1,5 @@
+-- cspell:words luasnip
+
 local ls = require "luasnip"
 local s = ls.snippet
 local i = ls.insert_node
@@ -11,7 +13,7 @@ local rep = require("luasnip.extras").rep
 local is_not_instanceof = s(
   {
     name = "Not instanceof",
-    trig = "ninst",
+    trig = "ninst", -- cspell:disable-line
     desc = "A check to throw an error, when a variable is not an instance of a type.",
   },
   fmt(

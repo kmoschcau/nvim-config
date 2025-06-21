@@ -153,8 +153,8 @@ local function select_and_build_csproj(dap_coroutine)
           id = build_notification_id,
           timeout = false,
           title = title,
-          opts = function(notif)
-            notif.icon = symbols.progress.get_dynamic_spinner()
+          opts = function(notification)
+            notification.icon = symbols.progress.get_dynamic_spinner()
           end,
         })
       end,

@@ -1,7 +1,10 @@
+-- cspell:words neoconf
+
 local has_neoconf, neoconf = pcall(require, "neoconf")
 
-local config =
-  has_neoconf and neoconf.get("lsp", require("neoconf-schemas.lsp").defaults) or {}
+local config = has_neoconf
+    and neoconf.get("lsp", require("neoconf-schemas.lsp").defaults)
+  or {}
 
 if config.ecma_server ~= "typescript-tools" then
   return

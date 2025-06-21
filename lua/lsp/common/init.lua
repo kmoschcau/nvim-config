@@ -1,3 +1,5 @@
+-- cspell:words neoconf omnisharp
+
 local M = {}
 
 ---The autocommand group for LSP init autocommands.

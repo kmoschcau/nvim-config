@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "MoaidHathot/dotnet.nvim",
   cmd = "DotnetUI",
   opts = {

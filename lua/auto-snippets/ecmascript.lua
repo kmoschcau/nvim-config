@@ -8,6 +8,7 @@ function M.add_async()
 
   local column = vim.api.nvim_win_get_cursor(0)[2]
 
+  -- cspell:disable-next-line
   if vim.api.nvim_get_current_line():sub(column - 3, column) ~= "awai" then
     return
   end

@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "smoka7/hop.nvim",
   opts = {
     uppercase_labels = true,

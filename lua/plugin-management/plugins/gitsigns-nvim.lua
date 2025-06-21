@@ -1,10 +1,15 @@
+-- cspell:words changedelete gitsigns numhl statuscol topdelete
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "lewis6991/gitsigns.nvim",
   dependencies = {
+    -- cspell:disable
     "luukvbaal/statuscol.nvim",
+    -- cspell:enable
   },
   config = function()
     local has_statuscol = pcall(require, "statuscol")
@@ -98,27 +103,37 @@ return {
           silent = true,
         })
 
-        vim.keymap.set("n", "gsbb", function()
-          vim.schedule(gs.blame)
+        vim.keymap.set(
+          "n",
+          "gsbb", -- cspell:disable-line
+          function()
+            vim.schedule(gs.blame)
 
-          return "<Ignore>"
-        end, {
-          buffer = bufnr,
-          desc = "gitsigns: Show the blame for the current buffer.",
-          expr = true,
-          silent = true,
-        })
+            return "<Ignore>"
+          end,
+          {
+            buffer = bufnr,
+            desc = "gitsigns: Show the blame for the current buffer.",
+            expr = true,
+            silent = true,
+          }
+        )
 
-        vim.keymap.set("n", "gsbl", function()
-          vim.schedule(gs.blame_line)
+        vim.keymap.set(
+          "n",
+          "gsbl", -- cspell:disable-line
+          function()
+            vim.schedule(gs.blame_line)
 
-          return "<Ignore>"
-        end, {
-          buffer = bufnr,
-          desc = "gitsigns: Show the blame for the current line.",
-          expr = true,
-          silent = true,
-        })
+            return "<Ignore>"
+          end,
+          {
+            buffer = bufnr,
+            desc = "gitsigns: Show the blame for the current line.",
+            expr = true,
+            silent = true,
+          }
+        )
 
         vim.keymap.set("n", "gsp", gs.preview_hunk, {
           buffer = bufnr,

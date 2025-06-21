@@ -1,7 +1,10 @@
+-- cspell:words neoconf
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "folke/neoconf.nvim",
   config = function()
     require("neoconf").setup {}

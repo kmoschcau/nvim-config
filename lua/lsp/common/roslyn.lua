@@ -1,3 +1,5 @@
+-- cspell:words libexec rzls
+
 local mason_utils = require "plugin-management.mason-utils"
 
 local M = {}

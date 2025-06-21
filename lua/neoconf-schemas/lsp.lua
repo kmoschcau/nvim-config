@@ -1,3 +1,5 @@
+-- cspell:words denols omnisharp
+
 local M = {}
 
 M.defaults = {

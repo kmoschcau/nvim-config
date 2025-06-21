@@ -1,9 +1,16 @@
+-- cspell:words splitjoin treesj
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "Wansmer/treesj",
-  dependencies = { "echasnovski/mini.nvim" },
+  dependencies = {
+    -- cspell:disable
+    "echasnovski/mini.nvim",
+    -- cspell:enable
+  },
   config = function()
     local treesj = require "treesj"
     treesj.setup {

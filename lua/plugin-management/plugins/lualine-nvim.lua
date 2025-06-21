@@ -1,3 +1,5 @@
+-- cspell:words gitsigns lualine navic winbar
+
 local symbols = require "symbols"
 local separators = symbols.separators
 
@@ -5,10 +7,13 @@ local separators = symbols.separators
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "nvim-lualine/lualine.nvim",
   dependencies = {
+    -- cspell:disable
     "SmiteshP/nvim-navic",
     "echasnovski/mini.nvim",
+    -- cspell:enable
   },
   config = function()
     local navic_component = {

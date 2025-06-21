@@ -1,7 +1,10 @@
+-- cspell:words FIXIT OPTIM
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {

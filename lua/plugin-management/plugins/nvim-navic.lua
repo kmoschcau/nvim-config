@@ -2,8 +2,13 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "SmiteshP/nvim-navic",
-  dependencies = "neovim/nvim-lspconfig",
+  dependencies = {
+    -- cspell:disable
+    "neovim/nvim-lspconfig",
+    -- cspell:enable
+  },
   -- @type Options -- Does not work, conflicts with other type definitions
   opts = {
     icons = require("symbols").types,

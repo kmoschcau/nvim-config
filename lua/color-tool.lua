@@ -1,4 +1,7 @@
 -- vim: foldmethod=marker
+-- cspell:words cterm ctermbg ctermfg lnum Okhsl Oklab Oklch truecolor
+-- cspell:words Pmenu Sbar
+-- cspell:words altfont guicursor nocombine undercurl underdashed underdotted underdouble
 
 -- Setup {{{
 
@@ -35,7 +38,7 @@ local WRITE_COLORSCHEME = true
 -- NOTE: All manipulation is done in Oklch color space.
 -- Get interactive view at https://bottosson.github.io/misc/colorpicker/
 -- Install https://github.com/echasnovski/mini.colors to have this working
-local has_mini_colors, colors = pcall(require, "mini.colors")
+local has_mini_colors, mini_colors = pcall(require, "mini.colors")
 if not has_mini_colors then
   vim.notify("Could not require mini.colors.", vim.log.levels.ERROR)
   return
@@ -144,7 +147,7 @@ local symbols = require "symbols"
 ---@param h number | nil the hue
 ---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "chroma"
 local function convert(l, c, h, gamut_clip)
-  return colors.convert({ l = l, c = c, h = h }, "hex", {
+  return mini_colors.convert({ l = l, c = c, h = h }, "hex", {
     gamut_clip = gamut_clip or "chroma",
   }) --[[@as string]]
 end
@@ -165,7 +168,7 @@ end
 ---@param val MiniColorsColor
 ---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
 local function invert_l(val, gamut_clip)
-  return colors.modify_channel(val, "lightness", function(l)
+  return mini_colors.modify_channel(val, "lightness", function(l)
     return 100 - l
   end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
@@ -175,7 +178,7 @@ end
 ---@param L number
 ---@param gamut_clip MiniColorsGamutClip | nil the clip method, defaults to "lightness"
 local function modify_l(val, L, gamut_clip)
-  return colors.modify_channel(val, "lightness", function(l)
+  return mini_colors.modify_channel(val, "lightness", function(l)
     return l + L
   end, { gamut_clip = gamut_clip or "lightness" }) --[[@as string]]
 end
@@ -227,7 +230,7 @@ end
 local function get_contrast_ratio(fg, bg)
   -- Source: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
   local function get_luminance(val)
-    local rgb = colors.convert(val, "rgb") --[[@as MiniColorsRgb]]
+    local rgb = mini_colors.convert(val, "rgb") --[[@as MiniColorsRgb]]
 
     -- Convert decimal color to [0; 1]
     local r, g, b = rgb.r / 255, rgb.g / 255, rgb.b / 255
@@ -363,10 +366,10 @@ end
 
 ---Insert the preview lines for the terminal colors into the given lines.
 ---@param lines string[] the lines to insert into
----@param clrs string[] the colors to preview
+---@param colors string[] the colors to preview
 ---@param bg string the background color to contrast against
-local function insert_terminal_colors_preview_lines(lines, clrs, bg)
-  for index, value in ipairs(clrs) do
+local function insert_terminal_colors_preview_lines(lines, colors, bg)
+  for index, value in ipairs(colors) do
     table.insert(
       lines,
       string.format(
@@ -510,7 +513,7 @@ end
 ---@param bufnr integer the ID of the buffer
 ---@param ext_ns integer the extmark namespace ID
 ---@param start_after_line integer after which line to start
----@param clrs string[] the terminal colors to highlight
+---@param colors string[] the terminal colors to highlight
 ---@param diagnostics vim.Diagnostic[] the diagnostics to append to
 ---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
 ---@param suffix "light" | "dark" the suffix to add to the highlights
@@ -518,12 +521,12 @@ local function color_terminal_preview_lines(
   bufnr,
   ext_ns,
   start_after_line,
-  clrs,
+  colors,
   diagnostics,
   normal,
   suffix
 )
-  for index, value in ipairs(clrs) do
+  for index, value in ipairs(colors) do
     local name = "terminal_color_" .. index - 1 .. "_" .. suffix
     local line_index = start_after_line + index
     local spec = { fg = value, bg = normal.bg }
@@ -705,8 +708,8 @@ local function write_nvim_colors(
     end
   end
 
-  local function insert_terminal_colors(lines, clrs)
-    for index, color in ipairs(clrs) do
+  local function insert_terminal_colors(lines, colors)
+    for index, color in ipairs(colors) do
       table.insert(
         lines,
         string.format('  vim.g.terminal_color_%d = "%s"', index - 1, color)
@@ -780,6 +783,7 @@ local function write_nvim_colors(
   file:close()
 end
 
+-- cspell:words lualine
 local function write_lualine_colors()
   local file = io.open(
     vim.fn.stdpath "config" .. "/lua/lualine/themes/" .. THEME_NAME .. ".lua",
@@ -1019,6 +1023,7 @@ local function write_fish(highlights_light, highlights_dark)
     "    --description 'Set the cursor color for the current mode.' \\"
   )
   table.insert(lines, "    --on-variable fish_bind_mode \\")
+  -- cspell:words fish_postexec
   table.insert(lines, "    --on-event fish_postexec \\")
   table.insert(lines, "    --on-event fish_focus_in")
   table.insert(lines, "")
@@ -1041,11 +1046,13 @@ local function write_fish(highlights_light, highlights_dark)
   table.insert(lines, "    end")
   table.insert(lines, "end")
   table.insert(lines, "")
+  -- cspell:words fish_vi_cursor_handle_preexec_color
   table.insert(lines, "function fish_vi_cursor_handle_preexec_color \\")
   table.insert(
     lines,
     "    --description 'Set the cursor color for the neutral cursor.' \\"
   )
+  -- cspell:words fish_preexec
   table.insert(lines, "    --on-event fish_preexec")
   table.insert(lines, "")
   table.insert(lines, "    echo -en $fish_cursor_color_normal")
@@ -1125,7 +1132,7 @@ local HUES = {
   green = 150,
   teal = 180,
   cyan = 195,
-  seafoam = 220,
+  sea_foam = 220,
   blue = 240,
   azure = 256,
   grey = 270,
@@ -1164,7 +1171,7 @@ local H = {
   },
   debug = {
     breakpoint = HUES.red,
-    logpoint = HUES.yellow,
+    log_point = HUES.yellow,
     current_frame = HUES.green,
   },
   spell = {
@@ -1183,10 +1190,10 @@ local H = {
     identifier = HUES.green,
     literal = HUES.blue,
     member = HUES.blue,
-    metaprogramming = HUES.purple,
+    meta_programming = HUES.purple,
     module = HUES.brown,
     number = HUES.blue,
-    property = HUES.seafoam,
+    property = HUES.sea_foam,
     special = HUES.red,
     statement = HUES.orange,
     storage_class = HUES.yellow,
@@ -1295,7 +1302,7 @@ local palette = {
     breakpoint = {
       normal = convert(50, 100, H.debug.breakpoint),
       conditional = convert(50, 100, H.debug.breakpoint),
-      log = convert(50, 100, H.debug.logpoint),
+      log = convert(50, 100, H.debug.log_point),
     },
     current_frame = convert(50, 100, H.debug.current_frame),
   },
@@ -1323,34 +1330,34 @@ local palette = {
   },
 
   syntax = {
-    boolean         = make_syn_with_bg(H.syntax.boolean),
-    character       = make_syn_with_bg(H.syntax.string - 20),
-    comment         = convert(60,   0, H.neutral),
-    ["coroutine"]   = convert(70, 100, H.syntax["coroutine"]),
-    directory       = convert(60, 100, H.syntax.directory),
-    doc_comment     = convert(50,   5, H.syntax.doc_comment),
-    enum            = convert(50, 100, H.syntax.enum),
-    enum_member     = convert(50, 100, H.syntax.enum),
-    event           = convert(50, 100, H.syntax["coroutine"]),
-    float           = make_syn_with_bg(H.syntax.number + 20),
-    ["function"]    = convert(50, 100, H.syntax["function"]),
-    identifier      = convert(70,  10, H.syntax.identifier),
-    literal         = make_syn_with_bg(nil),
-    member          = convert(60, 100, H.syntax.member),
-    metaprogramming = convert(60, 100, H.syntax.metaprogramming),
-    module          = convert(30, 100, H.syntax.module),
-    number          = make_syn_with_bg(H.syntax.number),
-    parameter       = convert(70, 100, H.syntax.variable - 10),
-    property        = convert(60, 100, H.syntax.property),
-    special         = convert(55,  20, H.syntax.special),
-    statement       = convert(70, 100, H.syntax.statement),
-    storage_class   = convert(80, 100, H.syntax.storage_class),
-    string          = make_syn_with_bg(H.syntax.string),
-    structure       = convert(40, 100, H.syntax.structure),
-    type            = convert(70, 100, H.syntax.typedef - 20),
-    typedef         = convert(60, 100, H.syntax.typedef),
-    underlined      = convert(50, 100, H.syntax.underlined),
-    variable        = convert(70, 100, H.syntax.variable),
+    boolean          = make_syn_with_bg(H.syntax.boolean),
+    character        = make_syn_with_bg(H.syntax.string - 20),
+    comment          = convert(60,   0, H.neutral),
+    ["coroutine"]    = convert(70, 100, H.syntax["coroutine"]),
+    directory        = convert(60, 100, H.syntax.directory),
+    doc_comment      = convert(50,   5, H.syntax.doc_comment),
+    enum             = convert(50, 100, H.syntax.enum),
+    enum_member      = convert(50, 100, H.syntax.enum),
+    event            = convert(50, 100, H.syntax["coroutine"]),
+    float            = make_syn_with_bg(H.syntax.number + 20),
+    ["function"]     = convert(50, 100, H.syntax["function"]),
+    identifier       = convert(70,  10, H.syntax.identifier),
+    literal          = make_syn_with_bg(nil),
+    member           = convert(60, 100, H.syntax.member),
+    meta_programming = convert(60, 100, H.syntax.meta_programming),
+    module           = convert(30, 100, H.syntax.module),
+    number           = make_syn_with_bg(H.syntax.number),
+    parameter        = convert(70, 100, H.syntax.variable - 10),
+    property         = convert(60, 100, H.syntax.property),
+    special          = convert(55,  20, H.syntax.special),
+    statement        = convert(70, 100, H.syntax.statement),
+    storage_class    = convert(80, 100, H.syntax.storage_class),
+    string           = make_syn_with_bg(H.syntax.string),
+    structure        = convert(40, 100, H.syntax.structure),
+    type             = convert(70, 100, H.syntax.typedef - 20),
+    typedef          = convert(60, 100, H.syntax.typedef),
+    underlined       = convert(50, 100, H.syntax.underlined),
+    variable         = convert(70, 100, H.syntax.variable),
   },
 }
 
@@ -1527,7 +1534,7 @@ local highlights_light = {
   Statement     = { fg = palette.syntax.statement, bold = true },
   Operator      = { fg = palette.syntax.statement },
 
-  PreProc       = { fg = palette.syntax.metaprogramming, bold = true, italic = false, nocombine = true },
+  PreProc       = { fg = palette.syntax.meta_programming, bold = true, italic = false, nocombine = true },
 
   Type          = { fg = palette.syntax.type },
   StorageClass  = { fg = palette.syntax.storage_class },
@@ -1551,6 +1558,7 @@ local highlights_light = {
   -- Syntax groups language overrides {{{
 
   -- razor {{{
+  -- cspell:words razorhtml razorcs
 
   razorhtmlAttribute   = { link = "@tag.attribute" },
   razorhtmlTagName     = { link = "@tag" },
@@ -1596,7 +1604,7 @@ local highlights_light = {
   ["@type.builtin"]                = { link = "Type" },
   ["@type.definition"]             = { link = "Typedef" },
 
-  ["@interface"]                   = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
+  ["@interface"]                   = { fg = palette.syntax.meta_programming, italic = false, nocombine = true },
 
   ["@attribute"]                   = { link = "@interface" },
   ["@property"]                    = { fg = palette.syntax.property, italic = true },
@@ -1618,7 +1626,7 @@ local highlights_light = {
   ["@keyword.directive"]           = { link = "PreProc" },
   ["@keyword.directive.define"]    = { link = "Define" },
 
-  ["@punctuation.special"]         = { fg = palette.syntax.metaprogramming },
+  ["@punctuation.special"]         = { fg = palette.syntax.meta_programming },
 
   ["@comment.documentation"]       = { fg = palette.syntax.doc_comment },
 
@@ -1642,7 +1650,7 @@ local highlights_light = {
   -- Custom captures {{{
 
   ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
-  ["@keyword.interface"] = { fg = palette.syntax.metaprogramming, bold = true },
+  ["@keyword.interface"] = { fg = palette.syntax.meta_programming, bold = true },
   ["@keyword.module"]    = { link = "@keyword.import" },
   ["@keyword.property"]  = { fg = palette.syntax.property, bold = true },
 
@@ -1671,6 +1679,7 @@ local highlights_light = {
 
   -- C# {{{
 
+  -- cspell:words omnisharp
   -- Omnisharp {{{
 
   ["@lsp.type.constantName.cs"] = { fg = palette.syntax.member, italic = false, nocombine = true },
@@ -1698,7 +1707,7 @@ local highlights_light = {
   ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
   ["@lsp.type.keyword.razor"]         = { link = "Statement" },
   ["@lsp.type.markupAttribute.razor"] = { link = "@tag.attribute" },
-  ["@lsp.type.razorTransition.razor"] = { fg = palette.syntax.metaprogramming, italic = false, nocombine = true },
+  ["@lsp.type.razorTransition.razor"] = { fg = palette.syntax.meta_programming, italic = false, nocombine = true },
 
   -- }}}}}}
 
@@ -1749,7 +1758,7 @@ local highlights_light = {
   BlinkCmpKindField         = { fg = palette.syntax.member },
   BlinkCmpKindFile          = framing.neutral.c,
   BlinkCmpKindFunction      = { fg = palette.syntax["function"] },
-  BlinkCmpKindInterface     = { fg = palette.syntax.metaprogramming },
+  BlinkCmpKindInterface     = { fg = palette.syntax.meta_programming },
   BlinkCmpKindKey           = { fg = palette.syntax.property },
   BlinkCmpKindKeyword       = { fg = palette.syntax.statement },
   BlinkCmpKindMethod        = { fg = palette.syntax["function"] },
@@ -1761,7 +1770,7 @@ local highlights_light = {
   BlinkCmpKindOperator      = { fg = palette.syntax.statement },
   BlinkCmpKindPackage       = { fg = palette.syntax.module },
   BlinkCmpKindProperty      = { fg = palette.syntax.property },
-  BlinkCmpKindSnippet       = { fg = palette.syntax.metaprogramming },
+  BlinkCmpKindSnippet       = { fg = palette.syntax.meta_programming },
   BlinkCmpKindString        = { fg = palette.syntax.string.fg },
   BlinkCmpKindStruct        = { fg = palette.syntax.structure },
   BlinkCmpKindText          = { fg = palette.neutral.strongest },
@@ -1770,6 +1779,7 @@ local highlights_light = {
 
   -- }}}
 
+  -- cspell:words gitsigns
   -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{
 
   GitSignsAdd          = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
@@ -1851,6 +1861,7 @@ local highlights_light = {
 
   -- }}}
 
+  -- cspell:words navic
   -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{
 
   NavicIconsArray         = { fg = palette.syntax.structure, bg = framing.neutral.c.bg },
@@ -1864,7 +1875,7 @@ local highlights_light = {
   NavicIconsField         = { fg = palette.syntax.member, bg = framing.neutral.c.bg },
   NavicIconsFile          = framing.neutral.c,
   NavicIconsFunction      = { fg = palette.syntax["function"], bg = framing.neutral.c.bg },
-  NavicIconsInterface     = { fg = palette.syntax.metaprogramming, bg = framing.neutral.c.bg },
+  NavicIconsInterface     = { fg = palette.syntax.meta_programming, bg = framing.neutral.c.bg },
   NavicIconsKey           = { fg = palette.syntax.property, bg = framing.neutral.c.bg },
   NavicIconsMethod        = { fg = palette.syntax["function"], bg = framing.neutral.c.bg },
   NavicIconsModule        = { fg = palette.syntax.module, bg = framing.neutral.c.bg },

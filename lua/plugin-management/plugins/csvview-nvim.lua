@@ -1,7 +1,10 @@
+-- cspell:words csvview textobject
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "hat0uma/csvview.nvim",
   cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
   ---@module "csvview"

@@ -1,7 +1,10 @@
+-- cspell:words devicons termbg splitjoin treesj
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "echasnovski/mini.nvim",
   config = function()
     require("mini.ai").setup()

@@ -19,6 +19,7 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable {
+  -- cspell:disable
   "astro",
   "bashls",
   "cssls",
@@ -57,4 +58,5 @@ vim.lsp.enable {
   "vimls",
   "vue_ls",
   "yamlls",
+  -- cspell:enable
 }

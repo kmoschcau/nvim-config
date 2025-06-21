@@ -2,8 +2,13 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "MeanderingProgrammer/render-markdown.nvim",
-  dependencies = { "echasnovski/mini.nvim" },
+  dependencies = {
+    -- cspell:disable
+    "echasnovski/mini.nvim",
+    -- cspell:enable
+  },
   ft = "markdown",
   ---@module "render-markdown"
   ---@type render.md.UserConfig

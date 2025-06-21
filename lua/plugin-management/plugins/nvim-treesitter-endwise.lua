@@ -2,6 +2,11 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "RRethy/nvim-treesitter-endwise",
-  dependencies = "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    -- cspell:disable
+    "nvim-treesitter/nvim-treesitter",
+    -- cspell:enable
+  },
 }

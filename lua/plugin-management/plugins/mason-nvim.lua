@@ -1,13 +1,14 @@
 local symbols = require "symbols"
 
 local always_install = {
-  "cspell", -- TODO: cspell_ls
+  "cspell",
   "typos-lsp",
 }
 
 local prettier = "prettier"
 
 local pkgs_by_ft = {
+  -- cspell:disable
   astro = { prettier },
   cs = { "csharpier", "netcoredbg" },
   cshtml = { "roslyn", "rzls" },
@@ -43,9 +44,11 @@ local pkgs_by_ft = {
   vue = { "markuplint", prettier },
   yaml = { "yamllint", prettier },
   ["yaml.cloudformation"] = { "cfn-lint", "yamllint" },
+  -- cspell:enable
 }
 
 local lsp_to_mason_package = {
+  -- cspell:disable
   astro = "astro-language-server",
   bashls = "bash-language-server",
   cssls = "css-lsp",
@@ -83,6 +86,7 @@ local lsp_to_mason_package = {
   vimls = "vim-language-server",
   vue_ls = "vue-language-server",
   yamlls = "yaml-language-server",
+  -- cspell:enable
 }
 
 local function add_package_names_from_lsp_config()
@@ -121,8 +125,8 @@ local function install_pkg(pkg_name)
     id = notification_id,
     timeout = false,
     title = "mason.nvim",
-    opts = function(notif)
-      notif.icon = symbols.progress.get_dynamic_spinner()
+    opts = function(notification)
+      notification.icon = symbols.progress.get_dynamic_spinner()
     end,
   })
   pkg:install(nil, function(success, error_or_receipt)
@@ -152,7 +156,7 @@ end
 
 ---Install the given packages
 ---@param pkg_names string[] the names of the packages to install
-local function install_pgks(pkg_names)
+local function install_packages(pkg_names)
   if pkg_names == nil then
     return
   end
@@ -180,8 +184,8 @@ return {
       id = refresh_notification_id,
       timeout = false,
       title = "mason.nvim",
-      opts = function(notif)
-        notif.icon = symbols.progress.get_dynamic_spinner()
+      opts = function(notification)
+        notification.icon = symbols.progress.get_dynamic_spinner()
       end,
     })
     reg.refresh(function(success, updated_registries)
@@ -200,7 +204,7 @@ return {
             title = "mason.nvim",
           }
         )
-        install_pgks(always_install)
+        install_packages(always_install)
       else
         vim.notify("Could not refresh the registries.", vim.log.levels.ERROR, {
           id = refresh_notification_id,
@@ -211,8 +215,10 @@ return {
   end,
   opts = {
     registries = {
+      -- cspell:disable
       "github:mason-org/mason-registry",
       "github:Crashdummyy/mason-registry",
+      -- cspell:enable
     },
   },
   config = function(_, opts)
@@ -223,7 +229,7 @@ return {
       group = vim.api.nvim_create_augroup("MasonNvimInstall", {}),
       desc = "mason.nvim: Automatically install packages for specific file types.",
       callback = function()
-        install_pgks(pkgs_by_ft[vim.bo.filetype])
+        install_packages(pkgs_by_ft[vim.bo.filetype])
       end,
     })
   end,

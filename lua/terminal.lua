@@ -1,3 +1,5 @@
+-- cspell:words lnum
+
 local augroup = vim.api.nvim_create_augroup("InitNvimTerminal", {})
 
 vim.api.nvim_create_autocmd("TermOpen", {

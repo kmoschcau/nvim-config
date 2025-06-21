@@ -1,7 +1,10 @@
+-- cspell:words clickhandlers foldclosed gitsigns lnumfunc statuscol
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "luukvbaal/statuscol.nvim",
   config = function()
     local builtin = require "statuscol.builtin"

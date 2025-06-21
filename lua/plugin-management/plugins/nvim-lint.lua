@@ -1,3 +1,26 @@
+-- cspell:words neoconf
+
+---@type table<string, string[]>
+local linters_by_ft = {
+  -- cspell:disable
+  fish = { "fish" },
+  html = { "markuplint" },
+  java = { "checkstyle", "pmd" },
+  ["json.cloudformation"] = { "cfn_lint" },
+  kotlin = { "ktlint" },
+  lua = { "selene" },
+  markdown = { "markdownlint", "proselint" },
+  svelte = { "markuplint" },
+  tex = { "proselint" },
+  tf = { "trivy" },
+  ["terraform-vars"] = { "trivy" },
+  vue = { "markuplint" },
+  yaml = { "actionlint", "yamllint" },
+  ["yaml.cloudformation"] = { "cfn_lint", "yamllint" },
+  ["*"] = { "cspell" },
+  -- cspell:enable
+}
+
 ---@class lint.LinterOverrideConfig
 ---@field args? string[]
 ---@field condition? fun(event_args: vim.api.keyset.create_autocmd.callback_args): boolean, boolean?
@@ -37,9 +60,8 @@ local function get_effective_linter(name)
   end
 end
 
----@param linters_by_ft table<string, string[]>
 ---@param linter_overrides table<string, lint.LinterOverride>
-local function merge_linter_configurations(linters_by_ft, linter_overrides)
+local function merge_linter_configurations(linter_overrides)
   local nvim_lint = require "lint"
 
   for name, linter_override in pairs(linter_overrides) do
@@ -128,29 +150,14 @@ end
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "mfussenegger/nvim-lint",
   dependencies = {
+    -- cspell:disable
     "folke/neoconf.nvim",
+    -- cspell:enable
   },
   config = function()
-    ---@type table<string, string[]>
-    local linters_by_ft = {
-      fish = { "fish" },
-      html = { "markuplint" },
-      java = { "checkstyle", "pmd" },
-      ["json.cloudformation"] = { "cfn_lint" },
-      kotlin = { "ktlint" },
-      lua = { "selene" },
-      markdown = { "markdownlint", "proselint" },
-      svelte = { "markuplint" },
-      tex = { "proselint" },
-      tf = { "trivy" },
-      ["terraform-vars"] = { "trivy" },
-      vue = { "markuplint" },
-      yaml = { "actionlint", "yamllint" },
-      ["yaml.cloudformation"] = { "cfn_lint", "yamllint" },
-    }
-
     -- TODO: extract this into override functions.
     local config = require("neoconf").get(
       "linters",
@@ -193,6 +200,14 @@ return {
       checkstyle = {
         args = checkstyle_args,
       },
+      cspell = {
+        condition = function(event_args)
+          return not vim.list_contains(
+            { "help" },
+            vim.api.nvim_get_option_value("buftype", { buf = event_args.buf })
+          )
+        end,
+      },
       markdownlint = {
         condition = function(event_args)
           return not vim.list_contains(
@@ -214,7 +229,7 @@ return {
       },
     }
 
-    merge_linter_configurations(linters_by_ft, linter_overrides)
+    merge_linter_configurations(linter_overrides)
 
     vim.api.nvim_create_autocmd(
       { "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },

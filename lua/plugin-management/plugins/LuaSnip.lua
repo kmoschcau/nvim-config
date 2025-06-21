@@ -1,9 +1,16 @@
+-- cspell:words autosnippets luasnip prio virt_text
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "L3MON4D3/LuaSnip",
-  dependencies = { "rafamadriz/friendly-snippets" },
+  dependencies = {
+    -- cspell:disable
+    "rafamadriz/friendly-snippets",
+    -- cspell:enable
+  },
   config = function()
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -42,10 +49,10 @@ return {
       enable_autosnippets = true,
       ext_opts = {
         [types.choiceNode] = make_ext_opts(
-          require("symbols").snippet.choice_virt_text
+          require("symbols").snippet.choice_virtual_text
         ),
         [types.insertNode] = make_ext_opts(
-          require("symbols").snippet.insert_virt_text
+          require("symbols").snippet.insert_virtual_text
         ),
       },
       ext_prio_increase = 2,

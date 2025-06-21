@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "nvim-treesitter/nvim-treesitter-context",
   event = "BufReadPre",
   opts = {

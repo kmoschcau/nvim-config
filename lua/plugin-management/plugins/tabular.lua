@@ -2,5 +2,6 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "godlygeek/tabular",
 }

@@ -2,8 +2,13 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "stevearc/oil.nvim",
-  dependencies = { "echasnovski/mini.nvim" },
+  dependencies = {
+    -- cspell:disable
+    "echasnovski/mini.nvim",
+    -- cspell:enable
+  },
   config = function()
     require("oil").setup {
       columns = {

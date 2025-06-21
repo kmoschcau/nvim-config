@@ -1,7 +1,10 @@
+-- cspell:words gnormal gvisual
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "monaqa/dial.nvim",
   config = function()
     local augend = require "dial.augend"

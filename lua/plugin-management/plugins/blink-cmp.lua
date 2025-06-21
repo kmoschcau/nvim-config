@@ -1,6 +1,8 @@
+-- cspell:words dapui lazydev luasnip vimtex
+
 local symbols = require "symbols"
 
-local buffer_source_include_buftypes = { "", "help" }
+local buffer_source_include_buffer_types = { "", "help" }
 
 ---@type table<integer, boolean?>
 local spell_enabled_cache = {}
@@ -20,7 +22,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
 ---@return boolean include whether to include the buffer for completion
 local function buffer_source_should_include_buffer(bufnr)
   return vim.list_contains(
-    buffer_source_include_buftypes,
+    buffer_source_include_buffer_types,
     vim.bo[bufnr].buftype
   )
 end
@@ -129,8 +131,10 @@ end
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "saghen/blink.cmp",
   dependencies = {
+    -- cspell:disable
     "L3MON4D3/LuaSnip",
     "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
@@ -142,6 +146,7 @@ return {
     "ribru17/blink-cmp-spell",
     { "saghen/blink.compat", lazy = true, config = true },
     "xzbdmw/colorful-menu.nvim",
+    -- cspell:enable
   },
   build = "cargo build --release",
   init = function()

@@ -1,7 +1,10 @@
+-- cspell:words lsplinks
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "icholy/lsplinks.nvim",
   config = function()
     local lsplinks = require "lsplinks"

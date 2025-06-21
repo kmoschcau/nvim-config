@@ -1,12 +1,17 @@
+-- cspell:words dapui logpoint netcoredbg nlua
+
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "https://codeberg.org/mfussenegger/nvim-dap",
   dependencies = {
+    -- cspell:disable
     "folke/snacks.nvim",
     "jbyuki/one-small-step-for-vimkind",
     "nvim-treesitter/nvim-treesitter",
+    -- cspell:enable
   },
   config = function()
     local dap = require "dap"
@@ -36,6 +41,7 @@ return {
         justMyCode = false,
         stopAtEntry = false,
         env = {
+          -- cspell:words ASPNETCORE
           ASPNETCORE_ENVIRONMENT = "Development",
           ASPNETCORE_URLS = "http://localhost:5274",
         },

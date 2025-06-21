@@ -2,6 +2,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
+  -- cspell:disable-next-line
   "JoosepAlviste/nvim-ts-context-commentstring",
   enabled = true,
   config = function()
