@@ -111,7 +111,7 @@ local function install_pkg(pkg_name)
   end
 
   local pkg = reg.get_package(pkg_name)
-  if pkg:is_installed() then
+  if pkg:is_installed() or pkg:is_installing() then
     return
   end
 
