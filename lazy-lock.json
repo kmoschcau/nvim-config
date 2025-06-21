@@ -33,7 +33,6 @@
   "muren.nvim": { "branch": "main", "commit": "fa18f2df80a52afd201da062d1af0e80c8d1988e" },
   "neoconf.nvim": { "branch": "main", "commit": "0be2f71bd152b4cf27b4673d9940779f42a97b97" },
   "nvim-autopairs": { "branch": "master", "commit": "2647cce4cb64fb35c212146663384e05ae126bdf" },
-  "nvim-config-local": { "branch": "main", "commit": "990f3e35e0fba8fb83012d7e85f9a6a77de7f87f" },
   "nvim-dap": { "branch": "master", "commit": "2edd6375692d9ac1053d50acfe415c1eb2ba92d0" },
   "nvim-dap-exception-breakpoints": { "branch": "main", "commit": "6bc8d52fb48d20c8cd61920a8c1a4b487eff3afd" },
   "nvim-dap-repl-highlights": { "branch": "master", "commit": "307cff2c364d3bf02501d59c405a817967fcd5fb" },
