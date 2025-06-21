@@ -28,6 +28,7 @@ vim.lsp.enable {
   "eslint",
   "fish_lsp",
   "gh_actions_ls",
+  -- "glint", -- FIXME: Currently tries to start local server, even if not installed
   "gradle_ls",
   "helm_ls",
   "html",

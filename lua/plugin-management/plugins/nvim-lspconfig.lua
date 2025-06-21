@@ -22,19 +22,4 @@ return {
     "tris203/rzls.nvim",
     -- cspell:enable
   },
-  config = function()
-    -- HACK: These calls are only needed for as long as these servers are not
-    -- yet migrated.
-    -- See: https://github.com/neovim/nvim-lspconfig/issues/3705
-
-    local servers = {
-      "glint",
-    }
-
-    local lspconfig = require "lspconfig"
-
-    for _, server in ipairs(servers) do
-      lspconfig[server].setup {}
-    end
-  end,
 }
