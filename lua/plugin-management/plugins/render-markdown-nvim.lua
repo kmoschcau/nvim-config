@@ -9,7 +9,9 @@ return {
   ---@type render.md.UserConfig
   opts = {
     code = {
-      language_border = " ",
+      language_border = "▄",
+      language_left = "🭃",
+      language_right = "🭎",
       left_pad = 1,
       right_pad = 1,
       width = "block",
