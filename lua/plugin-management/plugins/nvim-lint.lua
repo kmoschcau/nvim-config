@@ -203,19 +203,16 @@ return {
         args = checkstyle_args,
       },
       cspell = {
-        condition = function(event_args)
+        condition = function()
           return not vim.list_contains(
-            { "help" },
-            vim.api.nvim_get_option_value("buftype", { buf = event_args.buf })
-          )
+            { "cmd", "msg", "pager", "dialog" },
+            vim.bo.filetype
+          ) and not vim.list_contains({ "help" }, vim.bo.buftype)
         end,
       },
       markdownlint = {
-        condition = function(event_args)
-          return not vim.list_contains(
-            { "help", "nofile" },
-            vim.api.nvim_get_option_value("buftype", { buf = event_args.buf })
-          )
+        condition = function()
+          return not vim.list_contains({ "help", "nofile" }, vim.bo.buftype)
         end,
       },
       pmd = {
