@@ -6,6 +6,7 @@ local linters_by_ft = {
   fish = { "fish" },
   html = { "markuplint" },
   java = { "checkstyle", "pmd" },
+  json = { "jsonlint" },
   ["json.cloudformation"] = { "cfn_lint" },
   kotlin = { "ktlint" },
   lua = { "selene" },
