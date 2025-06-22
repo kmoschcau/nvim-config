@@ -87,12 +87,6 @@ local function merge_linter_configurations(linter_overrides)
   nvim_lint.linters_by_ft = linters_by_ft
 end
 
----@param event_args vim.api.keyset.create_autocmd.callback_args
----@return boolean
-local function persisted_file(event_args)
-  return vim.list_contains({ "BufReadPost", "BufWritePost" }, event_args.event)
-end
-
 -- Use nvim-lint's logic first:
 -- * checks if linters exist for the full filetype first
 -- * otherwise will split filetype by "." and add all those linters
@@ -121,10 +115,18 @@ local function do_lint(event_args)
       return false
     end
 
+    if
+      not nvim_lint_linter.stdin
+      and not vim.list_contains(
+        { "BufReadPost", "BufWritePost" },
+        event_args.event
+      )
+    then
+      return false
+    end
+
     if type(nvim_lint_linter.condition) == "function" then
       return nvim_lint_linter.condition(event_args)
-    elseif not nvim_lint_linter.stdin then
-      return persisted_file(event_args)
     end
 
     return true
