@@ -218,6 +218,11 @@ return {
       pmd = {
         args = pmd_args,
       },
+      proselint = {
+        condition = function()
+          return not vim.list_contains({ "help", "nofile" }, vim.bo.buftype)
+        end,
+      },
       selene = {
         condition = cache.by_bufnr(function(event_args)
           return #vim.fs.find("selene.toml", {
