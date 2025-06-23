@@ -6,4 +6,7 @@ return {
   bundle_path = is_installed
       and vim.fn.expand "$MASON/packages/powershell-editor-services"
     or nil,
+  init_options = {
+    enableProfileLoading = false,
+  },
 }
