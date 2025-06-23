@@ -206,7 +206,7 @@ return {
       cspell = {
         condition = function()
           return not vim.list_contains(
-            { "cmd", "msg", "pager", "dialog" },
+            { "cmd", "msg", "pager", "dialog", "fugitive" },
             vim.bo.filetype
           ) and not vim.list_contains({ "help" }, vim.bo.buftype)
         end,
