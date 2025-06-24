@@ -13,22 +13,52 @@ vim.diagnostic.config {
   },
 }
 
-vim.api.nvim_create_user_command("HighlightSeverity", function(args)
+vim.api.nvim_create_user_command("DiagnosticsSeverity", function(args)
   local argument = args.fargs[1]
-  local severity = vim.diagnostic.severity[argument]
-  if not severity then
-    vim.notify(
-      "An invalid argument was provided: " .. argument,
-      vim.log.levels.ERROR,
-      { title = args.name }
-    )
+  local severity
+  if argument then
+    local sev = vim.diagnostic.severity[argument]
+    if not sev then
+      vim.notify(
+        "An invalid argument was provided: " .. argument,
+        vim.log.levels.ERROR,
+        { title = args.name }
+      )
+      return
+    end
+
+    severity = sev
+  else
+    severity = vim.diagnostic.severity.HINT
+  end
+
+  local current_config = vim.diagnostic.config()
+  if not current_config then
     return
   end
 
-  vim.diagnostic.config {
-    underline = { severity = { min = severity } },
-    virtual_text = { severity = { min = severity } },
-  }
+  local function set_min_severity(key)
+    if current_config[key] then
+      if type(current_config[key]) == "table" then
+        current_config[key].severity = { min = severity }
+      elseif type(current_config[key]) == "boolean" then
+        current_config[key] = { severity = { min = severity } }
+      end
+    end
+  end
+
+  for _, key in ipairs {
+    "underline",
+    "virtual_text",
+    "virtual_lines",
+    "signs",
+    "float",
+    "jump",
+  } do
+    set_min_severity(key)
+  end
+
+  vim.diagnostic.config(current_config)
 end, {
   bar = true,
   complete = function()
@@ -41,7 +71,7 @@ end, {
     return candidates
   end,
   desc = "Diagnostics: Set the minimum severity level of in-buffer diagnostics",
-  nargs = 1,
+  nargs = "?",
 })
 
 vim.keymap.set("n", "<Space>dl", function()
