@@ -54,12 +54,16 @@ vim.keymap.set("n", "<Space>dl", function()
   vim.diagnostic.config {
     virtual_lines = {
       format = function(diagnostic)
-        return string.format(
-          "%s: %s [%s]",
-          diagnostic.source,
-          diagnostic.message,
-          diagnostic.code
-        )
+        if diagnostic.code then
+          return string.format(
+            "%s: %s [%s]",
+            diagnostic.source,
+            diagnostic.message,
+            diagnostic.code
+          )
+        end
+
+        return string.format("%s: %s", diagnostic.source, diagnostic.message)
       end,
     },
   }
