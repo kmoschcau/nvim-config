@@ -1258,8 +1258,7 @@ local palette = {
   },
 
   search = {
-    inc     = convert(85, 100, H.search),
-    current = convert(90,   7, H.search),
+    current = convert(85, 100, H.search),
     search  = convert(90,  10, H.search),
   },
 
@@ -1432,7 +1431,7 @@ local highlights_light = {
   WinSeparator  = framing.neutral.c_no_fg,
   Folded        = { fg = modify_l(normal.fg, 50), bg = modify_l(normal.bg, -5) },
   SignColumn    = { link = "LineNr" },
-  IncSearch     = { bg = palette.search.inc },
+  IncSearch     = { link = "CurSearch" },
   LineNr        = framing.neutral.b,
   LineNrAbove   = { fg = modify_l(framing.neutral.b.fg, 5), bg = modify_l(framing.neutral.b.bg, 5) },
   LineNrBelow   = { fg = modify_l(framing.neutral.b.fg, -5), bg = modify_l(framing.neutral.b.bg, -5) },
@@ -1959,7 +1958,7 @@ local highlights_light = {
 ---@type table<string, vim.api.keyset.highlight>
 local highlights_dark_overrides = {
   Cursor    = { bg = palette.interact.cursor.normal },
-  IncSearch = { bg = invert_l(highlights_light.IncSearch.bg, "cusp") },
+  CurSearch = { bg = invert_l(highlights_light.CurSearch.bg, "cusp") },
 }
 
 -- }}}
