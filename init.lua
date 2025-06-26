@@ -77,7 +77,10 @@ vim.o.guicursor = table.concat(
 )
 local base_font = "FiraMono Nerd Font" -- cspell:disable-line
 if vim.fn.has "win32" == 1 then
-  vim.o.guifont = base_font .. ",Segoe UI Emoji:h10" -- cspell:disable-line
+  vim.o.guifont = table.concat(
+    { base_font, "Segoe UI Emoji", "Unifont Upper" }, -- cspell:disable-line
+    ","
+  ) .. ":h10"
 else
   vim.o.guifont = base_font .. ":h10"
 end
