@@ -1625,7 +1625,7 @@ local highlights_light = {
   ["@keyword.directive"]           = { link = "PreProc" },
   ["@keyword.directive.define"]    = { link = "Define" },
 
-  ["@punctuation.special"]         = { fg = palette.syntax.meta_programming },
+  ["@punctuation.special"]         = { fg = palette.syntax.meta_programming, italic = false, nocombine = true },
 
   ["@comment.documentation"]       = { fg = palette.syntax.doc_comment },
 
@@ -1703,10 +1703,10 @@ local highlights_light = {
 
   -- Roslyn {{{
 
-  ["@lsp.type.extensionMethod.razor"] = { link = "Function" },
-  ["@lsp.type.keyword.razor"]         = { link = "Statement" },
-  ["@lsp.type.markupAttribute.razor"] = { link = "@tag.attribute" },
-  ["@lsp.type.razorTransition.razor"] = { fg = palette.syntax.meta_programming, italic = false, nocombine = true },
+  ["@lsp.type.extensionMethod.razor"]         = { link = "Function" },
+  ["@lsp.type.markupAttribute.razor"]         = { link = "@tag.attribute" },
+  ["@lsp.type.razorTransition.razor"]         = { link = "@punctuation.special" },
+  ["@lsp.type.razorTagHelperAttribute.razor"] = { fg = palette.syntax.meta_programming },
 
   -- }}}}}}
 
