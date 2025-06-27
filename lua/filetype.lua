@@ -41,9 +41,11 @@ end
 vim.filetype.add {
   extension = {
     azcli = "ps1",
+    cshtml = "razor",
     gotmpl = "gotmpl",
     json = with_cloud_formation "json",
     nswag = "json",
+    razor = "razor",
     yaml = with_cloud_formation "yaml",
     yml = with_cloud_formation "yaml",
   },
