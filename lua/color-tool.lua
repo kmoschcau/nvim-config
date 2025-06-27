@@ -1712,8 +1712,8 @@ local highlights_light = {
 
   -- rust {{{
 
-  ["@lsp.type.parameter.rust"]   = { link = "@variable.parameter.rust" },
-  ["@lsp.type.variable.rust"]   = { link = "@variable.rust" },
+  ["@lsp.type.parameter.rust"] = { link = "@variable.parameter.rust" },
+  ["@lsp.type.variable.rust"]  = { link = "@variable.rust" },
 
   ["@lsp.mod.mutable"] = { italic = true },
 
