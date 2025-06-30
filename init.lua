@@ -117,7 +117,6 @@ vim.opt.spellfile = {
 }
 vim.opt.spelloptions = { "camel" }
 vim.o.splitbelow = true
-vim.o.splitkeep = "screen"
 vim.o.splitright = true
 
 -- statusline {{{
