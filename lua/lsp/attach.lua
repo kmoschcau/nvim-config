@@ -310,7 +310,7 @@ return function(client, bufnr)
       }
     )
   if type_definition_impl then
-    vim.keymap.set("n", "<Space>D", type_definition_impl, {
+    vim.keymap.set("n", "grt", type_definition_impl, {
       buffer = bufnr,
       desc = "LSP("
         .. type_definition_impl_desc
