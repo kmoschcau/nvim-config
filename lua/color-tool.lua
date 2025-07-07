@@ -1704,9 +1704,12 @@ local highlights_light = {
   -- Roslyn {{{
 
   ["@lsp.type.extensionMethod.razor"]         = { link = "Function" },
+  ["@lsp.type.keyword.razor"]                 = { link = "Keyword" },
   ["@lsp.type.markupAttribute.razor"]         = { link = "@tag.attribute" },
+  ["@lsp.type.markupAttributeValue.razor"]    = { link = "String" },
   ["@lsp.type.razorTransition.razor"]         = { link = "@punctuation.special" },
   ["@lsp.type.razorTagHelperAttribute.razor"] = { fg = palette.syntax.meta_programming },
+  ["@lsp.type.variable.razor"]                = { fg = "NONE" },
 
   -- }}}}}}
 
