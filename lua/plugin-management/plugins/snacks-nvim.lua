@@ -60,23 +60,29 @@ return {
       snacks.picker.grep()
     end, { desc = "Snacks picker: Open live grep search." })
 
-    ---@type table<number, { token: lsp.ProgressToken, msg: string, done: boolean }[]>
-    local progress = vim.defaulttable()
+    -- TODO: get rid of progress_by_client and just use separate notifications
+    -- per token
+
+    ---@type table<number, { token: lsp.ProgressToken, message: string, done: boolean }[]>
+    local progress_by_client = vim.defaulttable()
     vim.api.nvim_create_autocmd("LspProgress", {
-      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+      ---@param event {data: {client_id: integer, params: lsp.ProgressParams}}
+      callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        local value = event.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
         if not client or type(value) ~= "table" then
           return
         end
-        local p = progress[client.id]
+        local client_progress = progress_by_client[client.id]
 
-        for i = 1, #p + 1 do
-          if i == #p + 1 or p[i].token == ev.data.params.token then
-            p[i] = {
-              token = ev.data.params.token,
-              msg = ("[%3d%%] %s%s"):format(
+        for i = 1, #client_progress + 1 do
+          if
+            i == #client_progress + 1
+            or client_progress[i].token == event.data.params.token
+          then
+            client_progress[i] = {
+              token = event.data.params.token,
+              message = ("[%3d%%] %s%s"):format(
                 value.kind == "end" and 100 or value.percentage or 100,
                 value.title or "",
                 value.message and (" **%s**"):format(value.message) or ""
@@ -87,16 +93,19 @@ return {
           end
         end
 
-        local msg = {} ---@type string[]
-        progress[client.id] = vim.tbl_filter(function(v)
-          return table.insert(msg, v.msg) or not v.done
-        end, p)
+        local message = {} ---@type string[]
+        progress_by_client[client.id] = vim.tbl_filter(function(v)
+          return table.insert(message, v.message) or not v.done
+        end, client_progress)
 
-        vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
-          id = "lsp_progress",
+        local is_done = value.kind == "end"
+
+        vim.notify(table.concat(message, "\n"), vim.log.levels.INFO, {
+          id = "lsp_progress_" .. event.data.client_id,
+          timeout = is_done and nil,
           title = client.name,
           opts = function(notification)
-            notification.icon = #progress[client.id] == 0
+            notification.icon = #progress_by_client[client.id] == 0
                 and symbols.progress.done
               or symbols.progress.get_dynamic_spinner()
           end,
