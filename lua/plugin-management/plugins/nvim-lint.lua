@@ -18,8 +18,15 @@ local linters_by_ft = {
   vue = { "markuplint" },
   yaml = { "actionlint", "yamllint" },
   ["yaml.cloudformation"] = { "cfn_lint", "yamllint" },
+  ["*"] = { "cspell" },
   -- cspell:enable
 }
+
+if vim.fn.has "win32" == 1 then
+  -- The LSP version seems to cause weird lag spikes on Windows, use it via
+  -- nvim-lint instead.
+  linters_by_ft["*"] = { "cspell" }
+end
 
 ---@class lint.LinterOverrideConfig
 ---@field args? string[]
@@ -201,6 +208,14 @@ return {
       },
       checkstyle = {
         args = checkstyle_args,
+      },
+      cspell = {
+        condition = function()
+          return require("linters.common.cspell").enable_cspell(
+            vim.bo.buftype,
+            vim.bo.filetype
+          )
+        end,
       },
       markdownlint = {
         condition = function()

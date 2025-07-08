@@ -1,9 +1,16 @@
 local symbols = require "symbols"
 
 local always_install = {
-  "cspell-lsp",
   "typos-lsp",
 }
+
+if vim.fn.has "win32" == 1 then
+  table.insert(always_install, "cspell")
+else
+  -- This seems to cause weird lag spikes on Windows, use it via nvim-lint
+  -- instead.
+  table.insert(always_install, "cspell-lsp")
+end
 
 local prettier = "prettier"
 

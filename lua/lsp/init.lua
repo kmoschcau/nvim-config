@@ -18,11 +18,16 @@ vim.lsp.config("*", {
   capabilities = common.capabilities,
 })
 
+if vim.fn.has "win32" == 0 then
+  -- This seems to cause weird lag spikes on Windows, use it via nvim-lint
+  -- instead.
+  vim.lsp.enable "cspell_ls"
+end
+
 vim.lsp.enable {
   -- cspell:disable
   "astro",
   "bashls",
-  "cspell_ls",
   "cssls",
   "denols",
   "ember",

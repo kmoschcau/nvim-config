@@ -4,10 +4,10 @@
 return {
   root_dir = function(bufnr, on_dir)
     if
-      vim.list_contains(
-        { "cmd", "msg", "pager", "dialog", "fugitive" },
+      require("linters.common.cspell").enable_cspell(
+        vim.bo[bufnr].buftype,
         vim.bo[bufnr].filetype
-      ) or vim.list_contains({ "help" }, vim.bo[bufnr].buftype)
+      )
     then
       return
     end
