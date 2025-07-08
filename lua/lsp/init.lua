@@ -58,7 +58,7 @@ vim.lsp.enable {
   "typos_lsp",
   "vale_ls",
   "vimls",
-  "vue_ls",
+  "vue_ls", -- FIXME: Version 3 requires using vtsls instead of ts_ls.
   "yamlls",
   -- cspell:enable
 }
