@@ -22,6 +22,7 @@ vim.lsp.enable {
   -- cspell:disable
   "astro",
   "bashls",
+  "cspell_ls",
   "cssls",
   "denols",
   "ember",

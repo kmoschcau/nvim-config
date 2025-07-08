@@ -1,7 +1,7 @@
 local symbols = require "symbols"
 
 local always_install = {
-  "cspell",
+  "cspell-lsp",
   "typos-lsp",
 }
 

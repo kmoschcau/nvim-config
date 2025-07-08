@@ -18,7 +18,6 @@ local linters_by_ft = {
   vue = { "markuplint" },
   yaml = { "actionlint", "yamllint" },
   ["yaml.cloudformation"] = { "cfn_lint", "yamllint" },
-  ["*"] = { "cspell" },
   -- cspell:enable
 }
 
@@ -202,14 +201,6 @@ return {
       },
       checkstyle = {
         args = checkstyle_args,
-      },
-      cspell = {
-        condition = function()
-          return not vim.list_contains(
-            { "cmd", "msg", "pager", "dialog", "fugitive" },
-            vim.bo.filetype
-          ) and not vim.list_contains({ "help" }, vim.bo.buftype)
-        end,
       },
       markdownlint = {
         condition = function()
