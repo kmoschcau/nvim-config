@@ -6,12 +6,14 @@
 return {
   -- cspell:disable-next-line
   "andymass/vim-matchup",
-  dependencies = "nvim-treesitter/nvim-treesitter",
-  event = "BufReadPost",
-  init = function()
-    vim.g.matchup_matchparen_offscreen = {
-      border = "none",
-      method = "popup",
-    }
-  end,
+  ---@module "match-up"
+  ---@type matchup.Config
+  opts = {
+    matchparen = {
+      offscreen = {
+        border = "none",
+        method = "popup",
+      },
+    },
+  },
 }
