@@ -1,4 +1,4 @@
--- cspell:words denols omnisharp
+-- cspell:words denols omnisharp vtsls
 
 local M = {}
 
@@ -7,8 +7,8 @@ M.defaults = {
   ---@type "omnisharp" | "roslyn_ls" | "roslyn.nvim"
   dotnet_server = "roslyn.nvim",
   ---Which LSP server to use for ECMAScript.
-  ---@type "denols" | "ts_ls" | "typescript-tools"
-  ecma_server = "typescript-tools",
+  ---@type "denols" | "ts_ls" | "typescript-tools" | "vtsls"
+  ecma_server = "vtsls",
 }
 
 M.schema = {
@@ -22,7 +22,7 @@ M.schema = {
     type = "string",
     description = "Which LSP server to use for ECMAScript.",
     default = M.defaults.ecma_server,
-    enum = { "denols", "ts_ls", "typescript-tools" },
+    enum = { "denols", "ts_ls", "typescript-tools", "vtsls" },
   },
 }
 

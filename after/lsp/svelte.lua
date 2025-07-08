@@ -1,4 +1,5 @@
 local common = require "lsp.common"
+local tsserver = require "lsp.common.tsserver"
 
 ---@type vim.lsp.Config
 return {
@@ -7,7 +8,7 @@ return {
     css = common.settings.css,
     less = common.settings.less,
     scss = common.settings.scss,
-    javascript = common.settings.javascript,
-    typescript = common.settings.typescript,
+    javascript = tsserver.settings.javascript,
+    typescript = tsserver.settings.typescript,
   },
 }

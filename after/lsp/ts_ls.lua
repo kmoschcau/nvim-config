@@ -1,30 +1,16 @@
 -- cspell:words lspconfig neoconf
 
-local common = require "lsp.common"
-
-local ts = common.settings.typescript
-
-local filetypes = {
-  "javascript",
-  "javascriptreact",
-  "typescript",
-  "typescriptreact",
-  "vue",
-}
+local tsserver = require "lsp.common.tsserver"
 
 ---@type vim.lsp.Config
 return {
-  filetypes = filetypes,
+  filetypes = tsserver.filetypes,
   -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#initializationoptions
   init_options = {
     plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = vim.fn.expand "$MASON/packages/vue-language-server/node_modules/@vue/language-server",
-        languages = filetypes,
-      },
+      tsserver.vue_plugin,
     },
-    preferences = ts.preferences,
+    preferences = tsserver.settings.typescript.preferences,
   },
   root_dir = function(bufnr, on_dir)
     local config =
@@ -40,8 +26,5 @@ return {
       )(fname)
     )
   end,
-  settings = {
-    javascript = common.settings.javascript,
-    typescript = ts,
-  },
+  settings = tsserver.settings,
 }

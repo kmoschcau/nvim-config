@@ -1,7 +1,7 @@
 -- cspell:words denols lspconfig neoconf
 
-local common = require "lsp.common"
-local ts = common.settings.typescript
+local tsserver = require "lsp.common.tsserver"
+local ts = tsserver.settings.typescript
 
 ---@type vim.lsp.Config
 return {
@@ -27,7 +27,7 @@ return {
         references = ts.referencesCodeLens.enabled,
         referencesAllFunctions = ts.referencesCodeLens.showOnAllFunctions,
       },
-      inlayHints = common.ts_inlay_vs_code_settings,
+      inlayHints = tsserver.ts_inlay_vs_code_settings,
     },
   },
 }

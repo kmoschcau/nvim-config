@@ -84,6 +84,7 @@ local lsp_to_mason_package = {
   ts_ls = "typescript-language-server",
   vale_ls = "vale-ls",
   vimls = "vim-language-server",
+  vtsls = "vtsls",
   vue_ls = "vue-language-server",
   yamlls = "yaml-language-server",
   -- cspell:enable

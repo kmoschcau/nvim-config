@@ -10,20 +10,13 @@ if config.ecma_server ~= "typescript-tools" then
   return
 end
 
-local common = require "lsp.common"
-
-local ts = common.settings.typescript
+local tsserver = require "lsp.common.tsserver"
+local ts = tsserver.settings.typescript
 
 require("typescript-tools").setup {
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-  },
+  filetypes = tsserver.filetypes,
   -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
-  settings = {
+  settings = vim.tbl_extend("force", tsserver.settings, {
     expose_as_code_action = "all",
     complete_function_calls = ts.suggest.completeFunctionCalls,
     code_lens = "all",
@@ -33,10 +26,7 @@ require("typescript-tools").setup {
     tsserver_file_preferences = ts.preferences,
     tsserver_plugins = {
       -- TODO: Notify when this is not installed.
-      "@vue/typescript-plugin",
+      tsserver.vue_plugin.name,
     },
-
-    javascript = common.settings.javascript,
-    typescript = ts,
-  },
+  }),
 }
