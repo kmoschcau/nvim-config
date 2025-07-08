@@ -82,7 +82,7 @@ return {
           then
             client_progress[i] = {
               token = event.data.params.token,
-              message = ("[%3d%%] %s%s"):format(
+              message = ("%3d%% %s%s"):format(
                 value.kind == "end" and 100 or value.percentage or 100,
                 value.title or "",
                 value.message and (" **%s**"):format(value.message) or ""
