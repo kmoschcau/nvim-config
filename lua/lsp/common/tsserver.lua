@@ -79,6 +79,7 @@ local js_like = {
 
 local has_neoconf, neoconf = pcall(require, "neoconf")
 
+-- https://code.visualstudio.com/docs/reference/default-settings
 -- https://github.com/yioneko/vtsls/blob/main/packages/service/configuration.schema.json
 M.settings = {
   javascript = vim.tbl_deep_extend("force", js_like, {

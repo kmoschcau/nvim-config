@@ -8,7 +8,5 @@ return {
     "templ",
     -- cspell:enable
   },
-  settings = {
-    html = require("lsp.common").settings.html,
-  },
+  settings = require("lsp.common.vscode-html").settings,
 }
