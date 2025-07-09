@@ -80,13 +80,22 @@ return {
             i == #client_progress + 1
             or client_progress[i].token == event.data.params.token
           then
+            local message_parts = {}
+            if value.percentage then
+              table.insert(message_parts, ("%3d%%"):format(value.percentage))
+            end
+
+            if value.title then
+              table.insert(message_parts, value.title)
+            end
+
+            if value.message then
+              table.insert(message_parts, ("**%s**"):format(value.message))
+            end
+
             client_progress[i] = {
               token = event.data.params.token,
-              message = ("%3d%% %s%s"):format(
-                value.kind == "end" and 100 or value.percentage or 100,
-                value.title or "",
-                value.message and (" **%s**"):format(value.message) or ""
-              ),
+              message = table.concat(message_parts, " "),
               done = value.kind == "end",
             }
             break
