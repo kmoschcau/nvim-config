@@ -300,6 +300,7 @@ return function(client, bufnr)
   })
 
   -- textDocument/typeDefinition
+  -- mapped to grt by default
   local type_definition_impl, type_definition_impl_desc =
     common.choose_keymap_implementation(
       keymap_implementation,
