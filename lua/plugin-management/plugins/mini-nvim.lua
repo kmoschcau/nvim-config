@@ -7,7 +7,19 @@ return {
   -- cspell:disable-next-line
   "echasnovski/mini.nvim",
   config = function()
-    require("mini.ai").setup()
+    require("mini.ai").setup {
+      mappings = {
+        -- These would otherwise override neovim defaults and I don't use them.
+        around_next = "",
+        inside_next = "",
+        around_last = "",
+        inside_last = "",
+
+        -- I don't need these and they just pollute the global mappings.
+        goto_left = "",
+        goto_right = "",
+      },
+    }
 
     require("mini.align").setup {
       mappings = {

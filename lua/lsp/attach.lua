@@ -280,6 +280,9 @@ return function(client, bufnr)
     )
   end
 
+  -- textDocument/selectionRange
+  -- mapped in visual to "an" and "in" by default
+
   -- textDocument/semanticTokens/full
   -- see: |lsp-semantic_tokens|
 
