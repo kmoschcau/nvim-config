@@ -160,7 +160,7 @@ end
 local function make_syn_with_bg(hue)
   return {
     fg = convert(30, 100, hue),
-    bg = convert(90, 5, hue),
+    bg = convert(92, 5, hue),
   }
 end
 
