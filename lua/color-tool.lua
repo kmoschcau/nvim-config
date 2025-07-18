@@ -562,6 +562,7 @@ local function create_preview_buffer(
   ---@type string[]
   local lines = {}
 
+  vim.list_extend(lines, { "cspell:disable" })
   vim.list_extend(lines, { "-- Highlights --" })
   insert_highlight_preview_header(lines, max_name_length)
   vim.list_extend(lines, { "Light:" })
@@ -609,7 +610,7 @@ local function create_preview_buffer(
 
   local ext_ns = vim.api.nvim_create_namespace "highlight-previews-extmarks"
 
-  local start_after_line = 2
+  local start_after_line = 3
   color_highlight_preview_lines(
     bufnr,
     ext_ns,
