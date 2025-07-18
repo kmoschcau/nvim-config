@@ -51,6 +51,7 @@ vim.opt.comments:remove ":%"
 vim.opt.completefuzzycollect = { "files", "keyword", "whole_line" }
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
 vim.o.conceallevel = 2
+vim.opt.diffopt:append "anchor"
 vim.opt.diffopt:append "hiddenoff"
 vim.opt.diffopt:remove "inline:simple"
 vim.opt.diffopt:append "inline:word"
