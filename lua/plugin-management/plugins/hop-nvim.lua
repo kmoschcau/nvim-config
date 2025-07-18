@@ -16,7 +16,7 @@ return {
 
     local hint = require "hop.hint"
 
-    vim.keymap.set({ "n" }, "s", function()
+    vim.keymap.set({ "n" }, "<C-j>", function()
       ---@diagnostic disable-next-line: missing-fields
       hop.hint_camel_case {}
     end, {
