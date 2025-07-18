@@ -2,6 +2,7 @@
 
 (directive_attribute
   [
+    "#"
     ":"
     "@"
   ] @punctuation.special)
