@@ -160,7 +160,7 @@ end
 local function make_syn_with_bg(hue)
   return {
     fg = convert(30, 100, hue),
-    bg = convert(92, 5, hue),
+    bg = convert(92, 7, hue),
   }
 end
 
@@ -1351,13 +1351,13 @@ local palette = {
     property         = convert(60, 100, H.syntax.property),
     special          = convert(55,  20, H.syntax.special),
     statement        = convert(70, 100, H.syntax.statement),
-    storage_class    = convert(80, 100, H.syntax.storage_class),
+    storage_class    = convert(70, 100, H.syntax.storage_class),
     string           = make_syn_with_bg(H.syntax.string),
     structure        = convert(40, 100, H.syntax.structure),
-    type             = convert(70, 100, H.syntax.typedef - 20),
+    type             = convert(69, 100, H.syntax.typedef - 20),
     typedef          = convert(60, 100, H.syntax.typedef),
     underlined       = convert(50, 100, H.syntax.underlined),
-    variable         = convert(70, 100, H.syntax.variable),
+    variable         = convert(69, 100, H.syntax.variable),
   },
 }
 
@@ -1379,7 +1379,7 @@ local terminal_colors_light = {
   convert(60, 100, HUES.blue),
   convert(60, 100, HUES.purple),
   convert(60, 100, HUES.teal),
-  modify_l(normal.fg, 80),
+  modify_l(normal.fg, 64),
 }
 
 vim.list_extend(
