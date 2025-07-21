@@ -210,6 +210,26 @@ return function(client, bufnr)
     desc = "LSP: Toggle inlay hints in the buffer.",
   })
 
+  -- textDocument/linkedEditingRange
+  -- see: |lsp-linked_editing_range|
+  vim.lsp.linked_editing_range.enable(true)
+  vim.api.nvim_buf_create_user_command(
+    bufnr,
+    "LspLinkedEditingEnable",
+    function()
+      vim.lsp.linked_editing_range(true)
+    end,
+    {}
+  )
+  vim.api.nvim_buf_create_user_command(
+    bufnr,
+    "LspLinkedEditingDisable",
+    function()
+      vim.lsp.linked_editing_range(false)
+    end,
+    {}
+  )
+
   -- textDocument/prepareTypeHierarchy
   -- see: |vim.lsp.buf.typehierarchy()|
   vim.keymap.set("n", "<Space>tb", function()
