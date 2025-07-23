@@ -1,8 +1,6 @@
 local symbols = require "symbols"
 
-local always_install = {
-  "typos-lsp",
-}
+local always_install = {}
 
 if vim.fn.has "win32" == 1 then
   table.insert(always_install, "cspell")
