@@ -29,6 +29,7 @@ vim.lsp.enable {
   "astro",
   "bashls",
   "cssls",
+  "docker_language_server",
   "denols",
   "ember",
   "eslint",
