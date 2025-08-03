@@ -40,3 +40,5 @@
 (class_declaration
   "class" @keyword.class
   name: (type_identifier) @class)
+
+(this_type) @type.builtin
