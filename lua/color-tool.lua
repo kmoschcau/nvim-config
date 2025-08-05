@@ -1726,6 +1726,12 @@ local highlights_light = {
 
   ["@lsp.type.string.terraform-vars"] = { link = "String" },
 
+  -- }}}
+
+  -- vue {{{
+
+  ["@lsp.type.component.vue"] = { link = "Structure" },
+
   -- }}}}}}}}}
 
   -- Plugins {{{
