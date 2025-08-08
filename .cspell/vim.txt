@@ -96,6 +96,7 @@ undofile
 updatetime
 vimscript
 wildoptions
+win_findbuf
 winborder
 winnr
 winwidth
