@@ -160,7 +160,7 @@ end
 ---@type LazyPluginSpec
 return {
   -- cspell:disable-next-line
-  "mfussenegger/nvim-lint",
+  "https://codeberg.org/mfussenegger/nvim-lint",
   dependencies = {
     -- cspell:disable
     "folke/neoconf.nvim",

@@ -6,7 +6,7 @@ return {
   "rcarriga/nvim-dap-ui",
   dependencies = {
     -- cspell:disable
-    "mfussenegger/nvim-dap",
+    "https://codeberg.org/mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
     -- cspell:enable
   },

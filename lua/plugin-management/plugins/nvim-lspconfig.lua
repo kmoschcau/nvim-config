@@ -10,7 +10,7 @@ return {
     -- cspell:disable
     "Hoffs/omnisharp-extended-lsp.nvim",
     "folke/neoconf.nvim",
-    "mfussenegger/nvim-jdtls",
+    "https://codeberg.org/mfussenegger/nvim-jdtls",
     {
       "pmizio/typescript-tools.nvim",
       dependencies = {

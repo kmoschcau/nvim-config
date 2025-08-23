@@ -1859,7 +1859,7 @@ local highlights_light = {
 
   -- }}}
 
-  -- nvim-dap | https://github.com/mfussenegger/nvim-dap {{{
+  -- nvim-dap | https://codeberg.org/mfussenegger/nvim-dap {{{
 
   DapBreakpoint          = { fg = palette.debug.breakpoint.normal, bg = framing.neutral.b.bg },
   DapBreakpointCondition = { fg = palette.debug.breakpoint.conditional, bg = framing.neutral.b.bg },

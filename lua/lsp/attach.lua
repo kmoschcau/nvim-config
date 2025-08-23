@@ -119,7 +119,7 @@ return function(client, bufnr)
 
   -- textDocument/diagnostic
   -- cspell:disable-next-line
-  -- plugin: mfussenegger/nvim-lint
+  -- plugin: https://codeberg.org/mfussenegger/nvim-lint
   -- see: |lsp-diagnostic|
   -- see: |vim.diagnostic|
 
