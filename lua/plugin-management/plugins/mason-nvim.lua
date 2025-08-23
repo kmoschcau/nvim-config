@@ -24,6 +24,7 @@ local pkgs_by_ft = {
     "google-java-format",
     "java-debug-adapter",
     "java-test",
+    "jdtls",
   },
   javascript = { prettier },
   javascriptreact = { prettier },

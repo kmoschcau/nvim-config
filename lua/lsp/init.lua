@@ -39,6 +39,7 @@ vim.lsp.enable {
   "gradle_ls",
   "helm_ls",
   "html",
+  "jdtls",
   "jedi_language_server",
   "jqls",
   "jsonls",
