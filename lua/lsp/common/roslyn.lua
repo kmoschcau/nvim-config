@@ -22,7 +22,7 @@ function M.get_roslyn_cmd()
     "--stdio",
     "--logLevel=Information",
     "--extensionLogDirectory",
-    vim.fs.dirname(vim.lsp.get_log_path()),
+    vim.fs.dirname(vim.lsp.log.get_filename()),
   })
 
   if not mason_utils.is_package_installed "rzls" then
