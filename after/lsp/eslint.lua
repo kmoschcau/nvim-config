@@ -12,8 +12,9 @@ return {
     "vue",
     "svelte",
     "astro",
+    "htmlangular",
   },
-  -- https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint#settings-options
+  -- https://github.com/Microsoft/vscode-eslint#settings-options
   settings = {
     eslint = {
       experimental = {
@@ -23,14 +24,20 @@ return {
         enable = false,
       },
       probe = {
-        "html",
+        "svelte",
+        -- default ones below
+        "astro",
+        "civet",
         "javascript",
         "javascriptreact",
-        "markdown",
-        "svelte",
         "typescript",
         "typescriptreact",
+        "html",
+        "mdx",
         "vue",
+        "markdown",
+        "json",
+        "jsonc",
       },
     },
   },
