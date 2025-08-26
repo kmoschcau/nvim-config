@@ -212,7 +212,6 @@ return function(client, bufnr)
 
   -- textDocument/linkedEditingRange
   -- see: |lsp-linked_editing_range|
-  vim.lsp.linked_editing_range.enable(true)
   vim.api.nvim_buf_create_user_command(
     bufnr,
     "LspLinkedEditingEnable",
