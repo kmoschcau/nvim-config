@@ -32,11 +32,7 @@ function M.log_capabilities(client, buf_id)
   local longest_meth = 0
   local entries = {}
   for meth_name, capability in
-    pairs(
-      vim.lsp.protocol._request_name_to_capability
-        or vim.lsp._request_name_to_capability
-        or {}
-    )
+    pairs(vim.lsp.protocol._request_name_to_server_capability or {})
   do
     local cap_name = table.concat(capability, ".")
     longest_cap = math.max(longest_cap, #cap_name)
@@ -91,7 +87,7 @@ function M.supports_method(client, method)
 
   return vim.tbl_get(
     client.server_capabilities or {},
-    unpack(vim.lsp._request_name_to_capability[method])
+    unpack(vim.lsp._request_name_to_server_capability[method])
   ) and true or false
 end
 
