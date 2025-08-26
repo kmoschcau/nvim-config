@@ -28,23 +28,18 @@ function M.log_capabilities(client, buf_id)
   local buffer_name = vim.api.nvim_buf_get_name(buf_id or 0)
   local title = "Capabilities for " .. client.name .. " at " .. buffer_name
 
-  local longest_cap = 0
   local longest_meth = 0
   local entries = {}
   for meth_name, capability in
     pairs(vim.lsp.protocol._request_name_to_server_capability or {})
   do
     local cap_name = table.concat(capability, ".")
-    longest_cap = math.max(longest_cap, #cap_name)
     longest_meth = math.max(longest_meth, #meth_name)
 
     local entry = {
-      cap_marker = vim.tbl_get(
-        client.server_capabilities or {},
-        unpack(capability)
-      ) and "[X]" or "[ ]",
       cap_name = cap_name,
-      meth_marker = M.supports_method(client, meth_name) and "[X]" or "[ ]",
+      ---@diagnostic disable-next-line: param-type-mismatch
+      marker = client:supports_method(meth_name) and "- [X]" or "- [ ]",
       meth_name = meth_name,
     }
 
@@ -59,36 +54,15 @@ function M.log_capabilities(client, buf_id)
     table.insert(
       lines,
       string.format(
-        "%s %-" .. longest_meth .. "s %s %-" .. longest_cap .. "s",
-        entry.meth_marker,
+        "%s %-" .. longest_meth .. "s %s",
+        entry.marker,
         entry.meth_name,
-        entry.cap_marker,
         entry.cap_name
       )
     )
   end
 
-  vim.notify(table.concat(lines, "\n"), vim.log.levels.DEBUG, { title = title })
-end
-
----Check whether the given client's server supports the given LSP method. If
----the given client is `nil`, this always returns false.
----@param client vim.lsp.Client | nil the LSP client whose server to check
----@param method string the method name of the method to check
----@return boolean
-function M.supports_method(client, method)
-  if client == nil then
-    return false
-  end
-
-  if client.supports_method then
-    return client:supports_method(method)
-  end
-
-  return vim.tbl_get(
-    client.server_capabilities or {},
-    unpack(vim.lsp._request_name_to_server_capability[method])
-  ) and true or false
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO, { title = title })
 end
 
 ---@alias KeymapImplementation "nvim" | "snacks" | "omnisharp_extended" | nil

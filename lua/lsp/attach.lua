@@ -149,7 +149,7 @@ return function(client, bufnr)
   end
 
   -- textDocument/foldingRange
-  if common.supports_method(client, "textDocument/foldingRange") then
+  if client and client:supports_method "textDocument/foldingRange" then
     vim.opt_local.foldexpr = "v:lua.vim.lsp.foldexpr()"
     vim.opt_local.foldmethod = "expr"
   end
