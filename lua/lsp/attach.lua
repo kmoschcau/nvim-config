@@ -210,6 +210,28 @@ return function(client, bufnr)
     desc = "LSP: Toggle inlay hints in the buffer.",
   })
 
+  -- textDocument/inlineCompletion
+  -- see: |lsp-inline_completion|
+  vim.lsp.inline_completion.enable(true)
+  vim.keymap.set("i", "<M-n>", function()
+    vim.lsp.inline_completion.select { count = 1 }
+  end, {
+    buffer = bufnr,
+    desc = "LSP: Select next inline completion candidate.",
+  })
+  vim.keymap.set("i", "<M-p>", function()
+    vim.lsp.inline_completion.select { count = -1 }
+  end, {
+    buffer = bufnr,
+    desc = "LSP: Select previous inline completion candidate.",
+  })
+  vim.keymap.set("i", "<M-c>", function()
+    vim.lsp.inline_completion.get()
+  end, {
+    buffer = bufnr,
+    desc = "LSP: Apply the current inline completion candidate.",
+  })
+
   -- textDocument/linkedEditingRange
   -- see: |lsp-linked_editing_range|
   vim.api.nvim_buf_create_user_command(

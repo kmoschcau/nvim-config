@@ -62,7 +62,7 @@ function M.log_capabilities(client, buf_id)
     )
   end
 
-  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO, { title = title })
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.DEBUG, { title = title })
 end
 
 ---@alias KeymapImplementation "nvim" | "snacks" | "omnisharp_extended" | nil
