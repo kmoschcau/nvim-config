@@ -136,11 +136,11 @@ return {
   dependencies = {
     -- cspell:disable
     "L3MON4D3/LuaSnip",
-    "echasnovski/mini.nvim",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
     "moyiz/blink-emoji.nvim",
     "mtoohey31/cmp-fish",
+    "nvim-mini/mini.nvim", -- for icons
     "rafamadriz/friendly-snippets",
     "rcarriga/cmp-dap",
     "ribru17/blink-cmp-spell",

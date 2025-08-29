@@ -37,7 +37,7 @@ local WRITE_COLORSCHEME = true
 
 -- NOTE: All manipulation is done in Oklch color space.
 -- Get interactive view at https://bottosson.github.io/misc/colorpicker/
--- Install https://github.com/echasnovski/mini.colors to have this working
+-- Install https://github.com/nvim-mini/mini.colors to have this working
 local has_mini_colors, mini_colors = pcall(require, "mini.colors")
 if not has_mini_colors then
   vim.notify("Could not require mini.colors.", vim.log.levels.ERROR)
@@ -1845,7 +1845,7 @@ local highlights_light = {
 
   -- }}}
 
-  -- mini.icons | https://github.com/echasnovski/mini.colors{{{
+  -- mini.icons | https://github.com/nvim-mini/mini.colors {{{
 
   MiniIconsAzure  = { fg = convert(60, 100, HUES.azure) },
   MiniIconsBlue   = { fg = convert(60, 100, HUES.blue) },

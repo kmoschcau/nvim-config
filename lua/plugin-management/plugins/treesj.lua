@@ -8,7 +8,7 @@ return {
   "Wansmer/treesj",
   dependencies = {
     -- cspell:disable
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim",
     -- cspell:enable
   },
   config = function()

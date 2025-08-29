@@ -6,7 +6,7 @@ return {
   "stevearc/oil.nvim",
   dependencies = {
     -- cspell:disable
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim", -- for icons
     -- cspell:enable
   },
   config = function()

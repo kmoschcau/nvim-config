@@ -5,7 +5,7 @@
 ---@type LazyPluginSpec
 return {
   -- cspell:disable-next-line
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   config = function()
     require("mini.ai").setup {
       mappings = {

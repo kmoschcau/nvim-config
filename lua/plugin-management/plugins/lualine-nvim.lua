@@ -12,7 +12,7 @@ return {
   dependencies = {
     -- cspell:disable
     "SmiteshP/nvim-navic",
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim", -- for icons
     -- cspell:enable
   },
   config = function()
