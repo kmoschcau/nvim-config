@@ -11,6 +11,25 @@ local has_blink, blink = pcall(require, "blink.cmp")
 M.capabilities = has_blink and blink.get_lsp_capabilities()
   or vim.lsp.protocol.make_client_capabilities()
 
+---Create a user command to trigger the LSP Source Actions selection.
+---@param client vim.lsp.Client the client that nvim is attaching to
+---@param bufnr integer the buffer number
+function M.create_source_actions_user_command(client, bufnr)
+  vim.api.nvim_buf_create_user_command(bufnr, "LspSourceAction", function()
+    local source_actions = vim.tbl_filter(function(action)
+      return vim.startswith(action, "source.")
+    end, client.server_capabilities.codeActionProvider.codeActionKinds)
+
+    vim.lsp.buf.code_action {
+      context = {
+        diagnostics = {},
+        only = source_actions,
+        triggerKind = 1,
+      },
+    }
+  end, {})
+end
+
 ---Log the given client's server's capabilities
 ---@param client vim.lsp.Client | nil the LSP client to log capabilities for
 ---@param buf_id? integer the buffer number, defaults to 0

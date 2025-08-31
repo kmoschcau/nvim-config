@@ -6,24 +6,7 @@ local tsserver = require "lsp.common.tsserver"
 return {
   filetypes = tsserver.filetypes,
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(
-      bufnr,
-      "LspTypescriptSourceAction",
-      function()
-        local source_actions = vim.tbl_filter(function(action)
-          return vim.startswith(action, "source.")
-        end, client.server_capabilities.codeActionProvider.codeActionKinds)
-
-        vim.lsp.buf.code_action {
-          context = {
-            diagnostics = {},
-            only = source_actions,
-            triggerKind = 1,
-          },
-        }
-      end,
-      {}
-    )
+    require("lsp.common").create_source_actions_user_command(client, bufnr)
   end,
   root_dir = function(bufnr, on_dir)
     local config =
