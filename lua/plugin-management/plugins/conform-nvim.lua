@@ -32,6 +32,7 @@ return {
       javascriptreact = { prettier },
       jq = { "jq" },
       json = { prettier },
+      json5 = { prettier },
       jsonc = { prettier },
       less = { prettier },
       lua = { "stylua" },

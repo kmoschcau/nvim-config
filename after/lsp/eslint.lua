@@ -2,6 +2,9 @@
 return {
   filetypes = {
     "html", -- needs @html-eslint/parser
+    "json", -- needs @eslint/json
+    "json5", -- needs @eslint/json
+    "jsonc", -- needs @eslint/json
     -- default ones below
     "javascript",
     "javascriptreact",
@@ -37,6 +40,7 @@ return {
         "vue",
         "markdown",
         "json",
+        "json5",
         "jsonc",
       },
     },

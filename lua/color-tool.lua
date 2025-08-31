@@ -1648,6 +1648,8 @@ local highlights_light = {
 
   -- Custom captures {{{
 
+  ["@reset.bold"]        = { bold = false, nocombine = true },
+
   ["@keyword.class"]     = { fg = palette.syntax.structure, bold = true },
   ["@keyword.interface"] = { fg = palette.syntax.meta_programming, bold = true },
   ["@keyword.module"]    = { link = "@keyword.import" },
