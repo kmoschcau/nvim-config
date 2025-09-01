@@ -20,9 +20,6 @@ return {
   -- https://github.com/Microsoft/vscode-eslint#settings-options
   settings = {
     eslint = {
-      experimental = {
-        useFlatConfig = true,
-      },
       format = {
         enable = false,
       },
