@@ -8,15 +8,19 @@ return {
   "windwp/nvim-autopairs",
   config = true,
   init = function()
-    local has_autopairs, nvim_autopairs = pcall(require, "nvim-autopairs")
+    local has_autopairs, autopairs = pcall(require, "nvim-autopairs")
     if not has_autopairs then
       return
     end
 
-    nvim_autopairs.add_rules {
-      require "nvim-autopairs.rule"("{{", "  }", "vue")
+    local rule = require "nvim-autopairs.rule"
+    local ts_conds = require "nvim-autopairs.ts-conds"
+
+    autopairs.add_rules {
+      rule("{{", "  }", "vue")
         :set_end_pair_length(2)
-        :with_pair(require("nvim-autopairs.ts-conds").is_ts_node "text"),
+        :with_pair(ts_conds.is_ts_node "text"),
+      rule("<!--", "  -->", "vue"):set_end_pair_length(4),
     }
   end,
 }
