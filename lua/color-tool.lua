@@ -48,7 +48,7 @@ local has_mini_icons, icons = pcall(require, "mini.icons")
 
 ---Get the highlight group from mini.icons for the given file name.
 ---@param name string the name of the file to get the highlight for
----@param opts GetMiniIconHlOptions? additional options
+---@param opts? GetMiniIconHlOptions additional options
 ---@return string?
 local function get_mini_icon_hl(name, opts)
   local options = opts or {}
