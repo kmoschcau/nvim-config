@@ -88,6 +88,7 @@ local lsp_to_mason_package = {
   terraform_lsp = "terraform-ls",
   texlab = "texlab",
   ts_ls = "typescript-language-server",
+  ts_query_ls = "ts_query_ls",
   vale_ls = "vale-ls",
   vimls = "vim-language-server",
   vtsls = "vtsls",

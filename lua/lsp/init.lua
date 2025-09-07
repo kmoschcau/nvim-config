@@ -62,6 +62,7 @@ vim.lsp.enable {
   "terraformls",
   "texlab",
   "ts_ls",
+  "ts_query_ls",
   "vale_ls",
   "vimls",
   "vtsls",
