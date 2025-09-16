@@ -2,7 +2,6 @@ local M = {}
 
 ---When typing "await" add "async" to the function declaration if the function
 ---isn't async already.
--- TODO: handle `public foo() in typescript`
 function M.add_async()
   vim.api.nvim_feedkeys("t", "n", true)
 
@@ -16,24 +15,33 @@ function M.add_async()
   local function_node = require("auto-snippets.init").find_node_ancestor({
     "arrow_function",
     "function_declaration",
-    "function",
     "method_definition",
   }, vim.treesitter.get_node { ignore_injections = false })
   if not function_node then
     return
   end
 
-  local bufnr = vim.api.nvim_get_current_buf()
+  local target_node = function_node:child(0)
 
-  if
-    vim.startswith(vim.treesitter.get_node_text(function_node, bufnr), "async")
-  then
+  if not target_node then
     return
   end
 
-  local start_row, start_col = function_node:start()
+  if target_node:type() == "accessibility_modifier" then
+    target_node = function_node:child(1)
+  end
+
+  if not target_node then
+    return
+  end
+
+  if not target_node or target_node:type() == "async" then
+    return
+  end
+
+  local start_row, start_col = target_node:start()
   vim.api.nvim_buf_set_text(
-    bufnr,
+    vim.api.nvim_get_current_buf(),
     start_row,
     start_col,
     start_row,
