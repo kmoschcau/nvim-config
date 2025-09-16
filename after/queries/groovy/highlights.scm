@@ -1,6 +1,5 @@
 ; extends
 
-; operators
 (unit
   "." @operator)
 

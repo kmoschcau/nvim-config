@@ -1,6 +1,5 @@
 ; extends
 
-; namespaces
 (ambient_declaration
   "global" @module)
 
@@ -8,7 +7,6 @@
   "namespace" @keyword.module
   name: (identifier) @module)
 
-; generics
 (type_arguments
   [
     "<"

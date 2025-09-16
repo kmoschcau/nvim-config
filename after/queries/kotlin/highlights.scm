@@ -1,6 +1,5 @@
 ; extends
 
-; namespaces
 (package_header
   "package" @keyword.module)
 

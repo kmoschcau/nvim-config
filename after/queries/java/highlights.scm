@@ -1,6 +1,5 @@
 ; extends
 
-; operators
 (method_invocation
   "." @operator)
 
@@ -10,7 +9,6 @@
 (wildcard
   "?" @punctuation.special)
 
-; namespaces
 (package_declaration
   "package" @keyword.module
   (scoped_identifier
@@ -24,7 +22,6 @@
   (scoped_identifier
     (identifier) @module))
 
-; generics
 (generic_type
   (type_arguments
     [
@@ -32,7 +29,6 @@
       ">"
     ] @punctuation.special))
 
-; type declarations
 (enum_declaration
   "enum" @keyword.enum
   name: (identifier) @enum)
@@ -48,7 +44,6 @@
   "class" @keyword.class
   name: (identifier) @class)
 
-; type references
 (class_declaration
   interfaces: (super_interfaces
     (type_list

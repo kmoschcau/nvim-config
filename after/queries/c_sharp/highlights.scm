@@ -1,14 +1,11 @@
 ; extends
 
-; keywords
 (lambda_expression
   (modifier) @keyword.coroutine)
 
-; operators
 (binary_expression
   operator: _ @operator)
 
-; namespaces
 (extern_alias_directive
   "extern" @keyword.import
   "alias" @keyword.import
@@ -29,7 +26,6 @@
 (namespace_declaration
   "namespace" @keyword.module)
 
-; generics
 (type_parameter_list
   [
     "<"
@@ -42,7 +38,6 @@
     ">"
   ] @punctuation.special)
 
-; type declarations
 (class_declaration
   "class" @keyword.class)
 
