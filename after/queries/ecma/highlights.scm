@@ -13,4 +13,8 @@
   [
     "get"
     "set"
-  ] @keyword.property)
+  ] @keyword.property
+  name: (property_identifier) @property)
+
+(class_declaration
+  "class" @keyword.class)
