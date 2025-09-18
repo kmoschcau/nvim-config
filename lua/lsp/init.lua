@@ -32,7 +32,6 @@ vim.lsp.enable {
   "docker_language_server",
   "denols",
   "ember",
-  "eslint",
   "fish_lsp",
   "gh_actions_ls",
   -- "glint", -- FIXME: Currently tries to start local server, even if not installed

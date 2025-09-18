@@ -60,7 +60,6 @@ local lsp_to_mason_package = {
   cssls = "css-lsp",
   denols = "deno",
   -- ember = "ember-language-server",
-  eslint = "eslint-lsp",
   fish_lsp = "fish-lsp",
   -- gh_actions_ls = "gh-actions-language-server",
   gradle_ls = "gradle-language-server",
