@@ -25,6 +25,19 @@ return {
         "astro",
         "htmlangular", -- cspell:disable-line
       },
+      handlers = {
+        ["eslint/noConfig"] = function()
+          vim.notify(
+            "Could not find a configuration file.",
+            vim.log.levels.ERROR,
+            { title = "eslint" }
+          )
+          return {}
+        end,
+      },
+      settings = {
+        nodePath = vim.NIL,
+      },
     }
   end,
 }
