@@ -392,6 +392,7 @@ local function color_preview(bufnr, name, spec, ext_ns, line_index)
 end
 
 ---Check the given spec's contrast ratio and add a diagnostic if it is too low.
+---@param bufnr number the buffer number of the preview buffer
 ---@param diagnostics vim.Diagnostic[] the diagnostics to append to
 ---@param name string the name of the highlight to check
 ---@param spec vim.api.keyset.highlight the highlight spec to check
@@ -399,6 +400,7 @@ end
 ---@param normal vim.api.keyset.highlight the "Normal" highlight group as fallback
 ---@param line_index integer where to place a potential diagnostic
 local function check_contrast(
+  bufnr,
   diagnostics,
   name,
   spec,
@@ -414,8 +416,11 @@ local function check_contrast(
   local number_length = #string.format("%.1f", contrast)
 
   if contrast < CONTRAST_ERROR_THRESHOLD then
-    table.insert(diagnostics, {
+    ---@type vim.Diagnostic
+    local diagnostic = {
+      bufnr = bufnr,
       lnum = line_index,
+      end_lnum = line_index,
       col = 5 + max_name_length + 9 - number_length,
       end_col = 5 + max_name_length + 9,
       severity = vim.diagnostic.severity.ERROR,
@@ -427,10 +432,14 @@ local function check_contrast(
       ),
       source = "color-tool",
       code = "contrast-below-error-threshold",
-    })
+    }
+    table.insert(diagnostics, diagnostic)
   elseif contrast < CONTRAST_WARNING_THRESHOLD then
-    table.insert(diagnostics, {
+    ---@type vim.Diagnostic
+    local diagnostic = {
+      bufnr = bufnr,
       lnum = line_index,
+      end_lnum = line_index,
       col = 5 + max_name_length + 9 - number_length,
       end_col = 5 + max_name_length + 9,
       severity = vim.diagnostic.severity.WARN,
@@ -442,7 +451,8 @@ local function check_contrast(
       ),
       source = "color-tool",
       code = "contrast-below-warning-threshold",
-    })
+    }
+    table.insert(diagnostics, diagnostic)
   end
 end
 
@@ -495,6 +505,7 @@ local function color_highlight_preview_lines(
 
       if not hl.link then
         check_contrast(
+          bufnr,
           diagnostics,
           name,
           spec,
@@ -531,7 +542,7 @@ local function color_terminal_preview_lines(
 
     color_preview(bufnr, name, spec, ext_ns, line_index)
 
-    check_contrast(diagnostics, name, spec, 2, normal, line_index)
+    check_contrast(bufnr, diagnostics, name, spec, 2, normal, line_index)
   end
 end
 

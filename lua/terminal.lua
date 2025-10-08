@@ -80,7 +80,9 @@ vim.api.nvim_create_autocmd("TermRequest", {
 
     ---@type vim.Diagnostic
     local diagnostic = {
+      bufnr = args.buf,
       lnum = row,
+      end_lnum = row,
       col = col,
       end_col = col,
       severity = vim.diagnostic.severity.ERROR,
