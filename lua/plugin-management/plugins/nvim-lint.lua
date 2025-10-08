@@ -1,4 +1,4 @@
--- cspell:words neoconf
+-- cspell:words sarif
 
 ---@type table<string, string[]>
 local linters_by_ft = {

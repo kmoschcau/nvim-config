@@ -1,5 +1,3 @@
--- cspell:words neoconf
-
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec

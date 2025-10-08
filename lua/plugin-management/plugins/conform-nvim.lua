@@ -1,5 +1,3 @@
--- cspell:words rzls
-
 local prettier = "prettier"
 
 local ignored_servers = {

@@ -1,5 +1,3 @@
--- cspell:words libexec rzls
-
 local mason_utils = require "plugin-management.mason-utils"
 
 local M = {}
@@ -29,6 +27,7 @@ function M.get_roslyn_cmd()
     return cmd
   end
 
+  -- cspell:disable-next-line
   local rzls_path = vim.fn.expand "$MASON/packages/rzls/libexec"
   vim.list_extend(cmd, {
     "--razorSourceGenerator",

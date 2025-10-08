@@ -1,5 +1,5 @@
 -- vim: foldmethod=marker
--- cspell:words omnisharp
+-- cspell:words typehierarchy
 
 ---@param client vim.lsp.Client | nil the LSP client
 ---@param bufnr number the buffer number

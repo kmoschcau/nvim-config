@@ -1,4 +1,4 @@
--- cspell:words lazydev luvit
+-- cspell:words lazydev luvit wezterm
 
 -- selene: allow(mixed_table)
 ---@module "lazy"

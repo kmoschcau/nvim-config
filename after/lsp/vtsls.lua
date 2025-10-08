@@ -1,5 +1,3 @@
--- cspell:words lspconfig neoconf vtsls
-
 local tsserver = require "lsp.common.tsserver"
 
 ---@type vim.lsp.Config

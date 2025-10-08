@@ -1,5 +1,3 @@
--- cspell:words customdata
-
 local M = {}
 
 -- https://code.visualstudio.com/docs/reference/default-settings
@@ -22,6 +20,7 @@ local style = {
 
 M.settings = {
   css = vim.tbl_deep_extend("force", style, {
+    -- cspell:disable-next-line
     customdata = {
       "~/.config/nvim/external-config/container.css-data.json",
     },

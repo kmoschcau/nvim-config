@@ -1,5 +1,3 @@
--- cspell:words lspconfig
-
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec

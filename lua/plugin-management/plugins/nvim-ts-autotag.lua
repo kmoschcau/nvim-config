@@ -1,5 +1,3 @@
--- cspell:words nvim-ts-autotag windwp
-
 -- selene: allow(mixed_table)
 ---@module "lazy"
 ---@type LazyPluginSpec

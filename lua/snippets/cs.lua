@@ -1,4 +1,5 @@
--- cspell:words cref inheritdoc langword luasnip paramref seealso typeparam typeparamref
+-- cspell:words cref inheritdoc langword luasnip paramref seealso typeparam
+-- cspell:words typeparamref
 
 local ls = require "luasnip"
 local s = ls.snippet

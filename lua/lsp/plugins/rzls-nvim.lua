@@ -1,5 +1,3 @@
--- cspell:words neoconf rzls
-
 local has_neoconf, neoconf = pcall(require, "neoconf")
 
 local config = has_neoconf

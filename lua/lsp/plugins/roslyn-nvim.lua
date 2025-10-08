@@ -1,5 +1,3 @@
--- cspell:words filewatching neoconf rzls
-
 local has_neoconf, neoconf = pcall(require, "neoconf")
 
 local config = has_neoconf
@@ -12,5 +10,6 @@ end
 
 require "lsp.plugins.rzls-nvim"
 require("roslyn").setup {
+  -- cspell:disable-next-line
   filewatching = "off",
 }

@@ -77,7 +77,6 @@ local js_like = {
   },
 }
 
--- cspell:words neoconf
 local has_neoconf, neoconf = pcall(require, "neoconf")
 
 -- https://code.visualstudio.com/docs/reference/default-settings

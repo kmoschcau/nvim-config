@@ -1,7 +1,5 @@
 -- vim: foldmethod=marker
--- cspell:words cterm ctermbg ctermfg lnum Okhsl Oklab Oklch truecolor
--- cspell:words Pmenu Sbar
--- cspell:words altfont guicursor nocombine undercurl underdashed underdotted underdouble
+-- cspell:words lualine
 
 -- Setup {{{
 
@@ -784,7 +782,6 @@ local function write_nvim_colors(
   file:close()
 end
 
--- cspell:words lualine
 local function write_lualine_colors()
   local file = io.open(
     vim.fn.stdpath "config" .. "/lua/lualine/themes/" .. THEME_NAME .. ".lua",
@@ -1024,7 +1021,7 @@ local function write_fish(highlights_light, highlights_dark)
     "    --description 'Set the cursor color for the current mode.' \\"
   )
   table.insert(lines, "    --on-variable fish_bind_mode \\")
-  -- cspell:words fish_postexec
+  -- cspell:disable-next-line
   table.insert(lines, "    --on-event fish_postexec \\")
   table.insert(lines, "    --on-event fish_focus_in")
   table.insert(lines, "")
@@ -1047,13 +1044,13 @@ local function write_fish(highlights_light, highlights_dark)
   table.insert(lines, "    end")
   table.insert(lines, "end")
   table.insert(lines, "")
-  -- cspell:words fish_vi_cursor_handle_preexec_color
+  -- cspell:disable-next-line
   table.insert(lines, "function fish_vi_cursor_handle_preexec_color \\")
   table.insert(
     lines,
     "    --description 'Set the cursor color for the neutral cursor.' \\"
   )
-  -- cspell:words fish_preexec
+  -- cspell:disable-next-line
   table.insert(lines, "    --on-event fish_preexec")
   table.insert(lines, "")
   table.insert(lines, "    echo -en $fish_cursor_color_normal")
@@ -1558,7 +1555,6 @@ local highlights_light = {
   -- Syntax groups language overrides {{{
 
   -- razor {{{
-  -- cspell:words razorhtml razorcs
 
   razorhtmlAttribute   = { link = "@tag.attribute" },
   razorhtmlTagName     = { link = "@tag" },
@@ -1680,7 +1676,6 @@ local highlights_light = {
 
   -- C# {{{
 
-  -- cspell:words omnisharp
   -- Omnisharp {{{
 
   ["@lsp.type.constantName.cs"] = { fg = palette.syntax.member, italic = false, nocombine = true },
@@ -1789,7 +1784,7 @@ local highlights_light = {
 
   -- }}}
 
-  -- cspell:words gitsigns
+  -- cspell:disable-next-line
   -- gitsigns | https://github.com/lewis6991/gitsigns.nvim {{{
 
   GitSignsAdd          = { fg = palette.diff.add.strong, bg = framing.neutral.b.bg },
@@ -1871,7 +1866,7 @@ local highlights_light = {
 
   -- }}}
 
-  -- cspell:words navic
+  -- cspell:disable-next-line
   -- nvim-navic | https://github.com/SmiteshP/nvim-navic {{{
 
   NavicIconsArray         = { fg = palette.syntax.structure, bg = framing.neutral.c.bg },

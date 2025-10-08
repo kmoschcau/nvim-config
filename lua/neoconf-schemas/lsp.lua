@@ -1,5 +1,3 @@
--- cspell:words denols omnisharp vtsls
-
 local M = {}
 
 M.defaults = {

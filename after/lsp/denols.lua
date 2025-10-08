@@ -1,5 +1,3 @@
--- cspell:words denols lspconfig neoconf
-
 local tsserver = require "lsp.common.tsserver"
 local ts = tsserver.settings.typescript
 

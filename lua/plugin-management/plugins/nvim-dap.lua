@@ -1,4 +1,4 @@
--- cspell:words dapui logpoint netcoredbg nlua
+-- cspell:words ASPNETCORE dapui logpoint netcoredbg nlua
 
 -- selene: allow(mixed_table)
 ---@module "lazy"
@@ -41,7 +41,6 @@ return {
         justMyCode = false,
         stopAtEntry = false,
         env = {
-          -- cspell:words ASPNETCORE
           ASPNETCORE_ENVIRONMENT = "Development",
           ASPNETCORE_URLS = "http://localhost:5274",
         },

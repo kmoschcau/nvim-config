@@ -1,5 +1,3 @@
--- cspell:words azcli csharpierignore gotmpl nswag
-
 local function is_cloud_formation(bufnr)
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 
@@ -40,6 +38,7 @@ end
 
 vim.filetype.add {
   extension = {
+    -- cspell:disable
     azcli = "ps1",
     cshtml = "razor",
     gotmpl = "gotmpl",
@@ -48,14 +47,19 @@ vim.filetype.add {
     razor = "razor",
     yaml = with_cloud_formation "yaml",
     yml = with_cloud_formation "yaml",
+    -- cspell:enable
   },
   filename = {
+    -- cspell:disable
     [".csharpierignore"] = "gitignore",
     ["quick-lint-js.config"] = "json",
+    -- cspell:enable
   },
   pattern = {
+    -- cspell:disable
     [".*/templates/.*%.tpl"] = "helm",
     [".*/templates/.*%.ya?ml"] = "helm",
     ["helmfile.*%.ya?ml"] = "helm",
+    -- cspell:enable
   },
 }

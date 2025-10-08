@@ -1,5 +1,3 @@
--- cspell:words neoconf
-
 ---@type vim.lsp.Config
 return {
   cmd = require("lsp.common.roslyn").get_roslyn_cmd(),

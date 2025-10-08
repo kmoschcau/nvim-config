@@ -1,5 +1,3 @@
--- cspell:words omnisharp
-
 local M = {}
 
 ---The autocommand group for LSP init autocommands.

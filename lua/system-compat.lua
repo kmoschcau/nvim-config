@@ -1,3 +1,5 @@
+-- cspell:words darkman pwsh wslview wslu
+
 local M = {}
 
 ---Append a file extension (default: "cmd") to the given base name, when
@@ -21,7 +23,6 @@ function M.get_browser_command()
     return "xdg-open"
   end
 
-  -- cspell:words wslview wslu
   if vim.fn.executable "wslview" == 1 then
     return "wslview"
   elseif vim.fn.has "wsl" == 1 then
@@ -58,7 +59,6 @@ function M.get_system_background()
     return result.stdout:match "0x1" and "light" or "dark"
   end
 
-  -- cspell:words darkman
   if vim.fn.executable "darkman" == 1 then
     local result = vim.system({ "darkman", "get" }, { text = true }):wait()
 
@@ -104,7 +104,6 @@ function M.set_up_shell(use_default)
     return
   end
 
-  -- cspell:words pwsh
   local has_pwsh = vim.fn.executable "pwsh"
   local has_powershell = vim.fn.executable "powershell"
   if has_pwsh or has_powershell then

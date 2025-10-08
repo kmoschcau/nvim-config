@@ -1,14 +1,6 @@
 # cspell:words lualine
 ---
 version: "0.2"
-dictionaryDefinitions:
-  - name: tech-speak
-    path: ./.cspell/tech-speak.txt
-  - name: vim
-    path: ./.cspell/vim.txt
-dictionaries:
-  - tech-speak
-  - vim
 ignorePaths:
   - "/colors/new.lua"
   - "/external-config/eclipse-formatter.xml"
@@ -16,3 +8,125 @@ ignorePaths:
   - "/lua/lualine/themes/new.lua"
   - "/spell/"
   - "**/Session.vim"
+words:
+  - Okhsl
+  - Oklab
+  - Oklch
+  - Pmenu
+  - Sbar
+  - altfont
+  - augroup
+  - autocmd
+  - autocommand
+  - autocommands
+  - blinkoff
+  - blinkon
+  - blinkwait
+  - breakindent
+  - breakindentopt
+  - bufhidden
+  - bufnr
+  - bufnrs
+  - buftype
+  - colorcolumn
+  - commentstring
+  - completefuzzycollect
+  - completeopt
+  - conceallevel
+  - cterm
+  - ctermbg
+  - ctermfg
+  - defaulttable
+  - denols
+  - diffopt
+  - emsg
+  - exitcode
+  - expandtab
+  - exrc
+  - extmark
+  - extmarks
+  - extui
+  - fargs
+  - fileformat
+  - fillchars
+  - fixendofline
+  - fnamemodify
+  - foldenable
+  - foldexpr
+  - foldlevelstart
+  - foldmethod
+  - formatoptions
+  - formatprg
+  - fromstart
+  - getcwd
+  - guicursor
+  - guifont
+  - hiddenoff
+  - ignorecase
+  - inccommand
+  - iskeyword
+  - joinpath
+  - keymap
+  - keymaps
+  - linematch
+  - listchars
+  - lnum
+  - lspconfig
+  - menuone
+  - mousemodel
+  - nargs
+  - neoconf
+  - neovide
+  - nocombine
+  - nofile
+  - noinsert
+  - nospell
+  - nvim
+  - nvim_feedkeys
+  - nvim_list_bufs
+  - omnisharp
+  - pumblend
+  - rzls
+  - scrolljump
+  - setloclist
+  - setqflist
+  - sfile
+  - shellcmdflag
+  - shellpipe
+  - shellquote
+  - shellredir
+  - shellxquote
+  - shiftwidth
+  - showbreak
+  - showmode
+  - sidescrolloff
+  - signcolumn
+  - smartcase
+  - smarttab
+  - spellfile
+  - spelllang
+  - spelloptions
+  - splitbelow
+  - splitkeep
+  - startswith
+  - statusline
+  - stdpath
+  - subtypes
+  - supertypes
+  - texthl
+  - textwidth
+  - trimempty
+  - truecolor
+  - undercurl
+  - underdashed
+  - underdotted
+  - underdouble
+  - undofile
+  - updatetime
+  - vimscript
+  - vtsls
+  - wildoptions
+  - win_findbuf
+  - winborder
+  - winnr
+  - winwidth
