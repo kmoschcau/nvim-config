@@ -206,12 +206,15 @@ end
 ---fields.
 ---@param highlights table<string, vim.api.keyset.highlight>
 local function add_cterm_values(highlights)
+  ---comment
+  ---@param color MiniColorsColor
+  ---@return number | "NONE" | nil
   local function convert_to_8bit(color)
     if color == nil or color == "NONE" then
       return color
     end
 
-    return require("mini.colors").convert(color, "8-bit")
+    return require("mini.colors").convert(color, "8-bit") --[[@as number]]
   end
 
   for _, value in pairs(highlights) do
@@ -365,7 +368,7 @@ end
 ---Insert the preview lines for the terminal colors into the given lines.
 ---@param lines string[] the lines to insert into
 ---@param colors string[] the colors to preview
----@param bg string the background color to contrast against
+---@param bg MiniColorsColor the background color to contrast against
 local function insert_terminal_colors_preview_lines(lines, colors, bg)
   for index, value in ipairs(colors) do
     table.insert(
@@ -388,7 +391,7 @@ end
 ---@param line_index number the line index where to place the highlight
 local function color_preview(bufnr, name, spec, ext_ns, line_index)
   vim.api.nvim_set_hl(0, name, spec)
-  vim.api.nvim_buf_add_highlight(bufnr, ext_ns, name, line_index, 0, 3)
+  vim.hl.range(bufnr, ext_ns, name, { line_index, 0 }, { line_index, 3 })
 end
 
 ---Check the given spec's contrast ratio and add a diagnostic if it is too low.
@@ -885,26 +888,32 @@ local function write_fish(highlights_light, highlights_dark)
   ---@param highlight vim.api.keyset.highlight
   ---@param omit_bg boolean | nil
   local function insert_highlight_line(lines, name, highlight, omit_bg)
-    local line = "            set --global fish_" .. name
-
-    if highlight.fg then
-      line = line .. " " .. convert_to_fish(highlight.fg)
+    local fg = highlight.fg
+    local bg = highlight.bg
+    if type(fg) == "number" and type(bg) == "number" then
+      return
     end
 
-    if highlight.bg and not omit_bg then
-      line = line .. " --background " .. convert_to_fish(highlight.bg)
+    local line = "            set --global fish_" .. name
+
+    if type(fg) == "string" then
+      line = line .. " " .. convert_to_fish(fg)
+    end
+
+    if type(bg) == "string" and not omit_bg then
+      line = line .. " --background " .. convert_to_fish(bg)
     end
 
     line = line .. get_decoration_flags(highlight)
 
     line = line .. " #"
 
-    if highlight.fg then
-      line = line .. " fg: " .. highlight.fg
+    if fg then
+      line = line .. " fg: " .. fg
     end
 
-    if highlight.bg and not omit_bg then
-      line = line .. " bg: " .. highlight.bg
+    if bg and not omit_bg then
+      line = line .. " bg: " .. bg
     end
 
     table.insert(lines, line)
@@ -912,8 +921,12 @@ local function write_fish(highlights_light, highlights_dark)
 
   ---@param lines table<string>
   ---@param name string
-  ---@param color string
+  ---@param color number | string
   local function insert_color_line(lines, name, color)
+    if type(color) == "number" then
+      return
+    end
+
     table.insert(
       lines,
       "            set --global fish_"
@@ -982,8 +995,12 @@ local function write_fish(highlights_light, highlights_dark)
 
   ---@param lines table<string>
   ---@param name string
-  ---@param color string
+  ---@param color number | string
   local function insert_cursor_color(lines, name, color)
+    if type(color) == "number" then
+      return
+    end
+
     local line = "            set --global fish_cursor_color_"
       .. name
       .. ' "\\e]12;rgb:'
