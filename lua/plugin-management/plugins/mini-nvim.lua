@@ -40,7 +40,7 @@ return {
     icons.mock_nvim_web_devicons()
 
     local misc = require "mini.misc"
-    if not vim.g.neovide and vim.fn.has "win32" == 0 then
+    if not vim.g.neovide then
       misc.setup_termbg_sync()
     end
 
