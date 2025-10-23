@@ -22,7 +22,12 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.incoming_calls,
-      {}
+      {
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_incoming_calls,
+          snacks_default_options
+        ),
+      }
     )
   if incoming_calls_impl then
     vim.keymap.set("n", "<Space>ci", incoming_calls_impl, {
@@ -38,7 +43,12 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.outgoing_calls,
-      {}
+      {
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_outgoing_calls,
+          snacks_default_options
+        ),
+      }
     )
   if outgoing_calls_impl then
     vim.keymap.set("n", "<Space>co", outgoing_calls_impl, {
