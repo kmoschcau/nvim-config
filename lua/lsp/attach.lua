@@ -149,7 +149,14 @@ return function(client, bufnr)
     common.choose_keymap_implementation(
       keymap_implementation,
       vim.lsp.buf.document_symbol,
-      { snacks_impl = snacks.picker.lsp_symbols }
+      {
+        snacks_impl = common.with_options(
+          snacks.picker.lsp_symbols,
+          vim.tbl_deep_extend("force", snacks_default_options, {
+            keep_parents = true,
+          })
+        ),
+      }
     )
   if document_symbol_impl then
     vim.keymap.set("n", "gO", document_symbol_impl, {
