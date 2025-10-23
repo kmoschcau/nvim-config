@@ -60,6 +60,18 @@ return {
       snacks.picker.grep()
     end, { desc = "Snacks picker: Open live grep search." })
 
+    vim.keymap.set("n", "<Space>pR", function()
+      snacks.picker.resume()
+    end, { desc = "Snacks picker: Resume the last picker." })
+
+    vim.keymap.set("n", "<Space>prf", function()
+      snacks.picker.resume { source = "files" }
+    end, { desc = "Snacks picker: Resume the file search." })
+
+    vim.keymap.set("n", "<Space>prg", function()
+      snacks.picker.resume { source = "grep" }
+    end, { desc = "Snacks picker: Resume the live grep search." })
+
     -- TODO: get rid of progress_by_client and just use separate notifications
     -- per token
 
