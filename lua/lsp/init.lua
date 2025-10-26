@@ -46,6 +46,7 @@ vim.lsp.enable {
   "lemminx",
   "lua_ls",
   "marksman",
+  "nushell",
   "omnisharp",
   "phpactor",
   "powershell_es",
