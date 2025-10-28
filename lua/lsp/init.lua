@@ -31,10 +31,10 @@ vim.lsp.enable {
   "cssls",
   "docker_language_server",
   "denols",
-  "ember",
+  -- "ember", -- FIXME: This spews errors into the log when no cmd present.
   "fish_lsp",
   "gh_actions_ls",
-  -- "glint", -- FIXME: Currently tries to start local server, even if not installed
+  -- "glint", -- FIXME: Currently tries to start local server, even if not installed.
   "gradle_ls",
   "helm_ls",
   "html",
