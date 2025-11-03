@@ -65,7 +65,7 @@
   "rest.nvim": { "branch": "main", "commit": "5466d1e447fc4b038ef511a7a2c4c7cbb13da01a" },
   "roslyn.nvim": { "branch": "main", "commit": "7ba2dd0a5628c5ad3d8cc5a22e66ece3efc371bc" },
   "rzls.nvim": { "branch": "main", "commit": "bbfe0f5429cc74ca53815875faf4710c2a54f01b" },
-  "snacks.nvim": { "branch": "main", "commit": "52d544cc64da4e9cae4f3df5adf7a777b2ed0217" },
+  "snacks.nvim": { "branch": "main", "commit": "8bb3ad6c53232b4c7f0cf430ef3df1bef69fd6ee" },
   "ssr.nvim": { "branch": "main", "commit": "7c95cfa5836508f08ae833a4b31d2ed265560f64" },
   "statuscol.nvim": { "branch": "main", "commit": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc" },
   "tabular": { "branch": "master", "commit": "12437cd1b53488e24936ec4b091c9324cafee311" },
