@@ -22,12 +22,6 @@ local linters_by_ft = {
   -- cspell:enable
 }
 
-if vim.fn.has "win32" == 1 then
-  -- The LSP version seems to cause weird lag spikes on Windows, use it via
-  -- nvim-lint instead.
-  linters_by_ft["*"] = { "cspell" }
-end
-
 ---@class lint.LinterOverrideConfig
 ---@field args? string[]
 ---@field condition? fun(event_args: vim.api.keyset.create_autocmd.callback_args): boolean, boolean?
