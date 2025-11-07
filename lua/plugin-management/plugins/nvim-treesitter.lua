@@ -68,13 +68,6 @@ return {
       indent = {
         enable = true,
       },
-
-      -- cspell:disable-next-line
-      -- andymass/vim-matchup
-      -- FIXME: This doesn't work with nvim-treesitter main branch
-      matchup = {
-        enable = true,
-      },
     }
   end,
 }
