@@ -1,9 +1,14 @@
+local web_injects = { "css", "javascript" }
+local front_end_framework_injects =
+  vim.list_extend({ "scss", "typescript" }, web_injects)
+
 local injections = {
   gitcommit = { "diff" },
-  html = { "javascript", "css" },
-  lua = { "luadoc" },
+  html = web_injects,
   markdown = { "mermaid" },
   markdown_inline = { "mermaid" },
+  svelte = front_end_framework_injects,
+  vue = front_end_framework_injects,
 }
 
 local function enable_features(buf)
