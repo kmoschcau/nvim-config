@@ -235,13 +235,13 @@ vim.keymap.set("n", "]Fa", function()
 end, { desc = "Formatoptions: Disable automatic paragraph formatting." })
 
 -- highlight group inspection
-vim.keymap.set("n", "<F10>", vim.show_pos, {
-  desc = "Syntax: Show highlight group information at cursor position.",
-})
+vim.keymap.set("n", "<F10>", function()
+  vim.show_pos()
+end, { desc = "Syntax: Show highlight group information at cursor position." })
 
-vim.keymap.set("n", "<S-F10>", vim.treesitter.inspect_tree, {
-  desc = "Treesitter: Show tree inspection window.",
-})
+vim.keymap.set("n", "<F22>", function()
+  vim.treesitter.inspect_tree()
+end, { desc = "Treesitter: Show tree inspection window." })
 
 -- }}}}}}
 
