@@ -16,18 +16,10 @@ return {
     pcall(vim.cmd, "TSUpdate")
   end,
   config = function()
-    local has_dap_repl_hl, dap_repl_hl =
-      pcall(require, "nvim-dap-repl-highlights")
-    if not has_dap_repl_hl then
-      return
-    end
-
     local has_configs, configs = pcall(require, "nvim-treesitter.configs")
     if not has_configs then
       return
     end
-
-    dap_repl_hl.setup()
 
     ---@diagnostic disable-next-line: missing-fields
     configs.setup {
