@@ -32,6 +32,7 @@ xpcall(require, error_handler, "lsp")
 xpcall(require, error_handler, "diagnostics")
 xpcall(require, error_handler, "extui")
 xpcall(require, error_handler, "filetype")
+xpcall(require, error_handler, "kmo.treesitter")
 xpcall(require, error_handler, "terminal")
 
 -- }}}
@@ -62,8 +63,6 @@ vim.o.expandtab = true
 vim.o.exrc = true
 vim.opt.fillchars = opt_sym.fillchars
 vim.o.foldenable = false
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldmethod = "expr"
 vim.o.formatoptions = "cro/qnlj" -- cspell:disable-line
 vim.o.guicursor = table.concat(
   vim.tbl_map(function(pair)

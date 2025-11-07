@@ -10,7 +10,6 @@ return {
     -- cspell:disable
     "folke/snacks.nvim",
     "jbyuki/one-small-step-for-vimkind",
-    "nvim-treesitter/nvim-treesitter",
     -- cspell:enable
   },
   config = function()

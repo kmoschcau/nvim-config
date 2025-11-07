@@ -64,6 +64,7 @@ words:
   - hiddenoff
   - ignorecase
   - inccommand
+  - indentexpr
   - iskeyword
   - joinpath
   - keymap

@@ -1,0 +1,1 @@
+require "kmo.treesitter"

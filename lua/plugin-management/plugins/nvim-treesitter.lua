@@ -4,62 +4,12 @@
 return {
   -- cspell:disable-next-line
   "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    -- cspell:disable
-    "LiadOz/nvim-dap-repl-highlights",
-    -- cspell:enable
-  },
   lazy = false,
-  -- TODO: migrate to "main"
-  branch = "master",
+  branch = "main",
   build = function()
     pcall(vim.cmd, "TSUpdate")
   end,
   config = function()
-    local has_configs, configs = pcall(require, "nvim-treesitter.configs")
-    if not has_configs then
-      return
-    end
-
-    ---@diagnostic disable-next-line: missing-fields
-    configs.setup {
-      ensure_installed = {
-        -- This should only include languages that are not automatically
-        -- installed, most often because they are injected.
-        "comment",
-        "dap_repl",
-        "diff", -- injected in git commit
-        "luadoc",
-        "markdown",
-        "markdown_inline",
-        "mermaid",
-        "printf",
-        "regex",
-      },
-      auto_install = true,
-
-      -- modules below
-
-      -- nvim-treesitter/nvim-treesitter
-      highlight = {
-        enable = true,
-      },
-
-      -- nvim-treesitter/nvim-treesitter
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<Tab>",
-          scope_incremental = "<CR>",
-          node_decremental = "<S-Tab>",
-        },
-      },
-
-      -- nvim-treesitter/nvim-treesitter
-      indent = {
-        enable = true,
-      },
-    }
+    require("nvim-treesitter").install { "comment", "printf", "regex" }
   end,
 }

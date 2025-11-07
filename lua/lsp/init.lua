@@ -26,6 +26,7 @@ vim.lsp.enable {
   "docker_language_server",
   "denols",
   -- "ember", -- FIXME: This spews errors into the log when no cmd present.
+  "emmet_language_server",
   "fish_lsp",
   "gh_actions_ls",
   -- "glint", -- FIXME: Currently tries to start local server, even if not installed.
