@@ -48,14 +48,6 @@ return {
 
       -- modules below
 
-      -- cspell:disable-next-line
-      -- RRethy/nvim-treesitter-endwise
-      -- FIXME: This doesn't work with nvim-treesitter main branch
-      -- https://github.com/RRethy/nvim-treesitter-endwise/issues/27
-      endwise = {
-        enable = true,
-      },
-
       -- nvim-treesitter/nvim-treesitter
       highlight = {
         enable = true,
