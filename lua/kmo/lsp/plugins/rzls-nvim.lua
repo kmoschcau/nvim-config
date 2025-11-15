@@ -8,8 +8,7 @@ if config.dotnet_server ~= "roslyn.nvim" then
   return
 end
 
-require "lsp.plugins.rzls-nvim"
-require("roslyn").setup {
-  -- cspell:disable-next-line
-  filewatching = "off",
+require("rzls").setup {
+  capabilities = require("kmo.lsp.common").capabilities,
+  on_attach = require "kmo.lsp.attach",
 }

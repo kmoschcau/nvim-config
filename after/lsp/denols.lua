@@ -1,4 +1,4 @@
-local tsserver = require "lsp.common.tsserver"
+local tsserver = require "kmo.lsp.common.tsserver"
 local ts = tsserver.settings.typescript
 
 ---@type vim.lsp.Config

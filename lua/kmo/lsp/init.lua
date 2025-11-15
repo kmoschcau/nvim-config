@@ -1,7 +1,7 @@
-local common = require "lsp.common"
+local common = require "kmo.lsp.common"
 
-require "lsp.plugins.roslyn-nvim"
-require "lsp.plugins.typescript-tools"
+require "kmo.lsp.plugins.roslyn-nvim"
+require "kmo.lsp.plugins.typescript-tools"
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP: Set up things when attaching with a language client to a buffer.",
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    require "lsp.attach"(client, args.buf)
+    require "kmo.lsp.attach"(client, args.buf)
   end,
 })
 

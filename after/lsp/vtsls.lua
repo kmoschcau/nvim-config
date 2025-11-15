@@ -1,10 +1,10 @@
-local tsserver = require "lsp.common.tsserver"
+local tsserver = require "kmo.lsp.common.tsserver"
 
 ---@type vim.lsp.Config
 return {
   filetypes = tsserver.filetypes,
   on_attach = function(client, bufnr)
-    require("lsp.common").create_source_actions_user_command(client, bufnr)
+    require("kmo.lsp.common").create_source_actions_user_command(client, bufnr)
   end,
   root_dir = function(bufnr, on_dir)
     local config =

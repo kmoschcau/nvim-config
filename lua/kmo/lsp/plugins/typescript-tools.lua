@@ -8,7 +8,7 @@ if config.ecma_server ~= "typescript-tools" then
   return
 end
 
-local tsserver = require "lsp.common.tsserver"
+local tsserver = require "kmo.lsp.common.tsserver"
 local ts = tsserver.settings.typescript
 
 require("typescript-tools").setup {

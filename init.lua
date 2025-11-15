@@ -23,7 +23,7 @@ local error_handler = require("error-handler").handler
 xpcall(require, error_handler, "plugin-management")
 
 -- setup LSP
-xpcall(require, error_handler, "lsp")
+xpcall(require, error_handler, "kmo.lsp")
 
 -- }}}
 

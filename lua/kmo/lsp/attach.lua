@@ -4,7 +4,7 @@
 ---@param client vim.lsp.Client | nil the LSP client
 ---@param bufnr number the buffer number
 return function(client, bufnr)
-  local common = require "lsp.common"
+  local common = require "kmo.lsp.common"
 
   local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
   has_omni_ext = false
@@ -397,5 +397,8 @@ return function(client, bufnr)
   -- see: |vim.lsp.buf.remove_workspace_folder()|
 
   -- textDocument/_vs_onAutoInsert
-  require("lsp.common.roslyn").set_up_vs_on_auto_insert_autocmd(client, bufnr)
+  require("kmo.lsp.common.roslyn").set_up_vs_on_auto_insert_autocmd(
+    client,
+    bufnr
+  )
 end

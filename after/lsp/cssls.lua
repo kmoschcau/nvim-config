@@ -1,4 +1,4 @@
 ---@type vim.lsp.Config
 return {
-  settings = require("lsp.common.vscode-css").settings,
+  settings = require("kmo.lsp.common.vscode-css").settings,
 }

@@ -65,7 +65,11 @@ function M.set_up_vs_on_auto_insert_autocmd(client, bufnr)
           return
         end
 
-        require("lsp.vs-on-auto-insert").trigger_request(client, bufnr, char)
+        require("kmo.lsp.vs-on-auto-insert").trigger_request(
+          client,
+          bufnr,
+          char
+        )
       end,
     })
   end
