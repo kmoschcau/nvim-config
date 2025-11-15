@@ -1,1 +1,1 @@
-require("auto-snippets.ecmascript").register_add_async()
+require("kmo.auto-snippets.ecmascript").register_add_async()

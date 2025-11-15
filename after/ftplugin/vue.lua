@@ -3,4 +3,4 @@
 vim.opt_local.comments =
   { "sO:* -", "mO:*  ", "exO:*/", "s1:/*", "mb:*", "ex:*/", "://" }
 
-require("auto-snippets.ecmascript").register_add_async()
+require("kmo.auto-snippets.ecmascript").register_add_async()
