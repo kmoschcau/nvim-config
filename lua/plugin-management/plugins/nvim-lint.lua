@@ -205,7 +205,7 @@ return {
       },
       cspell = {
         condition = function()
-          return require("linters.common.cspell").enable_cspell(
+          return require("kmo.linters.common.cspell").enable_cspell(
             vim.bo.buftype,
             vim.bo.filetype
           )
