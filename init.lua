@@ -31,7 +31,7 @@ xpcall(require, error_handler, "kmo.lsp")
 
 xpcall(require, error_handler, "kmo.diagnostics")
 xpcall(require, error_handler, "kmo.extui")
-xpcall(require, error_handler, "filetype")
+xpcall(require, error_handler, "kmo.filetype")
 xpcall(require, error_handler, "kmo.treesitter")
 xpcall(require, error_handler, "terminal")
 
