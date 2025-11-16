@@ -1,5 +1,5 @@
 local is_installed =
-  require("plugin-management.mason-utils").is_package_installed "powershell-editor-services"
+  require("kmo.plugin-management.mason-utils").is_package_installed "powershell-editor-services"
 
 ---@type vim.lsp.Config
 return {

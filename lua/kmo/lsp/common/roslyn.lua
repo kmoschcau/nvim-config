@@ -1,4 +1,4 @@
-local mason_utils = require "plugin-management.mason-utils"
+local mason_utils = require "kmo.plugin-management.mason-utils"
 
 local M = {}
 

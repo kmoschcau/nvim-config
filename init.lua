@@ -20,7 +20,7 @@ vim.cmd.colorscheme "new"
 local error_handler = require("error-handler").handler
 
 -- load plugin infrastructure
-xpcall(require, error_handler, "plugin-management")
+xpcall(require, error_handler, "kmo.plugin-management")
 
 -- setup LSP
 xpcall(require, error_handler, "kmo.lsp")

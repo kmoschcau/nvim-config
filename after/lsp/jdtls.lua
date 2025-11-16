@@ -1,6 +1,6 @@
 -- cspell:words jdtls
 
-local mason_utils = require "plugin-management.mason-utils"
+local mason_utils = require "kmo.plugin-management.mason-utils"
 
 ---Get the config file path for jdtls.
 ---@param jdtls_package_path string the mason registry package path for jdtls

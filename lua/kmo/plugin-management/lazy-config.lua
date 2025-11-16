@@ -1,5 +1,5 @@
 ---@diagnostic disable-next-line: missing-fields
-require("lazy").setup("plugin-management.plugins", {
+require("lazy").setup("kmo.plugin-management.plugins", {
   checker = {
     enabled = true,
   },

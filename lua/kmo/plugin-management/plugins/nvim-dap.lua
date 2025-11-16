@@ -16,7 +16,7 @@ return {
     local dap = require "dap"
     local dapui = require "dapui"
     local asp_net_core =
-      require "plugin-management.plugins.nvim-dap.asp-net-core"
+      require "kmo.plugin-management.plugins.nvim-dap.asp-net-core"
 
     dap.adapters.netcoredbg = {
       type = "executable",
