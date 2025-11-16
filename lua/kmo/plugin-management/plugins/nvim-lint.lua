@@ -30,7 +30,7 @@ local linters_by_ft = {
 
 ---@alias lint.LinterOverride lint.Linter | lint.LinterOverrideConfig
 
-local cache = require "cache"
+local cache = require "kmo.cache"
 
 ---@param timeout_ms number
 ---@param fn function
