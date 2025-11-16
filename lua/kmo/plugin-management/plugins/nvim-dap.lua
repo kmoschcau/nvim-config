@@ -140,7 +140,7 @@ return {
       dapui.close()
     end
 
-    local debug = require("symbols").debug
+    local debug = require("kmo.symbols").debug
     vim.fn.sign_define("DapBreakpoint", {
       text = debug.breakpoint.normal,
       texthl = "DapBreakpoint",

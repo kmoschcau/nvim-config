@@ -1,5 +1,5 @@
 local dap = require "dap"
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 
 local M = {}
 

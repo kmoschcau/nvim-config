@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
     local notification_id = "nvim-treesitter install " .. vim.inspect(all_langs)
     local title = "nvim-treesitter install"
-    local symbols = require "symbols"
+    local symbols = require "kmo.symbols"
 
     vim.notify("Installing " .. vim.inspect(all_langs), vim.log.levels.INFO, {
       id = notification_id,

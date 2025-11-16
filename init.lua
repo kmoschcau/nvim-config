@@ -41,7 +41,7 @@ xpcall(require, error_handler, "terminal")
 
 -- Neovim options {{{
 
-local opt_sym = require("symbols").options
+local opt_sym = require("kmo.symbols").options
 
 vim.o.breakindent = true
 vim.opt.breakindentopt = { "list:-1", "min:80", "shift:2", "sbr" }

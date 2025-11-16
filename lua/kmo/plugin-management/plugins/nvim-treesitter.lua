@@ -24,7 +24,7 @@ return {
   build = function()
     local notification_id = "nvim-treesitter update"
     local title = "nvim-treesitter update"
-    local symbols = require "symbols"
+    local symbols = require "kmo.symbols"
 
     vim.notify("Updating languages.", vim.log.levels.INFO, {
       id = notification_id,
@@ -45,7 +45,7 @@ return {
   config = function()
     local notification_id = "nvim-treesitter install base"
     local title = "nvim-treesitter install"
-    local symbols = require "symbols"
+    local symbols = require "kmo.symbols"
 
     local base_langs = { "comment", "printf", "regex" }
     if base_langs_installed(base_langs) then

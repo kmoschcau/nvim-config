@@ -1,6 +1,6 @@
 -- cspell:words dapui lazydev luasnip vimtex
 
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 
 local buffer_source_include_buffer_types = { "", "help" }
 

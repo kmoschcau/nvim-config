@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("TermRequest", {
 
     vim.api.nvim_buf_set_extmark(args.buf, term_prompt_ns, row, col, {
       sign_hl_group = "@punctuation.special",
-      sign_text = require("symbols").signs.term_prompt,
+      sign_text = require("kmo.symbols").signs.term_prompt,
     })
   end,
 })

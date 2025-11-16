@@ -1,6 +1,6 @@
 -- cspell:words gitsigns lualine navic winbar
 
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 local separators = symbols.separators
 
 -- selene: allow(mixed_table)

@@ -5,10 +5,10 @@ vim.diagnostic.config {
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = require("symbols").diagnostics.severities.error,
-      [vim.diagnostic.severity.WARN] = require("symbols").diagnostics.severities.warn,
-      [vim.diagnostic.severity.INFO] = require("symbols").diagnostics.severities.info,
-      [vim.diagnostic.severity.HINT] = require("symbols").diagnostics.severities.hint,
+      [vim.diagnostic.severity.ERROR] = require("kmo.symbols").diagnostics.severities.error,
+      [vim.diagnostic.severity.WARN] = require("kmo.symbols").diagnostics.severities.warn,
+      [vim.diagnostic.severity.INFO] = require("kmo.symbols").diagnostics.severities.info,
+      [vim.diagnostic.severity.HINT] = require("kmo.symbols").diagnostics.severities.hint,
     },
   },
 }

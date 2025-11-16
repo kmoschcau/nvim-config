@@ -1,4 +1,4 @@
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 
 local always_install = {}
 

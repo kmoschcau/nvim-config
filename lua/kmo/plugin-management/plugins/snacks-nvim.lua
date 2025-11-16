@@ -1,4 +1,4 @@
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 
 -- selene: allow(mixed_table)
 ---@module "lazy"

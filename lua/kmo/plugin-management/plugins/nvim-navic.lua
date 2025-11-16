@@ -11,7 +11,7 @@ return {
   },
   -- @type Options -- Does not work, conflicts with other type definitions
   opts = {
-    icons = require("symbols").types,
+    icons = require("kmo.symbols").types,
     highlight = true,
     lsp = {
       auto_attach = true,
@@ -21,6 +21,6 @@ return {
         "ts_ls",
       },
     },
-    separator = " " .. require("symbols").separators.hierarchy.right .. " ",
+    separator = " " .. require("kmo.symbols").separators.hierarchy.right .. " ",
   },
 }

@@ -58,7 +58,7 @@ local function get_mini_icon_hl(name, opts)
   return ({ icons.get(options.category or "default", name) })[2]
 end
 
-local symbols = require "symbols"
+local symbols = require "kmo.symbols"
 
 -- }}}
 

@@ -49,10 +49,10 @@ return {
       enable_autosnippets = true,
       ext_opts = {
         [types.choiceNode] = make_ext_opts(
-          require("symbols").snippet.choice_virtual_text
+          require("kmo.symbols").snippet.choice_virtual_text
         ),
         [types.insertNode] = make_ext_opts(
-          require("symbols").snippet.insert_virtual_text
+          require("kmo.symbols").snippet.insert_virtual_text
         ),
       },
       ext_prio_increase = 2,

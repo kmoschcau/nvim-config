@@ -10,28 +10,28 @@ return {
   opts = {
     keywords = {
       FIX = {
-        icon = require("symbols").todo.fix,
+        icon = require("kmo.symbols").todo.fix,
         color = "error",
         alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
       },
-      TODO = { icon = require("symbols").todo.todo, color = "info" },
-      HACK = { icon = require("symbols").todo.hack, color = "warning" },
+      TODO = { icon = require("kmo.symbols").todo.todo, color = "info" },
+      HACK = { icon = require("kmo.symbols").todo.hack, color = "warning" },
       WARN = {
-        icon = require("symbols").todo.warn,
+        icon = require("kmo.symbols").todo.warn,
         color = "warning",
         alt = { "WARNING", "XXX" },
       },
       PERF = {
-        icon = require("symbols").todo.perf,
+        icon = require("kmo.symbols").todo.perf,
         alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" },
       },
       NOTE = {
-        icon = require("symbols").todo.note,
+        icon = require("kmo.symbols").todo.note,
         color = "hint",
         alt = { "INFO" },
       },
       TEST = {
-        icon = require("symbols").todo.test,
+        icon = require("kmo.symbols").todo.test,
         color = "test",
         alt = { "TESTING", "PASSED", "FAILED" },
       },
