@@ -2,7 +2,7 @@
 return {
   root_dir = function(bufnr, on_dir)
     local config =
-      require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+      require("neoconf").get("lsp", require("kmo.neoconf-schemas.lsp").defaults)
     if config.dotnet_server ~= "omnisharp" then
       return
     end

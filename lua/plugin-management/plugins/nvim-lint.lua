@@ -164,7 +164,7 @@ return {
     -- TODO: extract this into override functions.
     local config = require("neoconf").get(
       "linters",
-      require("neoconf-schemas.linters").defaults
+      require("kmo.neoconf-schemas.linters").defaults
     )
 
     local checkstyle_config = config.java.checkstyle

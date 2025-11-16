@@ -3,7 +3,7 @@ return {
   cmd = require("kmo.lsp.common.roslyn").get_roslyn_cmd(),
   root_dir = function(bufnr, cb)
     local config =
-      require("neoconf").get("lsp", require("neoconf-schemas.lsp").defaults)
+      require("neoconf").get("lsp", require("kmo.neoconf-schemas.lsp").defaults)
     if config.dotnet_server ~= "roslyn_ls" then
       return
     end
