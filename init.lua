@@ -17,7 +17,7 @@ vim.cmd.colorscheme "new"
 
 -- plugins and packages {{{
 
-local error_handler = require("error-handler").handler
+local error_handler = require("kmo.error-handler").handler
 
 -- load plugin infrastructure
 xpcall(require, error_handler, "kmo.plugin-management")
