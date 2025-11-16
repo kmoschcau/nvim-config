@@ -10,7 +10,7 @@ vim.g._ts_force_sync_parsing = true
 
 -- theme settings {{{
 
-vim.o.background = require("system-compat").get_system_background()
+vim.o.background = require("kmo.system-compat").get_system_background()
 vim.cmd.colorscheme "new"
 
 -- }}}
@@ -96,7 +96,7 @@ vim.o.mousemodel = "extend"
 vim.o.number = true
 vim.o.scrolljump = -50
 
-require("system-compat").set_up_shell()
+require("kmo.system-compat").set_up_shell()
 
 vim.o.shiftwidth = 2
 vim.o.showbreak = opt_sym.showbreak
@@ -213,7 +213,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- shell {{{
 
 vim.api.nvim_create_user_command("SetUpShell", function(args)
-  require("system-compat").set_up_shell(args.bang)
+  require("kmo.system-compat").set_up_shell(args.bang)
 end, {
   bang = true,
   bar = true,

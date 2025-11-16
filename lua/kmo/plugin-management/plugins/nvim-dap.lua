@@ -20,7 +20,10 @@ return {
 
     dap.adapters.netcoredbg = {
       type = "executable",
-      command = require("system-compat").append_win_ext("netcoredbg", "exe"),
+      command = require("kmo.system-compat").append_win_ext(
+        "netcoredbg",
+        "exe"
+      ),
       args = { "--interpreter=vscode" },
     }
 

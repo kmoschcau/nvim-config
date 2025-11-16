@@ -16,7 +16,7 @@ require("lazy").setup("kmo.plugin-management.plugins", {
   },
   ui = {
     border = "rounded",
-    browser = require("system-compat").get_browser_command(),
+    browser = require("kmo.system-compat").get_browser_command(),
   },
 })
 
