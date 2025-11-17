@@ -1,9 +1,17 @@
 -- vim: foldmethod=marker
 -- cspell:words typehierarchy
 
+local ignored_filetypes = {
+  "snacks_picker_input",
+}
+
 ---@param client vim.lsp.Client | nil the LSP client
 ---@param bufnr number the buffer number
 return function(client, bufnr)
+  if vim.list_contains(ignored_filetypes, vim.bo[bufnr].filetype) then
+    return
+  end
+
   local common = require "kmo.lsp.common"
 
   local has_omni_ext, omni_ext = pcall(require, "omnisharp_extended")
