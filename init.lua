@@ -1,13 +1,5 @@
 -- vim: foldmethod=marker foldlevelstart=0
 
--- global variables {{{
-
--- This is a temporary workaround to prevent highlight flickering.
--- See: https://github.com/neovim/neovim/issues/32660
-vim.g._ts_force_sync_parsing = true
-
--- }}}
-
 -- theme settings {{{
 
 vim.o.background = require("kmo.system-compat").get_system_background()
