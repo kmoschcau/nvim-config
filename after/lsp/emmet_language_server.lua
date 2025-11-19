@@ -4,5 +4,9 @@ return {
   init_options = {
     -- https://docs.emmet.io/customization/preferences/
     preferences = {},
+    -- https://docs.emmet.io/customization/syntax-profiles/
+    syntaxProfiles = {
+      vue = "xhtml",
+    },
   },
 }
