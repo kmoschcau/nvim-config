@@ -1,13 +1,15 @@
-local web_injects = { "css", "javascript" }
+local web_injects = { "css", "javascript", "jsdoc" }
 local front_end_framework_injects =
   vim.list_extend({ "scss", "typescript" }, web_injects)
 
 local injections = {
   gitcommit = { "diff" },
   html = web_injects,
+  javascript = { "jsdoc" },
   markdown = { "mermaid" },
   markdown_inline = { "mermaid" },
   svelte = front_end_framework_injects,
+  typescript = { "jsdoc" },
   vue = front_end_framework_injects,
 }
 
