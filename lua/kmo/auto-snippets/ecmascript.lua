@@ -12,7 +12,7 @@ function M.add_async()
     return
   end
 
-  local function_node = require("auto-snippets.init").find_node_ancestor({
+  local function_node = require("kmo.auto-snippets.init").find_node_ancestor({
     "arrow_function",
     "function_declaration",
     "method_definition",
