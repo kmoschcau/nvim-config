@@ -41,7 +41,6 @@ vim.o.colorcolumn = "+1"
 vim.opt.comments:remove "n:>"
 vim.opt.comments:remove ":XCOMM" -- cspell:disable-line
 vim.opt.comments:remove ":%"
-vim.opt.completefuzzycollect = { "files", "keyword", "whole_line" }
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
 vim.o.conceallevel = 2
 vim.opt.diffopt:append "algorithm:histogram"

@@ -30,7 +30,6 @@ words:
   - buftype
   - colorcolumn
   - commentstring
-  - completefuzzycollect
   - completeopt
   - conceallevel
   - cterm
