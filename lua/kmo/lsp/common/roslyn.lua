@@ -23,29 +23,6 @@ function M.get_roslyn_cmd()
     vim.fs.dirname(vim.lsp.log.get_filename()),
   })
 
-  if not mason_utils.is_package_installed "rzls" then
-    return cmd
-  end
-
-  -- cspell:disable-next-line
-  local rzls_path = vim.fn.expand "$MASON/packages/rzls/libexec"
-  vim.list_extend(cmd, {
-    "--razorSourceGenerator",
-    vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-    "--razorDesignTimePath",
-    vim.fs.joinpath(
-      rzls_path,
-      "Targets",
-      "Microsoft.NET.Sdk.Razor.DesignTime.targets"
-    ),
-    "--extension",
-    vim.fs.joinpath(
-      rzls_path,
-      "RazorExtension",
-      "Microsoft.VisualStudioCode.RazorExtension.dll"
-    ),
-  })
-
   return cmd
 end
 

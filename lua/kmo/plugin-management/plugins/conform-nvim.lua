@@ -2,7 +2,6 @@ local prettier = "prettier"
 
 local ignored_servers = {
   "html",
-  "rzls",
 }
 
 ---@param client vim.lsp.Client

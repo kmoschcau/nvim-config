@@ -16,7 +16,7 @@ local pkgs_by_ft = {
   -- cspell:disable
   astro = { prettier },
   cs = { "csharpier", "netcoredbg" },
-  cshtml = { "roslyn", "rzls" },
+  cshtml = { "roslyn" },
   css = { prettier },
   html = { "markuplint" },
   java = {
@@ -37,7 +37,7 @@ local pkgs_by_ft = {
   lua = { "selene", "stylua" },
   markdown = { "markdownlint", "proselint" },
   ocaml = { "ocamlformat" },
-  razor = { "roslyn", "rzls" },
+  razor = { "roslyn" },
   sass = { prettier },
   scss = { prettier },
   sh = { "shellharden", "shfmt" },

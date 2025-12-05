@@ -17,7 +17,6 @@ return {
     },
     "saghen/blink.cmp",
     "seblyng/roslyn.nvim",
-    "tris203/rzls.nvim",
     -- cspell:enable
   },
 }

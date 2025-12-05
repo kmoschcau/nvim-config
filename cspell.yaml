@@ -86,7 +86,6 @@ words:
   - nvim_list_bufs
   - omnisharp
   - pumblend
-  - rzls
   - scrolljump
   - setloclist
   - setqflist

@@ -8,7 +8,6 @@ if config.dotnet_server ~= "roslyn.nvim" then
   return
 end
 
-require "kmo.lsp.plugins.rzls-nvim"
 require("roslyn").setup {
   -- cspell:disable-next-line
   filewatching = "off",
