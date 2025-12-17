@@ -15,7 +15,6 @@
   "dial.nvim": { "branch": "master", "commit": "f97c0c7fa7d5111bc04a91d0f693900fb2d95861" },
   "dotnet.nvim": { "branch": "main", "commit": "f5c52f9f52a3d8ca8dff6916c2228fb41a075274" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "garbage-day.nvim": { "branch": "main", "commit": "9c6abdedc0407ca517745a5c8e34214fc7dafaf4" },
   "gitsigns.nvim": { "branch": "main", "commit": "5813e4878748805f1518cee7abb50fd7205a3a48" },
   "grug-far.nvim": { "branch": "main", "commit": "b58b2d65863f4ebad88b10a1ddd519e5380466e0" },
   "hawtkeys.nvim": { "branch": "main", "commit": "261cc311d4abdc88decceca6dc1013faa14c56ea" },
