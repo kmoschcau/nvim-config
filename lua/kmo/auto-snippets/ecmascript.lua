@@ -15,6 +15,7 @@ function M.add_async()
   local function_node = require("kmo.auto-snippets.init").find_node_ancestor({
     "arrow_function",
     "function_declaration",
+    "function_expression",
     "method_definition",
   }, vim.treesitter.get_node { ignore_injections = false })
   if not function_node then
