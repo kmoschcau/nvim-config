@@ -33,7 +33,7 @@ return {
       jsonc = { prettier },
       less = { prettier },
       lua = { "stylua" },
-      markdown = { "injected", "markdownlint" },
+      markdown = { "injected", lsp_format = "last" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
       razor = { "trim_newlines", lsp_format = "first" },

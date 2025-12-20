@@ -10,7 +10,7 @@ local linters_by_ft = {
   ["json.cloudformation"] = { "cfn_lint" },
   kotlin = { "ktlint" },
   lua = { "selene" },
-  markdown = { "markdownlint", "proselint" },
+  markdown = { "proselint", "rumdl" },
   svelte = { "markuplint" },
   tex = { "proselint" },
   tf = { "trivy" },
@@ -209,11 +209,6 @@ return {
             vim.bo.buftype,
             vim.bo.filetype
           )
-        end,
-      },
-      markdownlint = {
-        condition = function()
-          return not vim.list_contains({ "help", "nofile" }, vim.bo.buftype)
         end,
       },
       pmd = {

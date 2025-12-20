@@ -49,6 +49,7 @@ vim.lsp.enable {
   "quick_lint_js",
   "roslyn_ls",
   "ruff",
+  "rumdl",
   "rust_analyzer",
   "stylelint_lsp",
   "somesass_ls",
