@@ -9,6 +9,7 @@ local injections = {
   gitcommit = { "diff" },
   html = web_injects,
   javascript = { "jsdoc" },
+  lua = { "luadoc" },
   markdown = { "mermaid" },
   markdown_inline = { "mermaid" },
   svelte = front_end_framework_injects,
