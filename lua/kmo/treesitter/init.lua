@@ -1,7 +1,10 @@
+---The common injections for web languages
 local web_injects = { "css", "javascript", "jsdoc" }
+---The common injections for web front-end frameworks
 local front_end_framework_injects =
   vim.list_extend({ "scss", "typescript" }, web_injects)
 
+---Base buffer filetypes pointing at injected filetypes
 local injections = {
   gitcommit = { "diff" },
   html = web_injects,
@@ -13,6 +16,8 @@ local injections = {
   vue = front_end_framework_injects,
 }
 
+---Enables nvim-treesitter features for the given buffer.
+---@param buf integer the buffer number
 local function enable_features(buf)
   vim.treesitter.start(buf)
 
@@ -22,7 +27,7 @@ local function enable_features(buf)
   end
 end
 
----Enable treesitter features for the given buffer
+---Enables nvim-treesitter features for the given buffer.
 ---@param buf integer the buffer number
 local function enable_nvim_treesitter_features(buf)
   vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
