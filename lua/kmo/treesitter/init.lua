@@ -22,10 +22,10 @@ local function enable_features(buf)
   end
 end
 
+---Enable treesitter features for the given buffer
+---@param buf integer the buffer number
 local function enable_nvim_treesitter_features(buf)
-  if vim.bo[buf].indentexpr == "" then
-    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end
+  vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end
 
 vim.api.nvim_create_autocmd("FileType", {
