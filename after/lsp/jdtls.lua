@@ -84,7 +84,7 @@ local function get_plugin_bundle_paths()
         "$MASON/packages/java-test/extension/server/com.microsoft.java.test.plugin-*.jar",
         true,
         true
-      ) --[[ @as string[] ]]
+      ) --[=[@as string[]]=]
     )
   end
 
