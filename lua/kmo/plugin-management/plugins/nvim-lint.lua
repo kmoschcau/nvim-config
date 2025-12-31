@@ -12,6 +12,7 @@ local linters_by_ft = {
   lua = { "selene" },
   markdown = { "proselint", "rumdl" },
   svelte = { "markuplint" },
+  systemd = { "systemd-analyze", "systemdlint" },
   tex = { "proselint" },
   tf = { "trivy" },
   ["terraform-vars"] = { "trivy" },

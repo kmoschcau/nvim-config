@@ -54,6 +54,7 @@ vim.lsp.enable {
   "stylelint_lsp",
   "somesass_ls",
   "svelte",
+  "systemd_lsp",
   "tailwindcss",
   "taplo",
   "terraformls",
