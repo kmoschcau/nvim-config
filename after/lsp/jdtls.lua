@@ -20,11 +20,13 @@ end
 ---@param jdtls_package_path string the mason registry package path for jdtls
 ---@return string
 local function get_launch_jar_path(jdtls_package_path)
-  return vim.fn.glob(
-    vim.fs.joinpath(
-      jdtls_package_path,
-      "plugins",
-      "org.eclipse.equinox.launcher_*.jar"
+  return vim.fs.normalize(
+    vim.fn.glob(
+      vim.fs.joinpath(
+        jdtls_package_path,
+        "plugins",
+        "org.eclipse.equinox.launcher_*.jar"
+      )
     )
   )
 end
@@ -32,8 +34,19 @@ end
 ---Get the workspace path for the current working directory.
 ---@return string
 local function get_workspace_path()
+  local prefix
+  if vim.fn.has "win32" == 1 then
+    prefix = vim.fs.joinpath("~", "AppData", "Local")
+  else
+    prefix = vim.fs.joinpath("~", ".local", "share")
+  end
+
   return vim.fs.normalize(
-    "~/.local/share/jdt-ws/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h")
+    vim.fs.joinpath(
+      prefix,
+      "jdt-ws",
+      vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h")
+    )
   )
 end
 
@@ -96,7 +109,34 @@ local function get_plugin_bundle_paths()
   return bundles
 end
 
-local jdtls = require "jdtls"
+local function get_runtimes()
+  local runtimes
+  if vim.fn.has "win32" == 1 then
+    runtimes = {
+      {
+        name = "JavaSE-21",
+        path = "C:/Program Files/Eclipse Adoptium/jdk-21.0.9.10-hotspot",
+      },
+    }
+  else
+    runtimes = {
+      {
+        name = "JavaSE-1.8",
+        path = "/usr/lib/jvm/java-8-openjdk-amd64",
+      },
+      {
+        name = "JavaSE-11",
+        path = "/usr/lib/jvm/java-11-openjdk-amd64",
+      },
+      {
+        name = "JavaSE-23",
+        path = "/usr/lib/jvm/java-23-openjdk",
+      },
+    }
+  end
+
+  return runtimes
+end
 
 ---@type vim.lsp.Config
 return {
@@ -104,7 +144,7 @@ return {
   init_options = { bundles = get_plugin_bundle_paths() },
   on_attach = function()
     ---@diagnostic disable-next-line: missing-fields
-    jdtls.setup_dap {
+    require("jdtls").setup_dap {
       hotcodereplace = "auto", -- cspell:disable-line
     }
   end,
@@ -142,20 +182,7 @@ return {
         overwrite = false,
       },
       configuration = {
-        runtimes = {
-          {
-            name = "JavaSE-1.8",
-            path = "/usr/lib/jvm/java-8-openjdk-amd64",
-          },
-          {
-            name = "JavaSE-11",
-            path = "/usr/lib/jvm/java-11-openjdk-amd64",
-          },
-          {
-            name = "JavaSE-23",
-            path = "/usr/lib/jvm/java-23-openjdk",
-          },
-        },
+        runtimes = get_runtimes(),
         updateBuildConfiguration = "automatic",
       },
       eclipse = {
