@@ -8,6 +8,7 @@ local front_end_framework_injects =
 local injections = {
   gitcommit = { "diff" },
   html = web_injects,
+  java = { "javadoc" },
   javascript = { "jsdoc" },
   lua = { "luadoc" },
   markdown = { "mermaid" },
