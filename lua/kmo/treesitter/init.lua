@@ -5,7 +5,7 @@ local front_end_framework_injects =
   vim.list_extend({ "scss", "typescript" }, web_injects)
 
 ---Base buffer filetypes pointing at injected filetypes
-local injections = {
+local language_injections = {
   gitcommit = { "diff" },
   html = web_injects,
   java = { "javadoc" },
@@ -41,12 +41,22 @@ vim.api.nvim_create_autocmd("FileType", {
     local buf = args.buf
     local filetype = args.match
 
-    local language = vim.treesitter.language.get_lang(filetype) or filetype
+    local buffer_language = vim.treesitter.language.get_lang(filetype)
+      or filetype
+
+    local all_languages = vim.list_extend(
+      { buffer_language },
+      language_injections[buffer_language] or {}
+    )
+
+    local missing_languages = vim.tbl_filter(function(lang)
+      return not (vim.treesitter.language.add(lang) or false)
+    end, all_languages)
 
     local has_nvim_treesitter, nvim_treesitter =
       pcall(require, "nvim-treesitter")
 
-    if vim.treesitter.language.add(language) then
+    if #missing_languages < 1 then
       enable_features(buf)
 
       if has_nvim_treesitter then
@@ -60,35 +70,43 @@ vim.api.nvim_create_autocmd("FileType", {
       return
     end
 
-    local available = nvim_treesitter.get_available()
+    local available_languages = nvim_treesitter.get_available()
 
-    local injected = injections[language]
-    local all_langs = vim.tbl_filter(function(lang)
-      return vim.list_contains(available, lang)
-    end, vim.list_extend({ language }, injected or {}))
+    local filtered_languages = vim.tbl_filter(function(lang)
+      return vim.list_contains(available_languages, lang)
+    end, missing_languages)
 
-    if #all_langs < 1 then
+    if #filtered_languages < 1 then
       return
     end
 
-    local notification_id = "nvim-treesitter install " .. vim.inspect(all_langs)
+    local notification_id = "nvim-treesitter install "
+      .. vim.inspect(filtered_languages)
     local title = "nvim-treesitter install"
     local symbols = require "kmo.symbols"
 
-    vim.notify("Installing " .. vim.inspect(all_langs), vim.log.levels.INFO, {
-      id = notification_id,
-      timeout = false,
-      title = title,
-      opts = function(notification)
-        notification.icon = symbols.progress.get_dynamic_spinner()
-      end,
-    })
-    nvim_treesitter.install(all_langs):await(function()
-      vim.notify("Installed " .. vim.inspect(all_langs), vim.log.levels.INFO, {
+    vim.notify(
+      "Installing " .. vim.inspect(filtered_languages),
+      vim.log.levels.INFO,
+      {
         id = notification_id,
-        icon = symbols.progress.done,
+        timeout = false,
         title = title,
-      })
+        opts = function(notification)
+          notification.icon = symbols.progress.get_dynamic_spinner()
+        end,
+      }
+    )
+    nvim_treesitter.install(filtered_languages):await(function()
+      vim.notify(
+        "Installed " .. vim.inspect(filtered_languages),
+        vim.log.levels.INFO,
+        {
+          id = notification_id,
+          icon = symbols.progress.done,
+          title = title,
+        }
+      )
 
       enable_features(buf)
 
