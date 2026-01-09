@@ -2,82 +2,6 @@
 
 local mason_utils = require "kmo.plugin-management.mason-utils"
 
----Get the config file path for jdtls.
----@param jdtls_package_path string the mason registry package path for jdtls
----@return string
-local function get_config_path(jdtls_package_path)
-  local os
-  if vim.fn.has "win32" == 1 then
-    os = "win"
-  else
-    os = "linux"
-  end
-
-  return vim.fs.joinpath(jdtls_package_path, "config_" .. os)
-end
-
----Get the launcher jar file path for jdtls.
----@param jdtls_package_path string the mason registry package path for jdtls
----@return string
-local function get_launch_jar_path(jdtls_package_path)
-  return vim.fs.normalize(
-    vim.fn.glob(
-      vim.fs.joinpath(
-        jdtls_package_path,
-        "plugins",
-        "org.eclipse.equinox.launcher_*.jar"
-      )
-    )
-  )
-end
-
----Get the workspace path for the current working directory.
----@return string
-local function get_workspace_path()
-  local prefix
-  if vim.fn.has "win32" == 1 then
-    prefix = vim.fs.joinpath("~", "AppData", "Local")
-  else
-    prefix = vim.fs.joinpath("~", ".local", "share")
-  end
-
-  return vim.fs.normalize(
-    vim.fs.joinpath(
-      prefix,
-      "jdt-ws",
-      vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h")
-    )
-  )
-end
-
----Get the command for jdtls.
----@param jdtls_package_path string the mason registry package path for jdtls
----@return string[]
-local function get_cmd(jdtls_package_path)
-  return {
-    "java",
-    -- cspell:disable
-    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-    "-Dosgi.bundles.defaultStartLevel=4",
-    "-Declipse.product=org.eclipse.jdt.ls.core.product",
-    "-Dlog.protocol=true",
-    "-Dlog.level=ALL",
-    -- cspell:enable
-    "-Xmx1G",
-    "--add-modules=ALL-SYSTEM",
-    "--add-opens",
-    "java.base/java.util=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.lang=ALL-UNNAMED",
-    "-jar",
-    get_launch_jar_path(jdtls_package_path),
-    "-configuration",
-    get_config_path(jdtls_package_path),
-    "-data",
-    get_workspace_path(),
-  }
-end
-
 ---Get the plugin bundle paths for jdtls.
 ---@return string[]
 local function get_plugin_bundle_paths()
@@ -140,7 +64,6 @@ end
 
 ---@type vim.lsp.Config
 return {
-  cmd = get_cmd(vim.fn.expand "$MASON/packages/jdtls"),
   init_options = { bundles = get_plugin_bundle_paths() },
   on_attach = function()
     ---@diagnostic disable-next-line: missing-fields
