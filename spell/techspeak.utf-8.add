@@ -170,3 +170,7 @@ BSI
 readonly
 cspell
 typehierarchy
+Keycloak
+Forgejo
+localhost
+nginx
