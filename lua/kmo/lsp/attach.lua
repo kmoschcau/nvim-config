@@ -73,17 +73,10 @@ return function(client, bufnr)
 
   -- textDocument/codeLens
   -- see: |lsp-codelens|
+  vim.lsp.codelens.enable(true, { bufnr = bufnr })
   vim.keymap.set("n", "grc", vim.lsp.codelens.run, {
     buffer = bufnr,
     desc = "LSP: Run the code lens in the current line.",
-  })
-  vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-    desc = "LSP: Update the code lenses of the buffer.",
-    group = common.augroup,
-    buffer = bufnr,
-    callback = function()
-      vim.lsp.codelens.refresh { bufnr = bufnr }
-    end,
   })
 
   -- textDocument/completion
