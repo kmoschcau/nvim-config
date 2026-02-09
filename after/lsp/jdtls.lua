@@ -142,6 +142,7 @@ return {
         enabled = true,
       },
       signatureHelp = {
+        enabled = true,
         description = {
           enabled = true,
         },
