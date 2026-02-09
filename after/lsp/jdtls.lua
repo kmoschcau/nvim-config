@@ -39,7 +39,11 @@ local function get_runtimes()
     runtimes = {
       {
         name = "JavaSE-21",
-        path = "C:/Program Files/Eclipse Adoptium/jdk-21.0.9.10-hotspot",
+        path = "C:/Program Files/Eclipse Adoptium/jdk-21.0.10.7-hotspot",
+      },
+      {
+        name = "JavaSE-17",
+        path = "C:/Program Files/Eclipse Adoptium/jre-17.0.18.8-hotspot",
       },
     }
   else
