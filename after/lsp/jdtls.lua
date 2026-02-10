@@ -79,6 +79,8 @@ return {
   settings = {
     java = {
       codeGeneration = {
+        addFinalForNewDeclaration = "all",
+        generateComments = true,
         hashCodeEquals = {
           useInstanceof = true,
           useJava7Objects = true,
@@ -95,6 +97,9 @@ return {
         },
       },
       completion = {
+        chain = {
+          enabled = true,
+        },
         guessMethodArguments = "insertBestGuessedArguments",
         importOrder = {
           -- cspell:disable
@@ -106,7 +111,7 @@ return {
           "org",
           -- cspell:enable
         },
-        overwrite = false,
+        matchCase = "firstletter",
       },
       configuration = {
         runtimes = get_runtimes(),
@@ -115,42 +120,40 @@ return {
       eclipse = {
         downloadSources = true,
       },
-      edit = {
-        validateAllOpenBuffersOnChanges = true,
-      },
       format = {
         enabled = false,
         settings = {
           url = "~/.config/nvim/external-config/eclipse-formatter.xml",
         },
       },
-      implementationsCodeLens = {
-        enabled = true,
-      },
+      implementationsCodeLens = "all",
       inlayHints = {
         parameterNames = {
+          enabled = "all",
+          suppressWhenSameNameNumbered = false,
+        },
+        parameterTypes = {
+          enabled = true,
+        },
+        variableTypes = {
           enabled = true,
         },
       },
       maven = {
         downloadSources = true,
       },
-      quickfix = {
-        showAt = "problem",
-      },
-      referencesCodeLens = {
-        enabled = true,
-      },
+      memberSortOrder = "SF,SI,SM,C,F,I,M,T",
       signatureHelp = {
         enabled = true,
         description = {
           enabled = true,
         },
       },
-      redhat = {
-        telemetry = {
-          enabled = false,
-        },
+      symbols = {
+        includeSourceMethodDeclarations = true,
+      },
+      telemetry = {
+        enabled = false,
       },
     },
   },
