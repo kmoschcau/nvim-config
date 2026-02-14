@@ -47,7 +47,7 @@ return {
     local title = "nvim-treesitter install"
     local symbols = require "kmo.symbols"
 
-    local base_langs = { "comment", "printf", "regex" }
+    local base_langs = { "comment", "lua", "printf", "regex" }
     if base_langs_installed(base_langs) then
       vim.notify(
         vim.inspect(base_langs) .. " are already installed.",
