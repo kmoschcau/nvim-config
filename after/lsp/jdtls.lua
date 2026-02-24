@@ -1,4 +1,4 @@
--- cspell:words jdtls
+-- cspell:words LOCALAPPDATA jdtls
 
 local mason_utils = require "kmo.plugin-management.mason-utils"
 
@@ -38,12 +38,16 @@ local function get_runtimes()
   if vim.fn.has "win32" == 1 then
     runtimes = {
       {
-        name = "JavaSE-21",
-        path = "C:/Program Files/Eclipse Adoptium/jdk-21.0.10.7-hotspot",
+        name = "JavaSE-20",
+        path = vim.fs.normalize "$LOCALAPPDATA/mise/installs/java/20.0.2",
       },
       {
-        name = "JavaSE-17",
-        path = "C:/Program Files/Eclipse Adoptium/jre-17.0.18.8-hotspot",
+        name = "JavaSE-25",
+        path = vim.fs.normalize "$LOCALAPPDATA/mise/installs/java/25.0.2",
+      },
+      {
+        name = "JavaSE-26",
+        path = vim.fs.normalize "$LOCALAPPDATA/mise/installs/java/26.0.0",
       },
     }
   else
