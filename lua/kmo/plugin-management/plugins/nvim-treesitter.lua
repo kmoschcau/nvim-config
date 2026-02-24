@@ -1,11 +1,14 @@
----Check if the given languages are already installed.
----@param base_langs string[]
----@return boolean
-local function base_langs_installed(base_langs)
-  local installed = require("nvim-treesitter").get_installed()
+---A list of languages, that should always be installed.
+local base_languages = { "comment", "lua", "printf", "regex" }
 
-  for _, base_lang in ipairs(base_langs) do
-    if not vim.list_contains(installed, base_lang) then
+---Check if the given languages are already installed.
+---@param languages_to_check string[]
+---@return boolean
+local function languages_installed(languages_to_check)
+  local installed_languages = require("nvim-treesitter").get_installed()
+
+  for _, language in ipairs(languages_to_check) do
+    if not vim.list_contains(installed_languages, language) then
       return false
     end
   end
@@ -47,30 +50,37 @@ return {
     local title = "nvim-treesitter install"
     local symbols = require "kmo.symbols"
 
-    local base_langs = { "comment", "lua", "printf", "regex" }
-    if base_langs_installed(base_langs) then
+    if languages_installed(base_languages) then
       vim.notify(
-        vim.inspect(base_langs) .. " are already installed.",
+        vim.inspect(base_languages) .. " are already installed.",
         vim.log.levels.DEBUG,
         { title = title }
       )
       return
     end
 
-    vim.notify("Installing " .. vim.inspect(base_langs), vim.log.levels.INFO, {
-      id = notification_id,
-      timeout = false,
-      title = title,
-      opts = function(notification)
-        notification.icon = symbols.progress.get_dynamic_spinner()
-      end,
-    })
-    require("nvim-treesitter").install(base_langs):await(function()
-      vim.notify("Installed " .. vim.inspect(base_langs), vim.log.levels.INFO, {
+    vim.notify(
+      "Installing " .. vim.inspect(base_languages),
+      vim.log.levels.INFO,
+      {
         id = notification_id,
-        icon = symbols.progress.done,
+        timeout = false,
         title = title,
-      })
+        opts = function(notification)
+          notification.icon = symbols.progress.get_dynamic_spinner()
+        end,
+      }
+    )
+    require("nvim-treesitter").install(base_languages):await(function()
+      vim.notify(
+        "Installed " .. vim.inspect(base_languages),
+        vim.log.levels.INFO,
+        {
+          id = notification_id,
+          icon = symbols.progress.done,
+          title = title,
+        }
+      )
     end)
   end,
 }
