@@ -10,15 +10,16 @@ else
   table.insert(always_install, "cspell-lsp")
 end
 
+local emmet = "emmet-language-server"
 local prettier = "prettier"
 
 local pkgs_by_ft = {
   -- cspell:disable
-  astro = { prettier },
+  astro = { emmet, prettier },
   cs = { "csharpier", "netcoredbg" },
-  cshtml = { "roslyn" },
+  cshtml = { emmet, "roslyn" },
   css = { prettier },
-  html = { "markuplint" },
+  html = { emmet, "markuplint" },
   java = {
     "checkstyle",
     "google-java-format",
@@ -27,7 +28,7 @@ local pkgs_by_ft = {
     "jdtls",
   },
   javascript = { prettier },
-  javascriptreact = { prettier },
+  javascriptreact = { emmet, prettier },
   jq = { "jq" },
   json = { "jsonlint", prettier },
   ["json.cloudformation"] = { "cfn-lint" },
@@ -37,18 +38,18 @@ local pkgs_by_ft = {
   lua = { "selene", "stylua" },
   markdown = { "proselint" },
   ocaml = { "ocamlformat" },
-  razor = { "roslyn" },
+  razor = { emmet, "roslyn" },
   sass = { prettier },
   scss = { prettier },
   sh = { "shellharden", "shfmt" },
-  svelte = { "markuplint", prettier },
+  svelte = { emmet, "markuplint", prettier },
   systemd = { "systemdlint" },
   tex = { "latexindent", "proselint" },
   tf = { "trivy" },
   ["terraform-vars"] = { "trivy" },
   typescript = { prettier },
-  typescriptreact = { prettier },
-  vue = { "markuplint", prettier },
+  typescriptreact = { emmet, prettier },
+  vue = { emmet, "markuplint", prettier },
   yaml = { "yamllint", prettier },
   ["yaml.cloudformation"] = { "cfn-lint", "yamllint" },
   -- cspell:enable
