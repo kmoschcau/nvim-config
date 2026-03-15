@@ -159,7 +159,10 @@ return {
     })
 
     vim.keymap.set("i", "<Down>", function()
-      if require("blink.cmp").select_next { auto_insert = false } then
+      if require("blink.cmp").is_active() then
+        vim.schedule(function()
+          require("blink.cmp").select_next { auto_insert = false }
+        end)
         return "<Ignore>"
       end
 
@@ -171,7 +174,10 @@ return {
     })
 
     vim.keymap.set("i", "<Up>", function()
-      if require("blink.cmp").select_prev { auto_insert = false } then
+      if require("blink.cmp").is_active() then
+        vim.schedule(function()
+          require("blink.cmp").select_prev { auto_insert = false }
+        end)
         return "<Ignore>"
       end
 
