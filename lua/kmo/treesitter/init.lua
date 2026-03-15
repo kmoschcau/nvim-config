@@ -1,23 +1,3 @@
----The common injections for web languages
-local web_injects = { "css", "javascript", "jsdoc" }
----The common injections for web front-end frameworks
-local front_end_framework_injects =
-  vim.list_extend({ "scss", "typescript" }, web_injects)
-
----Base buffer filetypes pointing at injected filetypes
-local language_injections = {
-  gitcommit = { "diff" },
-  html = web_injects,
-  java = { "javadoc" },
-  javascript = { "jsdoc" },
-  lua = { "luadoc" },
-  markdown = { "mermaid" },
-  markdown_inline = { "mermaid" },
-  svelte = front_end_framework_injects,
-  typescript = { "jsdoc" },
-  vue = front_end_framework_injects,
-}
-
 ---Enables nvim-treesitter features for the given buffer.
 ---@param buf integer the buffer number
 local function enable_features(buf)
@@ -46,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
     local all_languages = vim.list_extend(
       { buffer_language },
-      language_injections[buffer_language] or {}
+      require("kmo.filetype.injections")[buffer_language] or {}
     )
 
     local missing_languages = vim.tbl_filter(function(lang)
