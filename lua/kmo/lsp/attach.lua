@@ -72,8 +72,11 @@ return function(client, bufnr)
   -- see: |vim.lsp.buf.code_action()|
 
   -- textDocument/codeLens
+  -- Currently disabled, as the only available display is virtual lines, which
+  -- is just confusing.
+  -- see: https://github.com/neovim/neovim/discussions/38090
   -- see: |lsp-codelens|
-  vim.lsp.codelens.enable(true, { bufnr = bufnr })
+  vim.lsp.codelens.enable(false, { bufnr = bufnr })
   vim.keymap.set("n", "grc", vim.lsp.codelens.run, {
     buffer = bufnr,
     desc = "LSP: Run the code lens in the current line.",
