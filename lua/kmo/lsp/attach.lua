@@ -77,10 +77,7 @@ return function(client, bufnr)
   -- see: https://github.com/neovim/neovim/discussions/38090
   -- see: |lsp-codelens|
   vim.lsp.codelens.enable(false, { bufnr = bufnr })
-  vim.keymap.set("n", "grc", vim.lsp.codelens.run, {
-    buffer = bufnr,
-    desc = "LSP: Run the code lens in the current line.",
-  })
+  -- mapped to gra by default
 
   -- textDocument/completion
   -- cspell:disable-next-line
