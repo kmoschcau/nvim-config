@@ -5,8 +5,7 @@
 ---@type LazyPluginSpec
 return {
   -- cspell:disable-next-line
-  -- "L3MON4D3/LuaSnip",
-  "kmoschcau/LuaSnip",
+  "L3MON4D3/LuaSnip",
   dependencies = {
     -- cspell:disable
     "rafamadriz/friendly-snippets",

@@ -135,8 +135,7 @@ return {
   "saghen/blink.cmp",
   dependencies = {
     -- cspell:disable
-    -- "L3MON4D3/LuaSnip",
-    "kmoschcau/LuaSnip",
+    "L3MON4D3/LuaSnip",
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
     "moyiz/blink-emoji.nvim",
