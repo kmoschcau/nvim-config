@@ -33,9 +33,11 @@ local is_not_instanceof = s(
   )
 )
 
-ls.add_snippets("javascript", {
-  is_not_instanceof,
-})
-ls.add_snippets("typescript", {
-  is_not_instanceof,
-})
+local langs =
+  { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+
+for _, lang in ipairs(langs) do
+  ls.add_snippets(lang, {
+    is_not_instanceof,
+  })
+end
