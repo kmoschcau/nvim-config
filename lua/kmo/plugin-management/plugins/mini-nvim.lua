@@ -39,11 +39,6 @@ return {
     }
     icons.mock_nvim_web_devicons()
 
-    local misc = require "mini.misc"
-    if not vim.g.neovide then
-      misc.setup_termbg_sync()
-    end
-
     require("mini.splitjoin").setup {
       -- See treesj config.
       mappings = {
