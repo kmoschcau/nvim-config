@@ -6,6 +6,7 @@ local front_end_framework_injects =
 
 ---Base buffer filetypes pointing at injected filetypes
 return {
+  astro = front_end_framework_injects,
   gitcommit = { "diff" },
   html = web_injects,
   java = { "javadoc" },
