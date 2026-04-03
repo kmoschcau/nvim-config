@@ -1,4 +1,4 @@
----Enables nvim-treesitter features for the given buffer.
+---Enables vim.treesitter features for the given buffer.
 ---@param buf integer the buffer number
 local function enable_features(buf)
   vim.treesitter.start(buf)
