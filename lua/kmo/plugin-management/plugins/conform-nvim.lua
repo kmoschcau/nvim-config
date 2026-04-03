@@ -1,4 +1,11 @@
-local prettier = "prettier"
+local function prettier_or_dprint(_bufnr)
+  -- TODO: Make this decision in a more automatic way. For example by looking
+  -- for package dependencies.
+  if vim.g.conform_use_dprint then
+    return { "dprint" }
+  end
+  return { "prettier" }
+end
 
 local ignored_servers = {
   "html",
@@ -19,34 +26,34 @@ return {
   opts = {
     formatters_by_ft = {
       -- cspell:disable
-      astro = { prettier },
+      astro = prettier_or_dprint,
       cs = { "csharpier", "trim_newlines" },
-      css = { prettier },
+      css = prettier_or_dprint,
       fish = { "fish_indent" },
-      html = { prettier },
+      html = prettier_or_dprint,
       java = { "google-java-format" },
-      javascript = { prettier },
-      javascriptreact = { prettier },
+      javascript = prettier_or_dprint,
+      javascriptreact = prettier_or_dprint,
       jq = { "jq" },
-      json = { prettier },
-      json5 = { prettier },
-      jsonc = { prettier },
-      less = { prettier },
+      json = prettier_or_dprint,
+      json5 = prettier_or_dprint,
+      jsonc = prettier_or_dprint,
+      less = prettier_or_dprint,
       lua = { "stylua" },
       markdown = { "injected", lsp_format = "last" },
       ocaml = { "ocamlformat" },
       query = { "format-queries" },
       razor = { "trim_newlines", lsp_format = "first" },
-      sass = { prettier },
-      scss = { prettier },
+      sass = prettier_or_dprint,
+      scss = prettier_or_dprint,
       sh = { "shellharden", "shfmt" },
-      svelte = { prettier },
+      svelte = prettier_or_dprint,
       tex = { "latexindent", "trim_newlines", "trim_whitespace" },
-      typescript = { prettier },
-      typescriptreact = { prettier },
-      vue = { prettier },
+      typescript = prettier_or_dprint,
+      typescriptreact = prettier_or_dprint,
+      vue = prettier_or_dprint,
       xml = { "xmllint", "trim_newlines", "trim_whitespace" },
-      yaml = { prettier },
+      yaml = prettier_or_dprint,
       ["_"] = { "trim_newlines", "trim_whitespace" },
       -- cspell:enable
     },
