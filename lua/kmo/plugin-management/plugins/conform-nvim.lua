@@ -1,12 +1,3 @@
-local function prettier_or_dprint(_bufnr)
-  -- TODO: Make this decision in a more automatic way. For example by looking
-  -- for package dependencies.
-  if vim.g.conform_use_dprint then
-    return { "dprint" }
-  end
-  return { "prettier" }
-end
-
 local ignored_servers = {
   "html",
 }
@@ -22,58 +13,80 @@ end
 return {
   -- cspell:disable-next-line
   "stevearc/conform.nvim",
-  ---@type conform.setupOpts
-  opts = {
-    formatters_by_ft = {
-      -- cspell:disable
-      astro = prettier_or_dprint,
-      cs = { "csharpier", "trim_newlines" },
-      css = prettier_or_dprint,
-      fish = { "fish_indent" },
-      html = prettier_or_dprint,
-      java = { "google-java-format" },
-      javascript = prettier_or_dprint,
-      javascriptreact = prettier_or_dprint,
-      jq = { "jq" },
-      json = prettier_or_dprint,
-      json5 = prettier_or_dprint,
-      jsonc = prettier_or_dprint,
-      less = prettier_or_dprint,
-      lua = { "stylua" },
-      markdown = { "injected", lsp_format = "last" },
-      ocaml = { "ocamlformat" },
-      query = { "format-queries" },
-      razor = { "trim_newlines", lsp_format = "first" },
-      sass = prettier_or_dprint,
-      scss = prettier_or_dprint,
-      sh = { "shellharden", "shfmt" },
-      svelte = prettier_or_dprint,
-      tex = { "latexindent", "trim_newlines", "trim_whitespace" },
-      typescript = prettier_or_dprint,
-      typescriptreact = prettier_or_dprint,
-      vue = prettier_or_dprint,
-      xml = { "xmllint", "trim_newlines", "trim_whitespace" },
-      yaml = prettier_or_dprint,
-      ["_"] = { "trim_newlines", "trim_whitespace" },
-      -- cspell:enable
-    },
-    default_format_opts = {
-      lsp_format = "fallback",
-    },
-    formatters = {
-      -- cspell:disable-next-line
-      shfmt = {
-        prepend_args = { "--indent", "4" },
+  config = function()
+    require("conform").setup {
+      formatters_by_ft = {
+        -- cspell:disable
+        astro = { "dprint", "prettier" },
+        cs = { "csharpier", "trim_newlines" },
+        css = { "dprint", "prettier" },
+        fish = { "fish_indent" },
+        handlebars = { "dprint" },
+        html = { "dprint", "prettier" },
+        java = { "google-java-format" },
+        javascript = { "dprint", "prettier" },
+        javascriptreact = { "dprint", "prettier" },
+        jq = { "jq" },
+        json = { "dprint", "prettier" },
+        json5 = { "prettier" },
+        jsonc = { "dprint", "prettier" },
+        less = { "dprint", "prettier" },
+        lua = { "stylua" },
+        markdown = { "injected", lsp_format = "last" },
+        ocaml = { "ocamlformat" },
+        query = { "format-queries" },
+        razor = { "trim_newlines", lsp_format = "first" },
+        sass = { "dprint", "prettier" },
+        scss = { "dprint", "prettier" },
+        sh = { "shellharden", "shfmt" },
+        svelte = { "dprint", "prettier" },
+        tex = { "latexindent", "trim_newlines", "trim_whitespace" },
+        typescript = { "dprint", "prettier" },
+        typescriptreact = { "dprint", "prettier" },
+        vue = { "dprint", "prettier" },
+        xml = { "xmllint", "trim_newlines", "trim_whitespace" },
+        yaml = { "dprint", "prettier" },
+        ["_"] = { "trim_newlines", "trim_whitespace" },
+        -- cspell:enable
       },
-    },
-    format_on_save = function(bufnr)
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
+      formatters = {
+        prettier = {
+          cwd = require("conform.util").root_file {
+            ".prettierrc",
+            ".prettierrc.json",
+            ".prettierrc.yml",
+            ".prettierrc.yaml",
+            ".prettierrc.json5",
+            ".prettierrc.js",
+            ".prettierrc.cjs",
+            ".prettierrc.mjs",
+            ".prettierrc.toml",
+            "prettier.config.js",
+            "prettier.config.cjs",
+            "prettier.config.mjs",
+          },
+          require_cwd = true,
+        },
+        dprint = {
+          require_cwd = true,
+        },
+        -- cspell:disable-next-line
+        shfmt = {
+          prepend_args = { "--indent", "4" },
+        },
+      },
+      format_on_save = function(bufnr)
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
 
-      return { filter = formatter_filter, timeout_ms = 500 }
-    end,
-  },
+        return { filter = formatter_filter, timeout_ms = 500 }
+      end,
+    }
+  end,
   init = function()
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       if args.bang then
