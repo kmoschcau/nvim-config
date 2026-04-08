@@ -10,18 +10,14 @@ else
   table.insert(always_install, "cspell-lsp")
 end
 
-local dprint = "dprint"
-local emmet = "emmet-language-server"
-local prettier = "prettier"
-
 local pkgs_by_ft = {
   -- cspell:disable
-  astro = { dprint, emmet, prettier },
+  astro = { "dprint", "emmet-language-server", "prettier" },
   cs = { "csharpier", "netcoredbg" },
-  cshtml = { emmet, "roslyn" },
-  css = { dprint, prettier },
-  handlebars = { dprint },
-  html = { dprint, emmet, "markuplint" },
+  cshtml = { "emmet-language-server", "roslyn" },
+  css = { "dprint", "prettier" },
+  handlebars = { "dprint" },
+  html = { "dprint", "emmet-language-server", "markuplint" },
   java = {
     "checkstyle",
     "google-java-format",
@@ -29,31 +25,31 @@ local pkgs_by_ft = {
     "java-test",
     "jdtls",
   },
-  javascript = { dprint, prettier },
-  javascriptreact = { dprint, emmet, prettier },
+  javascript = { "dprint", "prettier" },
+  javascriptreact = { "dprint", "emmet-language-server", "prettier" },
   jq = { "jq" },
-  json = { dprint, "jsonlint", prettier },
-  json5 = { prettier },
+  json = { "dprint", "jsonlint", "prettier" },
+  json5 = { "prettier" },
   ["json.cloudformation"] = { "cfn-lint" },
-  jsonc = { dprint, prettier },
-  less = { dprint, prettier },
+  jsonc = { "dprint", "prettier" },
+  less = { "dprint", "prettier" },
   kotlin = { "ktlint" },
   lua = { "selene", "stylua" },
   markdown = { "proselint" },
   ocaml = { "ocamlformat" },
-  razor = { emmet, "roslyn" },
-  sass = { dprint, prettier },
-  scss = { dprint, prettier },
+  razor = { "emmet-language-server", "roslyn" },
+  sass = { "dprint", "prettier" },
+  scss = { "dprint", "prettier" },
   sh = { "shellharden", "shfmt" },
-  svelte = { dprint, emmet, "markuplint", prettier },
+  svelte = { "dprint", "emmet-language-server", "markuplint", "prettier" },
   systemd = { "systemdlint" },
   tex = { "latexindent", "proselint" },
   tf = { "trivy" },
   ["terraform-vars"] = { "trivy" },
-  typescript = { dprint, prettier },
-  typescriptreact = { dprint, emmet, prettier },
-  vue = { dprint, emmet, "markuplint", prettier },
-  yaml = { dprint, "yamllint", prettier },
+  typescript = { "dprint", "prettier" },
+  typescriptreact = { "dprint", "emmet-language-server", "prettier" },
+  vue = { "dprint", "emmet-language-server", "markuplint", "prettier" },
+  yaml = { "dprint", "yamllint", "prettier" },
   ["yaml.cloudformation"] = { "cfn-lint", "yamllint" },
   -- cspell:enable
 }
