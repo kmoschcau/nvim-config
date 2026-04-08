@@ -52,6 +52,7 @@ vim.opt.diffopt:append "inline:word"
 vim.opt.diffopt:append "linematch:60"
 vim.o.expandtab = true
 vim.o.exrc = true
+vim.opt.fileformats = { "unix", "dos" }
 vim.opt.fillchars = opt_sym.fillchars
 vim.o.foldenable = false
 vim.o.formatoptions = "cro/qnlj" -- cspell:disable-line
