@@ -25,7 +25,7 @@
   "luvit-meta": { "branch": "main", "commit": "cc9b2d412d2fbd30b94a70cfc214c2a3be27a0a2" },
   "markdown-table-mode.nvim": { "branch": "main", "commit": "bb1ea9b76c1b29e15e14806fdfbb2319df5c06f1" },
   "mason.nvim": { "branch": "main", "commit": "b03fb0f20bc1d43daf558cda981a2be22e73ac42" },
-  "mini.nvim": { "branch": "main", "commit": "418ef4930ddabe80f449c6f1323f8b6abb172d1c" },
+  "mini.nvim": { "branch": "main", "commit": "d76247d6e3ffa222784be5b156770e37c665f67e" },
   "muren.nvim": { "branch": "main", "commit": "fa18f2df80a52afd201da062d1af0e80c8d1988e" },
   "neoconf.nvim": { "branch": "main", "commit": "ecdb0c9bc3f3373e11be4c97e461d16b52d532d0" },
   "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },
