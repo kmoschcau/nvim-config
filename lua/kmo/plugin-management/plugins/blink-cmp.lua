@@ -133,6 +133,7 @@ end
 return {
   -- cspell:disable-next-line
   "saghen/blink.cmp",
+  version = "1.*",
   dependencies = {
     -- cspell:disable
     "L3MON4D3/LuaSnip",
