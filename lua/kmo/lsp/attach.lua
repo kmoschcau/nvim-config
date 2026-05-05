@@ -167,7 +167,7 @@ return function(client, bufnr)
   end
 
   -- textDocument/foldingRange
-  if client and client:supports_method "textDocument/foldingRange" then
+  if client and client:supports_method("textDocument/foldingRange", bufnr) then
     vim.opt_local.foldexpr = "v:lua.vim.lsp.foldexpr()"
     vim.opt_local.foldmethod = "expr"
   end
@@ -386,6 +386,11 @@ return function(client, bufnr)
 
   -- typeHierarchy/supertypes
   -- see: textDocument/prepareTypeHierarchy
+
+  -- workspace/diagnostic
+  if client and client:supports_method("workspace/diagnostic", bufnr) then
+    vim.lsp.buf.workspace_diagnostics { client_id = client.id }
+  end
 
   -- workspace/symbol
   -- cspell:disable-next-line
