@@ -47,6 +47,7 @@ words:
   - extui
   - fargs
   - fileformat
+  - fileformats
   - fillchars
   - fixendofline
   - fnamemodify
@@ -72,6 +73,7 @@ words:
   - listchars
   - lnum
   - lspconfig
+  - luadoc
   - menuone
   - mousemodel
   - nargs

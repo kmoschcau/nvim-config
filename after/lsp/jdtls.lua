@@ -1,4 +1,4 @@
--- cspell:words LOCALAPPDATA jdtls
+-- cspell:words LOCALAPPDATA firstletter jdtls
 
 local mason_utils = require "kmo.plugin-management.mason-utils"
 
