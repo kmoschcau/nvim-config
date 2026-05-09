@@ -7,7 +7,7 @@
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
   "cmp-fish": { "branch": "main", "commit": "3a23492e2aead05522a9887ec685d70e8c987323" },
   "cmp-vimtex": { "branch": "master", "commit": "c09ca05bfa0641754516f13294d73d3799a02fc8" },
-  "coerce.nvim": { "branch": "main", "commit": "49bf22e7f3f69403d9efb68eda1fa2f8492d2fb2" },
+  "coerce.nvim": { "branch": "main", "commit": "fc06d67e3c1b5c2c42692cc916fcba454f792c99" },
   "colorful-menu.nvim": { "branch": "master", "commit": "13f9b7eaa9cd2901b4f8915cfb2483c3be4c8c20" },
   "conform.nvim": { "branch": "master", "commit": "dca1a190aa85f9065979ef35802fb77131911106" },
   "coop.nvim": { "branch": "main", "commit": "98760ee1a2f964454f2daef57eb80ec7df71f281" },
