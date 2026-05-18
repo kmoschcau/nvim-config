@@ -143,10 +143,10 @@ function StatuslineModeName()
 end
 
 vim.o.statusline =
-  -- show the current mode
+  -- Show the current mode
   -- left justified, minimum 7
   " %-7.{v:lua.StatuslineModeName()}"
-  -- group for buffer flags
+  -- Group for buffer flags
   -- %h: Help buffer flag, text is "[help]".
   -- %w: Preview window flag, text is "[Preview]".
   -- %q: "[Quickfix List]", "[Location List]" or empty.
@@ -155,12 +155,14 @@ vim.o.statusline =
   -- Path to the file in the buffer, as typed or relative to current directory
   -- left justified, maximum 100
   .. " %.100f"
-  -- group for modification flags
+  -- Group for modification flags
   -- Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
   .. " %m%r"
   -- Separation point between alignment sections. Each section will be separated
   -- by an equal number of spaces. No width fields allowed.
   .. "%="
+  -- Show the diagnostics status of the buffer
+  .. "%{%v:lua.vim.diagnostic.status()%} "
   -- Type of file in the buffer, e.g., "[vim]".  See 'filetype'.
   -- maximum 20
   .. "%.20y "
