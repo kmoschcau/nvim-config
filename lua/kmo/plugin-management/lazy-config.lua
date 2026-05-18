@@ -25,7 +25,11 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "lazy_backdrop",
   group = vim.api.nvim_create_augroup("lazy.nvim-winborder", { clear = true }),
   callback = function(args)
-    for _, window_id in ipairs(vim.fn.win_findbuf(args.buf)) do
+    for _, window_id in
+      ipairs(vim.tbl_filter(function(win)
+        return args.buf == vim.api.nvim_win_get_buf(win)
+      end, vim.api.nvim_list_wins()))
+    do
       vim.api.nvim_win_set_config(window_id, { border = "none" })
     end
   end,

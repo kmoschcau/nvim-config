@@ -173,7 +173,11 @@ return {
     local checkstyle_args = { "-f", "sarif", "-c", checkstyle_config.config }
 
     if checkstyle_config.options then
-      for _, arg in ipairs(vim.fn.split(checkstyle_config.options)) do
+      for _, arg in
+        ipairs(vim.split(checkstyle_config.options, "%s+", {
+          trimempty = true,
+        }))
+      do
         table.insert(checkstyle_args, arg)
       end
     end

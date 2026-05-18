@@ -139,7 +139,7 @@ function StatuslineModeName()
     ["r?"] = "CONFIRM",
     ["!"] = "SHELL",
     t = "TERMINAL",
-  })[vim.fn.mode()]
+  })[vim.api.nvim_get_mode().mode]
 end
 
 vim.o.statusline =

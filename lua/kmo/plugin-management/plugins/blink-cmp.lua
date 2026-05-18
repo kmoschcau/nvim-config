@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
   desc = "Reset the cache for enabling the spell source for blink.cmp.",
   pattern = "spelllang",
   callback = function()
-    spell_enabled_cache[vim.fn.bufnr()] = nil
+    spell_enabled_cache[vim.api.nvim_get_current_buf()] = nil
   end,
 })
 
@@ -293,7 +293,7 @@ return {
           module = "blink-cmp-spell",
           name = "Spell",
           enabled = function()
-            local bufnr = vim.fn.bufnr()
+            local bufnr = vim.api.nvim_get_current_buf()
             local enabled = spell_enabled_cache[bufnr]
             if type(enabled) ~= "boolean" then
               enabled =
