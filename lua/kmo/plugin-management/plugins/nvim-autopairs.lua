@@ -69,7 +69,7 @@ return {
         :with_pair(ts_conds.is_ts_node "text"),
 
       -- Add spaces inside and complete XML comment in vue
-      rule("<!--", "  -->", "vue"):set_end_pair_length(4),
+      rule("<!--", "  -->", { "svg", "vue" }):set_end_pair_length(4),
     }
   end,
 }
