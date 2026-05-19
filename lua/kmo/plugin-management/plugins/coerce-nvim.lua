@@ -9,13 +9,18 @@ return {
     "gregorias/coop.nvim",
     -- cspell:enable
   },
-  ---@module "coerce"
-  ---@type CoerceConfigUser
-  opts = {
-    default_mode_keymap_prefixes = {
-      normal_mode = "<Space>cc",
-      motion_mode = "<Space>cr",
-      visual_mode = "<Space>cr",
-    },
-  },
+  config = true,
+  init = function()
+    vim.keymap.set("n", "<Space>cc", "<Plug>(coerce-normal)", {
+      desc = "coerce.nvim: Coerce word",
+    })
+
+    vim.keymap.set("n", "<Space>cr", "<Plug>(coerce-motion)", {
+      desc = "coerce.nvim: Coerce motion",
+    })
+
+    vim.keymap.set("x", "<Space>cr", "<Plug>(coerce-visual)", {
+      desc = "coerce.nvim: Coerce selection",
+    })
+  end,
 }
