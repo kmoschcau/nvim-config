@@ -17,6 +17,8 @@ xpcall(require, error_handler, "kmo.plugin-management")
 -- setup LSP
 xpcall(require, error_handler, "kmo.lsp")
 
+vim.cmd.packadd "nvim.undotree"
+
 -- }}}
 
 -- configuration modules {{{
