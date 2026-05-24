@@ -1,4 +1,4 @@
--- cspell:words darkman pwsh wslview wslu
+-- cspell:words pwsh wslview wslu
 
 local M = {}
 
@@ -59,14 +59,29 @@ function M.get_system_background()
     return result.stdout:match "0x1" and "light" or "dark"
   end
 
-  if vim.fn.executable "darkman" == 1 then
-    local result = vim.system({ "darkman", "get" }, { text = true }):wait()
+  if vim.fn.executable "qdbus6" == 1 or vim.fn.executable "qdbus" == 1 then
+    local cmd = vim.fn.executable "qdbus6" == 1 and "qdbus6" or "qdbus"
+
+    local result = vim
+      .system({
+        cmd,
+        "org.freedesktop.portal.Desktop",
+        "/org/freedesktop/portal/desktop",
+        "org.freedesktop.portal.Settings.Read",
+        "org.freedesktop.appearance",
+        "color-scheme",
+      }, { text = true })
+      :wait()
 
     if result.code > 0 then
+      vim.notify(
+        string.format('Calling "%s" failed.', cmd),
+        vim.log.levels.ERROR
+      )
       return "dark"
     end
 
-    return (result.stdout:gsub("%s+", "") == "dark") and "dark" or "light"
+    return result.stdout:match "2" and "light" or "dark"
   end
 
   return "dark"
