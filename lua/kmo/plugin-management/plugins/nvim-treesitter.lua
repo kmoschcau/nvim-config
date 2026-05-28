@@ -21,9 +21,13 @@ end
 ---@type LazyPluginSpec
 return {
   -- cspell:disable-next-line
-  "nvim-treesitter/nvim-treesitter",
+  "neovim-treesitter/nvim-treesitter",
+  dependencies = {
+    -- cspell:disable
+    "neovim-treesitter/treesitter-parser-registry",
+    -- cspell:enable
+  },
   lazy = false,
-  branch = "main",
   build = function()
     local notification_id = "nvim-treesitter update"
     local title = "nvim-treesitter update"
