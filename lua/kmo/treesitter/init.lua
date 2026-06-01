@@ -24,9 +24,11 @@ vim.api.nvim_create_autocmd("FileType", {
     local buffer_language = vim.treesitter.language.get_lang(filetype)
       or filetype
 
-    local all_languages = vim.list_extend(
-      { buffer_language },
-      require("kmo.filetype.injections")[buffer_language] or {}
+    local all_languages = vim.list.unique(
+      vim.list_extend(
+        { buffer_language },
+        require("kmo.filetype.dependencies")[buffer_language] or {}
+      )
     )
 
     local missing_languages = vim.tbl_filter(function(lang)
