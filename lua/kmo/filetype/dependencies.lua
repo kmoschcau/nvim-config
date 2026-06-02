@@ -1,4 +1,4 @@
-local javascript_dependencies = { "ecma", "jsdoc" }
+local javascript_dependencies = { "jsdoc" }
 
 local typescript_dependencies =
   vim.list.unique(vim.list_extend({}, javascript_dependencies))
