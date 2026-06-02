@@ -8,7 +8,7 @@ local web_dependencies =
 
 local front_end_framework_dependencies = vim.list.unique(
   vim.list_extend(
-    vim.list_extend({ "scss" }, web_dependencies),
+    vim.list_extend({ "html", "scss" }, web_dependencies),
     typescript_dependencies
   )
 )
