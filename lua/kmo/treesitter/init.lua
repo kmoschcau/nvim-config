@@ -1,18 +1,25 @@
 ---Enables vim.treesitter features for the given buffer.
 ---@param buf integer the buffer number
-local function enable_features(buf)
+---@param buffer_language string the buffer treesitter language
+local function enable_features(buf, buffer_language)
   vim.treesitter.start(buf)
 
-  vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  if vim.opt_local.foldmethod ~= "manual" then
+  if
+    #vim.treesitter.query.get_files(buffer_language, "folds") > 0
+    and vim.opt_local.foldmethod ~= "manual"
+  then
+    vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.opt_local.foldmethod = "expr"
   end
 end
 
 ---Enables nvim-treesitter features for the given buffer.
 ---@param buf integer the buffer number
-local function enable_nvim_treesitter_features(buf)
-  vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+---@param buffer_language string the buffer treesitter language
+local function enable_nvim_treesitter_features(buf, buffer_language)
+  if #vim.treesitter.query.get_files(buffer_language, "indents") > 0 then
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -39,10 +46,10 @@ vim.api.nvim_create_autocmd("FileType", {
       pcall(require, "nvim-treesitter")
 
     if #missing_languages < 1 then
-      enable_features(buf)
+      enable_features(buf, buffer_language)
 
       if has_nvim_treesitter then
-        enable_nvim_treesitter_features(buf)
+        enable_nvim_treesitter_features(buf, filetype)
       end
 
       return
@@ -90,10 +97,10 @@ vim.api.nvim_create_autocmd("FileType", {
         }
       )
 
-      enable_features(buf)
+      enable_features(buf, buffer_language)
 
       if has_nvim_treesitter then
-        enable_nvim_treesitter_features(buf)
+        enable_nvim_treesitter_features(buf, buffer_language)
       end
     end)
   end,
