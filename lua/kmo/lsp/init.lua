@@ -23,7 +23,9 @@ vim.lsp.enable {
   "astro",
   "bashls",
   "cssls",
+  "docker_compose_language_service",
   "docker_language_server",
+  "dockerls",
   "denols",
   -- "ember", -- FIXME: This spews errors into the log when no cmd present.
   "emmet_language_server",
