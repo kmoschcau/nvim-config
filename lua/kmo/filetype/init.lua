@@ -60,6 +60,9 @@ vim.filetype.add {
     [".*/templates/.*%.tpl"] = "helm",
     [".*/templates/.*%.ya?ml"] = "helm",
     ["helmfile.*%.ya?ml"] = "helm",
+
+    ["compose%.ya?ml"] = "yaml.docker-compose",
+    ["docker%-compose%.ya?ml"] = "yaml.docker-compose",
     -- cspell:enable
   },
 }
