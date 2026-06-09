@@ -31,16 +31,17 @@ vim.api.nvim_create_autocmd("FileType", {
     local buffer_language = vim.treesitter.language.get_lang(filetype)
       or filetype
 
-    local all_languages = vim.list.unique(
+    local base_and_injected_languages = vim.list.unique(
       vim.list_extend(
         { buffer_language },
-        require("kmo.filetype.dependencies")[buffer_language] or {}
+        require("kmo.filetype.dependencies").ft_to_injected_languages[buffer_language]
+          or {}
       )
     )
 
     local missing_languages = vim.tbl_filter(function(lang)
       return not (vim.treesitter.language.add(lang) or false)
-    end, all_languages)
+    end, base_and_injected_languages)
 
     local has_nvim_treesitter, nvim_treesitter =
       pcall(require, "nvim-treesitter")

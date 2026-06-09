@@ -60,7 +60,13 @@ return {
         local ts_fts = ext_ft.from_cursor_pos()
         return #ts_fts > 0 and ts_fts or ext_ft.from_filetype()
       end,
-      load_ft_func = ext_ft.extend_load_ft(require "kmo.filetype.dependencies"),
+      load_ft_func = ext_ft.extend_load_ft {
+        astro = { "css", "html", "javascript", "typescript" },
+        dockerfile = { "bash" },
+        html = { "css", "javascript" },
+        svelte = { "css", "html", "javascript", "typescript" },
+        vue = { "css", "html", "javascript", "typescript" },
+      },
     }
 
     vim.keymap.set({ "n", "i", "s" }, "<M-s>", function()
