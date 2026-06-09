@@ -1,6 +1,6 @@
 ---A list of languages, that should always be installed.
 local base_languages =
-  { "comment", "ecma", "html_tags", "lua", "printf", "regex" }
+  { "comment", "ecma", "html_tags", "lua", "printf", "regex", "sql" }
 
 ---Check if the given languages are already installed.
 ---@param languages_to_check string[]
