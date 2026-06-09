@@ -16,6 +16,7 @@ local front_end_framework_dependencies = vim.list.unique(
 ---Base buffer filetypes pointing at injected and inherited filetypes
 return {
   astro = front_end_framework_dependencies,
+  dockerfile = { "bash" },
   gitcommit = { "diff" },
   html = web_dependencies,
   java = { "javadoc" },
