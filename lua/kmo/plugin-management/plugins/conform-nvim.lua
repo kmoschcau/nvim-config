@@ -19,33 +19,44 @@ return {
         -- cspell:disable
         astro = { "dprint", "prettier" },
         cs = { "csharpier", "trim_newlines" },
-        css = { "dprint", "prettier" },
+        css = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         fish = { "fish_indent" },
         handlebars = { "dprint" },
-        html = { "dprint", "prettier" },
+        html = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         java = { "google-java-format" },
-        javascript = { "dprint", "prettier" },
-        javascriptreact = { "dprint", "prettier" },
+        javascript = { "dprint", "oxfmt", "prettier", stop_after_first = true },
+        javascriptreact = {
+          "dprint",
+          "oxfmt",
+          "prettier",
+          stop_after_first = true,
+        },
         jq = { "jq" },
-        json = { "dprint", "prettier" },
+        json = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         json5 = { "prettier" },
-        jsonc = { "dprint", "prettier" },
-        less = { "dprint", "prettier" },
+        jsonc = { "dprint", "oxfmt", "prettier", stop_after_first = true },
+        less = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         lua = { "stylua" },
-        markdown = { "injected", lsp_format = "last" },
+        markdown = { "injected", "oxfmt", lsp_format = "last" },
         ocaml = { "ocamlformat" },
         query = { "format-queries" },
         razor = { "trim_newlines", lsp_format = "first" },
-        sass = { "dprint", "prettier" },
-        scss = { "dprint", "prettier" },
+        sass = { "dprint", "oxfmt", "prettier", stop_after_first = true },
+        scss = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         sh = { "shellharden", "shfmt" },
-        svelte = { "dprint", "prettier" },
+        svelte = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         tex = { "latexindent", "trim_newlines", "trim_whitespace" },
-        typescript = { "dprint", "prettier" },
-        typescriptreact = { "dprint", "prettier" },
-        vue = { "dprint", "prettier" },
+        toml = { "oxfmt" },
+        typescript = { "dprint", "oxfmt", "prettier", stop_after_first = true },
+        typescriptreact = {
+          "dprint",
+          "oxfmt",
+          "prettier",
+          stop_after_first = true,
+        },
+        vue = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         xml = { "xmllint", "trim_newlines", "trim_whitespace" },
-        yaml = { "dprint", "prettier" },
+        yaml = { "dprint", "oxfmt", "prettier", stop_after_first = true },
         ["_"] = { "trim_newlines", "trim_whitespace" },
         -- cspell:enable
       },
@@ -53,6 +64,20 @@ return {
         lsp_format = "fallback",
       },
       formatters = {
+        dprint = {
+          require_cwd = true,
+        },
+        -- cspell:disable-next-line
+        oxfmt = {
+          cwd = require("conform.util").root_file {
+            -- cspell:disable
+            ".oxfmtrc.json",
+            ".oxfmtrc.jsonc",
+            "oxfmt.config.ts",
+            -- cspell:enable
+          },
+          require_cwd = true,
+        },
         prettier = {
           cwd = require("conform.util").root_file {
             ".prettierrc",
@@ -68,9 +93,6 @@ return {
             "prettier.config.cjs",
             "prettier.config.mjs",
           },
-          require_cwd = true,
-        },
-        dprint = {
           require_cwd = true,
         },
         -- cspell:disable-next-line
