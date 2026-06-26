@@ -184,7 +184,6 @@ vim.o.statusline =
 vim.o.textwidth = 80
 vim.o.title = true
 vim.o.undofile = true
-vim.o.updatetime = 100
 vim.opt.wildoptions:append "fuzzy"
 vim.o.winborder = "rounded"
 

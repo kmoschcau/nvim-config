@@ -87,6 +87,7 @@ words:
   - nvim_feedkeys
   - nvim_list_bufs
   - omnisharp
+  - packadd
   - pumblend
   - scrolljump
   - setloclist
@@ -123,7 +124,7 @@ words:
   - underdotted
   - underdouble
   - undofile
-  - updatetime
+  - undotree
   - vimscript
   - vtsls
   - wildoptions
