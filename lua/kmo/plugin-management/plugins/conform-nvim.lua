@@ -1,10 +1,19 @@
 local ignored_servers = {
   "html",
+  "vtsls",
 }
 
 ---@param client vim.lsp.Client
 local function formatter_filter(client)
-  return not vim.list_contains(ignored_servers, client.name)
+  local result = not vim.list_contains(ignored_servers, client.name)
+
+  vim.notify(
+    string.format("%s: %s", client.name, result and "formatting" or "ignoring"),
+    vim.log.levels.INFO,
+    { title = "conform.nvim" }
+  )
+
+  return result
 end
 
 -- selene: allow(mixed_table)
