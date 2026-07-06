@@ -45,6 +45,7 @@ vim.filetype.add {
     json = with_cloud_formation "json",
     nswag = "json",
     razor = "razor",
+    sarif = "json",
     yaml = with_cloud_formation "yaml",
     yml = with_cloud_formation "yaml",
     -- cspell:enable
