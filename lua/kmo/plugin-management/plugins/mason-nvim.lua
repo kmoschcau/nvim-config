@@ -57,6 +57,7 @@ local pkgs_by_ft = {
 local lsp_to_mason_package = {
   -- cspell:disable
   astro = "astro-language-server",
+  azure_pipelines_ls = "azure-pipelines-language-server",
   bashls = "bash-language-server",
   cssls = "css-lsp",
   denols = "deno",

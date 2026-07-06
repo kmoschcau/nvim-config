@@ -61,6 +61,8 @@ vim.filetype.add {
     [".*/templates/.*%.ya?ml"] = "helm",
     ["helmfile.*%.ya?ml"] = "helm",
 
+    ["azure%-pipelines?%.ya?ml"] = "yaml.azure-pipelines",
+
     ["compose%.ya?ml"] = "yaml.docker-compose",
     ["docker%-compose%.ya?ml"] = "yaml.docker-compose",
     -- cspell:enable
