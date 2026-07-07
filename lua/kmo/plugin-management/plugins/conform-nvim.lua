@@ -4,17 +4,14 @@ local ignored_servers = {
 }
 
 ---@param client vim.lsp.Client
-local function formatter_filter(client)
-  local result = not vim.list_contains(ignored_servers, client.name)
-
-  vim.notify(
-    string.format("%s: %s", client.name, result and "formatting" or "ignoring"),
-    vim.log.levels.INFO,
-    { title = "conform.nvim" }
-  )
-
-  return result
+local function lsp_formatter_filter(client)
+  return not vim.list_contains(ignored_servers, client.name)
 end
+
+-- selene: allow(mixed_table)
+local web_formatters_config =
+  -- cspell:disable-next-line
+  { "oxfmt", "dprint", "prettier", stop_after_first = true }
 
 -- selene: allow(mixed_table)
 ---@module "lazy"
@@ -28,33 +25,34 @@ return {
         -- cspell:disable
         astro = { "dprint", "prettier" },
         cs = { "csharpier", "trim_newlines" },
-        css = { "dprint", "prettier", stop_after_first = true },
+        css = web_formatters_config,
         fish = { "fish_indent" },
-        handlebars = { "dprint" },
-        html = { "dprint", "prettier", stop_after_first = true },
+        handlebars = { "oxfmt", "dprint", stop_after_first = true },
+        html = web_formatters_config,
         java = { "google-java-format" },
-        javascript = { "dprint", "prettier", stop_after_first = true },
-        javascriptreact = { "dprint", "prettier", stop_after_first = true },
+        javascript = web_formatters_config,
+        javascriptreact = web_formatters_config,
         jq = { "jq" },
-        json = { "dprint", "prettier", stop_after_first = true },
-        json5 = { "prettier" },
-        jsonc = { "dprint", "prettier", stop_after_first = true },
-        less = { "dprint", "prettier", stop_after_first = true },
+        json = web_formatters_config,
+        json5 = { "oxfmt", "prettier", stop_after_first = true },
+        jsonc = web_formatters_config,
+        less = web_formatters_config,
         lua = { "stylua" },
-        markdown = { "injected", lsp_format = "last" },
+        markdown = { "oxfmt", "injected", lsp_format = "last" },
         ocaml = { "ocamlformat" },
         query = { "format-queries" },
         razor = { "trim_newlines", lsp_format = "first" },
-        sass = { "dprint", "prettier", stop_after_first = true },
-        scss = { "dprint", "prettier", stop_after_first = true },
+        sass = web_formatters_config,
+        scss = web_formatters_config,
         sh = { "shellharden", "shfmt" },
         svelte = { "dprint", "prettier", stop_after_first = true },
         tex = { "latexindent", "trim_newlines", "trim_whitespace" },
-        typescript = { "dprint", "prettier", stop_after_first = true },
-        typescriptreact = { "dprint", "prettier", stop_after_first = true },
-        vue = { "dprint", "prettier", stop_after_first = true },
+        toml = { "oxfmt" },
+        typescript = web_formatters_config,
+        typescriptreact = web_formatters_config,
+        vue = web_formatters_config,
         xml = { "xmllint", "trim_newlines", "trim_whitespace" },
-        yaml = { "dprint", "prettier", stop_after_first = true },
+        yaml = web_formatters_config,
         ["_"] = { "trim_newlines", "trim_whitespace" },
         -- cspell:enable
       },
@@ -66,20 +64,10 @@ return {
           require_cwd = true,
         },
         prettier = {
-          cwd = require("conform.util").root_file {
-            ".prettierrc",
-            ".prettierrc.json",
-            ".prettierrc.yml",
-            ".prettierrc.yaml",
-            ".prettierrc.json5",
-            ".prettierrc.js",
-            ".prettierrc.cjs",
-            ".prettierrc.mjs",
-            ".prettierrc.toml",
-            "prettier.config.js",
-            "prettier.config.cjs",
-            "prettier.config.mjs",
-          },
+          require_cwd = true,
+        },
+        -- cspell:disable-next-line
+        oxfmt = {
           require_cwd = true,
         },
         -- cspell:disable-next-line
@@ -92,7 +80,7 @@ return {
           return
         end
 
-        return { filter = formatter_filter, timeout_ms = 500 }
+        return { filter = lsp_formatter_filter, timeout_ms = 500 }
       end,
     }
   end,
@@ -124,7 +112,7 @@ return {
     vim.keymap.set({ "n", "x" }, "<Space>f", function()
       require("conform").format {
         async = true,
-        filter = formatter_filter,
+        filter = lsp_formatter_filter,
       }
     end, { desc = "Conform: Format the current buffer or selection." })
     vim.keymap.set({ "n", "x" }, "<Space>lf", function()

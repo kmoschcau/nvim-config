@@ -10,14 +10,19 @@ else
   table.insert(always_install, "cspell-lsp")
 end
 
+-- cspell:disable
+local json_pkgs = { "dprint", "jsonlint", "prettier", "oxfmt" }
+local yaml_pkgs = { "dprint", "yamllint", "prettier", "oxfmt" }
+-- cspell:enable
+
 local pkgs_by_ft = {
   -- cspell:disable
   astro = { "dprint", "emmet-language-server", "prettier" },
   cs = { "csharpier", "netcoredbg" },
   cshtml = { "emmet-language-server", "roslyn" },
-  css = { "dprint", "prettier" },
-  handlebars = { "dprint" },
-  html = { "dprint", "emmet-language-server", "markuplint" },
+  css = { "dprint", "prettier", "oxfmt" },
+  handlebars = { "dprint", "oxfmt" },
+  html = { "dprint", "emmet-language-server", "markuplint", "oxfmt" },
   java = {
     "checkstyle",
     "google-java-format",
@@ -25,32 +30,39 @@ local pkgs_by_ft = {
     "java-test",
     "jdtls",
   },
-  javascript = { "dprint", "prettier" },
-  javascriptreact = { "dprint", "emmet-language-server", "prettier" },
+  javascript = { "dprint", "prettier", "oxfmt" },
+  javascriptreact = { "dprint", "emmet-language-server", "prettier", "oxfmt" },
   jq = { "jq" },
-  json = { "dprint", "jsonlint", "prettier" },
-  json5 = { "prettier" },
-  ["json.cloudformation"] = { "cfn-lint" },
-  jsonc = { "dprint", "prettier" },
-  less = { "dprint", "prettier" },
+  json = { "dprint", "jsonlint", "prettier", "oxfmt" },
+  json5 = { "prettier", "oxfmt" },
+  ["json.cloudformation"] = vim.list_extend({ "cfn-lint" }, json_pkgs),
+  jsonc = { "dprint", "prettier", "oxfmt" },
+  less = { "dprint", "prettier", "oxfmt" },
   kotlin = { "ktlint" },
   lua = { "selene", "stylua" },
-  markdown = { "proselint" },
+  markdown = { "proselint", "oxfmt" },
   ocaml = { "ocamlformat" },
   razor = { "emmet-language-server", "roslyn" },
-  sass = { "dprint", "prettier" },
-  scss = { "dprint", "prettier" },
+  sass = { "dprint", "prettier", "oxfmt" },
+  scss = { "dprint", "prettier", "oxfmt" },
   sh = { "shellharden", "shfmt" },
   svelte = { "dprint", "emmet-language-server", "markuplint", "prettier" },
   systemd = { "systemdlint" },
   tex = { "latexindent", "proselint" },
   tf = { "trivy" },
   ["terraform-vars"] = { "trivy" },
-  typescript = { "dprint", "prettier" },
-  typescriptreact = { "dprint", "emmet-language-server", "prettier" },
-  vue = { "dprint", "emmet-language-server", "markuplint", "prettier" },
-  yaml = { "dprint", "yamllint", "prettier" },
-  ["yaml.cloudformation"] = { "cfn-lint", "yamllint" },
+  toml = { "oxfmt" },
+  typescript = { "dprint", "prettier", "oxfmt" },
+  typescriptreact = { "dprint", "emmet-language-server", "prettier", "oxfmt" },
+  vue = {
+    "dprint",
+    "emmet-language-server",
+    "markuplint",
+    "prettier",
+    "oxfmt",
+  },
+  yaml = yaml_pkgs,
+  ["yaml.cloudformation"] = vim.list_extend({ "cfn-lint" }, yaml_pkgs),
   -- cspell:enable
 }
 
@@ -78,7 +90,6 @@ local lsp_to_mason_package = {
   lua_ls = "lua-language-server",
   marksman = "marksman",
   -- omnisharp = "omnisharp",
-  oxfmt = "oxfmt",
   oxlint = "oxlint",
   phpactor = "phpactor",
   powershell_es = "powershell-editor-services",

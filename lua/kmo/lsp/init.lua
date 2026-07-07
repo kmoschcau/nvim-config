@@ -47,7 +47,6 @@ vim.lsp.enable {
   "marksman",
   "nushell",
   "omnisharp",
-  "oxfmt",
   "oxlint",
   "phpactor",
   "powershell_es",
