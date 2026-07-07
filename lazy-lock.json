@@ -27,7 +27,7 @@
   "mason.nvim": { "branch": "main", "commit": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d" },
   "mini.nvim": { "branch": "main", "commit": "d74190c1528aaf12ba5f3a29d03524c6b81e18b3" },
   "muren.nvim": { "branch": "main", "commit": "fa18f2df80a52afd201da062d1af0e80c8d1988e" },
-  "neoconf.nvim": { "branch": "main", "commit": "6859959fa6322a48121d66aba7d4f3fe628a167d" },
+  "neoconf.nvim": { "branch": "main", "commit": "d6209e921be54ca82fff5afa5975b54c6f7f6a83" },
   "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
   "nvim-dap": { "branch": "master", "commit": "9e848e09a697ee95302a3ef2dd43fd6eb709e570" },
   "nvim-dap-exception-breakpoints": { "branch": "main", "commit": "6bc8d52fb48d20c8cd61920a8c1a4b487eff3afd" },
