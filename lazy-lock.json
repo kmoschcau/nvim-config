@@ -16,7 +16,7 @@
   "dotnet.nvim": { "branch": "main", "commit": "f5c52f9f52a3d8ca8dff6916c2228fb41a075274" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
   "gitsigns.nvim": { "branch": "main", "commit": "5be654f2232c10ddcad19c1607a67b6b4b78fc29" },
-  "grug-far.nvim": { "branch": "main", "commit": "46df5eff7c55593f43891cf521fbf3f6c2c69de8" },
+  "grug-far.nvim": { "branch": "main", "commit": "11595bf747edc270bce2069d1020502ad4ae56cf" },
   "indent-blankline.nvim": { "branch": "master", "commit": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
@@ -27,7 +27,7 @@
   "mason.nvim": { "branch": "main", "commit": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d" },
   "mini.nvim": { "branch": "main", "commit": "629bf6792187e11b4829411c1648f86f28df3963" },
   "muren.nvim": { "branch": "main", "commit": "fa18f2df80a52afd201da062d1af0e80c8d1988e" },
-  "neoconf.nvim": { "branch": "main", "commit": "8a176023f995e65912bff8074f1a3c1eb75ab284" },
+  "neoconf.nvim": { "branch": "main", "commit": "8560c245f6a5bc7bb229c00d9d0627d02ef9b4e8" },
   "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
   "nvim-dap": { "branch": "master", "commit": "9e848e09a697ee95302a3ef2dd43fd6eb709e570" },
   "nvim-dap-exception-breakpoints": { "branch": "main", "commit": "6bc8d52fb48d20c8cd61920a8c1a4b487eff3afd" },
@@ -81,5 +81,5 @@
   "wezterm-types": { "branch": "main", "commit": "851470ad5d2dfb56bda936e6aeef2f3a45e7f199" },
   "workspace-diagnostics.nvim": { "branch": "main", "commit": "a35321d8401878cc9558e357acfd0da58b582739" },
   "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" },
-  "zoxide.vim": { "branch": "master", "commit": "30cb0c029fdaab9a655ffc27579248b193924367" }
+  "zoxide.vim": { "branch": "master", "commit": "9b1de2dac951277b2552eda826bceadc27d906fe" }
 }
