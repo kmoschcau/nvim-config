@@ -9,6 +9,7 @@ local base_languages = {
   "regex",
   "sql",
   "vim",
+  "vimdoc",
 }
 
 ---Check if the given languages are already installed.
