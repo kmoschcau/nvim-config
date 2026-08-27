@@ -6,7 +6,7 @@ M.defaults = {
   dotnet_server = "roslyn.nvim",
   ---Which LSP server to use for ECMAScript.
   ---@type "denols" | "ts_ls" | "typescript-tools" | "vtsls"
-  ecma_server = "vtsls",
+  ecma_server = "ts_ls",
 }
 
 M.schema = {
