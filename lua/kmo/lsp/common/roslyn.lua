@@ -18,6 +18,7 @@ function M.get_roslyn_cmd()
   vim.list_extend(cmd, {
     "roslyn",
     "--stdio",
+    "--daemon-mode",
     "--logLevel=Information",
     "--extensionLogDirectory",
     vim.fs.dirname(vim.lsp.log.get_filename()),
