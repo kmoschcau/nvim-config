@@ -136,13 +136,13 @@ return {
   version = "1.*",
   dependencies = {
     -- cspell:disable
-    "L3MON4D3/LuaSnip",
+    -- "L3MON4D3/LuaSnip", -- Installed via vim.pack
     "folke/lazydev.nvim",
     "micangl/cmp-vimtex",
     "moyiz/blink-emoji.nvim",
     "mtoohey31/cmp-fish",
     "nvim-mini/mini.nvim", -- for icons
-    "rafamadriz/friendly-snippets",
+    -- "rafamadriz/friendly-snippets", -- Installed via vim.pack
     "rcarriga/cmp-dap",
     "ribru17/blink-cmp-spell",
     { "saghen/blink.compat", lazy = true, config = true },
