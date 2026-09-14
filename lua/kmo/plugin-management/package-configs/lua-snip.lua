@@ -1,16 +1,18 @@
 -- cspell:words autosnippets luasnip prio virt_text
 
 require("luasnip.loaders.from_vscode").load {
-  paths = vim.fs.normalize(
-    vim.fs.joinpath(
-      vim.fn.stdpath "data",
-      "site",
-      "pack",
-      "core",
-      "opt",
-      "friendly-snippets"
-    )
-  ),
+  paths = {
+    vim.fs.normalize(
+      vim.fs.joinpath(
+        vim.fn.stdpath "data",
+        "site",
+        "pack",
+        "core",
+        "opt",
+        "friendly-snippets"
+      )
+    ),
+  },
 }
 
 for _, ft_path in
