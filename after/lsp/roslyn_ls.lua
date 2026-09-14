@@ -11,7 +11,7 @@ return {
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
-    if not bufname:match("^" .. vim.fs.joinpath "/tmp/MetadataAsSource/") then
+    if not bufname:match("^" .. vim.fs.joinpath("tmp", "MetadataAsSource")) then
       -- try find solutions root first
       local root_dir = vim.fs.root(bufnr, function(fname, _)
         return fname:match "%.sln$" ~= nil
