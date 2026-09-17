@@ -36,7 +36,7 @@ function M.add_async()
     return
   end
 
-  if not target_node or target_node:type() == "async" then
+  if target_node:type() == "async" then
     return
   end
 
