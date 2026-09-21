@@ -23,7 +23,7 @@
   "luvit-meta": { "branch": "main", "commit": "7edcd52ac6f2acc2f83f0cc27ac989a142408fbf" },
   "markdown-table-mode.nvim": { "branch": "main", "commit": "0b768b58ec45afb7cb091175e837b7f5461663af" },
   "mason.nvim": { "branch": "main", "commit": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d" },
-  "mini.nvim": { "branch": "main", "commit": "4389a4f31f854ce066949ea89c72dc71564f5c20" },
+  "mini.nvim": { "branch": "main", "commit": "81ed10ebe1144b0eb9a7f289ffae000c22772c20" },
   "muren.nvim": { "branch": "main", "commit": "fa18f2df80a52afd201da062d1af0e80c8d1988e" },
   "neoconf.nvim": { "branch": "main", "commit": "a469ca99c14c1d19f908d1ce61fe8aa26bfdfb30" },
   "nvim-autopairs": { "branch": "master", "commit": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c" },
@@ -77,7 +77,7 @@
   "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
   "vimtex": { "branch": "master", "commit": "42dcf1699e45725bd3b366ecab2ae06f6e0f8118" },
   "wezterm-types": { "branch": "main", "commit": "895fd632c45c0d8fbf5f49756ffec8187e53f50a" },
-  "workspace-diagnostics.nvim": { "branch": "main", "commit": "a35321d8401878cc9558e357acfd0da58b582739" },
+  "workspace-diagnostics.nvim": { "branch": "main", "commit": "ea93521c0344fa2530c6f6da8b059d1b944ca550" },
   "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" },
   "zoxide.vim": { "branch": "master", "commit": "d4c3d088a70a4edae9def6209644c092f4221fe5" }
 }
