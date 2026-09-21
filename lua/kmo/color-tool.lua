@@ -238,7 +238,7 @@ local function get_contrast_ratio(fg, bg)
 
     -- Correct channels
     local function correct_channel(x)
-      return x <= 0.04045 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
+      return x <= 0.03928 and (x / 12.92) or math.pow((x + 0.055) / 1.055, 2.4)
     end
     local R, G, B = correct_channel(r), correct_channel(g), correct_channel(b)
 
