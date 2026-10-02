@@ -11,6 +11,7 @@ local linters_by_ft = {
   kotlin = { "ktlint" },
   lua = { "selene" },
   markdown = { "proselint" },
+  php = { "mago_lint", "mago_analyze" },
   svelte = { "markuplint" },
   systemd = { "systemd-analyze", "systemdlint" },
   tex = { "proselint" },
