@@ -92,6 +92,7 @@ local lsp_to_mason_package = {
   -- omnisharp = "omnisharp",
   oxlint = "oxlint",
   phpactor = "phpactor",
+  phpantom_lsp = "phpantom_lsp",
   powershell_es = "powershell-editor-services",
   prosemd_lsp = "prosemd-lsp",
   quick_lint_js = "quick-lint-js",
