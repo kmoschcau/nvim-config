@@ -69,6 +69,7 @@ words:
   - joinpath
   - keymap
   - keymaps
+  - leadmultispace
   - linematch
   - listchars
   - lnum

@@ -52,6 +52,8 @@ local M = {
     },
     listchars = {
       tab = "⊳ ⎹",
+      leadmultispace = "▎ ",
+      leadtab = "▍  ",
       trail = "·",
       extends = "≻",
       precedes = "≺",
