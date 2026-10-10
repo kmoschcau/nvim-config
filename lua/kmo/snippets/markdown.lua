@@ -12,7 +12,7 @@ local spell = s(
   },
   fmt(
     [[
-      <!-- vim: set spelllang={spelllang} -->
+      <!-- vim: set spelllang={spelllang}: -->
       <!-- cspell:dictionary {dictionary} -->
       <!-- cspell:words spelllang -->
     ]],
