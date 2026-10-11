@@ -8,7 +8,7 @@ return {
   "Wansmer/treesj",
   dependencies = {
     -- cspell:disable
-    "nvim-mini/mini.nvim",
+    -- "nvim-mini/mini.nvim", -- Installed via vim.pack
     -- cspell:enable
   },
   config = function()

@@ -6,7 +6,7 @@ return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = {
     -- cspell:disable
-    "nvim-mini/mini.nvim", -- for icons
+    -- "nvim-mini/mini.nvim", -- for icons, installed via vim.pack
     -- cspell:enable
   },
   ft = "markdown",

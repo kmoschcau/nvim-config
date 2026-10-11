@@ -141,7 +141,7 @@ return {
     "micangl/cmp-vimtex",
     "moyiz/blink-emoji.nvim",
     "mtoohey31/cmp-fish",
-    "nvim-mini/mini.nvim", -- for icons
+    -- "nvim-mini/mini.nvim", -- for icons, installed via vim.pack
     -- "rafamadriz/friendly-snippets", -- Installed via vim.pack
     "rcarriga/cmp-dap",
     "ribru17/blink-cmp-spell",

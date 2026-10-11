@@ -14,8 +14,14 @@ vim.opt.packpath:append(
 
 vim.pack.add {
   -- cspell:disable
+  { src = gh "folke/neoconf.nvim" },
+
   { src = gh "L3MON4D3/LuaSnip" },
   { src = gh "rafamadriz/friendly-snippets" },
+
+  { src = cb "mfussenegger/nvim-lint" },
+
+  { src = gh "nvim-mini/mini.nvim" },
   -- cspell:enable
 }
 

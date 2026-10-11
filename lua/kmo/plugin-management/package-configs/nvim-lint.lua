@@ -151,99 +151,85 @@ local function do_lint(event_args)
   end
 end
 
--- selene: allow(mixed_table)
----@module "lazy"
----@type LazyPluginSpec
-return {
-  -- cspell:disable-next-line
-  "https://codeberg.org/mfussenegger/nvim-lint",
-  dependencies = {
-    -- cspell:disable
-    "folke/neoconf.nvim",
-    -- cspell:enable
+-- TODO: extract this into override functions.
+local config = require("neoconf").get(
+  "linters",
+  require("kmo.neoconf-schemas.linters").defaults
+)
+
+local checkstyle_config = config.java.checkstyle
+
+local checkstyle_args = { "-f", "sarif", "-c", checkstyle_config.config }
+
+if checkstyle_config.options then
+  for _, arg in
+    ipairs(vim.split(checkstyle_config.options, "%s+", {
+      trimempty = true,
+    }))
+  do
+    table.insert(checkstyle_args, arg)
+  end
+end
+
+local pmd_config = config.java.pmd
+
+local pmd_args =
+  { "check", "--format", "sarif", "--rulesets", pmd_config.rulesets }
+
+if pmd_config.cache then
+  table.insert(pmd_args, "--cache")
+  table.insert(pmd_args, pmd_config.cache)
+else
+  table.insert(pmd_args, "--no-cache")
+end
+
+table.insert(pmd_args, "--dir")
+
+---@type table<string, lint.LinterOverrideConfig>
+local linter_overrides = {
+  actionlint = {
+    condition = cache.by_bufnr(function(event_args)
+      return vim
+        .regex([[\.git\%(hub\|ea\)]])
+        :match_str(vim.fs.normalize(event_args.match)) ~= nil
+    end),
   },
-  config = function()
-    -- TODO: extract this into override functions.
-    local config = require("neoconf").get(
-      "linters",
-      require("kmo.neoconf-schemas.linters").defaults
-    )
-
-    local checkstyle_config = config.java.checkstyle
-
-    local checkstyle_args = { "-f", "sarif", "-c", checkstyle_config.config }
-
-    if checkstyle_config.options then
-      for _, arg in
-        ipairs(vim.split(checkstyle_config.options, "%s+", {
-          trimempty = true,
-        }))
-      do
-        table.insert(checkstyle_args, arg)
-      end
-    end
-
-    local pmd_config = config.java.pmd
-
-    local pmd_args =
-      { "check", "--format", "sarif", "--rulesets", pmd_config.rulesets }
-
-    if pmd_config.cache then
-      table.insert(pmd_args, "--cache")
-      table.insert(pmd_args, pmd_config.cache)
-    else
-      table.insert(pmd_args, "--no-cache")
-    end
-
-    table.insert(pmd_args, "--dir")
-
-    ---@type table<string, lint.LinterOverrideConfig>
-    local linter_overrides = {
-      actionlint = {
-        condition = cache.by_bufnr(function(event_args)
-          return vim
-            .regex([[\.git\%(hub\|ea\)]])
-            :match_str(vim.fs.normalize(event_args.match)) ~= nil
-        end),
-      },
-      checkstyle = {
-        args = checkstyle_args,
-      },
-      cspell = {
-        condition = function()
-          return require("kmo.linters.common.cspell").enable_cspell(
-            vim.bo.buftype,
-            vim.bo.filetype
-          )
-        end,
-      },
-      pmd = {
-        args = pmd_args,
-      },
-      proselint = {
-        condition = function()
-          return not vim.list_contains({ "help", "nofile" }, vim.bo.buftype)
-        end,
-      },
-      selene = {
-        condition = cache.by_bufnr(function(event_args)
-          return #vim.fs.find("selene.toml", {
-            path = event_args.match,
-            upward = true,
-          }) > 0
-        end),
-      },
-    }
-
-    merge_linter_configurations(linter_overrides)
-
-    vim.api.nvim_create_autocmd(
-      { "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },
-      {
-        desc = "Try to run nvim-lint linters.",
-        group = vim.api.nvim_create_augroup("nvim-lint", {}),
-        callback = debounce(100, do_lint),
-      }
-    )
-  end,
+  checkstyle = {
+    args = checkstyle_args,
+  },
+  cspell = {
+    condition = function()
+      return require("kmo.linters.common.cspell").enable_cspell(
+        vim.bo.buftype,
+        vim.bo.filetype
+      )
+    end,
+  },
+  pmd = {
+    args = pmd_args,
+  },
+  proselint = {
+    condition = function()
+      return not vim.list_contains({ "help", "nofile" }, vim.bo.buftype)
+    end,
+  },
+  selene = {
+    condition = cache.by_bufnr(function(event_args)
+      return #vim.fs.find("selene.toml", {
+        path = event_args.match,
+        upward = true,
+      }) > 0
+    end),
+  },
 }
+
+merge_linter_configurations(linter_overrides)
+
+vim.api.nvim_create_autocmd(
+  { "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },
+  {
+    desc = "Try to run nvim-lint linters.",
+    group = vim.api.nvim_create_augroup("nvim-lint", {}),
+    callback = debounce(100, do_lint),
+  }
+)

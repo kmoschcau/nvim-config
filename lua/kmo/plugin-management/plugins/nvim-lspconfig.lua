@@ -7,7 +7,7 @@ return {
   dependencies = {
     -- cspell:disable
     "Hoffs/omnisharp-extended-lsp.nvim",
-    "folke/neoconf.nvim",
+    -- "folke/neoconf.nvim", -- Installed via vim.pack
     "https://codeberg.org/mfussenegger/nvim-jdtls",
     {
       "pmizio/typescript-tools.nvim",
