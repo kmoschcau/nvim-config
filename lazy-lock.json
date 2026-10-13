@@ -71,7 +71,7 @@
   "vim-maven-syntax": { "branch": "master", "commit": "ddb38beeb96dd4f96631a1370a027936c03353a6" },
   "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
   "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
-  "vimtex": { "branch": "master", "commit": "f029f22b418530788704bec2397b880da136b31c" },
+  "vimtex": { "branch": "master", "commit": "98615cefc441aaa5721c144ecfeacddcdf78816d" },
   "wezterm-types": { "branch": "main", "commit": "46b6b13c38cf79b3dd4f1414aa89fbfaffb892ae" },
   "workspace-diagnostics.nvim": { "branch": "main", "commit": "ea93521c0344fa2530c6f6da8b059d1b944ca550" },
   "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" },
