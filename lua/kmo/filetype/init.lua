@@ -53,7 +53,6 @@ vim.filetype.add {
   filename = {
     -- cspell:disable
     [".csharpierignore"] = "gitignore",
-    ["quick-lint-js.config"] = "json",
     -- cspell:enable
   },
   pattern = {

@@ -51,7 +51,6 @@ vim.lsp.enable {
   "phpantom_lsp",
   "powershell_es",
   "prosemd_lsp",
-  "quick_lint_js",
   "roslyn_ls",
   "ruff",
   "rumdl",
