@@ -9,11 +9,11 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "mini.nvim": {
-      "rev": "9ee72c26ac1440ee6c95ce708c1d739684be316a",
+      "rev": "8831fa150fa26492cfe135801fa498132f1491d2",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neoconf.nvim": {
-      "rev": "625bf922c8bcb15520f42d91e324dc6ecb80ae97",
+      "rev": "f64f69999d545e5474ce71401140053e4d47d94f",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-lint": {
