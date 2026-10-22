@@ -13,7 +13,7 @@
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neoconf.nvim": {
-      "rev": "6e885778e54bbb6695fc5caabfed448db1367dbb",
+      "rev": "c332db46ff4d44e0389aaaf857d20d98c3286373",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-lint": {
