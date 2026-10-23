@@ -37,7 +37,6 @@ vim.lsp.enable {
   "helm_ls",
   "html",
   "jdtls",
-  "jedi_language_server",
   "jqls",
   "jsonls",
   "kotlin_language_server",
@@ -71,5 +70,6 @@ vim.lsp.enable {
   "vtsls",
   "vue_ls",
   "yamlls",
+  "zuban",
   -- cspell:enable
 }

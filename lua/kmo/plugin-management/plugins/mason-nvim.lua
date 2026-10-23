@@ -82,7 +82,6 @@ local lsp_to_mason_package = {
   gradle_ls = "gradle-language-server",
   helm_ls = "helm-ls",
   html = "html-lsp",
-  jedi_language_server = "jedi-language-server",
   jqls = "jq-lsp",
   jsonls = "json-lsp",
   kotlin_language_server = "kotlin-language-server",
@@ -115,6 +114,7 @@ local lsp_to_mason_package = {
   vtsls = "vtsls",
   vue_ls = "vue-language-server",
   yamlls = "yaml-language-server",
+  zuban = "zuban",
   -- cspell:enable
 }
 
