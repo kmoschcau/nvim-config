@@ -207,6 +207,8 @@ vim.pack.add {
   { src = gh "refractalize/oil-git-status.nvim" },
   { src = gh "stevearc/oil.nvim" },
 
+  { src = gh "stevearc/overseer.nvim" },
+
   { src = gh "subnut/nvim-ghost.nvim" },
 
   { src = gh "windwp/nvim-autopairs" },
