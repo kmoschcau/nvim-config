@@ -121,6 +121,10 @@
       "rev": "6bc8d52fb48d20c8cd61920a8c1a4b487eff3afd",
       "src": "https://github.com/lucaSartore/nvim-dap-exception-breakpoints"
     },
+    "nvim-dap-repl-highlights": {
+      "rev": "f31deba47fe3ee6ff8d2f13d9dbd06b2d1ae06b5",
+      "src": "https://github.com/LiadOz/nvim-dap-repl-highlights"
+    },
     "nvim-lint": {
       "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"

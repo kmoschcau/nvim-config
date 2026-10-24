@@ -98,6 +98,8 @@ vim.pack.add {
 
   { src = gh "lewis6991/gitsigns.nvim" },
 
+  { src = gh "LiadOz/nvim-dap-repl-highlights" },
+
   { src = gh "lucaSartore/nvim-dap-exception-breakpoints" },
 
   { src = gh "lukas-reineke/indent-blankline.nvim" },
