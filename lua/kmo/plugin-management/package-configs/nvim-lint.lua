@@ -229,7 +229,7 @@ vim.api.nvim_create_autocmd(
   { "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },
   {
     desc = "Try to run nvim-lint linters.",
-    group = vim.api.nvim_create_augroup("nvim-lint", {}),
+    group = vim.api.nvim_create_augroup("kmo.nvim-lint", {}),
     callback = debounce(100, do_lint),
   }
 )

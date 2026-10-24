@@ -1,7 +1,7 @@
 local M = {}
 
 ---The autocommand group for LSP init autocommands.
-M.augroup = vim.api.nvim_create_augroup("InitNvimLanguageServer", {})
+M.augroup = vim.api.nvim_create_augroup("kmo.init.language-server", {})
 
 local has_blink, blink = pcall(require, "blink.cmp")
 

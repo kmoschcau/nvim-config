@@ -14,8 +14,7 @@ return {
       "*github.com",
     }
 
-    local augroup =
-      vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", {})
+    local augroup = vim.api.nvim_create_augroup("kmo.nvim-ghost", {})
 
     vim.api.nvim_create_autocmd("User", {
       desc = "nvim-ghost: Set markdown filetype",

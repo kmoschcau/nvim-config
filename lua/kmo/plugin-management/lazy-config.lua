@@ -23,7 +23,7 @@ require("lazy").setup("kmo.plugin-management.plugins", {
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Lazy.nvim: Remove the border from the backdrop window",
   pattern = "lazy_backdrop",
-  group = vim.api.nvim_create_augroup("lazy.nvim-winborder", { clear = true }),
+  group = vim.api.nvim_create_augroup("kmo.lazy.nvim-winborder", {}),
   callback = function(args)
     for _, window_id in
       ipairs(vim.tbl_filter(function(win)

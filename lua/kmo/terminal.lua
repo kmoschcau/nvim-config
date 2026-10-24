@@ -1,4 +1,4 @@
-local augroup = vim.api.nvim_create_augroup("InitNvimTerminal", {})
+local augroup = vim.api.nvim_create_augroup("kmo.init.terminal", {})
 
 vim.api.nvim_create_autocmd("TermOpen", {
   desc = "Adjust settings to make more sense in a terminal.",

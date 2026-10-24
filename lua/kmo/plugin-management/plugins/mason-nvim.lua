@@ -255,7 +255,7 @@ return {
     add_package_names_from_lsp_config()
 
     vim.api.nvim_create_autocmd({ "FileType" }, {
-      group = vim.api.nvim_create_augroup("MasonNvimInstall", {}),
+      group = vim.api.nvim_create_augroup("kmo.mason.install", {}),
       desc = "mason.nvim: Automatically install packages for specific file types.",
       callback = function()
         install_packages(pkgs_by_ft[vim.bo.filetype])

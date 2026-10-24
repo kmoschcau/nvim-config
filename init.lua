@@ -191,7 +191,7 @@ vim.o.winborder = "rounded"
 
 -- autocommands {{{
 
-local augroup = vim.api.nvim_create_augroup("InitNvim", {})
+local augroup = vim.api.nvim_create_augroup("kmo.init", {})
 
 vim.api.nvim_create_autocmd("OptionSet", {
   desc = "Automatically set the listchars option's leadmultispace when setting shiftwidth.",

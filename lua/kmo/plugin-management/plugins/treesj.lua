@@ -20,7 +20,7 @@ return {
     local langs = require("treesj.langs").presets
 
     vim.api.nvim_create_autocmd({ "FileType" }, {
-      group = vim.api.nvim_create_augroup("treesj", {}),
+      group = vim.api.nvim_create_augroup("kmo.treesj_mini", {}),
       desc = "Treesj/mini.nvim: Set up join and split keymaps.",
       callback = function()
         if langs[vim.bo.filetype] then

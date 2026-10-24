@@ -70,7 +70,7 @@ local function enable_nvim_treesitter_features(buf, buffer_language)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("treesitter.setup", {}),
+  group = vim.api.nvim_create_augroup("kmo.treesitter.setup", {}),
   callback = function(args)
     local buf = args.buf
     local filetype = args.match

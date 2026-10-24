@@ -3,7 +3,7 @@ local mason_utils = require "kmo.plugin-management.mason-utils"
 local M = {}
 
 ---The shared autocmd group for roslyn servers.
-M.augroup = vim.api.nvim_create_augroup("RoslynLanguageServer", {})
+M.augroup = vim.api.nvim_create_augroup("kmo.roslyn", {})
 
 ---Get the roslyn command for the roslyn language server.
 ---@return string[]
