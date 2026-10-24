@@ -128,6 +128,13 @@ vim.pack.add {
 
   { src = gh "monaqa/dial.nvim" },
 
+  { src = gh "Hoffs/omnisharp-extended-lsp.nvim" },
+  { src = cb "mfussenegger/nvim-jdtls" },
+  { src = gh "nvim-lua/plenary.nvim" },
+  { src = gh "pmizio/typescript-tools.nvim" },
+  { src = gh "seblyng/roslyn.nvim" },
+  { src = gh "neovim/nvim-lspconfig" },
+
   { src = gh "SmiteshP/nvim-navic" },
   { src = gh "nvim-lualine/lualine.nvim" },
 

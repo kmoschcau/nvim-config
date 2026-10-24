@@ -153,6 +153,10 @@
       "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
+    "nvim-jdtls": {
+      "rev": "6e9d953f0b82bccdb834cfde0e893f3119c22592",
+      "src": "https://codeberg.org/mfussenegger/nvim-jdtls"
+    },
     "nvim-lightbulb": {
       "rev": "b8c08c5f3b1586dfcdd9f34d7d54fe6982e01ac9",
       "src": "https://github.com/kosayoda/nvim-lightbulb"
@@ -160,6 +164,10 @@
     "nvim-lint": {
       "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
+    },
+    "nvim-lspconfig": {
+      "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
       "rev": "455808fd0fae06e6d70fadfd61432275db8f34ce",
@@ -173,13 +181,29 @@
       "rev": "0572382adde2eb03bde68da23c2aaac3577f503a",
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
+    "omnisharp-extended-lsp.nvim": {
+      "rev": "51e407a46ddb15e49727139b5b1ae3650cd6a069",
+      "src": "https://github.com/Hoffs/omnisharp-extended-lsp.nvim"
+    },
     "one-small-step-for-vimkind": {
       "rev": "1af6ffb9b5229a856e8090fa2f690e0931a5aace",
       "src": "https://github.com/jbyuki/one-small-step-for-vimkind"
     },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "roslyn.nvim": {
+      "rev": "bf1bd4e70bc7068d1b4aebf4ce03cc19a86615be",
+      "src": "https://github.com/seblyng/roslyn.nvim"
+    },
     "statuscol.nvim": {
       "rev": "887b8a03ea3804628505c9002fd07bd06a3db2e0",
       "src": "https://github.com/luukvbaal/statuscol.nvim"
+    },
+    "typescript-tools.nvim": {
+      "rev": "c2f5910074103705661e9651aa841e0d7eea9932",
+      "src": "https://github.com/pmizio/typescript-tools.nvim"
     },
     "wezterm-types": {
       "rev": "39511289aa040a7746a9e2d551b35ef330f15c77",
