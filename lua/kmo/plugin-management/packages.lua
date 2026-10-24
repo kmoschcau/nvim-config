@@ -28,6 +28,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 vim.pack.add {
   -- cspell:disable
+  { src = gh "AckslD/muren.nvim" },
+
   { src = gh "folke/neoconf.nvim" },
 
   { src = gh "gregorias/coop.nvim" },

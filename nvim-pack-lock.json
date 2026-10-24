@@ -101,6 +101,10 @@
       "rev": "acfc3b2702126209201ca8b38a105294fa2c1ddd",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "muren.nvim": {
+      "rev": "fa18f2df80a52afd201da062d1af0e80c8d1988e",
+      "src": "https://github.com/AckslD/muren.nvim"
+    },
     "neoconf.nvim": {
       "rev": "d48eff0ed316f7a49c20e05031e305679bc21252",
       "src": "https://github.com/folke/neoconf.nvim"
