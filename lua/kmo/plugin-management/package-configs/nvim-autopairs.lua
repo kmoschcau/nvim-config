@@ -1,9 +1,8 @@
 -- cspell:words autopairs conds
 
-local has_autopairs, autopairs = pcall(require, "nvim-autopairs")
-if not has_autopairs then
-  return
-end
+local autopairs = require "nvim-autopairs"
+
+autopairs.setup()
 
 local rule = require "nvim-autopairs.rule"
 local conds = require "nvim-autopairs.conds"
@@ -57,5 +56,3 @@ autopairs.add_rules {
   -- Add spaces inside and complete XML comment in vue
   rule("<!--", "  -->", { "svg", "vue" }):set_end_pair_length(4),
 }
-
-require("nvim-autopairs").setup()
