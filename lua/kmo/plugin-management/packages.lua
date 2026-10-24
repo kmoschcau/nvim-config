@@ -98,10 +98,6 @@ vim.pack.add {
 
   { src = gh "lewis6991/gitsigns.nvim" },
 
-  { src = gh "LiadOz/nvim-dap-repl-highlights" },
-
-  { src = gh "lucaSartore/nvim-dap-exception-breakpoints" },
-
   { src = gh "lukas-reineke/indent-blankline.nvim" },
 
   { src = gh "luukvbaal/statuscol.nvim" },
@@ -120,6 +116,14 @@ vim.pack.add {
   { src = gh "nvim-lualine/lualine.nvim" },
 
   { src = gh "nvim-mini/mini.nvim" },
+
+  { src = gh "jbyuki/one-small-step-for-vimkind" },
+  { src = gh "LiadOz/nvim-dap-repl-highlights" },
+  { src = gh "lucaSartore/nvim-dap-exception-breakpoints" },
+  { src = gh "nvim-neotest/nvim-nio" },
+  { src = gh "rcarriga/nvim-dap-ui" },
+  { src = gh "theHamsta/nvim-dap-virtual-text" },
+  { src = cb "mfussenegger/nvim-dap" },
 
   { src = gh "Bilal2453/luvit-meta" },
   { src = gh "DrKJeff16/wezterm-types" },
