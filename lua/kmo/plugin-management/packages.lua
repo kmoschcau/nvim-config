@@ -14,6 +14,7 @@ vim.opt.packpath:append(
 
 local names = {
   mason = "mason.nvim",
+  treesitter = "nvim-treesitter",
 }
 
 local augroup = vim.api.nvim_create_augroup("kmo.pack.build", {})
@@ -74,6 +75,44 @@ vim.api.nvim_create_autocmd("PackChanged", {
           title = title,
         })
       end
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd("PackChanged", {
+  desc = "Build mason.nvim",
+  group = augroup,
+  callback = function(event)
+    --- @type vim.event.packchanged.data
+    local data = event.data
+    local active, name, kind = data.active, data.spec.name, data.kind
+
+    if name ~= names.treesitter or (kind ~= "install" and kind ~= "update") then
+      return
+    end
+
+    if not active then
+      vim.cmd.packadd "nvim-treesitter"
+    end
+
+    local id = "nvim-treesitter update"
+    local title = "nvim-treesitter update"
+    local symbols = require "kmo.symbols"
+
+    vim.notify("Updating languages.", vim.log.levels.INFO, {
+      id = id,
+      timeout = false,
+      title = title,
+      opts = function(notification)
+        notification.icon = symbols.progress.get_dynamic_spinner()
+      end,
+    })
+    require("nvim-treesitter").update():await(function()
+      vim.notify("Updated languages.", vim.log.levels.INFO, {
+        id = id,
+        icon = symbols.progress.done,
+        title = title,
+      })
     end)
   end,
 })
@@ -139,6 +178,12 @@ vim.pack.add {
   { src = gh "nvim-lualine/lualine.nvim" },
 
   { src = gh "nvim-mini/mini.nvim" },
+
+  { src = gh "nvim-treesitter/nvim-treesitter-context" },
+  { src = gh "nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+  { src = gh "RRethy/nvim-treesitter-endwise" },
+  { src = gh "windwp/nvim-ts-autotag" },
+  { name = names.treesitter, src = gh "nvim-treesitter/nvim-treesitter" },
 
   { src = gh "olrtg/nvim-emmet" },
 
