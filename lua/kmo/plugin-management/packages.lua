@@ -133,6 +133,8 @@ vim.pack.add {
 
   { src = gh "folke/snacks.nvim" },
 
+  { src = gh "godlygeek/tabular" },
+
   { src = gh "gregorias/coop.nvim" },
   { src = gh "gregorias/coerce.nvim" },
 
