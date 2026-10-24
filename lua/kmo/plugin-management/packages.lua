@@ -155,7 +155,7 @@ vim.pack.add {
 
   { name = names.mason, src = gh "mason-org/mason.nvim" },
 
-  { src = gh "MoaidHathot/dotnet.nvim" },
+  { src = gh "MeanderingProgrammer/render-markdown.nvim" },
 
   { src = gh "jbyuki/one-small-step-for-vimkind" },
   { src = gh "LiadOz/nvim-dap-repl-highlights" },
@@ -166,6 +166,8 @@ vim.pack.add {
   { src = cb "mfussenegger/nvim-dap" },
 
   { src = cb "mfussenegger/nvim-lint" },
+
+  { src = gh "MoaidHathot/dotnet.nvim" },
 
   { src = gh "monaqa/dial.nvim" },
 
