@@ -274,6 +274,10 @@
       "rev": "c2f5910074103705661e9651aa841e0d7eea9932",
       "src": "https://github.com/pmizio/typescript-tools.nvim"
     },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    },
     "wezterm-types": {
       "rev": "39511289aa040a7746a9e2d551b35ef330f15c77",
       "src": "https://github.com/DrKJeff16/wezterm-types"
