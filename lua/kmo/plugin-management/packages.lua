@@ -37,6 +37,8 @@ vim.pack.add {
 
   { src = gh "icholy/lsplinks.nvim" },
 
+  { src = gh "Kicamon/markdown-table-mode.nvim" },
+
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
 
