@@ -42,6 +42,8 @@ vim.pack.add {
 
   { src = gh "luukvbaal/statuscol.nvim" },
 
+  { src = gh "MagicDuck/grug-far.nvim" },
+
   { src = gh "MoaidHathot/dotnet.nvim" },
 
   { src = cb "mfussenegger/nvim-lint" },
