@@ -89,6 +89,7 @@ words:
   - nvim_list_bufs
   - omnisharp
   - packadd
+  - packchanged
   - packpath
   - pumblend
   - scrolljump

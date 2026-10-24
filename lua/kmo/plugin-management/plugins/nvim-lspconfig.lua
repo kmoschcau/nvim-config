@@ -15,7 +15,7 @@ return {
         "nvim-lua/plenary.nvim",
       },
     },
-    "saghen/blink.cmp",
+    -- "saghen/blink.cmp", -- Installed via vim.pack
     "seblyng/roslyn.nvim",
     -- cspell:enable
   },

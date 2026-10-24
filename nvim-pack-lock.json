@@ -4,9 +4,46 @@
       "rev": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
+    "blink-cmp-spell": {
+      "rev": "2bd0e0d5e7735c047e72b6918a0458f3e8fadaba",
+      "src": "https://github.com/ribru17/blink-cmp-spell"
+    },
+    "blink-emoji.nvim": {
+      "rev": "dff709139ad5389fb55ebab026e75278a12b325a",
+      "src": "https://github.com/moyiz/blink-emoji.nvim"
+    },
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "1.10.2 - 2.0.0"
+    },
+    "blink.compat": {
+      "rev": "1454f14a8d855a578ceeba77c62538fa1459a67c",
+      "src": "https://github.com/saghen/blink.compat"
+    },
+    "cmp-dap": {
+      "rev": "ea92773e84c0ad3288c3bc5e452ac91559669087",
+      "src": "https://github.com/rcarriga/cmp-dap"
+    },
+    "cmp-fish": {
+      "rev": "3a23492e2aead05522a9887ec685d70e8c987323",
+      "src": "https://github.com/mtoohey31/cmp-fish"
+    },
+    "cmp-vimtex": {
+      "rev": "c09ca05bfa0641754516f13294d73d3799a02fc8",
+      "src": "https://github.com/micangl/cmp-vimtex"
+    },
+    "colorful-menu.nvim": {
+      "rev": "196ddf16d5f8fec09ba7f20e6b153aa5188e907b",
+      "src": "https://github.com/xzbdmw/colorful-menu.nvim"
+    },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "lazydev.nvim": {
+      "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
+      "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini.nvim": {
       "rev": "acfc3b2702126209201ca8b38a105294fa2c1ddd",
@@ -19,6 +56,10 @@
     "nvim-lint": {
       "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
+    },
+    "wezterm-types": {
+      "rev": "39511289aa040a7746a9e2d551b35ef330f15c77",
+      "src": "https://github.com/DrKJeff16/wezterm-types"
     }
   }
 }
