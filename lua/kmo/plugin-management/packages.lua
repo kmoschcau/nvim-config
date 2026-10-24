@@ -82,6 +82,8 @@ vim.pack.add {
   -- cspell:disable
   { src = gh "AckslD/muren.nvim" },
 
+  { src = gh "brenoprata10/nvim-highlight-colors" },
+
   { src = gh "esmuellert/nvim-eslint" },
 
   { src = gh "folke/neoconf.nvim" },

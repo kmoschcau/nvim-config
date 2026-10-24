@@ -149,6 +149,10 @@
       "rev": "bdba2a8ad0eec84379d65e7aa9b76a17b11b653a",
       "src": "https://github.com/subnut/nvim-ghost.nvim"
     },
+    "nvim-highlight-colors": {
+      "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
+      "src": "https://github.com/brenoprata10/nvim-highlight-colors"
+    },
     "nvim-lint": {
       "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
