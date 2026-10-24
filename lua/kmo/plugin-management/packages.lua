@@ -50,6 +50,8 @@ vim.pack.add {
   { src = gh "saghen/blink.compat" },
   { src = gh "xzbdmw/colorful-menu.nvim" },
   { src = gh "saghen/blink.cmp", version = vim.version.range "^1.10.2" },
+
+  { src = gh "stevearc/conform.nvim" },
   -- cspell:enable
 }
 
