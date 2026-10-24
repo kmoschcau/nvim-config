@@ -54,6 +54,9 @@ vim.pack.add {
 
   { src = gh "monaqa/dial.nvim" },
 
+  { src = gh "SmiteshP/nvim-navic" },
+  { src = gh "nvim-lualine/lualine.nvim" },
+
   { src = gh "nvim-mini/mini.nvim" },
 
   { src = gh "DrKJeff16/wezterm-types" },
