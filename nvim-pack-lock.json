@@ -97,6 +97,10 @@
       "rev": "0b768b58ec45afb7cb091175e837b7f5461663af",
       "src": "https://github.com/Kicamon/markdown-table-mode.nvim"
     },
+    "mason.nvim": {
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
     "mini.nvim": {
       "rev": "acfc3b2702126209201ca8b38a105294fa2c1ddd",
       "src": "https://github.com/nvim-mini/mini.nvim"

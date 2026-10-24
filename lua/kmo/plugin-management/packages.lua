@@ -13,16 +13,68 @@ vim.opt.packpath:append(
 )
 
 local names = {
-  blink_cmp = "blink.cmp",
+  mason = "mason.nvim",
 }
 
+local augroup = vim.api.nvim_create_augroup("kmo.pack.build", {})
+
 vim.api.nvim_create_autocmd("PackChanged", {
-  desc = "Build plugins that need it",
-  group = vim.api.nvim_create_augroup("kmo.pack.build", {}),
+  desc = "Build mason.nvim",
+  group = augroup,
   callback = function(event)
     --- @type vim.event.packchanged.data
     local data = event.data
-    local name, kind, path = data.spec.name, data.kind, data.path
+    local name, kind = data.spec.name, data.kind
+
+    if name ~= names.mason or (kind ~= "install" and kind ~= "update") then
+      return
+    end
+
+    local has_reg, reg = pcall(require, "mason-registry")
+
+    if not has_reg then
+      return
+    end
+
+    local id = "mason_nvim_registry_refresh"
+    local title = "mason.nvim"
+
+    local symbols = require "kmo.symbols"
+
+    vim.notify("Refreshing registries…", vim.log.levels.INFO, {
+      id = id,
+      timeout = false,
+      title = title,
+      opts = function(notification)
+        notification.icon = symbols.progress.get_dynamic_spinner()
+      end,
+    })
+    reg.refresh(function(success, updated_registries)
+      if success then
+        vim.notify(
+          #updated_registries > 0
+              and string.format(
+                "Successfully refreshed %d registries.",
+                #updated_registries
+              )
+            or "No registries needed refreshing.",
+          vim.log.levels.INFO,
+          {
+            id = id,
+            icon = symbols.progress.done,
+            title = title,
+          }
+        )
+
+        local mason_utils = require "kmo.plugin-management.mason-utils"
+        mason_utils.install_packages(mason_utils.always_install)
+      else
+        vim.notify("Could not refresh the registries.", vim.log.levels.ERROR, {
+          id = id,
+          title = title,
+        })
+      end
+    end)
   end,
 })
 
@@ -51,6 +103,8 @@ vim.pack.add {
   { src = gh "luukvbaal/statuscol.nvim" },
 
   { src = gh "MagicDuck/grug-far.nvim" },
+
+  { name = names.mason, src = gh "mason-org/mason.nvim" },
 
   { src = gh "MoaidHathot/dotnet.nvim" },
 
