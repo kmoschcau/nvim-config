@@ -136,6 +136,8 @@ vim.pack.add {
 
   { src = gh "icholy/lsplinks.nvim" },
 
+  { src = gh "jmbuhr/otter.nvim" },
+
   { src = gh "Kicamon/markdown-table-mode.nvim" },
 
   { src = gh "kosayoda/nvim-lightbulb" },
