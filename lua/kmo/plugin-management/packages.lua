@@ -108,6 +108,14 @@ vim.pack.add {
 
   { src = gh "MoaidHathot/dotnet.nvim" },
 
+  { src = gh "jbyuki/one-small-step-for-vimkind" },
+  { src = gh "LiadOz/nvim-dap-repl-highlights" },
+  { src = gh "lucaSartore/nvim-dap-exception-breakpoints" },
+  { src = gh "nvim-neotest/nvim-nio" },
+  { src = gh "rcarriga/nvim-dap-ui" },
+  { src = gh "theHamsta/nvim-dap-virtual-text" },
+  { src = cb "mfussenegger/nvim-dap" },
+
   { src = cb "mfussenegger/nvim-lint" },
 
   { src = gh "monaqa/dial.nvim" },
@@ -117,13 +125,7 @@ vim.pack.add {
 
   { src = gh "nvim-mini/mini.nvim" },
 
-  { src = gh "jbyuki/one-small-step-for-vimkind" },
-  { src = gh "LiadOz/nvim-dap-repl-highlights" },
-  { src = gh "lucaSartore/nvim-dap-exception-breakpoints" },
-  { src = gh "nvim-neotest/nvim-nio" },
-  { src = gh "rcarriga/nvim-dap-ui" },
-  { src = gh "theHamsta/nvim-dap-virtual-text" },
-  { src = cb "mfussenegger/nvim-dap" },
+  { src = gh "olrtg/nvim-emmet" },
 
   { src = gh "Bilal2453/luvit-meta" },
   { src = gh "DrKJeff16/wezterm-types" },
