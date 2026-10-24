@@ -1,7 +1,5 @@
 {
-  "coerce.nvim": { "branch": "main", "commit": "1d0b987b02280ec03dc82f7a94acad4361eb8163" },
   "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
-  "coop.nvim": { "branch": "main", "commit": "26df3be54846ed44b5a9d7749f7780049931b8a8" },
   "csvview.nvim": { "branch": "main", "commit": "f190de76d2eca0380ddcb2425cd582d740699b55" },
   "dial.nvim": { "branch": "master", "commit": "f2634758455cfa52a8acea6f142dcd6271a1bf57" },
   "dotnet.nvim": { "branch": "main", "commit": "f5c52f9f52a3d8ca8dff6916c2228fb41a075274" },

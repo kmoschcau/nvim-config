@@ -33,9 +33,17 @@
       "rev": "c09ca05bfa0641754516f13294d73d3799a02fc8",
       "src": "https://github.com/micangl/cmp-vimtex"
     },
+    "coerce.nvim": {
+      "rev": "1d0b987b02280ec03dc82f7a94acad4361eb8163",
+      "src": "https://github.com/gregorias/coerce.nvim"
+    },
     "colorful-menu.nvim": {
       "rev": "196ddf16d5f8fec09ba7f20e6b153aa5188e907b",
       "src": "https://github.com/xzbdmw/colorful-menu.nvim"
+    },
+    "coop.nvim": {
+      "rev": "26df3be54846ed44b5a9d7749f7780049931b8a8",
+      "src": "https://github.com/gregorias/coop.nvim"
     },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",

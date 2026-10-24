@@ -30,6 +30,9 @@ vim.pack.add {
   -- cspell:disable
   { src = gh "folke/neoconf.nvim" },
 
+  { src = gh "gregorias/coop.nvim" },
+  { src = gh "gregorias/coerce.nvim" },
+
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
 
