@@ -246,6 +246,10 @@
       "rev": "bf1bd4e70bc7068d1b4aebf4ce03cc19a86615be",
       "src": "https://github.com/seblyng/roslyn.nvim"
     },
+    "snacks.nvim": {
+      "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "statuscol.nvim": {
       "rev": "887b8a03ea3804628505c9002fd07bd06a3db2e0",
       "src": "https://github.com/luukvbaal/statuscol.nvim"

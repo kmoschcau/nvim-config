@@ -129,6 +129,8 @@ vim.pack.add {
 
   { src = gh "folke/neoconf.nvim" },
 
+  { src = gh "folke/snacks.nvim" },
+
   { src = gh "gregorias/coop.nvim" },
   { src = gh "gregorias/coerce.nvim" },
 
