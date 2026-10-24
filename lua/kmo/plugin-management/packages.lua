@@ -40,6 +40,8 @@ vim.pack.add {
 
   { src = gh "lewis6991/gitsigns.nvim" },
 
+  { src = gh "lukas-reineke/indent-blankline.nvim" },
+
   { src = gh "luukvbaal/statuscol.nvim" },
 
   { src = gh "MagicDuck/grug-far.nvim" },
