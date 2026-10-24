@@ -59,6 +59,7 @@ vim.pack.add {
 
   { src = gh "nvim-mini/mini.nvim" },
 
+  { src = gh "Bilal2453/luvit-meta" },
   { src = gh "DrKJeff16/wezterm-types" },
   { src = gh "folke/lazydev.nvim" },
   { src = gh "micangl/cmp-vimtex" },
