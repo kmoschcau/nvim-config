@@ -145,6 +145,10 @@
       "rev": "3c893af4152a417742e6ce96d9468b3f26359006",
       "src": "https://github.com/esmuellert/nvim-eslint"
     },
+    "nvim-ghost.nvim": {
+      "rev": "bdba2a8ad0eec84379d65e7aa9b76a17b11b653a",
+      "src": "https://github.com/subnut/nvim-ghost.nvim"
+    },
     "nvim-lint": {
       "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"

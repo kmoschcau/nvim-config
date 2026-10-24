@@ -143,6 +143,8 @@ vim.pack.add {
 
   { src = gh "stevearc/conform.nvim" },
 
+  { src = gh "subnut/nvim-ghost.nvim" },
+
   { src = gh "windwp/nvim-autopairs" },
   -- cspell:enable
 }
