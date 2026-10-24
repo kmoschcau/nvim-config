@@ -97,6 +97,8 @@ vim.pack.add {
 
   { src = gh "Kicamon/markdown-table-mode.nvim" },
 
+  { src = gh "kosayoda/nvim-lightbulb" },
+
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
 
