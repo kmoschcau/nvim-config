@@ -35,6 +35,8 @@ vim.pack.add {
 
   { src = gh "hat0uma/csvview.nvim" },
 
+  { src = gh "icholy/lsplinks.nvim" },
+
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
 
