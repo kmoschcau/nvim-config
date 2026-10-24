@@ -223,6 +223,8 @@ vim.pack.add {
 
   { src = gh "subnut/nvim-ghost.nvim" },
 
+  { src = gh "Wansmer/treesj" },
+
   { src = gh "windwp/nvim-autopairs" },
   -- cspell:enable
 }
