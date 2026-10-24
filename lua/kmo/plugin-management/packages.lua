@@ -84,6 +84,8 @@ vim.pack.add {
 
   { src = gh "brenoprata10/nvim-highlight-colors" },
 
+  { src = gh "chrisgrieser/nvim-rulebook" },
+
   { src = gh "esmuellert/nvim-eslint" },
 
   { src = gh "folke/neoconf.nvim" },
