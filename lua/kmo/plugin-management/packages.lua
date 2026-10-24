@@ -125,6 +125,8 @@ vim.pack.add {
 
   { src = gh "chrisgrieser/nvim-rulebook" },
 
+  { src = gh "cshuaimin/ssr.nvim" },
+
   { src = gh "esmuellert/nvim-eslint" },
 
   { src = gh "folke/neoconf.nvim" },

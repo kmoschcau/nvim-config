@@ -250,6 +250,10 @@
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "ssr.nvim": {
+      "rev": "7839acf6f940dc1c9210823a7c8b378df122765b",
+      "src": "https://github.com/cshuaimin/ssr.nvim"
+    },
     "statuscol.nvim": {
       "rev": "887b8a03ea3804628505c9002fd07bd06a3db2e0",
       "src": "https://github.com/luukvbaal/statuscol.nvim"
