@@ -191,6 +191,8 @@ vim.pack.add {
 
   { src = gh "olrtg/nvim-emmet" },
 
+  { src = gh "rest-nvim/rest.nvim" },
+
   { src = gh "Bilal2453/luvit-meta" },
   { src = gh "DrKJeff16/wezterm-types" },
   { src = gh "folke/lazydev.nvim" },
