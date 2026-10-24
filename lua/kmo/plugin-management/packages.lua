@@ -38,6 +38,8 @@ vim.pack.add {
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
 
+  { src = gh "MoaidHathot/dotnet.nvim" },
+
   { src = cb "mfussenegger/nvim-lint" },
 
   { src = gh "monaqa/dial.nvim" },
