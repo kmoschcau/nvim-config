@@ -40,6 +40,8 @@ vim.pack.add {
 
   { src = cb "mfussenegger/nvim-lint" },
 
+  { src = gh "monaqa/dial.nvim" },
+
   { src = gh "nvim-mini/mini.nvim" },
 
   { src = gh "DrKJeff16/wezterm-types" },
