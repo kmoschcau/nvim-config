@@ -282,9 +282,45 @@
       "rev": "1cc33d347c574c3bd21a4852fc9ffed677c1c58c",
       "src": "https://github.com/RRethy/vim-illuminate"
     },
+    "vim-log-highlighting": {
+      "rev": "1037e26f3120e6a6a2c0c33b14a84336dee2a78f",
+      "src": "https://github.com/MTDL9/vim-log-highlighting"
+    },
+    "vim-matchup": {
+      "rev": "0106b1afd4a2f7e1098037b5ceb161bab7471088",
+      "src": "https://github.com/andymass/vim-matchup"
+    },
+    "vim-maven-syntax": {
+      "rev": "ddb38beeb96dd4f96631a1370a027936c03353a6",
+      "src": "https://github.com/NLKNguyen/vim-maven-syntax"
+    },
+    "vim-unimpaired": {
+      "rev": "db65482581a28e4ccf355be297f1864a4e66985c",
+      "src": "https://github.com/tpope/vim-unimpaired"
+    },
+    "vim-wordmotion": {
+      "rev": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1",
+      "src": "https://github.com/chaoren/vim-wordmotion"
+    },
+    "vimtex": {
+      "rev": "02eee260766d031185449c9600f03b933fa0357c",
+      "src": "https://github.com/lervag/vimtex"
+    },
     "wezterm-types": {
       "rev": "39511289aa040a7746a9e2d551b35ef330f15c77",
       "src": "https://github.com/DrKJeff16/wezterm-types"
+    },
+    "workspace-diagnostics.nvim": {
+      "rev": "ea93521c0344fa2530c6f6da8b059d1b944ca550",
+      "src": "https://github.com/artemave/workspace-diagnostics.nvim"
+    },
+    "zen-mode.nvim": {
+      "rev": "8564ce6d29ec7554eb9df578efa882d33b3c23a7",
+      "src": "https://github.com/folke/zen-mode.nvim"
+    },
+    "zoxide.vim": {
+      "rev": "d4c3d088a70a4edae9def6209644c092f4221fe5",
+      "src": "https://github.com/nanotee/zoxide.vim"
     }
   }
 }

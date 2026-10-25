@@ -15,6 +15,9 @@ vim.opt.packpath:append(
 local names = {
   mason = "mason.nvim",
   treesitter = "nvim-treesitter",
+  vim_fugitive = "vim-fugitive",
+  vim_unimpaired = "vim-unimpaired",
+  zoxide_vim = "zoxide.vim",
 }
 
 local augroup = vim.api.nvim_create_augroup("kmo.pack.build", {})
@@ -121,7 +124,13 @@ vim.pack.add {
   -- cspell:disable
   { src = gh "AckslD/muren.nvim" },
 
+  { src = gh "andymass/vim-matchup" },
+
+  { src = gh "artemave/workspace-diagnostics.nvim" },
+
   { src = gh "brenoprata10/nvim-highlight-colors" },
+
+  { src = gh "chaoren/vim-wordmotion" },
 
   { src = gh "chrisgrieser/nvim-rulebook" },
 
@@ -134,6 +143,8 @@ vim.pack.add {
   { src = gh "folke/snacks.nvim" },
 
   { src = gh "folke/todo-comments.nvim" },
+
+  { src = gh "folke/zen-mode.nvim" },
 
   { src = gh "godlygeek/tabular" },
 
@@ -152,6 +163,8 @@ vim.pack.add {
 
   { src = gh "rafamadriz/friendly-snippets" },
   { src = gh "L3MON4D3/LuaSnip" },
+
+  { src = gh "lervag/vimtex" },
 
   { src = gh "lewis6991/gitsigns.nvim" },
 
@@ -179,12 +192,18 @@ vim.pack.add {
 
   { src = gh "monaqa/dial.nvim" },
 
+  { src = gh "MTDL9/vim-log-highlighting" },
+
+  { name = names.zoxide_vim, src = gh "nanotee/zoxide.vim" },
+
   { src = gh "Hoffs/omnisharp-extended-lsp.nvim" },
   { src = cb "mfussenegger/nvim-jdtls" },
   { src = gh "nvim-lua/plenary.nvim" },
   { src = gh "pmizio/typescript-tools.nvim" },
   { src = gh "seblyng/roslyn.nvim" },
   { src = gh "neovim/nvim-lspconfig" },
+
+  { src = gh "NLKNguyen/vim-maven-syntax" },
 
   { src = gh "SmiteshP/nvim-navic" },
   { src = gh "nvim-lualine/lualine.nvim" },
@@ -225,7 +244,9 @@ vim.pack.add {
 
   { src = gh "subnut/nvim-ghost.nvim" },
 
-  { src = gh "tpope/vim-fugitive" },
+  { name = names.vim_fugitive, src = gh "tpope/vim-fugitive" },
+
+  { name = names.vim_unimpaired, src = gh "tpope/vim-unimpaired" },
 
   { src = gh "Wansmer/treesj" },
 
@@ -242,4 +263,14 @@ for _, ft_path in
   )
 do
   loadfile(ft_path)()
+end
+
+local manually_to_load_packages = {
+  names.vim_fugitive,
+  names.vim_unimpaired,
+  names.zoxide_vim,
+}
+
+for _, package in ipairs(manually_to_load_packages) do
+  vim.cmd.packadd(package)
 end
