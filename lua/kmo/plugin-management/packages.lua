@@ -188,8 +188,6 @@ vim.pack.add {
 
   { src = cb "mfussenegger/nvim-lint" },
 
-  { src = gh "MoaidHathot/dotnet.nvim" },
-
   { src = gh "monaqa/dial.nvim" },
 
   { src = gh "MTDL9/vim-log-highlighting" },
