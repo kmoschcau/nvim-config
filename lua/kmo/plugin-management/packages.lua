@@ -1,3 +1,5 @@
+-- cspell:words rulebook
+
 ---@param path string
 local function cb(path)
   return "https://codeberg.org/" .. path
@@ -15,9 +17,6 @@ vim.opt.packpath:append(
 local names = {
   mason = "mason.nvim",
   treesitter = "nvim-treesitter",
-  vim_fugitive = "vim-fugitive",
-  vim_unimpaired = "vim-unimpaired",
-  zoxide_vim = "zoxide.vim",
 }
 
 local augroup = vim.api.nvim_create_augroup("kmo.pack.build", {})
@@ -146,8 +145,6 @@ vim.pack.add {
 
   { src = gh "folke/zen-mode.nvim" },
 
-  { src = gh "godlygeek/tabular" },
-
   { src = gh "gregorias/coop.nvim" },
   { src = gh "gregorias/coerce.nvim" },
 
@@ -192,7 +189,7 @@ vim.pack.add {
 
   { src = gh "MTDL9/vim-log-highlighting" },
 
-  { name = names.zoxide_vim, src = gh "nanotee/zoxide.vim" },
+  { src = gh "nanotee/zoxide.vim" },
 
   { src = gh "Hoffs/omnisharp-extended-lsp.nvim" },
   { src = cb "mfussenegger/nvim-jdtls" },
@@ -215,8 +212,6 @@ vim.pack.add {
   { name = names.treesitter, src = gh "nvim-treesitter/nvim-treesitter" },
 
   { src = gh "olrtg/nvim-emmet" },
-
-  { src = gh "rest-nvim/rest.nvim" },
 
   { src = gh "RRethy/vim-illuminate" },
 
@@ -242,9 +237,9 @@ vim.pack.add {
 
   { src = gh "subnut/nvim-ghost.nvim" },
 
-  { name = names.vim_fugitive, src = gh "tpope/vim-fugitive" },
+  { src = gh "tpope/vim-fugitive" },
 
-  { name = names.vim_unimpaired, src = gh "tpope/vim-unimpaired" },
+  { src = gh "tpope/vim-unimpaired" },
 
   { src = gh "Wansmer/treesj" },
 
@@ -261,14 +256,4 @@ for _, ft_path in
   )
 do
   loadfile(ft_path)()
-end
-
-local manually_to_load_packages = {
-  names.vim_fugitive,
-  names.vim_unimpaired,
-  names.zoxide_vim,
-}
-
-for _, package in ipairs(manually_to_load_packages) do
-  vim.cmd.packadd(package)
 end

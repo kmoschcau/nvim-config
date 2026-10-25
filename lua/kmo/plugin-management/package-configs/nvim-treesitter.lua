@@ -1,4 +1,4 @@
--- cspell:words autotag textobjects textobject
+-- cspell:words autotag textobjects textobject vimdoc
 
 require("nvim-treesitter-textobjects").setup {
   move = {
@@ -100,7 +100,7 @@ local function languages_installed(languages_to_check)
   return true
 end
 
-local notification_id = "nvim-treesitter install base"
+local id = "nvim-treesitter install base"
 local title = "nvim-treesitter install"
 local symbols = require "kmo.symbols"
 
@@ -114,7 +114,7 @@ if languages_installed(base_languages) then
 end
 
 vim.notify("Installing " .. vim.inspect(base_languages), vim.log.levels.INFO, {
-  id = notification_id,
+  id = id,
   timeout = false,
   title = title,
   opts = function(notification)
@@ -123,7 +123,7 @@ vim.notify("Installing " .. vim.inspect(base_languages), vim.log.levels.INFO, {
 })
 require("nvim-treesitter").install(base_languages):await(function()
   vim.notify("Installed " .. vim.inspect(base_languages), vim.log.levels.INFO, {
-    id = notification_id,
+    id = id,
     icon = symbols.progress.done,
     title = title,
   })

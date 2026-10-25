@@ -1,7 +1,5 @@
 -- cspell:words ASPNETCORE dapui logpoint netcoredbg nlua
 
-require("nvim-dap-repl-highlights").setup()
-
 local dapui = require "dapui"
 dapui.setup()
 
@@ -15,6 +13,7 @@ vim.api.nvim_create_user_command(
 )
 
 require("nvim-dap-repl-highlights").setup()
+require("nvim-dap-virtual-text").setup {}
 require("nvim-treesitter").install { "dap_repl" }
 
 local dap = require "dap"

@@ -7,7 +7,7 @@ local hard_break_sites_patterns = {
   "*github.com",
 }
 
-local augroup = vim.api.nvim_create_augroup("kmo.nvim-ghost", {})
+local augroup = vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", {})
 
 vim.api.nvim_create_autocmd("User", {
   desc = "nvim-ghost: Set markdown filetype",
