@@ -567,9 +567,17 @@ local function create_preview_buffer(
   local names = vim.tbl_keys(highlights_light)
   table.sort(names)
 
-  local max_name_length = math.max(unpack(vim.tbl_map(function(key)
-    return #key
-  end, names)))
+  ---@type table<integer>
+  local name_lengths = vim.tbl_map(
+    ---@param key string
+    function(key)
+      return #key
+    end,
+    names
+  )
+
+  ---@type integer
+  local max_name_length = math.max(unpack(name_lengths))
 
   ---@type string[]
   local lines = {}
@@ -2010,10 +2018,14 @@ local highlights_dark = vim.tbl_extend(
   highlights_dark_overrides
 )
 
----@type table<string, vim.api.keyset.highlight>
-local terminal_colors_dark = vim.tbl_map(function(c)
-  return modify_l(invert_l(c), 10)
-end, terminal_colors_light)
+---@type table<string, string>
+local terminal_colors_dark = vim.tbl_map(
+  ---@param c string
+  function(c)
+    return modify_l(invert_l(c), 10)
+  end,
+  terminal_colors_light
+)
 
 add_cterm_values(highlights_light)
 add_cterm_values(highlights_dark)

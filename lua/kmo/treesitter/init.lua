@@ -1,3 +1,5 @@
+-- cspell:words luap
+
 local bash_injected_langs = { "readline" }
 local bash_langs = vim.list_extend({ "bash" }, bash_injected_langs)
 

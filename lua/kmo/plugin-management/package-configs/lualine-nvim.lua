@@ -37,6 +37,7 @@ local lualine_b = {
     colored = true,
     symbols = symbols.git.lines,
     source = function()
+      ---@module "gitsigns"
       ---@type Gitsigns.StatusObj
       local gitsigns = vim.b.gitsigns_status_dict
       if gitsigns then

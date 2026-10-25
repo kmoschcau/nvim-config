@@ -1,4 +1,4 @@
--- cspell:words pwsh wslview wslu
+-- cspell:words pwsh qdbus wslview wslu
 
 local M = {}
 
@@ -101,8 +101,10 @@ end
 function M.set_up_shell(use_default)
   if use_default then
     local function reset(option_name)
-      vim.opt_global[option_name] =
+      local default =
         vim.api.nvim_get_option_info2(option_name, { scope = "global" }).default
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      vim.opt_global[option_name] = default
     end
 
     reset "shell"

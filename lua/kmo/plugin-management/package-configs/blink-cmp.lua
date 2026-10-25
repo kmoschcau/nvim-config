@@ -235,24 +235,20 @@ require("blink.cmp").setup {
           local bufnr = vim.api.nvim_get_current_buf()
           local enabled = spell_enabled_cache[bufnr]
           if type(enabled) ~= "boolean" then
-            enabled = not vim.list_contains(vim.opt_local.spelllang:get(), "de")
+            local spell_langs = vim.opt_local.spelllang:get() --[[@as table<string>]]
+            enabled = not vim.list_contains(spell_langs, "de")
             spell_enabled_cache[bufnr] = enabled
           end
           return enabled
         end,
         opts = {
           enable_in_context = function()
-            local cursor = vim.api.nvim_win_get_cursor(0)
-            local captures = vim.treesitter.get_captures_at_pos(
-              0,
-              cursor[1] - 1,
-              cursor[2] - 1
-            )
+            local captures = vim.treesitter.get_captures_at_cursor(0)
             local in_spell_capture = false
             for _, capture in ipairs(captures) do
-              if capture.capture == "spell" then
+              if capture == "spell" then
                 in_spell_capture = true
-              elseif capture.capture == "nospell" then
+              elseif capture == "nospell" then
                 return false
               end
             end

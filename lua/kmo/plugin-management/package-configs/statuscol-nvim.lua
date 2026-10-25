@@ -25,6 +25,7 @@ require("statuscol").setup {
       if args.button == "l" then
         local has_snacks, snacks = pcall(require, "snacks")
         if has_snacks then
+          ---@diagnostic disable-next-line: undefined-field
           snacks.picker.todo_comments()
         end
       end

@@ -202,6 +202,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
 
     local new_value = vim.v.option_new
     if new_value == 0 then
+      ---@diagnostic disable-next-line: param-type-mismatch
       new_value = is_local and vim.opt_local.tabstop:get()
         or vim.opt_global.tabstop:get()
     end
@@ -227,6 +228,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
   callback = function()
     local is_local = vim.v.option_type == "local"
 
+    ---@diagnostic disable-next-line: param-type-mismatch
     local shiftwidth = is_local and vim.opt_local.shiftwidth:get()
       or vim.opt_global.shiftwidth:get()
     if shiftwidth ~= 0 then

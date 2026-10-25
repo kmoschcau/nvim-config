@@ -40,6 +40,11 @@ local function debounce(timeout_ms, fn)
   local timer = vim.uv.new_timer()
   return function(...)
     local argv = { ... }
+
+    if not timer then
+      return
+    end
+
     timer:start(timeout_ms, 0, function()
       timer:stop()
       vim.schedule_wrap(fn)(unpack(argv))
