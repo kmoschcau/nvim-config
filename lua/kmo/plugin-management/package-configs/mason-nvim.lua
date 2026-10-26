@@ -106,6 +106,15 @@ local lsp_to_mason_package = {
   -- cspell:enable
 }
 
+require("mason").setup {
+  registries = {
+    -- cspell:disable
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+    -- cspell:enable
+  },
+}
+
 for server_name, package_name in pairs(lsp_to_mason_package) do
   local server_config = vim.lsp.config[server_name]
   if server_config then
@@ -122,15 +131,6 @@ for server_name, package_name in pairs(lsp_to_mason_package) do
     end
   end
 end
-
-require("mason").setup {
-  registries = {
-    -- cspell:disable
-    "github:mason-org/mason-registry",
-    "github:Crashdummyy/mason-registry",
-    -- cspell:enable
-  },
-}
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = vim.api.nvim_create_augroup("kmo.mason.install", {}),
