@@ -28,7 +28,7 @@ local pkgs_by_ft = {
   less = { "dprint", "prettier", "oxfmt" },
   kotlin = { "ktlint" },
   lua = { "selene", "stylua" },
-  markdown = { "proselint", "oxfmt" },
+  markdown = { "oxfmt" },
   ocaml = { "ocamlformat" },
   razor = { "emmet-language-server", "roslyn" },
   sass = { "dprint", "prettier", "oxfmt" },
@@ -36,7 +36,7 @@ local pkgs_by_ft = {
   sh = { "shellharden", "shfmt" },
   svelte = { "dprint", "emmet-language-server", "markuplint", "prettier" },
   systemd = { "systemdlint" },
-  tex = { "latexindent", "proselint" },
+  tex = { "latexindent" },
   tf = { "trivy" },
   ["terraform-vars"] = { "trivy" },
   toml = { "oxfmt" },
@@ -53,6 +53,13 @@ local pkgs_by_ft = {
   ["yaml.cloudformation"] = vim.list_extend({ "cfn-lint" }, yaml_pkgs),
   -- cspell:enable
 }
+
+if vim.fn.has "win32" == 0 then
+  -- proselint requires build tooling through dependencies, that is hard to
+  -- install on Windows.
+  table.insert(pkgs_by_ft.markdown, "proselint")
+  table.insert(pkgs_by_ft.tex, "proselint")
+end
 
 local lsp_to_mason_package = {
   -- cspell:disable
