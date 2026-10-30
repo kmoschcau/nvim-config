@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "a03ad899bda446b5a81cfa99d8aeeb92241522f3",
+      "rev": "6d5a29e86a7352739506c28e0bc50fe214b5216f",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -162,7 +162,7 @@
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "4b2b045b8ceb035f5c8bc9cab19b95706bfa6a19",
+      "rev": "460bb34e7be114f1fda7815781696bc701e60f83",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -235,7 +235,7 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "roslyn.nvim": {
-      "rev": "f0e15427ba4b4574aa90f5f5ae630e698606dcf8",
+      "rev": "059c5791a19a00049736d02ad2855a346433cf54",
       "src": "https://github.com/seblyng/roslyn.nvim"
     },
     "snacks.nvim": {
@@ -291,7 +291,7 @@
       "src": "https://github.com/chaoren/vim-wordmotion"
     },
     "vimtex": {
-      "rev": "8459d862eff5eabc3bf5d2601099aa0efb2f2496",
+      "rev": "3f96503904db6acdb7108cd93a9580dd41e88555",
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
