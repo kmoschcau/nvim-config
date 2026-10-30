@@ -62,7 +62,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "d4854fa9a94b5c8b37dd209fb4a19e98e764186f",
+      "rev": "1e9d0fbfe7ff848bc402d2c2e2854fb4eff2dce7",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -158,7 +158,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lint": {
-      "rev": "f6230a5c06ba59e6059c14637f1dbe29a7978b9b",
+      "rev": "52107ce2076a27a285af781248e2c59bad817cd0",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
@@ -291,11 +291,11 @@
       "src": "https://github.com/chaoren/vim-wordmotion"
     },
     "vimtex": {
-      "rev": "02eee260766d031185449c9600f03b933fa0357c",
+      "rev": "8459d862eff5eabc3bf5d2601099aa0efb2f2496",
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
-      "rev": "39511289aa040a7746a9e2d551b35ef330f15c77",
+      "rev": "c4ca18ef6c8bff12dc7469db6ec69eafff18de35",
       "src": "https://github.com/DrKJeff16/wezterm-types"
     },
     "workspace-diagnostics.nvim": {
