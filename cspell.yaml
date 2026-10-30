@@ -17,6 +17,7 @@ words:
   - altfont
   - augroup
   - autocmd
+  - autocmds
   - autocommand
   - autocommands
   - blinkoff

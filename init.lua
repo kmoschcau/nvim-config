@@ -24,6 +24,7 @@ vim.cmd.packadd "nvim.undotree"
 -- configuration modules {{{
 
 xpcall(require, error_handler, "kmo.diagnostics")
+xpcall(require, error_handler, "kmo.editorconfig")
 xpcall(require, error_handler, "kmo.extui")
 xpcall(require, error_handler, "kmo.filetype")
 xpcall(require, error_handler, "kmo.treesitter")
@@ -193,64 +194,6 @@ vim.o.winborder = "rounded"
 
 local augroup = vim.api.nvim_create_augroup("kmo.init", {})
 
-vim.api.nvim_create_autocmd("OptionSet", {
-  desc = "Automatically set the listchars option's leadmultispace when setting shiftwidth.",
-  group = augroup,
-  pattern = "shiftwidth",
-  callback = function()
-    local is_local = vim.v.option_type == "local"
-
-    local new_value = vim.v.option_new
-    if new_value == 0 then
-      ---@diagnostic disable-next-line: param-type-mismatch
-      new_value = is_local and vim.opt_local.tabstop:get()
-        or vim.opt_global.tabstop:get()
-    end
-
-    local new_leadmultispace = string.format(
-      "leadmultispace:%s%s",
-      "│",
-      string.rep(" ", new_value - 1)
-    )
-
-    if is_local then
-      vim.opt_local.listchars:append(new_leadmultispace)
-    else
-      vim.opt_global.listchars:append(new_leadmultispace)
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("OptionSet", {
-  desc = "Automatically set the listchars option's leadmultispace when setting tabstop while shiftwidth is 0.",
-  group = augroup,
-  pattern = "tabstop",
-  callback = function()
-    local is_local = vim.v.option_type == "local"
-
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local shiftwidth = is_local and vim.opt_local.shiftwidth:get()
-      or vim.opt_global.shiftwidth:get()
-    if shiftwidth ~= 0 then
-      return
-    end
-
-    local new_value = vim.v.option_new
-
-    local new_leadmultispace = string.format(
-      "leadmultispace:%s%s",
-      "│",
-      string.rep(" ", new_value - 1)
-    )
-
-    if is_local then
-      vim.opt_local.listchars:append(new_leadmultispace)
-    else
-      vim.opt_global.listchars:append(new_leadmultispace)
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd({ "TextPutPost", "TextYankPost" }, {
   desc = "Highlight text after yanking or putting.",
   group = augroup,
@@ -258,6 +201,8 @@ vim.api.nvim_create_autocmd({ "TextPutPost", "TextYankPost" }, {
     vim.hl.hl_op()
   end,
 })
+
+require("kmo.indent-markers").set_up_autocmds()
 
 -- }}}
 
