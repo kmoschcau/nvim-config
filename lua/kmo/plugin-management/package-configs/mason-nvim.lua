@@ -30,6 +30,7 @@ local pkgs_by_ft = {
   lua = { "selene", "stylua" },
   markdown = { "oxfmt" },
   ocaml = { "ocamlformat" },
+  python = { "black", "pylint" },
   razor = { "emmet-language-server", "roslyn" },
   sass = { "dprint", "prettier", "oxfmt" },
   scss = { "dprint", "prettier", "oxfmt" },

@@ -12,6 +12,7 @@ local linters_by_ft = {
   lua = { "selene" },
   markdown = { "proselint" },
   php = { "mago_lint", "mago_analyze" },
+  python = { "pylint" },
   svelte = { "markuplint" },
   systemd = { "systemd-analyze", "systemdlint" },
   tex = { "proselint" },

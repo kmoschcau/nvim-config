@@ -35,6 +35,7 @@ require("conform").setup {
     markdown = { "oxfmt", "injected", lsp_format = "last" },
     ocaml = { "ocamlformat" },
     php = { "mago_format" },
+    python = { "black" },
     query = { "format-queries" },
     razor = { "trim_newlines", lsp_format = "first" },
     sass = web_formatters_config,
