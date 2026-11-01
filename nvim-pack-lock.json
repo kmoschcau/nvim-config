@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "19abbbf57be0e5db4e057dd92b448468c93e7107",
+      "rev": "32c762d30b68255d75887de8191f8722125203ee",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
@@ -162,7 +162,7 @@
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "460bb34e7be114f1fda7815781696bc701e60f83",
+      "rev": "d8d2fda7aae57030452ce8cd6e770b1eb704514e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -178,7 +178,7 @@
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-treesitter": {
-      "rev": "a2f694478be07f89c2d03cc17858a8745a400c4b",
+      "rev": "a9c4e1457e2e59f1b82c8f78dcdb3b2517555200",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
