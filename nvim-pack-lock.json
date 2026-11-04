@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "6d5a29e86a7352739506c28e0bc50fe214b5216f",
+      "rev": "a321b535c75ca88ba7fddfd8eb5b583fbda50dd6",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "32c762d30b68255d75887de8191f8722125203ee",
+      "rev": "cbda6ee462d55cd56cdd56a971c0af31a30cb315",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
