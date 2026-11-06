@@ -62,7 +62,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "4bcd99167c265f135886b282baad77afe06206b2",
+      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "cbda6ee462d55cd56cdd56a971c0af31a30cb315",
+      "rev": "d03f4cbac44501d922e8fc98fe5ec9aceafe6b7e",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
