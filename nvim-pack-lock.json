@@ -58,7 +58,7 @@
       "src": "https://github.com/monaqa/dial.nvim"
     },
     "friendly-snippets": {
-      "rev": "b2ea5c41a150ba72fb656eedb4ed0a86d138d945",
+      "rev": "7a1c9f7897a4eb078b157a04c7af81e5869215b1",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "f9550dd81d0514927b7ad1794fd8eb8606ca28cd",
+      "rev": "f9ac12d7cbd2563cfc2cce9a8152fc8df2ad0d6f",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -231,7 +231,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "8e8795368391036643b622875a6da6a51bcd33f4",
+      "rev": "9c235bedc4f96145e63fcad5b78cd78bce8822c4",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "roslyn.nvim": {
@@ -287,7 +287,7 @@
       "src": "https://github.com/tpope/vim-unimpaired"
     },
     "vim-wordmotion": {
-      "rev": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1",
+      "rev": "8e7f88d724f333b695d945139b3327d82d5d76be",
       "src": "https://github.com/chaoren/vim-wordmotion"
     },
     "vimtex": {
