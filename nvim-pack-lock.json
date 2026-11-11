@@ -34,7 +34,7 @@
       "src": "https://github.com/micangl/cmp-vimtex"
     },
     "coerce.nvim": {
-      "rev": "1d0b987b02280ec03dc82f7a94acad4361eb8163",
+      "rev": "8789988bdcdd6e675be320088b5e5e83b92ef819",
       "src": "https://github.com/gregorias/coerce.nvim"
     },
     "colorful-menu.nvim": {
@@ -46,7 +46,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "coop.nvim": {
-      "rev": "26df3be54846ed44b5a9d7749f7780049931b8a8",
+      "rev": "ce1b286857412dc15cdac8e7e1637375fd5adddd",
       "src": "https://github.com/gregorias/coop.nvim"
     },
     "csvview.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "69b4caf88d5ae77b8cc21a599ec988ef725e8abd",
+      "rev": "49a66b264658f07d4406bbb53a7ee4faa6481b76",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
@@ -295,7 +295,7 @@
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
-      "rev": "c4ca18ef6c8bff12dc7469db6ec69eafff18de35",
+      "rev": "1e6a0b7ac2206b197c741240743e981af37ce292",
       "src": "https://github.com/DrKJeff16/wezterm-types"
     },
     "workspace-diagnostics.nvim": {
