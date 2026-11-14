@@ -62,7 +62,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
+      "rev": "dc7698f932792a764d3db95fedee26c38e728355",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "3d0cf05999ec1084dd660649a09f38b9d0d49e16",
+      "rev": "4d32e018f7cfcc0ba95357465516be615c542fef",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "5525b5fd18d81d1e4109e1f513c415b6023502c9",
+      "rev": "c5d89d7e80913db4e33441184684d37e7327247d",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
@@ -231,7 +231,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "9c235bedc4f96145e63fcad5b78cd78bce8822c4",
+      "rev": "8801162e041e34c64d0d1397cd1f353a14b01950",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "roslyn.nvim": {
@@ -243,7 +243,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "ssr.nvim": {
-      "rev": "7839acf6f940dc1c9210823a7c8b378df122765b",
+      "rev": "6814a149a9b108220e1e3f5360566e3cc32a6a9f",
       "src": "https://github.com/cshuaimin/ssr.nvim"
     },
     "statuscol.nvim": {
@@ -291,7 +291,7 @@
       "src": "https://github.com/chaoren/vim-wordmotion"
     },
     "vimtex": {
-      "rev": "9745f3b467f5c24d0d5133e82537a74434da8ae3",
+      "rev": "cedc0a172e40d0d1d49670dd0d936d6e2df61de7",
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
