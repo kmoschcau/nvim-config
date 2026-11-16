@@ -99,7 +99,7 @@
     },
     "mini.nvim": {
       "rev": "174eb9b9d5d66254966b9d52ea51b996317e51f6",
-      "src": "https://github.com/nvim-mini/mini.nvim"
+      "src": "https://codeberg.org/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
       "rev": "fa18f2df80a52afd201da062d1af0e80c8d1988e",

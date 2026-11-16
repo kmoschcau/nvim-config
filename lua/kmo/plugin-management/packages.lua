@@ -203,7 +203,7 @@ vim.pack.add {
   { src = gh "SmiteshP/nvim-navic" },
   { src = gh "nvim-lualine/lualine.nvim" },
 
-  { src = gh "nvim-mini/mini.nvim" },
+  { src = cb "nvim-mini/mini.nvim" },
 
   { src = gh "nvim-treesitter/nvim-treesitter-context" },
   { src = gh "nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
