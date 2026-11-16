@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "4d32e018f7cfcc0ba95357465516be615c542fef",
+      "rev": "174eb9b9d5d66254966b9d52ea51b996317e51f6",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -162,7 +162,7 @@
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "05588aab66016c6836634b87ca2d392d097515f2",
+      "rev": "6e72b89d499455611f09f46d13ee9f79325406e5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
