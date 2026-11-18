@@ -39,7 +39,9 @@ local injected_languages = {
   lua = { "c", "luadoc", "luap", "query", "vim" },
   markdown = { "markdown_inline", "mermaid" },
   markdown_inline = { "mermaid" },
-  php = { "phpdoc" },
+  php = vim.list.unique(
+    vim.list_extend({ "html", "phpdoc" }, html_injected_langs)
+  ),
   svelte = vim.list.unique(front_end_framework_injected_langs),
   typescript = vim.list.unique(typescript_injected_langs),
   vue = vim.list.unique(front_end_framework_injected_langs),
