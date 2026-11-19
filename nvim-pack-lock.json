@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "174eb9b9d5d66254966b9d52ea51b996317e51f6",
+      "rev": "e199196f5ed6b085743da6a808e6c8510698cdce",
       "src": "https://codeberg.org/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "cfbf3629909180c07746f8914fe6c47ebe742493",
+      "rev": "f09a401eb60f91b146194079ece34bb4e3d23959",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
@@ -162,7 +162,7 @@
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "e1c6a5a45d95ad22cf55c874db2ff8ab969556f0",
+      "rev": "4648fd8ba5c678d7e2db75ae44ffac269bb589d8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -178,7 +178,7 @@
       "src": "https://github.com/chrisgrieser/nvim-rulebook"
     },
     "nvim-treesitter": {
-      "rev": "b706d642dd20d0922e7e92365dc73617f0fdb4ea",
+      "rev": "37e52c733ada9d8d544d53a763140ef1ba404353",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
