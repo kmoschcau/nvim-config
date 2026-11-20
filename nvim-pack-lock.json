@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "e199196f5ed6b085743da6a808e6c8510698cdce",
+      "rev": "22619434ccca787cdb34406c97f0e395d4debadc",
       "src": "https://codeberg.org/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -158,7 +158,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lint": {
-      "rev": "52107ce2076a27a285af781248e2c59bad817cd0",
+      "rev": "6bf29b9dbdad60b38b489b23309c22ba6d4c915a",
       "src": "https://codeberg.org/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
