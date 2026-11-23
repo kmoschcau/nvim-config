@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "b8a0af521530f8ee68c738657429eab59de6a2ae",
+      "rev": "24cf4ad5840f0d092e3d8296b17eaf7026bf27f3",
       "src": "https://codeberg.org/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
@@ -295,7 +295,7 @@
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
-      "rev": "1e6a0b7ac2206b197c741240743e981af37ce292",
+      "rev": "230ad1fa651e0459c9a16fc59c328855604cc4e0",
       "src": "https://github.com/DrKJeff16/wezterm-types"
     },
     "workspace-diagnostics.nvim": {
