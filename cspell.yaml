@@ -71,6 +71,7 @@ words:
   - keymap
   - keymaps
   - leadmultispace
+  - leadtab
   - linematch
   - listchars
   - lnum
