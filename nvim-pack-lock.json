@@ -106,7 +106,7 @@
       "src": "https://github.com/AckslD/muren.nvim"
     },
     "neoconf.nvim": {
-      "rev": "ed2b0b38a2e1bc00f8140190793b68a6d5ec1817",
+      "rev": "5614ab23756fb8a36d193e71bdee78f6b6b19348",
       "src": "https://github.com/folke/neoconf.nvim"
     },
     "nvim-autopairs": {
