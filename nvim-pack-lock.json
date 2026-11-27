@@ -9,7 +9,7 @@
       "src": "https://github.com/ribru17/blink-cmp-spell"
     },
     "blink-emoji.nvim": {
-      "rev": "dff709139ad5389fb55ebab026e75278a12b325a",
+      "rev": "1ea4ef2e4699ef1a517a56a4e05ceba68c31be68",
       "src": "https://github.com/moyiz/blink-emoji.nvim"
     },
     "blink.cmp": {
@@ -291,7 +291,7 @@
       "src": "https://github.com/chaoren/vim-wordmotion"
     },
     "vimtex": {
-      "rev": "90cd6619728df9f6161e5691ac247f0fe3437462",
+      "rev": "8787e6d030e9aee63dbe8b445862358a93b421bb",
       "src": "https://github.com/lervag/vimtex"
     },
     "wezterm-types": {
