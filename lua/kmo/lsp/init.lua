@@ -22,6 +22,7 @@ vim.lsp.enable {
   -- cspell:disable
   "astro",
   "azure_pipelines_ls",
+  "basedpyright",
   "bashls",
   "cssls",
   "docker_compose_language_service",

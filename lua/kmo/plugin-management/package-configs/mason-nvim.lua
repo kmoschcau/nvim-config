@@ -67,6 +67,7 @@ local lsp_to_mason_package = {
   astro = "astro-language-server",
   azure_pipelines_ls = "azure-pipelines-language-server",
   bashls = "bash-language-server",
+  basedpyright = "basedpyright",
   cssls = "css-lsp",
   denols = "deno",
   docker_compose_language_service = "docker-compose-language-service",
