@@ -98,7 +98,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "24cf4ad5840f0d092e3d8296b17eaf7026bf27f3",
+      "rev": "39334e0f4dec24ef159945067e222318392a65c5",
       "src": "https://codeberg.org/nvim-mini/mini.nvim"
     },
     "muren.nvim": {
